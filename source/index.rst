@@ -11,7 +11,7 @@ Welcome to Nix Community Cookbook's documentation!
    Nix Community Cookbook presents topical, practical ways of using `Nix package manager <http://nixos.org/nix/>`_ ecosystem.
 
    The Cookbook supplements the official `Nix <http://nixos.org/nix/manual/>`_, `NixOS <http://nixos.org/nixos/manual/>`_,
-   `Nixkgs <http://nixos.org/nixpkgs/manual/>`_, `Hydra <http://nixos.org/hydra/manual/>`_ and
+   `Nixkgs <http://nixos.org/nixpkgs/manual/>`_, `Hydra <http://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc/manual>`_ and
    `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
 
    To contribute to Nix Community Cookbook, please read :ref:`contributing`.
