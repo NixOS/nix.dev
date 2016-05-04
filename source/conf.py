@@ -50,8 +50,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'nix-cookbook'
-copyright = '2016, Domen Kozar'
-author = 'Domen Kožar'
+copyright = u'2016, Domen Kožar'
+author = u'Domen Kožar'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
