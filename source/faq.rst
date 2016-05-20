@@ -16,7 +16,7 @@ What are channels and different branches on github?
 How do I mirror tarballs?
 -------------------------
 
-We have a content-addressed tarball mirror at http://tarballs.nixos.org for this
+We have a content-addressed tarball mirror at tarballs.nixos.org for this
 purpose. "fetchurl" will automatically use this mirror to obtain files by hash.
 However:
 
