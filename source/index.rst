@@ -27,4 +27,5 @@ Table of Contents
    tutorials/index.rst
    nix-pills.rst
    faq.rst
+   influences.rst
    contributing.rst
