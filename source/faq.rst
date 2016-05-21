@@ -44,6 +44,15 @@ Yes.
 - Kernel
 - Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
 
+
+NixOS
+*****
+
+How to build my own ISO?
+------------------------
+
+http://nixos.org/nixos/manual/index.html#sec-building-cd
+
 Hydra
 *****
 
