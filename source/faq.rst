@@ -4,6 +4,9 @@ Frequently Asked Questions
 Nix
 ***
 
+Secrets?
+--------
+
 How do I fix: error: querying path in database: database disk image is malformed
 --------------------------------------------------------------------------------
 
@@ -13,10 +16,20 @@ No known solution yet.
 How nix decides which parts of the environment affect a derivation and its sha256 hash
 --------------------------------------------------------------------------------------
 
+How to build reverse dependencies of a package?
+-----------------------------------------------
+
+nox-review wip
+
+I'm getting: writing to file: Connection reset by peer
+------------------------------------------------------
+
+Too big files in src, out of resources (HDD space, memory)
 
 What are channels and different branches on github?
 ---------------------------------------------------
 
+Subquestion: how stable is unstable?
 
 How do I mirror tarballs?
 -------------------------
@@ -45,6 +58,9 @@ Yes.
 - Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
 
 
+What's the reccomended process for building custom packages. E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?              
+--------------------------------------------------
+
 NixOS
 *****
 
@@ -52,6 +68,9 @@ How to build my own ISO?
 ------------------------
 
 http://nixos.org/nixos/manual/index.html#sec-building-cd
+
+How do I mix channels for packages?
+-----------------------------------
 
 Hydra
 *****
@@ -66,6 +85,7 @@ It's best to set binary cache timeout:
   nix.extraOptions = ''
     connect-timeout = 10
   '';
+
 
 How do I add a new binary cache?
 --------------------------------

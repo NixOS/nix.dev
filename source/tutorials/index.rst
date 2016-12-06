@@ -21,3 +21,13 @@ https://github.com/edolstra/nix-serve
 
 Using precompiled packages within Nix
 -------------------------------------
+
+Using Nix with
+--------------
+
+
+Docker
+******
+
+Travis-CI
+*********
