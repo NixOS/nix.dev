@@ -10,7 +10,15 @@ Secrets?
 How do I fix: error: querying path in database: database disk image is malformed
 --------------------------------------------------------------------------------
 
-No known solution yet.
+Try:
+
+    sqlite3 /nix/var/nix/db/db.sqlite "pragma integrity_check"
+
+Which will print the errors in the database. If the errors are due to missing
+references, the following may work:
+
+    mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
+    sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 
 
 How nix decides which parts of the environment affect a derivation and its sha256 hash
