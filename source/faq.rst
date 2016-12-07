@@ -66,8 +66,10 @@ Yes.
 - Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
 
 
-What's the reccomended process for building custom packages. E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?              
---------------------------------------------------
+What's the recommended process for building custom packages?
+------------------------------------------------------------
+
+ E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?              
 
 NixOS
 *****
