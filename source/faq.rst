@@ -54,6 +54,13 @@ However:
   jobset. Since moreutils is not part of the jobset, it's not mirrored. This can
   be fixed by adding a meta.platforms attribute to moreutils.
 
+How can I manage dotfiles in $HOME with Nix?
+--------------------------------------------
+
+See following solutions:
+
+- https://github.com/sheenobu/nix-home
+
 Are there some known impurities in builds?
 ------------------------------------------
 
