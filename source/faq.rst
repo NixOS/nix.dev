@@ -21,6 +21,23 @@ references, the following may work:
     sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 
 
+How do I fix: error: current Nix store schema is version 10, but I only support 7
+---------------------------------------------------------------------------------
+
+
+This means you have upgraded Nix sqlite schema to a newer version, but then tried
+to use older Nix.
+
+The solution is to dump the db and use old Nix version to initialize it:
+
+::
+
+   /path/to/nix/unstable/bin/nix-store --dump-db > /tmp/db.dump
+   mv /nix/var/nix/db /nix/var/nix/db.toonew
+   mkdir /nix/var/nix/db
+   nix-store --init (this is the old nix-store)
+   nix-store --load-db < /tmp/db.dump
+
 How nix decides which parts of the environment affect a derivation and its sha256 hash
 --------------------------------------------------------------------------------------
 
