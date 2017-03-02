@@ -41,6 +41,12 @@ The solution is to dump the db and use old Nix version to initialize it:
 How nix decides which parts of the environment affect a derivation and its sha256 hash
 --------------------------------------------------------------------------------------
 
+How to pin nixpkgs to a specific commit/branch?
+-----------------------------------------------
+
+-I nixpkgs=http://nixos.org/channels/nixos-16.09/nixexprs.tar.xz
+NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-16.09/nixexprs.tar.xz
+
 How to build reverse dependencies of a package?
 -----------------------------------------------
 
@@ -109,16 +115,13 @@ How do I mix channels for packages?
 Hydra
 *****
 
-What to do if Hydra is down or unreachable?
--------------------------------------------
+What to do if cache/hydra is down or unreachable?
+-------------------------------------------------
 
-It's best to set binary cache timeout:
+Pass following to Nix commands:
 
-.. code-block:: nix
-
-  nix.extraOptions = ''
-    connect-timeout = 10
-  '';
+- `--option connect-timeout 5` to wait only 5 second on binary package
+- `--fallback` to build from source if binary package fetching fails
 
 
 How do I add a new binary cache?
