@@ -120,8 +120,8 @@ What to do if cache/hydra is down or unreachable?
 
 Pass following to Nix commands:
 
-- `--option connect-timeout 5` to wait only 5 second on binary package
-- `--fallback` to build from source if binary package fetching fails
+- :option:`--option connect-timeout 5` to wait only 5 second on binary package
+- :option:`--fallback` to build from source if binary package fetching fails
 
 
 How do I add a new binary cache?
