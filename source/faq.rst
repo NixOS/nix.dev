@@ -20,6 +20,12 @@ references, the following may work:
     mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
     sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 
+How to operate between Nix paths and strings?
+---------------------------------------------
+
+
+http://stackoverflow.com/a/43850372
+
 
 How do I fix: error: current Nix store schema is version 10, but I only support 7
 ---------------------------------------------------------------------------------
