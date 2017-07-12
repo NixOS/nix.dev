@@ -59,9 +59,9 @@ author = u'Domen Kožar'
 #
 # The short X.Y version.
 import pkg_resources
-version = pkg_resources.get_distribution(project).version
+#version = pkg_resources.get_distribution(project).version
 # The full version, including alpha/beta/rc tags.
-release = version
+release = "0.1"
 
 suppress_warnings = ["ref.option"]
 
