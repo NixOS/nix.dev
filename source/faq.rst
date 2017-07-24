@@ -175,6 +175,16 @@ Apply following patch:
 
 And then the vde_switch network should be accessible locally.
 
+How to bootstrap NixOS inside an existing Linux installation?
+-------------------------------------------------------------
+
+There are a couple of tools:
+
+- https://github.com/jeaye/nixos-in-place
+- https://github.com/elitak/nixos-infect  
+- https://github.com/cleverca22/nix-tests/tree/master/kexec
+
+
 Hydra
 *****
 
