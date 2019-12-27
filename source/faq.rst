@@ -227,7 +227,7 @@ To wipe all cache-lookup-caches:
 
 .. code-block:: bash
 
-    $ rm $HOME/.cache/nix/binary-cache-v6.sqlite*
+    $ rm $HOME/.cache/nix/binary-cache-v*.sqlite*
 
 Alternatively, use the ``narinfo-cache-negative-ttl`` option to reduce the
 cache timeout.
