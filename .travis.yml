@@ -1,6 +1,0 @@
-language: python
-install:
-  - pip install -e .
-script:
-  - make html
-  - make linkcheck  
