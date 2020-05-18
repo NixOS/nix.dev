@@ -1,0 +1,3 @@
+[build]
+  publish = "build/html"
+  command = "make html"
