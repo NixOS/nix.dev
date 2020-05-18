@@ -8,3 +8,8 @@
 ==========
 
 Getting started and cookbook resources for Nix.
+
+Contributing
+------------
+
+Run `./live` and open a browser at https://localhost:5500. As you make changes, the browser should auto-reload.
