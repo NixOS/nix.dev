@@ -1,6 +1,10 @@
-.. image:: https://readthedocs.org/projects/nix-cookbook/badge/?version=stable
-.. image:: https://travis-ci.org/domenkozar/nix-cookbook.svg?branch=master
+|Netlify Status| |CI|
 
-http://nix-cookbook.readthedocs.io/
+.. |Netlify Status| image:: https://api.netlify.com/api/v1/badges/269f7467-6afd-49ae-97f2-61a160e93a9a/deploy-status
+   :target: https://app.netlify.com/sites/nixdev/deploys
+.. |CI| image:: https://github.com/domenkozar/nix.dev/workflows/CI/badge.svg
 
-For live coding use https://livesphinx.herokuapp.com/
+`nix.dev`_
+==========
+
+Getting started and cookbook resources for Nix.
