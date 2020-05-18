@@ -20,6 +20,6 @@ Table of Contents
    :glob:
 
    tutorials/index.rst
-   nix-pills.rst
+   recommended-reading.rst
    faq.rst
    influences.rst
