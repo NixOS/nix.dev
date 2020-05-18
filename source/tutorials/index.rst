@@ -1,33 +1,10 @@
 Tutorials
 =========
 
+.. toctree::
+   :glob:
 
-Hydra installation on NixOS
----------------------------
-
-https://github.com/peti/hydra-tutorial/
-
-Serving Nix binaries
---------------------
-
-Via HTTP
-********
-
-
-Via SSH
-*******
-
-https://github.com/edolstra/nix-serve
-
-Using precompiled packages within Nix
--------------------------------------
-
-Using Nix with
---------------
-
-
-Docker
-******
-
-Travis-CI
-*********
+   install-nix.rst
+   first-shell.rst
+   dev-environment.rst
+   contributing.rst

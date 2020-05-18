@@ -1,0 +1,2 @@
+# TODO: https://github.com/nix-community/pypi2nix/issues/432
+PATH=$PATH:$(nix-build requirements.nix)/bin nix-shell requirements.nix --run "python live.py"
