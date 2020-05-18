@@ -12,4 +12,6 @@ Getting started and cookbook resources for Nix.
 Contributing
 ------------
 
-Run `./live` and open a browser at https://localhost:5500. As you make changes, the browser should auto-reload.
+Run ``./live`` and open a browser at https://localhost:5500. 
+
+As you make changes your browser should auto-reload within a few seconds.
