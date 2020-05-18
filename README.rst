@@ -4,8 +4,8 @@
    :target: https://app.netlify.com/sites/nixdev/deploys
 .. |CI| image:: https://github.com/domenkozar/nix.dev/workflows/CI/badge.svg
 
-`nix.dev`_
-==========
+`nix.dev <https://nix.dev>`_
+============================
 
 Getting started and cookbook resources for Nix.
 
