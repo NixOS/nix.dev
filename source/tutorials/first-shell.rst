@@ -9,7 +9,7 @@ software as you.
 To get started, make a new folder and create a file called ``shell.nix``
 with the following contents:
 
-.. code:: code
+.. code:: nix
 
    { pkgs ? import <nixpkgs> {} }:
 
@@ -24,7 +24,7 @@ Basically we import our package channel ``nixpkgs`` and make a shell
 with ``which`` and ``htop`` as inputs. To enter this environment, type
 in:
 
-.. code:: code
+.. code:: bash
 
    nix-shell
 
@@ -38,7 +38,7 @@ Q.
 Now try ``which htop`` to check where the ``htop`` command is on-disk.
 You should see something similar to this:
 
-.. code:: code
+.. code:: bash
 
    /nix/store/y3w2i8kfdbfj9rx287ad52rahjpgv423-htop-2.2.0/bin/htop
 
@@ -49,7 +49,7 @@ version.
 You can search for available packages using ``nix-env -qa``, for
 example:
 
-.. code:: code
+.. code:: bash
 
    nix-env -qa python3
    nix-env -qa nodejs

@@ -7,7 +7,7 @@ web framework.
 Create a new file ``default.nix``. This file is conventionally used for
 specifying packages:
 
-.. code:: code
+.. code:: nix
 
    { pkgs ? import <nixpkgs> {} }:
 
@@ -20,7 +20,7 @@ specifying packages:
 
 You will also need a simple Flask app as ``main.py``:
 
-.. code:: code
+.. code:: python
 
    #! /usr/bin/env python
 
@@ -37,7 +37,7 @@ You will also need a simple Flask app as ``main.py``:
 
 and a ``setup.py`` script:
 
-.. code:: code
+.. code:: python
 
    from setuptools import setup
 
@@ -52,7 +52,7 @@ and a ``setup.py`` script:
 
 Now build the package with:
 
-.. code:: code
+.. code:: bash
 
    nix-build
 
@@ -65,7 +65,7 @@ You may notice we can run the application from the package like
 ``./result/bin/main.py``. We can still use the ``default.nix`` as a
 shell environment to get the same result:
 
-.. code:: code
+.. code:: bash
 
    nix-shell default.nix
    python3 main.py

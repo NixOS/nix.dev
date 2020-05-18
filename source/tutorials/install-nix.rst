@@ -5,7 +5,7 @@ While NixOS is a Linux distribution based on Nix, you can install Nix on
 other Linux distributions, MacOS and Windows via WSL using the install
 script from our website:
 
-.. code:: code
+.. code:: bash
 
    curl -L https://nixos.org/nix/install | sh
 
@@ -14,7 +14,7 @@ signatures.)
 
 Check that the installation was successful by running
 
-.. code:: code
+.. code:: bash
 
    nix-channel --list
 

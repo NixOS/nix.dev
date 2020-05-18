@@ -13,13 +13,13 @@ Welcome to nix.dev
 
 
 Table of Contents
-=================
+-----------------
 
 .. toctree::
    :maxdepth: 3
+   :glob:
 
-   installation.rst
-   tutorials/*.rst
+   tutorials/index.rst
    nix-pills.rst
    faq.rst
    influences.rst
