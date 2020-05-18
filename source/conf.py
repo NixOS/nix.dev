@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'nix.dev'
-copyright = u'2016, Domen Kožar'
+copyright = u'2016-2020, Domen Kožar'
 author = u'Domen Kožar'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -59,10 +59,7 @@ author = u'Domen Kožar'
 # built documents.
 #
 # The short X.Y version.
-import pkg_resources
-#version = pkg_resources.get_distribution(project).version
-# The full version, including alpha/beta/rc tags.
-release = "0.1"
+release = ""
 
 suppress_warnings = ["ref.option"]
 
