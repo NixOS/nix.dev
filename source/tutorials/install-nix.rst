@@ -1,24 +1,28 @@
 Install Nix
 ===========
 
-While NixOS is a Linux distribution based on Nix, you can install Nix on
-other Linux distributions, MacOS and Windows via WSL using the install
-script from our website:
+Install Nix on **any Linux distribution**, **MacOS** and **Windows (via WSL)**
+via the recommended `multi-user installation <https://nixos.org/nix/manual/#chap-installation>`_:
 
 .. code:: bash
 
-   curl -L https://nixos.org/nix/install | sh
+   sh <(curl -L https://nixos.org/nix/install) --daemon
 
-(For security, you may want to `verify the script`_ using our GPG
-signatures.)
+.. note:: 
 
-Check that the installation was successful by running
+  Due to `MacOS Catalina read-only system volume <https://github.com/NixOS/nix/issues/2925>`_,
+  there are extra installation steps by running `create-darwin-volume.sh <https://github.com/NixOS/nix/pull/3212>`_
+  
+  For security you may want to `verify installation script`_ using GPG signatures.
+
+Verify installation
+-------------------
+
+Check that the installation was successful:
 
 .. code:: bash
 
-   nix-channel --list
+   $ nix-env --version
+   nix-env (Nix) 2.3.4
 
-This command displays the package distribution channel used by Nix. By
-default, this is ``https://nixos.org/channels/nixpkgs-unstable``
-
-.. _verify the script: %5B%root%%5Ddownload.html#nix-verify-installation
+.. _verify installation script: https://nixos.org/download.html#nix-verify-installation
