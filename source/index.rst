@@ -23,3 +23,4 @@ Table of Contents
    recommended-reading.rst
    faq.rst
    influences.rst
+   glossary.rst

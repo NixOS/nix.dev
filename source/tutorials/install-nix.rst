@@ -1,3 +1,5 @@
+.. _install-nix:
+
 Install Nix
 ===========
 
