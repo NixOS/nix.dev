@@ -1,8 +1,10 @@
-Your first shell
-================
+Ad-hoc developer environments
+=============================
 
 Nix can create reproducible environments given a declarative
-configuration called a Nix expression. Reproducible means you can share
+configuration called a Nix expression. 
+
+Reproducible means you can share
 the configuration with others and guarantee that they are using the same
 software as you.
 
@@ -28,8 +30,10 @@ in:
 
    nix-shell
 
-The command will start downloading the missing packages from the cache.
-This may take a few moments. When it is done, you are dropped into a new
+The command will start downloading the missing packages from the default binary cache.
+
+
+Once it's' done, you are dropped into a new
 shell. This shell provides the packages specified in ``shell.nix``.
 
 Run ``htop`` to confirm it is present. Quit the program again by hitting

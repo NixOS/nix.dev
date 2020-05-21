@@ -2,13 +2,35 @@ Ad hoc developer environments
 =============================
 
 Assuming you have :ref:`Nix installed <install-nix>`, it is able to download packages
-and provide a new shell with packages available.
+and provide a new **shell environment** with packages available.
 
 This is a great way to play with Nix tooling and see some of its potential.
 
 
-When are such environments useful?
-----------------------------------
+What is a shell environment?
+----------------------------
+
+A hello world example:
+
+.. code:: shell-session
+
+    $ hello             
+    The program ‘hello’ is currently not installed.
+
+    $ nix-shell -p hello             
+
+    [nix-shell:~]$ hello
+    Hello, world!
+
+    [nix-shell:~]$ exit
+    exit
+
+    $ hello             
+    The program ‘hello’ is currently not installed.
+
+
+When are shell environments useful?
+-----------------------------------
 
 Sometimes you'd like **to use a tool, but it's not installed yet**. You don't want to
 bother installing software, you only want to have it now.
@@ -21,11 +43,15 @@ tools** being used and such that it works between all Linux distributions and on
 
 Sometimes you'd like **to provide a script that is reproducible**, meaning it will also provide the tooling.
 
+
 Searching package attribute names
 ---------------------------------
 
-To search available packages head over to `official package list <https://nixos.org/nixos/packages.html>`_
-or query in your terminal:
+What can you put in a shell environment?”
+
+To start, anything that's in the `official package list <https://nixos.org/nixos/packages.html>`_ can become part of the shell environment.
+
+You can search the package list using:
 
 .. code:: shell-session
 
@@ -36,12 +62,16 @@ or query in your terminal:
 
 The first column is the :term:`attribute name` and the second is :term:`package name` and its version.
 
+Once you are comfortable doing this, you can add other things too. 
+For example, packages of your own or custom shell aliases.
+
 .. note::
 
    Query for searching packages is a regex, so be aware when it comes to special characters.
 
-Ad hoc environments
--------------------
+
+Ad hoc shell environments
+-------------------------
 
 Once you have the :term:`attribute name` for packages, you can start a shell:
 
@@ -72,7 +102,7 @@ A quick example using Python and ``$PYTHONPATH``:
 
 .. code:: shell-session
 
-    $ nix-shell -p 'python38.withPackages (ps: [ ps.django ])' 
+    $ nix-shell -p 'python38.withPackages (packages: [ packages.django ])' 
     ...
 
     [nix-shell:~]$ python -c 'import django; print(django)'
@@ -83,35 +113,40 @@ We create ad hoc environment with ``$PYTHONPATH`` set and ``python`` available w
 ``-p`` argument accepts Nix expression, but going into the Nix language is out of scope of this tutorial.
 
 
-Improving reproducability
--------------------------
-
-These environments are **really convenient**, but they are **not yet reproducible**.
+Towards reproducability
+-----------------------
 
 If you handed over these commands to another developer, they might get different results.
 
-However the following is entirely reproducible and something you can share between collegues:
+These shell environments are **really convenient**, but they are **not yet reproducible**.
+
+What do we mean by reproducible? No matter when or on what machine you run the command, the result will be the same.
+The very same environment will be provided each time.
+
+The following is entirely reproducible and something you can share between colleagues:
 
 .. code:: shell-session
 
   $ nix-shell --pure -p git --run "git --version" -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz 
+  
+  [nix-shell:~]$ git --version
   git version 2.25.0
 
-There are a few things going on here:
+There are two things going on here:
 
 1. ``--pure`` flag makes sure that bash environnment from your system is not inherited. That means the only ``git`` is available inside the shell.
    This is useful for one-liners and scripts that run for example on a CI. While developing however, we'd like to have our editor around and
-   a bunch of other things.
+   a bunch of other things so we skip the flag.
 
-2. ``--run`` will execute a command instead of entering shell. This is only a demonstration how to automate things rather than reproducability improvement.
-
-3. ``-I`` pins nixpkgs revision to an exact git revision, leaving no doubt which version of Nix packages will be used.
+2. ``-I`` pins nixpkgs revision to an exact git revision, leaving no doubt which version of Nix packages will be used.
 
 
 Reproducible executables
 ------------------------
 
-Finally, we can wrap scripts to provide a reproducible environment that we can commit to a git repository.
+Finally, we can wrap scripts to provide a reproducible shell environment that we can commit to a git repository
+and share with strangers online. As long as they have Nix installed, they'll be able to execute the script without 
+worrying about manually installing and later uninstalling dependencies at all.
 
 .. code:: python
 
@@ -135,3 +170,5 @@ Going forward
 
 - When using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
   Once enough disk space accumulates, it's time to `Garbage Collect <https://nixos.org/nix/manual/#sec-garbage-collection>`_.
+
+- See ``man nix-shell`` for more options
