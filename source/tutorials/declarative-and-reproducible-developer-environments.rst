@@ -1,5 +1,5 @@
-Ad-hoc developer environments
-=============================
+Declarative and reproducible developer environments
+===================================================
 
 Nix can create reproducible environments given a declarative
 configuration called a Nix expression. 
