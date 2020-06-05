@@ -6,7 +6,7 @@ Welcome to nix.dev
 
 .. topic:: Introduction
  
-   Welcome to documentation for developers wanting to get things done with `Nix <https://nixos.org/>`_.
+   Welcome to documentation for developers wanting to get things done with `Nix ecosystem <https://nixos.org/>`_.
 
    Using Nix ecosystem you get:
 
