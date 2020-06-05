@@ -12,9 +12,6 @@ via the recommended `multi-user installation <https://nixos.org/nix/manual/#chap
 
 .. note:: 
 
-  Due to `MacOS Catalina read-only system volume <https://github.com/NixOS/nix/issues/2925>`_,
-  there are extra installation steps by running `create-darwin-volume.sh <https://github.com/NixOS/nix/pull/3212>`_
-  
   For security you may want to `verify installation script`_ using GPG signatures.
 
 Verify installation
