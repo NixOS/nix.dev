@@ -8,7 +8,7 @@ Welcome to nix.dev
  
    Welcome to documentation for developers wanting to get things done with Nix.
 
-   With Nix ecosystem you can:
+   Using Nix ecosystem you get:
 
    - Reproducible development environments.
    - Easy installation of software over URLS.
