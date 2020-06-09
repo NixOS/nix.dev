@@ -1,4 +1,4 @@
-. _pinning-nixpkgs:
+.. _pinning-nixpkgs:
 
 Towards reproducibility: Pinning nixpkgs
 ========================================
@@ -53,7 +53,7 @@ Dependency management with niv
 If you'd like a bit more automation around bumping dependencies such as nixpkgs,
 ``niv`` is made for exactly that::
 
-    $ niv init
+    $ nix-shell -p niv --run "niv init"
 
 This command will generate ``nix/sources.json`` with information how and where
 dependencies are fetched and ``nix/sources.nix`` that glues them together in Nix.
@@ -69,6 +69,10 @@ You can use it as:
     }:   
 
     ...
+
+To update all dependencies::
+
+    $ nix-shell -p niv --run "niv update"
 
 
 .. Reference: nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];

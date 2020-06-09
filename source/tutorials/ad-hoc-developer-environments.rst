@@ -113,7 +113,7 @@ We create ad hoc environment with ``$PYTHONPATH`` set and ``python`` available w
 ``-p`` argument accepts Nix expression, but going into the Nix language is out of scope of this tutorial.
 
 
-Towards reproducability
+Towards reproducibility
 -----------------------
 
 If you handed over these commands to another developer, they might get different results.
