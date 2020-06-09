@@ -1,7 +1,7 @@
 Towards reproducability: Pinning nixpkgs
 ========================================
 
-In Nix snippets around the internet you'll often notice the following:
+In Nix snippets around the internet you'll often encounter the following:
 
 .. code:: nix
 
