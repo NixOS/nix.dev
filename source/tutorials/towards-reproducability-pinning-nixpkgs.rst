@@ -1,3 +1,5 @@
+. _pinning-nixpkgs:
+
 Towards reproducibility: Pinning nixpkgs
 ========================================
 

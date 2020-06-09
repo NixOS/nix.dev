@@ -164,7 +164,7 @@ This is essentially the same example as in previous section, but this time decla
 Going forward
 -------------
 
-.. - Where are these packages coming from? TODO: channels and pinning nixpkgs
+- :ref:`pinning-nixpkgs`
 
 .. TODO: reproducible developer environments
 
