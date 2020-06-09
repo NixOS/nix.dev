@@ -13,7 +13,7 @@ In Nix snippets around the internet you'll often encounter the following:
 To quickly demonstrate and get a working Nix expression by importing Nix packages.
 
 But it doesn't make Nix expression reproducible. Two developers on different machines
-are likely to get different result.
+are likely to have `<nixpkgs>` point to different revisions which will lead to getting different results.
 
 .. note::
 
