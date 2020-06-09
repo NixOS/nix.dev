@@ -1,4 +1,4 @@
-Towards reproducability: Pinning nixpkgs
+Towards reproducibility: Pinning nixpkgs
 ========================================
 
 In Nix snippets around the internet you'll often encounter the following:
