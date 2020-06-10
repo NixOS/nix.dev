@@ -4,8 +4,49 @@ Frequently Asked Questions
 Nix
 ***
 
-Secrets?
---------
+What to do if a binary cache is down or unreachable?
+----------------------------------------------------
+
+Pass following to Nix commands:
+
+- :option:`--option connect-timeout 5` to wait only 5 second on binary package
+- :option:`--fallback` to build from source if binary package fetching fails
+
+
+How do I add a new binary cache?
+--------------------------------
+
+Using `NixOS`:
+
+.. code-block:: nix
+
+    trustedBinaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
+    binaryCaches = trustedBinaryCaches;
+    binaryCachePublicKeys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
+
+Using `Nix`:
+
+.. code-block:: bash
+
+    $ echo "trusted-binary-caches = https://hydra.snabb.co" >> /etc/nix/nix.conf
+    $ nix-build helpers/bench.nix --option extra-binary-caches https://hydra.snabb.co
+
+How do I force nix to re-check whether something exists at a binary cache?
+--------------------------------------------------------------------------
+
+Nix caches the contents of binary caches so that it doesn't have to query them
+on every command. This includes negative answers (cache doesn't have something).
+The default timeout for that is 1 hour as of writing.
+
+To wipe all cache-lookup-caches:
+
+.. code-block:: bash
+
+    $ rm $HOME/.cache/nix/binary-cache-v*.sqlite*
+
+Alternatively, use the ``narinfo-cache-negative-ttl`` option to reduce the
+cache timeout.
+
 
 How do I fix: error: querying path in database: database disk image is malformed
 --------------------------------------------------------------------------------
@@ -44,56 +85,11 @@ The solution is to dump the db and use old Nix version to initialize it:
    nix-store --init (this is the old nix-store)
    nix-store --load-db < /tmp/db.dump
 
-How nix decides which parts of the environment affect a derivation and its sha256 hash
---------------------------------------------------------------------------------------
-
-How to pin nixpkgs to a specific commit/branch?
------------------------------------------------
-
-
-Ways to provide/pin nixpkgs:
-
-- ``nix-channel --add URL nixpkgs && nix-channel --update`` sets it globally for the user,
-  but it doesn't allow precision (pinning to specific version)
-
-- As environment variable: ``$NIX_PATH=URL`` 
-
-- ``-I`` command line parameter to most of commands like ``nix-build``, ``nix-shell``, etc
-
-- Using `builtins.fetchTarball <https://nixos.org/nix/manual/#ssec-builtins>`_ function that fetches the channel at evaluation time
-
-
-Possible ``URL`` values:
-
-- Local file path. Using just ``.`` means that nixpkgs is located in current folder.
-
-- Pinned to a specific commit: ``https://github.com/NixOS/nixpkgs/archive/addcb0dddf2b7db505dae5c38fceb691c7ed85f9.tar.gz``
-
-- Using latest channel, meaning all tests have passed: ``http://nixos.org/channels/nixos-17.03/nixexprs.tar.xz``
-
-- Using latest channel, but hosted by github: ``https://github.com/NixOS/nixpkgs-channels/archive/nixos-17.03.tar.gz``
-
-- Using latest commit for release branch, but not tested yet: ``https://github.com/NixOS/nixpkgs/archive/release-17.03.tar.gz``
-
-Examples:
-
-
-- ``nix-build -I ~/dev``
-- ``nix-build -I ~/dev``
-- ``nix-build -I nixpkgs=http://nixos.org/channels/nixos-17.03/nixexprs.tar.xz``
-- ``NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-17.03/nixexprs.tar.xz nix-build ...``
-- Using just Nix:
-
-::
-
-    with import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-14.12.tar.gz) {};
-
-    stdenv.mkDerivation { … }
 
 How to build reverse dependencies of a package?
 -----------------------------------------------
 
-nox-review wip
+``nix-shell -p nox-review --run "nox-review wip"``
 
 I'm getting: writing to file: Connection reset by peer
 ------------------------------------------------------
@@ -103,29 +99,12 @@ Too big files in src, out of resources (HDD space, memory)
 What are channels and different branches on github?
 ---------------------------------------------------
 
-Subquestion: how stable is unstable?
-
-How do I mirror tarballs?
--------------------------
-
-We have a content-addressed tarball mirror at tarballs.nixos.org for this
-purpose. "fetchurl" will automatically use this mirror to obtain files by hash.
-However:
-
-* The mirroring script was not running lately. I've revived it so 16.03 tarballs
-  are mirrored now
-  (https://github.com/NixOS/nixos-org-configurations/commit/a17ccf87deae4fb86639c8d34ab5938edd68d8c4).
-
-* The mirroring script only copies tarballs of packages in the Nixpkgs Hydra
-  jobset. Since moreutils is not part of the jobset, it's not mirrored. This can
-  be fixed by adding a meta.platforms attribute to moreutils.
+See https://nixos.wiki/wiki/Nix_channels
 
 How can I manage dotfiles in $HOME with Nix?
 --------------------------------------------
 
-See following solutions:
-
-- https://github.com/sheenobu/nix-home
+https://github.com/rycee/home-manager
 
 Are there some known impurities in builds?
 ------------------------------------------
@@ -183,51 +162,3 @@ There are a couple of tools:
 - https://github.com/jeaye/nixos-in-place
 - https://github.com/elitak/nixos-infect  
 - https://github.com/cleverca22/nix-tests/tree/master/kexec
-
-
-Hydra
-*****
-
-What to do if cache/hydra is down or unreachable?
--------------------------------------------------
-
-Pass following to Nix commands:
-
-- :option:`--option connect-timeout 5` to wait only 5 second on binary package
-- :option:`--fallback` to build from source if binary package fetching fails
-
-
-How do I add a new binary cache?
---------------------------------
-
-Using `NixOS`:
-
-.. code-block:: nix
-
-    trustedBinaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-    binaryCaches = trustedBinaryCaches;
-    binaryCachePublicKeys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
-
-Using `Nix`:
-
-.. code-block:: bash
-
-    $ echo "trusted-binary-caches = https://hydra.snabb.co" >> /etc/nix/nix.conf
-    $ nix-build helpers/bench.nix --option extra-binary-caches https://hydra.snabb.co`
-
-
-How do I force nix to re-check whether something exists at a binary cache?
---------------------------------------------------------------------------
-
-Nix caches the contents of binary caches so that it doesn't have to query them
-on every command. This includes negative answers (cache doesn't have something).
-The default timeout for that is 1 hour as of writing.
-
-To wipe all cache-lookup-caches:
-
-.. code-block:: bash
-
-    $ rm $HOME/.cache/nix/binary-cache-v*.sqlite*
-
-Alternatively, use the ``narinfo-cache-negative-ttl`` option to reduce the
-cache timeout.
