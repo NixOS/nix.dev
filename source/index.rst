@@ -33,7 +33,8 @@ Table of Contents
    :glob:
 
    tutorials/index.rst
-   recommended-reading.rst
+   anti-patterns/index.rst
    faq.rst
+   recommended-reading.rst
    influences.rst
    glossary.rst
