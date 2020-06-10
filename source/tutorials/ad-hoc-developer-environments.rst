@@ -113,7 +113,7 @@ We create ad hoc environment with ``$PYTHONPATH`` set and ``python`` available w
 ``-p`` argument accepts Nix expression, but going into the Nix language is out of scope of this tutorial.
 
 
-Towards reproducability
+Towards reproducibility
 -----------------------
 
 If you handed over these commands to another developer, they might get different results.
@@ -164,7 +164,7 @@ This is essentially the same example as in previous section, but this time decla
 Going forward
 -------------
 
-.. - Where are these packages coming from? TODO: channels and pinning nixpkgs
+- :ref:`pinning-nixpkgs`
 
 .. TODO: reproducible developer environments
 
