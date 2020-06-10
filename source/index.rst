@@ -6,9 +6,7 @@ Welcome to nix.dev
 
 .. topic:: Introduction
  
-   An opinionated guide for developers wanting to get things done using `the Nix ecosystem <https://nixos.org/>`_.
-
-   Using Nix ecosystem you get:
+   An opinionated guide for developers wanting to get things done using `the Nix ecosystem <https://nixos.org/>`_:
 
    - Reproducible development environments.
    - Easy installation of software over URLS.
