@@ -75,4 +75,8 @@ To update all dependencies::
     $ nix-shell -p niv --run "niv update"
 
 
-.. Reference: nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];
+Going Forward
+-------------
+
+- See reference at :ref:`ref-pinning-nixpkgs`
+

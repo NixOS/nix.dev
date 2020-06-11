@@ -1,3 +1,5 @@
+.. _ref-pinning-nixpkgs:
+
 Pinning Nixpkgs
 ===============
 
@@ -31,10 +33,10 @@ Examples
 - ``nix-build -I ~/dev``
 - ``nix-build -I nixpkgs=http://nixos.org/channels/nixos-17.03/nixexprs.tar.xz``
 - ``NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-17.03/nixexprs.tar.xz nix-build ...``
-- Using just Nix:
-
-::
+- Using just Nix::
 
     with import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-14.12.tar.gz) {};
 
     stdenv.mkDerivation { … }
+
+- To make ad-hoc environment available on NixOS: ``nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];``
