@@ -2,7 +2,7 @@ Nix language
 ============
 
 
-Unqouted URLs
+Unquoted URLs
 -------------
 
 Nix syntax supports URLs as verbatim, so one can write ``https://example.com`` instead of ``"https://example.com"``
