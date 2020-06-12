@@ -1,5 +1,5 @@
-Nix expressions
-===============
+Nix language
+============
 
 
 Unqouted URLs
@@ -9,10 +9,48 @@ Nix syntax supports URLs as verbatim, so one can write ``https://example.com`` i
 
 There's was an `RFC 45 <https://github.com/NixOS/rfcs/pull/45>`_ accepted to deprecate verbatim URLS and provides
 a number of arguments this features does more harm than good.
+ 
+
+``rec { ... }`` expression
+--------------------------
+
+``rec`` allows you to reference variables within an attribute set.
+
+A simple example:
+
+.. code:: nix
+
+  rec {
+    a = 1;
+    b = a + 2;
+  }
+
+evaluating to ``{ a = 1; b = 3; }``.
+
+``b`` refers to ``a`` as ``rec`` makes all keys available within the attribute set.
+
+There are a couple of pitfalls:
+
+- It's possible to introduce a hard to debug error `infinite recursion` when shadowing a variable,
+  simplest example being ``rec { b = b; }``.
+
+- combining with overriding logic such as `overrideAttrs` function in nixpkgs it has suprising behavour
+  of not overriding every reference.
+
+A better way is to use simpler ``let .. in``:
+
+.. code:: nix
+
+  let
+    a = 1;
+  in {
+    a = a;
+    b = a + 2;
+  }
 
 
-``with`` expression
--------------------
+``with attrset; ...`` expression
+--------------------------------
 
 It's common to see the following expression in the wild:
 
