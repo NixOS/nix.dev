@@ -1,5 +1,5 @@
 # After updating run:
 # nix-shell -p pypi2nix --run "pypi2nix -r requirements.txt"
-sphinx==3.0.3
+sphinx==3.1.0
 Pallets-Sphinx-Themes==1.2.3
 livereload==2.6.2
