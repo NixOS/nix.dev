@@ -1,0 +1,7 @@
+{
+    "schedule": "daily", // daily|weekly|monthly
+    "ignoredFiles": [
+    ],
+    "aggressiveCompression": "true",
+    "compressWiki": "false",
+}
