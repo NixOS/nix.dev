@@ -8,7 +8,7 @@ Unquoted URLs
 Nix syntax supports URLs as verbatim, so one can write ``https://example.com`` instead of ``"https://example.com"``
 
 There's was an `RFC 45 <https://github.com/NixOS/rfcs/pull/45>`_ accepted to deprecate verbatim URLS and provides
-a number of arguments this features does more harm than good.
+a number of arguments how this feature does more harm than good.
  
 
 ``rec { ... }`` expression
@@ -31,10 +31,10 @@ evaluating to ``{ a = 1; b = 3; }``.
 
 There are a couple of pitfalls:
 
-- It's possible to introduce a hard to debug error `infinite recursion` when shadowing a variable,
-  simplest example being ``rec { b = b; }``.
+- It's possible to introduce a hard to debug error ``infinite recursion`` when shadowing a variable,
+  the simplest example being ``rec { b = b; }``.
 
-- combining with overriding logic such as `overrideAttrs` function in nixpkgs it has suprising behavour
+- combining with overriding logic such as ``overrideAttrs`` function in nixpkgs has a suprising behavour
   of not overriding every reference.
 
 A better way is to use simpler ``let .. in``:
@@ -67,11 +67,11 @@ There are a number of problems with such approach:
 - Static analysis can't reason about the code, because it would have to actually evaluate this file to see what
   variables are in scope.
 
-- As soon as there are two `with` used, it's not clear anymore from which the variables are coming from.
+- As soon as there are two ``with`` used, it's not clear anymore from which the variables are coming from.
 
-- Scoping rules around `with` are not intuitive, see `Nix issue for details <https://github.com/NixOS/nix/issues/490>`_
+- Scoping rules around ``with`` are not intuitive, see `Nix issue for details <https://github.com/NixOS/nix/issues/490>`_
 
-The better way is to use a variable:
+A better way is to use a variable:
 
 .. code:: nix
 
