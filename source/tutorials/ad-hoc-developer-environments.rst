@@ -63,7 +63,7 @@ You can search the package list using:
     gitMinimal           git-2.25.0
 
 
-The first column is the :term:`attribute name` and the second is :term:the `package name` and its version.
+The first column is the :term:`attribute name` and the second is the :term:`package name` and its version.
 
 Once you are comfortable doing this, you can add other things too. 
 For example, packages of your own or custom shell aliases.
