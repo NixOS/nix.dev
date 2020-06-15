@@ -7,6 +7,14 @@
       "created_at": "2020-06-14T15:08:21Z",
       "repoId": 58043886,
       "pullRequestNo": 40
+    },
+    {
+      "name": "domenkozar",
+      "id": 126339,
+      "comment_id": 644195267,
+      "created_at": "2020-06-15T15:12:05Z",
+      "repoId": 58043886,
+      "pullRequestNo": 34
     }
   ]
 }
