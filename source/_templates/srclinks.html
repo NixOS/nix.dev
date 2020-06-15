@@ -1,0 +1,16 @@
+{%- if show_source and has_source and sourcename %}
+<div class="widget navlinks">
+  <h3>{{ _('This Page') }}</h3>
+  <ul class="this-page-menu">
+    <li><a href="https://github.com/domenkozar/nix.dev/edit/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+            rel="nofollow"
+            target="_blank">{{ _('Edit this page') }}</a></li>
+    <li><a href="https://github.com/domenkozar/nix.dev/commits/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+            rel="nofollow"
+            target="_blank">{{ _('Page history') }}</a></li>
+    <li><a href="https://github.com/domenkozar/nix.dev/raw/master/{{ ('source/' + sourcename).replace('.txt','') }}"
+            rel="nofollow"
+            target="_blank">{{ _('Source') }}</a></li>
+  </ul>
+</div>
+{%- endif %}

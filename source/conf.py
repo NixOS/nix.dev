@@ -157,7 +157,20 @@ html_theme = "flask"
 #html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {}
+html_sidebars = {
+    '**': [
+        'searchbox.html',
+        'localtoc.html',
+        'relations.html',
+        'srclinks.html',
+        ],
+    'index': [
+        'searchbox.html',
+        'globaltoc.html',
+        'relations.html',
+        'srclinks.html',
+        ],
+}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
