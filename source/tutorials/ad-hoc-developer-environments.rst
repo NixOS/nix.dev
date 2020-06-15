@@ -134,10 +134,10 @@ The following is a fully reproducible example and something that different colle
 
 .. code:: shell-session
 
-  $ nix-shell --pure -p git --run "git --version" -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz 
+  $ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz 
   
   [nix-shell:~]$ git --version
-  git version 2.25.0
+  git version 2.25.4
 
 There are two things going on here:
 
