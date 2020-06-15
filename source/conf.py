@@ -159,15 +159,15 @@ html_theme = "flask"
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
     '**': [
+        'searchbox.html',
         'localtoc.html',
         'relations.html',
-        'searchbox.html',
         'srclinks.html',
         ],
     'index': [
+        'searchbox.html',
         'globaltoc.html',
         'relations.html',
-        'searchbox.html',
         'srclinks.html',
         ],
 }
