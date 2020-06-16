@@ -1,3 +1,13 @@
 [build]
   publish = "build/html"
   command = "make html"
+
+[[redirects]]
+  from = "/en/latest/*"
+  to = "/:splat"
+  status = 302
+
+[[redirects]]
+  from = "/en/stable/*"
+  to = "/:splat"
+  status = 302
