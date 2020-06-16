@@ -163,12 +163,14 @@ html_sidebars = {
         'localtoc.html',
         'relations.html',
         'srclinks.html',
+        'sponsors.html',
         ],
     'index': [
         'searchbox.html',
         'globaltoc.html',
         'relations.html',
         'srclinks.html',
+        'sponsors.html',
         ],
 }
 
