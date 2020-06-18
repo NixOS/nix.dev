@@ -22,6 +22,6 @@ Check that the installation was successful:
 .. code:: bash
 
    $ nix-env --version
-   nix-env (Nix) 2.3.4
+   nix-env (Nix) 2.3.6
 
 .. _verify installation script: https://nixos.org/download.html#nix-verify-installation
