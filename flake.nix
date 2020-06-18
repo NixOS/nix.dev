@@ -5,29 +5,39 @@
 
   outputs = { self, nixpkgs }:
     let
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-      };
+      systems = [
+        "x86_64-linux"
+        "i686-linux"
+        "x86_64-darwin"
+        "aarch64-linux"
+      ];
 
-      python = import ./requirements.nix {
-        inherit pkgs;
-      };
+      forAllSystems = generator: nixpkgs.lib.genAttrs systems generator;
 
-      website = pkgs.stdenv.mkDerivation {
-        name = "nix-dev";
-        src = self;
-        buildInputs = [ python.interpreter ];
-        buildPhase = ''
-          make html
-        '';
+      website = system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+          python = import ./requirements.nix { inherit pkgs; };
 
-        installPhase = ''
-          mkdir -p $out/html
-          cp -r build/html/ $out/
-        '';
-      };
+        in pkgs.stdenv.mkDerivation {
+          name = "nix-dev";
+          src = self;
+
+          buildInputs = [
+            python.interpreter
+          ];
+
+          buildPhase = ''
+            make html
+          '';
+
+          installPhase = ''
+            mkdir -p $out/html
+            cp -r build/html/ $out/
+          '';
+        };
 
     in {
-      defaultPackage.x86_64-linux = website;
+      defaultPackage = forAllSystems website;
     };
 }
