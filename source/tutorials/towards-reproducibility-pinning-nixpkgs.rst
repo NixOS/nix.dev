@@ -15,12 +15,12 @@ In various Nix examples, you'll often see references to `<nixpkgs> <https://gith
 This is **convenient** to quickly demonstrate a Nix expression and get it working by importing Nix packages.
 
 However, the resulting Nix expression **is not fully reproducible**. The ``<nixpkgs>`` reference
-is set from the **local** ``$NIX_PATH`` environment variable. In most cases, this is set at the time Nix is installed 
+is set from the **local** ``$NIX_PATH`` environment variable. In most cases, this is set at the time Nix is installed
 to the ``nixpkgs-unstable`` channel, and therefore it is likely to differ from machine to machine.
 
 .. note::
   `Channels <https://nixos.wiki/wiki/Nix_channels>`_ are a way of distributing Nix software, but they are being phased out.
-  Even though they are still used by default, it is recommended to avoid channels 
+  Even though they are still used by default, it is recommended to avoid channels
   and ``<nixpkgs>`` by always setting ``NIX_PATH=`` to be empty.
 
 Pinning packages with URLs inside a Nix expression
@@ -49,7 +49,7 @@ Dependency management with niv
 ------------------------------
 
 If you'd like a bit more automation around bumping dependencies, including nixpkgs,
-`niv <https://github.com/nmattia/niv/>`_ is made for exactly that. Niv itself is available 
+`niv <https://github.com/nmattia/niv/>`_ is made for exactly that. Niv itself is available
 in ``nixpkgs`` so using it is simple::
 
     $ nix-shell -p niv --run "niv init"
@@ -63,9 +63,9 @@ You can use the generated ``sources.nix`` file as follows:
 
 .. code:: nix
 
-    { sources ? import ./sources.nix 
+    { sources ? import ./sources.nix
     , pkgs ? import sources.nixpkgs {}
-    }:   
+    }:
 
     ...
 

@@ -5,7 +5,7 @@ Welcome to nix.dev
 :Generated: |today|
 
 .. topic:: Introduction
- 
+
    An opinionated guide for developers wanting to get things done using `the Nix ecosystem <https://nixos.org/>`_:
 
    - Reproducible development environments.

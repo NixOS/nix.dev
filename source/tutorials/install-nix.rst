@@ -10,7 +10,7 @@ via the recommended `multi-user installation <https://nixos.org/nix/manual/#chap
 
    sh <(curl -L https://nixos.org/nix/install) --daemon
 
-.. note:: 
+.. note::
 
   For security you may want to `verify installation script`_ using GPG signatures.
 
