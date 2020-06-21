@@ -9,4 +9,5 @@ Tutorials
    towards-reproducibility-pinning-nixpkgs.rst
    declarative-and-reproducible-developer-environments.rst
    dev-environment.rst
+   building-and-running-docker-images.rst
    contributing.rst
