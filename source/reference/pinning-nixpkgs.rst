@@ -5,7 +5,7 @@ Pinning Nixpkgs
 
 Different ways:
 
-- As environment variable: ``$NIX_PATH=URL`` 
+- As environment variable: ``$NIX_PATH=URL``
 
 - ``-I`` command line parameter to most of commands like ``nix-build``, ``nix-shell``, etc
 

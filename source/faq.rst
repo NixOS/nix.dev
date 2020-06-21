@@ -121,7 +121,7 @@ Yes.
 What's the recommended process for building custom packages?
 ------------------------------------------------------------
 
- E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?              
+ E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?
 
 NixOS
 *****
@@ -160,5 +160,5 @@ How to bootstrap NixOS inside an existing Linux installation?
 There are a couple of tools:
 
 - https://github.com/jeaye/nixos-in-place
-- https://github.com/elitak/nixos-infect  
+- https://github.com/elitak/nixos-infect
 - https://github.com/cleverca22/nix-tests/tree/master/kexec

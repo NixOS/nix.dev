@@ -2,7 +2,7 @@ Declarative and reproducible developer environments
 ===================================================
 
 Nix can create reproducible environments given a declarative
-configuration called a Nix expression. 
+configuration called a Nix expression.
 
 Reproducible means you can share
 the configuration with others and guarantee that they are using the same

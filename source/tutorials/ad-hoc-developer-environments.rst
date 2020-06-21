@@ -16,10 +16,10 @@ A hello world example:
 
 .. code:: shell-session
 
-    $ hello             
+    $ hello
     The program ‘hello’ is currently not installed.
 
-    $ nix-shell -p hello             
+    $ nix-shell -p hello
 
     [nix-shell:~]$ hello
     Hello, world!
@@ -27,7 +27,7 @@ A hello world example:
     [nix-shell:~]$ exit
     exit
 
-    $ hello             
+    $ hello
     The program ‘hello’ is currently not installed.
 
 Here we used the ``-p`` (packages) flag to specify that we needed the ``hello`` dependency. Nix found this, downloaded it, and made it available in a shell environment.
@@ -40,7 +40,7 @@ Sometimes you'd like **to use a tool that you do not have installed**. You don't
 bother installing the software, but you want to use it.
 
 Sometimes you'd like **to try a tool for a few minutes**. For example, there's a new shiny
-tool for writing presentation slides. 
+tool for writing presentation slides.
 
 Sometimes you'd like **to give someone else a one-liner to install a set of tools** and you want this to work on all Linux distributions and MacOS.
 
@@ -65,7 +65,7 @@ You can search the package list using:
 
 The first column is the :term:`attribute name` and the second is the :term:`package name` and its version.
 
-Once you are comfortable doing this, you can add other things too. 
+Once you are comfortable doing this, you can add other things too.
 For example, packages of your own or custom shell aliases.
 
 .. note::
@@ -107,7 +107,7 @@ Let's try a quick example using Python and ``$PYTHONPATH``:
 
 .. code:: shell-session
 
-    $ nix-shell -p 'python38.withPackages (packages: [ packages.django ])' 
+    $ nix-shell -p 'python38.withPackages (packages: [ packages.django ])'
     ...
 
     [nix-shell:~]$ python -c 'import django; print(django)'
@@ -134,8 +134,8 @@ The following is a fully reproducible example and something that different colle
 
 .. code:: shell-session
 
-  $ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz 
-  
+  $ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+
   [nix-shell:~]$ git --version
   git version 2.25.4
 
