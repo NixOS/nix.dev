@@ -119,6 +119,8 @@ relevant depending on your use case.
 Going forward
 -------------
 
-You can find more advanced examples of docker images built with Nix `in an
-example file on nixpkgs
+More details on how to use `dockerTools` can be found in the `nixpkgs manual
+<https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. You will also find
+more advanced examples of docker images built with Nix `in the examples file on
+nixpkgs
 <https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix>`_.
