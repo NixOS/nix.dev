@@ -37,7 +37,7 @@ Docker images:
 We call the ``dockerTools.buildImage`` and pass in a few
 parameters: a ``name`` for our image and a configuration including the command
 ``Cmd`` that should be run inside the container once the image is started. Here we
-reference the GNU hello package from nixpkgs and access its 36
+reference the GNU hello package from nixpkgs and run its executable in the container.
 
 Save this in ``hello-docker.nix`` and build it:
 
