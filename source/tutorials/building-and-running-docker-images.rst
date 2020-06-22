@@ -2,7 +2,9 @@ Building and running Docker images
 ==================================
 
 `Docker <https://www.docker.com/>`_ is a set of tools and services used to
-build, manage and deploy containers. As many cloud platforms offer Docker-based
+build, manage and deploy containers. 
+
+As many cloud platforms offer Docker-based
 container hosting services, creating Docker containers for a given service is a
 common task when building reproducible software. In this tutorial, you will
 learn how to build Docker containers using Nix.
