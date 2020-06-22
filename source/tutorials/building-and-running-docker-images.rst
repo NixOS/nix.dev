@@ -20,7 +20,7 @@ distribution or MacOS.
 Build your first container
 --------------------------
 
-`nixpkgs <https://github.com/NixOS/nixpkgs>`_ provides `dockerTools` to create
+`nixpkgs <https://github.com/NixOS/nixpkgs>`_ provides ``dockerTools`` to create
 Docker images:
 
 .. code:: nix
@@ -34,12 +34,12 @@ Docker images:
       };
     }
 
-We call the `buildImage` function from `dockerTools` and pass in a few
-parameters: a `name` for our image and a configuration including the command
-`Cmd` that should be run inside the container once the image is started. Here we
+We call the ``dockerTools.buildImage`` and pass in a few
+parameters: a ``name`` for our image and a configuration including the command
+``Cmd`` that should be run inside the container once the image is started. Here we
 reference the GNU hello package from nixpkgs and access its 36
 
-Save this in `hello-docker.nix` and build it:
+Save this in ``hello-docker.nix`` and build it:
 
 .. code:: shell-session
 
@@ -63,7 +63,7 @@ Save this in `hello-docker.nix` and build it:
     Finished.
     /nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz
 
-The image tag (`y74sb4nrhxr975xs7h83izgm8z75x5fc`) refers to the Nix build hash
+The image tag (``y74sb4nrhxr975xs7h83izgm8z75x5fc``) refers to the Nix build hash
 and makes sure that the Docker image corresponds to our Nix build. The store
 path at the end of the command line output contains the Docker image.
 
@@ -72,7 +72,7 @@ Run the container
 -----------------
 
 To work with the container, load this image into
-Docker's image registry from the default `result` file created by nix-build:
+Docker's image registry from the default ``result`` symlink created by nix-build:
 
 .. code:: shell-session
 
@@ -88,8 +88,8 @@ You can also use the store path to load it to avoid depending on the presence of
     Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
 
 Even more conveniently, you can do it all in one-go. The advantage here is that
-`nix-build` will rebuild the image, if there are any changes and pass its store
-path to `docker load`:
+``nix-build`` will rebuild the image, if there are any changes and pass its store
+path to ``docker load``:
 
 .. code:: shell-session
 
@@ -122,8 +122,10 @@ relevant depending on your use case.
 Going forward
 -------------
 
-More details on how to use `dockerTools` can be found in the `nixpkgs manual
-<https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. You will also find
+More details on how to use ``dockerTools`` can be found in the `nixpkgs manual
+<https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. 
+
+You will also find
 more advanced examples of docker images built with Nix `in the examples file on
 nixpkgs
 <https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix>`_.
