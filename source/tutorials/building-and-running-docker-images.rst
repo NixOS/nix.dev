@@ -6,6 +6,7 @@ build, manage and deploy containers. As many cloud platforms offer Docker-based
 container hosting services, creating Docker containers for a given service is a
 common task when building reproducible software. In this tutorial, you will
 learn how to build Docker containers using Nix.
+
 Prerequisites
 -------------
 We assume you have both Nix and `Docker installed <https://docs.docker.com/get-docker/>`_. Docker is available in
