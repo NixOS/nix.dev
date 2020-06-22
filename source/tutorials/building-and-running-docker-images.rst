@@ -6,8 +6,9 @@ build, manage and deploy containers. As many cloud platforms offer Docker-based
 container hosting services, creating Docker containers for a given service is a
 common task when building reproducible software. In this tutorial, you will
 learn how to build Docker containers using Nix.
-
-We assume you have both Nix and Docker installed. Docker is available in
+Prerequisites
+-------------
+We assume you have both Nix and `Docker installed <https://docs.docker.com/get-docker/>`_. Docker is available in
 nixpkgs, which is the preferred way to install it on NixOS. However, you can
 also use the native Docker installation of your OS, if you are on another Linux
 distribution or MacOS.
@@ -17,7 +18,7 @@ Build your first container
 --------------------------
 
 `nixpkgs <https://github.com/NixOS/nixpkgs>`_ provides `dockerTools` to create
-Docker images. Let's jump straight into the code, as it is only a few lines:
+Docker images:
 
 .. code:: nix
 
@@ -67,7 +68,7 @@ path at the end of the command line output contains the Docker image.
 Run the container
 -----------------
 
-Of course, we want to work with this container now. You can load this image into
+To work with the container, load this image into
 Docker's image registry from the default `result` file created by nix-build:
 
 .. code:: shell-session
