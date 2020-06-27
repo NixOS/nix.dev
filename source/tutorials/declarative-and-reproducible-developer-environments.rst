@@ -33,10 +33,10 @@ in:
 The command will start downloading the missing packages from the default binary cache.
 
 
-Once it's' done, you are dropped into a new
+Once it's done, you are dropped into a new
 shell. This shell provides the packages specified in ``shell.nix``.
 
-Run ``htop`` to confirm it is present. Quit the program again by hitting
+Run ``htop`` to confirm it is present. Quit the program by hitting
 Q.
 
 Now try ``which htop`` to check where the ``htop`` command is on-disk.
