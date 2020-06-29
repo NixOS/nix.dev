@@ -35,8 +35,8 @@ Examples
 - ``NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-20.03/nixexprs.tar.xz nix-build ...``
 - Using just Nix::
 
-    with import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-20.03.tar.gz) {};
-
-    stdenv.mkDerivation { … }
+    let
+      pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-20.03.tar.gz") {};
+    in pkgs.stdenv.mkDerivation { … }
 
 - To make ad-hoc environment available on NixOS: ``nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];``

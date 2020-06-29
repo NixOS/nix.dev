@@ -32,7 +32,7 @@ The simplest way to do this is to fetch the required nixpkgs version as a tarbal
 
 .. code:: nix
 
-    { pkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz) {};
+    { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {};
     }:
 
     ...
