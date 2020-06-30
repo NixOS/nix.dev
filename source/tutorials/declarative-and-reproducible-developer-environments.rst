@@ -1,61 +1,151 @@
+.. _declarative-reproducible-envs:
+
 Declarative and reproducible developer environments
 ===================================================
 
-Nix can create reproducible environments given a declarative
-configuration called a Nix expression.
+In :ref:`ad-hoc-envs` tutorial we took a dive into providing shell
+environments for when we need a quick'n'dirty way of getting hold
+of some tools.
 
-Reproducible means you can share
-the configuration with others and guarantee that they are using the same
-software as you.
+In this tutorial we'll take a look how to create :term:`reproducible`
+shell environments given a declarative configuration file called a Nix expression.
 
-To get started, make a new folder and create a file called ``shell.nix``
-with the following contents:
+
+When are declarative shell environments useful?
+-----------------------------------------------
+
+This is the quickest approach to getting started with Nix:
+
+- single command to invoke it via ``nix-shell``
+- works across different operating systems (Linux / MacOS)
+- share the exact same environment with all developers
+
+Developer environments allow you to:
+
+- provide CLI tools, such as ``psql``, ``jq``, ``tmux``, etc
+- provide developer libraries, such as ``zlib``, ``openssl``, etc
+- set shell environment variables
+- execute bash during environment activation
+
+
+An example
+----------
+
+In top-level of your project create ``shell.nix`` with the following contents:
 
 .. code:: nix
 
-   { pkgs ? import <nixpkgs> {} }:
+   { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {} }:
 
    pkgs.mkShell {
      buildInputs = [
        pkgs.which
        pkgs.htop
+       pkgs.zlib
      ];
    }
 
-Basically we import our package channel ``nixpkgs`` and make a shell
-with ``which`` and ``htop`` as inputs. To enter this environment, type
-in:
+We import ``nixpkgs`` and make a shell with ``which`` and ``htop`` available in ``$PATH``. 
+To enter the environment:
 
-.. code:: bash
+.. code:: shell-session
 
-   nix-shell
+   $ nix-shell
+   these paths will be fetched (0.07 MiB download, 0.20 MiB unpacked):
+     /nix/store/072a6x7rwv5f8wr6f5s1rq8nnm767cfp-htop-2.2.0
+   copying path '/nix/store/072a6x7rwv5f8wr6f5s1rq8nnm767cfp-htop-2.2.0' from 'https://cache.nixos.org'...
 
-The command will start downloading the missing packages from the default binary cache.
+   [nix-shell:~]$ 
 
+
+The command will start downloading the missing packages from https://cache.nixos.org binary cache.
 
 Once it's done, you are dropped into a new
 shell. This shell provides the packages specified in ``shell.nix``.
 
 Run ``htop`` to confirm it is present. Quit the program by hitting
-Q.
+``Q``.
 
-Now try ``which htop`` to check where the ``htop`` command is on-disk.
+Now, try ``which htop`` to check where the ``htop`` command is on-disk.
 You should see something similar to this:
 
-.. code:: bash
+.. code:: shell-session
 
+   [nix-shell:~]$ which htop
    /nix/store/y3w2i8kfdbfj9rx287ad52rahjpgv423-htop-2.2.0/bin/htop
 
-This is the path to the binary in the Nix store. Nix installs all
-packages into the store using a combination of its hash, name and
-version.
 
-You can search for available packages using ``nix-env -qa``, for
-example:
+Customizing your developer environment
+--------------------------------------
 
-.. code:: bash
+Given the following ``shell.nix``:
 
-   nix-env -qa python3
-   nix-env -qa nodejs
-   nix-env -qa ghc
-   nix-env -qa cargo
+.. code:: nix
+
+   { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {} }:
+
+   pkgs.mkShell {
+     buildInputs = [
+       pkgs.which
+       pkgs.htop
+       pkgs.zlib
+     ];
+
+     shellHook = ''
+       echo hello
+     '';
+
+     MY_ENVIRONMENT_VARIABLE = "world";
+   }
+
+Running ``nix-shell`` we observe:
+
+.. code:: shell-session
+
+   $ nix-shell
+   hello
+
+   [nix-shell:~]$ echo $MY_ENVIRONMENT_VARIABLE
+   world
+
+
+- ``shellHook`` allows you to execute bash while entering the shell environment
+
+- attributes passed to ``mkShell`` function are available once shell environment is active
+
+
+
+``direnv``: Automatically activating the environment on directory change  
+------------------------------------------------------------------------
+
+Besides activating environment for each project, everytime you change 
+``shell.nix`` you need to re-enter the shell.
+
+``direnv`` automates it for you with the downside that each developer needs
+to install it globally.
+
+
+Setup:
+
+1. `Install direnv with your OS package manager <https://direnv.net/docs/installation.html#from-system-packages>`_
+
+2. `Hook it into your shell <https://direnv.net/docs/hook.html>`_
+
+At the top-level of your project run::
+
+     echo "use nix" > .envrc && direnv allow
+
+The next time your launch terminal and enter top-level of your project:
+
+.. code:: shell-session
+
+   $ cd myproject
+   direnv: loading myproject/.envrc
+   direnv: using nix
+   hello
+
+
+Going forward
+-------------
+
+- :ref:`pinning-nixpkgs` to see different ways to import nixpkgs

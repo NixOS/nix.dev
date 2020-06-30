@@ -1,3 +1,5 @@
+.. _ad-hoc-envs:
+
 Ad hoc developer environments
 =============================
 
@@ -171,9 +173,9 @@ Going forward
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
 
-- :ref:`pinning-nixpkgs` to see examples of more advanced Nix expressions
+- :ref:`pinning-nixpkgs` to see different ways to import nixpkgs
 
-.. TODO: reproducible developer environments
+- :ref:`declarative-reproducible-envs`
 
 - `Garbage Collection <https://nixos.org/nix/manual/#sec-garbage-collection>`_- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
 
