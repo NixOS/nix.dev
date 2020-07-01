@@ -28,8 +28,8 @@ Developer environments allow you to:
 - execute bash during environment activation
 
 
-An example
-----------
+Getting started
+---------------
 
 In top-level of your project create ``shell.nix`` with the following contents:
 
@@ -45,7 +45,11 @@ In top-level of your project create ``shell.nix`` with the following contents:
      ];
    }
 
-We import ``nixpkgs`` and make a shell with ``which`` and ``htop`` available in ``$PATH``. 
+.. note:: To understand the first line, read through :ref:`pinning nixpkgs tutorial <ref-pinning-nixpkgs>`.
+
+
+We import ``nixpkgs`` and make a shell with ``which`` and ``htop`` available in ``$PATH``.
+``zlib`` provides libraries and headers in case we're compiling something against it.
 To enter the environment:
 
 .. code:: shell-session
