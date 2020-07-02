@@ -171,7 +171,7 @@ A better way is to use ``builtins.path``:
    pkgs.stdenv.mkDerivation {
      name = "foobar";
 
-     src = builtins.path { src = ./.; name = "myproject"; };
+     src = builtins.path { path = ./.; name = "myproject"; };
   }
 
 
