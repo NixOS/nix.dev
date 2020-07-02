@@ -100,10 +100,10 @@ b) And you can control the environment via your souce code,
 See :ref:`pinning-nixpkgs` for a tutorial on how to do better.
 
 
-``//`` operator
----------------
+``attr1 // attr2`` merge operator
+----------------------------------
 
-Allows to merge two attribute sets:
+It merges two attribute sets:
 
 .. code:: shell-session
 
@@ -134,8 +134,8 @@ A better way is to use ``pkgs.lib.recursiveUpdate`` function:
     { a = { b = 1; c = 3; }; }
 
 
-Reproducability: Sourcing top-level directory with ``./.``
-----------------------------------------------------------
+Reproducability referencing top-level directory with ``./.``
+------------------------------------------------------------
 
 Browsing `GitHub source code <https://github.com/search?l=nix&type=Code&q=mkDerivation>`_
 you're likely to see the following:
