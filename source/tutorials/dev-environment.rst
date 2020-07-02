@@ -18,7 +18,7 @@ specifying packages:
      propagatedBuildInputs = [ pkgs.python3Packages.flask ];
    }
 
-You will also need a simple Flask app as ``main.py``:
+You will also need a simple Flask app as ``myapp.py``:
 
 .. code:: python
 
@@ -33,7 +33,10 @@ You will also need a simple Flask app as ``main.py``:
        return "Hello, Nix!"
 
    def run():
-       app.run(host='0.0.0.0')
+       app.run(host="0.0.0.0")
+
+   if __name__ == "__main__":
+       run()
 
 and a ``setup.py`` script:
 
@@ -62,13 +65,13 @@ Nix store, which looks like
 to see what is inside.
 
 You may notice we can run the application from the package like
-``./result/bin/main.py``. We can still use the ``default.nix`` as a
+``./result/bin/myapp.py``. We can still use the ``default.nix`` as a
 shell environment to get the same result:
 
 .. code:: bash
 
    nix-shell default.nix
-   python3 main.py
+   python3 myapp.py
 
 In this context, Nix takes on the role that you would otherwise use pip
 or virtualenv for. Nix installs required dependencies and separates the
