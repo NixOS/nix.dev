@@ -98,3 +98,83 @@ b) And you can control the environment via your souce code,
    so that a) applies by somehow setting ``$NIX_PATH`` via nix-shell or NixOS options
 
 See :ref:`pinning-nixpkgs` for a tutorial on how to do better.
+
+
+``attr1 // attr2`` merge operator
+----------------------------------
+
+It merges two attribute sets:
+
+.. code:: shell-session
+
+  $ nix repl
+  Welcome to Nix version 2.3.6. Type :? for help.
+
+  nix-repl> { a = 1; b = 2; } // { b = 3; c = 4; }
+  { a = 1; b = 3; c = 4; }
+
+However, if attribute sets are nested it doesn't merge them::
+
+  nix-repl> :p { a = { b = 1; }; } // { a = { c = 3; }; }
+  { a = { c = 3; }; }
+
+You can see key ``b`` was removed, because whole ``a`` value was replaced.
+
+A better way is to use ``pkgs.lib.recursiveUpdate`` function:
+
+.. code:: shell-session
+
+    $ nix repl '<nixpkgs/lib>'
+    Welcome to Nix version 2.3.6. Type :? for help.
+
+    Loading '<nixpkgs/lib>'...
+    Added 364 variables.
+
+    nix-repl> :p recursiveUpdate { a = { b = 1; }; } { a = { c = 3;}; }
+    { a = { b = 1; c = 3; }; }
+
+
+Reproducability referencing top-level directory with ``./.``
+------------------------------------------------------------
+
+Browsing `GitHub source code <https://github.com/search?l=nix&type=Code&q=mkDerivation>`_
+you're likely to see the following:
+
+.. code:: nix
+
+   { pkgs ? import <nixpkgs> {}
+   }:
+
+   pkgs.stdenv.mkDerivation {
+     name = "foobar";
+
+     src = ./.;
+  }
+
+If working directory is ``/home/myuser/mywork/myproject``, then
+the derivation of ``src`` will be named ``/nix/store/n1caswkqqp8297833y24wyg9xxhs2dc6-myproject``.
+
+The problem is that now your build is no longer reproducible, 
+as it depends on the parent directory name that you don't have
+control of in the source code.
+
+If someone builds the project in a differently named folder, they will get a different hash of the
+``src`` and everything that depends on it.
+
+A better way is to use ``builtins.path``:
+
+.. code:: nix
+
+   { pkgs ? import <nixpkgs> {}
+   }:
+
+   pkgs.stdenv.mkDerivation {
+     name = "foobar";
+
+     src = builtins.path { src = ./.; name = "myproject"; };
+  }
+
+
+
+
+
