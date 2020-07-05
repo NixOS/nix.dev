@@ -60,7 +60,7 @@ issues <https://github.com/NixOS/nixpkgs/issues>`__. There are also
 `issues tagged with good-first-bug`_ that are a good start for new
 contributors.
 
-Feel free to join the `#nixos-dev IRC channel`_ on Freenode<
+Feel free to join the `#nixos-dev IRC channel`_ on Freenode.
 
 .. _GitHub: https://github.com/
 .. _how to setup a development environment: https://nixos.org/nix/manual/#chap-hacking
