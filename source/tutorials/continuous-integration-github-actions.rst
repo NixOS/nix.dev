@@ -15,7 +15,7 @@ for every project** on every branch using binary caches.
 Another important aspect of CI is the feedback loop of 
 **how many minutes does the build take to finish**.
 
-Using `Cachix <cachix.org/>`_ you'll never
+Using `Cachix <https://cachix.org/>`_ you'll never
 have to waste building any derivation twice and you'll share built derivations with all your developers.
 
 After each job, just built derivations are pushed to your binary cache.
