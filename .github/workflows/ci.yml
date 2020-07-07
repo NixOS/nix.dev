@@ -11,3 +11,4 @@ jobs:
     - uses: ammaraskar/sphinx-action@0.4
       with:
         docs-folder: "."
+        build-command: make html linkcheck
