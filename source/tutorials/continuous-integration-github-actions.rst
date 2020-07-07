@@ -1,9 +1,9 @@
 Continuous Integration with GitHub Actions
 ==========================================
 
-Setting up a **CI with Nix can take significant effort**.
-
-This tutorial guides you through **a few short steps** to start using `GitHub Actions <https://github.com/features/actions>`_.
+This tutorial guides you through **a few short steps** to start using 
+`GitHub Actions <https://github.com/features/actions>`_ as your CI
+for commits and pull requests.
 
 
 Caching builds using Cachix
