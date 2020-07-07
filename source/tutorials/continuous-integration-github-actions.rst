@@ -67,6 +67,7 @@ Create ``.github/workflows/test.yml`` with:
             # Only needed for private caches
             #authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         - run: nix-build
+        - run: nix-shell --run "echo OK"
 
 Once you commit and push to your GitHub repository,
 you should see status checks appearing on commits and PRs.
