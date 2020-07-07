@@ -129,7 +129,8 @@ Besides activating environment for each project, everytime you change
 to install it globally.
 
 
-Setup:
+Setup
+*****
 
 1. `Install direnv with your OS package manager <https://direnv.net/docs/installation.html#from-system-packages>`_
 
