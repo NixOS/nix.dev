@@ -154,3 +154,6 @@ Going forward
 -------------
 
 - :ref:`pinning-nixpkgs` to see different ways to import nixpkgs
+
+- To quickly setup a Nix project read through 
+  `Getting started Nix template <https://github.com/nix-dot-dev/getting-started-nix-template>`_.

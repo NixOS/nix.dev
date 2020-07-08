@@ -77,5 +77,7 @@ And you can update all the dependencies by running::
 Going forward
 -------------
 
-For more examples and details of the different ways to pin ``nixpkgs``, see :ref:`ref-pinning-nixpkgs`.
+- For more examples and details of the different ways to pin ``nixpkgs``, see :ref:`ref-pinning-nixpkgs`.
 
+- To quickly setup a Nix project read through 
+  `Getting started Nix template <https://github.com/nix-dot-dev/getting-started-nix-template>`_.

@@ -28,6 +28,7 @@ Table of Contents
    :glob:
 
    tutorials/index.rst
+   templates/index.rst
    anti-patterns/index.rst
    reference/index.rst
    faq.rst

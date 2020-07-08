@@ -180,3 +180,6 @@ We've only covered the bare essentials of Nix here. Once you're comfortable with
 - `Garbage Collection <https://nixos.org/nix/manual/#sec-garbage-collection>`_- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
 
 - See ``man nix-shell`` for all of the options.
+
+- To quickly setup a Nix project read through 
+  `Getting started Nix template <https://github.com/nix-dot-dev/getting-started-nix-template>`_.
