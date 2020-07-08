@@ -112,6 +112,7 @@ todo_include_todos = True
 
 html_theme = "alabaster"
 
+# https://alabaster.readthedocs.io/en/latest/customization.html
 html_theme_options = {
     "description": 'An opinionated guide for developers getting things done using <a href="https://nixos.org">the Nix ecosystem</a>.',
     "github_user": "nix-dot-dev",
