@@ -20,8 +20,8 @@ Welcome to nix.dev
    `Nixpkgs <http://nixos.org/nixpkgs/manual/>`_ and `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
 
 
-Table of Contents
------------------
+Topics
+------
 
 .. toctree::
    :maxdepth: 3
