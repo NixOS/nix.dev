@@ -17,7 +17,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
           path-to-signatures: 'cla/signatures.json'
-          path-To-cladocument: 'https://github.com/domenkozar/nix.dev/blob/master/cla/README.md'
+          path-To-cladocument: 'https://github.com/nix-dot-dev/nix.dev/blob/master/cla/README.md'
           # branch should not be protected
           branch: 'master'
           whitelist: imgbot,dependabot*

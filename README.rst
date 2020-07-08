@@ -2,9 +2,9 @@
 
 .. |Netlify Status| image:: https://api.netlify.com/api/v1/badges/269f7467-6afd-49ae-97f2-61a160e93a9a/deploy-status
    :target: https://app.netlify.com/sites/nixdev/deploys
-.. |CI| image:: https://github.com/domenkozar/nix.dev/workflows/CI/badge.svg
+.. |CI| image:: https://github.com/nix-dot-dev/nix.dev/workflows/CI/badge.svg
 .. |GitPod| image:: https://gitpod.io/button/open-in-gitpod.svg
-   :target: https://gitpod.io/#https://github.com/domenkozar/nix.dev
+   :target: https://gitpod.io/#https://github.com/nix-dot-dev/nix.dev
 
 
 `nix.dev <https://nix.dev>`_
