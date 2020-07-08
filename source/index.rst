@@ -1,12 +1,9 @@
 Welcome to nix.dev
 ==================
 
-:Source code / issues: `GitHub <https://github.com/domenkozar/nix.dev>`_
-:Generated: |today|
-
 .. topic:: Introduction
 
-   An opinionated guide for developers wanting to get things done using `the Nix ecosystem <https://nixos.org/>`_:
+   Nix ecosystem is a DevOps toolkit to achieve:
 
    - Reproducible development environments.
    - Easy installation of software over URLS.
@@ -19,7 +16,7 @@ Welcome to nix.dev
    - Remote deployments.
    - Atomic upgrades and rollbacks.
 
-   ``nix.dev`` supplements the official `Nix <http://nixos.org/nix/manual/>`_, `NixOS <http://nixos.org/nixos/manual/>`_,
+   This documentation supplements the official `Nix <http://nixos.org/nix/manual/>`_, `NixOS <http://nixos.org/nixos/manual/>`_,
    `Nixpkgs <http://nixos.org/nixpkgs/manual/>`_ and `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
 
 

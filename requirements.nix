@@ -113,10 +113,10 @@ let
     };
 
     "certifi" = python.mkDerivation {
-      name = "certifi-2020.4.5.1";
+      name = "certifi-2020.6.20";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/b8/e2/a3a86a67c3fc8249ed305fc7b7d290ebe5e4d46ad45573884761ef4dea7b/certifi-2020.4.5.1.tar.gz";
-        sha256 = "51fcb31174be6e6664c5f69e3e1691a2d72a1a12e90f872cbdb1567eb47b6519";
+        url = "https://files.pythonhosted.org/packages/40/a7/ded59fa294b85ca206082306bba75469a38ea1c7d44ea7e1d64f5443d67a/certifi-2020.6.20.tar.gz";
+        sha256 = "5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -164,10 +164,10 @@ let
     };
 
     "idna" = python.mkDerivation {
-      name = "idna-2.9";
+      name = "idna-2.10";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/cb/19/57503b5de719ee45e83472f339f617b0c01ad75cba44aba1e4c97c2b0abd/idna-2.9.tar.gz";
-        sha256 = "7588d1c14ae4c77d74036e8c22ff447b26d0fde8f007354fd48a7814db15b7cb";
+        url = "https://files.pythonhosted.org/packages/ea/b7/e0e3c1c467636186c39925827be42f16fee389dc404ac29e930e9136be70/idna-2.10.tar.gz";
+        sha256 = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -197,29 +197,6 @@ let
       };
     };
 
-    "importlib-metadata" = python.mkDerivation {
-      name = "importlib-metadata-1.6.0";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/b4/1b/baab42e3cd64c9d5caac25a9d6c054f8324cdc38975a44d600569f1f7158/importlib_metadata-1.6.0.tar.gz";
-        sha256 = "34513a8a0c4962bc66d35b359558fd8a5e10cd472d37aec5f66858addef32c1e";
-};
-      doCheck = commonDoCheck;
-      format = "pyproject";
-      buildInputs = commonBuildInputs ++ [
-        self."setuptools"
-        self."setuptools-scm"
-        self."wheel"
-      ];
-      propagatedBuildInputs = [
-        self."zipp"
-      ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "http://importlib-metadata.readthedocs.io/";
-        license = licenses.asl20;
-        description = "Read metadata from Python packages";
-      };
-    };
-
     "jinja2" = python.mkDerivation {
       name = "jinja2-2.11.2";
       src = pkgs.fetchurl {
@@ -240,10 +217,10 @@ let
     };
 
     "livereload" = python.mkDerivation {
-      name = "livereload-2.6.1";
+      name = "livereload-2.6.2";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/27/26/85ba3851d2e4905be7d2d41082adca833182bb1d7de9dfc7f623383d36e1/livereload-2.6.1.tar.gz";
-        sha256 = "89254f78d7529d7ea0a3417d224c34287ebfe266b05e67e51facaf82c27f0f66";
+        url = "https://files.pythonhosted.org/packages/b5/a2/a36af515c73fac8d596b5e0f1f9b38b83a9366facb3959dd8428727cc650/livereload-2.6.2.tar.gz";
+        sha256 = "d1eddcb5c5eb8d2ca1fa1f750e580da624c0f7fcb734aa5780dc81b7dcbd89be";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -277,10 +254,10 @@ let
     };
 
     "packaging" = python.mkDerivation {
-      name = "packaging-20.3";
+      name = "packaging-20.4";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/65/37/83e3f492eb52d771e2820e88105f605335553fe10422cba9d256faeb1702/packaging-20.3.tar.gz";
-        sha256 = "3c292b474fda1671ec57d46d739d072bfd495a4f51ad01a055121d81e952b7a3";
+        url = "https://files.pythonhosted.org/packages/55/fd/fc1aca9cf51ed2f2c11748fa797370027babd82f87829c7a8e6dbe720145/packaging-20.4.tar.gz";
+        sha256 = "4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -293,27 +270,6 @@ let
         homepage = "https://github.com/pypa/packaging";
         license = licenses.asl20;
         description = "Core utilities for Python packages";
-      };
-    };
-
-    "pallets-sphinx-themes" = python.mkDerivation {
-      name = "pallets-sphinx-themes-1.2.3";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/75/f6/e30ee3a57b57e4d96751d5613bf819f05d1c10728663dd402674094b12e4/Pallets-Sphinx-Themes-1.2.3.tar.gz";
-        sha256 = "bbb4fd6e259d498e4e5b4866860f12f0c4e59a67c9ac243eb8c1472cbc730aaf";
-};
-      doCheck = commonDoCheck;
-      format = "setuptools";
-      buildInputs = commonBuildInputs ++ [ ];
-      propagatedBuildInputs = [
-        self."importlib-metadata"
-        self."packaging"
-        self."sphinx"
-      ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "https://sphinx-themes.palletsprojects.com/";
-        license = licenses.bsdOriginal;
-        description = "Sphinx themes for Pallets and related projects.";
       };
     };
 
@@ -369,10 +325,10 @@ let
     };
 
     "requests" = python.mkDerivation {
-      name = "requests-2.23.0";
+      name = "requests-2.24.0";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/f5/4f/280162d4bd4d8aad241a21aecff7a6e46891b905a4341e7ab549ebaf7915/requests-2.23.0.tar.gz";
-        sha256 = "b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6";
+        url = "https://files.pythonhosted.org/packages/da/67/672b422d9daf07365259958912ba533a0ecab839d4084c487a5fe9a5405f/requests-2.24.0.tar.gz";
+        sha256 = "b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -391,10 +347,10 @@ let
     };
 
     "setuptools" = python.mkDerivation {
-      name = "setuptools-46.4.0";
+      name = "setuptools-49.1.0";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/ac/d6/0f6c0d9d0b07bbb2085e94a71aded1e137c7c9002ac54924bc1c0adf748a/setuptools-46.4.0.zip";
-        sha256 = "4334fc63121aafb1cc98fd5ae5dd47ea8ad4a38ad638b47af03a686deb14ef5b";
+        url = "https://files.pythonhosted.org/packages/8b/0f/5f135746c4d0c95fcc3c9a30ac942330bbdf092879ccaae7e3dcba6ea214/setuptools-49.1.0.zip";
+        sha256 = "60351853f8c093ef57224695ee989d5d074168f6b93dae000fa9996072adaba3";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -407,31 +363,11 @@ let
       };
     };
 
-    "setuptools-scm" = python.mkDerivation {
-      name = "setuptools-scm-3.5.0";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/b2/f7/60a645aae001a2e06cf4b8db2fba9d9f36b8fd378f10647e3e218b61b74b/setuptools_scm-3.5.0.tar.gz";
-        sha256 = "5bdf21a05792903cafe7ae0c9501182ab52497614fa6b1750d9dbae7b60c1a87";
-};
-      doCheck = commonDoCheck;
-      format = "pyproject";
-      buildInputs = commonBuildInputs ++ [
-        self."setuptools"
-        self."wheel"
-      ];
-      propagatedBuildInputs = [ ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "https://github.com/pypa/setuptools_scm/";
-        license = licenses.mit;
-        description = "the blessed package to manage your versions by scm tags";
-      };
-    };
-
     "six" = python.mkDerivation {
-      name = "six-1.14.0";
+      name = "six-1.15.0";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/21/9f/b251f7f8a76dec1d6651be194dfba8fb8d7781d10ab3987190de8391d08e/six-1.14.0.tar.gz";
-        sha256 = "236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a";
+        url = "https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-1.15.0.tar.gz";
+        sha256 = "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -462,10 +398,10 @@ let
     };
 
     "sphinx" = python.mkDerivation {
-      name = "sphinx-3.0.3";
+      name = "sphinx-3.1.2";
       src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/12/a9/41a67d6638323b763b284a80b57461fe3557b128efcce892360cd73879ce/Sphinx-3.0.3.tar.gz";
-        sha256 = "62edfd92d955b868d6c124c0942eba966d54b5f3dcb4ded39e65f74abac3f572";
+        url = "https://files.pythonhosted.org/packages/4b/2b/84e00ab4c6103ebe38b3c1f0d574d46a7b8fb1dccb4d41a6ec0b9d15aacd/Sphinx-3.1.2.tar.gz";
+        sha256 = "b9daeb9b39aa1ffefc2809b43604109825300300b987a24f45976c001ba1a8fd";
 };
       doCheck = commonDoCheck;
       format = "setuptools";
@@ -597,23 +533,6 @@ let
       };
     };
 
-    "toml" = python.mkDerivation {
-      name = "toml-0.10.1";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/da/24/84d5c108e818ca294efe7c1ce237b42118643ce58a14d2462b3b2e3800d5/toml-0.10.1.tar.gz";
-        sha256 = "926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f";
-};
-      doCheck = commonDoCheck;
-      format = "setuptools";
-      buildInputs = commonBuildInputs ++ [ ];
-      propagatedBuildInputs = [ ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "https://github.com/uiri/toml";
-        license = licenses.mit;
-        description = "Python Library for Tom's Obvious, Minimal Language";
-      };
-    };
-
     "tornado" = python.mkDerivation {
       name = "tornado-6.0.4";
       src = pkgs.fetchurl {
@@ -647,51 +566,11 @@ let
         description = "HTTP library with thread-safe connection pooling, file post, and more.";
       };
     };
-
-    "wheel" = python.mkDerivation {
-      name = "wheel-0.34.2";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/75/28/521c6dc7fef23a68368efefdcd682f5b3d1d58c2b90b06dc1d0b805b51ae/wheel-0.34.2.tar.gz";
-        sha256 = "8788e9155fe14f54164c1b9eb0a319d98ef02c160725587ad60f14ddc57b6f96";
-};
-      doCheck = commonDoCheck;
-      format = "setuptools";
-      buildInputs = commonBuildInputs ++ [
-        self."setuptools"
-      ];
-      propagatedBuildInputs = [ ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "https://github.com/pypa/wheel";
-        license = licenses.mit;
-        description = "A built-package format for Python";
-      };
-    };
-
-    "zipp" = python.mkDerivation {
-      name = "zipp-3.1.0";
-      src = pkgs.fetchurl {
-        url = "https://files.pythonhosted.org/packages/ce/8c/2c5f7dc1b418f659d36c04dec9446612fc7b45c8095cc7369dd772513055/zipp-3.1.0.tar.gz";
-        sha256 = "c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96";
-};
-      doCheck = commonDoCheck;
-      format = "pyproject";
-      buildInputs = commonBuildInputs ++ [
-        self."setuptools"
-        self."setuptools-scm"
-        self."wheel"
-      ];
-      propagatedBuildInputs = [ ];
-      meta = with pkgs.stdenv.lib; {
-        homepage = "https://github.com/jaraco/zipp";
-        license = licenses.mit;
-        description = "Backport of pathlib-compatible object wrapper for zip files";
-      };
-    };
   };
   localOverridesFile = ./requirements_override.nix;
   localOverrides = import localOverridesFile { inherit pkgs python; };
   commonOverrides = [
-        (let src = pkgs.fetchFromGitHub { owner = "nix-community"; repo = "pypi2nix-overrides"; rev = "100c15ec7dfe7d241402ecfb1e796328d0eaf1ec"; sha256 = "0akfkvdakcdxc1lrxznh1rz2811x4pafnsq3jnyr5pn3m30pc7db"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
+        (let src = pkgs.fetchFromGitHub { owner = "nix-community"; repo = "pypi2nix-overrides"; rev = "90e891e83ffd9e55917c48d24624454620d112f0"; sha256 = "0cl1r3sxibgn1ks9xyf5n3rdawq4hlcw4n6xfhg3s1kknz54jp9y"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
   ];
   paramOverrides = [
     (overrides { inherit pkgs python; })

@@ -31,8 +31,7 @@ import os
 # ones.
 extensions = [
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'pallets_sphinx_themes',
+    'sphinx.ext.todo'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -111,12 +110,17 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
-html_theme = "flask"
+html_theme = "alabaster"
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#html_theme_options = {}
+html_theme_options = {
+    "description": 'An opinionated guide for developers getting things done using <a href="https://nixos.org">the Nix ecosystem</a>.',
+    "github_user": "nix-dot-dev",
+    "github_repo": "nix.dev",
+    "github_type": "star",
+    "fixed_sidebar": True,
+    "github_banner": True,
+}
+
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -159,16 +163,9 @@ html_theme = "flask"
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
     '**': [
+        'about.html',
         'searchbox.html',
-        'localtoc.html',
-        'relations.html',
-        'srclinks.html',
-        'sponsors.html',
-        ],
-    'index': [
-        'searchbox.html',
-        'globaltoc.html',
-        'relations.html',
+        'navigation.html',
         'srclinks.html',
         'sponsors.html',
         ],
