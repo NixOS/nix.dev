@@ -1,3 +1,5 @@
+.. _declarative-reproducible-envs:
+
 Declarative and reproducible developer environments
 ===================================================
 In the :ref:`ad-hoc-envs` tutorial we looked at providing shell
