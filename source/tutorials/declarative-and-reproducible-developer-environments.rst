@@ -1,9 +1,6 @@
-.. _declarative-reproducible-envs:
-
 Declarative and reproducible developer environments
 ===================================================
-
-In :ref:`ad-hoc-envs` tutorial we took a dive into providing shell
+In the :ref:`ad-hoc-envs` tutorial we looked at providing shell
 environments for when we need a quick'n'dirty way of getting hold
 of some tools.
 
@@ -16,9 +13,9 @@ When are declarative shell environments useful?
 
 This is the quickest approach to getting started with Nix:
 
-- single command to invoke it via ``nix-shell``
-- works across different operating systems (Linux / MacOS)
-- share the exact same environment with all developers
+- use single command to invoke it via ``nix-shell``
+- it works across different operating systems (Linux / MacOS)
+- you share the exact same environment with all developers
 
 Developer environments allow you to:
 
@@ -31,7 +28,7 @@ Developer environments allow you to:
 Getting started
 ---------------
 
-In top-level of your project create ``shell.nix`` with the following contents:
+At the top-level of your project create ``shell.nix`` with the following contents:
 
 .. code:: nix
 
@@ -62,15 +59,15 @@ To enter the environment:
    [nix-shell:~]$ 
 
 
-The command will start downloading the missing packages from https://cache.nixos.org binary cache.
+The command will start downloading the missing packages from the https://cache.nixos.org binary cache.
 
 Once it's done, you are dropped into a new
 shell. This shell provides the packages specified in ``shell.nix``.
 
-Run ``htop`` to confirm it is present. Quit the program by hitting
-``Q``.
+Run ``htop`` to confirm that it is present. Quit the program by hitting
+``q``.
 
-Now, try ``which htop`` to check where the ``htop`` command is on-disk.
+Now, try ``which htop`` to check where the ``htop`` command is on disk.
 You should see something similar to this:
 
 .. code:: shell-session
@@ -113,24 +110,22 @@ Running ``nix-shell`` we observe:
    world
 
 
-- ``shellHook`` allows you to execute bash while entering the shell environment
-
-- attributes passed to ``mkShell`` function are available once shell environment is active
-
+- The ``shellHook`` section allows you to execute bash while entering the shell environment.
+- Any attributes passed to ``mkShell`` function are available once the shell environment is active.
 
 
 ``direnv``: Automatically activating the environment on directory change  
 ------------------------------------------------------------------------
 
-Besides activating environment for each project, everytime you change 
+Besides activating the environment for each project, every time you change 
 ``shell.nix`` you need to re-enter the shell.
 
-``direnv`` automates it for you with the downside that each developer needs
+You can use ``direnv`` to automate this process for you, with the downside that each developer needs
 to install it globally.
 
 
-Setup
-*****
+Setting up ``direnv``
+*********************
 
 1. `Install direnv with your OS package manager <https://direnv.net/docs/installation.html#from-system-packages>`_
 
@@ -140,7 +135,7 @@ At the top-level of your project run::
 
      echo "use nix" > .envrc && direnv allow
 
-The next time your launch terminal and enter top-level of your project:
+The next time your launch your terminal and enter the top-level of your project direnv will check for changes.
 
 .. code:: shell-session
 
@@ -155,5 +150,5 @@ Going forward
 
 - :ref:`pinning-nixpkgs` to see different ways to import nixpkgs
 
-- To quickly setup a Nix project read through 
+- To quickly set up a Nix project read through 
   `Getting started Nix template <https://github.com/nix-dot-dev/getting-started-nix-template>`_.
