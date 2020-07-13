@@ -63,7 +63,7 @@ You can use the generated ``sources.nix`` file as follows:
 
 .. code:: nix
 
-    { sources ? import ./sources.nix
+    { sources ? import ./nix/sources.nix
     , pkgs ? import sources.nixpkgs {}
     }:
 
