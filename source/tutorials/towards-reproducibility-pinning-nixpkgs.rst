@@ -65,7 +65,7 @@ You can see which version ``niv`` is tracking as follow:
 
 And you can change the tracking branch to the one you want like this:
 
-    $ niv modify nixpkgs --branch < nixpkgs-unstable | nixos-20.03 >
+    $ niv modify nixpkgs --branch nixos-20.03
 
 
 
