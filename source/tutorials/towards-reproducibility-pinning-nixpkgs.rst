@@ -69,7 +69,7 @@ And you can change the tracking branch to the one you want like this:
 
 
 
-You can use the generated ``sources.nix`` file as follows:
+You can use the generated ``nix/sources.nix`` with a top-level ``default.nix``:
 
 .. code:: nix
 
