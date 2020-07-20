@@ -146,6 +146,16 @@ The next time your launch your terminal and enter the top-level of your project 
    direnv: using nix
    hello
 
+Improvements for ``direnv``
+****************************
+
+``direnv`` ships with native Nix integration however the default implementation suffers from two setbacks:
+
+1. `nix-shell` environment is recalculated every time.
+2. environment has no *gcroots* and therefore is eligible for garbage collection.
+
+Consider using the nix-community `implementation <https://github.com/nix-community/nix-direnv>`_ which
+solves the problems mentioned above.
 
 Going forward
 -------------
