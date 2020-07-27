@@ -7,10 +7,7 @@ Nix
 What to do if a binary cache is down or unreachable?
 ----------------------------------------------------
 
-Pass following to Nix commands:
-
-- :option:`--option connect-timeout 5` to wait only 5 second on binary package
-- :option:`--fallback` to build from source if binary package fetching fails
+Pass ``--option substitute false`` to Nix commands.
 
 
 How do I add a new binary cache?
