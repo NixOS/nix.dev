@@ -86,7 +86,7 @@ The solution is to dump the db and use old Nix version to initialize it:
 How to build reverse dependencies of a package?
 -----------------------------------------------
 
-``nix-shell -p nox-review --run "nox-review wip"``
+``nix-shell -p nixpkgs-review --run "nixpkgs-review wip"``
 
 I'm getting: writing to file: Connection reset by peer
 ------------------------------------------------------
