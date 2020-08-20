@@ -175,6 +175,6 @@ A better way is to use ``builtins.path``:
   }
 
 
-
-
-
+If you're using git to track your code,
+you may also want to look at `gitignoresource <https://github.com/hercules-ci/gitignore.nix>`_,
+which does this for you. 
