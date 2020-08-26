@@ -2,7 +2,7 @@ name: "CLA Assistant"
 on:
   issue_comment:
     types: [created]
-  pull_request:
+  pull_request_target:
     types: [opened,closed,synchronize]
     
 jobs:
@@ -20,7 +20,7 @@ jobs:
           path-To-cladocument: 'https://github.com/nix-dot-dev/nix.dev/blob/master/cla/README.md'
           # branch should not be protected
           branch: 'master'
-          whitelist: imgbot,dependabot*
+          allowlist: imgbot,dependabot*
           empty-commit-flag: false
           blockchain-storage-flag: false
 
