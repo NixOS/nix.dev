@@ -34,7 +34,7 @@ There are a couple of pitfalls:
 - It's possible to introduce a hard to debug error ``infinite recursion`` when shadowing a variable,
   the simplest example being ``rec { b = b; }``.
 
-- combining with overriding logic such as ``overrideAttrs`` function in nixpkgs has a suprising behavour
+- combining with overriding logic such as ``overrideAttrs`` function in nixpkgs has a surprising behaviour
   of not overriding every reference.
 
 A better way is to use simpler ``let .. in``:
@@ -94,7 +94,7 @@ but that's still problematic unless:
 
 a) You specify the commit **at one place only** and reference it else where.
 
-b) And you can control the environment via your souce code,
+b) And you can control the environment via your source code,
    so that a) applies by somehow setting ``$NIX_PATH`` via nix-shell or NixOS options
 
 See :ref:`pinning-nixpkgs` for a tutorial on how to do better.
