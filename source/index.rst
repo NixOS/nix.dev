@@ -24,7 +24,7 @@ Topics
 ------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :glob:
 
    tutorials/index.rst
