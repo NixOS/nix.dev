@@ -1,5 +1,5 @@
 # After updating run:
 # nix-shell -p pypi2nix --run "pypi2nix -r requirements.txt"
-sphinx==3.2.1
+sphinx==3.3.0
 alabaster==0.7.12
 livereload==2.6.3
