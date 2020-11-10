@@ -30,7 +30,7 @@ It's recommended to have different binary caches per team, depending who will ha
 
 Fill out the form on `create binary cache <https://app.cachix.org/cache>`_ page. 
 
-On your freshly created binary cache, generate signing keypair via **Push binaries tab** instructions.
+On your freshly created binary cache, follow **Push binaries** tab instructions.
 
 
 2. Setting up secrets
@@ -40,7 +40,7 @@ On your GitHub repository or organization (for use across all repositories):
 
 1. Click on ``Settings`` 
 2. Click on ``Secrets``.
-3. Add your (previously generated) signing key under name ``CACHIX_SIGNING_KEY``.
+3. Add your previously generated secrets (``CACHIX_SIGNING_KEY`` and/or ``CACHIX_AUTH_TOKEN``).
 
 
 Setting up GitHub Actions
@@ -62,12 +62,13 @@ Create ``.github/workflows/test.yml`` with:
         - uses: cachix/install-nix-action@v12
           with:
             nix_path: nixpkgs=channel:nixos-unstable
-        - uses: cachix/cachix-action@v7
+        - uses: cachix/cachix-action@v8
           with:
             name: mycache
+            # If you chose signing key for write access
             signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-            # Only needed for private caches
-            #authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+            # If you chose API tokens for write access OR if you have a private cache
+            authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         - run: nix-build
         - run: nix-shell --run "echo OK"
 
