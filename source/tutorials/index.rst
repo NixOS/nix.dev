@@ -11,4 +11,5 @@ Tutorials
    continuous-integration-github-actions.rst
    dev-environment.rst
    building-and-running-docker-images.rst
+   deploying-nixos-using-terraform.rst
    contributing.rst
