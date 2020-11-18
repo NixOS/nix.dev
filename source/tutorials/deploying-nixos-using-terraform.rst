@@ -19,7 +19,7 @@ Booting NixOS image
 
    nix-shell -p terraform
 
-2. We are using `Terraform Cloud <app.terraform.io/>`_ as a `state/locking backend <https://www.terraform.io/docs/state/purpose.html>`_:
+2. We are using `Terraform Cloud <https://app.terraform.io>`_ as a `state/locking backend <https://www.terraform.io/docs/state/purpose.html>`_:
 
 .. code:: shell
 

@@ -371,6 +371,15 @@ epub_exclude_files = ['search.html']
 # If false, no index is generated.
 #epub_use_index = True
 
+# it's an SPA
+linkcheck_ignore = [r'https://app.terraform.io']
+
+# Anchors are not present in HTML
+linkcheck_anchors_ignore = [
+    r"instance_type",
+    r"authentication"
+]
+
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {}
