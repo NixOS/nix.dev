@@ -4,7 +4,7 @@ Install Nix
 ===========
 
 Install Nix on **any Linux distribution**, **MacOS** and **Windows (via WSL)**
-via the recommended `multi-user installation <https://nixos.org/nix/manual/#chap-installation>`_:
+via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
 
 .. code:: bash
 
