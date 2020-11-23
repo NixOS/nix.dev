@@ -30,8 +30,7 @@ and want to contribute to it's development, you can find information on
 `how to setup a development environment`_ in the manual.
 
 You can find inspiration for things to improve in the `reported
-issues`_. There are also some `issues tagged with easy`_ that are a good
-start for new contributors.
+issues`_.
 
 Feel free to join the `#nixos-dev IRC channel`_ on `Freenode`_ to get in
 contact with other developers.
@@ -65,7 +64,6 @@ Feel free to join the `#nixos-dev IRC channel`_ on Freenode.
 .. _GitHub: https://github.com/
 .. _how to setup a development environment: https://nixos.org/nix/manual/#chap-hacking
 .. _reported issues: https://github.com/NixOS/nix/issues
-.. _issues tagged with easy: https://github.com/NixOS/nix/labels/easy
 .. _#nixos-dev IRC channel: irc://irc.freenode.net/nixos
 .. _Freenode: https://freenode.net/
 .. _The manual: https://nixos.org/nixpkgs/manual/#chap-quick-start
