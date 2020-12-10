@@ -12,7 +12,7 @@ via the recommended `multi-user installation <https://nixos.org/manual/nix/stabl
 
 .. note::
 
-  For security you may want to `verify installation script`_ using GPG signatures.
+  For security you may want to `verify the installation script`_ using GPG signatures.
 
 Verify installation
 -------------------
@@ -24,4 +24,4 @@ Check that the installation was successful:
    $ nix-env --version
    nix-env (Nix) 2.3.6
 
-.. _verify installation script: https://nixos.org/download.html#nix-verify-installation
+.. _verify the installation script: https://nixos.org/download.html#nix-verify-installation
