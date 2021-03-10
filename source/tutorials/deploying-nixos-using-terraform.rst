@@ -29,7 +29,9 @@ Booting NixOS image
 
 4. Inside ``myorganization`` `create a workspace <https://app.terraform.io/app/cachix/workspaces/new>`_ by choosing **CLI-driven workflow** and pick name like  ``myapp``.
 
-5. Inside a new directory create ``main.tf`` file with the following contents that will start an AWS instance with NixOS image using one SSH keypair and an SSH security group:
+5. Inside your workspace, under ``Settings`` / ``General`` change Execution Mode to ``Local``.
+   
+6. Inside a new directory create ``main.tf`` file with the following contents that will start an AWS instance with NixOS image using one SSH keypair and an SSH security group:
 
 .. code:: 
 
