@@ -28,9 +28,9 @@ Booting NixOS image
 3. Make sure to `create an organization <https://app.terraform.io/app/organizations/new>`_ like ``myorganization`` in your Terraform Cloud account.
 
 4. Inside ``myorganization`` `create a workspace <https://app.terraform.io/app/cachix/workspaces/new>`_ by chosing 
-"CLI-driven workflow and pick name like  ``myapp``.
+"CLI-driven workflow" and pick name like  ``myapp``.
 
-4. Inside a new directory create ``main.tf`` file with the following contents that will start an AWS instance with NixOS image using one SSH keypair and an SSH security group:
+5. Inside a new directory create ``main.tf`` file with the following contents that will start an AWS instance with NixOS image using one SSH keypair and an SSH security group:
 
 .. code:: 
 
