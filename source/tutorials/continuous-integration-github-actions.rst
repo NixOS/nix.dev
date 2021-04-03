@@ -59,10 +59,10 @@ Create ``.github/workflows/test.yml`` with:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2.3.4
-        - uses: cachix/install-nix-action@v12
+        - uses: cachix/install-nix-action@v13
           with:
             nix_path: nixpkgs=channel:nixos-unstable
-        - uses: cachix/cachix-action@v8
+        - uses: cachix/cachix-action@v9
           with:
             name: mycache
             # If you chose signing key for write access
