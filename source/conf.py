@@ -15,6 +15,7 @@
 
 import sys
 import os
+from datetime import date
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -50,8 +51,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'nix.dev'
-copyright = u'2016-2020, Domen Kožar'
 author = u'Domen Kožar'
+copyright = '2016-' + str(date.today().year) + ', ' + author
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
