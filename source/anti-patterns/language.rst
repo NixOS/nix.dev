@@ -71,14 +71,31 @@ There are a number of problems with such approach:
 
 - Scoping rules around ``with`` are not intuitive, see `Nix issue for details <https://github.com/NixOS/nix/issues/490>`_
 
-A better way is to use a variable:
+Here are some better alternatives:
 
 .. code:: nix
 
+    # instead of:
+    with (import <nixpkgs> {});
+
+    # try this instead:
     let
       pkgs = import <nixpkgs> {};
+      inherit (pkgs) curl jq;
     in ...
 
+.. code:: nix
+
+    # instead of:
+    buildInputs = with pkgs; [ curl jq ];
+
+    # try this instead:
+    buildInputs = builtins.attrValues {
+      inherit (pkgs) curl jq;
+    };
+
+    # or this:
+    buildInputs = lib.attrVals ["curl" "jq"] pkgs
 
 ``<...>`` search path
 ---------------------
