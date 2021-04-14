@@ -1,5 +1,5 @@
-Nix language
-============
+In the Nix language
+===================
 
 
 Unquoted URLs
