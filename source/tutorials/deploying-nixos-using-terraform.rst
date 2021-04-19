@@ -4,8 +4,8 @@ Deploying NixOS using Terraform
 ===============================
 
 Assuming you're `familiar with the basics of Terraform <https://www.terraform.io/intro/index.html>`_,
-by the end of tutorial you will have provisioned Amazon AWS instance with Terraform
-and use Nix to deploy incremental changes to NixOS running on the instance. 
+by the end of tutorial you will have provisioned an Amazon AWS instance with Terraform
+and will be able to use Nix to deploy incremental changes to NixOS, running on the instance. 
 
 We'll look at how to boot a NixOS machine and how to deploy the incremental changes:
 
@@ -13,7 +13,7 @@ We'll look at how to boot a NixOS machine and how to deploy the incremental chan
 Booting NixOS image
 -------------------
 
-1. Start by providing terraform executable:
+1. Start by providing the terraform executable:
 
 .. code:: shell
 
@@ -27,11 +27,11 @@ Booting NixOS image
 
 3. Make sure to `create an organization <https://app.terraform.io/app/organizations/new>`_ like ``myorganization`` in your Terraform Cloud account.
 
-4. Inside ``myorganization`` `create a workspace <https://app.terraform.io/app/cachix/workspaces/new>`_ by choosing **CLI-driven workflow** and pick name like  ``myapp``.
+4. Inside ``myorganization`` `create a workspace <https://app.terraform.io/app/cachix/workspaces/new>`_ by choosing **CLI-driven workflow** and pick a name like  ``myapp``.
 
 5. Inside your workspace, under ``Settings`` / ``General`` change Execution Mode to ``Local``.
    
-6. Inside a new directory create ``main.tf`` file with the following contents that will start an AWS instance with NixOS image using one SSH keypair and an SSH security group:
+6. Inside a new directory create a ``main.tf`` file with the following contents. This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
 
 .. code:: 
 
@@ -111,12 +111,12 @@ The only NixOS specific snippet is:
 
 .. note::
 
-   ``aws_image_nixos`` module will return an NixOS AMI given `NixOS release number <https://status.nixos.org>`_
+   The ``aws_image_nixos`` module will return an NixOS AMI given a `NixOS release number <https://status.nixos.org>`_
    so that ``aws_instance`` resource can reference the AMI in `instance_type <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#instance_type>`_ argument.
 
 5. Make sure to `configure AWS credentials <https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication>`_.
 
-6. Applying Terraform configuration should get you a running NixOS:
+6. Applying the Terraform configuration should get you a running NixOS:
 
 .. code:: shell
 
@@ -127,8 +127,8 @@ The only NixOS specific snippet is:
 Deploying NixOS changes
 -----------------------
 
-Once AWS instance is running an NixOS image via Terraform, we can teach Terraform to always build
-latest NixOS configuration and apply those changes to your instance.
+Once the AWS instance is running an NixOS image via Terraform, we can teach Terraform to always build
+the latest NixOS configuration and apply those changes to your instance.
 
 1. Create ``configuration.nix`` with the following contents:
 
@@ -163,13 +163,13 @@ latest NixOS configuration and apply those changes to your instance.
 Caveats
 -------
 
-- ``deploy_nixos`` module requires NixOS to be installed on the target machine and Nix on the host machine.
+- The ``deploy_nixos`` module requires NixOS to be installed on the target machine and Nix on the host machine.
 
-- ``deploy_nixos`` module doesn't work when the client and target architectures are different (unless you use `distributed builds <https://nixos.org/manual/nix/unstable/advanced-topics/distributed-builds.html>`_).
+- The ``deploy_nixos`` module doesn't work when the client and target architectures are different (unless you use `distributed builds <https://nixos.org/manual/nix/unstable/advanced-topics/distributed-builds.html>`_).
 
 - If you need to inject a value into Nix, there is no elegant solution.
 
-- Each machine is evaluated separately, so note that your memory requirements will grow linearly with the number of machine.
+- Each machine is evaluated separately, so note that your memory requirements will grow linearly with the number of machines.
 
 
 Going Forward
