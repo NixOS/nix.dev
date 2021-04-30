@@ -166,6 +166,7 @@ html_theme_options = {
 html_sidebars = {
     '**': [
         'about.html',
+        'subscribe.html',
         'searchbox.html',
         'navigation.html',
         'srclinks.html',
