@@ -12,4 +12,5 @@ Tutorials
    dev-environment.rst
    building-and-running-docker-images.rst
    deploying-nixos-using-terraform.rst
+   installing-nixos-on-a-raspberry-pi.rst
    contributing.rst
