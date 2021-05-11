@@ -43,7 +43,7 @@ Copy NixOS to your SD card by replacing ``sdX`` with the name of your device:
 
   sudo dd if=nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
 
-Once that command exits, move SD card into your RPi and power it on.
+Once that command exits, move the SD card into your RPi and power it on.
 
 You should be greeted with a fresh shell!
 
@@ -156,7 +156,7 @@ Once you're ready to install NixOS:
 .. code:: shell-session
 
   $ nixos-install --root /
-  $ shutdown -r now
+  $ reboot
 
 In case your system doesn't boot, select the oldest configuration in the bootloader menu to get back to live image and start over.
 
