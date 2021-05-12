@@ -43,15 +43,15 @@ Copy NixOS to your SD card by replacing ``sdX`` with the name of your device:
 
   sudo dd if=nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
 
-Once that command exits, move the SD card into your Raspberry Pi and power it on.
+Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
 
 You should be greeted with a fresh shell!
-
-Run ``sudo -i`` to get a root shell for the rest of the tutorial.
 
 
 Getting internet connection
 ---------------------------
+
+Run ``sudo -i`` to get a root shell for the rest of the tutorial.
 
 At this point we'll need internet connection. If you can use an ethernet cable, plug it in.
 
@@ -60,7 +60,7 @@ network interface. In case it's ``wlan0`` replace ``SSID`` and ``passphrase`` wi
 
 .. code:: shell-session 
 
-  $ wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
+  # wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
 
 
 Once you see in your terminal that connection is established, run ``host google.com`` to 
@@ -76,8 +76,8 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 
 .. code:: shell-session
 
-  $ nix-shell -p raspberrypi-eeprom
-  $ FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
+  # nix-shell -p raspberrypi-eeprom
+  # FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 
   
 Installing NixOS 
@@ -146,7 +146,7 @@ To save time on typing the whole configuration, download it:
 
 .. code:: shell-session
 
-  $ curl -L https://tinyurl.com/nixos-rpi-tutorial-preview > /etc/nixos/configuration.nix 
+  # curl -L https://tinyurl.com/nixos-rpi-tutorial-preview > /etc/nixos/configuration.nix 
 
 At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure,
 most important being your wifi connection details, this time specified in declarative way.
@@ -155,8 +155,8 @@ Once you're ready to install NixOS:
 
 .. code:: shell-session
 
-  $ nixos-install --root /
-  $ reboot
+  # nixos-install --root /
+  # reboot
 
 In case your system doesn't boot, select the oldest configuration in the bootloader menu to get back to live image and start over.
 
@@ -172,13 +172,13 @@ edit ``/etc/nixos/configuration.nix`` and update your system:
 .. code:: shell-session 
 
   $ sudo -i
-  $ nixos-rebuild switch
+  # nixos-rebuild switch
 
 
 Going forward
 -------------
 
-- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and boot the old configuration if something broke
+- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and boot the old configuration if something broke.
   
-- To tweak bootloader options affecting hardware, look at `setting /boot/config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_
+- To tweak bootloader options affecting hardware, look at `setting /boot/config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_.
 
