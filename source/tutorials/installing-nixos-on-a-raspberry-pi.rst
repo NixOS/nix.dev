@@ -148,7 +148,7 @@ To save time on typing the whole configuration, download it:
 
   $ curl -L https://tinyurl.com/nixos-rpi-tutorial-preview > /etc/nixos/configuration.nix 
 
-At the top of the file there are a few variables that you'd want to configure,
+At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure,
 most important being your wifi connection details, this time specified in declarative way.
 
 Once you're ready to install NixOS:
