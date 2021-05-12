@@ -173,3 +173,12 @@ edit ``/etc/nixos/configuration.nix`` and update your system:
 
   $ sudo -i
   $ nixos-rebuild switch
+
+
+Going forward
+-------------
+
+- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and boot the old configuration if something broke
+  
+- To tweak bootloader options affecting hardware, look at `setting /boot/config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_
+
