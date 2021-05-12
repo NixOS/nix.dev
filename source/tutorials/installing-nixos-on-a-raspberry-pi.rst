@@ -9,7 +9,7 @@ Before starting this tutorial, make sure you have
 - HDMI cable/adapter.
 - 8GB+ SD card.
 - SD card reader in case your machine doesn't have an SD slot.
-- Power cable for your RPi.
+- Power cable for your Raspberry Pi.
 - USB keyboard.
 
 .. note:: 
@@ -43,7 +43,7 @@ Copy NixOS to your SD card by replacing ``sdX`` with the name of your device:
 
   sudo dd if=nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
 
-Once that command exits, move the SD card into your RPi and power it on.
+Once that command exits, move the SD card into your Raspberry Pi and power it on.
 
 You should be greeted with a fresh shell!
 
@@ -72,7 +72,7 @@ In case you've made a typo, run ``pkill wpa_supplicant`` and start over.
 Updating firmware
 -----------------
 
-To benefit from updates and bug fixes from the vendor, we'll start by updating RPi firmware:
+To benefit from updates and bug fixes from the vendor, we'll start by updating Raspberry Pi firmware:
 
 .. code:: shell-session
 
