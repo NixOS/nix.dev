@@ -14,22 +14,22 @@ Before starting this tutorial, make sure you have
 
 .. note:: 
 
-  RPi 2 won't work since it doesn't support 64bit OS, while RPi 3 should work with more fiddling.
+  This tutorial was written for the Raspberry Pi 4B. Using a previous supported revision, like the 3B or 3B+, is possible with tweaks.
 
 
 Booting NixOS live image
 ------------------------
 
-.. note:: Booting from a USB for vast majority of boards won't work without updating firmware. This tutorial boots from an SD card to avoid such hiccups.
+.. note:: Booting from USB may require an EEPROM firmware upgrade. This tutorial boots from an SD card to avoid such hiccups.
 
-Prepare the Aarch64 image on your laptop:
+Prepare the AArch64 image on your laptop:
 
 .. code:: shell-session
 
   $ nix-shell -p wget zstd
   $ wget https://hydra.nixos.org/build/142828023/download/1/nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img.zst
   $ unzstd -d nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img.zst
-  $ dmesg -w
+  $ dmesg --follow
 
 Your terminal should be printing kernel messages as they come in.
 
@@ -47,7 +47,7 @@ Once that command exits, move the SD card into your RPi and power it on.
 
 You should be greeted with a fresh shell!
 
-Run ``sudo su`` for the rest of the tutorial.
+Run ``sudo -i`` to get a root shell for the rest of the tutorial.
 
 
 Getting internet connection
@@ -72,7 +72,7 @@ In case you've made a typo, run ``pkill wpa_supplicant`` and start over.
 Updating firmware
 -----------------
 
-To increase chances for hardware to work, we'll start by updating RPi firmware:
+To benefit from updates and bug fixes from the vendor, we'll start by updating RPi firmware:
 
 .. code:: shell-session
 
@@ -164,12 +164,12 @@ In case your system doesn't boot, select the oldest configuration in the bootloa
 Making changes 
 --------------
 
-In case it does boot, congratulations!
+It booted, congratulations!
 
-To make further changes to configuration, `search through NixOS options <https://search.nixos.org/options>`_,
+To make further changes to the configuration, `search through NixOS options <https://search.nixos.org/options>`_,
 edit ``/etc/nixos/configuration.nix`` and update your system:
 
 .. code:: shell-session 
 
-  $ sudo su
+  $ sudo -i
   $ nixos-rebuild switch
