@@ -32,8 +32,12 @@ from datetime import date
 # ones.
 extensions = [
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo'
+    'sphinx.ext.todo',
+    'sphinx_copybutton'
 ]
+
+copybutton_prompt_text = r"# |\$ "
+copybutton_prompt_is_regexp = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
