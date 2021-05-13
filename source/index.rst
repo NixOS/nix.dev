@@ -6,9 +6,11 @@ Welcome to nix.dev
    Nix ecosystem is a DevOps toolkit to achieve:
 
    - Reproducible development environments.
-   - Easy installation of software over URLS.
+   - Easy installation of software over URLs.
    - Easy transfer of software environments between computers.
-   - Avoidance of version conflicts with already installed software.
+   - Declarative specification of Linux machines.
+   - Reproducible integration testing using virtual machines. 
+   - Avoidance of version conflicts with an already installed software.
    - Installing software from source code.
    - Transparent build caching via binary caches.
    - Strong support for software auditability.
@@ -16,8 +18,9 @@ Welcome to nix.dev
    - Remote deployments.
    - Atomic upgrades and rollbacks.
 
-   This documentation supplements the official `Nix <http://nixos.org/nix/manual/>`_, `NixOS <http://nixos.org/nixos/manual/>`_,
-   `Nixpkgs <http://nixos.org/nixpkgs/manual/>`_ and `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
+   This documentation supplements the official `Nix <http://nixos.org/nix/manual/>`_,
+   `NixOS <http://nixos.org/nixos/manual/>`_, `Nixpkgs <http://nixos.org/nixpkgs/manual/>`_
+   and `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
 
 
 Topics
