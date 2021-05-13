@@ -31,11 +31,15 @@ Prepare the AArch64 image on your laptop:
   $ unzstd -d nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img.zst
   $ dmesg --follow
 
+.. note::
+  You can pick a newer image by going to `Hydra job <https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image_new_kernel.aarch64-linux>`_,
+  clicking on a build and copying the link to the build product image.
+
 Your terminal should be printing kernel messages as they come in.
 
 Plug in your SD card and your terminal should print what device it got assigned, for example ``/dev/sdX``.
 
-Press ``ctrl-c`` to stop ``dmesg -w``.
+Press ``ctrl-c`` to stop ``dmesg --follow``.
 
 Copy NixOS to your SD card by replacing ``sdX`` with the name of your device:
 
@@ -63,7 +67,7 @@ network interface. In case it's ``wlan0`` replace ``SSID`` and ``passphrase`` wi
   # wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
 
 
-Once you see in your terminal that connection is established, run ``host google.com`` to 
+Once you see in your terminal that connection is established, run ``host nixos.org`` to 
 check that DNS resolves correctly.
 
 In case you've made a typo, run ``pkill wpa_supplicant`` and start over.
@@ -77,7 +81,8 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 .. code:: shell-session
 
   # nix-shell -p raspberrypi-eeprom
-  # FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
+  # mount /dev/disk/by-label/FIRMWARE /mnt
+  # BOOTFS=/mnt FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 
   
 Installing NixOS 
@@ -98,7 +103,7 @@ with user ``guest`` and SSH daemon.
     interface = "wlan0";
     hostname = "myhostname";
   in {
-    imports = ["${fetchTarball "https://github.com/domenkozar/nixos-hardware/archive/rpi4.tar.gz" }/raspberry-pi/4"];
+    imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz" }/raspberry-pi/4"];
 
     fileSystems = {
       "/" = {
@@ -123,22 +128,22 @@ with user ``guest`` and SSH daemon.
 
     users = {
       mutableUsers = false;
-      users.guest = {
+      users."${user}" = {
         isNormalUser = true;
         password = password;
         extraGroups = [ "wheel" ];
       };
     };
 
-    # video
+    # Enable GPU acceleration
+    hardware.raspberry-pi."4".fkms-3d.enable = true;
+
     services.xserver = {
       enable = true;
       displayManager.lightdm.enable = true;
       desktopManager.xfce.enable = true;
-      videoDrivers = [ "fbdev" ];
     };
 
-    # audio
     hardware.pulseaudio.enable = true;
   }
 
@@ -146,7 +151,7 @@ To save time on typing the whole configuration, download it:
 
 .. code:: shell-session
 
-  # curl -L https://tinyurl.com/nixos-rpi-tutorial-preview > /etc/nixos/configuration.nix 
+  # curl -L https://tinyurl.com/nixos-rpi4-tutorial > /etc/nixos/configuration.nix 
 
 At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure,
 most important being your wifi connection details, this time specified in declarative way.
@@ -178,7 +183,10 @@ edit ``/etc/nixos/configuration.nix`` and update your system:
 Going forward
 -------------
 
-- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and boot the old configuration if something broke.
+- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade`
+  and reboot to the old configuration if something broke.
   
-- To tweak bootloader options affecting hardware, look at `setting /boot/config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_.
+- To tweak bootloader options affecting hardware, `see config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_
+  and change the options by runnning ``mount /dev/disk/by-label/FIRMWARE /mnt`` and opening ``/mnt/config.txt``.
 
+- To see the power of declarative configuration, try replacing ``xfce`` with ``kodi`` in ``/etc/nixos/configuration.nix`` and ``reboot``.
