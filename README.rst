@@ -10,7 +10,8 @@
 `nix.dev <https://nix.dev>`_
 ============================
 
-Getting started and cookbook resources for Nix.
+An opinionated guide for developers wanting to get things done with the Nix ecosystem.
+
 
 Contributing
 ------------
