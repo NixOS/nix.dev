@@ -62,7 +62,7 @@ Create ``.github/workflows/test.yml`` with:
         - uses: cachix/install-nix-action@v13
           with:
             nix_path: nixpkgs=channel:nixos-unstable
-        - uses: cachix/cachix-action@v9
+        - uses: cachix/cachix-action@v10
           with:
             name: mycache
             # If you chose signing key for write access
