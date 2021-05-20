@@ -50,13 +50,17 @@ How do I fix: error: querying path in database: database disk image is malformed
 
 Try:
 
-    sqlite3 /nix/var/nix/db/db.sqlite "pragma integrity_check"
+.. code-block:: bash
+
+    $ sqlite3 /nix/var/nix/db/db.sqlite "pragma integrity_check"
 
 Which will print the errors in the database. If the errors are due to missing
 references, the following may work:
 
-    mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
-    sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
+.. code-block:: bash
+
+    $ mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
+    $ sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 
 How to operate between Nix paths and strings?
 ---------------------------------------------
