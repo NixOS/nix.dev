@@ -1,3 +1,5 @@
+.. _github-actions:
+
 Continuous Integration with GitHub Actions
 ==========================================
 

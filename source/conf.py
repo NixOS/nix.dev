@@ -377,8 +377,13 @@ epub_exclude_files = ['search.html']
 # If false, no index is generated.
 #epub_use_index = True
 
-# it's an SPA
-linkcheck_ignore = [r'https://app.terraform.io']
+
+linkcheck_ignore = [
+    # It's a SPA
+    r'https://app.terraform.io',
+    # Seems like README anchors aren't parsable?
+    r'https://github.com/cachix/install-nix-action',
+]
 
 # Anchors are not present in HTML
 linkcheck_anchors_ignore = [
