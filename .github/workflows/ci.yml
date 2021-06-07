@@ -11,4 +11,7 @@ jobs:
     - uses: cachix/install-nix-action@v13
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - run: nix-build
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+    - name: Build
+      run: nix-build
