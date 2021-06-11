@@ -1,43 +1,38 @@
 {
   description = "nix.dev static website";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+  inputs.flake-utils.url = "github:numtide/flake-utils/master";
+  inputs.poetry2nix.url = "github:nix-community/poetry2nix/master";
 
-  outputs = { self, nixpkgs }:
-    let
-      systems = [
-        "x86_64-linux"
-        "i686-linux"
-        "x86_64-darwin"
-        "aarch64-linux"
-      ];
-
-      forAllSystems = generator: nixpkgs.lib.genAttrs systems generator;
-
-      website = system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-          python = import ./requirements.nix { inherit pkgs; };
-
-        in pkgs.stdenv.mkDerivation {
-          name = "nix-dev";
-          src = self;
-
-          buildInputs = [
-            python.interpreter
-          ];
-
-          buildPhase = ''
-            make html
-          '';
-
-          installPhase = ''
-            mkdir -p $out/html
-            cp -r build/html/ $out/
-          '';
+  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ poetry2nix.overlay ];
         };
+      in rec {
+        packages = flake-utils.lib.flattenTree {
+          nix-dev-pyenv = pkgs.poetry2nix.mkPoetryEnv {
+            projectDir = self;
+            python = pkgs.python38;
+          };
+          nix-dev-html = pkgs.stdenv.mkDerivation {
+            name = "nix-dev";
+            src = self;
+            buildInputs = [ packages.nix-dev-pyenv ];
+            buildPhase = ''
+              make html
+            '';
+            installPhase = ''
+              mkdir -p $out
+              cp -R build/html/* $out/
+            '';
+          };
+        };
+        defaultPackage = packages.nix-dev-html;
+      }
+    );
 
-    in {
-      defaultPackage = forAllSystems website;
-    };
 }
