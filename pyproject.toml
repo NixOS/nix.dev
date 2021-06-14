@@ -10,7 +10,7 @@ python = "^3.8"
 sphinx = "4.0.2"
 alabaster = "0.7.12"
 livereload = "2.6.3"
-sphinx-copybutton = "0.3.1"
+sphinx-copybutton = "0.3.3"
 
 [tool.poetry.dev-dependencies]
 
