@@ -42,7 +42,7 @@ which lists all the releases and the latest commit that has passed all tests.
 
 When choosing a commit, it is recommended to follow either
 
-* the **latest stable NixOS** release by using a specific version, such as ``nixos-20.03``, **or**
+* the **latest stable NixOS** release by using a specific version, such as ``nixos-21.05``, **or**
 * the latest **unstable release** via ``nixos-unstable``.
 
 Dependency management with niv
@@ -65,7 +65,7 @@ You can see which version ``niv`` is tracking as follow:
 
 And you can change the tracking branch to the one you want like this:
 
-    $ niv modify nixpkgs --branch nixos-20.03
+    $ niv modify nixpkgs --branch nixos-21.05
 
 
 
