@@ -383,6 +383,8 @@ linkcheck_ignore = [
     r'https://app.terraform.io',
     # Seems like README anchors aren't parsable?
     r'https://github.com/cachix/install-nix-action',
+    # It's dynamic
+    r'https://matrix.to'
 ]
 
 # Anchors are not present in HTML
