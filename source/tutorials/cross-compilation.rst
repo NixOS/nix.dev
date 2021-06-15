@@ -29,6 +29,7 @@ It matters in cases where you'd like to distribute a compiler binary,
 as you'd then like to build a compiler on the build platform, compile code on the
 host plaform and run the final executable on the target platform.
 
+
 Since that's rarely needed, we'll treat the target platform the same as the host.
 
 
@@ -56,6 +57,9 @@ Note that ``<vendor>`` is often ``unknown`` and ``<abi>`` is optional.
 There's also no unique identifier for a platform, for example ``unknown`` and 
 ``pc`` are interchangeable (hence it's called config.guess).
 
+If you can't install Nix, find a way to run ``config.guess`` (usually comes with
+ the autoconf package) from the OS you're able to run on the host platform.
+
 Some other common examples of platform configs:
 
 - aarch64-apple-darwin14
@@ -69,7 +73,7 @@ Choosing the host platform with Nix
 
 Nixpkgs comes with a set of predefined host platforms applied to all packages.
 
-It's possible to list predefined sets via shell completion:
+It's possible to list predefined attribute sets via shell completion:
 
 .. code:: shell-session
 
@@ -103,14 +107,15 @@ It's possible to list predefined sets via shell completion:
   pkgsCross.msp430                      
 
 
-From the attribute name it isn't always immediately clear what the platform is.
+Cross-compilation package attribute names are made up, so it isn't always clear 
+what is the corresponding platform config.
 
 It's possible to query the platform config using:
 
   $ nix-instantiate '<nixpkgs>' -A pkgsCross.aarch64-darwin.hostPlatform.config --eval
   "aarch64-apple-darwin"
 
-.. note:: In case the plaforms hasn't been defined yet, feel free to contribute one
+.. note:: In case the plaform you seek hasn't been defined yet, feel free to contribute one
           by `adding it upstream <https://github.com/NixOS/nixpkgs/blob/master/lib/systems/examples.nix>`_.
 
 
