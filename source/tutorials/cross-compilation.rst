@@ -9,11 +9,11 @@ to the **host platform**, where the compiled **executable runs**. [#]_
 It's needed when the host platform has limited resources (such as CPU)
 or when it's not easily accessible for development.
 
-Nix community has world-class support for cross-compilation,
+The Nix community has world-class support for cross-compilation,
 after years of hard work from our community.
 
 .. [#] Terminology for cross-compilation platforms differs between build systems,
-       Nix community has chosen to follow 
+       we have chosen to follow 
        `autoconf terminology <https://www.gnu.org/software/autoconf/manual/autoconf-2.69/html_node/Hosts-and-Cross_002dCompilation.html>`_.
 
 .. note:: macOS/Darwin is a special case, as not the whole OS is Open Source. 
@@ -27,13 +27,13 @@ There's actually a third platform named target.
 
 It matters in cases where you'd like to distribute a compiler binary, 
 as you'd then like to build a compiler on the build platform, compile code on the
-target plaform and run the final executable on the host platform.
+host plaform and run the final executable on the target platform.
 
-Since that's rarely needed, we'll treat target platform the same as the build.
+Since that's rarely needed, we'll treat target platform the same as the host.
 
 
-Determining the host platform
------------------------------
+Determining the host platform config
+------------------------------------
 
 The build platform is determined automatically by Nix
 as it can just guess it during the configure phase.
@@ -46,7 +46,7 @@ The host platform is best determined by running on the host platform:
   aarch64-unknown-linux-gnu
 
 In case that's not possible (when the host platform is not easily accessible
-for development), it has to be constructed manually via the following template:
+for development), platform config has to be constructed manually via the following template:
 
 .. code::
 
@@ -56,7 +56,7 @@ Note that ``<vendor>`` is often ``unknown`` and ``<abi>`` is optional.
 There's also no unique identifier for a platform, for example ``unknown`` and 
 ``pc`` are interchangeable (hence it's called config.guess).
 
-Some other common examples of platforms:
+Some other common examples of platform configs:
 
 - aarch64-apple-darwin14
 - aarch64-pc-linux-gnu
@@ -105,7 +105,7 @@ It's possible to list predefined sets via shell completion:
 
 From the attribute name it can't always be immediately clear what is the platform.
 
-It's possible to query the platform name using::
+It's possible to query the platform config using::
 
   $ nix-instantiate '<nixpkgs>' -A pkgsCross.aarch64-darwin.hostPlatform.config --eval
   "aarch64-apple-darwin"
@@ -118,7 +118,7 @@ Cross-compiling for the first time!
 -----------------------------------
 
 To cross-compile a package like `hello <https://www.gnu.org/software/hello/>`_,
-pick the platform target name like ``aarch64-multiplatform`` in our case and run:
+pick the platform attribute like ``aarch64-multiplatform`` in our case and run:
 
 .. code:: shell-session 
 
@@ -165,8 +165,8 @@ with `an emulator <https://en.wikipedia.org/wiki/Emulator>`_.
         # Compile our example using the compiler specific to our host platform
         $CC ${helloWorld} -o hello 
 
-        # Run the compiled program using an emulator
-        # Usually Qemu, but on windows it is Wine
+        # Run the compiled program using user mode emulation (Qemu/Wine)
+        # buildPackages are passed so that emulation is built for the build platform
         ${hostPkgs.stdenv.hostPlatform.emulator hostPkgs.buildPackages} hello > $out
 
         # print to stdout program stdout
@@ -204,7 +204,7 @@ Given we have a ``shell.nix``:
   }:
 
   # pkgs.callPackage is needed due to https://github.com/NixOS/nixpkgs/pull/126844
-  pkgs.callPackage ({ mkShell, zlib, pkg-config }: mkShell {
+  pkgs.callPackage ({ mkShell, zlib, pkg-config, file }: mkShell {
     # these tools run on the build platform, but are configure to target the target platform
     nativeBuildInputs = [ pkg-config file ];
     # libraries needed for the target platform
@@ -253,5 +253,5 @@ Next steps
 
   `A detailed explanation how cross-compilation is implemented in Nix can help fixing those issues <https://nixos.org/manual/nixpkgs/stable/#chap-cross>`_.
 
-- Nix community has a `dedicated Matrix room <https://matrix.to/#/#cross-compiling:nixos.org>`_
+- The Nix community has a `dedicated Matrix room <https://matrix.to/#/#cross-compiling:nixos.org>`_
   for help around cross-compiling.
