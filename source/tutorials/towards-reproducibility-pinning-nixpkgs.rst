@@ -84,8 +84,8 @@ And you can update all the dependencies by running::
     $ nix-shell -p niv --run "niv update"
 
 
-Going forward
--------------
+Next steps
+----------
 
 - For more examples and details of the different ways to pin ``nixpkgs``, see :ref:`ref-pinning-nixpkgs`.
 
