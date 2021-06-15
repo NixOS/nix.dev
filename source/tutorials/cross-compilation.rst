@@ -12,24 +12,25 @@ or when it's not easily accessible for development.
 The Nix community has world-class support for cross-compilation,
 after years of hard work from our community.
 
-.. [#] Terminology for cross-compilation platforms differs between build systems,
-       we have chosen to follow 
+.. [#] Terminology for cross-compilation platforms differs between build systems.
+       We have chosen to follow 
        `autoconf terminology <https://www.gnu.org/software/autoconf/manual/autoconf-2.69/html_node/Hosts-and-Cross_002dCompilation.html>`_.
 
-.. note:: macOS/Darwin is a special case, as not the whole OS is Open Source. 
+.. note:: macOS/Darwin is a special case, as not the whole OS is open-source. 
           It's only possible to cross-compile between ``aarch64-darwin`` and ``x86_64-darwin``.
 
 
 What's a target platform?
 -------------------------
 
-There's actually a third platform named target.
+There's actually a third platform named the target platform.
 
 It matters in cases where you'd like to distribute a compiler binary, 
 as you'd then like to build a compiler on the build platform, compile code on the
 host plaform and run the final executable on the target platform.
 
-Since that's rarely needed, we'll treat target platform the same as the host.
+
+Since that's rarely needed, we'll treat the target platform the same as the host.
 
 
 Determining the host platform config
@@ -46,7 +47,7 @@ The host platform is best determined by running on the host platform:
   aarch64-unknown-linux-gnu
 
 In case that's not possible (when the host platform is not easily accessible
-for development), platform config has to be constructed manually via the following template:
+for development), the platform config has to be constructed manually via the following template:
 
 .. code::
 
@@ -106,9 +107,10 @@ It's possible to list predefined attribute sets via shell completion:
   pkgsCross.msp430                      
 
 
-Cross-compilation package attribute names are made up, so it isn't always clear what is the corresponding platform config.
+Cross-compilation package attribute names are made up, so it isn't always clear 
+what is the corresponding platform config.
 
-Query platform config via:
+It's possible to query the platform config using:
 
   $ nix-instantiate '<nixpkgs>' -A pkgsCross.aarch64-darwin.hostPlatform.config --eval
   "aarch64-apple-darwin"
@@ -121,7 +123,7 @@ Cross-compiling for the first time!
 -----------------------------------
 
 To cross-compile a package like `hello <https://www.gnu.org/software/hello/>`_,
-pick the platform attribute like ``aarch64-multiplatform`` in our case and run:
+pick the platform attribute - ``aarch64-multiplatform`` in our case - and run:
 
 .. code:: shell-session 
 
@@ -130,10 +132,10 @@ pick the platform attribute like ``aarch64-multiplatform`` in our case and run:
   /nix/store/pzi2h0d60nb4ydcl3nn7cbxxdnibw3sy-hello-aarch64-unknown-linux-gnu-2.10
 
 `Search for a package <https://search.nixos.org/packages>`_ attribute name to find the
-one that you're interested in to build.
+one that you're interested in building.
 
 
-Real world cross-compiling of a Hello World example
+Real-world cross-compiling of a Hello World example
 ---------------------------------------------------
  
 To show off the power of cross-compilation in Nix, let's build our own Hello World program 
@@ -169,10 +171,10 @@ with `an emulator <https://en.wikipedia.org/wiki/Emulator>`_.
         $CC ${helloWorld} -o hello 
 
         # Run the compiled program using user mode emulation (Qemu/Wine)
-        # buildPackages are passed so that emulation is built for the build platform
+        # buildPackages is passed so that emulation is built for the build platform
         ${hostPkgs.stdenv.hostPlatform.emulator hostPkgs.buildPackages} hello > $out
 
-        # print to stdout program stdout
+        # print to stdout
         cat $out
       '';
   in {
@@ -193,10 +195,10 @@ If we build this example and print both resulting derivations, we should see "He
 Developer environment with a cross-compiler
 -------------------------------------------
 
-In :ref:`tutorial for declarative reproducible environments <declarative-reproducible-envs>`,
-we've looked at how Nix helps us provide tooling and system libraries for our project.
+In the :ref:`tutorial for declarative reproducible environments <declarative-reproducible-envs>`,
+we looked at how Nix helps us provide tooling and system libraries for our project.
 
-It's also possible to provide an environment with a compiler configured for cross-compilation!
+It's also possible to provide an environment with a compiler configured for cross-compilation.
 
 Given we have a ``shell.nix``:
 
@@ -208,7 +210,7 @@ Given we have a ``shell.nix``:
 
   # pkgs.callPackage is needed due to https://github.com/NixOS/nixpkgs/pull/126844
   pkgs.callPackage ({ mkShell, zlib, pkg-config, file }: mkShell {
-    # these tools run on the build platform, but are configure to target the target platform
+    # these tools run on the build platform, but are configured to target the target platform
     nativeBuildInputs = [ pkg-config file ];
     # libraries needed for the target platform
     buildInputs = [ zlib ];
@@ -243,7 +245,7 @@ And confirm it's aarch64:
 Next steps
 ----------
 
-- `Official binary cache <https://cache.nixos.org>`_ doesn't come with binaries
+- The `official binary cache <https://cache.nixos.org>`_ doesn't come with binaries
   for packages that are cross-compiled, so it's important to set up
   :ref:`a binary cache and CI (GitHub Actions and Cachix) <github-actions>`.
 
@@ -252,9 +254,9 @@ Next steps
 
   On top of that, supporting cross-compilation is not trivial
   work and due to many possible combinations of what would
-  need to be tested, packages some might not build.
+  need to be tested, some packages might not build.
 
-  `A detailed explanation how cross-compilation is implemented in Nix can help fixing those issues <https://nixos.org/manual/nixpkgs/stable/#chap-cross>`_.
+  `A detailed explanation how of cross-compilation is implemented in Nix <https://nixos.org/manual/nixpkgs/stable/#chap-cross>`_ can help with fixing those issues.
 
 - The Nix community has a `dedicated Matrix room <https://matrix.to/#/#cross-compiling:nixos.org>`_
   for help around cross-compiling.
