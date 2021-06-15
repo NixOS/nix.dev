@@ -1,3 +1,5 @@
+.. _integration-testing-vms:
+
 Integration testing using virtual machines (VMs)
 ================================================
 

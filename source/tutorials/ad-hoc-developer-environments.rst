@@ -168,8 +168,8 @@ and share with strangers online. As long as they have Nix installed, they'll be 
 This is essentially the same example as in the previous section, but this time declaratively source controlled! All of the required Nix commands are included as ``#!`` shebang headers in the scripts itself.
 
 
-Going forward
--------------
+Next steps
+----------
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
 

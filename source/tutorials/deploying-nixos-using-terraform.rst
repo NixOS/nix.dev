@@ -172,8 +172,8 @@ Caveats
 - Each machine is evaluated separately, so note that your memory requirements will grow linearly with the number of machines.
 
 
-Going Forward
--------------
+Next steps
+----------
 
 - It's possible to `switch to use Google Compute Engine provider <https://github.com/tweag/terraform-nixos/tree/master/google_image_nixos#readme>`_.
 

@@ -147,8 +147,8 @@ The next time your launch your terminal and enter the top-level of your project 
    hello
 
 
-Going forward
--------------
+Next steps
+----------
 
 - :ref:`pinning-nixpkgs` to see different ways to import nixpkgs
 

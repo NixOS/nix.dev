@@ -117,8 +117,8 @@ follow along how Nix replaces each of its functions. Using the Docker CLI,
 Docker Compose, Docker Swarm or Docker Hub on the other hand may still be
 relevant depending on your use case.
 
-Going forward
--------------
+Next steps
+----------
 
 More details on how to use ``dockerTools`` can be found in the `nixpkgs manual
 <https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. 

@@ -180,8 +180,8 @@ edit ``/etc/nixos/configuration.nix`` and update your system:
   # nixos-rebuild switch
 
 
-Going forward
--------------
+Next steps
+----------
 
 - Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade`
   and reboot to the old configuration if something broke.

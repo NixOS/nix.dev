@@ -78,8 +78,8 @@ Once you commit and push to your GitHub repository,
 you should see status checks appearing on commits and PRs.
 
 
-Going forward
--------------
+Next steps
+----------
 
 - See `GitHub Actions workflow syntax <https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions>`_
 
