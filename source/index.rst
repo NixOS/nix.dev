@@ -5,14 +5,14 @@ Welcome to nix.dev
 
    Nix ecosystem is a DevOps toolkit to achieve:
 
-   - Reproducible development environments.
+   - :ref:`Reproducible development environments <declarative-reproducible-envs>`.
    - Easy installation of software over URLs.
    - Easy transfer of software environments between computers.
-   - Declarative specification of Linux machines.
-   - Reproducible integration testing using virtual machines. 
+   - :ref:`Declarative specification of Linux machines <deploying-nixos-using-terraform>`.
+   - :ref:`Reproducible integration testing using virtual machines <integration-testing-vms>`. 
    - Avoidance of version conflicts with an already installed software.
    - Installing software from source code.
-   - Transparent build caching via binary caches.
+   - :ref:`Transparent build caching using binary caches <github-actions>`.
    - Strong support for software auditability.
    - Remote builds.
    - Remote deployments.
