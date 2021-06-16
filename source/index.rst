@@ -14,7 +14,7 @@ Welcome to nix.dev
    - Installing software from source code.
    - Transparent build caching via binary caches.
    - Strong support for software auditability.
-   - First-class cross-compilation support.
+   - First-class cross compilation support.
    - Remote builds.
    - Remote deployments.
    - Atomic upgrades and rollbacks.
