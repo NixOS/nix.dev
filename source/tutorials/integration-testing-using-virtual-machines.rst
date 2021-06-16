@@ -1,5 +1,5 @@
-Integration testing using Virtual Machines
-==========================================
+Integration testing using virtual machines (VMs)
+================================================
 
 One of the most powerful features in the Nix ecosystem is **the ability
 to provide a set of declarative NixOS configurations and use a simple
@@ -11,7 +11,7 @@ They can be written and launched outside of NixOS, on any Linux machine (with
 `MacOS support coming soon <https://github.com/NixOS/nixpkgs/issues/108984>`_).
 
 Integration tests are reproducible due to the design properties of Nix,
-making them a valuable part of a Continuous Integration pipeline.
+making them a valuable part of a Continuous Integration (CI) pipeline.
 
 
 Testing a typical web application backed by PostgreSQL
@@ -25,9 +25,9 @@ in order to test if all the steps work.
 
 We are going to set up:
 
-- VM named ``server`` running postgreSQL and postgREST.
+- A VM named ``server`` running postgreSQL and postgREST.
 
-- VM named ``client`` running HTTP client queries using ``curl``.
+- A VM named ``client`` running HTTP client queries using ``curl``.
   
 - A ``testScript`` orchestrating testing logic between ``client`` and ``server``.
 
@@ -196,7 +196,7 @@ Developing and debugging tests
 When developing tests or when something breaks, it's useful to interactively fiddle
 with the script or access a terminal for a machine.
 
-To interactively start a Python session with testing framework:
+To interactively start a Python session with a testing framework:
 
 .. code:: shell-session 
 
@@ -206,7 +206,7 @@ To interactively start a Python session with testing framework:
   >>>
 
 You can run `any of the testing operations <https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests>`_. 
-``testScript`` attribute from our ``postgrest.nix`` definition can be executed with ``test_script()`` function.
+The ``testScript`` attribute from our ``postgrest.nix`` definition can be executed with ``test_script()`` function.
 
 To start all machines and enter a telnet terminal to a specific machine:
 
@@ -228,4 +228,4 @@ Next steps
   To run integration tests on :ref:`GitHub Actions <github-actions>` see 
   `how to disable hardware acceleration <https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests>`_.
 
-- NixOS comes with a large set of tests that serve also as educational examples, a good inspiration is `Matrix bridging with an IRC <https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix-appservice-irc.nix>`_.
+- NixOS comes with a large set of tests that serve also as educational examples. A good inspiration is `Matrix bridging with an IRC <https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix-appservice-irc.nix>`_.
