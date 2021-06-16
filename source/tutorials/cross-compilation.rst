@@ -3,8 +3,10 @@
 Cross-compilation
 =================
 
-Cross-compilation is the act of **compiling code** on the **build platform**
-to the **host platform**, where the compiled **executable runs**. [#]_
+When compiling code, we can distinguish between the **build platform**, where the executable
+is *built*, and the **host platform**, where the compiled executable *runs*. [#]_
+**Native compilation** is the special case where those two platforms are the same.
+**Cross compilation** is the general case where those two platforms are not.
 
 It's needed when the host platform has limited resources (such as CPU)
 or when it's not easily accessible for development.
