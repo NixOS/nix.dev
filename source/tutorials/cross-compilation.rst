@@ -1,4 +1,4 @@
-.. _ref-cross-compilation:
+.. _cross-compilation:
 
 Cross compilation
 =================
