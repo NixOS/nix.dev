@@ -115,16 +115,14 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
-html_theme = "alabaster"
+html_theme = "sphinx_book_theme"
 
 # https://alabaster.readthedocs.io/en/latest/customization.html
 html_theme_options = {
-    "description": 'An opinionated guide for developers getting things done using <a href="https://nixos.org">the Nix ecosystem</a>.',
-    "github_user": "nix-dot-dev",
-    "github_repo": "nix.dev",
-    "github_type": "star",
-    "fixed_sidebar": True,
-    "github_banner": True,
+    "repository_url": "https://github.com/nix-dot-dev/nix.dev",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    "use_edit_page_button": True
 }
 
 
@@ -170,9 +168,9 @@ html_theme_options = {
 html_sidebars = {
     '**': [
         'about.html',
+        'search-field.html',
         'subscribe.html',
-        'searchbox.html',
-        'navigation.html',
+        'sbt-sidebar-nav.html',
         'srclinks.html',
         'sponsors.html',
         ],
