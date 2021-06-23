@@ -120,6 +120,7 @@ html_theme = "sphinx_book_theme"
 # https://alabaster.readthedocs.io/en/latest/customization.html
 html_theme_options = {
     "repository_url": "https://github.com/nix-dot-dev/nix.dev",
+    "path_to_docs": "source",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True
