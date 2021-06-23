@@ -10,7 +10,7 @@ Welcome to nix.dev
    - Easy transfer of software environments between computers.
    - :ref:`Declarative specification of Linux machines <deploying-nixos-using-terraform>`.
    - :ref:`Reproducible integration testing using virtual machines <integration-testing-vms>`. 
-   - Avoidance of version conflicts with an already installed software.
+   - Avoidance of version conflicts with already installed software.
    - Installing software from source code.
    - :ref:`Transparent build caching using binary caches <github-actions>`.
    - Strong support for software auditability.
