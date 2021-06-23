@@ -1,7 +1,7 @@
 Welcome to nix.dev
 ==================
 
-.. topic:: Introduction
+.. topic:: **Introduction**
 
    Nix ecosystem is a DevOps toolkit to achieve:
 
