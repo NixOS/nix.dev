@@ -24,9 +24,6 @@ Welcome to nix.dev
    and `NixOps <http://nixos.org/nixops/manual/>`_ manuals.
 
 
-Topics
-------
-
 .. toctree::
    :maxdepth: 3
    :glob:
