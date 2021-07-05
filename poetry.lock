@@ -282,7 +282,7 @@ testing = ["myst-nb (>=0.11.1,<0.12.0)", "sphinx-thebe", "coverage", "pytest (>=
 
 [[package]]
 name = "sphinx-copybutton"
-version = "0.3.3"
+version = "0.4.0"
 description = "Add a copy button to each of your code cells."
 category = "main"
 optional = false
@@ -293,6 +293,7 @@ sphinx = ">=1.8"
 
 [package.extras]
 code_style = ["pre-commit (==2.12.1)"]
+rtd = ["sphinx", "ipython", "sphinx-book-theme"]
 
 [[package]]
 name = "sphinxcontrib-applehelp"
@@ -389,7 +390,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "2f6898681cc22ec20f82ed44856c63082bbcd1c0e0d260b4daf281ec3db5ce08"
+content-hash = "03de9f82fd092fcf5ef542c3b8f89753a219f51e373b0b5a81c688c371ba3b15"
 
 [metadata.files]
 alabaster = [
@@ -552,8 +553,8 @@ sphinx-book-theme = [
     {file = "sphinx_book_theme-0.1.0-py3-none-any.whl", hash = "sha256:182e57262e76c657a8f3082b0922f3617c8b0cb3e4c4079fa6b2ae9b2a5d3ae9"},
 ]
 sphinx-copybutton = [
-    {file = "sphinx-copybutton-0.3.3.tar.gz", hash = "sha256:3695987d5e98e3b223471aaed8aa7491e03e9bfc48ed655a91446fd5e30b6c25"},
-    {file = "sphinx_copybutton-0.3.3-py3-none-any.whl", hash = "sha256:19850e9c1ed09c899f136ce3cfa304cb3b6d2f508528c19d8f512ccc8c66b0d4"},
+    {file = "sphinx-copybutton-0.4.0.tar.gz", hash = "sha256:8daed13a87afd5013c3a9af3575cc4d5bec052075ccd3db243f895c07a689386"},
+    {file = "sphinx_copybutton-0.4.0-py3-none-any.whl", hash = "sha256:4340d33c169dac6dd82dce2c83333412aa786a42dd01a81a8decac3b130dc8b0"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},
