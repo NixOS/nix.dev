@@ -170,9 +170,8 @@ html_sidebars = {
     '**': [
         'about.html',
         'search-field.html',
-        'subscribe.html',
         'sbt-sidebar-nav.html',
-        'srclinks.html',
+        'subscribe.html',
         'sponsors.html',
         ],
 }
