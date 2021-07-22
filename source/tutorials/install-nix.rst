@@ -25,3 +25,19 @@ Check that the installation was successful:
    nix-env (Nix) 2.3.6
 
 .. _verify the installation script: https://nixos.org/download.html#nix-verify-installation
+
+Use Docker to explore Nix
+-------------------------
+
+Start a Docker shell with Nix:
+
+.. code:: bash
+
+    $ docker run -it nixos/nix
+
+Or start a Docker shell with Nix exposing a ``workdir`` directory:
+
+.. code:: bash
+
+    $ mkdir workdir
+    $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
