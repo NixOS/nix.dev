@@ -35,10 +35,9 @@ Start a Docker shell with Nix:
 
     $ docker run -it nixos/nix
 
-Or start a Docker shell with Nix exposing a work directory:
+Or start a Docker shell with Nix exposing a ``workdir`` directory:
 
 .. code:: bash
 
     $ mkdir workdir
     $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
-
