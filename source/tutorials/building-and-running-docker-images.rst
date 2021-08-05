@@ -9,12 +9,14 @@ container hosting services, creating Docker containers for a given service is a
 common task when building reproducible software. In this tutorial, you will
 learn how to build Docker containers using Nix.
 
+
 Prerequisites
 -------------
 We assume you have both Nix and `Docker installed <https://docs.docker.com/get-docker/>`_. Docker is available in
 ``nixpkgs``, which is the preferred way to install it on NixOS. However, you can
 also use the native Docker installation of your OS, if you are on another Linux
 distribution or MacOS.
+
 
 Build your first container
 --------------------------
@@ -24,14 +26,23 @@ Docker images:
 
 .. code:: nix
 
-    { pkgs ? import <nixpkgs> { system = "x86_64-linux"; } }:
+    { pkgs ? import <nixpkgs> { }
+    , pkgsLinux = import <nixpkgs> { system = "x86_64-linux"; }
+    }:
 
     pkgs.dockerTools.buildImage {
       name = "hello-docker";
       config = {
-        Cmd = [ "${pkgs.hello}/bin/hello" ];
+        Cmd = [ "${pkgsLinux.hello}/bin/hello" ];
       };
     }
+
+.. note::
+
+  If your running **macOS** or any other platform than ``x86_64-linux``, you'll need to either:
+
+  - `Set up a remote builder <https://github.com/nix-dot-dev/nix.dev/issues/157>`_ to build on Linux
+  - :ref:`Cross compile to Linux <cross-compilation>` by replacing ``pkgsLinux.hello`` with ``pkgs.pkgsCross.musl64.hello``
 
 We call the ``dockerTools.buildImage`` and pass in some parameters: 
 
@@ -68,6 +79,7 @@ The image tag (``y74sb4nrhxr975xs7h83izgm8z75x5fc``) refers to the Nix build has
 and makes sure that the Docker image corresponds to our Nix build. The store
 path in the last line of the output references the Docker image.
 
+
 Run the container
 -----------------
 
@@ -103,6 +115,7 @@ Now that you have loaded the image into Docker, it is time to run it:
     $ docker run -t hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
     Hello, world!
 
+
 Working with Docker images
 --------------------------
 
@@ -117,13 +130,16 @@ follow along how Nix replaces each of its functions. Using the Docker CLI,
 Docker Compose, Docker Swarm or Docker Hub on the other hand may still be
 relevant depending on your use case.
 
+
 Next steps
 ----------
 
-More details on how to use ``dockerTools`` can be found in the `nixpkgs manual
-<https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. 
+- More details on how to use ``dockerTools`` can be found in the `reference documentation
+  <https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools>`_. 
 
-You will also find
-more advanced examples of Docker images built with Nix `in the examples file on
-nixpkgs
-<https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix>`_.
+- You will also want to `browse through more examples of Docker images built with Nix 
+  <https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix>`_.
+
+- `Arion <https://docs.hercules-ci.com/arion/>`_, docker-compose wrapper with first-class support for Nix.
+
+- Build docker images on a :ref:`CI with Github Actions <github-actions>`
