@@ -1,6 +1,8 @@
 Building bootable ISO image
 ===========================
 
+.. note:: 
+  In case you'd like to build images for a different platform that you're on, see `Cross compiling <https://github.com/nix-community/nixos-generators#cross-compiling>`_.
 
 Often we're faced with the official installation image lacking some hardware support.
 
@@ -24,13 +26,13 @@ Generate an ISO with the above configuration:
 
 .. code:: shell-session
 
-  $ nixos-generate -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/74e2faf5965a12e8fa5cff799b1b19c6cd26b0e3.tar.gz --format iso --configuration ./myimage.nix -o iso
+  $ nix-shell -p nixos-generators -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/74e2faf5965a12e8fa5cff799b1b19c6cd26b0e3.tar.gz --run "nixos-generate --format iso --configuration ./myimage.nix -o result"
 
 Copy the new image to your USB stick by replacing ``sdX`` with the name of your device:
 
 .. code:: shell-session
 
-  $ dd if=iso/iso/*.iso of=/dev/sdX status=progress
+  $ dd if=result/iso/*.iso of=/dev/sdX status=progress
   $ sync
 
 
