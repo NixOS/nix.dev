@@ -1,5 +1,9 @@
 .. _github-actions:
 
+.. meta::
+  :description: Continuous Integration with GitHub Actions and Cachix
+  :keywords: CI, Continuous Integration, GitHub Actions, Cachix, Binary Cache, Nix
+
 Continuous Integration with GitHub Actions
 ==========================================
 

@@ -1,5 +1,9 @@
 .. _cross-compilation:
 
+.. meta::
+  :description: Cross compilation tutorial using Nix
+  :keywords: Nix, cross compilation, cross-compile, Nix
+
 Cross compilation
 =================
 

@@ -1,6 +1,10 @@
 Installing NixOS on a Raspberry Pi
 ==================================
 
+.. meta::
+  :description: Installing NixOS on a Raspberry Pi
+  :keywords: Raspberry Pi, rpi, NixOS, installation, image, tutorial
+
 This tutorial assumes `Raspberry P 4 Model B with 4GB RAM <https://www.raspberrypi.org/products/raspberry-pi-4-model-b/>`_.
 
 Before starting this tutorial, make sure you have 

@@ -1,6 +1,10 @@
 Building and running Docker images
 ==================================
 
+.. meta::
+  :description: Building and running Docker images
+  :keywords: Docker, containers, Nix, reproducible, build, tutorial
+
 `Docker <https://www.docker.com/>`_ is a set of tools and services used to
 build, manage and deploy containers. 
 

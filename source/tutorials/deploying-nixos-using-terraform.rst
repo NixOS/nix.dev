@@ -1,5 +1,11 @@
 .. _deploying-nixos-using-terraform:
 
+
+.. meta::
+  :description: Continuous Integration with GitHub Actions and Cachix
+  :keywords: NixOS, deployment, Terraform, AWS
+
+
 Deploying NixOS using Terraform
 ===============================
 

@@ -1,6 +1,10 @@
 Welcome to nix.dev
 ==================
 
+.. meta::
+   :description: An opinionated guide for developers wanting to get things done with the Nix ecosystem.
+   :keywords: Nix, NixOS, packaging, Linux, deployment, build systems, reproducible, developer
+
 .. topic:: **Introduction**
 
    The Nix ecosystem is a DevOps toolkit to achieve:
