@@ -56,7 +56,7 @@ Once that command exits, **move the SD card into your Raspberry Pi and power it 
 You should be greeted with a fresh shell!
 
 In case the image doesn't boot, it's worth `updating the firmware <https://www.raspberrypi.org/documentation/computers/raspberry-pi.html#updating-the-bootloader>`_
-and retrying booting the image again.
+and retry booting the image again.
 
 
 Getting internet connection
