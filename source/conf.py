@@ -379,8 +379,6 @@ epub_exclude_files = ['search.html']
 linkcheck_ignore = [
     # It's a SPA
     r'https://app.terraform.io',
-    # Seems like README anchors aren't parsable?
-    r'https://github.com/cachix/install-nix-action',
     # It's dynamic
     r'https://matrix.to'
 ]
@@ -388,7 +386,11 @@ linkcheck_ignore = [
 # Anchors are not present in HTML
 linkcheck_anchors_ignore = [
     r"instance_type",
-    r"authentication"
+    r"authentication",
+    # Seems like README anchors aren't parsable?
+    r"cross-compiling",
+    r"supported-formats",
+    r"how-can-i-run-nixos-tests",
 ]
 
 

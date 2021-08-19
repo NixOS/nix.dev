@@ -15,3 +15,5 @@ jobs:
         nix_path: nixpkgs=channel:nixos-unstable
     - name: Build
       run: nix-build
+    - name: Linkcheck
+      run: nix-shell --run "make linkcheck"
