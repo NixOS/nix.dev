@@ -7,7 +7,7 @@ license = "CC BY-SA"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-sphinx = "3.5.4"
+sphinx = "4.2.0"
 livereload = "2.6.3"
 sphinx-book-theme = "0.1.4"
 sphinx-copybutton = "0.4.0"
