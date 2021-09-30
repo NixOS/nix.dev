@@ -61,6 +61,15 @@ Or start a Docker shell with Nix exposing a ``workdir`` directory:
 
       $ mkdir workdir
       $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
+
+The ``workdir`` example from above can be also used to start hacking on nixpkgs:
+
+.. code:: bash
+
+      $ git clone git@github.com:NixOS/nixpkgs
+      $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
+      docker> nix-build -I nixpkgs=/nixpkgs -A hello
+      docker> find ./result # this symlink points to the build package
    
 Verify installation
 -------------------
