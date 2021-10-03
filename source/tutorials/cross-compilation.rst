@@ -39,7 +39,7 @@ Since that's rarely needed, we'll treat the target platform the same as the host
 Pinning nixpkgs
 ---------------
 
-To ensure reproducability of this tutorial as explained in :ref:`the pinning tutorial <pinning-nixpkgs>`:
+To ensure reproducibility of this tutorial as explained in :ref:`the pinning tutorial <pinning-nixpkgs>`:
 
 .. code:: shell-session 
 

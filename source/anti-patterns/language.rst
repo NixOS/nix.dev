@@ -151,7 +151,7 @@ A better way is to use ``pkgs.lib.recursiveUpdate`` function:
     { a = { b = 1; c = 3; }; }
 
 
-Reproducability referencing top-level directory with ``./.``
+Reproducibility referencing top-level directory with ``./.``
 ------------------------------------------------------------
 
 Browsing `GitHub source code <https://github.com/search?l=nix&type=Code&q=mkDerivation>`_
