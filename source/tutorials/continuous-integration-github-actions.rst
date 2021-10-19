@@ -7,24 +7,18 @@
 Continuous Integration with GitHub Actions
 ==========================================
 
-This tutorial guides you through **a few short steps** to start using 
-`GitHub Actions <https://github.com/features/actions>`_ as your CI
-for commits and pull requests.
-
+In this tutorial, we'll show you **a few short steps** to get started using `GitHub Actions <https://github.com/features/actions>`_ as your continuous integration (CI) workflow for commits and pull requests.
 
 Caching builds using Cachix
 ---------------------------
 
-One nice benefit of Nix is that **CI can build and cache developer environments 
-for every project** on every branch using binary caches.
+One benefit of Nix is that **CI can build and cache developer environments for every project** on every branch using binary caches.
 
-Another important aspect of CI is the feedback loop of 
-**how many minutes does the build take to finish**.
+An important aspect of CI is the feedback loop of, **how many minutes does the build take to finish?**
 
-Using `Cachix <https://cachix.org/>`_ you'll never
-have to waste building any derivation twice and you'll share built derivations with all your developers.
+Using `Cachix <https://cachix.org/>`_ you'll never have to waste time building a derivation twice, and you'll share built derivations with all your developers.
 
-After each job, just built derivations are pushed to your binary cache.
+After each job, just-built derivations are pushed to your binary cache.
 
 Before each job, derivations to be built are first substituted (if they exist) from your binary cache.
 
@@ -34,9 +28,9 @@ Before each job, derivations to be built are first substituted (if they exist) f
 
 It's recommended to have different binary caches per team, depending who will have write/read access to it.
 
-Fill out the form on `create binary cache <https://app.cachix.org/cache>`_ page. 
+Fill out the form on the `create binary cache <https://app.cachix.org/cache>`_ page. 
 
-On your freshly created binary cache, follow **Push binaries** tab instructions.
+On your freshly created binary cache, follow the **Push binaries** tab instructions.
 
 
 2. Setting up secrets
@@ -44,7 +38,7 @@ On your freshly created binary cache, follow **Push binaries** tab instructions.
 
 On your GitHub repository or organization (for use across all repositories):
 
-1. Click on ``Settings`` 
+1. Click on ``Settings``. 
 2. Click on ``Secrets``.
 3. Add your previously generated secrets (``CACHIX_SIGNING_KEY`` and/or ``CACHIX_AUTH_TOKEN``).
 
