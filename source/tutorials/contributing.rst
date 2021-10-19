@@ -32,7 +32,7 @@ and want to contribute to it's development, you can find information on
 You can find inspiration for things to improve in the `reported
 issues`_.
 
-Feel free to join the `#nixos-dev IRC channel`_ on `Freenode`_ to get in
+Feel free to `join our community`_ to get in
 contact with other developers.
 
 Contribute to Nix packages
@@ -59,13 +59,12 @@ issues <https://github.com/NixOS/nixpkgs/issues>`__. There are also
 `issues tagged with good-first-bug`_ that are a good start for new
 contributors.
 
-Feel free to join the `#nixos-dev IRC channel`_ on Freenode.
+Feel free to `join our community`_ of developers!
 
 .. _GitHub: https://github.com/
 .. _how to setup a development environment: https://nixos.org/nix/manual/#chap-hacking
 .. _reported issues: https://github.com/NixOS/nix/issues
-.. _#nixos-dev IRC channel: irc://irc.freenode.net/nixos
-.. _Freenode: https://freenode.net/
+.. _join our community: https://github.com/NixOS/nixpkgs#community
 .. _The manual: https://nixos.org/nixpkgs/manual/#chap-quick-start
 .. _programming language specific instructions: https://nixos.org/nixpkgs/manual/#chap-language-support
 .. _nixpkgs: https://github.com/NixOS/nixpkgs
