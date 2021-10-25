@@ -90,7 +90,7 @@ Choosing the host platform with Nix
 
 Nixpkgs comes with a set of predefined host platforms applied to all packages.
 
-It's possible to explore predefined attribute sets via ``nix repl````:
+It's possible to explore predefined attribute sets via ``nix repl``:
 
 .. code:: shell-session
 
