@@ -59,7 +59,7 @@ Create ``.github/workflows/test.yml`` with:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2.3.4
-        - uses: cachix/install-nix-action@v13
+        - uses: cachix/install-nix-action@v14.1
           with:
             nix_path: nixpkgs=channel:nixos-unstable
         - uses: cachix/cachix-action@v10
