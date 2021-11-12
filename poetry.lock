@@ -135,7 +135,7 @@ pyparsing = ">=2.0.2"
 
 [[package]]
 name = "pydata-sphinx-theme"
-version = "0.6.3"
+version = "0.7.2"
 description = "Bootstrap-based Sphinx theme from the PyData community"
 category = "main"
 optional = false
@@ -143,12 +143,12 @@ python-versions = ">=3.5"
 
 [package.dependencies]
 beautifulsoup4 = "*"
-docutils = "<0.17"
+docutils = "!=0.17.0"
 sphinx = "*"
 
 [package.extras]
-coverage = ["pytest-cov", "codecov", "sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
-test = ["sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
+coverage = ["pytest-cov", "codecov", "sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "sphinx-sitemap", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
+test = ["sphinx", "numpydoc", "recommonmark", "pandas", "pytest", "pytest-regressions", "beautifulsoup4", "sphinx-sitemap", "jupyter-sphinx", "plotly", "numpy", "xarray", "docutils (==0.16)"]
 
 [[package]]
 name = "pygments"
@@ -257,7 +257,7 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-book-theme"
-version = "0.1.6"
+version = "0.1.7"
 description = "Jupyter Book: Create an online book with Jupyter Notebooks"
 category = "main"
 optional = false
@@ -267,7 +267,7 @@ python-versions = ">=3.6"
 beautifulsoup4 = ">=4.6.1,<5"
 click = ">=7.1,<8.0"
 docutils = ">=0.15,<0.17"
-pydata-sphinx-theme = ">=0.6.0,<0.7.0"
+pydata-sphinx-theme = ">=0.7.2,<0.8.0"
 pyyaml = "*"
 sphinx = ">=3,<5"
 
@@ -387,7 +387,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1bb4b052ae49dfb75094f4135761e2ac060c11e8b464d39a45cf394ee4b4a3a6"
+content-hash = "ed355f79ba09f6d1706c0e7ccedf8151d070fae4299966eef633176353c40c98"
 
 [metadata.files]
 alabaster = [
@@ -514,8 +514,8 @@ packaging = [
     {file = "packaging-20.9.tar.gz", hash = "sha256:5b327ac1320dc863dca72f4514ecc086f31186744b84a230374cc1fd776feae5"},
 ]
 pydata-sphinx-theme = [
-    {file = "pydata-sphinx-theme-0.6.3.tar.gz", hash = "sha256:32e0580ef985734d652eec2bf25e0995a330a9d4f76deaa353571ce8e180ab14"},
-    {file = "pydata_sphinx_theme-0.6.3-py3-none-any.whl", hash = "sha256:f0fee20dc33fa5efa6b9be57368be760d236d8b9c1486b14ad1d17b7e7e0db04"},
+    {file = "pydata-sphinx-theme-0.7.2.tar.gz", hash = "sha256:671df35fcdd290eafbd23d0595e6d359dbe90b2e64e6c3f4dc88276eed4a065e"},
+    {file = "pydata_sphinx_theme-0.7.2-py3-none-any.whl", hash = "sha256:bc1abc45e103b254c6c7a8f2ddabbaf8aa1f0817d85cae65dd163dd554c52700"},
 ]
 pygments = [
     {file = "Pygments-2.9.0-py3-none-any.whl", hash = "sha256:d66e804411278594d764fc69ec36ec13d9ae9147193a1740cd34d272ca383b8e"},
@@ -581,8 +581,8 @@ sphinx = [
     {file = "Sphinx-4.2.0.tar.gz", hash = "sha256:94078db9184491e15bce0a56d9186e0aec95f16ac20b12d00e06d4e36f1058a6"},
 ]
 sphinx-book-theme = [
-    {file = "sphinx-book-theme-0.1.6.tar.gz", hash = "sha256:a9aa7e7e6eff879b998677a184d11a5835b6552732e7404776a2dfed942671f9"},
-    {file = "sphinx_book_theme-0.1.6-py3-none-any.whl", hash = "sha256:b7613cb38ea3613354ac4f68db48a38001746e76b9e6860d559ca37e25ce233f"},
+    {file = "sphinx-book-theme-0.1.7.tar.gz", hash = "sha256:42d3b166889f675074f2471de0a7ce4016f9a14e7ec2ab0c924c627f8de2d24b"},
+    {file = "sphinx_book_theme-0.1.7-py3-none-any.whl", hash = "sha256:af396ced8f835f2177ee07ec99ee04c3b4de24078fd14256352a1c08ae885c0b"},
 ]
 sphinx-copybutton = [
     {file = "sphinx-copybutton-0.4.0.tar.gz", hash = "sha256:8daed13a87afd5013c3a9af3575cc4d5bec052075ccd3db243f895c07a689386"},
