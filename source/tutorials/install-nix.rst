@@ -3,8 +3,8 @@
 Install Nix
 ===========
 
-Linux
------
+Linux (manual installation)
+---------------------------
 
 Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
 
@@ -15,6 +15,37 @@ Install Nix on via the recommended `multi-user installation <https://nixos.org/m
 .. note::
 
   For security you may want to `verify the installation script`_ using GPG signatures.
+
+
+Linux using your package manager
+--------------------------------
+
+If Nix is available in your favorite distribution, you can alternatively use its package manager;
+for instance on debian based distributions:
+
+.. code:: bash
+
+   sudo apt install nix
+
+.. note::
+
+  This guide was written assuming a manual installation; if you use your package manager, you must also:
+
+  - make sure that the nix daemon is running (many distributions will do that for you);
+  - subscribe to a channel and update its list of packages as shown in nix-channel(1):
+
+    .. code:: base
+      nix-channel --add https://nixos.org/channels/nixpkgs-unstable && nix-channel --update
+  - (possibly) setup some environment variables, typically by sourcing some file
+    in /etc/profile.d;
+    first try logging out and logging back again to see if your distribution does that automatically for you.
+  If your computer is used by multiple people each user must perform the last two steps.
+
+  Some distributions may require additional steps - on debian, for instance, you need to add yourself to the nix-users group:
+
+.. code:: bash
+
+   usermode -G nix-users --append your_username
 
 
 macOS
