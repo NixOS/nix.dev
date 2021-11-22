@@ -16,7 +16,7 @@ An opinionated guide for developers wanting to get things done with the Nix ecos
 Contributing
 ------------
 
-Run ``./live`` and open a browser at https://localhost:5500. 
+Run ``./live`` and open a browser at http://localhost:5500. 
 
 As you make changes your browser should auto-reload within a few seconds.
 
