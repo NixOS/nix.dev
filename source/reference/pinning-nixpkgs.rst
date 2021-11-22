@@ -30,7 +30,6 @@ Examples
 --------
 
 - ``nix-build -I ~/dev``
-- ``nix-build -I ~/dev``
 - ``nix-build -I nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz``
 - ``NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz nix-build ...``
 - Using just Nix::
