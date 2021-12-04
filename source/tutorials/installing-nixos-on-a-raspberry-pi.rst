@@ -194,6 +194,6 @@ Next steps
   and reboot to the old configuration if something broke.
   
 - To tweak bootloader options affecting hardware, `see config.txt options <https://www.raspberrypi.org/documentation/configuration/config-txt/>`_
-  and change the options by runnning ``mount /dev/disk/by-label/FIRMWARE /mnt`` and opening ``/mnt/config.txt``.
+  and change the options by running ``mount /dev/disk/by-label/FIRMWARE /mnt`` and opening ``/mnt/config.txt``.
 
 - To see the power of declarative configuration, try replacing ``xfce`` with ``kodi`` in ``/etc/nixos/configuration.nix`` and ``reboot``.

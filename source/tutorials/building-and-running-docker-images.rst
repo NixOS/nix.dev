@@ -43,7 +43,7 @@ Docker images:
 
 .. note::
 
-  If your running **macOS** or any other platform than ``x86_64-linux``, you'll need to either:
+  If you're running **macOS** or any platform other than ``x86_64-linux``, you'll need to either:
 
   - `Set up a remote builder <https://github.com/nix-dot-dev/nix.dev/issues/157>`_ to build on Linux
   - :ref:`Cross compile to Linux <cross-compilation>` by replacing ``pkgsLinux.hello`` with ``pkgs.pkgsCross.musl64.hello``
