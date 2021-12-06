@@ -177,7 +177,7 @@ We've only covered the bare essentials of Nix here. Once you're comfortable with
 
 - :ref:`declarative-reproducible-envs`
 
-- `Garbage Collection <https://nixos.org/nix/manual/#sec-garbage-collection>`_- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
+- `Garbage Collection <https://nixos.org/manual/nix/stable/package-management/garbage-collection.html>`_- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
 
 - See ``man nix-shell`` for all of the options.
 

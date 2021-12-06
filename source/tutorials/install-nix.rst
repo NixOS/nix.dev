@@ -6,7 +6,7 @@ Install Nix
 Linux
 -----
 
-Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
+Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/installation/multi-user.html>`_:
 
 .. code:: bash
 
