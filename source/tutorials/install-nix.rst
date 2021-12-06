@@ -6,7 +6,7 @@ Install Nix
 Linux
 -----
 
-Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
+Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/installation/multi-user.html>`_:
 
 .. code:: bash
 
@@ -20,7 +20,7 @@ Install Nix on via the recommended `multi-user installation <https://nixos.org/m
 macOS
 -----
 
-Install Nix on via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
+Install Nix via the recommended `multi-user installation <https://nixos.org/manual/nix/stable/installation/multi-user.html>`_:
 
 .. code:: bash
 
@@ -35,7 +35,7 @@ Install Nix on via the recommended `multi-user installation <https://nixos.org/m
 Windows (WSL2)
 --------------
 
-Install Nix on via the recommended `single-user installation <https://nixos.org/manual/nix/stable/#chap-installation>`_:
+Install Nix via the recommended `single-user installation <https://nixos.org/manual/nix/stable/installation/single-user.html>`_:
 
 .. code:: bash
 

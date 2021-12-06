@@ -130,7 +130,7 @@ NixOS
 How to build my own ISO?
 ------------------------
 
-http://nixos.org/nixos/manual/index.html#sec-building-cd
+http://nixos.org/nixos/manual/index.html#sec-building-image
 
 How do I connect to any of the machines in NixOS tests?
 -------------------------------------------------------

@@ -9,7 +9,7 @@ Different ways:
 
 - ``-I`` command line parameter to most of commands like ``nix-build``, ``nix-shell``, etc
 
-- Using `builtins.fetchTarball <https://nixos.org/nix/manual/#ssec-builtins>`_ function that fetches the channel at evaluation time
+- Using `builtins.fetchTarball <https://nixos.org/manual/nix/stable/expressions/builtins.html>`_ function that fetches the channel at evaluation time
 
 
 Possible ``URL`` values

@@ -62,11 +62,11 @@ contributors.
 Feel free to `join our community`_ of developers!
 
 .. _GitHub: https://github.com/
-.. _how to setup a development environment: https://nixos.org/nix/manual/#chap-hacking
+.. _how to setup a development environment: https://nixos.org/manual/nix/stable/contributing/hacking.html
 .. _reported issues: https://github.com/NixOS/nix/issues
 .. _join our community: https://github.com/NixOS/nixpkgs#community
-.. _The manual: https://nixos.org/nixpkgs/manual/#chap-quick-start
-.. _programming language specific instructions: https://nixos.org/nixpkgs/manual/#chap-language-support
+.. _The manual: https://nixos.org/manual/nix/stable/quick-start.html
+.. _programming language specific instructions: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
 .. _nixpkgs: https://github.com/NixOS/nixpkgs
-.. _NixOS manual: https://nixos.org/nixos/manual/index.html#ch-development
+.. _NixOS manual: https://nixos.org/manual/nixos/stable/index.html#ch-development
 .. _issues tagged with good-first-bug: https://github.com/NixOS/nixpkgs/labels/3.skill%3A%20good-first-bug
