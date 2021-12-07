@@ -1,7 +1,7 @@
 {
   description = "nix.dev static website";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
   inputs.flake-utils.url = "github:numtide/flake-utils/master";
   inputs.poetry2nix.url = "github:nix-community/poetry2nix/master";
 
