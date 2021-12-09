@@ -7,12 +7,14 @@ license = "CC BY-SA"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-sphinx = "4.3.1"
-livereload = "2.6.3"
-sphinx-book-theme = "0.1.7"
-sphinx-copybutton = "0.4.0"
+
+sphinx = "*"
+livereload = "*"
+sphinx-book-theme = "*"
+sphinx-copybutton = "*"
 
 [tool.poetry.dev-dependencies]
+black = "==21.12b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
