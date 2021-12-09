@@ -49,7 +49,7 @@ Copy NixOS to your SD card by replacing ``sdX`` with the name of your device:
 
 .. code:: shell-session
 
-  sudo dd if=nixos-sd-image-21.05pre288297.8eed0e20953-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
+  sudo dd if=nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
 
