@@ -31,10 +31,23 @@ from datetime import date
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx_copybutton'
 ]
+
+# Add myst-specific extensions, see what is available on
+# https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
+myst_enable_extensions =  [
+    "colon_fence",
+    "linkify",
+    "tasklist",
+]
+
+# GitHub-style automatic anchors for headings
+myst_heading_anchors = 2
+
 
 copybutton_prompt_text = r"# |\$ "
 copybutton_prompt_is_regexp = True

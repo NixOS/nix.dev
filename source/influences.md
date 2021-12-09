@@ -1,5 +1,4 @@
-Software Nix has influenced
----------------------------
+# Software Nix has influenced
 
 - https://github.com/alexanderGugel/ied
 - https://www.habitat.sh/
