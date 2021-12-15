@@ -18,8 +18,8 @@ is *built*, and the **host platform**, where the compiled executable *runs*. [^i
 Cross compilation needed when the host platform has limited resources (such as CPU)
 or when it's not easily accessible for development.
 
-The Nix community has world-class support for cross compilation,
-after many years of hard work.
+The `nixpkgs` package collection has world-class support for cross compilation,
+after many years of hard work by the Nix community.
 
 [^id3]: Terminology for cross compilation platforms differs between build systems.
     We have chosen to follow
