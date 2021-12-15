@@ -62,6 +62,8 @@ for development), the platform config has to be constructed manually via the fol
 <cpu>-<vendor>-<os>-<abi>
 ```
 
+This string representation is used in `nixpkgs` for historic reasons.
+
 Note that `<vendor>` is often `unknown` and `<abi>` is optional.
 There's also no unique identifier for a platform, for example `unknown` and
 `pc` are interchangeable (hence it's called config.guess).
