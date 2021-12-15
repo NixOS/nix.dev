@@ -87,9 +87,9 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 
 ## Choosing the host platform with Nix
 
-Nixpkgs comes with a set of predefined host platforms applied to all packages.
+`nixpkgs` comes with a set of predefined host platforms for cross compilation called `pkgsCross`.
 
-It's possible to explore predefined attribute sets via `nix repl`:
+It is possible to explore them in `nix repl`:
 
 ```shell-session
 $ nix repl '<nixpkgs>'
@@ -137,20 +137,56 @@ nix-repl> pkgsCross.aarch64-multiplatform.stdenv.hostPlatform.config
 "aarch64-unknown-linux-gnu"
 ```
 
-In case the host platform you seek hasn't been defined yet:
+If the host platform you seek hasn't been defined yet, please [contribute it upstream](https://github.com/NixOS/nixpkgs/blob/master/lib/systems/examples.nix).
 
-1. [Contribute it upstream](https://github.com/NixOS/nixpkgs/blob/master/lib/systems/examples.nix).
+## Specifying the host platform
 
-2. Pass the host platforms to `crossSystem` when importing `<nixpkgs>`:
+The mechanism for setting up cross compilation works as follows:
 
+1. Take the build platform configuration and apply it to the current package set, called `pkgs` by convention.
+
+   The build platform is implied in `pkgs = import <nixpkgs> {}` to be the current system.
+   This produces a build environment `pkgs.stdenv` with all the dependencies present to compile on the build platform.
+   
+2. Apply the appropriate host platform configuration to all the packages in `pkgsCross`.
+
+   Taking `pkgs.pkgsCross.<host>.hello` will produce the package `hello` compiled on the build platform to run on the `<host>` platform.
+   
+There are multiple, equivalent ways to access packages targeted to the host platform.
+
+1. Explicitly pick the host platform package from within the build platform environment:
+
+   ```nix
+   let
+     # all packages for the build system
+     pkgs = import <nixpkgs> {};
+   in
+   pkgs.pkgsCross.aarch64-multiplatform.hello
    ```
-   nix-repl> (import <nixpkgs> { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; }).hello
-   «derivation /nix/store/qjj23s25kg4vjqq19vxs4dg7k7h214ns-hello-aarch64-unknown-linux-gnu-2.10.drv»
+  
+   or
+  
+   ```nix
+   let
+     # all packages for `aarch64-multiplatform`
+     pkgs = (import <nixpkgs> {}).pkgsCross.aarch64-multiplatform;
+   in
+   pkgs.hello
+   ```
+  
+2. Pass the host platform to `crossSystem` when importing `<nixpkgs>`:
+
+   ```nix
+   let
+     # conigure `nixpkgs` such that all its packages are build for the host platform
+     pkgs = import <nixpkgs> { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
+   in
+   pkgs.hello
    ```
 
-   Or using passing it as an argument to `nix-build`:
+   Equivalently, you can pass the host platform as an argument to `nix-build`:
 
-   ```
+   ```sh
    $ nix-build '<nixpkgs>' -A hello --arg crossSystem '{ config = "aarch64-unknown-linux-gnu"; }'
    ```
 
