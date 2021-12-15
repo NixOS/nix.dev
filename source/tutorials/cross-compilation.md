@@ -128,10 +128,9 @@ pkgsCross.mmix                        pkgsCross.x86_64-unknown-redox
 pkgsCross.msp430
 ```
 
-Cross compilation package attribute names are made up, so it isn't always clear
-what is the corresponding platform config.
+These attribute names for cross compilation packages have been chosen somewhat freely over the course of time. They usually do not match the corresponding platform config string.
 
-It's possible to query the platform config using:
+You can retrieve the platform string from `pkgsCross.<platform>.stdenv.hostPlatform.config`:
 
 ```
 nix-repl> pkgsCross.aarch64-multiplatform.stdenv.hostPlatform.config
