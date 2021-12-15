@@ -27,13 +27,13 @@ after many years of hard work by the Nix community.
 
 ## What's a target platform?
 
-There's actually a third platform named the target platform.
+There is a third concept for a platform we call **target platform**.
 
-It matters in cases where you'd like to distribute a compiler binary,
-as you'd then like to build a compiler on the build platform, compile code on the
-host platform and run the final executable on the target platform.
+It matters in cases where you want to build a compiler binary.
+Then you would build a compiler on the *build platform*, run it to compile code on the
+*host platform*, and run the final executable on the *target platform*.
 
-Since that's rarely needed, we'll treat the target platform the same as the host.
+Since that is rarely needed, we will assume that the target is identical to the host.
 
 ## Pinning nixpkgs
 
