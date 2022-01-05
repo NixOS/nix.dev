@@ -406,8 +406,8 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-book-theme"
-version = "0.1.7"
-description = "Jupyter Book: Create an online book with Jupyter Notebooks"
+version = "0.1.8"
+description = "A clean book theme for scientific explanations and documentation with Sphinx"
 category = "main"
 optional = false
 python-versions = ">=3.6"
@@ -796,8 +796,8 @@ sphinx = [
     {file = "Sphinx-4.3.2.tar.gz", hash = "sha256:0a8836751a68306b3fe97ecbe44db786f8479c3bf4b80e3a7f5c838657b4698c"},
 ]
 sphinx-book-theme = [
-    {file = "sphinx-book-theme-0.1.7.tar.gz", hash = "sha256:42d3b166889f675074f2471de0a7ce4016f9a14e7ec2ab0c924c627f8de2d24b"},
-    {file = "sphinx_book_theme-0.1.7-py3-none-any.whl", hash = "sha256:af396ced8f835f2177ee07ec99ee04c3b4de24078fd14256352a1c08ae885c0b"},
+    {file = "sphinx-book-theme-0.1.8.tar.gz", hash = "sha256:f358e1de7564499a61f4061315386ac8a35e4ba4076974de6dffc9f934d9c00a"},
+    {file = "sphinx_book_theme-0.1.8-py3-none-any.whl", hash = "sha256:22c08228a9b76b3686ef8b6b5d865f00ce97387622edff399254a84b506fc55d"},
 ]
 sphinx-copybutton = [
     {file = "sphinx-copybutton-0.4.0.tar.gz", hash = "sha256:8daed13a87afd5013c3a9af3575cc4d5bec052075ccd3db243f895c07a689386"},
