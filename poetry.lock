@@ -406,7 +406,7 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-book-theme"
-version = "0.1.8"
+version = "0.1.9"
 description = "A clean book theme for scientific explanations and documentation with Sphinx"
 category = "main"
 optional = false
@@ -796,8 +796,8 @@ sphinx = [
     {file = "Sphinx-4.3.2.tar.gz", hash = "sha256:0a8836751a68306b3fe97ecbe44db786f8479c3bf4b80e3a7f5c838657b4698c"},
 ]
 sphinx-book-theme = [
-    {file = "sphinx-book-theme-0.1.8.tar.gz", hash = "sha256:f358e1de7564499a61f4061315386ac8a35e4ba4076974de6dffc9f934d9c00a"},
-    {file = "sphinx_book_theme-0.1.8-py3-none-any.whl", hash = "sha256:22c08228a9b76b3686ef8b6b5d865f00ce97387622edff399254a84b506fc55d"},
+    {file = "sphinx-book-theme-0.1.9.tar.gz", hash = "sha256:23538827b7a719b9d2b648ff2d43a4aa4310d721b4eed5696f129ed9d827df36"},
+    {file = "sphinx_book_theme-0.1.9-py3-none-any.whl", hash = "sha256:b42fcadc9085cdda606a5819ef33e4673526b21e1a46d7bf543217c087c17077"},
 ]
 sphinx-copybutton = [
     {file = "sphinx-copybutton-0.4.0.tar.gz", hash = "sha256:8daed13a87afd5013c3a9af3575cc4d5bec052075ccd3db243f895c07a689386"},
