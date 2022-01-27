@@ -1,10 +1,8 @@
-# Setup a development environment
+# Set up a development environment
 
-As an exercise, let us build a Python web application using the Flask
-web framework.
+Let's build a Python web application using the Flask web framework as an exercise.
 
-Create a new file `default.nix`. This file is conventionally used for
-specifying packages:
+Create a new file called `default.nix`. This file is conventionally used for specifying packages. Add the code:
 
 ```nix
 { pkgs ? import <nixpkgs> {} }:
@@ -37,7 +35,7 @@ if __name__ == "__main__":
     run()
 ```
 
-and a `setup.py` script:
+And a `setup.py` script:
 
 ```python
 from setuptools import setup
@@ -58,25 +56,15 @@ Now build the package with:
 nix-build
 ```
 
-This will create a symbolic link `result` to our package's path in the
-Nix store, which looks like
-`/nix/store/6i4l781jwk5vbia8as32637207kgkllj-myapp-0.1`. Look around
-to see what is inside.
+This will create a symbolic link `result` to our package's path in the Nix store, which looks like `/nix/store/6i4l781jwk5vbia8as32637207kgkllj-myapp-0.1`. Look around to see what's inside.
 
-You may notice we can run the application from the package like
-`./result/bin/myapp.py`. We can still use the `default.nix` as a
-shell environment to get the same result:
+You may notice we can run the application from the package like this: `./result/bin/myapp.py`. But we can also use the `default.nix` as a shell environment to get the same result:
 
 ```bash
 nix-shell default.nix
 python3 myapp.py
 ```
 
-In this context, Nix takes on the role that you would otherwise use pip
-or virtualenv for. Nix installs required dependencies and separates the
-environment from others on your system.
+In this context, Nix takes on the role that you would otherwise use pip or virtualenv for. Nix installs required dependencies and separates the environment from others on your system.
 
-You can check this Nix configuration into version control and share it
-with others to make sure you are all running the same software.
-Especially with many dependencies this is a great way to prevent
-configuration drift between different team members & contributors.
+You can check this Nix configuration into version control and share it with others to make sure you are all running the same software. This is a great way to prevent configuration drift between different team members & contributors, especially when a project has many dependencies.
