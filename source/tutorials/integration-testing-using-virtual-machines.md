@@ -2,29 +2,21 @@
 
 # Integration testing using virtual machines (VMs)
 
-One of the most powerful features in the Nix ecosystem is **the ability
-to provide a set of declarative NixOS configurations and use a simple
-Python interface** to interact with them using [QEMU](https://www.qemu.org/)
-as the backend.
+One of the most powerful features of the Nix ecosystem is **the ability to provide a set of declarative NixOS configurations and use a simple Python interface** to interact with them using [QEMU](https://www.qemu.org/) as the backend.
 
-Those tests are widely used to ensure that NixOS works as intended, so in general they are called **NixOS tests**.
-They can be written and launched outside of NixOS, on any Linux machine (with
-[MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
+These tests are widely used to ensure that NixOS works as intended, so in general they are called **NixOS tests**. They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
 
-Integration tests are reproducible due to the design properties of Nix,
-making them a valuable part of a Continuous Integration (CI) pipeline.
+Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
 ## Testing a typical web application backed by PostgreSQL
 
-This tutorial follows [PostgREST tutorial](https://postgrest.org/en/stable/tutorials/tut0.html),
-a generic [RESTful API](https://restfulapi.net/) for PostgreSQL.
+This tutorial follows this [PostgREST tutorial](https://postgrest.org/en/stable/tutorials/tut0.html), which shows you how to make a generic [RESTful API](https://restfulapi.net/) for PostgreSQL.
 
-If you skim over the official tutorial, you'll notice there's quite a bit of setup
-in order to test if all the steps work.
+If you skim over the official tutorial, you'll notice there's quite a bit of setup in order to test if all the steps work.
 
 We are going to set up:
 
-- A VM named `server` running postgreSQL and postgREST.
+- A VM named `server` running PostgreSQL and PostgREST.
 - A VM named `client` running HTTP client queries using `curl`.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
@@ -153,11 +145,8 @@ in pkgs.nixosTest ({
 
 A few notes:
 
-- Between the machines defined inside the `nodes` attribute, hostnames
-  are resolved based on their attribute names. In this case we have `client` and `server`.
-- The testing framework exposes a wide set of operations used inside the `testScript`.
-  A full set of testing operations is part of
-  [VM testing operations API Reference](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
+- Between the machines defined inside the `nodes` attribute, hostnames are resolved based on their attribute names. In this case we have `client` and `server`.
+- The testing framework exposes a wide set of operations used inside the `testScript`. A full set of testing operations is part of [VM testing operations API Reference](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
 
 ## Running tests
 
@@ -169,7 +158,7 @@ $ nix-build postgrest.nix
 
 You'll notice an error message if something goes wrong.
 
-In case the tests succeed, you should see at the end:
+In case the tests succeed, you should see this at the end:
 
 ```shell-session
 ...
@@ -183,8 +172,7 @@ killing server (pid 22)
 
 ## Developing and debugging tests
 
-When developing tests or when something breaks, it's useful to interactively fiddle
-with the script or access a terminal for a machine.
+When developing tests or when something breaks, it's useful to interactively fiddle with the script or access a terminal for a machine.
 
 To interactively start a Python session with a testing framework:
 
@@ -195,10 +183,9 @@ starting VDE switch for network 1
 >>>
 ```
 
-You can run [any of the testing operations](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
-The `testScript` attribute from our `postgrest.nix` definition can be executed with `test_script()` function.
+You can run any of the [testing operations described here](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests). The `testScript` attribute from our `postgrest.nix` definition can be executed with `test_script()` function.
 
-To start all machines and enter a telnet terminal to a specific machine:
+To start all machines and enter a Telnet terminal to a specific machine:
 
 ```shell-session
 >>> start_all()
@@ -212,7 +199,5 @@ Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 
 ## Next steps
 
-- Running integration tests on CI requires hardware acceleration, which many CIs do not support.
-  To run integration tests on {ref}`GitHub Actions <github-actions>` see
-  [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests).
-- NixOS comes with a large set of tests that serve also as educational examples. A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix-appservice-irc.nix).
+- Running integration tests on CI requires hardware acceleration, which many CIs do not support. To run integration tests on {ref}`GitHub Actions <github-actions>` see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests).
+- NixOS comes with a large set of tests that serve as educational examples. Take a look at [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix-appservice-irc.nix) for inspiration.
