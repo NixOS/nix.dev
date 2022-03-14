@@ -1,6 +1,6 @@
 (pinning-nixpkgs)=
 
-# Towards reproducibility: Pinning nixpkgs
+# Towards reproducibility: pinning Nixpkgs
 
 In various Nix examples, you'll often see references to [\<nixpkgs>](https://github.com/NixOS/nixpkgs), as follows.
 
@@ -11,7 +11,7 @@ In various Nix examples, you'll often see references to [\<nixpkgs>](https://git
 ...
 ```
 
-This is **convenient** to quickly demonstrate a Nix expression and get it working by importing Nix packages.
+This is a **convenient** way to quickly demonstrate a Nix expression and get it working by importing Nix packages.
 
 However, the resulting Nix expression **is not fully reproducible**. The `<nixpkgs>` reference
 is set from the **local** `$NIX_PATH` environment variable. In most cases, this is set at the time Nix is installed
@@ -25,9 +25,9 @@ and `<nixpkgs>` by always setting `NIX_PATH=` to be empty.
 
 ## Pinning packages with URLs inside a Nix expression
 
-To create **fully reproducible** Nix expressions, we can pin an exact versions of nixpkgs.
+To create **fully reproducible** Nix expressions, we can pin an exact version of Nixpkgs.
 
-The simplest way to do this is to fetch the required nixpkgs version as a tarball specified via the relevant git commit hash:
+The simplest way to do this is to fetch the required Nixpkgs version as a tarball specified via the relevant Git commit hash:
 
 ```nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {}
@@ -46,7 +46,7 @@ When choosing a commit, it is recommended to follow either
 
 ## Dependency management with niv
 
-If you'd like a bit more automation around bumping dependencies, including nixpkgs,
+If you'd like a bit more automation around bumping dependencies, including Nixpkgs,
 [niv](https://github.com/nmattia/niv/) is made for exactly that. Niv itself is available
 in `nixpkgs` so using it is simple:
 
@@ -55,11 +55,11 @@ $ nix-shell -p niv --run "niv init"
 ```
 
 This command will generate `nix/sources.json` with information about how and where
-dependencies are fetched. It will also create `nix/sources.nix` which glues the sources together in Nix.
+dependencies are fetched. It will also create `nix/sources.nix`, which glues the sources together in Nix.
 
-By default `niv` will use the **latest stable** NixOS release. However, you should check to see which version is currently specified in [the niv repository](https://github.com/nmattia/niv) if you require a specific release, as it might lag behind.
+By default, `niv` will use the **latest stable** NixOS release. However, you should check to see which version is currently specified in [the niv repository](https://github.com/nmattia/niv) if you require a specific release, as it might lag behind.
 
-You can see which version `niv` is tracking as follow:
+You can see which version `niv` is tracking as follows:
 
 > \$ niv show
 
@@ -86,5 +86,5 @@ $ nix-shell -p niv --run "niv update"
 ## Next steps
 
 - For more examples and details of the different ways to pin `nixpkgs`, see {ref}`ref-pinning-nixpkgs`.
-- To quickly setup a Nix project read through
+- To quickly set up a Nix project, read through
   [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
