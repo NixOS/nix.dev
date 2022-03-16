@@ -15,5 +15,6 @@ deploying-nixos-using-terraform.rst
 installing-nixos-on-a-raspberry-pi.rst
 integration-testing-using-virtual-machines.rst
 cross-compilation.rst
+quickstart-flakes.rst
 contributing.rst
 ```
