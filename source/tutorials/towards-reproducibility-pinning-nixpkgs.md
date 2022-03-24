@@ -60,13 +60,14 @@ dependencies are fetched. It will also create `nix/sources.nix` which glues the 
 By default `niv` will use the **latest stable** NixOS release. However, you should check to see which version is currently specified in [the niv repository](https://github.com/nmattia/niv) if you require a specific release, as it might lag behind.
 
 You can see which version `niv` is tracking as follow:
-
-> \$ niv show
-
+```
+$ niv show
+```
 And you can change the tracking branch to the one you want like this:
 
-> \$ niv modify nixpkgs --branch nixos-21.05
-
+```
+$ niv modify nixpkgs --branch nixos-21.05
+```
 You can use the generated `nix/sources.nix` with a top-level `default.nix`:
 
 ```nix
