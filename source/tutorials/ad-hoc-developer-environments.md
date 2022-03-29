@@ -121,7 +121,7 @@ Nix also offers fully reproducible environments, which it calls pure environment
 The following is a fully reproducible example and something that different colleagues with different machines, for example, could share.
 
 ```shell-session
-$ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+$ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 [nix-shell:~]$ git --version
 git version 2.25.4
@@ -141,7 +141,7 @@ and share with strangers online. As long as they have Nix installed, they'll be 
 ```python
 #! /usr/bin/env nix-shell
 #! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 import django
 

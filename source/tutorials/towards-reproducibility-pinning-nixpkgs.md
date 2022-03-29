@@ -61,12 +61,15 @@ By default, `niv` will use the **latest stable** NixOS release. However, you sho
 
 You can see which version `niv` is tracking as follows:
 
-> \$ niv show
+```
+$ niv show
+```
 
 And you can change the tracking branch to the one you want like this:
 
-> \$ niv modify nixpkgs --branch nixos-21.05
-
+```
+$ niv modify nixpkgs --branch nixos-21.05
+```
 You can use the generated `nix/sources.nix` with a top-level `default.nix`:
 
 ```nix
