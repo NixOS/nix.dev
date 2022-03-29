@@ -151,7 +151,8 @@ print(django)
 This is essentially the same example as in the previous section, but this time declaratively source controlled! All of the required Nix commands are included as `#!` shebang headers in the scripts itself.
 
 :::{note}
-The multi-line shebang format is a feature of [nix-shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter). Basically, all the subsequent `#! nix-shell` lines are used to build up the shells configuration before building the shell and executing the body of the script.
+The multi-line shebang format is a feature of [nix-shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter). 
+All the subsequent `#! nix-shell` lines are used to build up the shells configuration before building the shell and executing the body of the script.
 :::
 
 ## Next steps
