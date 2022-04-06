@@ -25,7 +25,7 @@
         packages = flake-utils.lib.flattenTree {
           nix-dev-pyenv = pkgs.poetry2nix.mkPoetryEnv {
             projectDir = self;
-            python = pkgs.python38;
+            python = pkgs.python39;
             overrides = [
               pkgs.poetry2nix.defaultPoetryOverrides
               poetryOverrides
