@@ -21,3 +21,5 @@ jobs:
       run: nix-build
     - name: Linkcheck
       run: nix-shell --run "make linkcheck"
+    - name: Run code block tests
+      run: nix-shell --run "./run_code_block_tests.sh"

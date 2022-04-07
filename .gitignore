@@ -1,5 +1,8 @@
-result
+.direnv/
+.envrc
 build/
+extracted/
 requirements_frozen.txt
-
-
+result
+source/_ext/__pycache__/
+TODO.txt
