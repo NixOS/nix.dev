@@ -4,8 +4,6 @@ Let's build a Python web application using the Flask web framework as an exercis
 
 Create a new file called `default.nix`. This file is conventionally used for specifying packages. Add the code:
 
-
-
 ```{code-block} nix default.nix
 { pkgs ? import <nixpkgs> {} }:
 
@@ -54,17 +52,25 @@ setup(
 
 Now build the package with:
 
-```{code-block} bash test_nix_build.sh
-nix-build
+```{code-block} shell-session nix_build.shell-session
+  $ nix-build
+  this derivation will be built:
+    /nix/store/...-myapp-0.1.drv
+  OK
+  Finished executing setuptoolsCheckPhase
+  /nix/store/...-myapp-0.1
 ```
 
-This will create a symbolic link `result` to our package's path in the Nix store, which looks like `/nix/store/6i4l781jwk5vbia8as32637207kgkllj-myapp-0.1`. Look around to see what's inside.
+This will create a symbolic link `result` to our package's path in the Nix store, which looks like `/nix/store/<HASH>-myapp-0.1`. Look around to see what's inside.
 
 You may notice we can run the application from the package like this: `./result/bin/myapp`. But we can also use the `default.nix` as a shell environment to get the same result:
 
-```bash
-nix-shell default.nix
-python myapp.py
+```{code-block} shell-session myapp.shell-session
+  $ nix-shell default.nix
+  ...
+
+  [nix-shell:]$ python myapp.py
+  Running on http://...:5000/
 ```
 
 In this context, Nix takes on the role that you would otherwise use pip or virtualenv for. Nix installs required dependencies and separates the environment from others on your system.

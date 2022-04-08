@@ -63,8 +63,8 @@ class ExtractableCodeBlock(CodeBlock):
         with open(path, "w") as f:
             f.write(self.block_text)
 
-        # make bash scripts executable
-        if path.endswith(".sh"):
+        # make scripts executable
+        if path.endswith(".sh") or path.endswith(".py"):
             st = os.stat(path)
             os.chmod(path, st.st_mode | stat.S_IEXEC)
 

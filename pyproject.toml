@@ -10,6 +10,7 @@ python = "^3.9"
 
 livereload = "*"
 myst-parser = {version = "*", extras = ["linkify"]}
+pexpect = "*"
 sphinx = "*"
 sphinx-book-theme = "^0.2.0"
 sphinx-copybutton = "*"
