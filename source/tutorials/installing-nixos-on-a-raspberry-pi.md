@@ -58,24 +58,21 @@ Once that command exits, **move the SD card into your Raspberry Pi and power it 
 
 You should be greeted with a fresh shell!
 
-In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.org/documentation/computers/raspberry-pi.html#updating-the-bootloader)
-and retry booting the image again.
+In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.org/documentation/computers/raspberry-pi.html#updating-the-bootloader) and booting the image again.
 
 ## Getting internet connection
 
 Run `sudo -i` to get a root shell for the rest of the tutorial.
 
-At this point we'll need internet connection. If you can use an ethernet cable, plug it in.
+At this point you'll need an internet connection. If you can use an ethernet cable, plug it in.
 
-In case you're connecting to a wifi run `iwconfig` to see what is the name of your wireless
-network interface. In case it's `wlan0` replace `SSID` and `passphrase` with your data and run:
+If you're connecting to wifi, run `iwconfig` to find the name of your wireless network interface. If it's `wlan0`, replace `SSID` and `passphrase` with your data and run:
 
 ```shell-session
 # wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
 ```
 
-Once you see in your terminal that connection is established, run `host nixos.org` to
-check that DNS resolves correctly.
+Once you see in your terminal that connection is established, run `host nixos.org` to check that the DNS resolves correctly.
 
 In case you've made a typo, run `pkill wpa_supplicant` and start over.
 
@@ -91,8 +88,7 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 
 ## Installing NixOS
 
-For initial installation we'll install [XFCE](https://www.xfce.org/) desktop environment
-with user `guest` and SSH daemon.
+For the initial installation, we'll install [XFCE](https://www.xfce.org/) desktop environment with user `guest` and SSH daemon.
 
 ```nix
 { config, pkgs, lib, ... }:
@@ -156,8 +152,7 @@ To save time on typing the whole configuration, download it:
 # curl -L https://tinyurl.com/nixos-rpi4-tutorial > /etc/nixos/configuration.nix
 ```
 
-At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure,
-most important being your wifi connection details, this time specified in declarative way.
+At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure, the most important being your wifi connection details, this time specified in declarative way.
 
 Once you're ready to install NixOS:
 
@@ -166,14 +161,14 @@ Once you're ready to install NixOS:
 # reboot
 ```
 
-In case your system doesn't boot, select the oldest configuration in the bootloader menu to get back to live image and start over.
+If your system doesn't boot, select the oldest configuration in the bootloader menu to get back to live image and start over.
 
 ## Making changes
 
 It booted, congratulations!
 
 To make further changes to the configuration, [search through NixOS options](https://search.nixos.org/options),
-edit `/etc/nixos/configuration.nix` and update your system:
+edit `/etc/nixos/configuration.nix`, and update your system:
 
 ```shell-session
 $ sudo -i
@@ -182,8 +177,6 @@ $ sudo -i
 
 ## Next steps
 
-- Once you have successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade`
-  and reboot to the old configuration if something broke.
-- To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/)
-  and change the options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
+- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and reboot to the old configuration if something broke.
+- To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/) and change the options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
 - To see the power of declarative configuration, try replacing `xfce` with `kodi` in `/etc/nixos/configuration.nix` and `reboot`.
