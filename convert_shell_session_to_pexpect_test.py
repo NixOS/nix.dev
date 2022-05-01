@@ -9,6 +9,7 @@ import sys
 from dataclasses import dataclass
 from dataclasses import field
 import pexpect
+import platform
 import re
 import typing as t
 import os
@@ -45,7 +46,11 @@ with open(filename, "r") as file:
             new_block = Block()
     blocks.append(new_block)
 
-shell = pexpect.spawn("nix-shell shell-darwin.nix")
+if platform.system() == "Darwin":
+    shell = pexpect.spawn("nix-shell shell-darwin.nix")
+else:
+    shell = pexpect.spawn("nix-shell")
+
 dir_ = os.path.dirname(filename)
 shell.sendline(f"cd {dir_}")
 for block in blocks:
