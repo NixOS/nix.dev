@@ -140,7 +140,7 @@ This is a default overlay that can be consumed by other flakes.
 - [Eelco Dolstra's tutorial, part 1](https://www.tweag.io/blog/2020-05-25-flakes/)
 - [Eelco Dolstra's tutorial, part 2](https://www.tweag.io/blog/2020-06-25-eval-cache/)
 - [Eelco Dolstra's tutorial, part 3](https://www.tweag.io/blog/2020-07-31-nixos-flakes/)
-- [Xe Iaso's blog post](https://christine.website/blog/nix-flakes-1-2022-02-21)
+- [Xe Iaso's nix flakes series](https://christine.website/blog/series/nix-flakes)
 - [zimbatm's post](https://zimbatm.com/notes/nixflakes)
 - [y|sndr's blog post](https://blog.ysndr.de/posts/internals/2021-01-01-flake-ification/)
 - [Bantyev's blog post on serokell.io](https://serokell.io/blog/practical-nix-flakes)
