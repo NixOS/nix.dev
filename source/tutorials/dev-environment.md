@@ -60,7 +60,7 @@ nix-build
 
 This will create a symbolic link `result` to our package's path in the Nix store, which looks like `/nix/store/6i4l781jwk5vbia8as32637207kgkllj-myapp-0.1`. Look around to see what's inside.
 
-You may notice we can run the application from the package like this: `./result/bin/myapp.py`. But we can also use the `default.nix` as a shell environment to get the same result:
+You may notice we can run the application from the package like this: `./result/bin/myapp`. But we can also use the `default.nix` as a shell environment to get the same result:
 
 ```bash
 nix-shell default.nix
