@@ -2,27 +2,24 @@
 
 # Declarative and reproducible developer environments
 
-In the {ref}`ad-hoc-envs` tutorial we looked at providing shell
-environments for when we need a quick'n'dirty way of getting hold
-of some tools.
+In the {ref}`ad-hoc-envs` tutorial we looked at providing shell environments for when we need a quick 'n dirty way of getting hold of some tools.
 
-In this tutorial we'll take a look how to create {term}`reproducible`
-shell environments given a declarative configuration file called a Nix expression.
+In this tutorial, we'll take a look how to create {term}`reproducible` shell environments given a declarative configuration file called a Nix expression.
 
-## When are declarative shell environments useful?
+## When is a declarative shell environment useful?
 
-This is the quickest approach to getting started with Nix:
+A declarative shell environment is the quickest approach to getting started with Nix:
 
-- use single command to invoke it via `nix-shell`
-- it works across different operating systems (Linux / MacOS)
-- you share the exact same environment with all developers
+- Use a single command to invoke it via `nix-shell`.
+- It works across different operating systems (Linux / MacOS).
+- Share the exact same environment with all developers.
 
 Developer environments allow you to:
 
-- provide CLI tools, such as `psql`, `jq`, `tmux`, etc
-- provide developer libraries, such as `zlib`, `openssl`, etc
-- set shell environment variables
-- execute bash during environment activation
+- Provide CLI tools, such as `psql`, `jq`, `tmux`, etc.
+- Provide developer libraries, such as `zlib`, `openssl`, etc.
+- Set shell environment variables.
+- Execute bash during environment activation.
 
 ## Getting started
 
@@ -41,11 +38,11 @@ pkgs.mkShell {
 ```
 
 :::{note}
-To understand the first line, read through {ref}`pinning nixpkgs tutorial <ref-pinning-nixpkgs>`.
+To understand the first line, read our tutorial on {ref}`pinning Nixpkgs`<ref-pinning-nixpkgs>.
 :::
 
-We import `nixpkgs` and make a shell with `which` and `htop` available in `$PATH`.
-`zlib` provides libraries and headers in case we're compiling something against it.
+We import `nixpkgs` and make a shell with `which` and `htop` available in `$PATH`. We use `zlib` to provide libraries and headers in case we're compiling something against it.
+
 To enter the environment:
 
 ```shell-session
@@ -57,16 +54,13 @@ copying path '/nix/store/072a6x7rwv5f8wr6f5s1rq8nnm767cfp-htop-2.2.0' from 'http
 [nix-shell:~]$
 ```
 
-The command will start downloading the missing packages from the <https://cache.nixos.org> binary cache.
+This command will start downloading the missing packages from the <https://cache.nixos.org> binary cache.
 
-Once it's done, you are dropped into a new
-shell. This shell provides the packages specified in `shell.nix`.
+Once the download is done, you are dropped into a new shell. This shell provides the packages specified in `shell.nix`.
 
-Run `htop` to confirm that it is present. Quit the program by hitting
-`q`.
+Run `htop` to confirm that it is present. Quit the program by hitting `q`.
 
-Now, try `which htop` to check where the `htop` command is on disk.
-You should see something similar to this:
+Now try `which htop` to check where the `htop` command is on disk. You should see something similar to this:
 
 ```shell-session
 [nix-shell:~]$ which htop
@@ -110,11 +104,9 @@ world
 
 ## `direnv`: Automatically activating the environment on directory change
 
-Besides activating the environment for each project, every time you change
-`shell.nix` you need to re-enter the shell.
+Besides activating the environment for each project, every time you change `shell.nix` you need to re-enter the shell.
 
-You can use `direnv` to automate this process for you, with the downside that each developer needs
-to install it globally.
+You can use `direnv` to automate this process for you, with the downside that each developer needs to install it globally.
 
 ### Setting up `direnv`
 
@@ -127,7 +119,7 @@ At the top-level of your project run:
 $ echo "use nix" > .envrc && direnv allow
 ```
 
-The next time your launch your terminal and enter the top-level of your project direnv will check for changes.
+The next time you launch your terminal and enter the top-level of your project, `direnv` will check for changes.
 
 ```shell-session
 $ cd myproject
@@ -138,6 +130,5 @@ hello
 
 ## Next steps
 
-- {ref}`pinning-nixpkgs` to see different ways to import nixpkgs
-- To quickly set up a Nix project read through
-  [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
+- Take a look at our {ref}`pinning Nixpkgs` tutorial to see different ways to import Nixpkgs.
+- To quickly set up a Nix project, read [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
