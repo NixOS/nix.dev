@@ -29,25 +29,23 @@ $ hello
 The program ‘hello’ is currently not installed.
 ```
 
-Here we used the `-p` (packages) flag to specify that we needed the `hello` dependency. Nix found this, downloaded it, and made it available in a shell environment.
+Here we used the `-p` (packages) flag to specify that we needed the `hello` dependency. Nix found it, downloaded it, and made it available in a shell environment.
 
 ## When are shell environments useful?
 
-Sometimes you'd like **to use a tool that you do not have installed**. You don't want to
-bother installing the software, but you want to use it.
+If you'd like **to use a tool that you do not have installed**. You can use the tool without having to install the software.
 
-Sometimes you'd like **to try a tool for a few minutes**. For example, there's a new shiny
-tool for writing presentation slides.
+If you'd like **to try a tool for a few minutes**. For example, there's a shiny new tool for writing presentation slides.
 
-Sometimes you'd like **to give someone else a one-liner to install a set of tools** and you want this to work on all Linux distributions and MacOS.
+If you'd like **to give someone else a one-liner to install a set of tools** and you want this to work on all Linux distributions and MacOS.
 
-Sometimes you'd like **to provide a script that is reproducible**, meaning it will also provide any tools that it depends on.
+If you'd like **to provide a script that is reproducible**, meaning it will also provide any tools that it depends on.
 
 ## Searching package attribute names
 
-What can you put in a shell environment?”
+What can you put in a shell environment?
 
-To start, anything that's in the [official package list](https://nixos.org/nixos/packages.html) can become part of the shell environment.
+Anything that's in the [official package list](https://nixos.org/nixos/packages.html) can become part of the shell environment.
 
 You can search the package list using:
 
@@ -59,8 +57,7 @@ gitMinimal           git-2.25.0
 
 The first column is the {term}`attribute name` and the second is the {term}`package name` and its version.
 
-Once you are comfortable doing this, you can add other things too.
-For example, packages of your own or custom shell aliases.
+Once you are comfortable doing this, you can add other things too. For example, packages of your own, or custom shell aliases.
 
 :::{note}
 The query you use for searching packages is a regex, so be aware when it comes to special characters.
@@ -85,7 +82,7 @@ git version 2.25.0
 /nix/store/hx63qkip16i4wifaqgxwrrmxj4az53h1-git-2.25.0/bin/git
 ```
 
-Note that even if you had git installed before, once in the shell only the exact version installed by Nix is used.
+Note that even if you had Git installed before, in the shell, only the exact version installed by Nix is used.
 
 Press `CTRL-D` to exit the shell and those packages won't be available anymore.
 
@@ -103,7 +100,7 @@ $ nix-shell -p 'python38.withPackages (packages: [ packages.django ])'
 <module 'django' from '/nix/store/c8ipxqsgh8xd6zmwb026lldsgr7hi315-python3-3.8.1-env/lib/python3.8/site-packages/django/__init__.py'>
 ```
 
-We create an ad hoc environment with `$PYTHONPATH` set and `python` available, along with the `django` package as well.
+We create an ad hoc environment with `$PYTHONPATH` set and `python` available, along with the `django` package.
 
 The `-p` argument can handle more than attribute names. You can use a full Nix expression, but we'll cover that in later tutorials.
 
@@ -113,8 +110,7 @@ Even running in these basic Nix shells, if you handed over these commands to ano
 
 These shell environments are **really convenient**, but they are not **perfectly reproducible** in this form.
 
-What do we mean by reproducible? A fully reproducible example would give exactly the same results no matter **when** or **on what machine** you run the command.
-The environment provided would be identical each time.
+What do we mean by reproducible? A fully reproducible example would give exactly the same results no matter **when** or **on what machine** you run the command. The environment provided would be identical each time.
 
 Nix also offers fully reproducible environments, which it calls pure environments.
 
@@ -129,14 +125,12 @@ git version 2.25.4
 
 There are two things going on here:
 
-1. `--pure` flag makes sure that the bash environment from your system is not inherited. That means only the `git` that Nix installed is available inside the shell.
-   This is useful for one-liners and scripts that run for example within a CI environment. While developing, however, we'd like to have our editor around and a bunch of other things. Therefore we might skip the flag for development environments but use it in build ones.
-2. The `-I` flag pins the nixpkgs revision to an **exact git revision**, leaving no doubt which exact version of Nix packages will be used.
+1. The `--pure` flag makes sure that the bash environment from your system is not inherited. That means only the `git` that Nix installed is available inside the shell. This is useful for one-liners and scripts that run, for example, within a CI environment. While developing, however, we'd like to have our editor around and a bunch of other things. Therefore we might skip the flag for development environments but use it in build ones.
+2. The `-I` flag pins the Nixpkgs revision to an **exact Git revision**, leaving no doubt about which exact version of Nix packages will be used.
 
 ## Reproducible executables
 
-Finally, we can wrap scripts with Nix to provide a reproducible shell environment that we can commit to a git repository
-and share with strangers online. As long as they have Nix installed, they'll be able to execute the script without worrying about manually installing and later uninstalling dependencies at all.
+Finally, we can wrap scripts with Nix to provide a reproducible shell environment that we can commit to a Git repository and share with strangers online. As long as they have Nix installed, they'll be able to execute the script without worrying about manually installing (and later uninstalling) dependencies at all.
 
 ```python
 #! /usr/bin/env nix-shell
@@ -148,19 +142,19 @@ import django
 print(django)
 ```
 
-This is essentially the same example as in the previous section, but this time declaratively source controlled! All of the required Nix commands are included as `#!` shebang headers in the scripts itself.
+This is essentially the same example as in the previous section, but this time declaratively source controlled! All of the required Nix commands are included as `#!` shebang headers in the script itself.
 
 :::{note}
-The multi-line shebang format is a feature of [nix-shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter). 
-All the subsequent `#! nix-shell` lines are used to build up the shells configuration before building the shell and executing the body of the script.
+The multiline shebang format is a feature of [nix-shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter). 
+All the subsequent `#! nix-shell` lines are used to build up the shell's configuration before building the shell and executing the body of the script.
 :::
 
 ## Next steps
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
 
-- {ref}`pinning-nixpkgs` to see different ways to import nixpkgs
-- {ref}`declarative-reproducible-envs`
+- {ref}`pinning-nixpkgs` to see different ways to import Nixpkgs.
+- {ref}`declarative-reproducible-envs` to create reproducible shell environments given a declarative configuration file called a Nix expression.
 - [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html)- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
 - See `man nix-shell` for all of the options.
 - To quickly setup a Nix project read through
