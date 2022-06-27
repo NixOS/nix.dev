@@ -1,8 +1,9 @@
 ---
-html_meta:
-  "description lang=en": "An opinionated guide for developers wanting to get things done with the Nix ecosystem."
-  "keywords": "Nix, NixOS, packaging, Linux, deployment, build systems, reproducible, developer"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "An opinionated guide for developers wanting to get things done with the Nix ecosystem."
+    "keywords": "Nix, NixOS, packaging, Linux, deployment, build systems, reproducible, developer"
+    "property=og:locale": "en_US"
 ---
 
 

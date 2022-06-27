@@ -1,7 +1,8 @@
 ---
-html_meta:
-  "description lang=en": "Building and running Docker images"
-  "keywords": "Docker, containers, Nix, reproducible, build, tutorial"
+myst:
+  html_meta: 
+    "description lang=en": "Building and running Docker images"
+    "keywords": "Docker, containers, Nix, reproducible, build, tutorial"
 ---
 
 # Building and running Docker images

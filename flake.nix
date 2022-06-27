@@ -1,9 +1,13 @@
 {
   description = "nix.dev static website";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
   inputs.flake-utils.url = "github:numtide/flake-utils/master";
-  inputs.poetry2nix.url = "github:nix-community/poetry2nix/master";
+  inputs.poetry2nix = {
+    inputs.flake-utils.follows = "flake-utils";
+    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:nix-community/poetry2nix/master";
+  };
 
   outputs = { self, nixpkgs, flake-utils, poetry2nix }:
     flake-utils.lib.eachDefaultSystem (system:

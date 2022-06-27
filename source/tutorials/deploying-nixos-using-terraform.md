@@ -1,7 +1,8 @@
 ---
-html_meta:
-  "description lang=en": "Continuous Integration with GitHub Actions and Cachix"
-  "keywords": "NixOS, deployment, Terraform, AWS"
+myst:
+  html_meta:
+    "description lang=en": "Continuous Integration with GitHub Actions and Cachix"
+    "keywords": "NixOS, deployment, Terraform, AWS"
 ---
 
 (deploying-nixos-using-terraform)=
