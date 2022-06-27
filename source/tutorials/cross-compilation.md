@@ -1,7 +1,8 @@
 ---
-html_meta:
-  "description lang=en": "Cross compilation tutorial using Nix"
-  "keywords": "Nix, cross compilation, cross-compile, Nix"
+myst:
+  html_meta:
+    "description lang=en": "Cross compilation tutorial using Nix"
+    "keywords": "Nix, cross compilation, cross-compile, Nix"
 ---
 
 

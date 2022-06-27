@@ -1,7 +1,8 @@
 ---
-html_meta:
-  "description lang=en": "Continuous Integration with GitHub Actions and Cachix"
-  "keywords": "CI, Continuous Integration, GitHub Actions, Cachix, Binary Cache, Nix"
+myst:
+  html_meta:
+    "description lang=en": "Continuous Integration with GitHub Actions and Cachix"
+    "keywords": "CI, Continuous Integration, GitHub Actions, Cachix, Binary Cache, Nix"
 ---
 
 (github-actions)=

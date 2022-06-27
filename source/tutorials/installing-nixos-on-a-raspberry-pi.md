@@ -1,7 +1,8 @@
 ---
-html_meta:
-  "description lang=en": "Installing NixOS on a Raspberry Pi"
-  "keywords": "Raspberry Pi, rpi, NixOS, installation, image, tutorial"
+myst:
+  html_meta:
+    "description lang=en": "Installing NixOS on a Raspberry Pi"
+    "keywords": "Raspberry Pi, rpi, NixOS, installation, image, tutorial"
 ---
 
 
