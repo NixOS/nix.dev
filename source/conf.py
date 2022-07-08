@@ -75,8 +75,8 @@ master_doc = "index"
 
 # General information about the project.
 project = "nix.dev"
-author = "Domen Kožar"
-copyright = "2016-" + str(date.today().year) + ", " + author
+author = "nix.dev contributors"
+copyright = "2016-" + str(date.today().year) + ", NixOS Foundation"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -265,7 +265,7 @@ latex_documents = [
         master_doc,
         "nixpkgs-cookbook.tex",
         "nixpkgs-cookbook Documentation",
-        "Domen Kožar",
+        "nix.dev contributors",
         "manual",
     ),
 ]
