@@ -15,4 +15,6 @@ Run `./live` and open a browser at <http://localhost:5500>.
 
 As you make changes your browser should auto-reload within a few seconds.
 
+For contents and style see [contribution guide][CONTRIBUTING.md].
+
 For syntax see [RST/Sphinx Cheatsheet](https://sphinx-tutorial.readthedocs.io/cheatsheet/).
