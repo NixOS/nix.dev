@@ -183,3 +183,36 @@ Collect links at the end of each section, which are delimited by headings.
 
 [Here is a discussion of different line wrapping styles.]: https://web.archive.org/web/20220519121408/https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
 [reference links]: https://github.github.com/gfm/#reference-link
+
+### Nomenclature
+
+To avoid confusion around all the things called Nix, always use the following terms with capitalization as given:
+
+- Nix ecosystem
+
+  All of the below.
+
+  - Nix package manager
+
+    Command line tool.
+
+  - Nix language
+
+      Programming langauge to declare packages and configurations for the Nix package manager.
+
+    - Nix expression
+
+      Expression written in Nix language.
+
+    - Nix file
+
+      File containing Nix expression, usally ends in `.nix`.
+
+  - Nix package collection (`nixpkgs`)
+
+    Read `nixpkgs` as "Nix packages".
+
+  - NixOS
+
+    Linux distribution based on Nix package manager and `nixpkgs`.
+    Read "Nix Oh Es".
