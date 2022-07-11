@@ -4,6 +4,7 @@
 :hidden: true
 
 documentation.md
+writing-a-tutorial.md
 ```
 
 This guide explains how you can contribute to Nix, Nix packages or
