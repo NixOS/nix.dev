@@ -117,7 +117,7 @@ Examples:
     # set `NIX_PATH` to point a name to that file
     env NIX_PATH=name_in_nix_path=nix_path_file nix repl
 
-    nix repl> import <nix_path_file>
+    nix repl> import <name_in_nix_path>
     123
 
 Nix simply reads and parses the `NIX_PATH` environment variable.
