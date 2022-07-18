@@ -11,7 +11,7 @@ python = "^3.9"
 livereload = "*"
 myst-parser = {version = "*", extras = ["linkify"]}
 sphinx = "*"
-sphinx-book-theme = "^0.2.0"
+sphinx-book-theme = "^0.3.3"
 sphinx-copybutton = "*"
 
 [tool.poetry.dev-dependencies]
