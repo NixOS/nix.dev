@@ -1,12 +1,12 @@
-# Building bootable ISO image
+# Building a bootable ISO image
 
 :::{note}
-In case you'd like to build images for a different platform that you're on, see [Cross compiling](https://github.com/nix-community/nixos-generators#cross-compiling).
+If you need to build images for a different platform, see [Cross compiling](https://github.com/nix-community/nixos-generators#cross-compiling).
 :::
 
-Often we're faced with the official installation image lacking some hardware support.
+You may find that an official installation image lacks some hardware support.
 
-Create `myimage.nix` that will point the kernel to the latest using the minimal installation iso:
+The solution is to create `myimage.nix` to point to the latest kernel using the minimal installation ISO:
 
 ```nix
 { pkgs, modulesPath, lib, ... }: {
@@ -37,5 +37,4 @@ $ sync
 
 ## Next steps
 
-- There are a bunch of [other formats that generators support](https://github.com/nix-community/nixos-generators#supported-formats),
-  for example different cloud providers or virtualization technologies
+- Take a look at this [list of formats that generators support](https://github.com/nix-community/nixos-generators#supported-formats) to find your cloud provider or virtualization technology.
