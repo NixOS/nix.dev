@@ -3,17 +3,19 @@
 ```{toctree}
 :glob: true
 
-install-nix.rst
-ad-hoc-developer-environments.rst
-towards-reproducibility-pinning-nixpkgs.rst
-declarative-and-reproducible-developer-environments.rst
-continuous-integration-github-actions.rst
-dev-environment.rst
-building-and-running-docker-images.rst
-building-bootable-iso-image.rst
-deploying-nixos-using-terraform.rst
-installing-nixos-on-a-raspberry-pi.rst
-integration-testing-using-virtual-machines.rst
-cross-compilation.rst
-contributing.rst
+install-nix.md
+ad-hoc-developer-environments.md
+towards-reproducibility-pinning-nixpkgs.md
+declarative-and-reproducible-developer-environments.md
+continuous-integration-github-actions.md
+dev-environment.md
+building-and-running-docker-images.md
+building-bootable-iso-image.md
+deploying-nixos-using-terraform.md
+installing-nixos-on-a-raspberry-pi.md
+nixos-configuration-on-vm.md
+nixos-configuration-testing.md
+nixos-configuration-organization.md
+cross-compilation.md
+contributing.md
 ```
