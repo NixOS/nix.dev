@@ -277,17 +277,21 @@ Example:
 
 Also known as “@ syntax” or “‘at’ syntax”.
 
-    {a, b, ...}@args: a + b + args.x
+    {a, b, ...}@args: a + b + args.c
+
+or
+
+    args@{a, b, ...}: a + b + args.c
 
 where additional attributes are subsumed under a name.
 
 Example:
 
     nix-repl> let
-              f = {a, b, ...}@args: a + b + args.x
+              f = {a, b, ...}@args: a + b + args.c
               in
-              f { a = 1; b = 2; c = 3; x = 5 }
-    8
+              f { a = 1; b = 2; c = 3; }
+    6
 
 This can be useful if this remaining attribute set needs to be processed as a whole.
 
