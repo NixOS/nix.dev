@@ -295,9 +295,6 @@ Example:
 
 This can be useful if this remaining attribute set needs to be processed as a whole.
 
-[^1]: For example, the built-in function `throw` causes evaluation to stop. However, the following works fine, because `throw` is never evaluated:
-     nix-repl> let lazy = { a = "success"; b = builtins.throw "error"; }; in lazy.a
-"success"
 
 ## Summary
 
@@ -321,8 +318,31 @@ As a programming language, Nix is
 
   It will only evaluate expressions when their result is needed.[^1]
 
+- *dynamically typed*
+
+  Type errors are only detected when operations are actually evaluated.[^2]
+
 - *purpose-built*
 
   The Nix language only exists for the Nix package manager.
   It is not intended for general purpose use.
+
+[^1]: For example, the built-in function `throw` causes evaluation to stop. However, the following works, because `throw` is never evaluated:
+
+     nix-repl> let lazy = { a = "success"; b = builtins.throw "error"; }; in lazy.a
+    "success"
+
+[^2]: For example, while one cannot add integers to strings, the error is only detected when trying to get the result:
+
+    nix-repl> let x = { a = 1 + "1"; b = 2; }; in x.b
+    2
+
+    nix-repl> let x = { a = 1 + "1"; b = 2; }; in x.a
+    error: cannot add a string to an integer
+
+           at «string»:1:19:
+
+                1| let x = { a = 1 + "1"; b = 2; }; in x.a
+                 |                   ^
+                2|
 
