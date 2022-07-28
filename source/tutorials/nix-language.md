@@ -156,8 +156,7 @@ They are constructed with the `rec` keyword.
 
 Note: This construct
 - allows infinite recursion, such as `rec { x = x; }.x`
-- can quickly become hard to understand
-- does not lend itself to static analysis.
+- can quickly become hard to understand.
 Therefore it is recommended to use let bindings instead.
 
     nix-repl> let x = 1; in { a = x; b = x + x; }
