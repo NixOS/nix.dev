@@ -1,4 +1,4 @@
-# Reading the Nix language
+# Reading the Nix language without fear
 
 The Nix language is used to declare packages and configurations for the Nix package manager.
 
