@@ -50,6 +50,8 @@ The following example is a Nix expression adding two numbers:
 
     1 + 2
 
+    3
+
 Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
 
   echo 1 + 2 > file.nix
