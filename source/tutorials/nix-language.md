@@ -45,7 +45,7 @@ To *evaluate* means to transform an expression according to the language rules u
 
 ## Running examples
 
-All examples in this guide are valid Nix files that you can run yourself
+All examples in this guide are valid Nix files that you can run yourself.
 
 The following example is a Nix expression adding two numbers:
 
@@ -170,7 +170,7 @@ Counter-example:
                  |         ^
                 4|   three = two + 1;
 
-See here why we recommend to avoid the {ref}`rec-expression` and prefer the `let` expression instead.
+{ref}`We recommend to avoid the <ref-rec-expression>` and to use the `let` expression instead.
 
 ## `let` expression
 
@@ -223,6 +223,12 @@ Example:
 
 
 <!-- TODO: exercise - use let to reuse a value in an attribute set -->
+
+<!-- TODO: # using names -->
+<!-- TODO: ## accessing attributes -->
+<!-- TODO: ## inherit -->
+<!-- TODO: ## with -->
+<!-- TODO: ## import -->
 
 # Functions
 
@@ -297,10 +303,6 @@ Nix functions can explicitly take an attribute set as argument.
 
     {a, b}: a + b
 
-This is equivalent to
-
-    x: x.a + x.b
-
 The argument defines the exact attributes that have to be in that set.
 Leaving out or passing additional attributes is an error.
 
@@ -340,7 +342,7 @@ Example:
 
 ## Additional attributes
 
-You can allow additional attributes with an ellipsis (`...`):
+Additional attributes are allowed with an ellipsis (`...`):
 
     {a, b, ...}: a + b
 
@@ -354,7 +356,7 @@ Example:
 
 ## Named keyword arguments
 
-Also known as “@ syntax” or “‘at’ syntax”.
+Also known as “@ syntax” or “‘at’ syntax”:
 
     {a, b, ...}@args: a + b + args.c
 
@@ -372,7 +374,7 @@ Example:
               f { a = 1; b = 2; c = 3; }
     6
 
-This can be useful if this remaining attribute set needs to be processed as a whole.
+This can be useful if the passed attribute set also needs to be processed as a whole.
 
 # File system paths
 
