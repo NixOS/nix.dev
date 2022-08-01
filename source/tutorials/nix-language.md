@@ -9,13 +9,16 @@ Yet, the language has only few basic constructs which can be combined arbitraril
 
 This guide should enable you to read typical Nix language code and understand its structure.
 
-It shows the most common patterns in the Nix language:
+It shows the most common and distingushing patterns in the Nix language:
 
 - assigning names
 - declaring and calling functions
 - referencing file system paths
 - using built-in functions and the standard library
 - declaring build inputs and build outputs
+
+It *does not* explain all Nix language features in detail.
+See the [Nix manual][manual-language] for a full language reference.
 
 ## What do you need?
 
