@@ -3,12 +3,26 @@
 The Nix language is used to declare packages and configurations for the Nix package manager.
 
 You will quickly encounter Nix language expressions that may look very complicated.
-Yet, the language has only few basic concepts that can be combined arbitrarily.
-Use this guide to learn reading code in Nix language and understand its structure.
+Yet, the language has only few basic constructs which can be combined arbitrarily.
 
-Imagine the Nix language as JSON with functions.
-Its purpose is to define structured data, and functions help with conveniently producing more complex data.
-All of the language constructs can be composed arbitrarily.
+## What will you learn?
+
+This guide should enable you to read typical Nix language code and understand its structure.
+
+It shows the most common patterns in the Nix language:
+
+- assigning names
+- declaring and calling functions
+- referencing file system paths
+- using built-in functions and the standard library
+- declaring build inputs and build outputs
+
+## What do you need?
+
+- Familiarity with other programming languages
+<!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
+- Familiarity with Unix shell to read command line examples
+- Install the Nix package manager to run the examples
 
 ## Running examples
 
