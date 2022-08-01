@@ -27,6 +27,21 @@ See the [Nix manual][manual-language] for a full language reference.
 - Familiarity with Unix shell to read command line examples
 - Install the Nix package manager to run the examples
 
+# Basic Concepts
+
+Imagine the Nix language as *JSON with functions*.
+
+The purpose of Nix language is to define structured data.
+Functions help with conveniently producing more complex data, and assigning names allows manipulating complex data as units.
+
+To that end, every valid piece of Nix language code is an *expression*.
+Evaluating a Nix expression produces a single value.
+Every Nix file (`.nix`) contains a single expression.
+
+:::{note}
+To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
+:::
+
 ## Running examples
 
 All examples in this guide are valid Nix files that you can run yourself
