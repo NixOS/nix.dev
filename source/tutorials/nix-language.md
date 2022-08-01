@@ -85,7 +85,7 @@ Assignments are denoted by a single equal sign (`=`).
 
 ## Attribute sets
 
-Attribute sets are collections of name-value-pairs.
+Attribute sets are unordered collections of name-value-pairs.
 
 Together with primitive data types and lists, they work exactly like in JSON and look very similar.
 
