@@ -10,7 +10,39 @@ Imagine the Nix language as JSON with functions.
 Its purpose is to define structured data, and functions help with conveniently producing more complex data.
 All of the language constructs can be composed arbitrarily.
 
-### Attribute sets
+## Running examples
+
+All examples in this guide are valid Nix files that you can run yourself
+
+The following example is a Nix expression adding two numbers:
+
+    1 + 2
+
+Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
+
+  echo 1 + 2 > file.nix
+
+  nix-instantiate --eval file.nix
+  3
+
+:::{note}
+`nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
+
+    echo 1 + 2 > default.nix
+
+    nix-instantiate --eval
+    3
+:::
+
+Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
+
+    nix repl
+    Welcome to Nix 2.5.1. Type :? for help.
+
+    nix-repl> 1 + 2
+    3
+
+## Attribute sets
 
 The primary data structure is the attribute set, a collection of key-value pairs.
 
