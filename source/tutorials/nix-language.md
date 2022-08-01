@@ -14,6 +14,7 @@ It shows the most common and distingushing patterns in the Nix language:
 - assigning names
 - declaring and calling functions
 - referencing file system paths
+- working with character strings
 - using built-in functions and the standard library
 - declaring build inputs and build outputs
 
@@ -76,26 +77,17 @@ Use `nix repl` to evaluate Nix expressions interactively (by typing them on the 
     nix-repl> 1 + 2
     3
 
+# Names
+
+There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
+
+Assignments are denoted by a single equal sign (`=`).
+
 ## Attribute sets
 
-The primary data structure is the attribute set, a collection of key-value pairs.
+Attribute sets are collections of name-value-pairs.
 
-JSON:
-
-    {
-      "string": "hello",
-      "integer": 1,
-      "float": 3.141,
-      "bool": true,
-      "null": null,
-      "list": [1, 2, 3],
-      "set": {
-        "a": "hello",
-        "b": 1,
-        "c": 2.718,
-        "d": false
-      }
-    }
+Together with primitive data types and lists, they work exactly like in JSON and look very similar.
 
 Nix language:
 
@@ -105,7 +97,7 @@ Nix language:
       float = 3.141;
       bool = true;
       null = null;
-      list = [ 1 2 3 ];
+      list = [ 1 "two" false ];
       attribute-set = {
         a = "hello";
         b = 2;
@@ -114,137 +106,154 @@ Nix language:
       }; # comments are supported
     }
 
-Note: List elements are separated by white space.
+JSON:
 
-Note: The outermost expression does not and must not have a semicolon.
+    {
+      "string": "hello",
+      "integer": 1,
+      "float": 3.141,
+      "bool": true,
+      "null": null,
+      "list": [1, "two", false],
+      "set": {
+        "a": "hello",
+        "b": 1,
+        "c": 2.718,
+        "d": false
+      }
+    }
 
-See attribute [naming rules]().
 
-Nix has additional primitives:
+:::{note}
+- Attribute names usually do not need quotes.[^1]
+- List elements are separated by white space.[^2]
+:::
 
-### String
+[^1]: Details: [Nix manual - attribute naming rules]()
+[^2]: Details: [Nix manual - lists][manual-lists]
 
-#### Multiline string
+[manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
 
-    nix-repl> ''
-              string
-              spanning
-              multiple
-              lines
-              ''
-    "string\nspanning\nmultiple\nlines\n"
+### Recursive attribute sets
 
-Whitespace that prefixes all lines is stripped automatically.
+You will sometimes see attribute sets declared with `rec` prepended.
+This allows expressions in the attribute set to access other attribute names in the set.
 
-Multiline strings ease the use of quotes and special characters.
+Example:
 
-    nix-repl> ''
-              "double quoted" and 'single quoted'
-              ''
-    "\"double quoted\" and 'single quoted'\n"
+```nix
+rec {
+  one = 1;
+  two = one + 1;
+  three = two + 1;
+}
+```
 
-#### String interpolation
+    { one = 1; three = 3; two = 2; }
 
-    nix-repl> let
-              name = "Nix";
-              in
-              "hello ${name}"
-    "hello Nix"
+Counter-example:
 
-See escaping rules.
+```nix
+{
+  one = 1;
+  two = one + 1;
+  three = two + 1;
+}
+```
 
-### Path
+    error: undefined variable 'one'
 
-#### Relative path
+           at «string»:3:9:
 
-    ./relative/path
+                2|   one = 1;
+                3|   two = one + 1;
+                 |         ^
+                4|   three = two + 1;
 
-The path is relative to the file containing the expression.
+See here why we recommend to avoid the {ref}`rec-expression` and prefer the `let` expression instead.
 
-#### Absolute path
+## `let` expression
 
-    /absolute/path
+Also known as “`let` binding” or “`let` … `in`”.
 
-#### Home directory path
+`let` expressions allow assigning names to values for repeated use.
 
-    ~/path/in/home/directory
+Example:
 
-#### Named paths
+    let
+      a = 1;
+    in
+    a + a
 
-Also known as “angle bracket syntax”.
-
-    <name>
-
-Examples:
-
-    # write a Nix expression to a file
-    echo 123 > nix_path_file
-
-    # set `NIX_PATH` to point a name to that file
-    env NIX_PATH=name_in_nix_path=nix_path_file nix repl
-
-    nix repl> import <name_in_nix_path>
-    123
-
-Nix simply reads and parses the `NIX_PATH` environment variable.
-Entries are separated by colons (`:`).
-
-Note: The value of a named path depends on external system state. Therefore it is recommended not to use them.
-
-#### Path concatenation
-
-    /nix + /store
-
-Paths can be concatenated with each other or with strings.
-
-Examples:
-
-    nix-repl> /nix + /store
-    /nix/store
-
-    nix-repl> /nix/var + "/nix"
-    /nix/var/nix
-
-### Let bindings
-
-    nix-repl> let a = 1; in a + a
     2
 
-Let bindings allow declaring named values for repeated use.
+As in attribute sets, names can be assigned in any order.
 
-### Recursive sets
+In contrast to attribute sets, the expressions on the right of the assignment can refer to other assigned names.
 
-Recursive sets allow elements to refer to attributes within the set.
-They are constructed with the `rec` keyword.
+Example:
 
-    nix-repl> rec { a = 1; b = a + a; }
-    { a = 1; b = 2; }
+    nix-repl> let
+              b = a + 1
+              a = 1;
+              in
+              a + b
+    3
 
-Note: This construct
-- allows infinite recursion, such as `rec { x = x; }.x`
-- can quickly become hard to understand.
-Therefore it is recommended to use let bindings instead.
+Only the expressions in the `let` expression can access the newly declared names.
+We say: the bindings have local scope.
 
-    nix-repl> let x = 1; in { a = x; b = x + x; }
-    { a = 1; b = 2; }
+Example:
 
-## Functions
+```nix
+{
+  a = let x = 1; in x;
+  b = x;
+}
+```
 
-The Nix language is Turing-complete.
-It gives you the power to tame complexity and the freedom to create overwhelming amounts of it.
+    error: undefined variable 'x'
 
-Therefore, it is recommended to use functions sparingly and instead think more in terms of data, because data is usually easier to understand.
+           at «string»:3:7:
+
+                2|   a = let x = 1; in x;
+                3|   b = x;
+                 |       ^
+                4| }
 
 
-### Arguments
+<!-- TODO: exercise - use let to reuse a value in an attribute set -->
+
+# Functions
+
+Functions are everywhere in the Nix language.
+
+## Arguments
 
 Nix functions take exactly one argument.
 
     x: x + 1
 
-Argument and function body are separated by a colon `:`.
+Argument and function body are separated by a colon (`:`).
 
-Applying a function to an argument means writing the argument after the function name.
+Wherever you see a colon (`:`) in Nix language code:
+- on its left is the function argument
+- on its right is the function body.
+
+Applying a function to an argument means writing the argument after the function.
+
+Example
+
+```nix
+(x: x + 1) 1
+```
+
+    2
+
+Nix functions have no name when declared.
+We say they are anonymous, or call such a function a *lambda*.
+
+We can assign functions a name like any to other value.
 
 Example:
 
@@ -258,7 +267,9 @@ Arguments can be chained.
 
     x: y: x + y
 
-The above function takes one argument and returns a function `y: x + y` with `x` set to passed value. 
+This can be used like a function that takes two arguments, but offers additional flexibility.
+
+The above function takes one argument and returns a function `y: x + y` with `x` set to the passed value.
 
 Example:
 
@@ -268,7 +279,7 @@ Example:
               f 1
     «lambda @ (string):2:8»
 
-The `lambda` indicates the resulting value is a function.
+The `lambda` indicates the resulting value is an anonymous function.
 
 Applying that to another argument yields the inner body `x + y`, which can now be fully evaluated.
 
@@ -278,7 +289,9 @@ Applying that to another argument yields the inner body `x + y`, which can now b
               f 1 2
     3
 
-### Keyword arguments
+<!-- TODO: exercise - assign the lambda a name and do something with it -->
+
+## Keyword arguments
 
 Nix functions can explicitly take an attribute set as argument.
 
@@ -286,7 +299,7 @@ Nix functions can explicitly take an attribute set as argument.
 
 This is equivalent to
 
-    x: x.a + a.b
+    x: x.a + x.b
 
 The argument defines the exact attributes that have to be in that set.
 Leaving out or passing additional attributes is an error.
@@ -299,11 +312,11 @@ Example:
               f { a = 1; b = 2; }
     3
 
-### Default attributes
+## Default attributes
 
 Also known as “default arguments”.
 
-Arguments can have default values for attributes, denoted with a question mark “?”.
+Arguments can have default values for attributes, denoted with a question mark (`?`).
 
     {a, b ? 0}: a + b
 
@@ -325,7 +338,7 @@ Example:
               f { } # empty attribute set
     0
 
-### Additional attributes
+## Additional attributes
 
 You can allow additional attributes with an ellipsis (`...`):
 
@@ -339,7 +352,7 @@ Example:
               f { a = 1; b = 2; c = 3; }
     3
 
-### Named keyword arguments
+## Named keyword arguments
 
 Also known as “@ syntax” or “‘at’ syntax”.
 
@@ -361,6 +374,77 @@ Example:
 
 This can be useful if this remaining attribute set needs to be processed as a whole.
 
+# File system paths
+
+Nix language offers additional convenience for file system paths.[^3]
+
+Absolute paths always start with a slash (`/`):
+
+    /absolute/path
+
+Paths are relative when they contain at least one slash (`/`) but to not start with one.
+They are relative to the file containing the expression:
+
+    ./relative
+
+    relative/path
+
+[^3]: Details: [Nix manual - primitive data types][manual-primitives]
+
+## Search path
+
+Also known as “angle bracket syntax”.
+
+    <nixpkgs>
+
+The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
+
+In practice, `<nixpkgs>` points to the file system path of some revision of the [Nix package collection][nixpkgs].
+For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
+
+[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
+[nixpkgs]: https://github.org/NixOS/nixpkgs
+[manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
+
+# Character strings
+
+<!-- TODO: introduction -->
+
+## String interpolation
+
+<!-- TODO: details -->
+
+    nix-repl> let
+              name = "Nix";
+              in
+              "hello ${name}"
+    "hello Nix"
+
+## Indented strings
+
+    ''
+      multi
+      line
+      string
+    ''
+
+You will recognize indented strings by *double single quotes*.
+Equal amounts of prepended white space are trimmed from the result.
+
+Example:
+
+    nix-repl> ''
+                one
+                 two
+                  three
+              ''
+    "one\n two\n  three\n"
+
+See [escaping rules]().
+
+<!-- TODO: built-ins and library -->
+
+<!-- TODO: side effects - fetchers and derivations -->
 
 ## Summary
 
@@ -370,8 +454,6 @@ As a programming language, Nix is
 
   It has no notion of executing sequential steps.
   Dependencies between operations are established only through data.
-  Everything in Nix is an expression that results in a single value.
-  Every Nix file (`.nix`) contains a single expression.
 
 - *purely functional*
 
