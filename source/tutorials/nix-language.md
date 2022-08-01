@@ -174,7 +174,7 @@ Counter-example:
 
 ## `let` expression
 
-Also known as “`let` binding” or “`let` … `in`”.
+Also known as “`let` binding” or “`let ... in`”.
 
 `let` expressions allow assigning names to values for repeated use.
 
