@@ -57,7 +57,7 @@ The following example is a Nix expression adding two numbers:
 
 Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
 
-```shell
+```console
 echo 1 + 2 > file.nix
 
 nix-instantiate --eval file.nix
@@ -67,7 +67,7 @@ nix-instantiate --eval file.nix
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
 
-```shell
+```console
 echo 1 + 2 > default.nix
 
 nix-instantiate --eval
@@ -77,7 +77,7 @@ nix-instantiate --eval
 
 Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
 
-```shell
+```console
 nix repl
 Welcome to Nix 2.5.1. Type :? for help.
 
