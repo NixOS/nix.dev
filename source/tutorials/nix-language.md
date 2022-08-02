@@ -645,9 +645,24 @@ Example:
 
 See [escaping rules]().
 
+# Using existing functions
+
 <!-- TODO: built-ins and library -->
 
+# Building software using side effects
+
+So far we have only covered what we call *pure expressions*:
+declaring data and transforming it with functions.
+
+Building software requires interaction with the outside world, which we call *side effects*.
+
+There are two main side effects in the Nix language that are relevant here:
+1. Reading files from the file system as build inputs
+2. Writing files to the file system as build outputs
+
 <!-- TODO: side effects - fetchers and derivations -->
+
+See Nix Pills for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
 
 # Summary
 
