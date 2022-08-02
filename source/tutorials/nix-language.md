@@ -49,33 +49,41 @@ All examples in this guide are valid Nix files that you can run yourself.
 
 The following example is a Nix expression adding two numbers:
 
-    1 + 2
+```nix
+1 + 2
+```
 
     3
 
 Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
 
-  echo 1 + 2 > file.nix
+```shell
+echo 1 + 2 > file.nix
 
-  nix-instantiate --eval file.nix
-  3
+nix-instantiate --eval file.nix
+3
+```
 
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
 
-    echo 1 + 2 > default.nix
+```shell
+echo 1 + 2 > default.nix
 
-    nix-instantiate --eval
-    3
+nix-instantiate --eval
+3
+```
 :::
 
 Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
 
-    nix repl
-    Welcome to Nix 2.5.1. Type :? for help.
+```shell
+nix repl
+Welcome to Nix 2.5.1. Type :? for help.
 
-    nix-repl> 1 + 2
-    3
+nix-repl> 1 + 2
+3
+```
 
 # Names
 
@@ -91,38 +99,43 @@ Together with primitive data types and lists, they work exactly like in JSON and
 
 Nix language:
 
-    {
-      string = "hello";
-      integer = 1;
-      float = 3.141;
-      bool = true;
-      null = null;
-      list = [ 1 "two" false ];
-      attribute-set = {
-        a = "hello";
-        b = 2;
-        c = 2.718;
-        d = false;
-      }; # comments are supported
-    }
+```nix
+{
+  string = "hello";
+  integer = 1;
+  float = 3.141;
+  bool = true;
+  null = null;
+  list = [ 1 "two" false ];
+  attribute-set = {
+    a = "hello";
+    b = 2;
+    c = 2.718;
+    d = false;
+  }; # comments are supported
+}
+```
+
+<!-- would be great to have those side by side -->
 
 JSON:
 
-    {
-      "string": "hello",
-      "integer": 1,
-      "float": 3.141,
-      "bool": true,
-      "null": null,
-      "list": [1, "two", false],
-      "set": {
-        "a": "hello",
-        "b": 1,
-        "c": 2.718,
-        "d": false
-      }
-    }
-
+```json
+{
+  "string": "hello",
+  "integer": 1,
+  "float": 3.141,
+  "bool": true,
+  "null": null,
+  "list": [1, "two", false],
+  "set": {
+    "a": "hello",
+    "b": 1,
+    "c": 2.718,
+    "d": false
+  }
+}
+```
 
 :::{note}
 - Attribute names usually do not need quotes.[^1]
@@ -180,10 +193,12 @@ Also known as “`let` binding” or “`let ... in`”.
 
 Example:
 
-    let
-      a = 1;
-    in
-    a + a
+```nix
+let
+  a = 1;
+in
+a + a
+```
 
     2
 
@@ -193,11 +208,14 @@ In contrast to attribute sets, the expressions on the right of the assignment ca
 
 Example:
 
-    nix-repl> let
-              b = a + 1
-              a = 1;
-              in
-              a + b
+```nix
+let
+  b = a + 1
+  a = 1;
+in
+a + b
+```
+
     3
 
 Only the expressions in the `let` expression can access the newly declared names.
@@ -263,10 +281,13 @@ We can assign functions a name like any to other value.
 
 Example:
 
-    nix-repl> let
-              f = x: x + 1;
-              in
-              f 1
+```nix
+let
+  f = x: x + 1;
+in
+f 1
+```
+
     2
 
 Arguments can be chained.
@@ -279,20 +300,26 @@ The above function takes one argument and returns a function `y: x + y` with `x`
 
 Example:
 
-    nix-repl> let
-              f = x: y: x + y;
-              in
-              f 1
-    «lambda @ (string):2:8»
+```nix
+let
+  f = x: y: x + y;
+in
+f 1
+```
 
-The `lambda` indicates the resulting value is an anonymous function.
+    <LAMBDA>
+
+The `<LAMBDA>` indicates the resulting value is an anonymous function.
 
 Applying that to another argument yields the inner body `x + y`, which can now be fully evaluated.
 
-    nix-repl> let
-              f = x: y: x + y;
-              in
-              f 1 2
+```nix
+let
+  f = x: y: x + y;
+in
+f 1 2
+```
+
     3
 
 <!-- TODO: exercise - assign the lambda a name and do something with it -->
@@ -308,10 +335,13 @@ Leaving out or passing additional attributes is an error.
 
 Example:
 
-    nix-repl> let
-              f = {a, b}: a + b
-              in
-              f { a = 1; b = 2; }
+```nix
+let
+  f = {a, b}: a + b
+in
+f { a = 1; b = 2; }
+```
+
     3
 
 ## Default attributes
@@ -326,18 +356,24 @@ Attributes in the argument are not required if they have a default value.
 
 Example:
 
-    nix-repl> let
-              f = {a, b ? 0}: a + b
-              in
-              f { a = 1; }
+```nix
+let
+  f = {a, b ? 0}: a + b
+in
+f { a = 1; }
+```
+
     1
 
 Example:
 
-    nix-repl> let
-              f = {a ? 0, b ? 0}: a + b
-              in
-              f { } # empty attribute set
+```nix
+let
+  f = {a ? 0, b ? 0}: a + b
+in
+f { } # empty attribute set
+```
+
     0
 
 ## Additional attributes
@@ -348,10 +384,13 @@ Additional attributes are allowed with an ellipsis (`...`):
 
 Example:
 
-    nix-repl> let
-              f = {a, b, ...}: a + b
-              in
-              f { a = 1; b = 2; c = 3; }
+```nix
+let
+  f = {a, b, ...}: a + b
+in
+f { a = 1; b = 2; c = 3; }
+```
+
     3
 
 ## Named keyword arguments
@@ -368,10 +407,13 @@ where additional attributes are subsumed under a name.
 
 Example:
 
-    nix-repl> let
-              f = {a, b, ...}@args: a + b + args.c
-              in
-              f { a = 1; b = 2; c = 3; }
+```nix
+let
+  f = {a, b, ...}@args: a + b + args.c
+in
+f { a = 1; b = 2; c = 3; }
+```
+
     6
 
 This can be useful if the passed attribute set also needs to be processed as a whole.
@@ -416,10 +458,13 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 
 <!-- TODO: details -->
 
-    nix-repl> let
-              name = "Nix";
-              in
-              "hello ${name}"
+```nix
+let
+  name = "Nix";
+in
+"hello ${name}"
+```
+
     "hello Nix"
 
 ## Indented strings
@@ -435,11 +480,14 @@ Equal amounts of prepended white space are trimmed from the result.
 
 Example:
 
-    nix-repl> ''
-                one
-                 two
-                  three
-              ''
+```nix
+''
+  one
+   two
+    three
+''
+```
+
     "one\n two\n  three\n"
 
 See [escaping rules]().
