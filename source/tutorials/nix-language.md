@@ -263,12 +263,25 @@ Example:
 
 ```nix
 let
-  attrset = { a = { b = { c = 2; }; }; };
+  attrset = { a = { b = { c = 1; }; }; };
 in
 attrset.a.b.c
 ```
 
-    2
+    1
+
+The dot (`.`) notation also works when assigning attributes.
+
+Example:
+
+```nix
+let
+  attrset = { a.b.c = 1; };
+in
+attrset
+```
+
+    { a = { b = { c = 1; }; }; }
 
 ## `with`
 
