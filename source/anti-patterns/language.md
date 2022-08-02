@@ -7,6 +7,7 @@ Nix syntax supports URLs as verbatim, so one can write `https://example.com` ins
 There's was an [RFC 45](https://github.com/NixOS/rfcs/pull/45) accepted to deprecate verbatim URLS and provides
 a number of arguments how this feature does more harm than good.
 
+(rec-expression)=
 ## `rec { ... }` expression
 
 `rec` allows you to reference variables within an attribute set.

@@ -1,3 +1,5 @@
+(reading-nix-language)=
+
 # Reading the Nix language without fear
 
 The Nix language is used to declare packages and configurations for the Nix package manager.
@@ -21,11 +23,12 @@ It shows the most common and distingushing patterns in the Nix language:
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
 
+[manual-language]: https://nixos.org/manual/nix/stable/expressions/expression-language.html
+
 ## What do you need?
 
 - Familiarity with other programming languages
-<!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- Familiarity with Unix shell to read command line examples
+- Familiarity with Unix shell to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
 - Install the Nix package manager to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
@@ -92,13 +95,19 @@ There are two ways to assign names to values in Nix: attribute sets and `let` ex
 
 Assignments are denoted by a single equal sign (`=`).
 
-## Attribute sets
+## Attribute set `{ ... }`
 
-Attribute sets are unordered collections of name-value-pairs.
+An attribute set is an unordered collection of name-value-pairs.
 
-Together with primitive data types and lists, they work like in JSON and look very similar.
+Together with primitive data types and lists, attribute sets work like objects in JSON and look very similar.
 
-Nix language:
+<table>
+<tr>
+  <th>Nix language</th>
+  <th>JSON</th>
+</tr>
+<tr>
+<td>
 
 ```nix
 {
@@ -117,9 +126,8 @@ Nix language:
 }
 ```
 
-<!-- would be great to have those side by side -->
-
-JSON:
+</td>
+<td>
 
 ```json
 {
@@ -138,6 +146,10 @@ JSON:
 }
 ```
 
+</td>
+</tr>
+</table>
+
 :::{note}
 - Attribute names usually do not need quotes.[^1]
 - List elements are separated by white space.[^2]
@@ -148,7 +160,7 @@ JSON:
 
 [manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
 
-### Recursive attribute sets
+### Recursive attribute set `rec { ... }`
 
 You will sometimes see attribute sets declared with `rec` prepended.
 This allows access to attributes from within the set.
@@ -184,11 +196,11 @@ Counter-example:
                  |         ^
                 4|   three = two + 1;
 
-{ref}`We recommend to avoid the <ref-rec-expression>` and to use the `let` expression instead.
+{ref}`We recommend to avoid recursive sets <rec-expression>` and to use the `let` expression instead.
 
-## `let` expression
+## `let ... in ...`
 
-Also known as “`let` binding” or “`let ... in ...`”.
+Also known as “`let` expression” or “`let` binding”
 
 `let` expressions allow assigning names to values for repeated use.
 
@@ -218,7 +230,7 @@ a + b
 
     3
 
-Only the expressions in the `let` expression can access the newly declared names.
+Only expressions within the `let` expression itself can access the newly declared names.
 We say: the bindings have local scope.
 
 Counter-example:
@@ -242,7 +254,7 @@ Counter-example:
 
 <!-- TODO: exercise - use let to reuse a value in an attribute set -->
 
-## Accessing attributes
+## Attribute access
 
 Attributes in a set can be accessed with a dot (`.`) and the attribute name.
 
@@ -283,9 +295,9 @@ attrset
 
     { a = { b = { c = 1; }; }; }
 
-## `with`
+## `with ...; ...`
 
-`with` allows access to attributes without repeatedly referencing their attribute set.
+The `with` expression allows access to attributes without repeatedly referencing their attribute set.
 
 Example:
 
@@ -337,7 +349,7 @@ in
                  |       ^
                11| }
 
-## `inherit`
+## `inherit ...`
 
 One can assign attributes from variables that have the same name with `inherit`.
 It is for convenience to avoid repeating the same name multiple times.
@@ -391,7 +403,7 @@ is equivalent to
 
 Functions are everywhere in the Nix language.
 
-## Arguments
+## Argument
 
 Nix functions take exactly one argument.
 
@@ -463,7 +475,9 @@ f 1 2
 
 <!-- TODO: exercise - assign the lambda a name and do something with it -->
 
-## Keyword arguments
+## Attribute set argument
+
+Also known as “keyword arguments”.
 
 Nix functions can explicitly take an attribute set as argument.
 
@@ -532,7 +546,7 @@ f { a = 1; b = 2; c = 3; }
 
     3
 
-## Named keyword arguments
+## Named attribute argument
 
 Also known as “@ syntax” or “‘at’ syntax”:
 
@@ -542,7 +556,7 @@ or
 
     args@{a, b, ...}: a + b + args.c
 
-where additional attributes are subsumed under a name.
+where the passed attribute set is given a name, and some of its attributes are required.
 
 Example:
 
@@ -682,9 +696,13 @@ Example:
 
 ```nix
 { lib, stdenv }:
+
 stdenv.mkDerivation rec {
+
   pname = "hello";
+
   version = "2.12";
+
   src = builtins.fetchTarball {
     url = "mirror://gnu/hello/hello-${version}.tar.gz";
     sha256 = "1ayhp9v4m4rdhjmnl2bq3cibrbqqkgjbl3s7yk2nhlh8vj3ay16g";
@@ -698,7 +716,7 @@ stdenv.mkDerivation rec {
 
 Explanation:
 
-This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv.`
+This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
 It returns the result of evaluating the function `mkDerivaion` from `stdenv` applied to a recursive set.
 The recursive set passed to `mkDerivation` uses its own `version` attribute in the argument to the built-in function `fetchTarball`.
 The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
@@ -723,33 +741,44 @@ As a programming language, Nix is
 
 - *lazy*
 
-  It will only evaluate expressions when their result is needed.[^1]
+  It will only evaluate expressions when their result is needed.[^4]
 
 - *dynamically typed*
 
-  Type errors are only detected when expressions are actually evaluated.[^2]
+  Type errors are only detected when expressions are actually evaluated.[^5]
 
 - *purpose-built*
 
   The Nix language only exists for the Nix package manager.
   It is not intended for general purpose use.
 
-[^1]: For example, the built-in function `throw` causes evaluation to stop. However, the following works, because `throw` is never evaluated:
+[^4]: For example, the built-in function `throw` causes evaluation to stop. However, the following works, because `throw` is never evaluated:
 
-     nix-repl> let lazy = { a = "success"; b = builtins.throw "error"; }; in lazy.a
-    "success"
+      ```nix
+      let lazy = { a = "success"; b = builtins.throw "error"; }; in lazy.a
+      ```
 
-[^2]: For example, while one cannot add integers to strings, the error is only detected when trying to get the result:
+          "success"
 
-    nix-repl> let x = { a = 1 + "1"; b = 2; }; in x.b
-    2
+[^5]: For example, while one cannot add integers to strings, the error is not detected by simply parsing the meaningless expression.
 
-    nix-repl> let x = { a = 1 + "1"; b = 2; }; in x.a
-    error: cannot add a string to an integer
+      ```nix
+      let x = { a = 1 + "1"; b = 2; }; in x.b
+      ```
 
-           at «string»:1:19:
+          2
 
-                1| let x = { a = 1 + "1"; b = 2; }; in x.a
-                 |                   ^
-                2|
+      The error only detected on evaluation, that is, when trying to access the result.
+
+      ```nix
+      let x = { a = 1 + "1"; b = 2; }; in x.a
+      ```
+
+          error: cannot add a string to an integer
+
+                 at «string»:1:19:
+
+                      1| let x = { a = 1 + "1"; b = 2; }; in x.a
+                       |                   ^
+                      2|
 
