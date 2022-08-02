@@ -11,7 +11,7 @@ This guide should enable you to read typical Nix language code and understand it
 
 It shows the most common and distingushing patterns in the Nix language:
 
-- assigning names
+- assigning names and accessing values
 - declaring and calling functions
 - referencing file system paths
 - working with character strings
@@ -27,6 +27,7 @@ See the [Nix manual][manual-language] for a full language reference.
 <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
 - Familiarity with Unix shell to read command line examples
 - Install the Nix package manager to run the examples
+<!-- TODO: approximate amount of time, as observed with test subjects -->
 
 # Basic Concepts
 
@@ -85,7 +86,7 @@ nix-repl> 1 + 2
 3
 ```
 
-# Names
+# Names and values
 
 There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
 
@@ -95,7 +96,7 @@ Assignments are denoted by a single equal sign (`=`).
 
 Attribute sets are unordered collections of name-value-pairs.
 
-Together with primitive data types and lists, they work exactly like in JSON and look very similar.
+Together with primitive data types and lists, they work like in JSON and look very similar.
 
 Nix language:
 
@@ -150,7 +151,7 @@ JSON:
 ### Recursive attribute sets
 
 You will sometimes see attribute sets declared with `rec` prepended.
-This allows expressions in the attribute set to access other attribute names in the set.
+This allows access to attributes from within the set.
 
 Example:
 
@@ -187,7 +188,7 @@ Counter-example:
 
 ## `let` expression
 
-Also known as “`let` binding” or “`let ... in`”.
+Also known as “`let` binding” or “`let ... in ...`”.
 
 `let` expressions allow assigning names to values for repeated use.
 
@@ -203,7 +204,6 @@ a + a
     2
 
 As in attribute sets, names can be assigned in any order.
-
 In contrast to attribute sets, the expressions on the right of the assignment can refer to other assigned names.
 
 Example:
@@ -221,7 +221,7 @@ a + b
 Only the expressions in the `let` expression can access the newly declared names.
 We say: the bindings have local scope.
 
-Example:
+Counter-example:
 
 ```nix
 {
@@ -242,11 +242,137 @@ Example:
 
 <!-- TODO: exercise - use let to reuse a value in an attribute set -->
 
-<!-- TODO: # using names -->
-<!-- TODO: ## accessing attributes -->
-<!-- TODO: ## inherit -->
-<!-- TODO: ## with -->
-<!-- TODO: ## import -->
+## Accessing attributes
+
+Attributes in a set can be accessed with a dot (`.`) and the attribute name.
+
+Example:
+
+```nix
+let
+  attrset = { x = 1; };
+in
+attrset.x
+```
+
+    1
+
+Accessing nested attributes works the same way.
+
+Example:
+
+```nix
+let
+  attrset = { a = { b = { c = 2; }; }; };
+in
+attrset.a.b.c
+```
+
+    2
+
+## `with`
+
+`with` allows access to attributes without repeatedly referencing their attribute set.
+
+Example:
+
+```nix
+let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in
+with a; [ x y z ]
+```
+
+    [ 1 2 3 ]
+
+The expression
+
+    with a; [ x y z ]
+
+is equivalent to
+
+    [ a.x a.y a.z ]
+
+Attributes made available through `with` are only in scope of the expression following the semicolon (`;`).
+
+Counter-example:
+
+```nix
+let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in
+{
+  b = with a; [ x y z ];
+  c = x;
+}
+```
+
+    error: undefined variable 'x'
+
+           at «string»:10:7:
+
+                9|   b = with a; [ x y z ];
+               10|   c = x;
+                 |       ^
+               11| }
+
+## `inherit`
+
+One can assign attributes from variables that have the same name with `inherit`.
+It is for convenience to avoid repeating the same name multiple times.
+
+Example:
+
+```
+let
+  x = 1;
+  y = 2;
+in
+{
+  inherit x y;
+}
+```
+
+    { x = 1; y = 2; }
+
+The fragment
+
+    inherit x y;
+
+is equivalent to
+
+    x = x; y = y;
+
+It is also possible to `inherit` attributes from another set with parentheses (`inherit ( ... ) ...`).
+
+Example:
+
+```nix
+let
+  a = { x = 1; y = 2; };
+in
+{
+  inherit (a) x y;
+}
+```
+
+    { x = 1; y = 2; }
+
+The fragment
+
+    inherit (a) x y;
+
+is equivalent to
+
+    x = a.x; y = a.y;
 
 # Functions
 
