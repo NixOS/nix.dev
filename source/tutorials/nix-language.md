@@ -716,7 +716,7 @@ As a programming language, Nix is
 
 - *purely functional*
 
-  Pure means: Nix does not change the value of declarations during computation – there are no variables, only names for immutable values.
+  Pure means: Nix does not change the value of declarations during computation – there are no actual variables, only names for immutable values.
 
   Functional means: In Nix, functions are like any other value.
   Functions can be assigned to names, taken as arguments, or returned by functions.
@@ -727,7 +727,7 @@ As a programming language, Nix is
 
 - *dynamically typed*
 
-  Type errors are only detected when operations are actually evaluated.[^2]
+  Type errors are only detected when expressions are actually evaluated.[^2]
 
 - *purpose-built*
 
