@@ -635,7 +635,77 @@ See [escaping rules]().
 
 <!-- TODO: side effects - fetchers and derivations -->
 
-## Summary
+# Summary
+
+You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following examples.
+
+Example:
+
+```nix
+{ pkgs ? import <nixpkgs> {}, ... }:
+pkgs.mkShell {
+  # ...
+}
+```
+
+Explanation:
+
+This expression is a function that takes an attribute set as an argument.
+If the argument has the attribute `pkgs`, it will be used in the function body.
+Otherwise, the default value of importing from the search path `<nixpkgs>` and calling the resulting function with an empty attribute set will be used.
+The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
+Its return value is also the result of the outer function.
+
+(This example declares a shell environment.)
+
+Example:
+
+```nix
+{ config, pkgs, ... }: {
+  # ...
+  environment.systemPackages = with pkgs; [ git ];
+  # ...
+}
+```
+
+Explanation:
+
+This expression is also a function that takes an attribute set as an argument.
+It returns an attribute set.
+The argument must at least have the attributes `config` and `pkgs`.
+The returned attribute set contains a nested attribute set `environment` with an attribute `systemPackages`.
+`systemPackages` will evaluate to a list with one element: the `git` attribute of the `pkgs` set.
+
+(This example is a NixOS configuration.)
+
+Example:
+
+```nix
+{ lib, stdenv }:
+stdenv.mkDerivation rec {
+  pname = "hello";
+  version = "2.12";
+  src = builtins.fetchTarball {
+    url = "mirror://gnu/hello/hello-${version}.tar.gz";
+    sha256 = "1ayhp9v4m4rdhjmnl2bq3cibrbqqkgjbl3s7yk2nhlh8vj3ay16g";
+  };
+
+  meta = with lib; {
+    license = licenses.gpl3Plus;
+  };
+}
+```
+
+Explanation:
+
+This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv.`
+It returns the result of evaluating the function `mkDerivaion` from `stdenv` applied to a recursive set.
+The recursive set passed to `mkDerivation` uses its own `version` attribute in the argument to the built-in function `fetchTarball`.
+The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
+
+(This example is a (simplified) package declaration from `nixpkgs`.)
+
+# Nix language properties
 
 As a programming language, Nix is
 
