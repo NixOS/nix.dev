@@ -622,6 +622,8 @@ in
 
     "hello Nix"
 
+<!-- TODO: difference between ${foo} and $foo in build scripts -->
+
 ## Indented strings
 
     ''
