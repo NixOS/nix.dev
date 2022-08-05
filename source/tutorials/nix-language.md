@@ -609,7 +609,9 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 
 ## String interpolation
 
-<!-- TODO: details -->
+Also known as “antiquotiation”.
+
+<!-- TODO: details, especially how this relates to derivations and store paths -->
 
 ```nix
 let
