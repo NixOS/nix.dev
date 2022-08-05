@@ -89,20 +89,40 @@ buildInputs = lib.attrVals ["curl" "jq"] pkgs
 
 ## `<...>` search path
 
-`<...>` is syntax, commonly `<nixpkgs>` is for looking up Nix expression's path
-specified by shell environment variable `$NIX_PATH`.
+You will often see Nix language code samples that refer to `<nixpkgs>`.
 
-Two developers on different machines are likely to have `<nixpkgs>` point to different revisions,
-which will lead to getting different results.
+`<...>` is special syntax that was [introduced in 2011][1ecc97b6bd] to conveniently access values from the shell environment variable [`$NIX_PATH`][NIX_PATH].
 
-It's {ref}`possible to specify exact nixpkgs commit <ref-pinning-nixpkgs>` via `$NIX_PATH`,
-but that's still problematic unless:
+This means, the value of a search path depends on external system state.
+When using search paths, the same Nix expression can produce different results.
 
-1. You specify the commit **at one place only** and reference it else where.
-2. And you can control the environment via your source code,
-   so that a) applies by somehow setting `$NIX_PATH` via nix-shell or NixOS options
+In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, and is therefore likely to differ from machine to machine.
+
+:::{note}
+[Channels](https://nixos.wiki/wiki/Nix_channels) are a way of distributing Nix software.
+They are being phased out, but still used by default.
+:::
+
+For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of `nixpkgs`.
+Builds may work for one and fail for the other, causing confusion.
+
+It's <ref-pinning-nixpkgs>`possible to specify an exact \`nixpkgs\` revision ` via `$NIX_PATH`.
+But that is still problematic, unless:
+
+1. you specify the commit **at one place only**,
+
+   and
+
+2. you control the shell environment via your source code, setting `$NIX_PATH` via `nix-shell` or NixOS options.
+
+:::{note}
+We recommend to avoid using search paths and to disable channels by permanently setting `NIX_PATH=` to be empty.
+:::
 
 See {ref}`pinning-nixpkgs` for a tutorial on how to do better.
+
+[1ecc97b6bd]: https://github.com/NixOS/nix/commit/1ecc97b6bdb27e56d832ca48cdafd3dbb5185a04
+[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 
 ## `attr1 // attr2` merge operator
 

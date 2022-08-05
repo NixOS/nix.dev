@@ -13,15 +13,7 @@ In various Nix examples, you'll often see references to [\<nixpkgs>](https://git
 
 This is a **convenient** way to quickly demonstrate a Nix expression and get it working by importing Nix packages.
 
-However, the resulting Nix expression **is not fully reproducible**. The `<nixpkgs>` reference
-is set from the **local** `$NIX_PATH` environment variable. In most cases, this is set at the time Nix is installed
-to the `nixpkgs-unstable` channel, and therefore it is likely to differ from machine to machine.
-
-:::{note}
-[Channels](https://nixos.wiki/wiki/Nix_channels) are a way of distributing Nix software, but they are being phased out.
-Even though they are still used by default, it is recommended to avoid channels
-and `<nixpkgs>` by always setting `NIX_PATH=` to be empty.
-:::
+However, <ref-search-path>`the resulting Nix expression is not fully reproducible`.
 
 ## Pinning packages with URLs inside a Nix expression
 
