@@ -695,7 +695,7 @@ Example:
 
 ```nix
 { config, pkgs, ... }: {
-  # ...
+  imports = [ ./hardware-configuration.nix ];
   environment.systemPackages = with pkgs; [ git ];
   # ...
 }
@@ -706,8 +706,11 @@ Explanation:
 This expression is also a function that takes an attribute set as an argument.
 It returns an attribute set.
 The argument must at least have the attributes `config` and `pkgs`.
-The returned attribute set contains a nested attribute set `environment` with an attribute `systemPackages`.
+The returned attribute set contains an attribute `imports` and a nested attribute set `environment` with an attribute `systemPackages`.
+`imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+(Note: it is not the impure built-in `import`, but a regular attribute name!)
 `systemPackages` will evaluate to a list with one element: the `git` attribute of the `pkgs` set.
+The `config` argument is not used.
 
 (This example is a NixOS configuration.)
 
@@ -736,7 +739,7 @@ stdenv.mkDerivation rec {
 Explanation:
 
 This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
-It returns the result of evaluating the function `mkDerivaion` from `stdenv` applied to a recursive set.
+It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
 The recursive set passed to `mkDerivation` uses its own `version` attribute in the argument to the built-in function `fetchTarball`.
 The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
