@@ -173,9 +173,9 @@ Examples:
 ### Markdown
 
 Write one sentence per line.
-This makes it easier to manage changes.
-The rule is unambiguous and does not require tooling support to be applied easily.
+This makes long sentences immediately visible, and makes it easier to manage changes.
 
+The rule is unambiguous and does not require tooling support to be applied easily.
 [Here is a discussion of different line wrapping styles.]
 
 Use [reference links] to keep the plain text readable.
