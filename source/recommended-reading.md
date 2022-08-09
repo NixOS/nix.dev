@@ -2,10 +2,25 @@
 
 ## Nix language tutorials
 
-- [Learn Nix in Y minutes](https://learnxinyminutes.com/docs/nix/)
-- [Nix by Example](https://medium.com/@MrJamesFisher/nix-by-example-a0063a1a4c55)
-- [Nix lanuage one-pager reference](https://github.com/tazjin/nix-1p)
-- [Video: Nix language overview](https://www.youtube.com/watch?v=eCapIx9heBw&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&index=5)
+- [Nix lanuage one-pager reference](https://github.com/tazjin/nix-1p) (Vincent Ambo, 2019-2021)
+
+  Overview of common language features and widely used idioms.
+
+- [A tour of Nix](https://nixcloud.io/tour) (Joachim Schiele, 2015-2022)
+
+  Interactive exercises with the Nix language.
+
+- [Video: Nix language overview](https://www.youtube.com/watch?v=eCapIx9heBw&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&index=5) (Wil Taylor, 2021)
+
+  Overview of language features.
+
+- [Video: Reading the Nix language](https://youtu.be/hbJkMl631FE?t=1533) (Jonas Chevalier, 2019)
+
+  Introduction to reading Nix language code.
+
+- [Video: How and Why it Works](https://youtu.be/hbJkMl631FE?t=4806) (Graham Christensen, 2019)
+
+  Introduction to writing derivations.
 
 ## [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix)
 
