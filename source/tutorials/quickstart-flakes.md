@@ -143,11 +143,12 @@ This is a default overlay that can be consumed by other flakes.
 
 # Other resources
 
-- [This nix flake page in the wiki](https://nixos.wiki/wiki/Flakes)
-- [The nix flake section of the Nix manual](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html)
+- [Nix manual: `nix flake`](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html)
 - [Eelco Dolstra's tutorial, part 1](https://www.tweag.io/blog/2020-05-25-flakes/)
 - [Eelco Dolstra's tutorial, part 2](https://www.tweag.io/blog/2020-06-25-eval-cache/)
 - [Eelco Dolstra's tutorial, part 3](https://www.tweag.io/blog/2020-07-31-nixos-flakes/)
+- [NixOS Wiki: Flakes](https://nixos.wiki/wiki/Flakes)
+
 - [Xe Iaso's nix flakes series](https://christine.website/blog/series/nix-flakes)
 - [zimbatm's post](https://zimbatm.com/notes/nixflakes)
 - [y|sndr's blog post](https://blog.ysndr.de/posts/internals/2021-01-01-flake-ification/)
