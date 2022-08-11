@@ -114,7 +114,7 @@ If your flake provides only one package, or there is a clear "main"
 package, include this:
 
 ```
-defaultPackage."<system>" = derivation;
+defaultPackage.<system> = <derivation>;
 ```
 
 `<system>` is something like "x86_64-linux", "aarch64-linux", "i686-linux", or "x86_64-darwin".
