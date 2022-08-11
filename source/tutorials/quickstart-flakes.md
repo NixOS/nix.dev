@@ -70,14 +70,11 @@ inputs.grid.url = "path:/home/amy/github/grid";
 
 See the [Nix documentation](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-inputs) for more options.
 
-Each of the `inputs` is fetched, evaluated and passed to the `outputs`
-function as a set of attributes with the same name as the
-corresponding input.
-
 ## Outputs
 
-We said above that `inputs` are passed to the `outputs`,
-so we need to list them as parameters.
+Each of the `inputs` is fetched, evaluated and passed to the `outputs` function as a set of attributes with the same name as the corresponding input.
+Therefore we need to list them as parameters.
+
 This example references the `import-cargo` dependency defined
 in the previous example.
 
