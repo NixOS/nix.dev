@@ -87,7 +87,7 @@ outputs = { self, nixpkgs, import-cargo }: {
 };
 ```
 
-Below, we look at the most common elements in the outputs section.
+Below, we look at the most common elements in the `outputs` section.
 For information on other things that can go here,
 see the [wiki](https://nixos.wiki/wiki/Flakes).
 
