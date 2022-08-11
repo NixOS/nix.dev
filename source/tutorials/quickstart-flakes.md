@@ -43,6 +43,7 @@ This section specifies the dependencies of a flake.
 Each entry maps an input name to a *flake reference*:
 
     inputs.<name> = <flake>;
+
 The most common type of flake reference is a
 Git or Mercurial repositories.
 Here's a simple example:
