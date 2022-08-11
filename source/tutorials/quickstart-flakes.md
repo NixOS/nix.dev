@@ -106,7 +106,7 @@ whatever system types you support.
 - `"i686-linux"`
 - `"x86_64-darwin"`
 <!-- TODO: add link to complete list of systems -->
-This is executed by `nix build .#<name>`
+This is what gets built by `nix build .#<name>`
 
 ### The default package
 
