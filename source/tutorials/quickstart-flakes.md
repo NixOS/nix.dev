@@ -3,6 +3,9 @@
 This guide focuses on things that you need to know as a beginner,
 directing you where to go for more information on each particular topic.
 
+## Prerequisites
+- reading the Nix language <!-- TODO: link to currently recommended resource -->
+
 ## Templates
 
 You don't have to write flakes from scratch, there are several
