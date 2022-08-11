@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    "description lang=en": "An opinionated guide for developers wanting to get things done with the Nix ecosystem."
+    "description lang=en": "Opinionated guides to getting things done in the Nix ecosystem."
     "keywords": "Nix, NixOS, packaging, Linux, deployment, build systems, reproducible, developer"
     "property=og:locale": "en_US"
 ---
