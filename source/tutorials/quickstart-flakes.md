@@ -95,7 +95,7 @@ see the [wiki](https://nixos.wiki/wiki/Flakes).
 ### Build instructions
 
 ```
-packages."<system>"."<name>" = derivation;
+packages.<system>.<name> = <derivation>;
 ```
 
 This is where you specify how to build the binary package for
