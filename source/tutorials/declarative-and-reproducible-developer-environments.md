@@ -41,7 +41,7 @@ pkgs.mkShell {
 ```
 
 :::{note}
-To understand the first line, read through {ref}`pinning nixpkgs tutorial <ref-pinning-nixpkgs>`.
+To understand the first line, read through {ref}`pinning nixpkgs tutorial <pinning-nixpkgs>`.
 :::
 
 We import `nixpkgs` and make a shell with `which` and `htop` available in `$PATH`.

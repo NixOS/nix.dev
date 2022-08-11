@@ -38,7 +38,6 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 tutorials/index.rst
 templates/index.rst
 anti-patterns/index.rst
-reference/index.rst
 faq.rst
 recommended-reading.rst
 influences.rst
