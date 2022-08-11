@@ -100,7 +100,12 @@ packages."<system>"."<name>" = derivation;
 
 This is where you specify how to build the binary package for
 whatever system types you support.
-`<system>` is something like "x86_64-linux", "aarch64-linux", "i686-linux", or "x86_64-darwin".
+`<system>` can be
+- `"x86_64-linux"`
+- `"aarch64-linux"`
+- `"i686-linux"`
+- `"x86_64-darwin"`
+<!-- TODO: add link to complete list of systems -->
 This is executed by `nix build .#<name>`
 
 ### The default package
