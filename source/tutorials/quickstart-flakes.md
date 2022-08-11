@@ -53,7 +53,7 @@ inputs.import-cargo = {
 };
 ```
 
-Equivalently, you could just write:
+Equivalently, you can use the URL-like shorthand syntax:
 
 ```
 inputs.import-cargo.url = "github:edolstra/import-cargo";
