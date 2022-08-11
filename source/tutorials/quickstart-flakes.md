@@ -83,7 +83,7 @@ in the previous example.
 
 ```
 outputs = { self, nixpkgs, import-cargo }: {
-  ... outputs ...
+  ... # outputs
 };
 ```
 
