@@ -34,7 +34,7 @@ The basic structure of a flake is
 
 The `description` part is self-explanatory.
 You probably won't need `nixConfig` unless you're doing something fancy.
-We'll focus on what goes into the `inputs` and `outputs` sections,
+We'll focus on what goes into the `inputs` and `outputs` attributes,
 and highlight some of the things that beginners may find confusing.
 
 ## Inputs
