@@ -28,8 +28,8 @@ It shows the most common and distingushing patterns in the Nix language:
 - declaring and calling functions
 - referencing file system paths
 - working with character strings
-- using built-in functions and the standard library
-- declaring build inputs and build outputs
+- built-in functions and the standard library
+- using build inputs and build results
 
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
