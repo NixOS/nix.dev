@@ -603,6 +603,11 @@ They are relative to the file containing the expression:
 
     relative/path
 
+One dot (`.`) as the last path element is ignored.
+It can be used to denote the current directory:
+
+    ./.
+
 [^3]: Details: [Nix manual - primitive data types][manual-primitives]
 
 ## Search path
