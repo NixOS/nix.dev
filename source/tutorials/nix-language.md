@@ -668,7 +668,58 @@ See [escaping rules]().
 
 # Using existing functions
 
-<!-- TODO: built-ins and library -->
+There are three widely used libraries that could be considered standard for the Nix language.
+You need to know about all three to understand and navigate Nix language code.
+
+We recommend to at least skim them to familiarise yourself with what is available.
+
+## `builtins`
+
+Nix comes with many functions that are built into the language.
+
+:::{note}
+The Nix manual lists all [Built-in Functions][nix-builtins] and shows how to use them.
+:::
+
+These functions are available under the `builtins` constant. Example:
+
+    builtins.toString
+
+Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in the Nix language.
+
+[nix-builtins]: https://nixos.org/manual/nix/stable/expressions/builtins.html
+
+## `pkgs.lib`
+
+The Nix package collection [`nixpkgs`][nixpkgs] contains an attribute set called `lib`, which provides a large number of useful functions.
+
+:::{note}
+The `nixpkgs` manual lists all [Nixpkgs library functions][nixpkgs-functions].
+:::
+
+These functions are accessed through `pkgs.lib`. Example:
+
+    pkgs.lib.strings.toUpper
+
+[nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+
+## Trivial builders
+
+Outside of the `nixpkgs` library there is a collection of utilities for 
+
+- writing text files
+- writing shell scripts
+- running shell commands and capturing their output.
+
+:::{note}
+Trivial builders are defined and documented in `nixpkgs` source code [Nixos/nixpkgs:pkgs/build-support/trivial-builders.nix][trivial-builders].
+:::
+
+These functions are accessed through `pkgs`. Example:
+
+    pkgs.writeText
+
+[trivial-builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix
 
 # Building software using side effects
 
@@ -766,4 +817,5 @@ The `meta` attribute is itself an attribute set, where the `license` attribute h
 
 (This example is a (simplified) package declaration from `nixpkgs`.)
 
+# Next steps
 
