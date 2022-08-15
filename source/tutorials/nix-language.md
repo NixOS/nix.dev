@@ -368,7 +368,7 @@ in
 
 ## `inherit ...`
 
-One can assign attributes from variables that have the same name with `inherit`.
+With `inherit` one can assign existing names to attributes of the same name.
 It is for convenience to avoid repeating the same name multiple times.
 
 Example:
