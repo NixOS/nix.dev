@@ -565,7 +565,7 @@ f { a = 1; b = 2; c = 3; }
 
 ## Named attribute argument
 
-Also known as “@ syntax” or “‘at’ syntax”:
+Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”:
 
     {a, b, ...}@args: a + b + args.c
 
