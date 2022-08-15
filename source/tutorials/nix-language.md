@@ -38,9 +38,9 @@ See the [Nix manual][manual-language] for a full language reference.
 
 ## What do you need?
 
-- Familiarity with other programming languages
-- Familiarity with Unix shell to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- Install the Nix package manager to run the examples
+- Familiarity with software development
+- Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
+- Install the Nix package manager, to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
 # Basic Concepts
