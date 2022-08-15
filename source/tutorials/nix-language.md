@@ -172,7 +172,7 @@ Together with primitive data types and lists, attribute sets work like objects i
 - List elements are separated by white space.[^2]
 :::
 
-[^1]: Details: [Nix manual - attribute naming rules]()
+[^1]: Details: Nix manual - attribute naming rules <!-- TODO: create and link manual section -->
 [^2]: Details: [Nix manual - lists][manual-lists]
 
 [manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
@@ -664,7 +664,7 @@ Example:
 
     "one\n two\n  three\n"
 
-See [escaping rules]().
+<!-- TODO: See [escaping rules](). -->
 
 # Using existing functions
 
