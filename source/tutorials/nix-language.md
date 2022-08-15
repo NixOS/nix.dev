@@ -154,7 +154,7 @@ Together with primitive data types and lists, attribute sets work like objects i
   "bool": true,
   "null": null,
   "list": [1, "two", false],
-  "set": {
+  "object": {
     "a": "hello",
     "b": 1,
     "c": 2.718,
