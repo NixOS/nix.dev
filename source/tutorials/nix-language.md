@@ -11,7 +11,7 @@ Using the Nix language in practice entails multiple things:
 
 - language: syntax and semantics
 - standard libraries: `builtins` and `nixpkgs/lib`
-- generic build mechanisms: `stdenv.mkDerivation`, `runCommand`, `writeShellScriptBin`, ...
+- generic build mechanisms: `stdenv`, trivial builders, ...
 - composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
 - ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
@@ -668,8 +668,8 @@ See [escaping rules]().
 
 # Using existing functions
 
-There are three widely used libraries that could be considered standard for the Nix language.
-You need to know about all three to understand and navigate Nix language code.
+There are two widely used libraries that *together* can be considered standard for the Nix language.
+You need to know about both to understand and navigate Nix language code.
 
 We recommend to at least skim them to familiarise yourself with what is available.
 
@@ -702,24 +702,6 @@ These functions are accessed through `pkgs.lib`. Example:
     pkgs.lib.strings.toUpper
 
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
-
-## Trivial builders
-
-Outside of the `nixpkgs` library there is a collection of utilities for 
-
-- writing text files
-- writing shell scripts
-- running shell commands and capturing their output.
-
-:::{note}
-Trivial builders are defined and documented in `nixpkgs` source code [Nixos/nixpkgs:pkgs/build-support/trivial-builders.nix][trivial-builders].
-:::
-
-These functions are accessed through `pkgs`. Example:
-
-    pkgs.writeText
-
-[trivial-builders]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix
 
 # Building software using side effects
 
