@@ -774,14 +774,17 @@ Example:
 
 Explanation:
 
-This expression is also a function that takes an attribute set as an argument.
-It returns an attribute set.
-The argument must at least have the attributes `config` and `pkgs`.
-The returned attribute set contains an attribute `imports` and a nested attribute set `environment` with an attribute `systemPackages`.
-`imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
-(Note: it is not the impure built-in `import`, but a regular attribute name!)
-`systemPackages` will evaluate to a list with one element: the `git` attribute of the `pkgs` set.
-The `config` argument is not used.
+- This expression is a function that takes an attribute set as an argument.
+  It returns an attribute set.
+- The argument must at least have the attributes `config` and `pkgs`.
+- The returned attribute set contains an attribute `imports` and a nested attribute set `environment` with an attribute `systemPackages`.
+  `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+
+  :::{note}
+  `imports` is not the impure built-in `import`, but a regular attribute name!
+  :::
+- `systemPackages` will evaluate to a list with one element: the `git` attribute of the `pkgs` set.
+- The `config` argument is not used.
 
 (This example is a NixOS configuration.)
 
