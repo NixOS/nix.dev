@@ -418,11 +418,9 @@ is equivalent to
 
 # Functions
 
-Functions are everywhere in the Nix language.
+Functions are everywhere in the Nix language and deserve particular attention.
 
-## Argument
-
-Nix functions take exactly one argument.
+Functions take exactly one argument.
 
     x: x + 1
 
