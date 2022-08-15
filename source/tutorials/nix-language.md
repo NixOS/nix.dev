@@ -445,7 +445,7 @@ Example
 Nix functions have no name when declared.
 We say they are anonymous, or call such a function a *lambda*.
 
-We can assign functions a name like any to other value.
+We can assign functions a name as to any other value.
 
 Example:
 
