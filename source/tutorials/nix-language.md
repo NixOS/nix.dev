@@ -7,6 +7,17 @@ The Nix language is used to declare packages and configurations for the Nix pack
 You will quickly encounter Nix language expressions that may look very complicated.
 Yet, the language has only few basic constructs which can be combined arbitrarily.
 
+Using the Nix language in practice entails multiple things:
+
+- language: syntax and semantics
+- standard libraries: `builtins` and `nixpkgs/lib`
+- generic build mechanisms: `stdenv.mkDerivation`, `runCommand`, `writeShellScriptBin`, ...
+- composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
+- ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
+- NixOS module system: `config`, `option`, ...
+
+This tutorial will *only* cover syntax and semantics, and guide you to resources for learning the other components.
+
 ## What will you learn?
 
 This guide should enable you to read typical Nix language code and understand its structure.
