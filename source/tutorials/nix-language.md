@@ -741,18 +741,24 @@ Example:
 
 ```nix
 { pkgs ? import <nixpkgs> {}, ... }:
+let
+  name = "example";
+in
 pkgs.mkShell {
-  # ...
+  inherit name;
+  src = ./.;
 }
 ```
 
 Explanation:
 
-This expression is a function that takes an attribute set as an argument.
-If the argument has the attribute `pkgs`, it will be used in the function body.
-Otherwise, the default value of importing from the search path `<nixpkgs>` and calling the resulting function with an empty attribute set will be used.
-The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
-Its return value is also the result of the outer function.
+- This expression is a function that takes an attribute set as an argument.
+- If the argument has the attribute `pkgs`, it will be used in the function body.
+  Otherwise, the default value of importing from the search path `<nixpkgs>` and calling the resulting function with an empty attribute set will be used.
+- The variable `name` is bound to the string value `"example"`.
+- The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
+  Its return value is also the result of the outer function.
+- The passed attribute set has the attributes `name` (set to `"example"`) and `src` (set to the current directory).
 
 (This example declares a shell environment.)
 
