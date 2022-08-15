@@ -599,14 +599,22 @@ Absolute paths always start with a slash (`/`):
 Paths are relative when they contain at least one slash (`/`) but to not start with one.
 They are relative to the file containing the expression:
 
-    ./relative
+```nix
+./relative
+```
 
-    relative/path
+```nix
+relative/path
+```
 
-One dot (`.`) as the last path element is ignored.
-It can be used to denote the current directory:
+One dot (`.`) denotes the same directory.
+This is typically used to denote the current directory:
 
-    ./.
+```nix
+./.
+```
+
+Two dots (`..`) denote the parent directory.
 
 [^3]: Details: [Nix manual - primitive data types][manual-primitives]
 
