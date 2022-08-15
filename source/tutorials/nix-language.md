@@ -683,7 +683,11 @@ There are two main side effects in the Nix language that are relevant here:
 
 <!-- TODO: side effects - fetchers and derivations -->
 
-See Nix Pills for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
+
+
+See the [Nix Pills][nix-pills] series for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
+
+[nix-pills]: https://nixos.org/guides/nix-pills/
 
 # Summary
 
