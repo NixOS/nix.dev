@@ -451,12 +451,12 @@ Example:
 
 ```nix
 let
-  f = x: x + 1;
+  f = x: x.a
 in
-f 1
+f { a = 1; }
 ```
 
-    2
+    1
 
 Arguments can be chained.
 
