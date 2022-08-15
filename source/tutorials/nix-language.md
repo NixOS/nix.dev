@@ -76,8 +76,9 @@ Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
 echo 1 + 2 > file.nix
 
 nix-instantiate --eval file.nix
-3
 ```
+
+    3
 
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
@@ -86,19 +87,24 @@ nix-instantiate --eval file.nix
 echo 1 + 2 > default.nix
 
 nix-instantiate --eval
-3
 ```
+
+    3
 :::
 
 Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
 
 ```console
 nix repl
-Welcome to Nix 2.5.1. Type :? for help.
-
-nix-repl> 1 + 2
-3
 ```
+
+    Welcome to Nix 2.5.1. Type :? for help.
+
+```console
+nix-repl> 1 + 2
+```
+
+    3
 
 # Names and values
 
