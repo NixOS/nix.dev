@@ -432,7 +432,7 @@ Wherever you see a colon (`:`) in Nix language code:
 - on its left is the function argument
 - on its right is the function body.
 
-Applying a function to an argument means writing the argument after the function.
+Calling a function with an operand means writing the operand after the function.
 
 Example
 
