@@ -730,10 +730,10 @@ There are two main side effects in the Nix language that are relevant here:
 
 ### Build inputs
 
-<!-- TODO: side effects - fetchers and derivations -->
 
 ### Build results
 
+<!-- TODO: side effects - fetchers and derivations -->
 
 See the [Nix Pills][nix-pills] series for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
 
@@ -824,6 +824,4 @@ The recursive set passed to `mkDerivation` uses its own `version` attribute in t
 The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
 (This example is a (simplified) package declaration from `nixpkgs`.)
-
-# Next steps
 
