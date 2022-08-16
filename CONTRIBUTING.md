@@ -197,7 +197,7 @@ Terms in parentheses (`(  )`) are abbreviations.
 
   - Nix package manager
 
-    Command line tool.
+    - `nix` [command [line interface]] (Nix CLI)
 
   - Nix language
 
