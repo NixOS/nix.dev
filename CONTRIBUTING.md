@@ -184,7 +184,7 @@ Collect links at the end of each section, which are delimited by headings.
 [Here is a discussion of different line wrapping styles.]: https://web.archive.org/web/20220519121408/https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
 [reference links]: https://github.github.com/gfm/#reference-link
 
-### Nomenclature
+### Terminology
 
 To avoid confusion around all the things called Nix, always use the following terms with capitalization as given:
 
