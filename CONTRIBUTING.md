@@ -215,4 +215,4 @@ To avoid confusion around all the things called Nix, always use the following te
   - NixOS
 
     Linux distribution based on Nix package manager and `nixpkgs`.
-    Read "Nix Oh Es".
+    Read /nɪks oʊ ɛs/ ("Nix Oh Es").
