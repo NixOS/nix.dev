@@ -201,7 +201,7 @@ Terms in parentheses (`(  )`) are abbreviations.
 
   - Nix language
 
-      Programming langauge to declare packages and configurations for the Nix package manager.
+      Programming language to declare packages and configurations for the Nix package manager.
 
     - Nix expression
 
