@@ -215,7 +215,9 @@ Terms in parentheses (`(  )`) are abbreviations.
 
     Read `nixpkgs` as "Nix packages".
 
-  - NixOS
+  - NixOS [Linux distribution]
 
     Linux distribution based on Nix package manager and `nixpkgs`.
     Read /nɪks oʊ ɛs/ ("Nix Oh Es").
+
+    - NixOS module collection (NixOS modules)
