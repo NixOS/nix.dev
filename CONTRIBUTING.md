@@ -186,7 +186,10 @@ Collect links at the end of each section, which are delimited by headings.
 
 ### Terminology
 
-To avoid confusion around all the things called Nix, always use the following terms with capitalization as given:
+To avoid confusion around all the things called Nix, always use the following terms with capitalization as given.
+
+Terms in brackets (`[  ]`) are optional.
+Terms in parentheses (`(  )`) are abbreviations.
 
 - Nix ecosystem
 
