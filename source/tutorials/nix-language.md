@@ -719,7 +719,7 @@ These functions are accessed through `pkgs.lib`. Example:
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-Building software requires interaction with the outside world, which we call *side effects*.
+Building software requires interaction with the outside world, called *side effects*.
 
 There are two main side effects in the Nix language that are relevant here:
 1. Reading files from the file system as build inputs
