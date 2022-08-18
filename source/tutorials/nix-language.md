@@ -447,7 +447,9 @@ is equivalent to
 
 Functions are everywhere in the Nix language and deserve particular attention.
 
-Functions take exactly one argument.
+### Single argument
+
+Functions in Nix language can appear in different forms, but always take exactly one argument.
 
     x: x + 1
 
@@ -456,6 +458,9 @@ Argument and function body are separated by a colon (`:`).
 Wherever you see a colon (`:`) in Nix language code:
 - on its left is the function argument
 - on its right is the function body.
+
+
+### Calling functions
 
 Calling a function with an operand means writing the operand after the function.
 
