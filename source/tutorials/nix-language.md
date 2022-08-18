@@ -1,8 +1,10 @@
 (reading-nix-language)=
 
-# Reading the Nix language without fear
+# Nix language basics
 
-The Nix language is used to declare packages and configurations for the Nix package manager.
+The Nix language is a domain-specific, purely functional, lazily evaluated programming language, used to declare packages and configurations for the Nix package manager.
+
+## Reading the Nix language without fear
 
 You will quickly encounter Nix language expressions that may look very complicated.
 Yet, the language has only few basic constructs which can be combined arbitrarily.
@@ -18,7 +20,7 @@ Using the Nix language in practice entails multiple things:
 
 This guide *only* covers syntax and semantics, and will direct you to resources for learning the other components.
 
-## What will you learn?
+### What will you learn?
 
 This guide should enable you to read typical Nix language code and understand its structure.
 
@@ -36,14 +38,14 @@ See the [Nix manual][manual-language] for a full language reference.
 
 [manual-language]: https://nixos.org/manual/nix/stable/expressions/expression-language.html
 
-## What do you need?
+### What do you need?
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
 - Install the Nix package manager, to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
-# Basic Concepts
+## Basic Concepts
 
 Imagine the Nix language as *JSON with functions*.
 
@@ -58,7 +60,7 @@ Every Nix file (`.nix`) contains a single expression.
 To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
 :::
 
-## Running examples
+### Running examples
 
 All examples in this guide are valid Nix files that you can run yourself.
 
@@ -106,13 +108,13 @@ nix-repl> 1 + 2
 
     3
 
-# Names and values
+## Names and values
 
 There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
 
 Assignments are denoted by a single equal sign (`=`).
 
-## Attribute set `{ ... }`
+### Attribute set `{ ... }`
 
 An attribute set is an unordered collection of name-value-pairs.
 
@@ -177,7 +179,7 @@ Together with primitive data types and lists, attribute sets work like objects i
 
 [manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
 
-### Recursive attribute set `rec { ... }`
+#### Recursive attribute set `rec { ... }`
 
 You will sometimes see attribute sets declared with `rec` prepended.
 This allows access to attributes from within the set.
@@ -215,7 +217,7 @@ Counter-example:
 
 {ref}`We recommend to avoid recursive sets <rec-expression>` and to use the `let` expression instead.
 
-## `let ... in ...`
+### `let ... in ...`
 
 Also known as “`let` expression” or “`let` binding”
 
@@ -271,7 +273,7 @@ Counter-example:
 
 <!-- TODO: exercise - use let to reuse a value in an attribute set -->
 
-## Attribute access
+### Attribute access
 
 Attributes in a set can be accessed with a dot (`.`) and the attribute name.
 
@@ -312,7 +314,7 @@ attrset
 
     { a = { b = { c = 1; }; }; }
 
-## `with ...; ...`
+### `with ...; ...`
 
 The `with` expression allows access to attributes without repeatedly referencing their attribute set.
 
@@ -366,7 +368,7 @@ in
                  |       ^
                11| }
 
-## `inherit ...`
+### `inherit ...`
 
 With `inherit` one can assign existing names to attributes of the same name.
 It is for convenience to avoid repeating the same name multiple times.
@@ -416,7 +418,7 @@ is equivalent to
 
     x = a.x; y = a.y;
 
-# Functions
+## Functions
 
 Functions are everywhere in the Nix language and deserve particular attention.
 
@@ -490,7 +492,7 @@ f 1 2
 
 <!-- TODO: exercise - assign the lambda a name and do something with it -->
 
-## Attribute set argument
+### Attribute set argument
 
 Also known as “keyword arguments”.
 
@@ -512,7 +514,7 @@ f { a = 1; b = 2; }
 
     3
 
-## Default attributes
+### Default attributes
 
 Also known as “default arguments”.
 
@@ -544,7 +546,7 @@ f { } # empty attribute set
 
     0
 
-## Additional attributes
+### Additional attributes
 
 Additional attributes are allowed with an ellipsis (`...`):
 
@@ -561,7 +563,7 @@ f { a = 1; b = 2; c = 3; }
 
     3
 
-## Named attribute argument
+### Named attribute argument
 
 Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”:
 
@@ -586,7 +588,7 @@ f { a = 1; b = 2; c = 3; }
 
 This can be useful if the passed attribute set also needs to be processed as a whole.
 
-# File system paths
+## File system paths
 
 Nix language offers additional convenience for file system paths.[^3]
 
@@ -616,7 +618,7 @@ Two dots (`..`) denote the parent directory.
 
 [^3]: Details: [Nix manual - primitive data types][manual-primitives]
 
-## Search path
+### Search path
 
 Also known as “angle bracket syntax”.
 
@@ -631,11 +633,11 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 [nixpkgs]: https://github.org/NixOS/nixpkgs
 [manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
 
-# Character strings
+## Character strings
 
 <!-- TODO: introduction -->
 
-## String interpolation
+### String interpolation
 
 Also known as “antiquotiation”.
 
@@ -652,7 +654,7 @@ in
 
 <!-- TODO: difference between ${foo} and $foo in build scripts -->
 
-## Indented strings
+### Indented strings
 
     ''
       multi
@@ -677,14 +679,14 @@ Example:
 
 <!-- TODO: See [escaping rules](). -->
 
-# Using existing functions
+## Function libraries
 
 There are two widely used libraries that *together* can be considered standard for the Nix language.
 You need to know about both to understand and navigate Nix language code.
 
 We recommend to at least skim them to familiarise yourself with what is available.
 
-## `builtins`
+### `builtins`
 
 Nix comes with many functions that are built into the language.
 
@@ -700,7 +702,7 @@ Most of them are implemented in the Nix language interpreter itself, which means
 
 [nix-builtins]: https://nixos.org/manual/nix/stable/expressions/builtins.html
 
-## `pkgs.lib`
+### `pkgs.lib`
 
 The Nix package collection [`nixpkgs`][nixpkgs] contains an attribute set called `lib`, which provides a large number of useful functions.
 
@@ -714,7 +716,7 @@ These functions are accessed through `pkgs.lib`. Example:
 
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
 
-# Building software using side effects
+## Building software using side effects
 
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
@@ -723,17 +725,20 @@ Building software requires interaction with the outside world, called *side effe
 
 There are two main side effects in the Nix language that are relevant here:
 1. Reading files from the file system as build inputs
-2. Writing files to the file system as build outputs
+2. Writing files to the file system as build results
+
+### Build inputs
 
 <!-- TODO: side effects - fetchers and derivations -->
 
+### Build results
 
 
 See the [Nix Pills][nix-pills] series for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
 
 [nix-pills]: https://nixos.org/guides/nix-pills/
 
-# Summary
+## Summary
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following examples.
 
