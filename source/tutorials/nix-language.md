@@ -609,7 +609,7 @@ relative/path
 ```
 
 One dot (`.`) denotes the same directory.
-This is typically used to denote the current directory:
+This is typically used to specify the current directory:
 
 ```nix
 ./.
