@@ -739,60 +739,69 @@ See the [Nix Pills][nix-pills] series for a detailed explanation on how Nix the 
 
 [nix-pills]: https://nixos.org/guides/nix-pills/
 
-## Summary
+## Worked examples
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following examples.
 
 Example:
 
 ```nix
-{ pkgs ? import <nixpkgs> {}, ... }:
+{ pkgs ? import <nixpkgs> {} }:
 let
-  name = "example";
+  message = "hello world";
 in
 pkgs.mkShell {
-  inherit name;
-  src = ./.;
+  buildInputs = with pkgs; [ cowsay ];
+  shellHook = ''
+    cowsay ${message}
+  '';
 }
 ```
+
+This example declares a shell environment (which runs the `shellHook` on initialization).
 
 Explanation:
 
 - This expression is a function that takes an attribute set as an argument.
 - If the argument has the attribute `pkgs`, it will be used in the function body.
-  Otherwise, the default value of importing from the search path `<nixpkgs>` and calling the resulting function with an empty attribute set will be used.
-- The variable `name` is bound to the string value `"example"`.
+  Otherwise, by default, import the Nix expression in the file found on the search path `<nixpkgs>` (which is a function in this case), call the function with an empty attribute set, and use the resulting value.
+- The name `message` is bound to the string value `"hello world"`.
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
-- The passed attribute set has the attributes `name` (set to `"example"`) and `src` (set to the current directory).
+- The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
+- the indented string contains an antiquotation, which will expand to `"hello world"`, the value of `message`
 
-(This example declares a shell environment.)
 
 Example:
 
 ```nix
 { config, pkgs, ... }: {
+
   imports = [ ./hardware-configuration.nix ];
+
   environment.systemPackages = with pkgs; [ git ];
+
   # ...
+
 }
 ```
+
+This example is (part of) a NixOS configuration.
 
 Explanation:
 
 - This expression is a function that takes an attribute set as an argument.
   It returns an attribute set.
-- The argument must at least have the attributes `config` and `pkgs`.
-- The returned attribute set contains an attribute `imports` and a nested attribute set `environment` with an attribute `systemPackages`.
+- The argument must at least have the attributes `config` and `pkgs`, and may have more attributes.
+- The returned attribute set contains the attributes `imports` and `environment`.
   `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
 
   :::{note}
   `imports` is not the impure built-in `import`, but a regular attribute name!
   :::
-- `systemPackages` will evaluate to a list with one element: the `git` attribute of the `pkgs` set.
+- `environment` is itself an attribute set with one attribute `systemPackages`, which will evaluate to a list with one element: the `git` attribute from the `pkgs` set.
 - The `config` argument is not used.
 
-(This example is a NixOS configuration.)
 
 Example:
 
@@ -806,22 +815,23 @@ stdenv.mkDerivation rec {
   version = "2.12";
 
   src = builtins.fetchTarball {
-    url = "mirror://gnu/hello/hello-${version}.tar.gz";
+    url = "mirror://gnu/${pname}/${pname}-${version}.tar.gz";
     sha256 = "1ayhp9v4m4rdhjmnl2bq3cibrbqqkgjbl3s7yk2nhlh8vj3ay16g";
   };
 
   meta = with lib; {
     license = licenses.gpl3Plus;
   };
+
 }
 ```
 
+This example is a (simplified) package declaration from `nixpkgs`.
+
 Explanation:
 
-This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
-It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
-The recursive set passed to `mkDerivation` uses its own `version` attribute in the argument to the built-in function `fetchTarball`.
-The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
-
-(This example is a (simplified) package declaration from `nixpkgs`.)
+- This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
+- It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
+- The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the built-in function `fetchTarball`.
+- The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
