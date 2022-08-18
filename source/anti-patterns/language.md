@@ -88,6 +88,7 @@ buildInputs = builtins.attrValues {
 buildInputs = lib.attrVals ["curl" "jq"] pkgs
 ```
 
+(search-path)=
 ## `<...>` search path
 
 You will often see Nix language code samples that refer to `<nixpkgs>`.
