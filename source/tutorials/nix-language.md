@@ -2,8 +2,8 @@
 
 # Nix language basics
 
-The Nix language is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
-It is used to declare packages and configurations for the [Nix package manager][nix-manual].
+The Nix language is used to declare packages and configurations for the [Nix package manager][nix-manual].
+It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
 The purpose of Nix language is to define structured data.
 It supports functions, for conveniently producing more complex data, and assigning names, for manipulating complex data as units.
