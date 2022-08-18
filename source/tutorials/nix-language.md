@@ -3,12 +3,36 @@
 # Nix language basics
 
 The Nix language is a domain-specific, purely functional, lazily evaluated programming language.
-It is used to declare packages and configurations for the Nix package manager.
+It is used to declare packages and configurations for the [Nix package manager][nix-manual].
 
-## Reading the Nix language without fear
+The purpose of Nix language is to define structured data.
+It supports functions, for conveniently producing more complex data, and assigning names, for manipulating complex data as units.
 
-You will quickly encounter Nix language expressions that may look very complicated.
-Yet, the language has only few basic constructs which can be combined arbitrarily.
+To that end, every valid piece of Nix language code is an *expression*.
+Evaluating a *Nix expression* produces a single value.
+Every *Nix file* (`.nix`) contains a single Nix expression.
+
+:::{note}
+To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
+:::
+
+[nix-manual]: https://nixos.org/manual/nix/stable/#preface
+[nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
+[nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
+[home-manager]: https://github.com/nix-community/home-manager
+
+Notable uses of the Nix language are:
+
+- [Nix package collection][nixpkgs] (`nixpkgs`)
+
+  It is the largest, most up-to-date software distribution in the world, and written in Nix language.
+
+- [NixOS][nixos-manual], a Linux distribution which can be configured fully declaratively
+
+  The underlying modular configuration system is written in Nix language, and uses packages from `nixpkgs`.
+  The operating system environment and services it provides are configured with Nix language.
+
+## Overview
 
 Using the Nix language in practice entails multiple things:
 
@@ -34,6 +58,7 @@ It shows the most common and distingushing patterns in the Nix language:
 - built-in functions and the standard library
 - using build inputs and build results
 
+
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
 
@@ -46,22 +71,7 @@ See the [Nix manual][manual-language] for a full language reference.
 - Install the Nix package manager, to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
-## Basic Concepts
-
-Imagine the Nix language as *JSON with functions*.
-
-The purpose of Nix language is to define structured data.
-Functions help with conveniently producing more complex data, and assigning names allows manipulating complex data as units.
-
-To that end, every valid piece of Nix language code is an *expression*.
-Evaluating a Nix expression produces a single value.
-Every Nix file (`.nix`) contains a single expression.
-
-:::{note}
-To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
-:::
-
-### Running examples
+### How to run the examples?
 
 All examples in this guide are valid Nix files that you can run yourself.
 
@@ -108,6 +118,20 @@ nix-repl> 1 + 2
 ```
 
     3
+
+## Reading the Nix language without fear
+
+You will quickly encounter Nix language expressions that may look very complicated.
+Yet, the language has only few basic constructs which can be combined arbitrarily.
+
+As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
+
+Building software is a complex undertaking, and the Nix package manager both exposes and allows managing this complexity with the Nix language.
+
+Most of the software you will want use with Nix is probably already in the [Nix package collection][nixpkgs].
+Therefore you may not need to actually write any Nix language code in the beginning.
+
+To get started, imagine the Nix language as *JSON with functions*.
 
 ## Names and values
 
@@ -627,7 +651,7 @@ Also known as “angle bracket syntax”.
 
 The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
 
-In practice, `<nixpkgs>` points to the file system path of some revision of the [Nix package collection][nixpkgs].
+In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [nixpkgs][nixpkgs].
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
 
 While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
