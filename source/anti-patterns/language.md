@@ -106,7 +106,7 @@ They are being phased out, but still used by default.
 For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of `nixpkgs`.
 Builds may work for one and fail for the other, causing confusion.
 
-It's <ref-pinning-nixpkgs>`possible to specify an exact \`nixpkgs\` revision ` via `$NIX_PATH`.
+It's [possible to specify an exact `nixpkgs` revision](ref-pinning-nixpkgs) via `$NIX_PATH`.
 But that is still problematic, unless:
 
 1. you specify the commit **at one place only**,
