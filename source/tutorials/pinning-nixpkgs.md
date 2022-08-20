@@ -83,8 +83,6 @@ which lists all the releases and the latest commit that has passed all tests.
 When choosing a commit, it is recommended to follow either
 
 - the **latest stable NixOS** release by using a specific version, such as `nixos-21.05`, **or**
-- the latest **unstable release** via `nixos-unstable`.
+- the latest **unstable release** via `nixpkgs-unstable` or for NixOS `nixos-unstable`
 
-
-## Next steps
-
+More information on channels can be found on the [Wiki](https://nixos.wiki/wiki/Nix_channels) and on [Diskurse](https://discourse.nixos.org/t/differences-between-nix-channels/13998) <!-- todo: move here + check manuals for content again -->
