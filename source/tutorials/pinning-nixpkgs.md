@@ -33,7 +33,7 @@ todo
 There are three ways to refer to nixpkgs:
 
 - Setting the environment variable `$NIX_PATH` to include a `nixpkgs=URL` entry and use the search path `<nixpkgs>` <!-- link to language tutorial -->
-- Using the command line parameter `-I URL` to most of commands like `nix-build`, `nix-shell`, etc <!-- link to ??? tutorial -->
+- Commands like `nix-build`, `nix-shell`, etc. take a command line parameter `-I nixpkgs=URL` that can be used to extend the search path for that command only. Nixpkgs can then also be referenced with `<nixpkgs>`
 - Using [builtins.fetchTarball](https://nixos.org/manual/nix/stable/expressions/builtins.html) function that fetches the `URL` at evaluation time <!-- more precise link would be nice -->
 
 Possible `URL` values are:
