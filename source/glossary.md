@@ -2,7 +2,7 @@
 
 ```{glossary}
 attribute name
-    TODO
+    Attribute sets are a collection of key/value pairs. The attribute name is the key.
 
 package name
     TODO
