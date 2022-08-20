@@ -40,9 +40,9 @@ Possible `URL` values are:
 
 - Local file path. Using just `.` means that nixpkgs is located in current folder.
 - Pinned to a specific commit: `https://github.com/NixOS/nixpkgs/archive/addcb0dddf2b7db505dae5c38fceb691c7ed85f9.tar.gz`
-- Using latest channel, meaning all tests have passed: `http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz`
-- Using latest channel, but hosted by github: `https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz`
-- Using latest commit for release branch, but not tested yet: `https://github.com/NixOS/nixpkgs/archive/release-21.05.tar.gz`
+- Using latest channel, meaning all tests have passed: `http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz`
+- Using latest channel, but hosted by github: `https://github.com/NixOS/nixpkgs/archive/nixos-22.05.tar.gz`
+- Using latest commit for release branch, but not tested yet: `https://github.com/NixOS/nixpkgs/archive/release-22.05.tar.gz`
 
 github creates archive for all branches and tags, because of this many archive links are available that are not recommended to be used.
 
@@ -50,9 +50,9 @@ github creates archive for all branches and tags, because of this many archive l
 
 - `nix-build -I ~/dev`
 
-- `nix-build -I nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz`
+- `nix-build -I nixpkgs=http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz`
 
-- `NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz nix-build ...`
+- `NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz nix-build ...`
 
 - To make ad-hoc environment available on NixOS: `nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];`
 
@@ -60,7 +60,7 @@ github creates archive for all branches and tags, because of this many archive l
 
   ```
   let
-    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz") {};
+    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.05.tar.gz") {};
   in pkgs.stdenv.mkDerivation { … }
   ```
 
@@ -82,7 +82,7 @@ which lists all the releases and the latest commit that has passed all tests.
 
 When choosing a commit, it is recommended to follow either
 
-- the **latest stable NixOS** release by using a specific version, such as `nixos-21.05`, **or**
+- the **latest stable NixOS** release by using a specific version, such as `nixos-22.05`, **or**
 - the latest **unstable release** via `nixpkgs-unstable` or for NixOS `nixos-unstable`
 
 More information on channels can be found on the [Wiki](https://nixos.wiki/wiki/Nix_channels) and on [Diskurse](https://discourse.nixos.org/t/differences-between-nix-channels/13998) <!-- todo: move here + check manuals for content again -->
