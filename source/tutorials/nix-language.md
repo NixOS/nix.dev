@@ -450,6 +450,127 @@ is equivalent to
 
     x = a.x; y = a.y;
 
+### File system paths
+
+Nix language offers convenience syntax for file system paths.
+
+Absolute paths always start with a slash (`/`):
+
+    /absolute/path
+
+Paths are relative when they contain at least one slash (`/`) but to not start with one.
+They are relative to the file containing the expression:
+
+```nix
+./relative
+```
+
+```nix
+relative/path
+```
+
+One dot (`.`) denotes the same directory.
+This is typically used to specify the current directory:
+
+```nix
+./.
+```
+
+Two dots (`..`) denote the parent directory.
+
+### Indented strings
+
+Also known as “multi-line strings”.
+
+Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
+
+Indented strings are denoted by *double single quotes* (`'' ''`).
+
+Example:
+
+```nix
+''
+multi
+line
+string
+''
+```
+
+    "multi\nline\nstring"
+
+Equal amounts of prepended white space are trimmed from the result.
+
+Example:
+
+```nix
+''
+  one
+   two
+    three
+''
+```
+
+    "one\n two\n  three\n"
+
+<!-- TODO: See [escaping rules](). -->
+
+### Antiquotation
+
+Also known as “string interpolation”.
+
+The value of Nix expressions can be inserted into character strings with `${...}`.
+
+Example:
+
+```nix
+let
+  name = "Nix";
+in
+"hello ${name}"
+```
+
+    "hello Nix"
+
+Only character strings or values that can be represented as a character string are allowed.
+
+Counter-example:
+
+```nix
+let
+  x = 1;
+in
+"${x} + ${x} = ${x + x}"
+```
+
+    error: cannot coerce an integer to a string
+
+           at «string»:4:2:
+
+                3| in
+                4| "${x} + ${x} = ${x + x}"
+                 |  ^
+                5|
+
+Antiquotation can be arbitrarily nested.
+
+(This can become hard to read, and we recommend to avoid it in practice.)
+
+Example:
+
+```nix
+let
+  a = "no";
+in
+"${a + "${a + " ${a}"}"}"
+```
+
+    "no no no"
+
+
+<!-- TODO: link to escaping rules -->
+
+<!-- TODO: difference between ${foo} and $foo in build scripts -->
+
 ## Functions
 
 Functions are everywhere in the Nix language and deserve particular attention.
@@ -704,37 +825,7 @@ f { a = 1; b = 2; c = 3; }
 
     6
 
-## File system paths
-
-Nix language offers additional convenience for file system paths.[^3]
-
-Absolute paths always start with a slash (`/`):
-
-    /absolute/path
-
-Paths are relative when they contain at least one slash (`/`) but to not start with one.
-They are relative to the file containing the expression:
-
-```nix
-./relative
-```
-
-```nix
-relative/path
-```
-
-One dot (`.`) denotes the same directory.
-This is typically used to specify the current directory:
-
-```nix
-./.
-```
-
-Two dots (`..`) denote the parent directory.
-
-[^3]: Details: [Nix manual - primitive data types][manual-primitives]
-
-### Search path
+#### Search path
 
 Also known as “angle bracket syntax”.
 
@@ -750,52 +841,6 @@ While you will see many such examples, we recommend to {ref}`avoid search paths 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.org/NixOS/nixpkgs
 [manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
-
-## Character strings
-
-<!-- TODO: introduction -->
-
-### String interpolation
-
-Also known as “antiquotiation”.
-
-<!-- TODO: details, especially how this relates to derivations and store paths -->
-
-```nix
-let
-  name = "Nix";
-in
-"hello ${name}"
-```
-
-    "hello Nix"
-
-<!-- TODO: difference between ${foo} and $foo in build scripts -->
-
-### Indented strings
-
-    ''
-      multi
-      line
-      string
-    ''
-
-You will recognize indented strings by *double single quotes*.
-Equal amounts of prepended white space are trimmed from the result.
-
-Example:
-
-```nix
-''
-  one
-   two
-    three
-''
-```
-
-    "one\n two\n  three\n"
-
-<!-- TODO: See [escaping rules](). -->
 
 ## Function libraries
 
