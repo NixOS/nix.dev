@@ -650,6 +650,8 @@ in f
 
 ### Calling functions
 
+Also known as "function application".
+
 Calling a function with an operand means writing the operand after the function.
 
 Example:
