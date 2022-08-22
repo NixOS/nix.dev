@@ -736,9 +736,9 @@ f 1 2
 
 ### Attribute set argument
 
-Also known as “keyword arguments”.
+Also known as “keyword arguments” or “destructuring” .
 
-Nix functions can explicitly take an attribute set as argument.
+Nix functions can be declared to require an attribute set with specific structure as argument.
 
 This is denoted by listing the expected attribute names separated by commas (`,`) and enclosed in braces (`{ }`).
 
@@ -782,11 +782,14 @@ f { a = 1; b = 2; c = 3; }
                  | ^
                 5|
 
+
+<!-- TODO: not the same as x: x.a + x.b (!!!!) -->
+
 ### Default attributes
 
 Also known as “default arguments”.
 
-Arguments can have default values for attributes.
+Destructured arguments can have default values for attributes.
 
 This is denoted by separating the attribute name and its default value with a question mark (`?`).
 
