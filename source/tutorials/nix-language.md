@@ -432,7 +432,7 @@ is equivalent to
 
     x = x; y = y;
 
-It is also possible to `inherit` attributes from another set with parentheses (`inherit (...) ...`).
+It is also possible to `inherit` names from a specific attribute set with parentheses (`inherit (...) ...`).
 
 Example:
 
