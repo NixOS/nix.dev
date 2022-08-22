@@ -453,6 +453,8 @@ Functions are everywhere in the Nix language and deserve particular attention.
 
 Functions in Nix language can appear in different forms, but always take exactly one argument.
 
+Example:
+
     x: x + 1
 
 Argument and function body are separated by a colon (`:`).
