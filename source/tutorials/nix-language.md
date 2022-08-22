@@ -707,7 +707,7 @@ x: y: x + y
 
     <LAMBDA>
 
-The above function takes one argument and returns a function `y: x + y` with `x` set to the passed value.
+The above function takes one argument and returns a function `y: x + y` with `x` set to the value of the argument.
 
 Example:
 
@@ -721,7 +721,7 @@ f 1
     <LAMBDA>
 
 
-Applying that to another argument yields the inner body `x + y`, which can now be fully evaluated.
+Applying that function `f 1` to another argument yields the inner body `x + y` (with `x` set to `1`), which can now be fully evaluated.
 
 ```nix
 let
