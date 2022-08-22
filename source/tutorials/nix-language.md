@@ -56,8 +56,6 @@ It shows the most common and distingushing patterns in the Nix language:
 
 - assigning names and accessing values
 - declaring and calling functions
-- referencing file system paths
-- working with character strings
 - built-in functions and the standard library
 - using build inputs and build results
 
