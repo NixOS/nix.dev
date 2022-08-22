@@ -606,7 +606,6 @@ in
 ```
 
     "echo Nix > $out"
-
 :::
 
 <!-- TODO: link to escaping rules -->
