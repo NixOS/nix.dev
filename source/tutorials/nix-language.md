@@ -468,7 +468,7 @@ Wherever you see a colon (`:`) in Nix language code:
 
 Calling a function with an operand means writing the operand after the function.
 
-Example
+Example:
 
 ```nix
 (x: x + 1) 1
