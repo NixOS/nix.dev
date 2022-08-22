@@ -134,10 +134,11 @@ As with any programming language, the required amount of Nix language code close
 
 Building software is a complex undertaking, and the Nix package manager both exposes and allows managing this complexity with the Nix language.
 
-Most of the software you will want use with Nix is probably already in the [Nix package collection][nixpkgs].
-Therefore you may not need to actually write any Nix language code in the beginning.
+Most of the software you will want to use with Nix is probably already in the [Nix package collection][nixpkgs], or will be presented to you in ready-made configurations.
 
-To get started, imagine the Nix language as *JSON with functions*.
+Therefore to get started, you should be able to read the Nix language, but may not need to actually write any in the beginning.
+
+If you are familiar with JSON, imagine the Nix language as *JSON with functions*.
 
 ## Names and values
 
