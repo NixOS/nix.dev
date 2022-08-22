@@ -544,12 +544,30 @@ Example:
 
 ```nix
 let
-  f = {a, b}: a + b
+  f = {a, b}: a + b;
 in
 f { a = 1; b = 2; }
 ```
 
     3
+
+Counter-example:
+
+```nix
+let
+  f = {a, b}: a + b;
+in
+f { a = 1; b = 2; c = 3; }
+```
+
+    error: 'f' at (string):2:7 called with unexpected argument 'c'
+
+           at «string»:4:1:
+
+                3| in
+                4| f { a = 1; b = 2; c = 3; }
+                 | ^
+                5|
 
 ### Default attributes
 
