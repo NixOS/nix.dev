@@ -143,7 +143,7 @@ Assignments are denoted by a single equal sign (`=`).
 
 ### Attribute set `{ ... }`
 
-An attribute set is an unordered collection of name-value-pairs.
+An attribute set is an unordered collection of name-value-pairs, where names must be unique.
 
 Together with primitive data types and lists, attribute sets work like objects in JSON and look very similar.
 
@@ -222,6 +222,11 @@ rec {
 ```
 
     { one = 1; three = 3; two = 2; }
+
+:::{note}
+Attribute sets are unordered.
+The evaluator prints them in alphabetic order.
+:::
 
 Counter-example:
 
@@ -452,17 +457,36 @@ Functions are everywhere in the Nix language and deserve particular attention.
 ### Single argument
 
 Functions in Nix language can appear in different forms, but always take exactly one argument.
-
-Example:
-
-    x: x + 1
-
 Argument and function body are separated by a colon (`:`).
 
 Wherever you see a colon (`:`) in Nix language code:
 - on its left is the function argument
 - on its right is the function body.
 
+Nix functions have no names.
+We say they are anonymous, and call such a function a *lambda*.
+
+Example:
+
+```nix
+x: x + 1
+```
+
+    <LAMBDA>
+
+The `<LAMBDA>` indicates the resulting value is an anonymous function.
+
+We can assign functions a name as to any other value.
+
+Example:
+
+```nix
+let
+  f = x: x + 1
+in f
+```
+
+    <LAMBDA>
 
 ### Calling functions
 
@@ -476,18 +500,32 @@ Example:
 
     2
 
-Nix functions have no name when declared.
-We say they are anonymous, or call such a function a *lambda*.
-
-We can assign functions a name as to any other value.
+:::{note}
+Since function and operand are separated by white space, sometimes parantheses (`( )`) are required to distinguish expressions.
+:::
 
 Example:
 
 ```nix
 let
-  f = x: x.a
+  f = x: x.a;
 in
 f { a = 1; }
+```
+
+    1
+
+The above example calls `f` on a literal attribute set.
+One can also pass operands by name.
+
+Example:
+
+```nix
+let
+  f = x: x.a;
+  v = { a = 1; };
+in
+f v
 ```
 
     1
@@ -495,11 +533,17 @@ f { a = 1; }
 
 ### Chaining arguments
 
-Arguments can be chained.
+Arguments can be chained by nesting functions.
 
-    x: y: x + y
+Such a nested function can be used like a function that takes multiple arguments, but offers additional flexibility.
 
-This can be used like a function that takes two arguments, but offers additional flexibility.
+Example:
+
+```nix
+x: y: x + y
+```
+
+    <LAMBDA>
 
 The above function takes one argument and returns a function `y: x + y` with `x` set to the passed value.
 
@@ -514,7 +558,6 @@ f 1
 
     <LAMBDA>
 
-The `<LAMBDA>` indicates the resulting value is an anonymous function.
 
 Applying that to another argument yields the inner body `x + y`, which can now be fully evaluated.
 
@@ -535,7 +578,15 @@ Also known as “keyword arguments”.
 
 Nix functions can explicitly take an attribute set as argument.
 
-    {a, b}: a + b
+This is denoted by listing the expected attribute names separated by commas (`,`) and enclosed in braces (`{ }`).
+
+Example:
+
+```nix
+{a, b}: a + b
+```
+
+    <LAMBDA>
 
 The argument defines the exact attributes that have to be in that set.
 Leaving out or passing additional attributes is an error.
@@ -573,9 +624,9 @@ f { a = 1; b = 2; c = 3; }
 
 Also known as “default arguments”.
 
-Arguments can have default values for attributes, denoted with a question mark (`?`).
+Arguments can have default values for attributes.
 
-    {a, b ? 0}: a + b
+This is denoted by separating the attribute name and its default value with a question mark (`?`).
 
 Attributes in the argument are not required if they have a default value.
 
@@ -620,15 +671,27 @@ f { a = 1; b = 2; c = 3; }
 
 ### Named attribute argument
 
-Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”:
+Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”.
 
-    {a, b, ...}@args: a + b + args.c
+An attribute set argument can be given a name to be accessible as a whole.
+
+This is denoted by prepending or appending the name to the attribute set argument, separated by the at sign (`@`).
+
+Example:
+
+```nix
+{a, b, ...}@args: a + b + args.c
+```
+
+    <LAMBDA>
 
 or
 
-    args@{a, b, ...}: a + b + args.c
+```nix
+args@{a, b, ...}: a + b + args.c
+```
+    <LAMBDA>
 
-where the passed attribute set is given a name, and some of its attributes are required.
 
 Example:
 
@@ -640,8 +703,6 @@ f { a = 1; b = 2; c = 3; }
 ```
 
     6
-
-This can be useful if the passed attribute set also needs to be processed as a whole.
 
 ## File system paths
 
