@@ -483,6 +483,23 @@ This is typically used to specify the current directory:
 
 Two dots (`..`) denote the parent directory.
 
+#### Search path
+
+Also known as “angle bracket syntax”.
+
+    <nixpkgs>
+
+The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
+
+In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [nixpkgs][nixpkgs].
+For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
+
+While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
+
+[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
+[nixpkgs]: https://github.org/NixOS/nixpkgs
+[manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
+
 ### Indented strings
 
 Also known as “multi-line strings”.
@@ -848,22 +865,6 @@ f { a = 1; b = 2; c = 3; }
 
     6
 
-#### Search path
-
-Also known as “angle bracket syntax”.
-
-    <nixpkgs>
-
-The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
-
-In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [nixpkgs][nixpkgs].
-For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
-
-While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
-
-[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
-[nixpkgs]: https://github.org/NixOS/nixpkgs
-[manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
 
 ## Function libraries
 
