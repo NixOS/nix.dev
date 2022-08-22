@@ -492,6 +492,9 @@ f { a = 1; }
 
     1
 
+
+### Chaining arguments
+
 Arguments can be chained.
 
     x: y: x + y
