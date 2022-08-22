@@ -914,12 +914,16 @@ declaring data and transforming it with functions.
 
 Building software requires interaction with the outside world, called *side effects*.
 
-There are two main side effects in the Nix language that are relevant here:
+There are three main side effects in the Nix language that are relevant here:
+0. Importing Nix expressions from other files
 1. Reading files from the file system as build inputs
 2. Writing files to the file system as build results
 
+### Imports
+
 ### Build inputs
 
+#### Paths
 
 ### Build results
 
