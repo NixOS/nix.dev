@@ -567,9 +567,27 @@ in
     "no no no"
 
 
-<!-- TODO: link to escaping rules -->
+:::{warning}
+You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
 
-<!-- TODO: difference between ${foo} and $foo in build scripts -->
+These are *not* antiquotations, but usually denote variables in a shell script.
+
+In such cases, the use of names from the surrounding Nix expression is a coincidence.
+
+Example:
+
+```nix
+let
+  out = "Nix"
+in
+"echo ${out} > $out"
+```
+
+    "echo Nix > $out"
+
+:::
+
+<!-- TODO: link to escaping rules -->
 
 ## Functions
 
