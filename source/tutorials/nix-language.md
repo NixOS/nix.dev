@@ -85,6 +85,24 @@ The following example is a Nix expression adding two numbers:
 
     3
 
+#### Interactive evaluation
+
+Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
+
+```console
+nix repl
+```
+
+    Welcome to Nix 2.5.1. Type :? for help.
+
+```console
+nix-repl> 1 + 2
+```
+
+    3
+
+#### Evaluating Nix files
+
 Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
 
 ```console
@@ -106,20 +124,6 @@ nix-instantiate --eval
 
     3
 :::
-
-Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
-
-```console
-nix repl
-```
-
-    Welcome to Nix 2.5.1. Type :? for help.
-
-```console
-nix-repl> 1 + 2
-```
-
-    3
 
 ## Reading the Nix language without fear
 
