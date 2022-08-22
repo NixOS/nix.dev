@@ -74,7 +74,8 @@ See the [Nix manual][manual-language] for a full language reference.
 
 ### How to run the examples?
 
-All examples in this guide are valid Nix files that you can run yourself.
+All examples in this guide are valid Nix expressions that you can run yourself.
+They are accompanied by the expected evaluation result.
 
 The following example is a Nix expression adding two numbers:
 
