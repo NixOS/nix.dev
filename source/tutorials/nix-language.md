@@ -9,8 +9,9 @@ It supports functions, for conveniently producing more complex data, and assigni
 
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language:
 
-- Every valid piece of Nix language code is an *expression*.
-- Evaluating a *Nix expression* produces a single value.
+- Every valid piece of Nix language code is a *Nix expression*.
+- Nix expressions can contain other Nix expressions, that is, they can be nested.
+- Evaluating a Nix expression produces a single value.
 - Every *Nix file* (`.nix`) contains a single Nix expression.
 
 :::{note}
