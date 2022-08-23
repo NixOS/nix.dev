@@ -67,7 +67,7 @@ Carefully working through all definitions and examples, and reading all detailed
 
 If you are proficient in procedural or object-oriented programming, learning syntax and semantics by examining all examples should take ca. 1 hour.
 
-If you are familiar with functional programming, the Nix language will be unsurprizing.
+If you are familiar with functional programming, the Nix language will be largely unsurprizing.
 Reading through the guide to get accustomed to the syntax should take ca. 30 minutes.
 
 ### How to run the examples?
@@ -94,7 +94,7 @@ The following example is a Nix expression adding two numbers:
 
 #### Interactive evaluation
 
-Use `nix repl` to evaluate Nix expressions interactively (by typing them on the command line):
+Use [`nix repl`][nix-repl] to evaluate Nix expressions interactively (by typing them on the command line):
 
 ```console
 nix repl
@@ -108,9 +108,11 @@ nix-repl> 1 + 2
 
     3
 
+[nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
+
 #### Evaluating Nix files
 
-Use `nix-instantiate --eval` to evaluate the expression in a Nix file.
+Use [`nix-instantiate --eval`][nix-instantiate] to evaluate the expression in a Nix file.
 
 ```console
 echo 1 + 2 > file.nix
@@ -132,6 +134,8 @@ nix-instantiate --eval
     3
 :::
 
+[nix-instantiate]: https://nixos.org/manual/nix/stable/command-ref/nix-instantiate.html
+
 ## Reading the Nix language without fear
 
 You will quickly encounter Nix language expressions that may look very complicated.
@@ -143,7 +147,7 @@ Building software is a complex undertaking, and the Nix package manager both exp
 The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
 
 :::{important}
-A build task in the Nix package manager is also called *derivation*.
+A build task in the Nix package manager is called *derivation*.
 :::
 
 The Nix language has only few basic constructs which can be combined arbitrarily:
@@ -581,6 +585,7 @@ Example:
 
 <!-- TODO: See [escaping rules](). -->
 
+(antiquotation)=
 ### Antiquotation `${ ... }`
 
 Also known as “string interpolation”.
@@ -1022,7 +1027,7 @@ It precludes build tasks from referring to files which are not explicitly specif
 
 #### Paths
 
-Whenever a file system path is rendered to a character string with [antiquotation](#antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*.
+Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*.
 
 The evaluated string then contains the Nix store path assigned to that file.
 
