@@ -546,7 +546,7 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
-[nixpkgs]: https://github.org/NixOS/nixpkgs
+[nixpkgs]: https://github.com/NixOS/nixpkgs
 [manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
 
 ### Indented strings
