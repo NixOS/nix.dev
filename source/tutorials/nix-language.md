@@ -951,31 +951,143 @@ The Nix package collection [`nixpkgs`][nixpkgs] contains an attribute set called
 The `nixpkgs` manual lists all [Nixpkgs library functions][nixpkgs-functions].
 :::
 
-These functions are accessed through `pkgs.lib`. Example:
+These functions are usually accessed through `pkgs.lib`.
+
+Example:
 
     pkgs.lib.strings.toUpper
 
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
 
-## Building software using side effects
+## Building software with side effects
 
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
 Building software requires interaction with the outside world, called *side effects*.
 
-There are three main side effects in the Nix language that are relevant here:
-0. Importing Nix expressions from other files
-1. Reading files from the file system as build inputs
-2. Writing files to the file system as build results
+There are three side effects in the Nix language that are relevant here:
+
+1. Importing Nix expressions from other files
+2. Reading files from the file system as build inputs
+3. Writing files to the file system as build tasks
+
+Side effects are performed while evaluating a given impure expression.
 
 ### Imports
 
+The built-in function `import` takes a path to a Nix file, and reads it to evaluate the contained Nix expression.
+
+Example:
+
+```console
+echo 1 + 2 > file.nix
+```
+
+```nix
+import ./file.nix
+```
+
+    3
+
+Example:
+
+```console
+echo "x: x + 1" > file.nix
+```
+
+```nix
+import ./file.nix 1
+```
+
+    2
+
+It is an error if the file system path does not exist.
+
 ### Build inputs
+
+Build inputs are files that build tasks refer to in their precise description of how to derive new files.
+
+Since Nix language evaluation is otherwise pure, the only way to specify build inputs is explicitly with:
+- file system paths
+- dedicated impure functions
+
+When run, a build task will only have access to explicitly declared build inputs.
+
+:::{important}
+Purity is the key to reproducible builds.
+
+It precludes build tasks from referring to files which are not explicitly specified as build inputs.
+:::
 
 #### Paths
 
-### Build results
+Whenever a file system path is rendered to a character string with [antiquotation](#antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*.
+
+The evaluated string then contains the Nix store path assigned to that file.
+
+<!-- TODO: link to explanation of the Nix store -->
+
+Example:
+
+```console
+echo 123 > data
+```
+
+```nix
+"${./data}"
+```
+
+    "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
+
+#### Fetchers
+
+Files to be used as build inputs do not have to come from the file system.
+
+The Nix language provides built-in impure functions to fetch files from the network during evaluation:
+
+- [builtins.fetchurl][fetchurl]
+- [builtins.fetchTarball][fetchTarball]
+- [builtins.fetchGit][fetchGit]
+- [builtins.fetchClosure][fetchClosure]
+
+These functions evaluate to a file system path in the Nix store, which is uniquely determined by the fetched file's contents.
+
+Example:
+
+```nix
+builtins.fetchurl https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+```
+
+    "/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+
+Some of them add extra convenience, such as automatically unpacking archives.
+
+Example:
+
+```nix
+builtins.fetchGit https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+```
+
+    "/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+
+[fetchurl]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchurl
+[fetchTarball]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchTarball
+[fetchGit]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchGit
+[fetchClosure]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchClosure
+
+### Build tasks
+
+A build task in the Nix package manager is called *derivation*.
+
+The Nix language primitive to declare such a derivation is the built-in function `derivation`.
+
+:::{important}
+You will most never encounter `derivation` in practice.
+
+It is usually wrapped by the `nixpkgs` build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in build procedures.
+:::
+
 
 <!-- TODO: side effects - fetchers and derivations -->
 
