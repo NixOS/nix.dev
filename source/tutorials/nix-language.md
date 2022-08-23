@@ -1103,6 +1103,7 @@ A build task in the Nix package manager is called *derivation*.
 Derivations are at the core of both the Nix package manager and the Nix language:
 - The Nix language is used to produce build tasks.
 - The Nix package manager runs build tasks to produce *build results*.
+- Build results can in turn be used as inputs for other build tasks.
 
 The Nix language primitive to declare a build task is the built-in impure function `derivation`.
 
@@ -1126,6 +1127,8 @@ Two things happen when evaluating `derivation`:
   The character string representation of a derivation is the Nix store path of its build result.
 
   This Nix store path will contain the build result when the derivation is built.
+
+  It is different from the path of the store derivation, which is the build task for that build result.
   :::
 
 Example:
@@ -1158,8 +1161,8 @@ in [ drv "${drv}" drv.name ]
 
 The build itself is performed by running the executable file referred to by the `builder` attribute in the argument to `derivation`.
 
-The `builder` file can in turn be the build result of a different derivation.
-In the Nix language, we can refer to that file using the character string representation of its derivation  – before it has been built.
+The `builder` file can be the build result of a different derivation.
+In the Nix language, we can refer to that file using the character string representation of its derivation – before the derivatiothe derivation has been built.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 Evaluating such an expression will produce a collection of `.drv` files (store derivations) as a side effect.
