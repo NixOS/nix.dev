@@ -4,24 +4,7 @@
 
 The Nix language is used to declare packages and configurations for the [Nix package manager][nix-manual].
 
-The purpose of Nix language is to define structured data.
-It supports functions, for conveniently producing more complex data, and assigning names, for manipulating complex data as units.
-
-It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language:
-
-- Every valid piece of Nix language code is a *Nix expression*.
-- Nix expressions can contain other Nix expressions, that is, they can be nested.
-- Evaluating a Nix expression produces a single value.
-- Every *Nix file* (`.nix`) contains a single Nix expression.
-
-:::{note}
-To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
-:::
-
-[nix-manual]: https://nixos.org/manual/nix/stable/#preface
-[nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
-[nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
-[home-manager]: https://github.com/nix-community/home-manager
+It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
 Notable uses of the Nix language are:
 
@@ -29,10 +12,17 @@ Notable uses of the Nix language are:
 
   It is the largest, most up-to-date software distribution in the world, and written in Nix language.
 
-- [NixOS][nixos-manual], a Linux distribution which can be configured fully declaratively
+- [NixOS][nixos-manual] Linux distribution
 
-  The underlying modular configuration system is written in Nix language, and uses packages from `nixpkgs`.
+  It is based on the Nix package manager, and can be configured fully declaratively.
+
+  Its underlying modular configuration system is written in Nix language, and uses packages from `nixpkgs`.
   The operating system environment and services it provides are configured with Nix language.
+
+[nix-manual]: https://nixos.org/manual/nix/stable/#preface
+[nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
+[nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
+[home-manager]: https://github.com/nix-community/home-manager
 
 ## Overview
 
@@ -46,7 +36,7 @@ Using the Nix language in practice entails multiple things:
 - ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
-**This guide only covers syntax and semantics**, and will direct you to resources for learning the other components.
+**This guide only covers language syntax and semantics**, briefly discusses standard libraries, and at the end will direct you to resources on the other components.
 
 ### What will you learn?
 
@@ -56,9 +46,8 @@ It shows the most common and distingushing patterns in the Nix language:
 
 - assigning names and accessing values
 - declaring and calling functions
-- built-in functions and the standard library
-- using build inputs and build results
-
+- built-in and library functions
+- side effects to obtain build inputs and produce build results
 
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
@@ -72,10 +61,28 @@ See the [Nix manual][manual-language] for a full language reference.
 - Install the Nix package manager, to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
+### How long does it take?
+
+Carefully working through all definitions and examples, and reading all detailed explanations should take ca. 2 hours.
+
+If you are proficient in procedural or object-oriented programming, learning syntax and semantics by examining all examples should take ca. 1 hour.
+
+If you are familiar with functional programming, the Nix language will be unsurprizing.
+Reading through the guide to get accustomed to the syntax should take ca. 30 minutes.
+
 ### How to run the examples?
 
-All examples in this guide are valid Nix expressions that you can run yourself.
-They are accompanied by the expected evaluation result.
+- Every valid piece of Nix language code is a *Nix expression*.
+- Nix expressions can contain other Nix expressions, that is, they can be nested.
+- Evaluating a Nix expression produces a single value.
+- Every *Nix file* (`.nix`) contains a single Nix expression.
+
+:::{note}
+To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
+:::
+
+All examples in this guide are valid Nix expressions.
+Each one is followed by the expected evaluation result.
 
 The following example is a Nix expression adding two numbers:
 
@@ -128,17 +135,48 @@ nix-instantiate --eval
 ## Reading the Nix language without fear
 
 You will quickly encounter Nix language expressions that may look very complicated.
-Yet, the language has only few basic constructs which can be combined arbitrarily.
 
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 
 Building software is a complex undertaking, and the Nix package manager both exposes and allows managing this complexity with the Nix language.
 
-Most of the software you will want to use with Nix is probably already in the [Nix package collection][nixpkgs], or will be presented to you in ready-made configurations.
+The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
 
-Therefore to get started, you should be able to read the Nix language, but may not need to actually write any in the beginning.
+:::{important}
+A build task in the Nix package manager is also called *derivation*.
+:::
 
-If you are familiar with JSON, imagine the Nix language as *JSON with functions*.
+The Nix language has only few basic constructs which can be combined arbitrarily:
+
+- primitive data types
+
+  as basic building blocks
+
+- compound data types and functions
+
+  to produce and transform complex data
+
+- name assignment
+
+  to manipulate complex data as units
+
+In addition it allows three side effects:
+
+  - reading files as Nix expressions
+
+    to enable code reuse
+
+  - reading files as *build inputs*
+
+    to capture what build tasks will operate on
+
+  - writing files as *build tasks*
+
+    to keep them for later execution, the *build*
+
+There is nothing else to it.
+
+What may look complicated comes not from the language, but from how it is used.
 
 ## Names and values
 
@@ -150,7 +188,14 @@ Assignments are denoted by a single equal sign (`=`).
 
 An attribute set is an unordered collection of name-value-pairs, where names must be unique.
 
-Together with primitive data types and lists, attribute sets work like objects in JSON and look very similar.
+The following example shows all primitive data types, lists, and attribute sets.
+
+:::{note}
+If you are familiar with JSON, imagine the Nix language as *JSON with functions*.
+
+Nix language data types *without functions* work just like their counterparts in JSON and look very similar.
+:::
+
 
 <table>
 <tr>
