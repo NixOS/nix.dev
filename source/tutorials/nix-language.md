@@ -1265,15 +1265,19 @@ Explanation:
 
 ## References
 
-[Nix manual: Nix language][manual-language] - Nix language reference
-[Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
-[Nixpkgs manual: Functions reference][nixpkgs-functions] - `nixpkgs` function library
-[Nixpkgs manual: Fetchers][nixpkgs-fetchers] - `nixpkgs` fetcher library
-[Nix Pills][nix-pills] - a detailed explanation of derivations and how the Nix package collection is constructed from first principles
-
-[nix-pills]: https://nixos.org/guides/nix-pills/
+- [Nix manual: Nix language][manual-language] - Nix language reference
+- [Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
+- [Nixpkgs manual: Functions reference][nixpkgs-functions] - `nixpkgs` function library
+- [Nixpkgs manual: Fetchers][nixpkgs-fetchers] - `nixpkgs` fetcher library
 
 ## Next steps
+
+To get things done:
+
+- [](declarative-reproducible-envs) – create reproducible shell environments from a Nix file
+- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – remove unused build results from the Nix store
+
+To learn more:
 
 If you worked through the examples, you will have noticed that reading the Nix language reveals the structure of the code, but does not necessarily tell what the code actually means.
 
@@ -1300,4 +1304,35 @@ How do we know
 And how does the caller of this function know that it requires an attribute set with attributes `x`, `y`, `z`?
 
 Answering such questions requires a knowing the context in which a given expression is supposed to be used.
+
+The Nix ecosystem and code style is driven by conventions.
+Most names you will encounter in Nix language code come from the Nix package collection `nixpkgs`:
+
+- [Nix Pills][nix-pills] - a detailed explanation of derivations and how the Nix package collection is constructed from first principles
+
+`nixpkgs` provides generic build mechanisms that are widely used:
+
+- [`stdenv`][stdenv] - most importantly `mkDerivation`
+- [Trivial Builders][trivial-builders] - to create files and shell scripts
+
+Packages from `nixpkgs` can be modified through multiple mechanisms:
+
+- [overrides] – specifically `override` and `overrideAttrs` to modify single packages
+- [overlays] – to produce a custom variant of `nixpkgs` with individually modified packages
+
+Different language ecosystems and frameworks have different requirements to accommodating them into `nixpkgs`:
+
+- [Languages and frameworks][language-support] lists tools provided by `nixpkgs` to build language- or framework-specific packages with the Nix package manager.
+
+The NixOS Linux distribution has a modular configuration system that imposes its own conventions:
+
+- [NixOS modules][nixos-modules] shows how NixOS configurations are organized.
+
+[nix-pills]: https://nixos.org/guides/nix-pills/
+[stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
+[trivial-builders]: https://nixos.org/manual/nixpkgs/stable/#chap-trivial-builders
+[overlays]: https://nixos.org/manual/nixpkgs/stable/#chap-overlays
+[overrides]: https://nixos.org/manual/nixpkgs/stable/#chap-overrides
+[language-support]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
+[nixos-modules]: https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules
 
