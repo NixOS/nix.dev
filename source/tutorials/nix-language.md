@@ -536,7 +536,7 @@ Also known as “angle bracket syntax”.
 
 The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
 
-In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [nixpkgs][nixpkgs].
+In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [`nixpkgs`][nixpkgs].
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
 
 While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
