@@ -581,11 +581,11 @@ Example:
 
 <!-- TODO: See [escaping rules](). -->
 
-### Antiquotation
+### Antiquotation `${ ... }`
 
 Also known as “string interpolation”.
 
-The value of Nix expressions can be inserted into character strings with `${...}`.
+The value of a Nix expression can be inserted into a character string with the dollar-sign and braces (`${ }`).
 
 Example:
 
