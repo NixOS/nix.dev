@@ -920,6 +920,8 @@ f { a = 1; b = 2; c = 3; }
 There are two widely used libraries that *together* can be considered standard for the Nix language.
 You need to know about both to understand and navigate Nix language code.
 
+<!-- TODO: find a place for operators -->
+
 We recommend to at least skim them to familiarise yourself with what is available.
 
 ### `builtins`
@@ -927,15 +929,18 @@ We recommend to at least skim them to familiarise yourself with what is availabl
 Nix comes with many functions that are built into the language.
 
 :::{note}
-The Nix manual lists all [Built-in Functions][nix-builtins] and shows how to use them.
+The Nix manual lists all [Built-in Functions][nix-builtins], and shows how to use them.
 :::
 
-These functions are available under the `builtins` constant. Example:
+These functions are available under the `builtins` constant.
+
+Example:
 
     builtins.toString
 
 Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in the Nix language.
 
+[nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/expressions/builtins.html
 
 ### `pkgs.lib`
