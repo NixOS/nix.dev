@@ -1045,13 +1045,23 @@ echo 123 > data
 
     "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
 
+<details><summary>Detailed explanation</summary>
+
+The preceding shell command writes the characters `123` to the file `data` in the current directory.
+
+Evaluating the Nix expression referencing this file as `./data` produces a file system path.
+
+Only values that can be represented as a character string are allowed for [antiquotation](antiquotation).
+A file system path is such a value, and its character string representation is the corresponding Nix store path.
+
+The Nix store path is obtained by taking the hash of the file's contents and combining it with the file name.
+The resulting file is placed into the Nix store directory `/nix/store`:
+
+    /nix/store/<hash>-<name>
+
+</details>
+
 It is an error if the file system path does not exist.
-
-<!--:::{note}-->
-<!--Only values that can be represented as a character string are allowed for [antiquotation](#antiquotation).-->
-
-<!--A file system path is such a value, and its character string representation is the corresponding Nix store path.-->
-<!--:::-->
 
 #### Fetchers
 
