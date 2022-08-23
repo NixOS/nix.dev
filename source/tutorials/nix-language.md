@@ -1010,7 +1010,7 @@ Build inputs are files that build tasks refer to in their precise description of
 
 Since Nix language evaluation is otherwise pure, the only way to specify build inputs is explicitly with:
 - file system paths
-- dedicated impure functions
+- dedicated impure functions.
 
 When run, a build task will only have access to explicitly declared build inputs.
 
@@ -1040,18 +1040,26 @@ echo 123 > data
 
     "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
 
+It is an error if the file system path does not exist.
+
+<!--:::{note}-->
+<!--Only values that can be represented as a character string are allowed for [antiquotation](#antiquotation).-->
+
+<!--A file system path is such a value, and its character string representation is the corresponding Nix store path.-->
+<!--:::-->
+
 #### Fetchers
 
 Files to be used as build inputs do not have to come from the file system.
 
-The Nix language provides built-in impure functions to fetch files from the network during evaluation:
+The Nix language provides built-in impure functions to fetch files over the network during evaluation:
 
 - [builtins.fetchurl][fetchurl]
 - [builtins.fetchTarball][fetchTarball]
 - [builtins.fetchGit][fetchGit]
 - [builtins.fetchClosure][fetchClosure]
 
-These functions evaluate to a file system path in the Nix store, which is uniquely determined by the fetched file's contents.
+These functions evaluate to a file system path in the Nix store.
 
 Example:
 
@@ -1066,34 +1074,91 @@ Some of them add extra convenience, such as automatically unpacking archives.
 Example:
 
 ```nix
-builtins.fetchGit https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+builtins.fetchTarball https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
 ```
 
-    "/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+    "/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
+
+:::{note}
+The `nixpkgs` manual on [Fetchers][nixpkgs-fetchers] lists numerous additional library functions to fetch files over the network.
+:::
+
+It is an error if the network request fails.
 
 [fetchurl]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchurl
 [fetchTarball]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchTarball
 [fetchGit]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchGit
 [fetchClosure]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchClosure
+[nixpkgs-fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 
 ### Build tasks
 
 A build task in the Nix package manager is called *derivation*.
 
-The Nix language primitive to declare such a derivation is the built-in function `derivation`.
+Derivations are at the core of both the Nix package manager and the Nix language:
+- The Nix language is used to produce build tasks.
+- The Nix package manager runs build tasks to produce *build results*.
 
-:::{important}
-You will most never encounter `derivation` in practice.
+The Nix language primitive to declare a build task is the built-in impure function `derivation`.
 
-It is usually wrapped by the `nixpkgs` build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in build procedures.
+:::{note}
+You will probably never encounter `derivation` in practice.
+
+It is usually wrapped by the `nixpkgs` build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
 :::
 
+Two things happen when evaluating `derivation`:
 
-<!-- TODO: side effects - fetchers and derivations -->
+- The build task is written to the Nix store as a `.drv` file.
 
-See the [Nix Pills][nix-pills] series for a detailed explanation on how Nix the package manager builds software using library functions and packages from the Nix package collection.
+  The process is called *instantiation*, and the resulting file is called *store derivation*.
 
-[nix-pills]: https://nixos.org/guides/nix-pills/
+- The expression evaluates to a special derivation value.
+
+  It behaves like an attribute set, except that it can be used in antiquotation.
+
+  :::{important}
+  The character string representation of a derivation is the Nix store path of its build result.
+
+  This Nix store path will contain the build result when the derivation is built.
+  :::
+
+Example:
+
+```nix
+builtins.derivation {
+  name = "example";
+  builder = /bin/sh;
+  args = ["-c" "echo hello > $out"];
+  system = "x86_64-darwin";
+}
+```
+
+    «derivation /nix/store/ccdzzm0mzmavzmf8vyr6wx95ihm2lpzr-example.drv»
+
+The following example shows the different appearances of that derivation:
+
+```nix
+let
+  drv = builtins.derivation {
+    name = "example";
+    builder = /bin/sh;
+    args = ["-c" "echo hello > $out"];
+    system = "x86_64-darwin";
+  };
+in [ drv "${drv}" drv.name ]
+```
+
+    [ «derivation /nix/store/ccdzzm0mzmavzmf8vyr6wx95ihm2lpzr-example.drv» "/nix/store/spvfs5qfrf113ll4vhcc5lby4gqmc532-example" "example" ]
+
+The build itself is performed by running the executable file referred to by the `builder` attribute in the argument to `derivation`.
+
+The `builder` file can in turn be the build result of a different derivation.
+In the Nix language, we can refer to that file using the character string representation of its derivation  – before it has been built.
+
+This allows constructing arbitrarily complex compositions of derivations with the Nix language.
+Evaluating such an expression will produce a collection of `.drv` files (store derivations) as a side effect.
+The Nix package manager will then build them in correct order and write all (including the intermediate) build results to the Nix store.
 
 ## Worked examples
 
@@ -1158,7 +1223,6 @@ Explanation:
 - `environment` is itself an attribute set with one attribute `systemPackages`, which will evaluate to a list with one element: the `git` attribute from the `pkgs` set.
 - The `config` argument is not used.
 
-
 Example:
 
 ```nix
@@ -1190,4 +1254,42 @@ Explanation:
 - It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
 - The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the built-in function `fetchTarball`.
 - The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
+
+## References
+
+[Nix manual: Nix language][manual-language] - Nix language reference
+[Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
+[Nixpkgs manual: Functions reference][nixpkgs-functions] - `nixpkgs` function library
+[Nixpkgs manual: Fetchers][nixpkgs-fetchers] - `nixpkgs` fetcher library
+[Nix Pills][nix-pills] - a detailed explanation of derivations and how the Nix package collection is constructed from first principles
+
+[nix-pills]: https://nixos.org/guides/nix-pills/
+
+## Next steps
+
+If you worked through the examples, you will have noticed that reading the Nix language reveals the structure of the code, but does not necessarily tell what the code actually means.
+
+Often it is not possible to determine from the code at hand
+- the data type of a named value or function argument.
+- the data type a called function accepts for its operand.
+- which attributes are present in a given attribute set.
+
+Example:
+
+```nix
+{ x, y, z }: (x y) z.a
+```
+
+How do we know
+- that `x` will be a function that, given an operand, returns a function?
+- that, given `x` is a function, `y` will be an appropriate operand to `x`?
+- that, given `(x y)` is a function, `z.a` will be an appropriate operand to `(x y)`?
+- that `z` will be an attribute set at all?
+- that, given `z` is an attribute set, it will have an attribute `a`?
+- which data type `y` and `z.a` will be?
+- the data type of the end result?
+
+And how does the caller of this function know that it requires an attribute set with attributes `x`, `y`, `z`?
+
+Answering such questions requires a knowing the context in which a given expression is supposed to be used.
 
