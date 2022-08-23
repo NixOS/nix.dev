@@ -29,14 +29,14 @@ Notable uses of the Nix language are:
 Using the Nix language in practice entails multiple things:
 
 - language: syntax and semantics
-- standard libraries: `builtins` and `nixpkgs/lib`
+- function libraries: `builtins` and `nixpkgs/lib`
 - developer tools: testing, debugging, linting and formatting, ...
 - generic build mechanisms: `stdenv`, trivial builders, ...
 - composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
 - ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
-**This guide only covers language syntax and semantics**, briefly discusses standard libraries, and at the end will direct you to resources on the other components.
+**This guide only covers language syntax and semantics**, briefly discusses function libraries, and at the end will direct you to resources on the other components.
 
 ### What will you learn?
 
