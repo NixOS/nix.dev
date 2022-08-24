@@ -19,7 +19,7 @@ Notable uses of the Nix language are:
   Its underlying modular configuration system is written in Nix language, and uses packages from `nixpkgs`.
   The operating system environment and services it provides are configured with Nix language.
 
-[nix-manual]: https://nixos.org/manual/nix/stable/#preface
+[nix-manual]: https://nixos.org/manual/nix/stable
 [nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
 [nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
 [home-manager]: https://github.com/nix-community/home-manager
