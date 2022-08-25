@@ -55,6 +55,7 @@ Github creates archive for all branches and tags, because of this many archive l
 - `NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz nix-build ...`
 
 - To make ad-hoc environment available on NixOS: `nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];`
+<!-- ^ when would this be used? -->
 
 - Using just Nix:
 
