@@ -33,15 +33,17 @@ However, the resulting Nix expression is not fully reproducible.
 There are three ways to refer to nixpkgs:
 
 - Setting the environment variable `$NIX_PATH` to include a `nixpkgs=URL` entry and use the search path `<nixpkgs>` <!-- link to language tutorial -->
-- Commands like `nix-build`, `nix-shell`, etc. take a command line parameter `-I nixpkgs=URL` that can be used to extend the search path for that command only. Nixpkgs can then also be referenced with `<nixpkgs>`
+- Commands like `nix-build`, `nix-shell`, etc. take a command line parameter `-I nixpkgs=URL` that can be used to extend the search path for that command only. Nixpkgs can then also be referenced with `<nixpkgs>` <!-- link to nix-cli documentation -->
 - Using [builtins.fetchTarball](https://nixos.org/manual/nix/stable/expressions/builtins.html) function that fetches the `URL` at evaluation time <!-- more precise link would be nice -->
 
 Possible `URL` values are:
 
 - Local file path. Using just `.` means that nixpkgs is located in current folder.
 - Pinned to a specific commit: `https://github.com/NixOS/nixpkgs/archive/addcb0dddf2b7db505dae5c38fceb691c7ed85f9.tar.gz`
-- Using latest channel, meaning all tests have passed and it includes `programs.sqlite` file, which contains an index for which package contains which binaries: : `http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz`
+- Using latest channel[^nixeprs]: `http://nixos.org/channels/nixos-22.05/nixexprs.tar.xz`
+<!-- moved info to footnote -->
 - Using latest channel, but hosted by github: `https://github.com/NixOS/nixpkgs/archive/nixos-22.05.tar.gz`
+<!-- so on github no tests? what and why? -->
 - Using latest commit for release branch, but not tested yet: `https://github.com/NixOS/nixpkgs/archive/release-22.05.tar.gz`
 
 Github creates archive for all branches and tags, because of this many archive links are available that are not recommended to be used.
@@ -86,4 +88,7 @@ When choosing a commit, it is recommended to follow either
 - the **latest stable NixOS** release by using a specific version, such as `nixos-22.05`, **or**
 - the latest **unstable release** via `nixpkgs-unstable` or for NixOS `nixos-unstable`
 
-More information on channels can be found on the [Wiki](https://nixos.wiki/wiki/Nix_channels) and on [Diskurse](https://discourse.nixos.org/t/differences-between-nix-channels/13998) <!-- todo: move here + check manuals for content again -->
+More information on channels can be found on the [Wiki](https://nixos.wiki/wiki/Nix_channels) and on [Discourse](https://discourse.nixos.org/t/differences-between-nix-channels/13998) <!-- todo: move here + check manuals for content again -->
+
+
+[^nixeprs]: This means all tests have passed and it includes `programs.sqlite` file, which contains an index for which package contains which binaries. <!-- todo improve sentence-->
