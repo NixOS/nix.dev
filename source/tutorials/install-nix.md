@@ -4,7 +4,7 @@
 
 ## Linux
 
-Install Nix on via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
+Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
