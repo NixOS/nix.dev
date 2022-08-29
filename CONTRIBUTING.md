@@ -188,36 +188,32 @@ Collect links at the end of each section, which are delimited by headings.
 
 To avoid confusion around all the things called Nix, always use the following terms with capitalization as given.
 
-Terms in brackets (`[  ]`) are optional.
-Terms in parentheses (`(  )`) are abbreviations.
+- Nix
 
-- Nix ecosystem
+  Build system and package manager.
 
-  All of the below.
+  Read /nɪks/ ("Niks").
 
-  - Nix package manager
+- Nix language
 
-    - `nix` [command [line interface]] (Nix CLI)
+    Programming language to declare packages and configurations for Nix.
 
-  - Nix language
+  - Nix expression
 
-      Programming language to declare packages and configurations for the Nix package manager.
+    Expression written in Nix language.
 
-    - Nix expression
+  - Nix file
 
-      Expression written in Nix language.
+    File (`.nix`) containing a Nix expression.
 
-    - Nix file
+- Nixpkgs
 
-      File containing Nix expression, usally ends in `.nix`.
+  Software distribution built with Nix.
 
-  - Nix package collection (`nixpkgs`)
+  Read /nɪks ˈpækɪʤɪz/ ("Niks packages").
 
-    Read `nixpkgs` as "Nix packages".
+- NixOS
 
-  - NixOS [Linux distribution]
+  Linux distribution based on Nix and Nixpkgs.
 
-    Linux distribution based on Nix package manager and `nixpkgs`.
-    Read /nɪks oʊ ɛs/ ("Nix Oh Es").
-
-    - NixOS module collection (NixOS modules)
+  Read /nɪks oʊ ɛs/ ("Niks Oh Es").
