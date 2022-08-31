@@ -8,15 +8,15 @@ It is a domain-specific, purely functional, lazily evaluated, dynamically typed 
 
 Notable uses of the Nix language are:
 
-- [Nix package collection][nixpkgs] (`nixpkgs`)
+- [Nixpkgs][nixpkgs]
 
-  It is the largest, most up-to-date software distribution in the world, and written in Nix language.
+  The largest, most up-to-date software distribution in the world, and written in Nix language.
 
-- [NixOS][nixos-manual] Linux distribution
+- [NixOS][nixos-manual]
 
-  It is based on the Nix package manager, and can be configured fully declaratively.
+  Linux distribution based on the Nix package manager, which can be configured fully declaratively.
 
-  Its underlying modular configuration system is written in Nix language, and uses packages from `nixpkgs`.
+  Its underlying modular configuration system is written in Nix language, and uses packages from Nixpkgs.
   The operating system environment and services it provides are configured with Nix language.
 
 [nix-manual]: https://nixos.org/manual/nix/stable
@@ -540,7 +540,7 @@ Also known as “angle bracket syntax”.
 
 The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
 
-In practice, `<nixpkgs>` points to the file system path of some revision of the Nix package collection's source repository [`nixpkgs`][nixpkgs].
+In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
 
 While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
@@ -950,10 +950,10 @@ Most of them are implemented in the Nix language interpreter itself, which means
 
 ### `pkgs.lib`
 
-The Nix package collection [`nixpkgs`][nixpkgs] contains an attribute set called `lib`, which provides a large number of useful functions.
+The [`nixpkgs`][nixpkgs] repository contains an attribute set called `lib`, which provides a large number of useful functions.
 
 :::{note}
-The `nixpkgs` manual lists all [Nixpkgs library functions][nixpkgs-functions].
+The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
 :::
 
 These functions are usually accessed through `pkgs.lib`.
@@ -1095,7 +1095,7 @@ builtins.fetchTarball https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430
     "/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
 
 :::{note}
-The `nixpkgs` manual on [Fetchers][nixpkgs-fetchers] lists numerous additional library functions to fetch files over the network.
+The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] lists numerous additional library functions to fetch files over the network.
 :::
 
 It is an error if the network request fails.
@@ -1120,7 +1120,7 @@ The Nix language primitive to declare a build task is the built-in impure functi
 :::{note}
 You will probably never encounter `derivation` in practice.
 
-It is usually wrapped by the `nixpkgs` build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
+It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
 :::
 
 Two things happen when evaluating `derivation`:
@@ -1264,7 +1264,7 @@ stdenv.mkDerivation rec {
 }
 ```
 
-This example is a (simplified) package declaration from `nixpkgs`.
+This example is a (simplified) package declaration from Nixpkgs.
 
 Explanation:
 
@@ -1277,8 +1277,8 @@ Explanation:
 
 - [Nix manual: Nix language][manual-language] - Nix language reference
 - [Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
-- [Nixpkgs manual: Functions reference][nixpkgs-functions] - `nixpkgs` function library
-- [Nixpkgs manual: Fetchers][nixpkgs-fetchers] - `nixpkgs` fetcher library
+- [Nixpkgs manual: Functions reference][nixpkgs-functions] - Nixpkgs function library
+- [Nixpkgs manual: Fetchers][nixpkgs-fetchers] - Nixpkgs fetcher library
 
 ## Next steps
 
@@ -1316,23 +1316,23 @@ And how does the caller of this function know that it requires an attribute set 
 Answering such questions requires a knowing the context in which a given expression is supposed to be used.
 
 The Nix ecosystem and code style is driven by conventions.
-Most names you will encounter in Nix language code come from the Nix package collection `nixpkgs`:
+Most names you will encounter in Nix language code come from Nixpkgs:
 
 - [Nix Pills][nix-pills] - a detailed explanation of derivations and how the Nix package collection is constructed from first principles
 
-`nixpkgs` provides generic build mechanisms that are widely used:
+Nixpkgs provides generic build mechanisms that are widely used:
 
 - [`stdenv`][stdenv] - most importantly `mkDerivation`
 - [Trivial Builders][trivial-builders] - to create files and shell scripts
 
-Packages from `nixpkgs` can be modified through multiple mechanisms:
+Packages from Nixpkgs can be modified through multiple mechanisms:
 
 - [overrides] – specifically `override` and `overrideAttrs` to modify single packages
-- [overlays] – to produce a custom variant of `nixpkgs` with individually modified packages
+- [overlays] – to produce a custom variant of Nixpkgs with individually modified packages
 
-Different language ecosystems and frameworks have different requirements to accommodating them into `nixpkgs`:
+Different language ecosystems and frameworks have different requirements to accommodating them into Nixpkgs:
 
-- [Languages and frameworks][language-support] lists tools provided by `nixpkgs` to build language- or framework-specific packages with the Nix package manager.
+- [Languages and frameworks][language-support] lists tools provided by Nixpkgs to build language- or framework-specific packages with the Nix package manager.
 
 The NixOS Linux distribution has a modular configuration system that imposes its own conventions:
 
