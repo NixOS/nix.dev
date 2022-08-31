@@ -179,7 +179,6 @@ In addition it allows three side effects:
     to keep them for later execution, the *build*
 
 There is nothing else to it.
-
 What may look complicated comes not from the language, but from how it is used.
 
 ## Names and values
@@ -188,6 +187,7 @@ There are two ways to assign names to values in Nix: attribute sets and `let` ex
 
 Assignments are denoted by a single equal sign (`=`).
 
+(attrset)=
 ### Attribute set `{ ... }`
 
 An attribute set is an unordered collection of name-value-pairs, where names must be unique.
@@ -260,6 +260,7 @@ Nix language data types *without functions* work just like their counterparts in
 
 [manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
 
+(rec-attrset)=
 #### Recursive attribute set `rec { ... }`
 
 You will sometimes see attribute sets declared with `rec` prepended.
@@ -320,20 +321,123 @@ a + a
 
     2
 
-As in attribute sets, names can be assigned in any order.
-In contrast to attribute sets, the expressions on the right of the assignment can refer to other assigned names.
+<details><summary>Detailed explanation</summary>
+
+Assignments are placed between the keywords `let` and `in`.
+In this example we assign `a = 1`.
+
+After `in` comes the expression in which the assignments are valid, i.e., where assigned names can be used.
+In this example the expression is `a + a`, where `a` refers to `a = 1`.
+
+By replacing the names with their assigned values, `a + a` evaluates to `2`.
+
+</details>
+
+Names can be assigned in any order, and expressions on the right of the assignment (`=`) can refer to other assigned names.
 
 Example:
 
 ```nix
 let
-  b = a + 1
+  b = a + 1;
   a = 1;
 in
 a + b
 ```
 
     3
+
+
+<details><summary>Detailed explanation</summary>
+
+Assignments are placed between the keywords `let` and `in`.
+In this example we assign `a = 1` and `b = a + 1`.
+
+The order of assignments does not matter.
+Therefore the following example, where the assignments are in reverse order, is equivalent:
+
+
+```nix
+let
+  a = 1;
+  b = a + 1;
+in
+a + b
+```
+
+    3
+
+Note that the `a` in `b = a + 1` refers to `a = 1`.
+
+After `in` comes the expression in which the assignments are valid.
+In this example the expression is `a + b`, where `a` refers to `a = 1`, and `b` refers to `b = a + 1`.
+
+By replacing the names with their assigned values, `a + b` evaluates to `3`.
+
+This is similar to [recursive attribute sets](rec-attrset):
+in both, the order of assignments does not matter, and names on the left can be used in expressions on the right of the assignment (`=`).
+
+Example:
+
+<table>
+<tr>
+  <th>
+
+`let ... in ...`
+
+  </th>
+  <th>
+
+`rec { ... }`
+
+  </th>
+</tr>
+<tr>
+<td>
+
+```nix
+let
+  b = a + 1;
+  c = a + b
+  a = 1;
+in {  c = c; a = a; b = b; }
+```
+
+    { a = 1; b = 2; c = 3; }
+
+</td>
+<td>
+
+```nix
+rec {
+  b = a + 1;
+  c = a + b;
+  a = 1;
+}
+```
+
+    { a = 1; b = 2; c = 3; }
+
+</td>
+</tr>
+</table>
+
+The difference is that while a recursive attribute set evaluates to an [attribute set](attrset), any expression can follow after the `in` keyword.
+
+In the following example we use the `let` expression to form a list:
+
+
+```nix
+let
+  b = a + 1;
+  c = a + b
+  a = 1;
+in [ a b c ]
+```
+
+    [ 1 2 3 ]
+
+</details>
 
 Only expressions within the `let` expression itself can access the newly declared names.
 We say: the bindings have local scope.
