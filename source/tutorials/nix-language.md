@@ -44,10 +44,10 @@ This guide should enable you to read typical Nix language code and understand it
 
 It shows the most common and distingushing patterns in the Nix language:
 
-- assigning names and accessing values
-- declaring and calling functions
-- built-in and library functions
-- side effects to obtain build inputs and produce build results
+- [assigning names and accessing values](names-values)
+- declaring and calling [functions](functions)
+- [built-in and library functions](libraries)
+- [side effects](side-effects) to obtain build inputs and produce build results
 
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
@@ -181,7 +181,14 @@ In addition it allows three side effects:
 There is nothing else to it.
 What may look complicated comes not from the language, but from how it is used.
 
+(names-values)=
 ## Names and values
+
+Values in Nix language can be primitive data types, lists, attribute sets, and functions.
+
+We show primitve data types and lists as examples in the context of [attribute sets](attrset).
+Later in this section we cover special features of character strings: [file system paths](file-system-paths), [indented strings](indented-strings), and [antiquotation](antiquotation).
+We deal with [functions](functions) separately.
 
 There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
 
@@ -504,6 +511,7 @@ attrset
 
     { a = { b = { c = 1; }; }; }
 
+(with)=
 ### `with ...; ...`
 
 The `with` expression allows access to attributes without repeatedly referencing their attribute set.
@@ -608,6 +616,7 @@ is equivalent to
 
     x = a.x; y = a.y;
 
+(file-system-paths)=
 ### File system paths
 
 Nix language offers convenience syntax for file system paths.
@@ -653,6 +662,7 @@ While you will see many such examples, we recommend to {ref}`avoid search paths 
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
 
+(indented-strings)=
 ### Indented strings
 
 Also known as “multi-line strings”.
@@ -764,6 +774,7 @@ in
 
 <!-- TODO: link to escaping rules -->
 
+(functions)=
 ## Functions
 
 Functions are everywhere in the Nix language and deserve particular attention.
@@ -1024,6 +1035,7 @@ f { a = 1; b = 2; c = 3; }
     6
 
 
+(libraries)=
 ## Function libraries
 
 There are two widely used libraries that *together* can be considered standard for the Nix language.
@@ -1068,6 +1080,7 @@ Example:
 
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
 
+(side-effects)=
 ## Building software with side effects
 
 So far we have only covered what we call *pure expressions*:
