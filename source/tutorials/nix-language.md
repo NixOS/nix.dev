@@ -508,7 +508,7 @@ Counter-example:
 
 ### Attribute access
 
-Attributes in a set can be accessed with a dot (`.`) and the attribute name.
+Attributes in a set are accessed with a dot (`.`) and the attribute name.
 
 Example:
 
@@ -534,7 +534,7 @@ attrset.a.b.c
 
     1
 
-The dot (`.`) notation also works when assigning attributes.
+The dot (`.`) notation can also be used for assigning attributes.
 
 Example:
 
@@ -692,7 +692,7 @@ The value of a named path is a file system path that depends on the contents of 
 In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
 
-While you will see many such examples, we recommend to {ref}`avoid search paths <search-path>` in practice, as they are not fully reproducible.
+While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are not fully reproducible.
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
@@ -1095,14 +1095,14 @@ Example:
 
     builtins.toString
 
-Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in the Nix language.
+Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in Nix language.
 
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/expressions/builtins.html
 
 ### `pkgs.lib`
 
-The [`nixpkgs`][nixpkgs] repository contains an attribute set called `lib`, which provides a large number of useful functions.
+The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions.
 
 :::{note}
 The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
@@ -1115,9 +1115,10 @@ Example:
     pkgs.lib.strings.toUpper
 
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+[nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
 
 (side-effects)=
-## Building software with side effects
+## Side effects
 
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
@@ -1508,7 +1509,7 @@ How do we know
 
 And how does the caller of this function know that it requires an attribute set with attributes `x`, `y`, `z`?
 
-Answering such questions requires a knowing the context in which a given expression is supposed to be used.
+Answering such questions requires knowing the context in which a given expression is supposed to be used.
 
 The Nix ecosystem and code style is driven by conventions.
 Most names you will encounter in Nix language code come from Nixpkgs:
