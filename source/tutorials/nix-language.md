@@ -657,29 +657,61 @@ is equivalent to
 
 Nix language offers convenience syntax for file system paths.
 
-Absolute paths always start with a slash (`/`):
+Absolute paths always start with a slash (`/`).
+
+Example:
+
+```nix
+/absolute/path
+```
 
     /absolute/path
 
 Paths are relative when they contain at least one slash (`/`) but to not start with one.
-They are relative to the file containing the expression:
+They evaluate to the path relative to the file containing the expression.
+
+The following examples assume the containing Nix file is in `/current/directory` (or `nix repl` is run in `/current/directory`).
+
+Example:
+
 
 ```nix
 ./relative
 ```
 
+    /current/directory/relative
+
+Example:
+
 ```nix
 relative/path
 ```
 
+    /current/directory/relative/path
+
+
 One dot (`.`) denotes the same directory.
-This is typically used to specify the current directory:
+This is typically used to specify the current directory.
+
+Example:
 
 ```nix
 ./.
 ```
 
+    /current/directory
+
 Two dots (`..`) denote the parent directory.
+
+
+Example:
+
+
+```nix
+../.
+```
+
+    /current
 
 #### Search path
 
