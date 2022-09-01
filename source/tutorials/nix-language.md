@@ -2,7 +2,7 @@
 
 # Nix language basics
 
-The Nix language is used to declare packages and configurations for the [Nix package manager][nix-manual].
+The Nix language is used to declare packages and configurations for [Nix][nix-manual].
 
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
@@ -14,7 +14,7 @@ Notable uses of the Nix language are:
 
 - [NixOS][nixos-manual]
 
-  Linux distribution based on the Nix package manager, which can be configured fully declaratively.
+  Linux distribution based on Nix, which can be configured fully declaratively.
 
   Its underlying modular configuration system is written in Nix language, and uses packages from Nixpkgs.
   The operating system environment and services it provides are configured with Nix language.
@@ -58,7 +58,7 @@ See the [Nix manual][manual-language] for a full language reference.
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- Install the Nix package manager, to run the examples
+- Install Nix, to run the examples
 <!-- TODO: approximate amount of time, as observed with test subjects -->
 
 ### How long does it take?
@@ -142,12 +142,12 @@ You will quickly encounter Nix language expressions that may look very complicat
 
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 
-Building software is a complex undertaking, and the Nix package manager both exposes and allows managing this complexity with the Nix language.
+Building software is a complex undertaking, and Nix both exposes and allows managing this complexity with the Nix language.
 
 The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
 
 :::{important}
-A build task in the Nix package manager is called *derivation*.
+A build task in Nix is called *derivation*.
 :::
 
 The Nix language has only few basic constructs which can be combined arbitrarily:
@@ -1449,7 +1449,7 @@ Packages from Nixpkgs can be modified through multiple mechanisms:
 
 Different language ecosystems and frameworks have different requirements to accommodating them into Nixpkgs:
 
-- [Languages and frameworks][language-support] lists tools provided by Nixpkgs to build language- or framework-specific packages with the Nix package manager.
+- [Languages and frameworks][language-support] lists tools provided by Nixpkgs to build language- or framework-specific packages with Nix.
 
 The NixOS Linux distribution has a modular configuration system that imposes its own conventions:
 
