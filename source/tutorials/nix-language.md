@@ -147,7 +147,7 @@ The second command runs `nix-instantiate` with the `--eval` option on `file.nix`
 The resulting value is printed as output.
 
 `--eval` is required to evaluate the file and do nothing else.
-If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special data type called *derivation*.
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special data type called *Derivation*, which we will come back to at the end of this guide in [](build-tasks).
 
 If you do not need `file.nix` any more, remove it with
 
@@ -1336,11 +1336,12 @@ It is an error if the network request fails.
 [fetchClosure]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchClosure
 [nixpkgs-fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 
+(build-tasks)=
 ### Build tasks
 
 A build task in Nix is called *derivation*.
 
-Derivations are at the core of both Nix and the Nix language:
+Build tasks are at the core of both Nix and the Nix language:
 - The Nix language is used to produce build tasks.
 - Nix runs build tasks to produce *build results*.
 - Build results can in turn be used as inputs for other build tasks.
@@ -1355,9 +1356,10 @@ You will probably never encounter `derivation` in practice.
 
 Whenever you see `mkDerivation`, it denotes something that Nix will eventually *build*.
 
-Example: [package using `mkDerivation`](mkDerivation-example)
+Example: [a package using `mkDerivation`](mkDerivation-example)
 
-The evaluation result of `derivation` (and `mkDerivation`) behaves like an attribute set, except that it can be used in [antiquotation](antiquotation).
+The evaluation result of `derivation` (and `mkDerivation`) has the special Nix language data type Derivation.
+It behaves like an [attribute set](attrset), except that it can be used in [antiquotation](antiquotation).
 
 Example:
 
@@ -1383,35 +1385,49 @@ This is why we recommend to [avoid search paths](search-path), except in example
 The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
 
-It cannot be inferred from the code above, but `pkgs` is an attribute set of derivations.
+It cannot be inferred from the code above, but `pkgs` is an attribute set of Derivations.
 That is, each of its attributes ultimately boils down to a call to `derivation`.
 
-Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a derivation.
+Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a Derivation.
 The resulting string is the file system path where the build result of that derivation will end up.
-
-Two things happen when evaluating `derivation`:
-
-- The build task described by the call to `derivation` is written to the Nix store as a `.drv` file.
-
-  The process is called *instantiation*, and the resulting file is called *store derivation*.
-
-- The expression evaluates to a special derivation value.
-
-  It behaves like an attribute set, and in addition can be used in [antiquotation](antiquotation):
-  the character string representation of a derivation is the Nix store path of its build result.
-
-  This Nix store path will contain the build result when the derivation is built.
-
-  :::{note}
-  The Nix store path of a derivation's build result is different from the path of the store derivation.
-  The store derivation is only the build task for that build result, not the build result itself.
-  :::
 
 </details>
 
-Antiquotation on derivation values is used to refer to other build results as file system paths when declaring new build tasks.
+Antiquotation on Derivation values is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
+
+:::{important}
+Nix and Nix language distinguish the following concepts which have similar names:
+
+- derivation
+
+  A build task in Nix.
+  This is an abstract concept embodied by the following representations.
+
+- `derivation`
+
+  A built-in function in Nix language.
+  It evaluates to a *Derivation* within Nix language and produces a *store derivation* in the Nix store as a side effect.
+
+  The process of creating a store derivation is called *instantiation*.
+
+- Derivation
+
+  A data type in Nix language.
+  It is like an [attribute set](attrset) and can be used in [antiquotation](antiquotation).
+
+  The character string representation of a Derivation is the Nix store path of its build result.
+  This Nix store path will contain the build result when the derivation is built.
+
+- store derivation
+
+  A `.drv` file in the Nix store.
+  It describes a build task, and is produced as a side effect of evaluating `derivation`.
+
+  The Nix store path of a store derivation is different from the path of the derivation's build result.
+  The store derivation is only the build task for that build result, not the build result itself.
+:::
 
 ## Worked examples
 
