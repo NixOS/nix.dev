@@ -1106,12 +1106,14 @@ f { a = 1; b = 2; c = 3; }
 (libraries)=
 ## Function libraries
 
-There are two widely used libraries that *together* can be considered standard for the Nix language.
+In addition to the [built-in operators][operators], there are two widely used libraries that *together* can be considered standard for the Nix language.
 You need to know about both to understand and navigate Nix language code.
 
 <!-- TODO: find a place for operators -->
 
 We recommend to at least skim them to familiarise yourself with what is available.
+
+[operators]: https://nixos.org/manual/nix/stable/language/operators.html
 
 ### `builtins`
 
