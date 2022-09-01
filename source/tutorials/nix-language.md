@@ -63,12 +63,23 @@ See the [Nix manual][manual-language] for a full language reference.
 
 ### How long does it take?
 
-Carefully working through all definitions and examples, and reading all detailed explanations should take ca. 2 hours.
+- **No experience with functional programming: 2 hours**
 
-If you are proficient in procedural or object-oriented programming, learning syntax and semantics by examining all examples should take ca. 1 hour.
+  Carefully work through all definitions and examples.
 
-If you are familiar with functional programming, the Nix language will be largely unsurprizing.
-Reading through the guide to get accustomed to the syntax should take ca. 30 minutes.
+  Make sure you understand them by reading all detailed explanations.
+
+- **Familiar with functional programming: 1 hour**
+
+  Learn syntax and semantics by examining definitions and examples, and read detailed explanations if in doubt.
+
+- **Proficient with functional programming: 30 minutes**
+
+  The Nix language is largely unsurprizing to experienced functional programmers.
+
+  Read through the guide to get accustomed to the syntax and language features.
+
+We recommend running all examples and playing with them to validate your assumptions and test what you have learned.
 
 ### How to run the examples?
 
