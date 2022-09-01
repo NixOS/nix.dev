@@ -19,7 +19,7 @@ For security you may want to [verify the installation script] using GPG signatur
 Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
 
 ```bash
-sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
+sh <(curl -L https://nixos.org/nix/install)
 ```
 
 :::{note}
@@ -67,8 +67,8 @@ docker> find ./result # this symlink points to the build package
 Check that the installation by opening **a new terminal** and typing:
 
 ```bash
-$ nix-env --version
-nix-env (Nix) 2.3.15
+$ nix --version
+nix (Nix) 2.11.0
 ```
 
 [verify the installation script]: https://nixos.org/download.html#nix-verify-installation
