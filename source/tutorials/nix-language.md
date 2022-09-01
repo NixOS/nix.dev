@@ -1443,7 +1443,7 @@ Explanation:
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
 - The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
-- the indented string contains an antiquotation, which will expand to `"hello world"`, the value of `message`
+- The indented string contains an antiquotation, which will expand the value of `message` to yield `"hello world"`.
 
 
 Example:
