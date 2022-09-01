@@ -133,6 +133,31 @@ nix-instantiate --eval file.nix
 
     3
 
+<details><summary>Detailed explanation</summary>
+
+The first command writes `1 + 2` to a file `file.nix` in the current directory.
+The contents of `file.nix` are now `1 + 2`, which you can check with
+
+```console
+cat file.nix
+```
+
+    1 + 2
+
+The second command runs `nix-instantiate` with the `--eval` option on `file.nix`, which reads the file and evaluates the contained Nix expression.
+The resulting value is printed as output.
+
+`--eval` is required to evaluate the file and do nothing else.
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special data type called *derivation*.
+
+If you do not need `file.nix` any more, remove it with
+
+```console
+rm file.nix
+```
+
+</details>
+
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
 
@@ -1123,6 +1148,25 @@ import ./file.nix
 
     3
 
+<details><summary>Detailed explanation</summary>
+
+The preceding shell command writes the contents `1 + 2` to the file `file.nix` in the current directory.
+
+The above Nix expression refers to this file as `./file.nix`.
+`import` reads the file as a side effect and evaluates to the contained Nix expression.
+
+It is an error if the file system path does not exist.
+
+After reading `file.nix` the Nix expression is equivalent to the file contents:
+
+```nix
+1 + 2
+```
+
+    3
+
+</details>
+
 Example:
 
 ```console
@@ -1135,7 +1179,30 @@ import ./file.nix 1
 
     2
 
+<details><summary>Detailed explanation</summary>
+
+The preceding shell command writes the contents `x: x + 1` to the file `file.nix` in the current directory.
+
+The above Nix expression refers to this file as `./file.nix`.
+`import ./file.nix` reads the file as a side effect and evaluates to the contained Nix expression.
+
 It is an error if the file system path does not exist.
+
+After reading the file, the Nix expression `import ./file.nix` is equivalent to the file contents:
+
+```nix
+(x: x + 1) 1
+```
+
+    2
+
+This applies the function `x: x + 1` to the argument `1`, and therefore evaluates to `3`.
+
+:::{note}
+Parentheses are required to separate function declaration from function application.
+:::
+
+</details>
 
 ### Build inputs
 
