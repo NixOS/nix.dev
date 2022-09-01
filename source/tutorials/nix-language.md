@@ -1257,7 +1257,7 @@ It precludes build tasks from referring to files which are not explicitly specif
 
 #### Paths
 
-Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*.
+Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
 
 The evaluated string then contains the Nix store path assigned to that file.
 
@@ -1279,19 +1279,20 @@ echo 123 > data
 
 The preceding shell command writes the characters `123` to the file `data` in the current directory.
 
-Evaluating the Nix expression referencing this file as `./data` produces a file system path.
+The above Nix expression refers to this file as `./data` and converts the file system path to a string with [antiquotation](antiquotation) `${ ... }`.
 
-Only values that can be represented as a character string are allowed for [antiquotation](antiquotation).
+Only values that can be represented as a character string are allowed for antiquotation.
 A file system path is such a value, and its character string representation is the corresponding Nix store path.
 
-The Nix store path is obtained by taking the hash of the file's contents and combining it with the file name.
-The resulting file is placed into the Nix store directory `/nix/store`:
+The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
+The file is copied into the Nix store directory `/nix/store` as a side effect of evaluation:
 
     /nix/store/<hash>-<name>
 
+It is an error if the file system path does not exist.
+
 </details>
 
-It is an error if the file system path does not exist.
 
 #### Fetchers
 
@@ -1338,75 +1339,80 @@ It is an error if the network request fails.
 
 ### Build tasks
 
-A build task in the Nix package manager is called *derivation*.
+A build task in Nix is called *derivation*.
 
-Derivations are at the core of both the Nix package manager and the Nix language:
+Derivations are at the core of both Nix and the Nix language:
 - The Nix language is used to produce build tasks.
-- The Nix package manager runs build tasks to produce *build results*.
+- Nix runs build tasks to produce *build results*.
 - Build results can in turn be used as inputs for other build tasks.
 
 The Nix language primitive to declare a build task is the built-in impure function `derivation`.
 
+It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
+
 :::{note}
 You will probably never encounter `derivation` in practice.
-
-It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
 :::
+
+Whenever you see `mkDerivation`, it denotes something that Nix will eventually *build*.
+
+Example: [package using `mkDerivation`](mkDerivation-example)
+
+The evaluation result of `derivation` (and `mkDerivation`) behaves like an attribute set, except that it can be used in [antiquotation](antiquotation).
+
+Example:
+
+```nix
+let
+  pkgs = import <nixpkgs> {};
+in "${pkgs.nix}"
+```
+
+    "/nix/store/rbyjapdp614xfd0l2wiji700x5s8dssl-nix-2.10.3"
+
+:::{note}
+Your output may differ.
+It may produce a different hash or even a different package version.
+
+A derivation's output path is fully determined by its inputs, which in this case come from *some* version of Nixpkgs.
+
+This is why we recommend to [avoid search paths](search-path), except in examples intended for illustration only.
+:::
+
+<details><summary>Detailed explanation</summary>
+
+The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
+Its output is assigned the name `pkgs`.
+
+It cannot be inferred from the code above, but `pkgs` is an attribute set of derivations.
+That is, each of its attributes ultimately boils down to a call to `derivation`.
+
+Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a derivation.
+The resulting string is the file system path where the build result of that derivation will end up.
 
 Two things happen when evaluating `derivation`:
 
-- The build task is written to the Nix store as a `.drv` file.
+- The build task described by the call to `derivation` is written to the Nix store as a `.drv` file.
 
   The process is called *instantiation*, and the resulting file is called *store derivation*.
 
 - The expression evaluates to a special derivation value.
 
-  It behaves like an attribute set, except that it can be used in antiquotation.
-
-  :::{important}
-  The character string representation of a derivation is the Nix store path of its build result.
+  It behaves like an attribute set, and in addition can be used in [antiquotation](antiquotation):
+  the character string representation of a derivation is the Nix store path of its build result.
 
   This Nix store path will contain the build result when the derivation is built.
 
-  It is different from the path of the store derivation, which is the build task for that build result.
+  :::{note}
+  The Nix store path of a derivation's build result is different from the path of the store derivation.
+  The store derivation is only the build task for that build result, not the build result itself.
   :::
 
-Example:
+</details>
 
-```nix
-builtins.derivation {
-  name = "example";
-  builder = /bin/sh;
-  args = ["-c" "echo hello > $out"];
-  system = "x86_64-darwin";
-}
-```
-
-    «derivation /nix/store/ccdzzm0mzmavzmf8vyr6wx95ihm2lpzr-example.drv»
-
-The following example shows the different appearances of that derivation:
-
-```nix
-let
-  drv = builtins.derivation {
-    name = "example";
-    builder = /bin/sh;
-    args = ["-c" "echo hello > $out"];
-    system = "x86_64-darwin";
-  };
-in [ drv "${drv}" drv.name ]
-```
-
-    [ «derivation /nix/store/ccdzzm0mzmavzmf8vyr6wx95ihm2lpzr-example.drv» "/nix/store/spvfs5qfrf113ll4vhcc5lby4gqmc532-example" "example" ]
-
-The build itself is performed by running the executable file referred to by the `builder` attribute in the argument to `derivation`.
-
-The `builder` file can be the build result of a different derivation.
-In the Nix language, we can refer to that file using the character string representation of its derivation – before the derivatiothe derivation has been built.
+Antiquotation on derivation values is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
-Evaluating such an expression will produce a collection of `.drv` files (store derivations) as a side effect.
-The Nix package manager will then build them in correct order and write all (including the intermediate) build results to the Nix store.
 
 ## Worked examples
 
@@ -1471,6 +1477,7 @@ Explanation:
 - `environment` is itself an attribute set with one attribute `systemPackages`, which will evaluate to a list with one element: the `git` attribute from the `pkgs` set.
 - The `config` argument is not used.
 
+(mkDerivation-example)=
 Example:
 
 ```nix
