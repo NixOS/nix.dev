@@ -120,7 +120,7 @@ The following is a fully reproducible example and something that different colle
 $ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 [nix-shell:~]$ git --version
-git version 2.25.4
+git version 2.33.1
 ```
 
 There are two things going on here:
