@@ -1055,6 +1055,8 @@ Additional attributes are allowed with an ellipsis (`...`):
 
     {a, b, ...}: a + b
 
+Unlike the previous counter-example, passing additional arguments will not be an error.
+
 Example:
 
 ```nix
