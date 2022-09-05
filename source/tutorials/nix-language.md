@@ -52,7 +52,7 @@ It shows the most common and distingushing patterns in the Nix language:
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
 
-[manual-language]: https://nixos.org/manual/nix/stable/expressions/expression-language.html
+[manual-language]: https://nixos.org/manual/nix/stable/language/index.html
 
 ### What do you need?
 
@@ -300,7 +300,7 @@ Nix language data types *without functions* work just like their counterparts in
 [^1]: Details: Nix manual - attribute naming rules <!-- TODO: create and link manual section -->
 [^2]: Details: [Nix manual - lists][manual-lists]
 
-[manual-lists]: https://nixos.org/manual/nix/stable/expressions/language-values.html#lists
+[manual-lists]: https://nixos.org/manual/nix/stable/language/values.html#list
 
 (rec-attrset)=
 #### Recursive attribute set `rec { ... }`
@@ -727,7 +727,7 @@ While you will see many such examples, we recommend to [avoid search paths](sear
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
-[manual-primitives]: https://nixos.org/manual/nix/stable/expressions/language-values.html#primitives
+[manual-primitives]: https://nixos.org/manual/nix/stable/language/values.html#primitives
 
 (indented-strings)=
 ### Indented strings
@@ -1133,7 +1133,7 @@ Example:
 Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in Nix language.
 
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
-[nix-builtins]: https://nixos.org/manual/nix/stable/expressions/builtins.html
+[nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
 
 ### `pkgs.lib`
 
@@ -1332,10 +1332,10 @@ The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] lists numerous additional lib
 
 It is an error if the network request fails.
 
-[fetchurl]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchurl
-[fetchTarball]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchTarball
-[fetchGit]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchGit
-[fetchClosure]: https://nixos.org/manual/nix/stable/expressions/builtins.html#builtins-fetchClosure
+[fetchurl]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchurl
+[fetchTarball]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchTarball
+[fetchGit]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchGit
+[fetchClosure]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchClosure
 [nixpkgs-fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 
 (build-tasks)=
