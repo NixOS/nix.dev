@@ -117,6 +117,29 @@ nix-repl> 1 + 2
 
     3
 
+:::{note}
+Nix language by default uses lazy evaluation, and will only compute values when needed.
+
+Some examples show results of strict evaluation for clarity.
+If your output does not match the example, try prepending `:p` to the input expression.
+
+Example:
+
+```console
+nix-repl> { a.b.c = 1; }
+```
+
+    { a = { ... }; }
+
+
+```console
+nix-repl> :p { a.b.c = 1; }
+```
+
+    { a = { b = { c = 1; }; }; }
+
+:::
+
 [nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
 
 #### Evaluating Nix files
@@ -166,6 +189,33 @@ nix-instantiate --eval
 ```
 
     3
+:::
+
+:::{note}
+Nix language by default uses lazy evaluation, and will only compute values when needed.
+
+Some examples show results of strict evaluation for clarity.
+If your output does not match the example, try adding the `--strict` option to `nix-instantiate`.
+
+Example:
+
+```console
+echo "{ a.b.c = 1; }" > file.nix
+
+nix-instantiate --eval file.nix
+```
+
+    { a = <CODE>; }
+
+
+```console
+echo "{ a.b.c = 1; }" > file.nix
+
+nix-instantiate --eval --strict file.nix
+```
+
+    { a = { b = { c = 1; }; }; }
+
 :::
 
 [nix-instantiate]: https://nixos.org/manual/nix/stable/command-ref/nix-instantiate.html
