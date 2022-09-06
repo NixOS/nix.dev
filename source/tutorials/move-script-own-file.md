@@ -57,7 +57,7 @@ nanolibs-script = rec {
 };
 ```
 :::{note}
-We could have added the `name` and `text` arguments directly to the script line. By using the name and text bindings, however, we avoid cluttering the line, making it more easy to read. We could also move them out of the nanolibs-script attribute within our let-in statement, in which case we wouldn't need the `rec` statement as they would be picked up by the surrounding lexical scope. More details [here](https://nixos.wiki/wiki/Overview_of_the_Nix_Language).
+We could have added the `name` and `text` arguments directly to the script line. By using the name and text bindings, however, we avoid cluttering the line, making it more easy to read. We could also move them out of the nanolibs-script attribute within our let-in statement, in which case we wouldn't need the `rec` statement as they would be picked up by the surrounding lexical scope. More details [here](https://nixos.wiki/wiki/Overview_of_the_Nix_Language), under the `rec statement` heading.
 :::
 
 In order to execute this script, we still need to create a derivation that we can call elsewhere, either from another derivation or a developer shell. We can do this with [`symlinkJoin`](https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix#L388). If you look at the documentation for this function, you'll read that it "_creates a single derivation that replicates the directory structure of all the input paths._" It accepts a `name` and a `paths` arguments. Since we're dealing with a single path only, all we need to do is to add the script wrapper declared above to the `paths` argument: 
@@ -69,7 +69,7 @@ nanolibsPath = pkgs.symlinkJoin {
 };
 ```
 
-Now, if you had a developer shell, you could easily call the executable inside a `shellHook`, like this:
+Now, if you had a developer shell, you could easily call the executable inside a `shellHook` with `nix run`, like this:
 
 ```nix
 devShells = {
