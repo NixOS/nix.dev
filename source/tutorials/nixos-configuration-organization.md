@@ -4,12 +4,12 @@ Draft 2022.08.11
 
 ## What will you learn?
 
-In the two previous tutorials we used a single nix file that contains all information to configure nixos, use it in a virtual machine or to run a test.
+In the two previous tutorials we used a single Nix file that contains all information to configure NixOS, use it in a virtual machine, or to run a test.
 A single file that contains the complete configuration is helpful for debugging and sharing, but less for real world use cases.
-The nix language allows us to separate concerns.
+The Nix language allows us to separate concerns.
 
 In the following section we take the standard configuration from the beginning.
-This time we do not change the file but add separate files for different tasks.
+This time we do not change the file, and instead add separate files for different tasks.
 
 In the following section we will go through some possibilities to disentangle the configuration file, the additions we want for a usable virtual machine and the test script.
 
