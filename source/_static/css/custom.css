@@ -1,0 +1,4 @@
+div.highlight-shell-session + div.highlight-none pre {
+  background-color: rgba(var(--pst-color-preformatted-text),1) !important;
+  color: rgba(var(--pst-color-preformatted-background),1) !important;
+}
