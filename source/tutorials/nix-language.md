@@ -88,7 +88,7 @@ We recommend running all examples and playing with them to validate your assumpt
 - Every *Nix file* (`.nix`) contains a single Nix expression.
 
 :::{note}
-To *evaluate* means to transform an expression according to the language rules until no further simplification is possible.
+To *evaluate* means to transform an expression into a value according to the language rules.
 :::
 
 All examples in this guide are valid Nix expressions.
