@@ -14,7 +14,7 @@ Notable uses of the Nix language are:
 
 - [NixOS][nixos-manual]
 
-  Linux distribution based on Nix, which can be configured fully declaratively.
+  Linux distribution that can be configured fully declaratively and is based on Nix.
 
   Its underlying modular configuration system is written in Nix language, and uses packages from Nixpkgs.
   The operating system environment and services it provides are configured with Nix language.
