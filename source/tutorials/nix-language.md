@@ -58,7 +58,7 @@ See the [Nix manual][manual-language] for a full language reference.
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- [](./install-nix), to run the examples
+- [A Nix installation](./install-nix) to run the examples
 
 ### How long does it take?
 
