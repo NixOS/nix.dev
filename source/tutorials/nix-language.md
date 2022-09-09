@@ -36,7 +36,7 @@ Using the Nix language in practice entails multiple things:
 - ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
-**This guide only covers language syntax and semantics**, briefly discusses function libraries, and at the end will direct you to resources on the other components.
+**This guide only covers language syntax and semantics**, briefly discusses libraries, and at the end will direct you to resources on the other components.
 
 ### What will you learn?
 
