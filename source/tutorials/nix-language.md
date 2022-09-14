@@ -83,7 +83,6 @@ We recommend running all examples and playing with them to validate your assumpt
 ### How to run the examples?
 
 - Every valid piece of Nix language code is a *Nix expression*.
-- Nix expressions can contain other Nix expressions, that is, they can be nested.
 - Evaluating a Nix expression produces a *Nix value*.
 - The content of every *Nix file* (file extension `.nix`) is a Nix expression.
 
