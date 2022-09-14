@@ -172,7 +172,7 @@ nix-instantiate --eval
 
 ## Reading the Nix language without fear
 
-You will quickly encounter Nix language expressions that may look very complicated.
+You may quickly encounter Nix language expressions that look very complicated.
 
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 
