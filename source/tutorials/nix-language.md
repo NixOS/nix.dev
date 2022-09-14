@@ -10,7 +10,7 @@ Notable uses of the Nix language are:
 
 - [Nixpkgs][nixpkgs]
 
-  The largest, most up-to-date software distribution in the world, and written in Nix language.
+  The largest, most up-to-date software distribution in the world, and written in the Nix language.
 
 - [NixOS][nixos-manual]
 
