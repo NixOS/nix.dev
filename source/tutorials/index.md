@@ -14,7 +14,7 @@ building-bootable-iso-image.md
 deploying-nixos-using-terraform.md
 installing-nixos-on-a-raspberry-pi.md
 nixos-configuration-on-vm.md
-nixos-configuration-testing.md
+integration-testing-using-virtual-machines.md
 nixos-configuration-organization.md
 cross-compilation.md
 contributing.md
