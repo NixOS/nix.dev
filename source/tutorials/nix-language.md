@@ -80,7 +80,7 @@ Read detailed explanations if you want to make sure you fully understand the exa
 To *evaluate* means to transform an expression into a value according to the language rules.
 :::
 
-All examples in this guide are valid Nix expressions.
+This guide contains many examples of Nix expressions.
 Each one is followed by the expected evaluation result.
 
 The following example is a Nix expression adding two numbers:
