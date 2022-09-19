@@ -28,12 +28,12 @@ Notable uses of the Nix language are:
 
 Using the Nix language in practice entails multiple things:
 
-- language: syntax and semantics
-- libraries: `builtins` and `pkgs.lib`
-- developer tools: testing, debugging, linting, formatting, ...
-- generic build mechanisms: `stdenv.mkDerivation`, trivial builders, ...
-- composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
-- ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
+- Language: syntax and semantics
+- Libraries: `builtins` and `pkgs.lib`
+- Developer tools: testing, debugging, linting, formatting, ...
+- Generic build mechanisms: `stdenv.mkDerivation`, trivial builders, ...
+- Composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
+- Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
 **This guide only covers language syntax and semantics**, briefly discusses libraries, and at the end will direct you to resources on the other components.
@@ -44,10 +44,10 @@ This guide should enable you to read typical Nix language code and understand it
 
 It shows the most common and distingushing patterns in the Nix language:
 
-- [assigning names and accessing values](names-values)
-- declaring and calling [functions](functions)
-- [built-in and library functions](libraries)
-- [side effects](side-effects) to obtain build inputs and produce build results
+- [Assigning names and accessing values](names-values)
+- Declaring and calling [functions](functions)
+- [Built-in and library functions](libraries)
+- [Side effects](side-effects) to obtain build inputs and produce build results
 
 It *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
@@ -236,29 +236,29 @@ A build task in Nix is called *derivation*.
 
 The Nix language has only few basic constructs which can be combined arbitrarily:
 
-- primitive data types
+- Primitive data types
 
   as basic building blocks
 
-- compound data types and functions
+- Compound data types and functions
 
   to produce and transform complex data
 
-- name assignment
+- Name assignment
 
   to manipulate complex data as units
 
 In addition it allows three side effects:
 
-  - reading files as Nix expressions
+  - Reading files as Nix expressions
 
     to enable code reuse
 
-  - reading files as *build inputs*
+  - Reading files as *build inputs*
 
     to capture what build tasks will operate on
 
-  - writing files as *build tasks*
+  - Writing files as *build tasks*
 
     to keep them for later execution, the *build*
 
@@ -901,8 +901,8 @@ Functions in Nix language can appear in different forms, but always take exactly
 Argument and function body are separated by a colon (`:`).
 
 Wherever you see a colon (`:`) in Nix language code:
-- on its left is the function argument
-- on its right is the function body.
+- On its left is the function argument
+- On its right is the function body.
 
 Nix functions have no names.
 We say they are anonymous, and call such a function a *lambda*.
@@ -1294,8 +1294,9 @@ Parentheses are required to separate function declaration from function applicat
 Build inputs are files that build tasks refer to in their precise description of how to derive new files.
 
 Since Nix language evaluation is otherwise pure, the only way to specify build inputs is explicitly with:
-- file system paths
-- dedicated impure functions.
+
+- File system paths
+- Dedicated impure functions.
 
 When run, a build task will only have access to explicitly declared build inputs.
 
@@ -1605,7 +1606,7 @@ Example:
 { x, y, z }: (x y) z.a
 ```
 
-How do we know
+How do we know...
 - that `x` will be a function that, given an operand, returns a function?
 - that, given `x` is a function, `y` will be an appropriate operand to `x`?
 - that, given `(x y)` is a function, `z.a` will be an appropriate operand to `(x y)`?
