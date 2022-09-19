@@ -964,9 +964,10 @@ f v
     1
 
 
-### Chaining arguments
+### Multiple arguments
 
-Arguments can be chained by nesting functions.
+Nix functions take exactly one argument.
+Multiple arguments can be handled by nesting functions.
 
 Such a nested function can be used like a function that takes multiple arguments, but offers additional flexibility.
 
