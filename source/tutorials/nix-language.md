@@ -16,8 +16,8 @@ Notable uses of the Nix language are:
 
   Linux distribution that can be configured fully declaratively and is based on Nix.
 
-  Its underlying modular configuration system is written in Nix language, and uses packages from Nixpkgs.
-  The operating system environment and services it provides are configured with Nix language.
+  Its underlying modular configuration system is written in the Nix language, and uses packages from Nixpkgs.
+  The operating system environment and services it provides are configured with the Nix language.
 
 [nix-manual]: https://nixos.org/manual/nix/stable
 [nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
@@ -108,7 +108,7 @@ nix-repl> 1 + 2
     3
 
 :::{note}
-Nix language by default uses lazy evaluation, and will only compute values when needed.
+The Nix language by default uses lazy evaluation, and will only compute values when needed.
 
 Some examples show results of strict evaluation for clarity.
 If your output does not match the example, try prepending `:p` to the input expression.
@@ -182,7 +182,7 @@ nix-instantiate --eval
 :::
 
 :::{note}
-Nix language by default uses lazy evaluation, and will only compute values when needed.
+The Nix language by default uses lazy evaluation, and will only compute values when needed.
 
 Some examples show results of strict evaluation for clarity.
 If your output does not match the example, try adding the `--strict` option to `nix-instantiate`.
@@ -258,7 +258,7 @@ What may look complicated comes not from the language, but from how it is used.
 (names-values)=
 ## Names and values
 
-Values in Nix language can be primitive data types, lists, attribute sets, and functions.
+Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
 We show primitve data types and lists as examples in the context of [attribute sets](attrset).
 Later in this section we cover special features of character strings: [file system paths](file-system-paths), [indented strings](indented-strings), and [antiquotation](antiquotation).
@@ -693,7 +693,7 @@ is equivalent to
 (file-system-paths)=
 ### File system paths
 
-Nix language offers convenience syntax for file system paths.
+The Nix language offers convenience syntax for file system paths.
 
 Absolute paths always start with a slash (`/`).
 
@@ -773,7 +773,7 @@ While you will see many such examples, we recommend to [avoid search paths](sear
 
 Also known as “multi-line strings”.
 
-Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
+The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
 
 Indented strings are denoted by *double single quotes* (`'' ''`).
 
@@ -887,7 +887,7 @@ Functions are everywhere in the Nix language and deserve particular attention.
 
 ### Single argument
 
-Functions in Nix language can appear in different forms, but always take exactly one argument.
+Functions in the Nix language can appear in different forms, but always take exactly one argument.
 Argument and function body are separated by a colon (`:`).
 
 Wherever you see a colon (`:`) in Nix language code:
@@ -1169,7 +1169,7 @@ Example:
 
     builtins.toString
 
-Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in Nix language.
+Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in the Nix language.
 
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
@@ -1440,7 +1440,7 @@ Antiquotation on Derivation values is used to refer to other build results as fi
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
 :::{important}
-Nix and Nix language distinguish the following concepts which have similar names:
+Nix and the Nix language distinguish the following concepts which have similar names:
 
 - derivation
 
@@ -1449,14 +1449,14 @@ Nix and Nix language distinguish the following concepts which have similar names
 
 - `derivation`
 
-  A built-in function in Nix language.
-  It evaluates to a *Derivation* within Nix language and produces a *store derivation* in the Nix store as a side effect.
+  A built-in function in the Nix language.
+  It evaluates to a *Derivation* within the Nix language and produces a *store derivation* in the Nix store as a side effect.
 
   The process of creating a store derivation is called *instantiation*.
 
 - Derivation
 
-  A data type in Nix language.
+  A data type in the Nix language.
   It is like an [attribute set](attrset) and can be used in [antiquotation](antiquotation).
 
   The character string representation of a Derivation is the Nix store path of its build result.
