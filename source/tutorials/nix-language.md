@@ -979,7 +979,16 @@ x: y: x + y
 
     <LAMBDA>
 
-The above function takes one argument and returns a function `y: x + y` with `x` set to the value of the argument.
+The above function is equivalent to
+
+
+```nix
+x: (y: x + y)
+```
+
+    <LAMBDA>
+
+It takes one argument and returns a function `y: x + y` with `x` set to the value of the argument.
 
 Example:
 
