@@ -216,7 +216,7 @@ You may quickly encounter Nix language expressions that look very complicated.
 
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 
-Building software is a complex undertaking, and Nix both exposes and allows managing this complexity with the Nix language.
+Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
 
 The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
 
