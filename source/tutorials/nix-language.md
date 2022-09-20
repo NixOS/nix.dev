@@ -479,7 +479,7 @@ Example:
 ```nix
 let
   b = a + 1;
-  c = a + b
+  c = a + b;
   a = 1;
 in {  c = c; a = a; b = b; }
 ```
@@ -511,7 +511,7 @@ In the following example we use the `let` expression to form a list:
 ```nix
 let
   b = a + 1;
-  c = a + b
+  c = a + b;
   a = 1;
 in [ a b c ]
 ```
@@ -877,7 +877,7 @@ Example:
 
 ```nix
 let
-  out = "Nix"
+  out = "Nix";
 in
 "echo ${out} > $out"
 ```
@@ -920,7 +920,7 @@ Example:
 
 ```nix
 let
-  f = x: x + 1
+  f = x: x + 1;
 in f
 ```
 
@@ -1087,7 +1087,7 @@ Example:
 
 ```nix
 let
-  f = {a, b ? 0}: a + b
+  f = {a, b ? 0}: a + b;
 in
 f { a = 1; }
 ```
@@ -1098,7 +1098,7 @@ Example:
 
 ```nix
 let
-  f = {a ? 0, b ? 0}: a + b
+  f = {a ? 0, b ? 0}: a + b;
 in
 f { } # empty attribute set
 ```
@@ -1117,7 +1117,7 @@ Example:
 
 ```nix
 let
-  f = {a, b, ...}: a + b
+  f = {a, b, ...}: a + b;
 in
 f { a = 1; b = 2; c = 3; }
 ```
@@ -1152,7 +1152,7 @@ Example:
 
 ```nix
 let
-  f = {a, b, ...}@args: a + b + args.c
+  f = {a, b, ...}@args: a + b + args.c;
 in
 f { a = 1; b = 2; c = 3; }
 ```
