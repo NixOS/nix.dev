@@ -728,8 +728,9 @@ relative/path
     /current/directory/relative/path
 
 
-One dot (`.`) denotes the same directory.
-This is typically used to specify the current directory.
+One dot (`.`) denotes the current directory within the given path.
+
+You will often see the following expression, which specifies a Nix file's directory.
 
 Example:
 
@@ -738,6 +739,12 @@ Example:
 ```
 
     /current/directory
+
+<details><summary>Detailed explanation</summary>
+
+Since relative paths must contain a slash (`/`) but must not start with one, and the dot (`.`) denotes no change of directory, the combination `./.` specifies the current directory as a relative path.
+
+</details>
 
 Two dots (`..`) denote the parent directory.
 
