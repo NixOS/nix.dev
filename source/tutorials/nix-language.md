@@ -68,13 +68,13 @@ Read detailed explanations if you want to make sure you fully understand the exa
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- [A Nix installation](./install-nix) to run the examples
+- A [Nix installation](./install-nix) to run the examples
 
 ### How to run the examples?
 
-- Every valid piece of Nix language code is a *Nix expression*.
+- A piece of Nix language code is a *Nix expression*.
 - Evaluating a Nix expression produces a *Nix value*.
-- The content of every *Nix file* (file extension `.nix`) is a Nix expression.
+- The content of a *Nix file* (file extension `.nix`) is a Nix expression.
 
 :::{note}
 To *evaluate* means to transform an expression into a value according to the language rules.
