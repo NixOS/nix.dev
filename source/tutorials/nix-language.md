@@ -892,16 +892,58 @@ in
 
 Functions are everywhere in the Nix language and deserve particular attention.
 
-### Single argument
-
-Functions in the Nix language can appear in different forms, but always take exactly one argument.
+A function always takes exactly one argument.
 Argument and function body are separated by a colon (`:`).
 
 Wherever you see a colon (`:`) in Nix language code:
 - On its left is the function argument
 - On its right is the function body.
 
-Nix functions have no names.
+Functions in the Nix language can appear in different forms:
+
+- single argument:
+
+  ```nix
+  x: x + 1
+  ```
+
+  - multiple arguments via nesting
+
+    ```nix
+    x: y: x + y
+    ```
+
+- attribute set argument
+
+  ```nix
+  { a, b }: a + b
+  ```
+
+  - with default attributes
+
+    ```nix
+    { a, b ? 0 }: a + b
+    ```
+
+  - with additional attributes allowed
+
+    ```nix
+    { a, b, ...}: a + b
+    ```
+
+- named attribute set argument
+
+  ```nix
+  args@{ a, b, ... }: a + b + args.c
+  ```
+
+  or
+
+  ```nix
+  { a, b, ... }@args: a + b + args.c
+  ```
+
+Functions have no names.
 We say they are anonymous, and call such a function a *lambda*.
 
 Example:
@@ -930,7 +972,7 @@ in f
 
 Also known as "function application".
 
-Calling a function with an operand means writing the operand after the function.
+Calling a function with an argument means writing the argument after the function.
 
 Example:
 
@@ -941,7 +983,7 @@ Example:
     2
 
 :::{note}
-Since function and operand are separated by white space, sometimes parantheses (`( )`) are required to distinguish expressions.
+Since function and argument are separated by white space, sometimes parantheses (`( )`) are required to distinguish expressions.
 :::
 
 Example:
@@ -956,7 +998,7 @@ f { a = 1; }
     1
 
 The above example calls `f` on a literal attribute set.
-One can also pass operands by name.
+One can also pass arguments by name.
 
 Example:
 
@@ -970,8 +1012,7 @@ f v
 
     1
 
-
-### Multiple arguments
+#### Multiple arguments
 
 Nix functions take exactly one argument.
 Multiple arguments can be handled by nesting functions.
@@ -1073,7 +1114,7 @@ f { a = 1; b = 2; c = 3; }
 
 <!-- TODO: not the same as x: x.a + x.b (!!!!) -->
 
-### Default attributes
+#### Default attributes
 
 Also known as “default arguments”.
 
@@ -1105,7 +1146,7 @@ f { } # empty attribute set
 
     0
 
-### Additional attributes
+#### Additional attributes
 
 Additional attributes are allowed with an ellipsis (`...`):
 
@@ -1124,7 +1165,7 @@ f { a = 1; b = 2; c = 3; }
 
     3
 
-### Named attribute argument
+### Named attribute set argument
 
 Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”.
 
@@ -1158,7 +1199,6 @@ f { a = 1; b = 2; c = 3; }
 ```
 
     6
-
 
 (libraries)=
 ## Function libraries
@@ -1604,7 +1644,7 @@ If you worked through the examples, you will have noticed that reading the Nix l
 
 Often it is not possible to determine from the code at hand
 - the data type of a named value or function argument.
-- the data type a called function accepts for its operand.
+- the data type a called function accepts for its argument.
 - which attributes are present in a given attribute set.
 
 Example:
@@ -1614,9 +1654,9 @@ Example:
 ```
 
 How do we know...
-- that `x` will be a function that, given an operand, returns a function?
-- that, given `x` is a function, `y` will be an appropriate operand to `x`?
-- that, given `(x y)` is a function, `z.a` will be an appropriate operand to `(x y)`?
+- that `x` will be a function that, given an argument, returns a function?
+- that, given `x` is a function, `y` will be an appropriate argument to `x`?
+- that, given `(x y)` is a function, `z.a` will be an appropriate argument to `(x y)`?
 - that `z` will be an attribute set at all?
 - that, given `z` is an attribute set, it will have an attribute `a`?
 - which data type `y` and `z.a` will be?
