@@ -1018,10 +1018,14 @@ f v
 
 #### Multiple arguments
 
+Also known as “[curried] functions”.
+
 Nix functions take exactly one argument.
 Multiple arguments can be handled by nesting functions.
 
 Such a nested function can be used like a function that takes multiple arguments, but offers additional flexibility.
+
+[curried]: https://en.m.wikipedia.org/wiki/Currying
 
 Example:
 
@@ -1040,7 +1044,7 @@ x: (y: x + y)
 
     <LAMBDA>
 
-It takes one argument and returns a function `y: x + y` with `x` set to the value of the argument.
+This function takes one argument and returns another function `y: x + y` with `x` set to the value of the argument.
 
 Example:
 
@@ -1054,7 +1058,7 @@ f 1
     <LAMBDA>
 
 
-Applying that function `f 1` to another argument yields the inner body `x + y` (with `x` set to `1` and `y` set to the other argument), which can now be fully evaluated.
+Applying the function which results from `f 1` to another argument yields the inner body `x + y` (with `x` set to `1` and `y` set to the other argument), which can now be fully evaluated.
 
 ```nix
 let
