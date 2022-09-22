@@ -261,7 +261,7 @@ What may look complicated comes not from the language, but from how it is used.
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
 We show primitve data types and lists as examples in the context of [attribute sets](attrset).
-Later in this section we cover special features of character strings: [file system paths](file-system-paths), [indented strings](indented-strings), and [antiquotation](antiquotation).
+Later in this section we cover special features of character strings: [file system paths](file-system-paths), [antiquotation](antiquotation), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
 There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
@@ -775,43 +775,6 @@ While you will see many such examples, we recommend to [avoid search paths](sear
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [manual-primitives]: https://nixos.org/manual/nix/stable/language/values.html#primitives
 
-(indented-strings)=
-### Indented strings
-
-Also known as “multi-line strings”.
-
-The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
-
-Indented strings are denoted by *double single quotes* (`'' ''`).
-
-Example:
-
-```nix
-''
-multi
-line
-string
-''
-```
-
-    "multi\nline\nstring"
-
-Equal amounts of prepended white space are trimmed from the result.
-
-Example:
-
-```nix
-''
-  one
-   two
-    three
-''
-```
-
-    "one\n two\n  three\n"
-
-<!-- TODO: See [escaping rules](). -->
-
 (antiquotation)=
 ### Antiquotation `${ ... }`
 
@@ -886,6 +849,43 @@ in
 :::
 
 <!-- TODO: link to escaping rules -->
+
+(indented-strings)=
+### Indented strings
+
+Also known as “multi-line strings”.
+
+The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
+
+Indented strings are denoted by *double single quotes* (`'' ''`).
+
+Example:
+
+```nix
+''
+multi
+line
+string
+''
+```
+
+    "multi\nline\nstring"
+
+Equal amounts of prepended white space are trimmed from the result.
+
+Example:
+
+```nix
+''
+  one
+   two
+    three
+''
+```
+
+    "one\n two\n  three\n"
+
+<!-- TODO: See [escaping rules](). -->
 
 (functions)=
 ## Functions
