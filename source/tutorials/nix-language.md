@@ -2,7 +2,7 @@
 
 # Nix language basics
 
-The Nix language is used to declare packages and configurations for [Nix][nix-manual].
+The Nix language is used to declare packages and configurations to be built by [Nix][nix-manual].
 
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
@@ -47,7 +47,8 @@ It shows the most common and distingushing patterns in the Nix language:
 - [Assigning names and accessing values](names-values)
 - Declaring and calling [functions](functions)
 - [Built-in and library functions](libraries)
-- [Side effects](side-effects) to obtain build inputs and produce build results
+- [Side effects](side-effects) to obtain build inputs
+- [Derivations](derivations) that describe build tasks
 
 :::{important}
 This guide *does not* explain all Nix language features in detail.
@@ -240,19 +241,8 @@ The Nix language has only few basic constructs which can be combined arbitrarily
 
   to manipulate complex data as units
 
-In addition it allows three side effects:
-
-  - Reading files as Nix expressions
-
-    to enable code reuse
-
-  - Reading files as *build inputs*
-
-    to capture what build tasks will operate on
-
-  - Writing files as *build tasks*
-
-    to keep them for later execution, the *build*
+In addition it allows one significant side effect:
+reading files, to capture what build tasks will operate on.
 
 There is nothing else to it.
 What may look complicated comes not from the language, but from how it is used.
@@ -771,7 +761,7 @@ The value of a named path is a file system path that depends on the contents of 
 In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
 
-While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are not reproducible.
+While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are [side effects](side-effects) which are not reproducible.
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
@@ -1211,7 +1201,7 @@ f { a = 1; b = 2; c = 3; }
 (libraries)=
 ## Function libraries
 
-In addition to the [built-in operators][operators], there are two widely used libraries that *together* can be considered standard for the Nix language.
+In addition to the [built-in operators][operators] (`+`, `==`, `&&`, etc.), there are two widely used libraries that *together* can be considered standard for the Nix language.
 You need to know about both to understand and navigate Nix language code.
 
 <!-- TODO: find a place for operators -->
@@ -1221,6 +1211,8 @@ We recommend to at least skim them to familiarise yourself with what is availabl
 [operators]: https://nixos.org/manual/nix/stable/language/operators.html
 
 ### `builtins`
+
+Also known as “primitive operations” or “primops”.
 
 Nix comes with many functions that are built into the language.
 
@@ -1232,49 +1224,25 @@ These functions are available under the `builtins` constant.
 
 Example:
 
-    builtins.toString
+```nix
+builtins.toString
+```
 
-Most of them are implemented in the Nix language interpreter itself, which means they usually execute faster than their equivalents implemented in the Nix language.
+    <PRIMOP>
+
+Some of them have equivalents in `pkgs.lib`.
+But since most `builtins` are implemented in C++ as part of the Nix language interpreter, they usually execute faster.
 
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
 
-### `pkgs.lib`
+#### `import`
 
-The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions.
+Most built-in functions are only accessible through `builtins`.
+A notable exception is `import`, which is also available at the top level.
 
-:::{note}
-The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
-:::
+`import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value.
 
-These functions are usually accessed through `pkgs.lib`.
-
-Example:
-
-    pkgs.lib.strings.toUpper
-
-[nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
-[nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
-
-(side-effects)=
-## Side effects
-
-So far we have only covered what we call *pure expressions*:
-declaring data and transforming it with functions.
-
-Building software requires interaction with the outside world, called *side effects*.
-
-There are three side effects in the Nix language that are relevant here:
-
-1. Importing Nix expressions from other files
-2. Reading files from the file system as build inputs
-3. Writing files to the file system as build tasks
-
-Side effects are performed while evaluating a given impure expression.
-
-### Imports
-
-The built-in function `import` takes a path to a Nix file, and reads it to evaluate the contained Nix expression.
 
 Example:
 
@@ -1306,6 +1274,10 @@ After reading `file.nix` the Nix expression is equivalent to the file contents:
     3
 
 </details>
+
+Since a Nix file can contain any Nix expression, `import`ed functions can be applied to arguments immediately.
+
+That is, whenever you see additional tokens after a call to `import`, the value it returns should be a function, and anything that follows are arguments to that function.
 
 Example:
 
@@ -1344,7 +1316,37 @@ Parentheses are required to separate function declaration from function applicat
 
 </details>
 
-### Build inputs
+### `pkgs.lib`
+
+The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions.
+
+:::{note}
+The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
+:::
+
+These functions are usually accessed through `pkgs.lib`.
+
+Example:
+
+    pkgs.lib.strings.toUpper
+
+[nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+[nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
+
+(side-effects)=
+## Side effects
+
+So far we have only covered what we call *pure expressions*:
+declaring data and transforming it with functions.
+
+Building software requires interaction with the outside world, called *side effects*.
+
+There is only one side effect in the Nix language that is relevant here:
+reading files from the file system as *build inputs*
+
+:::{note}
+Side effects are performed while evaluating a given impure expression.
+:::
 
 Build inputs are files that build tasks refer to in their precise description of how to derive new files.
 
@@ -1359,9 +1361,12 @@ When run, a build task will only have access to explicitly declared build inputs
 Purity is the key to reproducible builds.
 
 It precludes build tasks from referring to files which are not explicitly specified as build inputs.
+
+Nix supports other types of impure expressions, such as [search paths](search-path) or the constant [`builtins.currentSystem`](https://nixos.org/manual/nix/stable/language/builtin-constants.html#builtins-currentSystem).
+We do not cover those here more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
-#### Paths
+### Paths
 
 Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
 
@@ -1399,8 +1404,7 @@ It is an error if the file system path does not exist.
 
 </details>
 
-
-#### Fetchers
+### Fetchers
 
 Files to be used as build inputs do not have to come from the file system.
 
@@ -1503,38 +1507,6 @@ The resulting string is the file system path where the build result of that deri
 Antiquotation on Derivation values is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
-
-:::{important}
-Nix and the Nix language distinguish the following concepts which have similar names:
-
-- derivation
-
-  A build task in Nix.
-  This is an abstract concept embodied by the following representations.
-
-- `derivation`
-
-  A built-in function in the Nix language.
-  It evaluates to a *Derivation* within the Nix language and produces a *store derivation* in the Nix store as a side effect.
-
-  The process of creating a store derivation is called *instantiation*.
-
-- Derivation
-
-  A data type in the Nix language.
-  It is like an [attribute set](attrset) and can be used in [antiquotation](antiquotation).
-
-  The character string representation of a Derivation is the Nix store path of its build result.
-  This Nix store path will contain the build result when the derivation is built.
-
-- store derivation
-
-  A `.drv` file in the Nix store.
-  It describes a build task, and is produced as a side effect of evaluating `derivation`.
-
-  The Nix store path of a store derivation is different from the path of the derivation's build result.
-  The store derivation is only the build task for that build result, not the build result itself.
-:::
 
 ## Worked examples
 
