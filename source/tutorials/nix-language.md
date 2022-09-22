@@ -899,39 +899,40 @@ Wherever you see a colon (`:`) in Nix language code:
 - On its left is the function argument
 - On its right is the function body.
 
-Functions in the Nix language can appear in different forms:
+Function declarations in the Nix language can appear in different forms.
+Each of them is explained in the following, and here is an overview:
 
-- single argument:
+- Single argument
 
   ```nix
   x: x + 1
   ```
 
-  - multiple arguments via nesting
+  - Multiple arguments via nesting
 
     ```nix
     x: y: x + y
     ```
 
-- attribute set argument
+- Attribute set argument
 
   ```nix
   { a, b }: a + b
   ```
 
-  - with default attributes
+  - With default attributes
 
     ```nix
     { a, b ? 0 }: a + b
     ```
 
-  - with additional attributes allowed
+  - With additional attributes allowed
 
     ```nix
     { a, b, ...}: a + b
     ```
 
-- named attribute set argument
+- Named attribute set argument
 
   ```nix
   args@{ a, b, ... }: a + b + args.c
@@ -983,7 +984,8 @@ Example:
     2
 
 :::{note}
-Since function and argument are separated by white space, sometimes parantheses (`( )`) are required to distinguish expressions.
+Function and argument are separated by white space.
+Therefore, in this case parantheses (`( )`) are required to distinguish the function declaration and its argument.
 :::
 
 Example:
