@@ -36,7 +36,7 @@ Using the Nix language in practice entails multiple things:
 - Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
-**This guide only covers language syntax and semantics**, briefly discusses libraries, and at the end will direct you to resources on the other components.
+**This guide only covers some language syntax and mostly semantics**, briefly discusses libraries, and at the end will direct you to resources on the other components.
 
 ### What will you learn?
 
@@ -49,8 +49,10 @@ It shows the most common and distingushing patterns in the Nix language:
 - [Built-in and library functions](libraries)
 - [Side effects](side-effects) to obtain build inputs and produce build results
 
-It *does not* explain all Nix language features in detail.
+:::{important}
+This guide *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
+:::
 
 [manual-language]: https://nixos.org/manual/nix/stable/language/index.html
 
@@ -230,7 +232,7 @@ The Nix language has only few basic constructs which can be combined arbitrarily
 
   as basic building blocks
 
-- Compound data types and functions
+- Compound data types and, in the broader sense, functions
 
   to produce and transform complex data
 
