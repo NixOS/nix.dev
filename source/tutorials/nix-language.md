@@ -642,7 +642,7 @@ in
 
 ### `inherit ...`
 
-With `inherit` one can assign existing names to attributes of the same name.
+With `inherit` one can assign values behind existing names to attributes with the same names.
 It is for convenience to avoid repeating the same name multiple times.
 
 Example:
