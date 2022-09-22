@@ -1122,7 +1122,7 @@ f { a = 1; b = 2; c = 3; }
 
 <!-- TODO: not the same as x: x.a + x.b (!!!!) -->
 
-#### Default attributes
+#### Default values
 
 Also known as “default arguments”.
 
@@ -1160,7 +1160,7 @@ Additional attributes are allowed with an ellipsis (`...`):
 
     {a, b, ...}: a + b
 
-Unlike the previous counter-example, passing additional arguments will not be an error.
+Unlike in the previous counter-example, passing an argument that contains additional attributes is not an error.
 
 Example:
 
