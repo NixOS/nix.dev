@@ -27,7 +27,3 @@ else
     echo "The report is invalid" | mail someone@localhost.example
 fi
 ```
-
-By using `nix-shell` as the shebang, you don't have any prerequisites
-steps like typing `nix-shell` or installing packages before using the
-program.
