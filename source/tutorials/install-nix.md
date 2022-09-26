@@ -53,7 +53,7 @@ $ mkdir workdir
 $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
 ```
 
-The `workdir` example from above can be also used to start hacking on nixpkgs:
+The `workdir` example from above can be also used to start hacking on Nixpkgs:
 
 ```bash
 $ git clone git@github.com:NixOS/nixpkgs
@@ -64,7 +64,7 @@ docker> find ./result # this symlink points to the build package
 
 ## Verify installation
 
-Check that the installation by opening **a new terminal** and typing:
+Check the installation by opening **a new terminal** and typing:
 
 ```bash
 $ nix --version
