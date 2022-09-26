@@ -10,17 +10,14 @@ myst:
 
 # Cross compilation
 
-When compiling code, we can distinguish between the **build platform**, where the executable
-is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
+When compiling code, we can distinguish between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
 
 **Native compilation** is the special case where those two platforms are the same.
 **Cross compilation** is the general case where those two platforms are not.
 
-Cross compilation needed when the host platform has limited resources (such as CPU)
-or when it's not easily accessible for development.
+Cross compilation is needed when the host platform has limited resources (such as CPU) or when it's not easily accessible for development.
 
-The `nixpkgs` package collection has world-class support for cross compilation,
-after many years of hard work by the Nix community.
+The `nixpkgs` package collection has world-class support for cross compilation, after many years of hard work by the Nix community.
 
 [^id3]: Terminology for cross compilation platforms differs between build systems.
     We have chosen to follow
@@ -28,17 +25,16 @@ after many years of hard work by the Nix community.
 
 ## What's a target platform?
 
-There is a third concept for a platform we call **target platform**.
+There is a third concept for a platform we call a **target platform**.
 
-It matters in cases where you want to build a compiler binary.
-Then you would build a compiler on the *build platform*, run it to compile code on the
-*host platform*, and run the final executable on the *target platform*.
+The target platform is relevant to cases where you want to build a compiler binary.
+In such cases, you would build a compiler on the *build platform*, run it to compile code on the *host platform*, and run the final executable on the *target platform*.
 
-Since that is rarely needed, we will assume that the target is identical to the host.
+Since this is rarely needed, we will assume that the target is identical to the host.
 
-## Pinning nixpkgs
+## Pinning Nixpkgs
 
-To ensure reproducibility of this tutorial as explained in {ref}`the pinning tutorial <pinning-nixpkgs>`:
+To ensure the reproducibility of this tutorial as explained in {ref}`the pinning tutorial <pinning-nixpkgs>`:
 
 ```shell-session
 $ NIX_PATH=https://github.com/NixOS/nixpkgs/archive/9420363b95521e65a76eb5153de1eaee4a2e41c6.tar.gz
@@ -46,18 +42,16 @@ $ NIX_PATH=https://github.com/NixOS/nixpkgs/archive/9420363b95521e65a76eb5153de1
 
 ## Determining the host platform config
 
-The build platform is determined automatically by Nix
-as it can just guess it during the configure phase.
+The build platform is determined automatically by Nix during the configure phase.
 
-The host platform is best determined by running on the host platform:
+The host platform is best determined by running this command on the host platform:
 
 ```shell-session
 $ bash $(nix-build '<nixpkgs>' -A gnu-config)/config.guess
 aarch64-unknown-linux-gnu
 ```
 
-In case that's not possible (when the host platform is not easily accessible
-for development), the platform config has to be constructed manually via the following template:
+In case this is not possible (for example, when the host platform is not easily accessible for development), the platform config has to be constructed manually via the following template:
 
 ```
 <cpu>-<vendor>-<os>-<abi>
@@ -66,12 +60,9 @@ for development), the platform config has to be constructed manually via the fol
 This string representation is used in `nixpkgs` for historic reasons.
 
 Note that `<vendor>` is often `unknown` and `<abi>` is optional.
-There's also no unique identifier for a platform, for example `unknown` and
-`pc` are interchangeable (hence it's called config.guess).
+There's also no unique identifier for a platform, for example `unknown` and `pc` are interchangeable (which is why the script is called `config.guess`).
 
-If you can't install Nix, find a way to run `config.guess` (usually comes with
-
-: the autoconf package) from the OS you're able to run on the host platform.
+If you can't install Nix, find a way to run `config.guess` (usually comes with the autoconf package) from the OS you're able to run on the host platform.
 
 Some other common examples of platform configs:
 
@@ -129,7 +120,8 @@ pkgsCross.mmix                        pkgsCross.x86_64-unknown-redox
 pkgsCross.msp430
 ```
 
-These attribute names for cross compilation packages have been chosen somewhat freely over the course of time. They usually do not match the corresponding platform config string.
+These attribute names for cross compilation packages have been chosen somewhat freely over the course of time. 
+They usually do not match the corresponding platform config string.
 
 You can retrieve the platform string from `pkgsCross.<platform>.stdenv.hostPlatform.config`:
 
@@ -153,7 +145,7 @@ The mechanism for setting up cross compilation works as follows:
 
    Taking `pkgs.pkgsCross.<host>.hello` will produce the package `hello` compiled on the build platform to run on the `<host>` platform.
    
-There are multiple, equivalent ways to access packages targeted to the host platform.
+There are multiple equivalent ways to access packages targeted to the host platform.
 
 1. Explicitly pick the host platform package from within the build platform environment:
 
@@ -191,10 +183,9 @@ There are multiple, equivalent ways to access packages targeted to the host plat
    $ nix-build '<nixpkgs>' -A hello --arg crossSystem '{ config = "aarch64-unknown-linux-gnu"; }'
    ```
 
-## Cross compiling for the first time!
+## Cross compiling for the first time
 
-To cross compile a package like [hello](https://www.gnu.org/software/hello/),
-pick the platform attribute - `aarch64-multiplatform` in our case - and run:
+To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
 $ nix-build '<nixpkgs>' -A pkgsCross.aarch64-multiplatform.hello
@@ -202,15 +193,11 @@ $ nix-build '<nixpkgs>' -A pkgsCross.aarch64-multiplatform.hello
 /nix/store/pzi2h0d60nb4ydcl3nn7cbxxdnibw3sy-hello-aarch64-unknown-linux-gnu-2.10
 ```
 
-[Search for a package](https://search.nixos.org/packages) attribute name to find the
-one that you're interested in building.
+[Search for a package](https://search.nixos.org/packages) attribute name to find the one you're interested in building.
 
 ## Real-world cross compiling of a Hello World example
 
-To show off the power of cross compilation in Nix, let's build our own Hello World program
-by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf`
-and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable
-with [an emulator](https://en.wikipedia.org/wiki/Emulator).
+To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
 ```nix
 { pkgs ? import <nixpkgs> {}
@@ -262,11 +249,9 @@ Hello, world!
 
 ## Developer environment with a cross compiler
 
-In the {ref}`tutorial for declarative reproducible environments <declarative-reproducible-envs>`,
-we looked at how Nix helps us provide tooling and system libraries for our project.
+In the {ref}`tutorial for declarative reproducible environments <declarative-reproducible-envs>`, we looked at how Nix helps us provide tooling and system libraries for our project.
 
-It's also possible to provide an environment with a compiler configured for **cross-compilation
-to static binaries using musl**.
+It's also possible to provide an environment with a compiler configured for **cross-compilation to static binaries using musl**.
 
 Given we have a `shell.nix`:
 
@@ -311,18 +296,12 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically link
 
 ## Next steps
 
-- The [official binary cache](https://cache.nixos.org) has very limited number of binaries
-  for packages that are cross compiled, so to save time recompiling, configure
-  {ref}`a binary cache and CI (GitHub Actions and Cachix) <github-actions>`.
+- The [official binary cache](https://cache.nixos.org) has a limited number of binaries for packages that are cross compiled, so to save time recompiling, configure {ref}`a binary cache and CI (GitHub Actions and Cachix) <github-actions>`.
 
-- While many compilers in nixpkgs support cross compilation,
-  not all of them do.
+- While many compilers in Nixpkgs support cross compilation, not all of them do.
 
-  On top of that, supporting cross compilation is not trivial
-  work and due to many possible combinations of what would
-  need to be tested, some packages might not build.
+  Additionally, supporting cross compilation is not trivial work and due to many possible combinations of what would need to be tested, some packages might not build.
 
   [A detailed explanation how of cross compilation is implemented in Nix](https://nixos.org/manual/nixpkgs/stable/#chap-cross) can help with fixing those issues.
 
-- The Nix community has a [dedicated Matrix room](https://matrix.to/#/#cross-compiling:nixos.org)
-  for help around cross compiling.
+- The Nix community has a [dedicated Matrix room](https://matrix.to/#/#cross-compiling:nixos.org) for help with cross compiling.
