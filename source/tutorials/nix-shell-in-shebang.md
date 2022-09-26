@@ -1,4 +1,4 @@
-# How to use nix-shel in a shebang
+# Reproducible interpreted scripts
 
 The [nix
 shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html)
@@ -11,13 +11,13 @@ You can nix-shell as an interpreter](https://nixos.org/manual/nix/stable/command
 in the shebang, not only to define the interpreter, but also a list the
 dependencies required for the script file.
 
-Imagine a simple shell script downloading an XML file, running a linter
-on it and sending an email of the result. It requires `curl`, `xmllint`
-and `mail`.
+The following shell script example downloads an XML file, runs a linter on it, and sends an email depending on the result.
+It requires `curl`, `xmllint`, and `mail`.
 
 ```shell
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl libxml2 mailutils
+#! nix-shell -i bash -p curl libxml2 mailutils
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 curl http://localhost.example/report.xml | xmllint -
 
