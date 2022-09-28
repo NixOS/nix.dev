@@ -21,3 +21,4 @@ jobs:
           # branch should not be protected
           branch: 'master'
           allowlist: imgbot,dependabot*
+          lock-pullrequest-aftermerge: false
