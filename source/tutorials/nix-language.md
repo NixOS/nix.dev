@@ -162,13 +162,7 @@ The second command runs `nix-instantiate` with the `--eval` option on `file.nix`
 The resulting value is printed as output.
 
 `--eval` is required to evaluate the file and do nothing else.
-If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called *Derivation*, which we will come back to at the end of this guide in [](derivations).
-
-If you do not need `file.nix` any more, remove it with
-
-```console
-rm file.nix
-```
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *Derivation*, which we will come back to at the end of this guide in [](derivations).
 
 </details>
 
