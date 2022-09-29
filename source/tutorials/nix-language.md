@@ -627,7 +627,7 @@ in
 
 ### `inherit ...`
 
-With `inherit` one can assign values behind existing names to attributes with the same names.
+`inherit` is shorthand for assigning the value of a name from an existing scope to the same name in a nested scope.
 It is for convenience to avoid repeating the same name multiple times.
 
 Example:
@@ -674,6 +674,39 @@ The fragment
 is equivalent to
 
     x = a.x; y = a.y;
+
+`inherit` also works inside `let` expressions.
+
+Example:
+
+```nix
+let
+  a = { x = 1; y = 2; };
+in
+let
+  inherit (a) x y;
+in [ x y ]
+```
+
+    [ 1 2 ]
+
+<details><summary>Detailed explanation</summary>
+
+While this example is contrived, in more complex code you will regularly see nested `let` expressions that re-use names from their outer scope.
+
+Here we declare an attribute set `a` to have something non-trivial to inherit from.
+The nested `let` inherits `x` and `y` from `a`, which is equivalent to writing:
+
+```
+let
+  x = a.x;
+  y = a.y;
+in
+```
+
+The new inner scope now contains `x` and `y`, which are used in the list `[ x y ]`.
+
+</details>
 
 (file-system-paths)=
 ### File system paths
