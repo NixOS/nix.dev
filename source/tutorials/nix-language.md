@@ -243,6 +243,62 @@ reading files, to capture what build tasks will operate on.
 There is nothing else to it.
 What may look complicated comes not from the language, but from how it is used.
 
+### Notes on syntax
+
+This tutorial does not go into the specifics of syntactical rules, but rather puts emphasis on recurrent patterns as observed in practical code and what they mean.
+
+The most important heuristics to avoid confusion are about white space and parentheses, since in that regard, the Nix language may differ from languages you are used to.
+
+(Don't worry if you don't understand the examples here, they are only for illustration.)
+
+1. White space is used to delimit [lexical tokens], where required.
+
+   It is otherwise insignificant.
+   Line breaks, indentation, and additional spaces are for readers' convenience.
+
+   The following are equivalent:
+
+   ```nix
+   let
+     x = 1;
+     y = 2;
+   in x + y
+   ```
+
+       3
+
+   ```nix
+   let x=1;y=2;in x+y
+   ```
+
+       3
+
+[lexical tokens]: https://en.m.wikipedia.org/wiki/Lexical_analysis#Token
+
+2. Parentheses are used to force precedence.[^inherit-parens]
+
+   The following are different:
+
+   ```nix
+   let
+     f = x: x + 1;
+     a = 1;
+   in [ (f a) ]
+   ```
+
+       2
+
+   ```nix
+   let
+     f = x: x + 1;
+     a = 1;
+   in [ f a ]
+   ```
+
+       [ <LAMBDA> 1 ]
+
+[^inherit-parens]: [`inherit`](inherit) is the only exception where parentheses are a syntactical requirement.
+
 (names-values)=
 ## Names and values
 
