@@ -218,7 +218,7 @@ Building software is a complex undertaking, and Nix both *exposes* and *allows m
 The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
 
 :::{important}
-A build task in Nix is called *derivation*.
+A build task in Nix is called a *derivation*.
 :::
 
 The Nix language has only few basic constructs which can be combined arbitrarily:
@@ -1444,7 +1444,7 @@ It is an error if the network request fails.
 (derivations)=
 ## Derivations
 
-A build task in Nix is called *derivation*.
+A build task in Nix is called a *derivation*.
 
 Build tasks are at the core of both Nix and the Nix language:
 - The Nix language is used to produce build tasks.
