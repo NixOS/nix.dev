@@ -257,7 +257,7 @@ Assignments are denoted by a single equal sign (`=`).
 (attrset)=
 ### Attribute set `{ ... }`
 
-An attribute set is an unordered collection of name-value-pairs, where names must be unique.
+An attribute set is a collection of name-value-pairs, where names must be unique.
 
 The following example shows all primitive data types, lists, and attribute sets.
 
@@ -346,8 +346,7 @@ rec {
     { one = 1; three = 3; two = 2; }
 
 :::{note}
-Attribute sets are unordered.
-The evaluator prints them in alphabetic order.
+Elements in an attribute set can be declared in any order, and are ordered on evaluation.
 :::
 
 Counter-example:
