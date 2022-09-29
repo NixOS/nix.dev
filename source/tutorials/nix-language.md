@@ -26,7 +26,9 @@ Notable uses of the Nix language are:
 
 ## Overview
 
-Using the Nix language in practice entails multiple things:
+This is an introduction to **reading the Nix language**, for the purpose of following other tutorials and examples.
+
+**Using the Nix language** in practice entails multiple things:
 
 - Language: syntax and semantics
 - Libraries: `builtins` and `pkgs.lib`
@@ -36,11 +38,11 @@ Using the Nix language in practice entails multiple things:
 - Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
 
-**This guide only covers some language syntax and mostly semantics**, briefly discusses libraries, and at the end will direct you to resources on the other components.
+This tutorial only covers the most important language features, briefly discusses libraries, and at the end will direct you to reference material and resources on the other components.
 
 ### What will you learn?
 
-This guide should enable you to read typical Nix language code and understand its structure.
+This tutorial should enable you to read typical Nix language code and understand its structure.
 
 It shows the most common and distingushing patterns in the Nix language:
 
@@ -51,7 +53,7 @@ It shows the most common and distingushing patterns in the Nix language:
 - [Derivations](derivations) that describe build tasks
 
 :::{important}
-This guide *does not* explain all Nix language features in detail.
+This tutorial *does not* explain all Nix language features in detail.
 See the [Nix manual][manual-language] for a full language reference.
 :::
 
@@ -83,7 +85,7 @@ Read detailed explanations if you want to make sure you fully understand the exa
 To *evaluate* means to transform an expression into a value according to the language rules.
 :::
 
-This guide contains many examples of Nix expressions.
+This tutorial contains many examples of Nix expressions.
 Each one is followed by the expected evaluation result.
 
 The following example is a Nix expression adding two numbers:
@@ -162,7 +164,7 @@ The second command runs `nix-instantiate` with the `--eval` option on `file.nix`
 The resulting value is printed as output.
 
 `--eval` is required to evaluate the file and do nothing else.
-If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *Derivation*, which we will come back to at the end of this guide in [](derivations).
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *Derivation*, which we will come back to at the end of this tutorial in [](derivations).
 
 </details>
 
