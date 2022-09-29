@@ -49,7 +49,7 @@ It shows the most common and distingushing patterns in the Nix language:
 - [Assigning names and accessing values](names-values)
 - Declaring and calling [functions](functions)
 - [Built-in and library functions](libraries)
-- [Side effects](side-effects) to obtain build inputs
+- [Impurities](impurities) to obtain build inputs
 - [Derivations](derivations) that describe build tasks
 
 :::{important}
@@ -237,7 +237,7 @@ The Nix language has only few basic constructs which can be combined arbitrarily
 
   to manipulate complex data as units
 
-In addition it allows one significant side effect:
+The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
 reading files, to capture what build tasks will operate on.
 
 There is nothing else to it.
@@ -304,13 +304,17 @@ The most important heuristics to avoid confusion are about white space and paren
 
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
-We show primitve data types and lists as examples in the context of [attribute sets](attrset).
-Later in this section we cover special features of character strings: [file system paths](file-system-paths), [antiquotation](antiquotation), and [indented strings](indented-strings).
+We show primitive data types and lists as examples in the context of [attribute sets](attrset).
+Later in this section we cover special features of character strings: [antiquotation](antiquotation), [file system paths](file-system-paths), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
-There are two ways to assign names to values in Nix: attribute sets and `let` expressions.
+There are two ways to assign names to values in Nix: [attribute sets](attrset) and [`let` expressions](let).
 
 Assignments are denoted by a single equal sign (`=`).
+
+Whenever you see an equal sign (`=`) in Nix language code:
+- On its left is the assigned name.
+- On its right is the value, delimited by a semicolon (`;`).
 
 (attrset)=
 ### Attribute set `{ ... }`
@@ -376,12 +380,12 @@ Nix language data types *without functions* work just like their counterparts in
 </table>
 
 :::{note}
-- Attribute names usually do not need quotes.[^1]
-- List elements are separated by white space.[^2]
+- Attribute names usually do not need quotes.[^attrnames]
+- List elements are separated by white space.[^list-whitespace]
 :::
 
-[^1]: Details: Nix manual - attribute naming rules <!-- TODO: create and link manual section -->
-[^2]: Details: [Nix manual - lists][manual-lists]
+[^attrnames]: Any name that starts with a letter and contains letters (`a`-`z`, `A`-`Z`), numbers (`0`-`9`), dashes (`-`), underscores (`_`), or apostrophes (`'`) can be used without quotes. <!-- TODO: create and link manual section -->
+[^list-whitespace]: Details: [Nix manual - lists][manual-lists]
 
 [manual-lists]: https://nixos.org/manual/nix/stable/language/values.html#list
 
@@ -426,8 +430,7 @@ Counter-example:
                  |         ^
                 4|   three = two + 1;
 
-{ref}`We recommend to avoid recursive sets <rec-expression>` and to use the `let` expression instead.
-
+(let)=
 ### `let ... in ...`
 
 Also known as “`let` expression” or “`let` binding”
@@ -470,7 +473,6 @@ a + b
 ```
 
     3
-
 
 <details><summary>Detailed explanation</summary>
 
@@ -550,7 +552,6 @@ The difference is that while a recursive attribute set evaluates to an [attribut
 
 In the following example we use the `let` expression to form a list:
 
-
 ```nix
 let
   b = a + 1;
@@ -620,10 +621,7 @@ The dot (`.`) notation can also be used for assigning attributes.
 Example:
 
 ```nix
-let
-  attrset = { a.b.c = 1; };
-in
-attrset
+{ a.b.c = 1; }
 ```
 
     { a = { b = { c = 1; }; }; }
@@ -683,6 +681,7 @@ in
                  |       ^
                11| }
 
+(inherit)=
 ### `inherit ...`
 
 `inherit` is shorthand for assigning the value of a name from an existing scope to the same name in a nested scope.
@@ -739,10 +738,7 @@ Example:
 
 ```nix
 let
-  a = { x = 1; y = 2; };
-in
-let
-  inherit (a) x y;
+  inherit ({ x = 1; y = 2; }) x y;
 in [ x y ]
 ```
 
@@ -752,104 +748,19 @@ in [ x y ]
 
 While this example is contrived, in more complex code you will regularly see nested `let` expressions that re-use names from their outer scope.
 
-Here we declare an attribute set `a` to have something non-trivial to inherit from.
-The nested `let` inherits `x` and `y` from `a`, which is equivalent to writing:
+Here we use the attribute set `{ x = 1; y = 2; }` to have something non-trivial to inherit from.
+The `let` expression inherits `x` and `y` from that attribute set using `( )`, which is equivalent to writing:
 
 ```
 let
-  x = a.x;
-  y = a.y;
+  x = { x = 1; y = 2; }.x;
+  y = { x = 1; y = 2; }.y;
 in
 ```
 
 The new inner scope now contains `x` and `y`, which are used in the list `[ x y ]`.
 
 </details>
-
-(file-system-paths)=
-### File system paths
-
-The Nix language offers convenience syntax for file system paths.
-
-Absolute paths always start with a slash (`/`).
-
-Example:
-
-```nix
-/absolute/path
-```
-
-    /absolute/path
-
-Paths are relative when they contain at least one slash (`/`) but to not start with one.
-They evaluate to the path relative to the file containing the expression.
-
-The following examples assume the containing Nix file is in `/current/directory` (or `nix repl` is run in `/current/directory`).
-
-Example:
-
-
-```nix
-./relative
-```
-
-    /current/directory/relative
-
-Example:
-
-```nix
-relative/path
-```
-
-    /current/directory/relative/path
-
-
-One dot (`.`) denotes the current directory within the given path.
-
-You will often see the following expression, which specifies a Nix file's directory.
-
-Example:
-
-```nix
-./.
-```
-
-    /current/directory
-
-<details><summary>Detailed explanation</summary>
-
-Since relative paths must contain a slash (`/`) but must not start with one, and the dot (`.`) denotes no change of directory, the combination `./.` specifies the current directory as a relative path.
-
-</details>
-
-Two dots (`..`) denote the parent directory.
-
-
-Example:
-
-
-```nix
-../.
-```
-
-    /current
-
-#### Search path
-
-Also known as “angle bracket syntax”.
-
-    <nixpkgs>
-
-The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
-
-In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
-For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path.
-
-While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are [side effects](side-effects) which are not reproducible.
-
-[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
-[nixpkgs]: https://github.com/NixOS/nixpkgs
-[manual-primitives]: https://nixos.org/manual/nix/stable/language/values.html#primitives
 
 (antiquotation)=
 ### Antiquotation `${ ... }`
@@ -925,6 +836,105 @@ in
 :::
 
 <!-- TODO: link to escaping rules -->
+
+(file-system-paths)=
+### File system paths
+
+The Nix language offers convenience syntax for file system paths.
+
+Absolute paths always start with a slash (`/`).
+
+Example:
+
+```nix
+/absolute/path
+```
+
+    /absolute/path
+
+Paths are relative when they contain at least one slash (`/`) but to not start with one.
+They evaluate to the path relative to the file containing the expression.
+
+The following examples assume the containing Nix file is in `/current/directory` (or `nix repl` is run in `/current/directory`).
+
+Example:
+
+
+```nix
+./relative
+```
+
+    /current/directory/relative
+
+Example:
+
+```nix
+relative/path
+```
+
+    /current/directory/relative/path
+
+
+One dot (`.`) denotes the current directory within the given path.
+
+You will often see the following expression, which specifies a Nix file's directory.
+
+Example:
+
+```nix
+./.
+```
+
+    /current/directory
+
+<details><summary>Detailed explanation</summary>
+
+Since relative paths must contain a slash (`/`) but must not start with one, and the dot (`.`) denotes no change of directory, the combination `./.` specifies the current directory as a relative path.
+
+</details>
+
+Two dots (`..`) denote the parent directory.
+
+
+Example:
+
+
+```nix
+../.
+```
+
+    /current
+
+#### Search path
+
+Also known as “angle bracket syntax”.
+
+Example:
+
+```nix
+<nixpkgs>
+```
+
+    /nix/var/nix/profiles/per-user/root/channels/nixpkgs
+
+The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
+
+In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
+
+
+For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path:
+
+```nix
+<nixpkgs/lib>
+```
+
+    /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
+
+While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are [impurities](impurities) which are not reproducible.
+
+[NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
+[nixpkgs]: https://github.com/NixOS/nixpkgs
+[manual-primitives]: https://nixos.org/manual/nix/stable/language/values.html#primitives
 
 (indented-strings)=
 ### Indented strings
@@ -1118,7 +1128,7 @@ x: (y: x + y)
 
     <LAMBDA>
 
-This function takes one argument and returns another function `y: x + y` with `x` set to the value of the argument.
+This function takes one argument and returns another function `y: x + y` with `x` set to the value of that argument.
 
 Example:
 
@@ -1345,7 +1355,7 @@ import ./file.nix
 The preceding shell command writes the contents `1 + 2` to the file `file.nix` in the current directory.
 
 The above Nix expression refers to this file as `./file.nix`.
-`import` reads the file as a side effect and evaluates to the contained Nix expression.
+`import` reads the file and evaluates to the contained Nix expression.
 
 It is an error if the file system path does not exist.
 
@@ -1380,7 +1390,7 @@ import ./file.nix 1
 The preceding shell command writes the contents `x: x + 1` to the file `file.nix` in the current directory.
 
 The above Nix expression refers to this file as `./file.nix`.
-`import ./file.nix` reads the file as a side effect and evaluates to the contained Nix expression.
+`import ./file.nix` reads the file and evaluates to the contained Nix expression.
 
 It is an error if the file system path does not exist.
 
@@ -1417,37 +1427,30 @@ Example:
 [nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
 [nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
 
-(side-effects)=
-## Side effects
+(impurities)=
+## Impurities
 
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-Building software requires interaction with the outside world, called *side effects*.
+In practice, describing build tasks requires observing the outside world.
 
-There is only one side effect in the Nix language that is relevant here:
+There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*
 
-:::{note}
-Side effects are performed while evaluating a given impure expression.
-:::
-
 Build inputs are files that build tasks refer to in their precise description of how to derive new files.
-
-Since Nix language evaluation is otherwise pure, the only way to specify build inputs is explicitly with:
-
-- File system paths
-- Dedicated impure functions.
-
 When run, a build task will only have access to explicitly declared build inputs.
 
-:::{important}
-Purity is the key to reproducible builds.
+The only way to specify build inputs in the Nix language is explicitly with:
 
-It precludes build tasks from referring to files which are not explicitly specified as build inputs.
+- File system paths
+- Dedicated functions.
 
+Nix and the Nix language refer to files by their content hash. If file contents are not known in advance, it's unavoidable to read files during expression evaluation.
+
+:::{note}
 Nix supports other types of impure expressions, such as [search paths](search-path) or the constant [`builtins.currentSystem`](https://nixos.org/manual/nix/stable/language/builtin-constants.html#builtins-currentSystem).
-We do not cover those here more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
+We do not cover those here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
 ### Paths
@@ -1733,7 +1736,7 @@ Answering such questions requires knowing the context in which a given expressio
 The Nix ecosystem and code style is driven by conventions.
 Most names you will encounter in Nix language code come from Nixpkgs:
 
-- [Nix Pills][nix-pills] - a detailed explanation of derivations and how the Nix package collection is constructed from first principles
+- [Nix Pills][nix-pills] - a detailed explanation of derivations and how Nixpkgs is constructed from first principles
 
 Nixpkgs provides generic build mechanisms that are widely used:
 
