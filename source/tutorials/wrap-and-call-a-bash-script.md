@@ -44,7 +44,7 @@ read = rec {
 
 ## Symlinking it
 
-Next thing, create a derivation that we can call elsewhere. We will do that with [`symlinkJoin`](https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix#L388). Since we're dealing with a single path only, all we need to do is to add the script wrapper declared above to the `paths` argument: 
+Next thing, create a derivation that we can call elsewhere. We will do that with [`symlinkJoin`](https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders.nix#L388). All we need to do is to add the script wrapper declared above to the `paths` argument. We will also add the `hello` package: 
 
 ```nix
 symlink = with pkgs; pkgs.symlinkJoin {
@@ -58,7 +58,7 @@ symlink = with pkgs; pkgs.symlinkJoin {
 
 ## Call the executable from a developer shell
 
-In a developer shell definition, export the path and call the executable inside a `shellHook`:
+In a developer shell definition, export the path to the `hello` package and call the executable inside a `shellHook`:
 
 ```nix
 devShells.x86_64-linux = {
@@ -76,7 +76,7 @@ devShells.x86_64-linux = {
 
 ## Call the executable from a derivation
 
-Export the path and call the executable with a `writeShellScriptBin` trivial builder:
+Again, export the path to the `hello` package and call the executable with a `writeShellScriptBin` trivial builder:
 
 ```
 wrapped = pkgs.writeShellScriptBin "script" ''
