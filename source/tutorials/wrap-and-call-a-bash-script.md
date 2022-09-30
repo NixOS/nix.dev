@@ -78,7 +78,7 @@ devShells.x86_64-linux = {
 
 Again, export the path to the `hello` package and call the executable with a `writeShellScriptBin` trivial builder:
 
-```
+```nix
 wrapped = pkgs.writeShellScriptBin "script" ''
   PATH=${pkgs.hello}/bin:$PATH
   exec ${symlink}/bin/script
