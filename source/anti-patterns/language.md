@@ -31,7 +31,7 @@ There are a couple of pitfalls:
 - combining with overriding logic such as `overrideAttrs` function in nixpkgs has a surprising behaviour
   of not overriding every reference.
 
-A better way is to use simpler `let .. in`:
+A better way is to use simpler but more verbose `let .. in`:
 
 ```nix
 let
@@ -41,6 +41,10 @@ in {
   b = a + 2;
 }
 ```
+
+:::{note}
+It is fine to use `rec` in nixpkgs' stdenv.mkDerivation function especially for reusing version in a fetcher for src since that is a fixed output derivation anyway.
+:::
 
 ## `with attrset; ...` expression
 
@@ -70,21 +74,7 @@ with (import <nixpkgs> {});
 # try this instead:
 let
   pkgs = import <nixpkgs> {};
-  inherit (pkgs) curl jq;
 in ...
-```
-
-```nix
-# instead of:
-buildInputs = with pkgs; [ curl jq ];
-
-# try this instead:
-buildInputs = builtins.attrValues {
-  inherit (pkgs) curl jq;
-};
-
-# or this:
-buildInputs = lib.attrVals ["curl" "jq"] pkgs
 ```
 
 ## `<...>` search path
@@ -100,7 +90,7 @@ In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, a
 
 :::{note}
 [Channels](https://nixos.wiki/wiki/Nix_channels) are a way of distributing Nix software.
-They are being phased out, but still used by default.
+They are being phased out by flakes, but still used by default.
 :::
 
 For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of `nixpkgs`.
@@ -116,7 +106,7 @@ But that is still problematic, unless:
 2. you control the shell environment via your source code, setting `$NIX_PATH` via `nix-shell` or NixOS options.
 
 :::{note}
-We recommend to avoid using search paths and to disable channels by permanently setting `NIX_PATH=` to be empty.
+We recommend to avoid using extra search paths and to switch to flakes and disable channels by permanently setting `NIX_PATH=` to be empty.
 :::
 
 See {ref}`pinning-nixpkgs` for a tutorial on how to do better.
@@ -145,7 +135,7 @@ nix-repl> :p { a = { b = 1; }; } // { a = { c = 3; }; }
 
 You can see key `b` was removed, because whole `a` value was replaced.
 
-A better way is to use `pkgs.lib.recursiveUpdate` function:
+If recursive merging is desired, it can be done with the `pkgs.lib.recursiveUpdate` function:
 
 ```shell-session
 $ nix repl '<nixpkgs/lib>'
@@ -196,7 +186,3 @@ A better way is to use `builtins.path`:
    src = builtins.path { path = ./.; name = "myproject"; };
 }
 ```
-
-If you're using git to track your code,
-you may also want to look at [gitignoresource](https://github.com/hercules-ci/gitignore.nix),
-which does this for you.
