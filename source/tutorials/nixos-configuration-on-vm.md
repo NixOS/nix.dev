@@ -1,4 +1,6 @@
-# NixOS Configuration debugging using virtual machines
+(nixos-vms)=
+
+# NixOS virtual machines
 
 One of the most important features of NixOS is the ability to configure the entire system declaratively, including packages to be installed, services to be run, as well as other settings and options.
 
@@ -6,16 +8,13 @@ A NixOS configuration is a Nix language function which follows to the [NixOS mod
 
 ## What will you learn?
 
-This tutorial teaches testing and debuging NixOS configurations independent of a working NixOS installation.
-It serves as an introduction creating virtual NixOS machines.
+This tutorial serves as an introduction creating virtual NixOS machines.
+Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## What do you need?
 
-<!-- todo links -->
-
-- Basic knowledge of the Nix language.
-- A working installation of Nix Package Manager or NixOS.
-
+- A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
+- Basic knowledge of the [Nix language](https://nixos.org/manual/nix/stable/language/index.html).
 
 ## Starting from the default NixOS configuration
 
@@ -23,7 +22,7 @@ On NixOS, by default, the configuration file is located at `/etc/nixos/configura
 For CLI commands that use a configuration, its file path can be specified.
 In this tutorial we use this strategy, because the goal is not to install or update the current NixOS, but to debug a specific configuration.
 
-On NixOS, you can use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions [^nixosconf].
+On NixOS, you can use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.[^nixosconf]
 You can create a NixOS configuration in your working directory:
 ```shell-session
 nixos-generate-config --dir ./
@@ -58,7 +57,9 @@ Without comments the configuration file contains the following content:
 
 In this tutorial we focus on testing NixOS configurations on a virtual machine, in these cases you can remove the `hardware-configuration.nix` import.
 
-To be able to log in, you must uncomment the section that specifies the user "alice", or add the following lines to the configuration inside the curly bracket that contain the configuration specification:
+Changes to the configuration need to be positioned inside the curly bracket.[^bracket]
+
+To be able to log in, you must uncomment the section that specifies the user `alice`, or add the following lines:
 ```nix
   users.users.alice = {
     isNormalUser = true;
@@ -71,22 +72,9 @@ To be able to log in, you must uncomment the section that specifies the user "al
 ```
 
 Additionally, you need to specify a password for this user.
-An insecure solution is to specify an plain text password by adding the `initialPassword` option to the user configuration:
+An insecure[^password] solution is to specify an plain text password by adding the `initialPassword` option to the user configuration:
 ```nix
-    initialPassword = "danger";
-```
-
-Note that this may pose a security risk.
-A more secure option is to encrypt a password using sha-512.
-To create an encrypted password (here using "danger" as an example), execute:
-```shell-session
-$ mkpasswd -m sha-512 danger
-```
-
-Copy the output of `mkpasswd` into the user configuration and use the `initialHashedPassword` option.
-It should look something like this:
-```nix
-    initialHashedPassword = "$6$YLpneQLpnPxXpo1Y$mTZg26KMjWIBqP1N98LzeANb5rfMcC5t7a7Khf/gTB/rPCT4t4x2EgJJZmXkRWcGVW6ZEDMulsjTsXxD7BLZZ/";
+    initialPassword = "testpw";
 ```
 
 The complete `configuration.nix` file now looks like this:
@@ -108,27 +96,14 @@ The complete `configuration.nix` file now looks like this:
       firefox
       thunderbird
     ];
-    initialHashedPassword = "$6$YLpneQLpnPxXpo1Y$mTZg26KMjWIBqP1N98LzeANb5rfMcC5t7a7Khf/gTB/rPCT4t4x2EgJJZmXkRWcGVW6ZEDMulsjTsXxD7BLZZ/";
+    initialPassword = "testpw";
   };
 
   system.stateVersion = "22.05";
 }
 ```
 
-## Manual testing of a NixOS configuration
-
-One of the most powerful features in the Nix ecosystem is the ability
-to provide a set of declarative NixOS configurations and use a
-Python shell to interact with them through [QEMU](https://www.qemu.org/)
-as the backend.
-
-Those tests are widely used to ensure that NixOS works as intended, so in general they are called **NixOS tests**.
-They can be written and launched outside of NixOS, on any Linux machine (with
-[MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
-Integration tests are reproducible due to the design properties of Nix,
-making them a valuable part of a Continuous Integration (CI) pipeline. [^nixdev]
-
-### Creating a QEMU based virtual machine using a configuration
+## Creating a QEMU based virtual machine using a configuration
 
 A virtual machine is created with the `nix-build` command.
 
@@ -140,36 +115,49 @@ $ nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 
 This command builds the attribute `vm` utilizing the version of Nixpkgs as specified in the environment variable `NIX_PATH` and using the NixOS configuration as specified in the relative path.
 
-
-### Running the virtual machine
+## Running the virtual machine
 
 The previous command creates a link with the name `result` in the working directory.
 It links to the folder that contains the virtual machine.
+
+```shell-session
+$ ls -R ./result
+```
+
+    result:
+    bin  system
+
+    result/bin:
+    run-nixos-vm
+
 
 To run the virtual machine, execute:
 ```shell-session
 $ ./result/bin/run-nixos-vm
 ```
 
-This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `danger`.
+This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
 
-<!-- todo: remember to delete nixos.qcow2 (especially regarding user rights etc ...) -->
+Running the virtual machine will create a nixos.qcow2 file. This disk image file contains the dynamic state of the virtual machine. It can interfere with debugging as it keeps the state of previous runs, for example the user password. You should delete this file when you change the configuration.
 
-[^wikinixos]: Origin https://NixOS.wiki/wiki/NixOS
+[^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules). In the attribute set you describe how you want your NixOS system configured. 
 
-[^nixdev]: Origin https://github.com/NixOS/nix.dev/blob/master/source/tutorials/integration-testing-using-virtual-machines.md
+[^password]: Note that this may pose a security risk.
+A more secure option is to encrypt a password using sha-512.
+To create an encrypted password (here using "danger" as an example), execute:
+```shell-session
+$ mkpasswd -m sha-512 danger
+```
 
-[^nixlang]: Origin: [https://nixos.org/manual/nix/stable/expressions/expression-language.html](https://nixos.org/manual/nix/stable/expressions/expression-language.html)
+Copy the output of `mkpasswd` into the user configuration and use the `initialHashedPassword` option.
+It should look something like this:
+```nix
+    initialHashedPassword = "$6$YLpneQLpnPxXpo1Y$mTZg26KMjWIBqP1N98LzeANb5rfMcC5t7a7Khf/gTB/rPCT4t4x2EgJJZmXkRWcGVW6ZEDMulsjTsXxD7BLZZ/";
+```
 
 [^nixpkgs]: Nixpkgs is the largest repository of Nix packages and NixOS modules.
 The repository is hosted on GitHub and maintained by the community, with official backing from the NixOS Foundation.
-Origin: [https://nixos.wiki/wiki/Nixpkgs](https://nixos.wiki/wiki/Nixpkgs)
 
 [^nixosconf]: https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226
 
-[^nixosrebuild]: On NixOS you can create a virtual machine using the command `nixos-rebuild build-vm -I nixos-config=./configuration.nix` which basically wraps the above command.
-
-[^additionaltests]: Additional information regarding tests:
-Running integration tests on CI requires hardware acceleration, which many CIs do not support.
-To run integration tests on {ref}`GitHub Actions <github-actions>` see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests).
-NixOS comes with a large set of tests that serve also as educational examples. A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
+[^nixosrebuild]: On NixOS you can create a virtual machine using the command `nixos-rebuild build-vm -I nixos-config=./configuration.nix` which wraps the above command.

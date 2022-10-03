@@ -6,6 +6,7 @@
 
 This guide introduces the functionality of Nix Package Manager to write automated tests to debug NixOS configurations independent of a working NixOS installation.
 
+
 ## What do you need?
 
 - Basic knowledge of the Nix language.<!-- todo link after merge -->
@@ -16,6 +17,14 @@ This guide introduces the functionality of Nix Package Manager to write automate
 ## Introduction
 
 NixOS provides a [test environment](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests) to automate integration testing.
+You can define tests that make use of a set of declarative NixOS configurations and use a Python shell to interact with them through [QEMU](https://www.qemu.org/) as the backend.
+Those tests are widely used to ensure that NixOS works as intended, so in general they are called [NixOS Tests](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
+They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
+Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
+
+## The nixosTest function
+
+To setup a test you make use of the nixosTest function.
 The function `nixosTest` takes an attribute set that specifies the test.
 
 ```nix
@@ -371,7 +380,7 @@ The setup includes:
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
 Because some of the needed packages of this example are broken in 22.05 release this example uses a specific revision of nixpkgs.
-Additionally this example shows the value of pinning a test to a specific revision of `nixpkgs`.<!-- link to pinning -->
+Additionally this example shows the value of {ref}`pinning <ref-pinning-nixpkgs>` a test to a specific revision of `nixpkgs`.
 
 The complete `postgrest.nix` file looks like the following:
 ```{code-block}
@@ -516,6 +525,6 @@ $ nix-build postgrest.nix
   - NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
     To run integration tests on {ref}`GitHub Actions <github-actions>` see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests).
-  - NixOS comes with a large set of tests that serve also as educational examples. 
+  - NixOS comes with a large set of tests that serve also as educational examples.
     A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
   - [NixOS.wiki on  NixOS Testing library](https://nixos.wiki/wiki/NixOS_Testing_library) seems to be mostly outdated (last edit 05.11.2021)
