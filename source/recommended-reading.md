@@ -39,7 +39,7 @@ A collection of Nix resources.
 ## Other videos
 
 * [Nix Fundamentals](https://www.youtube.com/watch?v=m4sv2M9jRLg) (Jakub Grzegorz Sokolowski, 2020)
-* [Nix Shell Overview](https://www.youtube.com/watch?v=SGekN4pDExY) (Wil T, 2021)
+* [Nix Shell Overview](https://www.youtube.com/watch?v=SGekN4pDExY) (Wil Taylor, 2021)
 * [How to update a package](https://www.youtube.com/watch?v=D_IZ2EfW_8U) (Jon Ringer, 2020)
 * [How to create a patch for any package](https://www.youtube.com/watch?v=5K_2RSjbdXc) (Jon Ringer, 2020)
 * [Overlays](https://www.youtube.com/watch?v=dGAL3gMXvug) (Jon Ringer, 2020)
