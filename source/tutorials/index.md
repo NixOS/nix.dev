@@ -5,6 +5,7 @@
 
 install-nix.rst
 ad-hoc-developer-environments.rst
+nix-language.rst
 towards-reproducibility-pinning-nixpkgs.rst
 declarative-and-reproducible-developer-environments.rst
 continuous-integration-github-actions.rst

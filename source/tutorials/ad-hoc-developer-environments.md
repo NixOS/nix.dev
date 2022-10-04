@@ -153,6 +153,7 @@ All the subsequent `#! nix-shell` lines are used to build up the shell's configu
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
 
+- {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
 - {ref}`pinning-nixpkgs` to see different ways to import Nixpkgs.
 - {ref}`declarative-reproducible-envs` to create reproducible shell environments given a declarative configuration file called a Nix expression.
 - [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html)- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.

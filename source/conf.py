@@ -52,7 +52,7 @@ myst_enable_extensions = [
 ]
 
 # GitHub-style automatic anchors for headings
-myst_heading_anchors = 2
+myst_heading_anchors = 3
 
 
 copybutton_prompt_text = r"# |\$ "
