@@ -200,7 +200,7 @@ To avoid confusion around all the things called Nix, always use the following te
 
   - Nix expression
 
-    Expression written in Nix language.
+    Expression written in the Nix language.
 
   - Nix file
 
