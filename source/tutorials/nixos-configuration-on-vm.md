@@ -145,15 +145,15 @@ Running the virtual machine will create a nixos.qcow2 file. This disk image file
 [^password]: Note that this may pose a security risk.
 A more secure option is to encrypt a password using sha-512.
 To create an encrypted password (here using "danger" as an example), execute:
-```shell-session
-$ mkpasswd -m sha-512 danger
-```
+    ```shell-session
+    $ mkpasswd -m sha-512 danger
+    ```
 
-Copy the output of `mkpasswd` into the user configuration and use the `initialHashedPassword` option.
-It should look something like this:
-```nix
-    initialHashedPassword = "$6$YLpneQLpnPxXpo1Y$mTZg26KMjWIBqP1N98LzeANb5rfMcC5t7a7Khf/gTB/rPCT4t4x2EgJJZmXkRWcGVW6ZEDMulsjTsXxD7BLZZ/";
-```
+    Copy the output of `mkpasswd` into the user configuration and use the `initialHashedPassword` option.
+    It should look something like this:
+    ```nix
+        initialHashedPassword = "$6$YLpneQLpnPxXpo1Y$mTZg26KMjWIBqP1N98LzeANb5rfMcC5t7a7Khf/gTB/rPCT4t4x2EgJJZmXkRWcGVW6ZEDMulsjTsXxD7BLZZ/";
+    ```
 
 [^nixpkgs]: Nixpkgs is the largest repository of Nix packages and NixOS modules.
 The repository is hosted on GitHub and maintained by the community, with official backing from the NixOS Foundation.
