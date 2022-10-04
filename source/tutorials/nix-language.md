@@ -286,7 +286,7 @@ The most important heuristics to avoid confusion are about white space and paren
    in [ (f a) ]
    ```
 
-       2
+       [ 2 ]
 
    ```nix
    let
