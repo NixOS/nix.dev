@@ -72,7 +72,9 @@ Changes to the configuration need to be positioned inside the curly bracket.[^br
 [^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
 In the attribute set you describe how you want your NixOS system configured.
 
-To be able to log in, you must uncomment the section that specifies the user `alice`, or add the following lines:
+To be able to log in add the following lines:[^user]
+
+[^user]: On NixOS your configuration generated using `nix-generate-config` contains the user configuration commented out.
 
 ```nix
   users.users.alice = {
