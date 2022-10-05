@@ -164,10 +164,3 @@ Running the virtual machine will create a `nixos.qcow2` file in the folder from 
 This disk image file contains the dynamic state of the virtual machine.
 It can interfere with debugging as it keeps the state of previous runs, for example the user password.
 You should delete this file when you change the configuration.
-
-
-
-[^nixpkgs]: Nixpkgs is the largest repository of Nix packages and NixOS modules.
-The repository is hosted on GitHub and maintained by the community, with official backing from the NixOS Foundation.
-
-
