@@ -135,6 +135,15 @@ To select `configuration.nix` in the working directory, specify the configuratio
 nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 ```
 
+:::{note}
+On systems that do not have a `$NIX_PATH` environment variable set up as recommended in [the pinning tutorial](pinning-nixpkgs) you use:
+
+```shell-session
+nix-build $(nix-prefetch-url --print-path --unpack https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz | tail -n 1)/nixos -A vm -I nixos-config=./configuration.nix
+
+nix-prefetcch-url downloads the archive of Nixpkgs, unpacks the archive, and returns the nix store path. This path is then used for by nix-build command to build the virtual machine.
+```
+:::
 
 This command builds the attribute `vm` utilizing the version of Nixpkgs as specified in the environment variable `NIX_PATH` and using the NixOS configuration as specified in the relative path.
 
