@@ -140,9 +140,13 @@ $ ./result/bin/run-nixos-vm
 
 This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
 
-Running the virtual machine will create a nixos.qcow2 file. This disk image file contains the dynamic state of the virtual machine. It can interfere with debugging as it keeps the state of previous runs, for example the user password. You should delete this file when you change the configuration.
+Running the virtual machine will create a nixos.qcow2 file in the folder from which you start the virtual machine.
+This disk image file contains the dynamic state of the virtual machine.
+It can interfere with debugging as it keeps the state of previous runs, for example the user password.
+You should delete this file when you change the configuration.
 
-[^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules). In the attribute set you describe how you want your NixOS system configured. 
+[^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
+In the attribute set you describe how you want your NixOS system configured.
 
 [^password]: Note that this may pose a security risk.
 A more secure option is to encrypt a password using sha-512.
