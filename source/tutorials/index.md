@@ -14,6 +14,7 @@ building-bootable-iso-image.rst
 deploying-nixos-using-terraform.rst
 installing-nixos-on-a-raspberry-pi.rst
 integration-testing-using-virtual-machines.rst
+nixos-configuration-organization.md
 cross-compilation.rst
 contributing.rst
 ```
