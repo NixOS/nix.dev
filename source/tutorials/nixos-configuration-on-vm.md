@@ -17,7 +17,7 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## What do you need?
 
-- A working [Nix installation](install-nix) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
+- A working [Nix installation](install-nix) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
 - Basic knowledge of the [Nix language](reading-nix-language)
 
 ## Starting from the default NixOS configuration
