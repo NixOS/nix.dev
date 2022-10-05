@@ -10,8 +10,10 @@ In this tutorial, you will learn how to use the [nix shell] to create reproducib
 
 - A working [Nix installation](install-nix)
 - Familiarity with [Bash]
+- Familiarity with the concept of [shebang]
 
 [Bash]: https://www.gnu.org/software/bash/
+[shebang]: https://en.m.wikipedia.org/wiki/Shebang_(Unix)
 
 # A trivial script with non-trivial dependencies
 
@@ -28,11 +30,6 @@ It also requires the `bash` interpreter.
 If any of these dependencies are not present on the system running the script, it will fail partially or altogether.
 
 We will use `nix-shell` interpreter directives to declare all dependencies explicitly, and produce a script that will always run on any machine that supports Nix and the required packages from Nixpkgs.
-
-The characters `#!` at the beginning of a script are known as a [shebang].
-This is a mechanism to tell which program should be used to interpret the following code.
-
-[shebang]: https://en.m.wikipedia.org/wiki/Shebang_(Unix)
 
 We will use the [nix-shell as an interpreter] in the shebang, not only to define the interpreter, but to also list the packages needed to provide the commands we saw in the previous section: `bash`, `python3Packages.xmljson`, `jq` and `curl`.
 
