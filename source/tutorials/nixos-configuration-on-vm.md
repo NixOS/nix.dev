@@ -139,9 +139,9 @@ nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 On systems that do not have a `$NIX_PATH` environment variable set up as recommended in [the pinning tutorial](pinning-nixpkgs) you use:
 
 ```shell-session
-nix-build $(nix-prefetch-url --print-path --unpack https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz | tail -n 1)/nixos -A vm -I nixos-config=./configuration.nix
-
-nix-prefetcch-url downloads the archive of Nixpkgs, unpacks the archive, and returns the nix store path. This path is then used for by nix-build command to build the virtual machine.
+nix-build '<nixpkgs/nixos>' -A vm \
+-I https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz \
+-I nixos-config=./configuration.nix
 ```
 :::
 
