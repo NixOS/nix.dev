@@ -28,6 +28,9 @@ In this tutorial we use this strategy, because the goal is not to install or upd
 
 On NixOS, you can use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.[^nixosconf]
 You can create a NixOS configuration in your working directory:
+
+[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
+
 ```shell-session
 nixos-generate-config --dir ./
 ```
@@ -39,6 +42,7 @@ We can ignore that file for this tutorial because it has no effect inside a virt
 
 The `configuration.nix` file contains various suggestions for the initial setup of a desktop computer.
 Without comments the configuration file contains the following content:
+
 ```nix
 { config, pkgs, ... }:
 {
@@ -65,7 +69,11 @@ Therefore we will remove the reference to `hardware-configuration.nix`:
 
 Changes to the configuration need to be positioned inside the curly bracket.[^bracket]
 
+[^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
+In the attribute set you describe how you want your NixOS system configured.
+
 To be able to log in, you must uncomment the section that specifies the user `alice`, or add the following lines:
+
 ```nix
   users.users.alice = {
     isNormalUser = true;
@@ -79,11 +87,15 @@ To be able to log in, you must uncomment the section that specifies the user `al
 
 Additionally, you need to specify a password for this user.
 For the purpose of demonstration only, we use specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:[^password]
+
+[^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`] or [`ssh.authorizedKeys`] for more secure alternatives.
+
 ```nix
 initialPassword = "testpw";
 ```
 
 The complete `configuration.nix` file now looks like this:
+
 ```nix
 { config, pkgs, ... }:
 {
@@ -115,6 +127,8 @@ A virtual machine is created with the `nix-build` command.
 
 To select `configuration.nix` in the working directory, specify the configuration file as an argument:[^nixosrebuild]
 
+[^nixosrebuild]: On NixOS you can create a virtual machine using `nixos-rebuild build-vm -I nixos-config=./configuration.nix`, which wraps the original command.
+
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 ```
@@ -139,6 +153,7 @@ ls -R ./result
 
 
 To run the virtual machine, execute:
+
 ```shell-session
 ./result/bin/run-nixos-vm
 ```
@@ -150,14 +165,9 @@ This disk image file contains the dynamic state of the virtual machine.
 It can interfere with debugging as it keeps the state of previous runs, for example the user password.
 You should delete this file when you change the configuration.
 
-[^bracket]: As a reminder `configuration.nix` contains a function that returns an [attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set) that follows the convention of a [module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
-In the attribute set you describe how you want your NixOS system configured.
 
-[^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`] or [`ssh.authorizedKeys`] for more secure alternatives.
 
 [^nixpkgs]: Nixpkgs is the largest repository of Nix packages and NixOS modules.
 The repository is hosted on GitHub and maintained by the community, with official backing from the NixOS Foundation.
 
-[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
 
-[^nixosrebuild]: On NixOS you can create a virtual machine using `nixos-rebuild build-vm -I nixos-config=./configuration.nix`, which wraps the original command.
