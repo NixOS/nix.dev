@@ -134,6 +134,14 @@ nix-build '<nixpkgs/nixos>' -A vm \
 
 This command builds the attribute `vm` using the version of Nixpkgs as using the [short form for channels]((https://nixos.org/manual/nix/stable/command-ref/opt-common.html)) and using the NixOS configuration as specified in the relative path.
 
+<details><summary>Detailed explanation</summary>
+TODO: explain `<nixpkgs/nixos>`
+arguments of nix-build: https://nixos.org/manual/nix/stable/command-ref/nix-build.html
+search paths: https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH
+TODO: explain what `-A` does (https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr)
+TODO: explain where `vm` comes from (https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19)
+TODO:  explain what `-I` does here (https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) and refer to search paths
+</details>
 
 :::{note}
 It is common to a `$NIX_PATH` environment variable set up so you can use your current version of nixpkgs to build the virtual machine:[^nixosrebuild]
