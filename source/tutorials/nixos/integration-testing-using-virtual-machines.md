@@ -12,7 +12,7 @@ This guide introduces the functionality of Nix Package Manager to write automate
 
 - A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
 - Basic knowledge of the [Nix language](https://nixos.org/manual/nix/stable/language/index.html).
-- Basic knowledge of {ref}`NixOS configuration <nixos-vms>`.
+- Basic knowledge of [NixOS configuration](nixos-vms).
 
 ## Introduction
 
@@ -49,15 +49,15 @@ in
 ```
 
 The function `nixosTest` takes an attribute set that follows the module convention to specify the test.
-Because the attribute set only defines options one can use the abbreviated form of the module convention.
-The attribute set needs to define three options `name`, `nodes` and `testScript`.
+Because the attribute set only defines options, one can use the abbreviated form of the module convention.
+The attribute set needs to define the following options:
 
-- The option `name` defines the name of the test.
+- `name` defines the name of the test.
 
-- The option `nodes` contains a set of named configurations, because a test script can involve more than one virtual machine.
+- `nodes` contains a set of named configurations, because a test script can involve more than one virtual machine.
 Each virtual machine is setup using a NixOS configuration.
 
-- The option `testScript` defines the Python test script, either as literal string.
+- `testScript` defines the Python test script, either as literal string.
   This Python test script can access the virtual machines via the names used for the `nodes`.
   It has super user rights in the virtual machines.
   In the Python script is each virtual machine is accessible via the `machine` object.
@@ -67,7 +67,7 @@ The test framework automatically starts the virtual machines and runs the Python
 
 ## Minimal example
 
-As a minimal test on the default configuration {ref}`configuration <nixos-vms>`, we will check if the user `root` and `alice` can run Firefox.
+As a minimal test on the default configuration [configuration](nixos-vms), we will check if the user `root` and `alice` can run Firefox.
 
 As {ref}`recommended <ref-pinning-nixpkgs>` you use an explicitly pinned version of Nixpkgs:
 
