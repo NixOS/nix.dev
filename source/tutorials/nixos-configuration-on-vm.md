@@ -142,18 +142,20 @@ This command builds the attribute `vm` using the version of Nixpkgs as using the
 
 <details><summary>Detailed explanation</summary>
 
-TODO: explain `<nixpkgs/nixos>`
+The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation that you want to build.
 
-arguments of nix-build: https://nixos.org/manual/nix/stable/command-ref/nix-build.html
+By using `'<nixpkgs>'` you use a named search path that can be defined using the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the `-I` option.
 
-search paths: https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH
+To build the virtual machine attribute you want to make use of the attributes provided by NixOS in the Nixpkgs, therefore you use `'<nixpkgs/nixos>'`.
 
-TODO: explain what `-A` does (https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr)
+The [-I](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) option allows you to set search paths.
+In this example, you use it to explicitly set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the configuration.nix file in your current folder.
+
+[-A](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) allows you to specify which attribute to build.
+To build the virtual machine, you choose the attribute `vm`.
 
 TODO: explain where `vm` comes from (https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.
 nix#L19)
-
-TODO:  explain what `-I` does here (https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) and refer to search paths
 
 </details>
 
