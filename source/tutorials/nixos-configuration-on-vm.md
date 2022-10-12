@@ -22,13 +22,14 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## Starting from the default NixOS configuration
 
-:::{admonition} NixOS
-On NixOS, by default, the configuration file is located at `/etc/nixos/configuration.nix`.
-
-On NixOS, you can use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.[^nixosconf]
-You can create a NixOS configuration in your working directory:
-
+In this tutorial you will use the default configuration that is shipped with NixOS.[^nixosconf]
 [^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
+
+:::{admonition} NixOS
+
+On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
+By default, the configuration file is located at `/etc/nixos/configuration.nix` to avoid overwriting this file you have to specify the output directory.
+Create a NixOS configuration in your working directory:
 
 ```shell-session
 nixos-generate-config --dir ./
@@ -37,10 +38,9 @@ nixos-generate-config --dir ./
 In the working directory you will then find two files: `configuration.nix` and `hardware-configuration.nix`.
 
 `hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
-We can ignore that file for this tutorial because it has no effect inside a virtual machine.
+You can ignore that file for this tutorial because it has no effect inside a virtual machine.
 
 The `configuration.nix` file contains various suggestions for the initial setup of a desktop computer.
-We use this default configuration in this tutorial.
 :::
 
 The default configuration of NixOS is:
@@ -80,7 +80,7 @@ On NixOS your configuration generated using `nix-generate-config` contains the u
 :::
 
 Additionally, you need to specify a password for this user.
-For the purpose of demonstration only, we use specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:[^password]
+For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:[^password]
 
 [^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`] or [`ssh.authorizedKeys`] for more secure alternatives.
 
@@ -88,8 +88,8 @@ For the purpose of demonstration only, we use specify an insecure, plain text pa
 initialPassword = "testpw";
 ```
 
-In this tutorial we focus on testing NixOS configurations on a virtual machine.
-Therefore we will remove the reference to `hardware-configuration.nix`:
+This tutorial focuses on testing NixOS configurations on a virtual machine.
+Therefore you will remove the reference to `hardware-configuration.nix`:
 
 ```diff
 -  imports =  [ ./hardware-configuration.nix ];
@@ -199,6 +199,6 @@ You should delete this file when you change the configuration.
 - Manual entry: [`nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html)
 - Manual entry: [NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration)
 - Manual entry: [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules)
-- Source code: [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226)
 - Wiki entry: [nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm)
+- Source code: [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226)
 - Source code: [vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix)
