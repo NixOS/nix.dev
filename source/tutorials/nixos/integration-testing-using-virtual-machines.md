@@ -12,7 +12,8 @@ This guide introduces the functionality of Nix Package Manager to write automate
 
 - A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
 - Basic knowledge of the [Nix language](https://nixos.org/manual/nix/stable/language/index.html).
-- Basic knowledge of [NixOS configuration](nixos-vms).
+- Basic knowledge of NixOS configuration.
+<!-- - Basic knowledge of [NixOS configuration](<nixos-vms>). -->
 
 ## Introduction
 
@@ -67,9 +68,10 @@ The test framework automatically starts the virtual machines and runs the Python
 
 ## Minimal example
 
-As a minimal test on the default configuration [configuration](nixos-vms), we will check if the user `root` and `alice` can run Firefox.
+As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
+<!-- As a minimal test on the default [configuration](<nixos-vms>), we will check if the user `root` and `alice` can run Firefox. -->
 
-As {ref}`recommended <ref-pinning-nixpkgs>` you use an explicitly pinned version of Nixpkgs:
+As [recommended](<ref-pinning-nixpkgs>) you use an explicitly pinned version of Nixpkgs:
 
 ```nix
 let
@@ -93,7 +95,9 @@ name = "minimal-test";
 
 #### Nodes
 
-Because this example only uses one virtual machine the node you specify is simply called `machine`. As configuration you use the default configuration as {ref}`discussed before <nixos-vms>`:
+Because this example only uses one virtual machine the node you specify is simply called `machine`.
+As configuration you use the default configuration as discussed before:
+<!-- As configuration you use the default configuration as [discussed before](<nixos-vms>): -->
 
 ```nix
 nodes.machine = { config, pkgs, ... }: {
@@ -270,7 +274,7 @@ The setup includes:
 
 :::{note}
 Because some of the needed packages of this example are broken in 22.11 release this example uses a specific revision of nixpkgs.
-Additionally this example shows the value of {ref}`pinning <ref-pinning-nixpkgs>` a test to a specific revision of `nixpkgs`.
+Additionally this example shows the value of [pinning](<ref-pinning-nixpkgs>) a test to a specific revision of `nixpkgs`.
 Tests that make use of nixpkgs versions before 22.11 need to choose names that do not contain whitespaces.
 :::
 
@@ -419,7 +423,7 @@ $ nix-build postgrest.nix
 ## Additional information regarding NixOS tests:
   - NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
-    To run integration tests on {ref}`GitHub Actions <github-actions>` see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests).
+    To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests).
   - NixOS comes with a large set of tests that serve also as educational examples.
     A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
   - [NixOS.wiki on  NixOS Testing library](https://nixos.wiki/wiki/NixOS_Testing_library) seems to be mostly outdated (last edit 05.11.2021)
