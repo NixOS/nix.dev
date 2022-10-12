@@ -22,12 +22,8 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## Starting from the default NixOS configuration
 
-:::{note}
+:::{admonition} NixOS
 On NixOS, by default, the configuration file is located at `/etc/nixos/configuration.nix`.
-For commands that use a configuration file, such as `nixos-rebuild`, the configuration file's path can be specified.[^path]
-In this tutorial we use this strategy, because the goal is not to install or update the current NixOS, but to debug a specific configuration.
-
-[^path]: the Nix command line tools use in general they `-I` option. This as documented in the [nix manual](https://nixos.org/manual/nix/stable/command-ref/opt-common.html). The `-I` option overwrites the environment variable `$NIX_PATH` that is <!-- partly -->documented in the [nix manual](https://nixos.org/manual/nix/stable/command-ref/env-common.html).<!-- todo: link to proper pinning manual -->
 
 On NixOS, you can use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.[^nixosconf]
 You can create a NixOS configuration in your working directory:
@@ -79,7 +75,7 @@ To be able to log in add the following lines:
   };
 ```
 
-:::{note}
+:::{admonition} NixOS
 On NixOS your configuration generated using `nix-generate-config` contains the user configuration commented out.
 :::
 
@@ -140,7 +136,7 @@ nix-build '<nixpkgs/nixos>' -A vm \
 
 This command builds the attribute `vm` using the version of Nixpkgs as using the [short form for channels](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#env-NIX_PATH) and using the NixOS configuration as specified in the relative path.
 
-<details><summary>Detailed explanation</summary>
+<details><summary> Detailed explanation </summary>
 
 The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation that you want to build.
 
@@ -151,20 +147,20 @@ To build the virtual machine attribute you want to make use of the attributes pr
 The [-I](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) option allows you to set search paths.
 In this example, you use it to explicitly set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the configuration.nix file in your current folder.
 
-[-A](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) allows you to specify which attribute to build.
+The [-A](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) option allows you to specify which attribute to build.
 To build the virtual machine, you choose the attribute `vm`.
 
-TODO: explain where `vm` comes from (https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.
-nix#L19)
+The `vm` attribute is inhereted from `eval.config.system.build` as defined in the [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
 
-</details>
-
-:::{note}
+:::{admonition} NixOS
 On NixOS you usually have a `$NIX_PATH` environment variable set up. You can use your current version of nixpkgs to build the virtual machine with this simpler command:[^nixosrebuild]
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 ```
 :::
+
+</details>
+
 
 [^nixosrebuild]: On NixOS you can create a virtual machine using `nixos-rebuild build-vm -I nixos-config=./configuration.nix`, which wraps the original command. its usage is mentioned [here](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 
