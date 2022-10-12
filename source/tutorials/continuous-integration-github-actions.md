@@ -52,11 +52,11 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.4.0
-    - uses: cachix/install-nix-action@v16
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v17
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - uses: cachix/cachix-action@v10
+    - uses: cachix/cachix-action@v11
       with:
         name: mycache
         # If you chose signing key for write access
