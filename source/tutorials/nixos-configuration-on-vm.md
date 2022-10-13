@@ -156,7 +156,6 @@ nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 
 </details>
 
-
 [^nixosrebuild]: On NixOS you can create a virtual machine using `nixos-rebuild build-vm -I nixos-config=./configuration.nix`, which wraps the original command. its usage is mentioned [here](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 
 ## Running the virtual machine
@@ -191,9 +190,13 @@ You should delete this file when you change the configuration.
 
 # References
 
-- Manual entry: [`nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html)
-- Manual entry: [NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration)
-- Manual entry: [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules)
-- Wiki entry: [nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm)
-- Source code: [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226)
-- Source code: [vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix)
+- Nix manual: [`nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
+- Nix manual: [common cli options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
+- Nix manual: [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
+- NixOS Manual: [NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
+- NixOS Manual: [Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
+- NixOS Manual Reference: [Options](https://nixos.org/manual/nixos/stable/options.html).
+- NixOS Manual: [NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+- Wiki entry: [nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
+- Source code: [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
+- Source code: [vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
