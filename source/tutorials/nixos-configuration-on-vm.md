@@ -40,10 +40,10 @@ In the working directory you will then find two files: `configuration.nix` and `
 `hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
 You can ignore that file for this tutorial because it has no effect inside a virtual machine.
 
-The `configuration.nix` file contains various suggestions for the initial setup of a desktop computer.
+The `configuration.nix` file contains various suggestions and comments for the initial setup of a desktop computer.
 :::
 
-The default configuration of NixOS is:
+The default configuration of NixOS without comments is:
 
 ```nix
 { config, pkgs, ... }:
@@ -62,7 +62,7 @@ The default configuration of NixOS is:
 }
 ```
 
-To be able to log in add the following lines:
+To be able to log in add the following lines to the returned attribute set:
 
 ```nix
   users.users.alice = {
@@ -139,17 +139,12 @@ This command builds the attribute `vm` using the version of Nixpkgs as using the
 <details><summary> Detailed explanation </summary>
 
 The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation that you want to build.
-
 By using `'<nixpkgs>'` you use a named search path that can be defined using the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the `-I` option.
-
 To build the virtual machine attribute you want to make use of the attributes provided by NixOS in the Nixpkgs, therefore you use `'<nixpkgs/nixos>'`.
-
 The [-I](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) option allows you to set search paths.
 In this example, you use it to explicitly set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the configuration.nix file in your current folder.
-
 The [-A](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) option allows you to specify which attribute to build.
 To build the virtual machine, you choose the attribute `vm`.
-
 The `vm` attribute is inhereted from `eval.config.system.build` as defined in the [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
 
 :::{admonition} NixOS
