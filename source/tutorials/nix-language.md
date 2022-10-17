@@ -1650,7 +1650,8 @@ Explanation:
   It returns an attribute set.
 - The argument must at least have the attributes `config` and `pkgs`, and may have more attributes.
 - The returned attribute set contains the attributes `imports` and `environment`.
-  `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+- `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+  When evaluated, the `./hardware-configuration.nix` will be copied into the Nix store, converting it into a Nix store path.
 
   :::{note}
   `imports` is not the impure built-in `import`, but a regular attribute name!
