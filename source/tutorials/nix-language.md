@@ -852,7 +852,7 @@ Example:
 
     /absolute/path
 
-Paths are relative when they contain at least one slash (`/`) but to not start with one.
+Paths are relative when they contain at least one slash (`/`) but do not start with one.
 They evaluate to the path relative to the file containing the expression.
 
 The following examples assume the containing Nix file is in `/current/directory` (or `nix repl` is run in `/current/directory`).
