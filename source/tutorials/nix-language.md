@@ -1491,6 +1491,8 @@ It is an error if the file system path does not exist.
 
 </details>
 
+For directories the same thing happens: The entire directory (including nested files and directories) is copied to the Nix store, and the evaluated string becomes the Nix store path of the directory.
+
 ### Fetchers
 
 Files to be used as build inputs do not have to come from the file system.
