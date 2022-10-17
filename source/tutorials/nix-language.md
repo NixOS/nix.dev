@@ -905,6 +905,10 @@ Example:
 
     /current
 
+:::{note}
+Paths can be used in antiquotation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+:::
+
 #### Search path
 
 Also known as “angle bracket syntax”.
@@ -1453,6 +1457,7 @@ Nix supports other types of impure expressions, such as [search paths](search-pa
 We do not cover those here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
+(path-impurities)=
 ### Paths
 
 Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
