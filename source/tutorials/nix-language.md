@@ -1043,7 +1043,7 @@ x: x + 1
 
 The `<LAMBDA>` indicates the resulting value is an anonymous function.
 
-We can assign functions a name as to any other value.
+As with any other value, functions can be assigned to a name.
 
 Example:
 
