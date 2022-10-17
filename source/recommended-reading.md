@@ -2,7 +2,7 @@
 
 ## Nix language tutorials
 
-- [Nix lanuage one-pager reference](https://github.com/tazjin/nix-1p) (Vincent Ambo, 2019-2021)
+- [Nix language one-pager reference](https://github.com/tazjin/nix-1p) (Vincent Ambo, 2019-2021)
 
   Overview of common language features and widely used idioms.
 
