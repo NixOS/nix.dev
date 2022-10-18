@@ -24,6 +24,7 @@
 
 ## Other Articles
 
+- [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
 
   An overview of different methods to customize Nix packages.
 
