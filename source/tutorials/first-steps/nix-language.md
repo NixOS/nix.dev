@@ -175,7 +175,7 @@ $ nix-instantiate --eval
 :::
 
 :::{note}
-The Nix language uses lazy evaluation, and `nix-instantiate` by default does not compute everything.
+The Nix language uses lazy evaluation, and `nix-instantiate` by default only computes values when needed.
 
 Some examples show a fully evaluated data structure for clarity.
 If your output does not match the example, try adding the `--strict` option to `nix-instantiate`.
