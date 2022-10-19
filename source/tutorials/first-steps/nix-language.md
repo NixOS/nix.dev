@@ -119,7 +119,6 @@ The Nix language uses lazy evaluation, and `nix repl` by default only computes v
 
 Some examples show a fully evaluated data structure for clarity.
 If your output does not match the example, try prepending `:p` to the input expression.
-This will compute more of the returned value before showing it.
 
 Example:
 
