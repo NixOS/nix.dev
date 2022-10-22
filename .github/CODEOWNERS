@@ -12,4 +12,40 @@
 # permissions, you need to list all members of the team with commit access individually.
 
 # This file
-/.github/CODEOWNERS @domenkozar
+.github/CODEOWNERS @domenkozar
+
+# Dependabot
+.github/dependabot.yml @domenkozar
+
+# GitHub Actions
+.github/workflows/ @domenkozar
+
+# Meta-documentation
+CONTRIBUTING.md @domenkozar
+LICENSE.md @domenkozar
+README.md @domenkozar @fricklerhandwerk
+cla/ @domenkozar
+
+# GitPod
+.gitpod* @domenkozar
+
+# gitignore
+.gitignore @domenkozar
+
+# Nix machinery
+*.nix @domenkozar
+flake.lock @domenkozar
+
+# Python machinery
+poetry.lock @domenkozar
+pyproject.toml @domenkozar
+
+# Build and run machinery
+Makefile @domenkozar
+live* @domenkozar
+runtime.txt @domenkozar
+run_code_block_tests.sh @domenkozar
+.imgbogconfig @domenkozar
+
+# Documentation sources
+source/ @domenkozar @fricklerhandwerk
