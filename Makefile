@@ -51,6 +51,10 @@ clean:
 .PHONY: html
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+
+	# support for Cloudflare Pages' redirects
+	@cp _redirects build/html/_redirects
+
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
