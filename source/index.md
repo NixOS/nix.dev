@@ -43,4 +43,5 @@ faq.rst
 recommended-reading.rst
 influences.rst
 glossary.rst
+contributing.rst
 ```
