@@ -35,13 +35,13 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 :glob: true
 :maxdepth: 3
 
-tutorials/index.rst
-templates/index.rst
-anti-patterns/index.rst
-reference/index.rst
-faq.rst
-recommended-reading.rst
-influences.rst
-glossary.rst
-contributing.rst
+tutorials/index.md
+templates/index.md
+anti-patterns/index.md
+reference/index.md
+faq.md
+recommended-reading.md
+influences.md
+glossary.md
+contributing.md
 ```
