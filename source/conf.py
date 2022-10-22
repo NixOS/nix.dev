@@ -414,10 +414,6 @@ linkcheck_anchors_ignore = [
     r"instance_type",
     r"authentication",
     r"community",
-    # Seems like README anchors aren't parsable?
-    r"cross-compiling",
-    r"supported-formats",
-    r"how-can-i-run-nixos-tests",
 ]
 
 
