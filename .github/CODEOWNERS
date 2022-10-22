@@ -1,0 +1,15 @@
+# CODEOWNERS file
+#
+# This file is used to describe who owns what in this repository. This file does not
+# replace `meta.maintainers` but is instead used for other things than derivations
+# and modules, like documentation, package sets, and other assets.
+#
+# For documentation on this file, see https://help.github.com/articles/about-codeowners/
+# Mentioned users will get code review requests.
+#
+# IMPORTANT NOTE: in order to actually get pinged, commit access is required.
+# This also holds true for GitHub teams. Since almost none of our teams have write
+# permissions, you need to list all members of the team with commit access individually.
+
+# This file
+/.github/CODEOWNERS @domenkozar
