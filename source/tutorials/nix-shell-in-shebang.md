@@ -10,7 +10,9 @@ In this tutorial, you will learn how to use the [nix shell] to create reproducib
 
 - A working [Nix installation](install-nix)
 - Familiarity with [Bash]
-- Familiarity with the concept of [shebang]
+
+We will refer to the concept of [shebang].
+You don't need to know more that it's the first line of a script telling your shell shell which program should be used to run the script, examples: `#!/usr/bin/env bash`, `#!/usr/bin/perl`.
 
 [Bash]: https://www.gnu.org/software/bash/
 [shebang]: https://en.m.wikipedia.org/wiki/Shebang_(Unix)
@@ -55,6 +57,10 @@ Create a file named `nixpkgs-releases.sh` with the following content:
 
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
+
+The command `xml2json` is provided by the package `python3Packages.xmljson`, while the commands `jq` and `curl` are provided by eponymous packages.
+
+The parameter of `-I` refers to a pinned nixpkgs version, which mean this script will always run with the same packages versions. If you distribute your script, it's guaranteed to run on other systems with the same binaries.
 
 Make it executable using
 
