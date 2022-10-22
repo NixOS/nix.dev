@@ -1,6 +1,6 @@
 # How to contribute to documentation in the Nix ecosystem
 
-If you want to help improving documentation, consider the following guidelines developed by the [Nix documentation team](https://discourse.nixos.org/t/documentation-team-flattening-the-learning-curve/20003).
+If you want to help improving documentation, consider the following guidelines developed by the [Nix documentation team](./README.md).
 
 Different audiences require different levels of sophistication, and both readers' and contributors' available time and expertise varies widely.
 
