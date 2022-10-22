@@ -8,10 +8,10 @@ NixOS.
 We can only fix issues that we know of, so please report any issue you
 encounter.
 
-Issues with the **package manager Nix** (including it's documentation)
+Issues with the **package manager Nix** (including its documentation)
 are reported at <https://github.com/NixOS/nix/issues>.
 
-Issues with **specific packages or NixOS** (including it's modules and
+Issues with **specific packages or NixOS** (including its modules and
 documentation) are reported at <https://github.com/NixOS/nixpkgs/issues>.
 
 Make sure that there is not already an open issue for your problem.
@@ -23,7 +23,7 @@ You need a [GitHub] account for that.
 ## Contribute to Nix
 
 The package manager Nix is mostly written in C++. If you are a developer
-and want to contribute to it's development, you can find information on
+and want to contribute to its development, you can find information on
 [how to setup a development environment] in the manual.
 
 You can find inspiration for things to improve in the [reported
