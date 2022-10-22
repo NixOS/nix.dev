@@ -1,44 +1,54 @@
 # Maintainer responsibilities
 
-## Monitor notifications
+## Join the team meetings
 
-Watch discussions and proposals from these communication channels:
+Participate in the regular team meetings, see [meeting information and protocol] for details.
+
+[meeting information and protocol]: ./README.md#team-meetings
+
+If you can't participate, notify other team members.
+
+## Stay informed
+
+Follow relevant activities on these communication channels:
 
 - GitHub
+
+  Subscribe to issues and pull requests you care about.
+
 - Discourse
+
+  Set the notification level on the [Development > Documentation] Discourse category to "watching".
+
+  [Development > Documentation]: https://discourse.nixos.org/c/dev/documentation/25
+
 - Matrix
 
-Maintain your entry in the [`CODEOWNERS`](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file in the respective repository.
+  Join the [Nix\* Documentation] Matrix room and enable relevant notifications.
+
+  [Nix\* Documentation]: https://matrix.to/#/#docs:nixos.org
+
+## Take ownership
+
+Maintain your entry in the [`CODEOWNERS`] file in the respective repository.
 GitHub will then request reviews for pull requests that change files you own.
 
+[`CODEOWNERS`]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-Set the notification level on the [Development > Documentation](https://discourse.nixos.org/c/dev/documentation/25) Discourse category to "watching".
+As a maintainer, you are responsible for the code you approve and merge.
+Make sure to follow up on bugs and regressions in the code you maintain.
 
-Join the [Nix* Documentation](https://matrix.to/#/#docs:nixos.org) Matrix room and enable relevant notifications.
+Respond to `@` mentions on GitHub, Discourse, and Matrix within reasonable time.
+Notify readers if you cannot deal with the issue due to time constraints or other priorities.
 
-As a maintainer, you have the responsibility to be responsive to `@` mentions
-on GitHub, Discourse, and Matrix. If said mention is low on your priority list,
-you can respond by saying that.
-
-Finally, you should also make sure to subscribe to external resources that
-falls into your area. For example, if you are a maintainer of the documentation
-team, you need to be aware of the stabilisation status of Nix features. If you
-are a maintainer of the security team, you need to be subscribed to CVE
-publications.
+Make sure to reserve time for reviewing pull requests that fall within your area of interest or expertise.
 
 ## Provide guidance
 
-As a maintainer, you will have to guide potential contributors.
+Guide potential contributors:
 
-This can be done by taking questions from the Discourse forum, and encouraging
-the poster to write issues on GitHub, if needed, and then guide them to write
-Pull Requests.
+- help answering questions on the [Discourse Help category]
+- encourage question authors to raise or upvote issues on GitHub, if needed
+- assist them with making pull requests to solve the underlying problems, if possible
 
-In any case, make sure to reserve time for doing Pull Request reviews, and to
-only pick subjects that fall withing files that are in your `CODEOWNERS` entry.
-
-## Take ownership of issues, pull requests, and source code
-
-As a maintainer, you are responsible for the code you approve and merge: it is
-also your responsibility to follow-up on bugs and regressions caused by this
-code.
+[Discourse Help category]: https://discourse.nixos.org/c/learn/9
