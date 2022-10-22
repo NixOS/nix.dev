@@ -20,27 +20,59 @@ as they help us solve the problem.
 
 You need a [GitHub] account for that.
 
+[github]: https://github.com/
+
+## Contribute to documentation
+
+Documentation on the Nix ecosystem is divided into several domains based on purpose.
+
+The manuals for [Nix][nix manual], [Nixpkgs][nixpkgs manual], and [NixOS][nixos manual] 
+are reference documentation, specifying interfaces and behavior.
+
+[nix.dev] is a curated and maintained repository of guides and tutorials aimed
+to teach beginners essential Nix knowledge, show best practices, and help orient
+users in the Nix ecosystem.
+
+[Writing style and guidelines for documentation] are available in the nix.dev
+repository.
+
+[Detailed overview of the entire documentation ecosystem in Nix] are available
+in the Nix documentation team repository.
+
+[nix manual]: https://nixos.org/manual/nix/stable/quick-start.html
+[nixpkgs manual]: https://nixos.org/manual/nixpkgs/stable
+[nixos manual]: https://nixos.org/manual/nixos/stable
+[nix.dev]: https://nix.dev
+[Writing style and guidelines for documentation]: https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#user-content-guidelines
+[Detailed overview of the entire documentation ecosystem in Nix]: https://github.com/NixOS/nix.dev/blob/master/maintainers/how-to-contribute-to-documentation.md
+
 ## Contribute to Nix
 
-The package manager Nix is mostly written in C++. If you are a developer
-and want to contribute to its development, you can find information on
-[how to setup a development environment] in the manual.
+The package manager Nix is mostly written in C++.
 
-You can find inspiration for things to improve in the [reported
-issues][nix issues].
+If you are a developer and want to contribute to its development, you can find
+information on [how to setup a development environment] in the manual.
+
+You can find inspiration for things to improve in the [reported issues][nix issues].
 
 Feel free to [join our community] to get in
 contact with other developers.
 
-## Contribute to Nix packages
+[how to setup a development environment]: https://nixos.org/manual/nix/unstable/contributing/hacking.html
+[nix issues]: https://github.com/NixOS/nix/issues
+[join our community]: https://github.com/NixOS/nixpkgs#community
+
+## Contribute to Nixpkgs
 
 Packaging for Nix is simple when you have understood the basic concept.
 
-[The manual] explains step-by-step how to add new packages to the Nix
-package collection. There are also [programming language specific
-instructions][programming language specific instructions].
+[The manual][nixpkgs manual] explains step-by-step how to add new packages to
+the Nix package collection. There are also [programming language specific instructions].
 
 You can find inspiration for things to improve in the [reported issues][nixpkgs issues].
+
+[programming language specific instructions]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
+[nixpkgs issues]: https://github.com/NixOS/nixpkgs/issues?page=3&q=is%3Aissue+is%3Aopen+label%3A%228.has%3A+package+%28update%29%22%2C%228.has%3A+package+%28new%29%22%2C%229.needs%3A+package+%28update%29%22%2C%229.needs%3A+package+%28new%29%22%2C%220.kind%3A+packaging+request%22%2C%220.kind%3A+build+failure%22
 
 ## Contribute to NixOS
 
@@ -49,23 +81,16 @@ distributions. All the code is on GitHub in the repository [nixpkgs].
 Everyone can propose an improvement and most of them get merged after a
 review of the maintainers. You will get feedback in the pull request.
 
-See the [NixOS manual] to get started and find all the details.
+See the [NixOS manual][nixos manual dev] to get started and find all the details.
 
-You can find inspiration for things to improve in the [reported
-issues][nixos issues]. There are also
-[issues tagged with good-first-bug] that are a good start for new
+You can find inspiration for things to improve in the [reported issues][nixos issues].
+
+There are also [issues tagged with good-first-bug] that are a good start for new
 contributors.
 
 Feel free to [join our community] of developers!
 
-[github]: https://github.com/
-[how to setup a development environment]: https://nixos.org/manual/nix/stable/contributing/hacking.html
-[issues tagged with good-first-bug]: https://github.com/NixOS/nixpkgs/labels/3.skill%3A%20good-first-bug
-[join our community]: https://github.com/NixOS/nixpkgs#community
-[nixos manual]: https://nixos.org/manual/nixos/stable/index.html#ch-development
 [nixpkgs]: https://github.com/NixOS/nixpkgs
-[programming language specific instructions]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
-[the manual]: https://nixos.org/manual/nix/stable/quick-start.html
-[nix issues]: https://github.com/NixOS/nix/issues
+[nixos manual dev]: https://nixos.org/manual/nixos/stable/index.html#ch-development
 [nixos issues]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%226.topic%3A+nixos%22
-[nixpkgs issues]: https://github.com/NixOS/nixpkgs/issues?page=3&q=is%3Aissue+is%3Aopen+label%3A%228.has%3A+package+%28update%29%22%2C%228.has%3A+package+%28new%29%22%2C%229.needs%3A+package+%28update%29%22%2C%229.needs%3A+package+%28new%29%22%2C%220.kind%3A+packaging+request%22%2C%220.kind%3A+build+failure%22
+[issues tagged with good-first-bug]: https://github.com/NixOS/nixpkgs/labels/3.skill%3A%20good-first-bug
