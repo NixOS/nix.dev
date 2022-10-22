@@ -3,5 +3,5 @@
 ```{toctree}
 :glob: true
 
-pinning-nixpkgs.rst
+pinning-nixpkgs.md
 ```
