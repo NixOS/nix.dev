@@ -175,3 +175,12 @@ flowchart
 
 Do you have suggestions how to ease contributing to documentation in the Nix ecosystem?
 Please open a pull request to update this document with your proposals.
+
+## Links to this guide
+
+In case this guide moves, the following documents link here and should be updated:
+
+- [Discourse: Summer of Nix documentation stream](https://discourse.nixos.org/t/summer-of-nix-documentation-stream/20351)
+- [Discourse: How to contribute to documentation](https://discourse.nixos.org/t/how-to-contribute-to-documentation/21028)
+- [NixOS Wiki: Contributing to Nix documentation](https://nixos.wiki/wiki/Contributing_to_Nix_documentation)
+
