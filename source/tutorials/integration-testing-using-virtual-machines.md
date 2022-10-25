@@ -189,7 +189,7 @@ with the script or access a terminal for a machine.
 To interactively start a Python session with a testing framework:
 
 ```shell-session
-$ $(nix-build -A driver postgrest.nix)/bin/nixos-test-driver
+$ $(nix-build -A driverInteractive postgrest.nix)/bin/nixos-test-driver
 ...
 starting VDE switch for network 1
 >>>
