@@ -136,6 +136,12 @@ Use culturally neutral language:
 
   What you may consider well-known may be entirely obscure and distracting to people from different backgrounds.
 
+- Use consistent spelling.
+
+  Different cultures spell certain words differently.
+  The choice of spelling is arbitrary, so we have chosen one that is the most widespread and culturally inclusive.
+  The development shell provides the `spellcheck` utility to check the spelling in all the content files.
+
 [plain language guidelines]: https://www.plainlanguage.gov/guidelines/
 
 ### Licensing and attribution
