@@ -29,15 +29,15 @@ nix-shell -p terraform
 terraform login
 ```
 
-3. Make sure to [create an organization](https://app.terraform.io/app/organizations/new) like `myorganization` in your Terraform Cloud account.
-4. Inside `myorganization` [create a workspace](https://app.terraform.io/app/cachix/workspaces/new) by choosing **CLI-driven workflow** and pick a name like  `myapp`.
+3. Make sure to [create an organisation](https://app.terraform.io/app/organisations/new) like `myorganisation` in your Terraform Cloud account.
+4. Inside `myorganisation` [create a workspace](https://app.terraform.io/app/cachix/workspaces/new) by choosing **CLI-driven workflow** and pick a name like  `myapp`.
 5. Inside your workspace, under `Settings` / `General` change Execution Mode to `Local`.
 6. Inside a new directory create a `main.tf` file with the following contents. This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
 
 ```
 terraform {
     backend "remote" {
-        organization = "myorganization"
+        organisation = "myorganisation"
 
         workspaces {
             name = "myapp"

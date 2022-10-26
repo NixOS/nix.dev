@@ -33,7 +33,7 @@ On your freshly created binary cache, follow the **Push binaries** tab instructi
 
 ### 2. Setting up secrets
 
-On your GitHub repository or organization (for use across all repositories):
+On your GitHub repository or organisation (for use across all repositories):
 
 1. Click on `Settings`.
 2. Click on `Secrets`.

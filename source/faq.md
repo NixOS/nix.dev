@@ -75,7 +75,7 @@ $ sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sql
 This means you have upgraded Nix sqlite schema to a newer version, but then tried
 to use older Nix.
 
-The solution is to dump the db and use old Nix version to initialize it:
+The solution is to dump the db and use old Nix version to initialise it:
 
 ```
 /path/to/nix/unstable/bin/nix-store --dump-db > /tmp/db.dump

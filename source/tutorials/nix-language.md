@@ -1614,7 +1614,7 @@ pkgs.mkShell {
 }
 ```
 
-This example declares a shell environment (which runs the `shellHook` on initialization).
+This example declares a shell environment (which runs the `shellHook` on initialisation).
 
 Explanation:
 
@@ -1687,7 +1687,7 @@ This example is a (simplified) package declaration from Nixpkgs.
 Explanation:
 
 - This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
-- It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
+- It returns the result of evaluating the function `mkDerivation`, which is an attribute of `stdenv`, applied to a recursive set.
 - The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the built-in function `fetchTarball`.
 - The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
@@ -1754,7 +1754,7 @@ Different language ecosystems and frameworks have different requirements to acco
 
 The NixOS Linux distribution has a modular configuration system that imposes its own conventions:
 
-- [NixOS modules][nixos-modules] shows how NixOS configurations are organized.
+- [NixOS modules][nixos-modules] shows how NixOS configurations are organised.
 
 [nix-pills]: https://nixos.org/guides/nix-pills/
 [stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv

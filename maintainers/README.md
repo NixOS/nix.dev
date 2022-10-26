@@ -5,14 +5,14 @@ The Nix documentation team was formed to flatten the infamous learning curve.
 ## Goals
 
 - ease learning, increase onboarding success and user retention
-- improve organization of knowledge
+- improve organisation of knowledge
 - lead, guide, and support related community efforts
 
 ## Motivation
 
 To finally improve the state of affairs with Nix onboarding and documentation, we have to tackle some big issues and work through many small ones: implement structural changes after gathering the necessary social support; fix numerous little problems and help people get their contributions merged.
 
-It appears that, so far, no one really had the time or resources required to do this consistently. The team is built around that limitation, and therefore organized as a praxicracy: you are in charge if and only if you get the work done. The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
+It appears that, so far, no one really had the time or resources required to do this consistently. The team is built around that limitation, and therefore organised as a praxicracy: you are in charge if and only if you get the work done. The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
 
 ## Members
 

@@ -14,7 +14,7 @@ If You are an employee and have created the Contribution as part of your employm
 
 **"Contribution"** means any original work of authorship, including any original modifications or additions to an existing work of authorship, Submitted by You to Us, in which You own the Copyright.
 
-**"Copyright"** means all rights protecting works of authorship, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence.
+**"Copyright"** means all rights protecting works of authorship, including copyright, moral and neighbouring rights, as appropriate, for the full term of their existence.
 
 **"Material"** means the software or documentation made available by Us to third parties. When this Agreement covers more than one software project, the Material means the software or documentation to which the Contribution was Submitted. After You Submit the Contribution, it may be included in the Material.
 
@@ -35,7 +35,7 @@ Subject to the terms and conditions of this Agreement, You hereby grant to Us a 
 
 **2.2 Moral rights**
 
-Moral Rights remain unaffected to the extent they are recognized and not waivable by applicable law. Notwithstanding, You may add your name to the attribution mechanism customary used in the Materials you Contribute to, such as the header of the source code files of Your Contribution, and We will respect this attribution when using Your Contribution.
+Moral Rights remain unaffected to the extent they are recognised and not waivable by applicable law. Notwithstanding, You may add your name to the attribution mechanism customary used in the Materials you Contribute to, such as the header of the source code files of Your Contribution, and We will respect this attribution when using Your Contribution.
 
 ### 3. Patents
 
@@ -71,7 +71,7 @@ IF THE DISCLAIMER AND DAMAGE WAIVER MENTIONED IN SECTION 4. AND SECTION 5. CANNO
 
 **8.2** This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.
 
-**8.3** In case of Your death, this agreement shall continue with Your heirs. In case of more than one heir, all heirs must exercise their rights through a commonly authorized person.
+**8.3** In case of Your death, this agreement shall continue with Your heirs. In case of more than one heir, all heirs must exercise their rights through a commonly authorised person.
 
 **8.4** If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and that is enforceable. The terms and conditions set forth in this Agreement shall apply not withstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.
 

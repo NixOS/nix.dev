@@ -19,7 +19,7 @@ Streams can be appended to:
    - The amount of infomation in them grows without bounds.
    - Only recent items are relevant.
 
-Artifacts can be changed:
+Artefacts can be changed:
    - The amount of information in them is strictly bounded.
    - All items should be up to date.
 
@@ -40,7 +40,7 @@ flowchart
 		Discourse
 		RFCs
   end
-  subgraph artifact
+  subgraph artefact
 		Wiki
 		code
 		manuals
@@ -95,7 +95,7 @@ flowchart
     
     [NixOS Wiki](https://nixos.wiki/) is a collection of interlinked guides to solve common problems which are otherwise not well-documented.
     It is collectively edited by the community, covers a broad range of topics.
-    It is only loosely organized, and does not impose quality standards.
+    It is only loosely organised, and does not impose quality standards.
     Its purpose is to quickly and conveniently collect insights and make them readily available for everyone.
     
     We recommend to use it as a dumping ground for more obscure Nix knowledge, and strive to make it *smaller* over time (see [NixCon 2015: Make Nix friendlier for Beginners](https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video&t=1365)), by incrementally incorporating its contents into authoritative documentation and curated learning material.
@@ -104,7 +104,7 @@ flowchart
     
     You can help with
     
-    - improving discoverability by adding categorization and relevant links
+    - improving discoverability by adding categorisation and relevant links
     - clarifying articles and correcting errors
     - removing redundant information that is already present in curated sources
     - migrating information to other resources.
@@ -124,7 +124,7 @@ flowchart
     - [Nixpkgs](https://nixos.org/manual/nixpkgs/stable/) ([source](https://github.com/NixOS/nixpkgs/tree/master/doc))
     - [NixOS](https://nixos.org/manual/nixos/stable/) ([source](https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual))
     
-    are purely reference documentation, specifying interfaces and behavior.
+    are purely reference documentation, specifying interfaces and behaviour.
     They also show example interactions to show how to use its components, and explain mechanisms where necessary.
     
     The documentation team watches all pull requests to the manuals and assists contributors to get their changes merged.
@@ -138,7 +138,7 @@ flowchart
       - correct obvious errors
       - clarify language
     - expanding on sections that appear incomplete
-    - documenting how the manuals are organized and built
+    - documenting how the manuals are organised and built
     - identifying sections that are not reference documentation and should be moved to nix.dev
 
 

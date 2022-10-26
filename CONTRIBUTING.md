@@ -128,7 +128,7 @@ Use culturally neutral language:
 
 - Don't try to be funny.
 
-  Humor is highly culturally sensitive.
+  Humour is highly culturally sensitive.
   At best, jokes may obfuscate the relevant instructions.
   At worst, jokes may offend readers and invalidate our effort to help them learn.
 
@@ -192,7 +192,7 @@ Collect links at the end of each section, which are delimited by headings.
 
 ### Terminology
 
-To avoid confusion around all the things called Nix, always use the following terms with capitalization as given.
+To avoid confusion around all the things called Nix, always use the following terms with capitalisation as given.
 
 - Nix
 

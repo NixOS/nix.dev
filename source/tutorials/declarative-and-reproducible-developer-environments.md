@@ -73,7 +73,7 @@ You should see something similar to this:
 /nix/store/y3w2i8kfdbfj9rx287ad52rahjpgv423-htop-2.2.0/bin/htop
 ```
 
-## Customizing your developer environment
+## Customising your developer environment
 
 Given the following `shell.nix`:
 

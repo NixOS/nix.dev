@@ -37,4 +37,4 @@ $ sync
 
 ## Next steps
 
-- Take a look at this [list of formats that generators support](https://github.com/nix-community/nixos-generators#supported-formats) to find your cloud provider or virtualization technology.
+- Take a look at this [list of formats that generators support](https://github.com/nix-community/nixos-generators#supported-formats) to find your cloud provider or virtualisation technology.
