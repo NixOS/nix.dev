@@ -852,7 +852,7 @@ Example:
 
     /absolute/path
 
-Paths are relative when they contain at least one slash (`/`) but to not start with one.
+Paths are relative when they contain at least one slash (`/`) but do not start with one.
 They evaluate to the path relative to the file containing the expression.
 
 The following examples assume the containing Nix file is in `/current/directory` (or `nix repl` is run in `/current/directory`).
@@ -904,6 +904,10 @@ Example:
 ```
 
     /current
+
+:::{note}
+Paths can be used in antiquotation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+:::
 
 #### Search path
 
@@ -1043,7 +1047,7 @@ x: x + 1
 
 The `<LAMBDA>` indicates the resulting value is an anonymous function.
 
-We can assign functions a name as to any other value.
+As with any other value, functions can be assigned to a name.
 
 Example:
 
@@ -1453,6 +1457,7 @@ Nix supports other types of impure expressions, such as [search paths](search-pa
 We do not cover those here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
+(path-impurities)=
 ### Paths
 
 Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
@@ -1490,6 +1495,8 @@ The file is copied into the Nix store directory `/nix/store` as a side effect of
 It is an error if the file system path does not exist.
 
 </details>
+
+For directories the same thing happens: The entire directory (including nested files and directories) is copied to the Nix store, and the evaluated string becomes the Nix store path of the directory.
 
 ### Fetchers
 
@@ -1650,7 +1657,8 @@ Explanation:
   It returns an attribute set.
 - The argument must at least have the attributes `config` and `pkgs`, and may have more attributes.
 - The returned attribute set contains the attributes `imports` and `environment`.
-  `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+- `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
+  When evaluated, the `./hardware-configuration.nix` will be copied into the Nix store, converting it into a Nix store path.
 
   :::{note}
   `imports` is not the impure built-in `import`, but a regular attribute name!
