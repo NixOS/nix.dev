@@ -25,7 +25,8 @@
             }
           );
         };
-      in rec {
+      in
+      rec {
         packages = flake-utils.lib.flattenTree {
           nix-dev-pyenv = pkgs.poetry2nix.mkPoetryEnv {
             projectDir = self;
@@ -42,6 +43,8 @@
               ncurses6
               (hunspellWithDicts (with hunspellDicts; [
                 en-gb-ise
+                en-au
+                en-ca
                 en-us
               ]))
             ];
@@ -50,10 +53,10 @@
               exceptionsFile=./spelling-exceptions.dic
               newExceptionsFile=./new-spelling-exceptions.dic
               gbFile=gb.dic
-              usFile=us.dic
+              otherFile=other.dic
               hunspell -d en_GB -l "''${files[@]}" | sed 's/.*: //' | sort | uniq > $gbFile
-              hunspell -d en_US -l "''${files[@]}" | sed 's/.*: //' | sort | uniq > $usFile
-              comm -1 -2 $gbFile $usFile > $newExceptionsFile
+              hunspell -d en_US,en_AU,en_CA -l "''${files[@]}" | sed 's/.*: //' | sort | uniq > $otherFile
+              comm -1 -2 $gbFile $otherFile > $newExceptionsFile
               mapfile -t newExceptions < <(comm -1 -3 $exceptionsFile $newExceptionsFile)
               cat $exceptionsFile $newExceptionsFile | sort | uniq | sponge $exceptionsFile
               rm $newExceptionsFile
