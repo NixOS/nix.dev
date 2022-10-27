@@ -18,8 +18,8 @@ jobs:
         name: nix-dev
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: Build
-      run: nix-build
+      run: nix build -L
     - name: Linkcheck
-      run: nix-shell --run "make linkcheck"
+      run: nix develop -c make linkcheck
     - name: Run code block tests
-      run: nix-shell --run "./run_code_block_tests.sh"
+      run: nix develop -c ./run_code_block_tests.sh
