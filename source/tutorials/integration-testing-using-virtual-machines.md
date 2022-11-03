@@ -214,5 +214,5 @@ Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 
 - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
   To run integration tests on {ref}`GitHub Actions <github-actions>` see
-  [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-can-i-run-nixos-tests).
+  [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests).
 - NixOS comes with a large set of tests that serve also as educational examples. A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).

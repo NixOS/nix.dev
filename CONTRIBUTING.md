@@ -183,3 +183,18 @@ Collect links at the end of each section, which are delimited by headings.
 
 [Here is a discussion of different line wrapping styles.]: https://web.archive.org/web/20220519121408/https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
 [reference links]: https://github.github.com/gfm/#reference-link
+
+### Notes
+
+#### GitHub heading anchors fails linkcheck
+
+Due to a [Sphinx bug][linkcheck gh bug], linkcheck fails when it verifies the
+existence of GitHub heading anchors on rendered Markdown documents.
+
+Until the bug is resolved, add the `user-content-` prefix to GitHub links
+containing heading anchors.
+
+For example, instead of
+`https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests`,
+use
+`https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests`. 
