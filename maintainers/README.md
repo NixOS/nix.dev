@@ -86,7 +86,7 @@ Meeting notes should contain:
 
 - date of meeting
 - list of attendees
-- results and links to GitHub issues and PRs for each agenda item
+- results and links to GitHub issues and pull requests for each agenda item
 
 ## Contributing
 
