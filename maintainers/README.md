@@ -1,6 +1,6 @@
 # Nix documentation team
 
-The Nix documentation team was formed to flatten the infamous learning curve. 
+The Nix documentation team was formed to flatten the infamous learning curve.
 
 ## Goals
 
@@ -17,21 +17,21 @@ It appears that, so far, no one really had the time or resources required to do 
 ## Members
 
 - Valentin Gagarin (@fricklerhandwerk) (lead until 2022-10-31)
-    
+
     Nix documentarian, [Tweag](tweag.io)
 
 - Domen Kožar (@domenkozar)
-    
+
     [nix.dev](http://nix.dev) author, [Cachix](cachix.org)
 
 - Jörg Thalheim (@Mic92)
-    
+
     NixOS Wiki maintainer
 
 - Silvan Mosberger (@infinisil)
 
    `nixpkgs` maintainer, [Tweag](tweag.io)
-    
+
 ## Responsibilities
 
 ### Team
@@ -72,18 +72,21 @@ As the Nix community is distributed globally, available time for synchronous com
 
 To keep discussions highly focused and make their results accessible, we will:
 
-- set meeting agendas on [the team's GitHub project board](https://github.com/orgs/NixOS/projects/15) from issues and pull requests
+- prepare meeting agendas as a pull requests on the [nix.dev repository](https://github.com/NixOS/nix.dev)
   - pull requests have priority, invite authors to the meetings
   - annotate estimated discussion time for each agenda item, it should be followed
-- post meeting protocols on the [Discourse documentation category](https://discourse.nixos.org/c/dev/documentation/25)
-  - add notes to the respective issue or pull request as a comment
-    -  prepare notes collaboratively, e.g. in a [HackMD](https://hackmd.io/) scratchpad
+- prepare notes collaboratively, e.g. in a [HackMD](https://hackmd.io/) scratchpad
+- merge pull requests made on the last session
+- submit new pull requests or issues
+- add notes to existing issues or pull requests as a comment
+- post the meeting protocol on the [Discourse documentation category](https://discourse.nixos.org/c/dev/documentation/25)
+- update calendar invitations
 
 Meeting notes should contain:
 
 - date of meeting
 - list of attendees
-- results and links to GitHub comments for agenda item.
+- results and links to GitHub issues and pull requests for each agenda item
 
 ## Contributing
 
