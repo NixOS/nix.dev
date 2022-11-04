@@ -60,8 +60,8 @@ Ordered by priority:
 1. extend and curate [nix.dev] as the central learning resource – long-term vision: The Nix Book
 1. review and merge [Nix pull requests] and [Nixpkgs and NixOS pull requests] concerning documentation
 1. keep track of [Nix issues] and [Nixpkgs and NixOS issues] concerning documentation
-1. monitor the [Documentation Discourse category]
-1. monitor the [Nix\* Documentation Matrix room]
+1. monitor the [*Documentation* Discourse category]
+1. monitor the [*Nix\* Documentation* Matrix room]
 1. monitor [changes to the NixOS Wiki]
 
 [nix.dev]: https://nix.dev
