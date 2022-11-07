@@ -44,4 +44,5 @@ recommended-reading.md
 influences.md
 glossary.md
 contributing.md
+documentation/index.md
 ```
