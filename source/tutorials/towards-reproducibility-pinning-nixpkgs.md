@@ -42,7 +42,7 @@ If you'd like a bit more automation around bumping dependencies, including Nixpk
 [niv](https://github.com/nmattia/niv/) is made for exactly that. Niv itself is available
 in `nixpkgs` so using it is simple:
 
-```
+```shell-session
 $ nix-shell -p niv --run "niv init"
 ```
 
@@ -53,15 +53,16 @@ By default, `niv` will use the **latest stable** NixOS release. However, you sho
 
 You can see which version `niv` is tracking as follows:
 
-```
+```shell-session
 $ niv show
 ```
 
 And you can change the tracking branch to the one you want like this:
 
-```
+```shell-session
 $ niv modify nixpkgs --branch nixos-21.05
 ```
+
 You can use the generated `nix/sources.nix` with a top-level `default.nix`:
 
 ```nix
@@ -74,7 +75,7 @@ You can use the generated `nix/sources.nix` with a top-level `default.nix`:
 
 And you can update all the dependencies by running:
 
-```
+```shell-session
 $ nix-shell -p niv --run "niv update"
 ```
 

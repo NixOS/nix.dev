@@ -19,14 +19,14 @@ We'll look at how to boot a NixOS machine and how to deploy the incremental chan
 
 1. Start by providing the terraform executable:
 
-```shell
-nix-shell -p terraform
+```shell-session
+$ nix-shell -p terraform
 ```
 
 2. We are using [Terraform Cloud](https://app.terraform.io) as a [state/locking backend](https://www.terraform.io/docs/state/purpose.html):
 
-```shell
-terraform login
+```shell-session
+$ terraform login
 ```
 
 3. Make sure to [create an organization](https://app.terraform.io/app/organizations/new) like `myorganization` in your Terraform Cloud account.
@@ -34,7 +34,7 @@ terraform login
 5. Inside your workspace, under `Settings` / `General` change Execution Mode to `Local`.
 6. Inside a new directory create a `main.tf` file with the following contents. This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
 
-```
+```terraform
 terraform {
     backend "remote" {
         organization = "myorganization"
@@ -103,7 +103,7 @@ output "public_dns" {
 
 The only NixOS specific snippet is:
 
-```
+```terraform
 module "nixos_image" {
   source = "git::https://github.com/tweag/terraform-nixos.git/aws_image_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
   release = "20.09"
@@ -118,9 +118,9 @@ so that `aws_instance` resource can reference the AMI in [instance_type](https:/
 5. Make sure to [configure AWS credentials](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication).
 6. Applying the Terraform configuration should get you a running NixOS:
 
-```shell
-terraform init
-terraform apply
+```shell-session
+$ terraform init
+$ terraform apply
 ```
 
 ## Deploying NixOS changes
@@ -140,7 +140,7 @@ the latest NixOS configuration and apply those changes to your instance.
 
 2. Append the following snippet to your `main.tf`:
 
-```
+```terraform
 module "deploy_nixos" {
     source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
     nixos_config = "${path.module}/configuration.nix"
@@ -152,9 +152,9 @@ module "deploy_nixos" {
 
 3. Deploy:
 
-```shell
-terraform init
-terraform apply
+```shell-session
+$ terraform init
+$ terraform apply
 ```
 
 ## Caveats

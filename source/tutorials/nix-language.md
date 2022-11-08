@@ -100,17 +100,13 @@ The following example is a Nix expression adding two numbers:
 
 Use [`nix repl`][nix-repl] to evaluate Nix expressions interactively (by typing them on the command line):
 
-```console
-nix repl
-```
+```shell-session
+$ nix repl
+Welcome to Nix 2.5.1. Type :? for help.
 
-    Welcome to Nix 2.5.1. Type :? for help.
-
-```console
 nix-repl> 1 + 2
+3
 ```
-
-    3
 
 :::{note}
 The Nix language by default uses lazy evaluation, and will only compute values when needed.
@@ -120,19 +116,13 @@ If your output does not match the example, try prepending `:p` to the input expr
 
 Example:
 
-```console
+```shell-session
 nix-repl> { a.b.c = 1; }
-```
+{ a = { ... }; }
 
-    { a = { ... }; }
-
-
-```console
 nix-repl> :p { a.b.c = 1; }
+{ a = { b = { c = 1; }; }; }
 ```
-
-    { a = { b = { c = 1; }; }; }
-
 :::
 
 [nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
@@ -141,24 +131,21 @@ nix-repl> :p { a.b.c = 1; }
 
 Use [`nix-instantiate --eval`][nix-instantiate] to evaluate the expression in a Nix file.
 
-```console
-echo 1 + 2 > file.nix
-
-nix-instantiate --eval file.nix
+```shell-session
+$ echo 1 + 2 > file.nix
+$ nix-instantiate --eval file.nix
+3
 ```
-
-    3
 
 <details><summary>Detailed explanation</summary>
 
 The first command writes `1 + 2` to a file `file.nix` in the current directory.
 The contents of `file.nix` are now `1 + 2`, which you can check with
 
-```console
-cat file.nix
+```shell-session
+$ cat file.nix
+1 + 2
 ```
-
-    1 + 2
 
 The second command runs `nix-instantiate` with the `--eval` option on `file.nix`, which reads the file and evaluates the contained Nix expression.
 The resulting value is printed as output.
@@ -171,13 +158,11 @@ If `--eval` is omitted, `nix-instantiate` expects the expression in the given fi
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
 
-```console
-echo 1 + 2 > default.nix
-
-nix-instantiate --eval
+```shell-session
+$ echo 1 + 2 > default.nix
+$ nix-instantiate --eval
+3
 ```
-
-    3
 :::
 
 :::{note}
@@ -188,22 +173,17 @@ If your output does not match the example, try adding the `--strict` option to `
 
 Example:
 
-```console
-echo "{ a.b.c = 1; }" > file.nix
-
-nix-instantiate --eval file.nix
+```shell-session
+$ echo "{ a.b.c = 1; }" > file.nix
+$ nix-instantiate --eval file.nix
+{ a = <CODE>; }
 ```
 
-    { a = <CODE>; }
-
-
-```console
-echo "{ a.b.c = 1; }" > file.nix
-
-nix-instantiate --eval --strict file.nix
+```shell-session
+$ echo "{ a.b.c = 1; }" > file.nix
+$ nix-instantiate --eval --strict file.nix
+{ a = { b = { c = 1; }; }; }
 ```
-
-    { a = { b = { c = 1; }; }; }
 
 :::
 
