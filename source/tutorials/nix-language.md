@@ -43,8 +43,9 @@ This tutorial only covers the most important language features, briefly discusse
 ### What will you learn?
 
 This tutorial should enable you to read typical Nix language code and understand its structure.
+Its goal is to highlight where the Nix language may differ from languages you are used to.
 
-It shows the most common and distingushing patterns in the Nix language:
+It therefore shows the most common and distingushing patterns in the Nix language:
 
 - [Assigning names and accessing values](names-values)
 - Declaring and calling [functions](functions)
@@ -53,7 +54,8 @@ It shows the most common and distingushing patterns in the Nix language:
 - [Derivations](derivations) that describe build tasks
 
 :::{important}
-This tutorial *does not* explain all Nix language features in detail.
+This tutorial *does not* explain all Nix language features in detail and *does not* go into specifics of syntactical rules.
+
 See the [Nix manual][manual-language] for a full language reference.
 :::
 
@@ -243,61 +245,31 @@ reading files, to capture what build tasks will operate on.
 There is nothing else to it.
 What may look complicated comes not from the language, but from how it is used.
 
-### Notes on syntax
+### Notes on whitespace
 
-This tutorial does not go into the specifics of syntactical rules, but rather puts emphasis on recurrent patterns as observed in practical code and what they mean.
-
-The most important heuristics to avoid confusion are about white space and parentheses, since in that regard, the Nix language may differ from languages you are used to.
-
-(Don't worry if you don't understand the examples here, they are only for illustration.)
-
-1. White space is used to delimit [lexical tokens], where required.
-
-   It is otherwise insignificant.
-   Line breaks, indentation, and additional spaces are for readers' convenience.
-
-   The following are equivalent:
-
-   ```nix
-   let
-     x = 1;
-     y = 2;
-   in x + y
-   ```
-
-       3
-
-   ```nix
-   let x=1;y=2;in x+y
-   ```
-
-       3
+White space is used to delimit [lexical tokens], where required.
+It is otherwise insignificant.
 
 [lexical tokens]: https://en.m.wikipedia.org/wiki/Lexical_analysis#Token
 
-2. Parentheses are used to force precedence.[^inherit-parens]
+Line breaks, indentation, and additional spaces are for readers' convenience.
 
-   The following are different:
+The following are equivalent:
 
-   ```nix
-   let
-     f = x: x + 1;
-     a = 1;
-   in [ (f a) ]
-   ```
+```nix
+let
+ x = 1;
+ y = 2;
+in x + y
+```
 
-       [ 2 ]
+   3
 
-   ```nix
-   let
-     f = x: x + 1;
-     a = 1;
-   in [ f a ]
-   ```
+```nix
+let x=1;y=2;in x+y
+```
 
-       [ <LAMBDA> 1 ]
-
-[^inherit-parens]: [`inherit`](inherit) is the only exception where parentheses are a syntactical requirement.
+   3
 
 (names-values)=
 ## Names and values
@@ -1068,15 +1040,12 @@ Calling a function with an argument means writing the argument after the functio
 Example:
 
 ```nix
-(x: x + 1) 1
+let
+  f = x: x + 1;
+in f 1
 ```
 
     2
-
-:::{note}
-Function and argument are separated by white space.
-Therefore, in this case parantheses (`( )`) are required to distinguish the function declaration and its argument.
-:::
 
 Example:
 
@@ -1103,6 +1072,51 @@ f v
 ```
 
     1
+
+Since function and argument are separated by white space, sometimes parentheses (`( )`) are required to achieve the desired result.
+
+Example:
+
+```nix
+(x: x + 1) 1
+```
+
+    2
+
+<details><summary>Detailed explanation</summary>
+
+This expression applies an anonymous function `x: x + 1` to the argument `1`.
+The function has to be written in parentheses to distinguish it from the argument.
+
+</details>
+
+Example:
+
+List elements are also separated by white space, therefore the following are different:
+
+```nix
+let
+ f = x: x + 1;
+ a = 1;
+in [ (f a) ]
+```
+
+   [ 2 ]
+
+```nix
+let
+ f = x: x + 1;
+ a = 1;
+in [ f a ]
+```
+
+   [ <LAMBDA> 1 ]
+
+The first example reads: apply `f` to `a`, and put the result in a list.
+The resulting list has one element.
+
+The second example reads: put `f` and `a` in a list.
+The resulting list has two elements.
 
 #### Multiple arguments
 
