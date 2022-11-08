@@ -1422,14 +1422,106 @@ The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nix
 The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
 :::
 
-These functions are usually accessed through `pkgs.lib`.
+[nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+[nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
+
+These functions are usually accessed through `pkgs.lib`, as the Nixpkgs attribute set is given the name `pkgs` by convention.
 
 Example:
 
-    pkgs.lib.strings.toUpper
+```nix
+let
+  pkgs = import <nixpkgs> {};
+in
+  pkgs.lib.strings.toUpper "search paths considered harmful"
+```
 
-[nixpkgs-functions]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
-[nixpkgs-lib]: https://github.com/NixOS/nixpkgs/blob/master/lib/default.nix
+    SEARCH PATHS CONSIDERED HARMFUL
+
+<details><summary>Detailed explanation</summary>
+
+This is a more complex example, but by now you should be familiar with all its components.
+
+The name `pkgs` is declared to be the expression `import`ed from some file.
+That file's path is determined by the value of the search path `<nixpkgs>`, which in turn is determined by the `$NIX_PATH` environment variable at the time this expression is evaluated.
+As this expression happens to be a function, it requires an argument to evaluate, and in this case passing an empty attribute set `{}` is sufficient.
+
+Now that `pkgs` is in scope of `let ... in ...`, its attributes can be accessed.
+From the Nixpkgs manual one can determine that there exists a function under [`lib.strings.toUpper`].
+
+[lib.strings.toUpper]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.strings.toUpper
+
+For brevity, this example uses a search path to obtain *some version* of Nixpkgs.
+The function `toUpper` is trivial enough that we can expect it not to produce different results for different versions of Nixpkgs.
+Yet, more sophisticated software is likely to suffer from such problems.
+A fully reproducible example would therefore look like this:
+
+```nix
+let
+  nixpkgs = fetchTarball https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz;
+  pkgs = import nixpkgs {};
+in
+  pkgs.lib.strings.toUpper "always pin your sources"
+```
+
+    ALWAYS PIN YOUR SOURCES
+
+See [](pinning-nixpkgs) for details.
+
+What you will also often see is that `pkgs` is passed as an argument to a function.
+By convention one can assume that it refers to the Nixpkgs attribute set, which has a `lib` attribute:
+
+```nix
+{ pkgs, ... }:
+pkgs.lib.strings.removePrefix "no " "no true scotsman"
+```
+
+    <LAMBDA>
+
+To make this function produce a result, you can write it to a file (e.g. `file.nix`) and pass it an argument through `nix-instantiate`:
+
+```console
+nix-instantiate --eval test.nix --arg pkgs 'import <nixpkgs> {}'
+```
+
+    "true scotsman"
+
+Oftentimes you will see in NixOS configurations, and also within Nixpkgs, that `lib` is passed directly.
+In that case one can assume that this `lib` is equivalent to `pkgs.lib` where only `pkgs` is available.
+
+Example:
+
+```nix
+{ lib, ... }:
+let
+  to-be = true;
+in
+lib.trivial.or to-be (! to-be)
+```
+
+    <LAMBDA>
+
+To make this function produce a result, you can write it to a file (e.g. `file.nix`) and pass it an argument through `nix-instantiate`:
+
+```console
+nix-instantiate --eval file.nix --arg lib '(import <nixpkgs> {}).lib'
+```
+
+    true
+
+Sometimes both `pkgs` and `lib` are passed as arguments.
+In that case, one can assume `pkgs.lib` and `lib` to be equivalent.
+This is done to improve readability by avoiding repeated use of `pkgs.lib`.
+
+Example:
+
+```nix
+{ pkgs, lib, ... }:
+# ... multiple uses of `pkgs`
+# ... multiple uses of `lib`
+```
+
+</details>
 
 (impurities)=
 ## Impurities
