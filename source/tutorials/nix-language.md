@@ -1415,7 +1415,8 @@ Parentheses are required to separate function declaration from function applicat
 (pkgs-lib)=
 ### `pkgs.lib`
 
-The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions implemented in the Nix language.
+The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions.
+They are implemented in the Nix language, as opposed to [`builtins`](builtins), which are part of the language itself.
 
 :::{note}
 The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
