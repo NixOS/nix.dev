@@ -1308,11 +1308,13 @@ We recommend to at least skim them to familiarise yourself with what is availabl
 
 [operators]: https://nixos.org/manual/nix/stable/language/operators.html
 
+(builtins)=
 ### `builtins`
 
 Also known as “primitive operations” or “primops”.
 
 Nix comes with many functions that are built into the language.
+They are implemented in C++ as part of the Nix language interpreter.
 
 :::{note}
 The Nix manual lists all [Built-in Functions][nix-builtins], and shows how to use them.
@@ -1328,9 +1330,6 @@ builtins.toString
 
     <PRIMOP>
 
-Some of them have equivalents in `pkgs.lib`.
-But since most `builtins` are implemented in C++ as part of the Nix language interpreter, they usually execute faster.
-
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
 
@@ -1340,7 +1339,6 @@ Most built-in functions are only accessible through `builtins`.
 A notable exception is `import`, which is also available at the top level.
 
 `import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value.
-
 
 Example:
 
@@ -1414,9 +1412,10 @@ Parentheses are required to separate function declaration from function applicat
 
 </details>
 
+(pkgs-lib)=
 ### `pkgs.lib`
 
-The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions.
+The [`nixpkgs`][nixpkgs] repository contains an attribute set called [`lib`][nixpkgs-lib], which provides a large number of useful functions implemented in the Nix language.
 
 :::{note}
 The Nixpkgs manual lists all [Nixpkgs library functions][nixpkgs-functions].
@@ -1520,6 +1519,8 @@ Example:
 # ... multiple uses of `pkgs`
 # ... multiple uses of `lib`
 ```
+
+For historical reasons, some of them are equivalent to [`builtins`](builtins) of the same name.
 
 </details>
 
