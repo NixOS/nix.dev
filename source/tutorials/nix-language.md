@@ -1433,7 +1433,7 @@ Example:
 let
   pkgs = import <nixpkgs> {};
 in
-  pkgs.lib.strings.toUpper "search paths considered harmful"
+pkgs.lib.strings.toUpper "search paths considered harmful"
 ```
 
     SEARCH PATHS CONSIDERED HARMFUL
@@ -1449,7 +1449,7 @@ As this expression happens to be a function, it requires an argument to evaluate
 Now that `pkgs` is in scope of `let ... in ...`, its attributes can be accessed.
 From the Nixpkgs manual one can determine that there exists a function under [`lib.strings.toUpper`].
 
-[lib.strings.toUpper]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.strings.toUpper
+[`lib.strings.toUpper`]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.strings.toUpper
 
 For brevity, this example uses a search path to obtain *some version* of Nixpkgs.
 The function `toUpper` is trivial enough that we can expect it not to produce different results for different versions of Nixpkgs.
@@ -1461,7 +1461,7 @@ let
   nixpkgs = fetchTarball https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz;
   pkgs = import nixpkgs {};
 in
-  pkgs.lib.strings.toUpper "always pin your sources"
+pkgs.lib.strings.toUpper "always pin your sources"
 ```
 
     ALWAYS PIN YOUR SOURCES
@@ -1521,9 +1521,9 @@ Example:
 # ... multiple uses of `lib`
 ```
 
-For historical reasons, some of them are equivalent to [`builtins`](builtins) of the same name.
-
 </details>
+
+For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`builtins`](builtins) of the same name.
 
 (impurities)=
 ## Impurities
