@@ -159,7 +159,7 @@ flowchart
     - follow the [contribution guide](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md)
 
   New articles can be based on videos such as
-  - [The Nix Hour](https://www.youtube.com/watch?v=wwV1204mCtE&list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in) recordings
+  - [The Nix Hour](https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in) recordings
   - some of the ~100 [NixCon](https://www.youtube.com/c/NixCon) recordings
   - [Nix video guides](https://www.youtube.com/channel/UC-cY3DcYladGdFQWIKL90SQ) by @jonringer.
   - [Summer of Nix 2022 talks](https://www.youtube.com/playlist?list=PLt4-_lkyRrOMWyp5G-m_d1wtTcbBaOxZk)
