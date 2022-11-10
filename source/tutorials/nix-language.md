@@ -164,7 +164,7 @@ The second command runs `nix-instantiate` with the `--eval` option on `file.nix`
 The resulting value is printed as output.
 
 `--eval` is required to evaluate the file and do nothing else.
-If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *Derivation*, which we will come back to at the end of this tutorial in [](derivations).
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *derivation*, which we will come back to at the end of this tutorial in [](derivations).
 
 </details>
 
@@ -1442,7 +1442,7 @@ In practice, describing build tasks requires observing the outside world.
 There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*
 
-Build inputs are files that build tasks refer to in their precise description of how to derive new files.
+Build inputs are files that build tasks refer to in order to describe how to derive new files.
 When run, a build task will only have access to explicitly declared build inputs.
 
 The only way to specify build inputs in the Nix language is explicitly with:
@@ -1547,7 +1547,7 @@ It is an error if the network request fails.
 A build task in Nix is called a *derivation*.
 
 Build tasks are at the core of both Nix and the Nix language:
-- The Nix language is used to produce build tasks.
+- The Nix language is used to describe build tasks.
 - Nix runs build tasks to produce *build results*.
 - Build results can in turn be used as inputs for other build tasks.
 
@@ -1563,8 +1563,8 @@ Whenever you see `mkDerivation`, it denotes something that Nix will eventually *
 
 Example: [a package using `mkDerivation`](mkDerivation-example)
 
-The evaluation result of `derivation` (and `mkDerivation`) has the special Nix language data type Derivation.
-It behaves like an [attribute set](attrset), except that it can be used in [antiquotation](antiquotation).
+The evaluation result of `derivation` (and `mkDerivation`) is an [attribute set](attrset) with a certain structure and a special property:
+It can be used in [antiquotation](antiquotation), and in that case evaluates to the Nix store path of its build result.
 
 Example:
 
@@ -1574,7 +1574,7 @@ let
 in "${pkgs.nix}"
 ```
 
-    "/nix/store/rbyjapdp614xfd0l2wiji700x5s8dssl-nix-2.10.3"
+    "/nix/store/sv2srrjddrp2isghmrla8s6lazbzmikd-nix-2.11.0"
 
 :::{note}
 Your output may differ.
@@ -1582,7 +1582,7 @@ It may produce a different hash or even a different package version.
 
 A derivation's output path is fully determined by its inputs, which in this case come from *some* version of Nixpkgs.
 
-This is why we recommend to [avoid search paths](search-path), except in examples intended for illustration only.
+This is why we recommend to [avoid search paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
 :::
 
 <details><summary>Detailed explanation</summary>
@@ -1590,15 +1590,16 @@ This is why we recommend to [avoid search paths](search-path), except in example
 The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
 
-It cannot be inferred from the code above, but `pkgs` is an attribute set of Derivations.
-That is, each of its attributes ultimately boils down to a call to `derivation`.
+Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a derivation.
+That is, ultimately `pkgs.nix` boils down to a call to `derivation`.
 
-Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a Derivation.
 The resulting string is the file system path where the build result of that derivation will end up.
+
+There is more depth to the inner workings of derivations, but at this point it should be enough to know that such expressions evaluate to Nix store paths.
 
 </details>
 
-Antiquotation on Derivation values is used to refer to other build results as file system paths when declaring new build tasks.
+Antiquotation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
