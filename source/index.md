@@ -38,7 +38,6 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 guides/index.md
 templates/index.md
 anti-patterns/index.md
-reference/index.md
 faq.md
 recommended-reading.md
 influences.md

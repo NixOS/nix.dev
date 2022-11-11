@@ -108,7 +108,12 @@ They are being phased out, but still used by default.
 For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of `nixpkgs`.
 Builds may work for one and fail for the other, causing confusion.
 
-It's [possible to specify an exact `nixpkgs` revision](ref-pinning-nixpkgs) via `$NIX_PATH`.
+It's possible to specify an exact `nixpkgs` revision via `$NIX_PATH`.
+
+```shell-session
+$ NIX_PATH=https://github.com/NixOS/nixpkgs/archive/addcb0dddf2b7db505dae5c38fceb691c7ed85f9.tar.gz nix-build
+```
+
 But that is still problematic, unless:
 
 1. you specify the commit **at one place only**,
