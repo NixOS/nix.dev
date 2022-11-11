@@ -1,1 +1,2 @@
 /tutorials/contributing /contributing 301
+/tutorials/* /guides/:splat 301

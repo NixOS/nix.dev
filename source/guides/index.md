@@ -1,4 +1,6 @@
-# Tutorials
+# Guides
+
+This section is a collection of articles which help you achieve a particular goal with the Nix ecosystem.
 
 ```{toctree}
 :glob: true
