@@ -50,7 +50,7 @@ in the Nix documentation team repository.
 
 The package manager Nix is mostly written in C++.
 
-If you are a developer and want to contribute to its development, you can find
+If you want to contribute to its development, you can find
 information on [how to setup a development environment] in the manual.
 
 You can find inspiration for things to improve in the [reported issues][nix issues].
