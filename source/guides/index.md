@@ -4,6 +4,7 @@ This section is a collection of articles which help you achieve a particular goa
 
 ```{toctree}
 :glob: true
+:maxdepth: 1
 
 install-nix.md
 ad-hoc-developer-environments.md
