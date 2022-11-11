@@ -66,11 +66,12 @@ contact with other developers.
 
 Packaging for Nix is simple when you have understood the basic concept.
 
-[The manual][nixpkgs manual] explains step-by-step how to add new packages to
+[The manual][nixpkgs quick-start] explains step-by-step how to add new packages to
 the Nix package collection. There are also [programming language specific instructions].
 
 You can find inspiration for things to improve in the [reported issues][nixpkgs issues].
 
+[nixpkgs quick-start]: https://nixos.org/manual/nixpkgs/stable/#chap-quick-start 
 [programming language specific instructions]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
 [nixpkgs issues]: https://github.com/NixOS/nixpkgs/issues?page=3&q=is%3Aissue+is%3Aopen+label%3A%228.has%3A+package+%28update%29%22%2C%228.has%3A+package+%28new%29%22%2C%229.needs%3A+package+%28update%29%22%2C%229.needs%3A+package+%28new%29%22%2C%220.kind%3A+packaging+request%22%2C%220.kind%3A+build+failure%22
 
