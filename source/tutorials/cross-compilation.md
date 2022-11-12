@@ -125,7 +125,7 @@ They usually do not match the corresponding platform config string.
 
 You can retrieve the platform string from `pkgsCross.<platform>.stdenv.hostPlatform.config`:
 
-```
+```shell-session
 nix-repl> pkgsCross.aarch64-multiplatform.stdenv.hostPlatform.config
 "aarch64-unknown-linux-gnu"
 ```
@@ -271,7 +271,7 @@ pkgs.pkgsStatic.callPackage ({ mkShell, zlib, pkg-config, file }: mkShell {
 
 And `hello.c`:
 
-```c
+```{code-block} c hello.c
 #include <stdio.h>
 
 int main (void)

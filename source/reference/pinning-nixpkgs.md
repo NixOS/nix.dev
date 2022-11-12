@@ -18,18 +18,29 @@ Different ways:
 
 ## Examples
 
-- `nix-build -I ~/dev`
+- ```shell-session 
+  $ nix-build -I ~/dev
+  ```
 
-- `nix-build -I nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz`
+- ```shell-session
+  $ nix-build -I nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz`
+  ```
 
-- `NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz nix-build ...`
+- ```shell-session
+  $ NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-21.05/nixexprs.tar.xz nix-build ...`
+  ```
 
 - Using just Nix:
 
-  ```
+  ```nix
   let
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz") {};
-  in pkgs.stdenv.mkDerivation { … }
+  in pkgs.stdenv.mkDerivation { ... }
   ```
 
-- To make ad-hoc environment available on NixOS: `nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];`
+- To make ad-hoc environment available on NixOS: 
+  ```nix
+  {
+    nix.nixPath = [ ("nixpkgs=" + toString pkgs.path) ];
+  }
+  ```

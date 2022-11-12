@@ -123,8 +123,8 @@ to install it globally.
 
 At the top-level of your project run:
 
-```
-echo "use nix" > .envrc && direnv allow
+```shell-session
+$ echo "use nix" > .envrc && direnv allow
 ```
 
 The next time your launch your terminal and enter the top-level of your project direnv will check for changes.

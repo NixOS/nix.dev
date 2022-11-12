@@ -30,7 +30,7 @@ nix = {
 
 Using `Nix`:
 
-```bash
+```shell-session
 $ echo "trusted-binary-caches = https://hydra.snabb.co" >> /etc/nix/nix.conf
 $ nix-build helpers/bench.nix --option extra-binary-caches https://hydra.snabb.co
 ```
@@ -43,7 +43,7 @@ The default timeout for that is 1 hour as of writing.
 
 To wipe all cache-lookup-caches:
 
-```bash
+```shell-session
 $ rm $HOME/.cache/nix/binary-cache-v*.sqlite*
 ```
 
@@ -54,14 +54,14 @@ cache timeout.
 
 Try:
 
-```bash
+```shell-session
 $ sqlite3 /nix/var/nix/db/db.sqlite "pragma integrity_check"
 ```
 
 Which will print the errors in the database. If the errors are due to missing
 references, the following may work:
 
-```bash
+```shell-session
 $ mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
 $ sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 ```
@@ -77,17 +77,19 @@ to use older Nix.
 
 The solution is to dump the db and use old Nix version to initialize it:
 
-```
-/path/to/nix/unstable/bin/nix-store --dump-db > /tmp/db.dump
-mv /nix/var/nix/db /nix/var/nix/db.toonew
-mkdir /nix/var/nix/db
-nix-store --init (this is the old nix-store)
-nix-store --load-db < /tmp/db.dump
+```shell-session
+$ /path/to/nix/unstable/bin/nix-store --dump-db > /tmp/db.dump
+$ mv /nix/var/nix/db /nix/var/nix/db.toonew
+$ mkdir /nix/var/nix/db
+$ nix-store --init # this is the old nix-store
+$ nix-store --load-db < /tmp/db.dump
 ```
 
 ### How to build reverse dependencies of a package?
 
-`nix-shell -p nixpkgs-review --run "nixpkgs-review wip"`
+```shell-session
+$ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
+```
 
 ### I'm getting: writing to file: Connection reset by peer
 
@@ -125,7 +127,7 @@ Yes.
 
 Apply following patch:
 
-```
+```diff
 diff --git a/nixos/lib/test-driver/test-driver.pl b/nixos/lib/test-driver/test-driver.pl
 index 8ad0d67..838fbdd 100644
 --- a/nixos/lib/test-driver/test-driver.pl

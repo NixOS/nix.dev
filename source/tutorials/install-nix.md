@@ -6,8 +6,8 @@
 
 Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
 
-```bash
-sh <(curl -L https://nixos.org/nix/install) --daemon
+```shell-session
+$ sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
 :::{note}
@@ -18,8 +18,8 @@ For security you may want to [verify the installation script] using GPG signatur
 
 Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
 
-```bash
-sh <(curl -L https://nixos.org/nix/install)
+```shell-session
+$ sh <(curl -L https://nixos.org/nix/install)
 ```
 
 :::{note}
@@ -30,8 +30,8 @@ For security you may want to [verify the installation script] using GPG signatur
 
 Install Nix via the recommended [single-user installation](https://nixos.org/manual/nix/stable/installation/single-user.html):
 
-```bash
-sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```shell-session
+$ sh <(curl -L https://nixos.org/nix/install) --no-daemon
 ```
 
 :::{note}
@@ -42,31 +42,31 @@ For security you may want to [verify the installation script] using GPG signatur
 
 Start a Docker shell with Nix:
 
-```bash
+```shell-session
 $ docker run -it nixos/nix
 ```
 
 Or start a Docker shell with Nix exposing a `workdir` directory:
 
-```bash
+```shell-session
 $ mkdir workdir
 $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
 ```
 
 The `workdir` example from above can be also used to start hacking on Nixpkgs:
 
-```bash
+```shell-session
 $ git clone git@github.com:NixOS/nixpkgs
 $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
-docker> nix-build -I nixpkgs=/nixpkgs -A hello
-docker> find ./result # this symlink points to the build package
+bash-5.1# nix-build -I nixpkgs=/nixpkgs -A hello
+bash-5.1# find ./result # this symlink points to the build package
 ```
 
 ## Verify installation
 
 Check the installation by opening **a new terminal** and typing:
 
-```bash
+```shell-session
 $ nix --version
 nix (Nix) 2.11.0
 ```

@@ -33,9 +33,10 @@ Prepare the AArch64 image on your laptop:
 
 ```shell-session
 $ nix-shell -p wget zstd
-$ wget https://hydra.nixos.org/build/160738647/download/1/nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
-$ unzstd -d nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
-$ dmesg --follow
+
+[nix-shell:~]$ wget https://hydra.nixos.org/build/160738647/download/1/nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
+[nix-shell:~]$ unzstd -d nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
+[nix-shell:~]$ dmesg --follow
 ```
 
 :::{note}
@@ -51,8 +52,8 @@ Press `ctrl-c` to stop `dmesg --follow`.
 
 Copy NixOS to your SD card by replacing `sdX` with the name of your device:
 
-```shell-session
-sudo dd if=nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
+```console
+[nix-shell:~]$ sudo dd if=nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
 ```
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
