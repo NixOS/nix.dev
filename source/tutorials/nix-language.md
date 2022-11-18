@@ -1679,9 +1679,13 @@ This allows constructing arbitrarily complex compositions of derivations with th
 
 ## Worked examples
 
-You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following examples.
+So far we have seen artifical examples illustrating the various constructs in the Nix language.
 
-Example:
+You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following practical examples.
+
+Note that the goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
+
+### Shell environment
 
 ```nix
 { pkgs ? import <nixpkgs> {} }:
@@ -1710,7 +1714,7 @@ Explanation:
 - The indented string contains an antiquotation, which will expand the value of `message` to yield `"hello world"`.
 
 
-Example:
+### NixOS configuration
 
 ```nix
 { config, pkgs, ... }: {
@@ -1733,16 +1737,15 @@ Explanation:
 - The argument must at least have the attributes `config` and `pkgs`, and may have more attributes.
 - The returned attribute set contains the attributes `imports` and `environment`.
 - `imports` is a list with one element: a path to a file next to this Nix file, called `hardware-configuration.nix`.
-  When evaluated, the `./hardware-configuration.nix` will be copied into the Nix store, converting it into a Nix store path.
 
   :::{note}
   `imports` is not the impure built-in `import`, but a regular attribute name!
   :::
 - `environment` is itself an attribute set with one attribute `systemPackages`, which will evaluate to a list with one element: the `git` attribute from the `pkgs` set.
-- The `config` argument is not used.
+- The `config` argument is not (shown to be) used.
 
 (mkDerivation-example)=
-Example:
+### Package
 
 ```nix
 { lib, stdenv }:
@@ -1783,12 +1786,12 @@ Explanation:
 
 ## Next steps
 
-To get things done:
+### Get things done
 
 - [](declarative-reproducible-envs) – create reproducible shell environments from a Nix file
 - [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – remove unused build results from the Nix store
 
-To learn more:
+### Learn more
 
 If you worked through the examples, you will have noticed that reading the Nix language reveals the structure of the code, but does not necessarily tell what the code actually means.
 
