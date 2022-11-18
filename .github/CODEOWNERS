@@ -21,7 +21,7 @@
 .github/workflows/ @domenkozar
 
 # Meta-documentation
-CONTRIBUTING.md @domenkozar
+CONTRIBUTING.md @domenkozar @fricklerhandwerk
 LICENSE.md @domenkozar
 README.md @domenkozar @fricklerhandwerk
 cla/ @domenkozar
@@ -48,4 +48,11 @@ run_code_block_tests.sh @domenkozar
 .imgbogconfig @domenkozar
 
 # Documentation sources
-source/ @domenkozar @fricklerhandwerk
+source/ @domenkozar @lucperkins
+source/contributing.md @lucperkins @fricklerhandwerk
+source/recommended-reading.md @fricklerhandwerk
+source/glossary.md @fricklerhandwerk
+source/tutorials/nix-language.md @fricklerhandwerk
+
+# Documentation team information
+maintainers @lucperkins @fricklerhandwerk
