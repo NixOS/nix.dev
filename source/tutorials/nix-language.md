@@ -207,10 +207,21 @@ A build task in Nix is called a *derivation*.
 
 The Nix language has only few basic constructs which can be combined arbitrarily:
 
-- Primitive data types i.e. strings, integers, booleans
-- Compound data types i.e lists and attribute sets
-- Functions to produce and transform data
-- Name assignment to manipulate data as units
+- Primitive data types
+
+  such as integers or character strings
+
+- Compound data types
+
+  that is, lists and attribute sets
+
+- Functions and operators
+
+  to produce and transform data
+
+- Name assignment
+
+  to manipulate data as units
 
 The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
 reading files, to capture what build tasks will operate on.
