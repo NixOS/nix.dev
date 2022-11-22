@@ -14,6 +14,10 @@ $ sh <(curl -L https://nixos.org/nix/install) --daemon
 For security you may want to [verify the installation script] using GPG signatures.
 :::
 
+### Arch Linux
+
+On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
+
 ## macOS
 
 Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
