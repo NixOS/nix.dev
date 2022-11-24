@@ -209,15 +209,19 @@ The Nix language has only few basic constructs which can be combined arbitrarily
 
 - Primitive data types
 
-  as basic building blocks
+  such as integers or character strings
 
-- Compound data types and, in the broader sense, functions
+- Compound data types
 
-  to produce and transform complex data
+  that is, lists and attribute sets
+
+- Functions and operators
+
+  to produce and transform data
 
 - Name assignment
 
-  to manipulate complex data as units
+  to manipulate data as units
 
 The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
 reading files, to capture what build tasks will operate on.
