@@ -1,24 +1,20 @@
 # Maintainer responsibilities
 
-## Notifications
+## Monitor notifications
 
-A maintainer must watch discussions and proposals from the different
-communication channels: GitHub, Discourse, and Matrix.
+Watch discussions and proposals from these communication channels:
 
-To monitor GitHub, you must have your own entry in the `.github/CODEOWNERS`
-file. GitHub will then notify you and request you for review for Pull Requests
-that change files that you own.
+- GitHub
+- Discourse
+- Matrix
 
-Start by choosing a restricted set of files you want to watch. Keep in mind
-that choosing a broad set of files can lead to too frequent notifications.
-Then, ask for `write` access to the repository, which is needed for the
-`CODEOWNERS` file to be valid.
+Maintain your entry in the [`CODEOWNERS`](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file in the respective repository.
+GitHub will then request reviews for pull requests that change files you own.
 
-On the Discourse topic for your team, make sure to set your notification level
-to "watching".
 
-On Matrix, make sure to join rooms related to your team, and to enable
-notifications.
+Set the notification level on the [Development > Documentation](https://discourse.nixos.org/c/dev/documentation/25) Discourse category to "watching".
+
+Join the [Nix* Documentation](https://matrix.to/#/#docs:nixos.org) Matrix room and enable relevant notifications.
 
 As a maintainer, you have the responsibility to be responsive to `@` mentions
 on GitHub, Discourse, and Matrix. If said mention is low on your priority list,
@@ -30,7 +26,7 @@ team, you need to be aware of the stabilisation status of Nix features. If you
 are a maintainer of the security team, you need to be subscribed to CVE
 publications.
 
-## Guidance
+## Provide guidance
 
 As a maintainer, you will have to guide potential contributors.
 
@@ -41,7 +37,7 @@ Pull Requests.
 In any case, make sure to reserve time for doing Pull Request reviews, and to
 only pick subjects that fall withing files that are in your `CODEOWNERS` entry.
 
-## Following-up
+## Take ownership of issues, pull requests, and source code
 
 As a maintainer, you are responsible for the code you approve and merge: it is
 also your responsibility to follow-up on bugs and regressions caused by this
