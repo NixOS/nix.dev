@@ -1085,7 +1085,9 @@ let
 in [ (f a) ]
 ```
 
-   [ 2 ]
+```nix
+[ 2 ]
+```
 
 ```nix
 let
@@ -1094,7 +1096,9 @@ let
 in [ f a ]
 ```
 
-   [ <LAMBDA> 1 ]
+```nix
+[ <LAMBDA> 1 ]
+```
 
 The first example reads: apply `f` to `a`, and put the result in a list.
 The resulting list has one element.
