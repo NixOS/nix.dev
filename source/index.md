@@ -36,7 +36,6 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 :maxdepth: 3
 
 tutorials/index.md
-templates/index.md
 anti-patterns/index.md
 reference/index.md
 faq.md
