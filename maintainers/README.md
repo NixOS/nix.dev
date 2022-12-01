@@ -85,11 +85,21 @@ Ordered by priority:
   - moderate and keep schedule
   - take and publish notes
 
-## Meeting protocol
+## Team meetings
 
-The team holds meetings every second Thursday 17:30-18:30 (Europe/Berlin):
+The team holds weekly meetings on Thursdays 17:30-18:30 (Europe/Berlin):
 - [NixOS calendar](https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com)
 - [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589)
+
+### Meeting links
+
+- [Jitsi conference](https://meet.jit.si/nix-documentation)
+- [Meeting notes scratchad](https://pad.lassul.us/p-Y8MjU2SdSD5qO1fnpCPA)
+- [GitHub project board](https://github.com/orgs/NixOS/projects/15)
+
+[Previous meeting notes](https://discourse.nixos.org/search?q=documentation%20team%20meeting%20%23dev%3Adocumentation%20order%3Alatest)
+
+### Meeting protocol
 
 The purpose of the meetings is to
 - make strategic decisions
