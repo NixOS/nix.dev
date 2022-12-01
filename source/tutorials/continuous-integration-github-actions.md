@@ -72,6 +72,4 @@ you should see status checks appearing on commits and PRs.
 
 ## Next steps
 
-- See [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
-- To quickly setup a Nix project read through
-  [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
+See [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)

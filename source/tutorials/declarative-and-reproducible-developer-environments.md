@@ -138,6 +138,4 @@ hello
 
 ## Next steps
 
-- {ref}`pinning-nixpkgs` to see different ways to import nixpkgs
-- To quickly set up a Nix project read through
-  [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
+{ref}`pinning-nixpkgs` to see different ways to import nixpkgs
