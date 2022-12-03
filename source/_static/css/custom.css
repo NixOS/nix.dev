@@ -37,3 +37,35 @@ div.highlight > pre::before {
 div.highlight:hover > pre::before {
   opacity: 0;
 }
+
+details {
+  border-left: 0.2rem solid;
+  border-radius: 0.2em;
+  border-color: rgba(var(--pst-color-admonition-note));
+  padding: .5em .5em 0;
+  margin: 1em auto;
+  box-shadow: 0 0.2rem 0.5rem rgb(0 0 0 / 5%), 0 0 0.0625rem rgb(0 0 0 / 10%)
+}
+
+summary {
+  background-color: rgba(var(--pst-color-admonition-default),.1);
+  font-weight: 700;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  margin-bottom: 0.5em;
+}
+
+details[open] p, details[open] > div {
+  padding: 0 1.4rem;
+}
+
+details[open] :last-child {
+  margin-bottom: 0;
+}
