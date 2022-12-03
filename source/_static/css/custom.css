@@ -12,12 +12,12 @@ div.expression > div.highlight > pre {
   border: 1px solid rgba(var(--pst-color-primary));
 }
 
-div.result > div.highlight > pre::before {
-  content: "Result";
+div.value > div.highlight > pre::before {
+  content: "Value";
   background-color: rgba(var(--pst-color-info));
 }
 
-div.result > div.highlight > pre {
+div.value > div.highlight > pre {
   border: 1px solid rgba(var(--pst-color-info));
 }
 

@@ -98,7 +98,7 @@ The following example is a Nix expression adding two numbers:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -253,7 +253,7 @@ in x + y
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -263,7 +263,7 @@ let x=1;y=2;in x+y
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -375,7 +375,7 @@ rec {
 ```
 
 ```{code-block}
-:class: result
+:class: value
 { one = 1; three = 3; two = 2; }
 ```
 
@@ -395,7 +395,7 @@ Counter-example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 error: undefined variable 'one'
 
        at «string»:3:9:
@@ -424,7 +424,7 @@ a + a
 ```
 
 ```{code-block}
-:class: result
+:class: value
 2
 ```
 
@@ -454,7 +454,7 @@ a + b
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -477,7 +477,7 @@ a + b
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -519,7 +519,7 @@ in {  c = c; a = a; b = b; }
 ```
 
 ```{code-block}
-:class: result
+:class: value
 { a = 1; b = 2; c = 3; }
 ```
 </td>
@@ -535,7 +535,7 @@ rec {
 ```
 
 ```{code-block}
-:class: result
+:class: value
 { a = 1; b = 2; c = 3; }
 ```
 </td>
@@ -556,7 +556,7 @@ in [ a b c ]
 ```
 
 ```{code-block}
-:class: result
+:class: value
 [ 1 2 3 ]
 ```
 </details>
@@ -575,7 +575,7 @@ Counter-example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 error: undefined variable 'x'
 
        at «string»:3:7:
@@ -603,7 +603,7 @@ attrset.x
 ```
 
 ```{code-block}
-:class: result
+:class: value
 1
 ```
 
@@ -620,7 +620,7 @@ attrset.a.b.c
 ```
 
 ```{code-block}
-:class: result
+:class: value
 1
 ```
 
@@ -634,7 +634,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 { a = { b = { c = 1; }; }; }
 ```
 
@@ -658,7 +658,7 @@ with a; [ x y z ]
 ```
 
 ```{code-block} 
-:class: result
+:class: value
 [ 1 2 3 ]
 ```
 
@@ -694,7 +694,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 error: undefined variable 'x'
 
        at «string»:10:7:
@@ -725,7 +725,7 @@ in
 ```
 
 ```{code-block} 
-:class: result
+:class: value
 { x = 1; y = 2; }
 ```
 
@@ -755,7 +755,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 { x = 1; y = 2; }
 ```
 
@@ -783,7 +783,7 @@ in [ x y ]
 ```
 
 ```{code-block}
-:class: result
+:class: value
 [ 1 2 ]
 ```
 
@@ -823,7 +823,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "hello Nix"
 ```
 
@@ -840,7 +840,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 error: cannot coerce an integer to a string
 
        at «string»:4:2:
@@ -865,7 +865,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "no no no"
 ```
 
@@ -888,7 +888,7 @@ in
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "echo Nix > $out"
 ```
 :::
@@ -910,7 +910,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /absolute/path
 ```
 
@@ -928,7 +928,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /current/directory/relative
 ```
 
@@ -940,7 +940,7 @@ relative/path
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /current/directory/relative/path
 ```
 
@@ -956,7 +956,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /current/directory
 ```
 
@@ -976,7 +976,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /current
 ```
 :::{note}
@@ -995,7 +995,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs
 ```
 
@@ -1011,7 +1011,7 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 ```
 
 ```{code-block}
-:class: result
+:class: value
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
 ```
 
@@ -1042,7 +1042,7 @@ string
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "multi\nline\nstring"
 ```
 
@@ -1060,7 +1060,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "one\n two\n  three\n"
 ```
 
@@ -1134,7 +1134,7 @@ x: x + 1
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1152,7 +1152,7 @@ in f
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1172,7 +1172,7 @@ in f 1
 ```
 
 ```{code-block}
-:class: result
+:class: value
     2
 ```
 
@@ -1187,7 +1187,7 @@ f { a = 1; }
 ```
 
 ```{code-block}
-:class: result
+:class: value
 1
 ```
 
@@ -1206,7 +1206,7 @@ f v
 ```
 
 ```{code-block}
-:class: result
+:class: value
 1
 ```
 
@@ -1220,7 +1220,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 2
 ```
 
@@ -1244,7 +1244,7 @@ in [ (f a) ]
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 [ 2 ]
 ```
 
@@ -1257,7 +1257,7 @@ in [ f a ]
 ```
 
 ```{code-block}
-:class: result
+:class: value
 [ <LAMBDA> 1 ]
 ```
 The first example reads: apply `f` to `a`, and put the result in a list.
@@ -1285,7 +1285,7 @@ x: y: x + y
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1297,7 +1297,7 @@ x: (y: x + y)
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1314,7 +1314,7 @@ f 1
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1329,7 +1329,7 @@ f 1 2
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -1351,7 +1351,7 @@ Example:
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1369,7 +1369,7 @@ f { a = 1; b = 2; }
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 3
 ```
 
@@ -1384,7 +1384,7 @@ f { a = 1; b = 2; c = 3; }
 ```
 
 ```{code-block}
-:class: result
+:class: value
 error: 'f' at (string):2:7 called with unexpected argument 'c'
 
        at «string»:4:1:
@@ -1418,7 +1418,7 @@ f { a = 1; }
 ```
 
 ```{code-block}
-:class: result
+:class: value
 1
 ```
 
@@ -1433,7 +1433,7 @@ f { } # empty attribute set
 ```
 
 ```{code-block}
-:class: result
+:class: value
 0
 ```
 
@@ -1458,7 +1458,7 @@ f { a = 1; b = 2; c = 3; }
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -1478,7 +1478,7 @@ Example:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1490,7 +1490,7 @@ args@{a, b, ...}: a + b + args.c
 ```
 
 ```{code-block}
-:class: result 
+:class: value 
 <LAMBDA>
 ```
 
@@ -1505,7 +1505,7 @@ f { a = 1; b = 2; c = 3; }
 ```
 
 ```{code-block} nix
-:class: result
+:class: value
 6
 ```
 
@@ -1543,7 +1543,7 @@ builtins.toString
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <PRIMOP>
 ```
 
@@ -1569,7 +1569,7 @@ import ./file.nix
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 
@@ -1590,7 +1590,7 @@ After reading `file.nix` the Nix expression is equivalent to the file contents:
 ```
 
 ```{code-block}
-:class: result
+:class: value
 3
 ```
 </details>
@@ -1611,7 +1611,7 @@ import ./file.nix 1
 ```
 
 ```{code-block}
-:class: result
+:class: value
 2
 ```
 
@@ -1632,7 +1632,7 @@ After reading the file, the Nix expression `import ./file.nix` is equivalent to 
 ```
 
 ```{code-block}
-:class: result
+:class: value
 2
 ```
 
@@ -1670,7 +1670,7 @@ pkgs.lib.strings.toUpper "search paths considered harmful"
 ```
 
 ```{code-block}
-:class: result
+:class: value
 SEARCH PATHS CONSIDERED HARMFUL
 ```
 
@@ -1702,7 +1702,7 @@ pkgs.lib.strings.toUpper "always pin your sources"
 ```
 
 ```{code-block}
-:class: result
+:class: value
 ALWAYS PIN YOUR SOURCES
 ```
 
@@ -1718,7 +1718,7 @@ pkgs.lib.strings.removePrefix "no " "no true scotsman"
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1744,7 +1744,7 @@ lib.trivial.or to-be (! to-be)
 ```
 
 ```{code-block}
-:class: result
+:class: value
 <LAMBDA>
 ```
 
@@ -1818,7 +1818,7 @@ $ echo 123 > data
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
 ```
 
@@ -1865,7 +1865,7 @@ builtins.fetchurl https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
 ```
 
@@ -1879,7 +1879,7 @@ builtins.fetchTarball https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
 ```
 
@@ -1930,7 +1930,7 @@ in "${pkgs.nix}"
 ```
 
 ```{code-block}
-:class: result
+:class: value
 "/nix/store/sv2srrjddrp2isghmrla8s6lazbzmikd-nix-2.11.0"
 ```
 
