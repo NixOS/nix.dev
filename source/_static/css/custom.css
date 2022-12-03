@@ -55,7 +55,7 @@ summary {
 }
 
 details[open] {
-  padding: 0.5em;
+  padding: 0 .6rem .8rem;
 }
 
 details[open] summary {
