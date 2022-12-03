@@ -4,7 +4,7 @@
 
 ## Linux
 
-Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
+Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
 $ sh <(curl -L https://nixos.org/nix/install) --daemon
@@ -16,7 +16,7 @@ For security you may want to [verify the installation script] using GPG signatur
 
 ## macOS
 
-Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
+Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
 $ sh <(curl -L https://nixos.org/nix/install)
@@ -28,15 +28,23 @@ For security you may want to [verify the installation script] using GPG signatur
 
 ## Windows (WSL2)
 
-Install Nix via the recommended [single-user installation](https://nixos.org/manual/nix/stable/installation/single-user.html):
+Install Nix via the recommended [single-user installation]:
 
 ```shell-session
 $ sh <(curl -L https://nixos.org/nix/install) --no-daemon
 ```
 
+However, if you have [systemd support] enabled, install Nix via the recommended [multi-user installation]:
+
+```shell-session
+$ sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
 :::
+
+[systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
 
 ## Docker
 
@@ -71,4 +79,6 @@ $ nix --version
 nix (Nix) 2.11.0
 ```
 
+[multi-user installation]: https://nixos.org/manual/nix/stable/installation/multi-user.html
+[single-user installation]: https://nixos.org/manual/nix/stable/installation/single-user.html
 [verify the installation script]: https://nixos.org/download.html#nix-verify-installation
