@@ -2,3 +2,38 @@ div.highlight-shell-session + div.highlight-none pre {
   background-color: rgba(var(--pst-color-preformatted-text),1) !important;
   color: rgba(var(--pst-color-preformatted-background),1) !important;
 }
+
+div.expression > div.highlight > pre::before {
+  content: "Expression";
+  background-color: rgba(var(--pst-color-primary));
+}
+
+div.expression > div.highlight > pre {
+  border: 1px solid rgba(var(--pst-color-primary));
+}
+
+div.result > div.highlight > pre::before {
+  content: "Result";
+  background-color: rgba(var(--pst-color-info));
+}
+
+div.result > div.highlight > pre {
+  border: 1px solid rgba(var(--pst-color-info));
+}
+
+div.highlight > pre::before {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 0.5em;
+  background-color: #b3b3b3;
+  color: #fff;
+  font-size: 0.8em;
+  border-radius: 0 0.4em 0 0.4em;
+  transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+}
+
+div.highlight:hover > pre::before {
+  opacity: 0;
+}
