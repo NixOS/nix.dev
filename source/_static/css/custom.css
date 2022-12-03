@@ -62,8 +62,12 @@ details[open] summary {
   margin-bottom: 0.5em;
 }
 
-details[open] > *:not(summary) {
+details[open] > *:not(summary):not(.admonition) {
   padding: 0 1.4rem;
+}
+
+details[open] > .admonition {
+  margin: 0 1.4rem;
 }
 
 details[open] :last-child {
