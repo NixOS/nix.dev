@@ -68,8 +68,6 @@ these 93 paths will be fetched (120.19 MiB download, 519.24 MiB unpacked):
 [nix-shell:~/dev-environment]$ 
 ```
 
-As you can see, Nix will build a working shell environment with the packages you
-defined in `shell.nix`.
 
 Let's use the shell environment to start the web application:
 
