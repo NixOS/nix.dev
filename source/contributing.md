@@ -59,7 +59,7 @@ contact with other developers.
 
 [how to setup a development environment]: https://nixos.org/manual/nix/unstable/contributing/hacking.html
 [nix issues]: https://github.com/NixOS/nix/issues
-[join our community]: https://github.com/NixOS/nixpkgs#community
+[join our community]: https://nixos.org/community
 
 ## Contribute to Nixpkgs
 
