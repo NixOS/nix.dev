@@ -69,7 +69,7 @@ these 93 paths will be fetched (120.19 MiB download, 519.24 MiB unpacked):
 ```
 
 
-Let's use the shell environment to start the web application:
+Let's start the web application within this shell environment:
 
 ```shell-session
 [nix-shell:~/dev-environment]$ python ./myapp.py
