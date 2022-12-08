@@ -2,7 +2,7 @@
 
 Let's build a Python web application using the Flask web framework as an exercise.
 
-For our Flask web application, create a new file called `myapp.py` and add the code:
+For our Flask web application, create a new file called `myapp.py` and add the following code:
 
 ```{code-block} python myapp.py
 #! /usr/bin/env python
