@@ -82,8 +82,8 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-We have a running Python web application now, let's try it out using the
-developer tools that are also included.
+We now have a running Python web application now.
+Let's try it out using the developer tools that are also included.
 
 Launch a new terminal to start another session of the shell environment and
 follow the commands below:
