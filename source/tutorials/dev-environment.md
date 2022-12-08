@@ -54,7 +54,7 @@ If we went with Python's [virtualenv], it is not possible to have these
 utilities to be a part of the development environment without additional manual
 steps.
 
-We can now use the `nix-shell` to launch the newly created shell environment:
+We can now use `nix-shell` to launch the shell environment we just declared:
 
 ```shell-session
 $ nix-shell
