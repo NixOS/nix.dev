@@ -29,7 +29,7 @@ Documentation on the Nix ecosystem is divided into several domains based on purp
 The manuals for [Nix][nix manual], [Nixpkgs][nixpkgs manual], and [NixOS][nixos manual] 
 are reference documentation, specifying interfaces and behavior.
 
-[nix.dev] is a curated and maintained repository of guides and tutorials aimed
+[nix.dev] is a curated repository of guides and tutorials aimed
 to teach beginners essential Nix knowledge, show best practices, and help orient
 users in the Nix ecosystem.
 
