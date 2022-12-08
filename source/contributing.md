@@ -4,7 +4,7 @@ This guide explains how you can contribute to Nix, Nix packages or
 NixOS.
 
 :::{note}
-If you're interested in contributing documentation, read [Contributing Documentation](./documentation/contributing.md).
+Please also consider [contributing documentation](./documentation/contributing.md).
 :::
 
 ## Report an issue
