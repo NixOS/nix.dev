@@ -102,7 +102,8 @@ $ nix-shell
 ```
 
 As demonstrated, we can use both `curl` and `jq` to test the running web
-application without any manual installation, Nix just does it all for us.
+application without any manual installation.
+Nix does all of that for us.
 
 With the files we created, we can add them to a repository and share them to
 other people. They can now use the same shell environment as long as they have
