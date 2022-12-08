@@ -35,7 +35,7 @@ Different ways:
   ```nix
   let
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz") {};
-  in pkgs.stdenv.mkDerivation { … }
+  in pkgs.stdenv.mkDerivation { ... }
   ```
 
 - To make ad-hoc environment available on NixOS: 
