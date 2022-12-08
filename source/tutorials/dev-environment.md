@@ -27,8 +27,7 @@ if __name__ == "__main__":
 This is a simple Flask application which serves a JSON document with the message
 "Hello, Nix!".
 
-For the development environment, create a new file `shell.nix` which creates a
-shell environment to be used for development: 
+To declare the development environment, create a new file `shell.nix`: 
 
 ```{code-block} nix shell.nix
 { pkgs ? import <nixpkgs> {} }:
