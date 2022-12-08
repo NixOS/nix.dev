@@ -30,7 +30,7 @@ This is a simple Flask application which serves a JSON document with the message
 To declare the development environment, create a new file `shell.nix`: 
 
 ```{code-block} nix shell.nix
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz") {} }:
 
 pkgs.mkShell {
   packages = [
@@ -46,23 +46,28 @@ pkgs.mkShell {
 
 This creates a shell environment with `python3`, including the `flask` package.
 
-However, it also contains developer tools: `curl` (utility to perform web
-requests) and `jq` (utility to parse and format JSON documents). Both of them
+However, it also contains developer tools: [`curl`] (utility to perform web
+requests) and [`jq`] (utility to parse and format JSON documents). Both of them
 are not Python packages and they are not part of the Python ecosystem.
 
 If we went with Python's [virtualenv], it is not possible to have these
 utilities to be a part of the development environment without additional manual
 steps.
 
+[`curl`]: https://curl.se
+[`jq`]: https://stedolan.github.io/jq/
+[virtualenv]: https://virtualenv.pypa.io/en/latest/
+
 We can now use `nix-shell` to launch the shell environment we just declared:
 
 ```shell-session
 $ nix-shell
 these 2 derivations will be built:
-  /nix/store/w1k2wq0pw53p4h097p9lnfgypzqq6a43-builder.pl.drv
-  /nix/store/911clx564fkrlczx0vwqxsm9wi9ik93c-python3-3.10.6-env.drv
-these 93 paths will be fetched (120.19 MiB download, 519.24 MiB unpacked):
-  /nix/store/0h73sj1n8hzc6fs36cjvsvcvz3av7n47-bash-interactive-5.1-p16
+  /nix/store/5yvz7zf8yzck6r9z4f1br9sh71vqkimk-builder.pl.drv
+  /nix/store/aihgjkf856dbpjjqalgrdmxyyd8a5j2m-python3-3.9.13-env.drv
+these 93 paths will be fetched (109.50 MiB download, 468.52 MiB unpacked):
+  /nix/store/0xxjx37fcy2nl3yz6igmv4mag2a7giq6-glibc-2.33-123
+  /nix/store/138azk9hs5a2yp3zzx6iy1vdwi9q26wv-hook
 ...
 
 [nix-shell:~/dev-environment]$ 
@@ -108,4 +113,4 @@ Nix does all of that for us.
 We can commit the files we created to version control and share them with other people.
 Others can now use the same shell environment as long as they have Nix installed.
 
-[virtualenv]: https://virtualenv.pypa.io/en/latest/
+
