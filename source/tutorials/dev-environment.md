@@ -44,8 +44,7 @@ pkgs.mkShell {
 }
 ```
 
-This creates a shell environment with a Python 3 that contains the `flask`
-library.
+This creates a shell environment with `python3`, including the `flask` package.
 
 However, it also contains developer tools: `curl` (utility to perform web
 requests) and `jq` (utility to parse and format JSON documents). Both of them
