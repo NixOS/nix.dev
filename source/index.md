@@ -9,7 +9,6 @@ myst:
 
 # Welcome to nix.dev
 
-:::{topic} **Introduction**
 The Nix ecosystem is a DevOps toolkit to achieve:
 
 - {ref}`Reproducible development environments <ad-hoc-envs>`.
@@ -29,11 +28,10 @@ The Nix ecosystem is a DevOps toolkit to achieve:
 This documentation supplements the official [Nix](http://nixos.org/nix/manual/),
 [NixOS](http://nixos.org/nixos/manual/), [Nixpkgs](http://nixos.org/nixpkgs/manual/)
 and [NixOps](http://nixos.org/nixops/manual/) manuals.
-:::
 
 ```{toctree}
 :glob: true
-:maxdepth: 3
+:hidden: true
 
 tutorials/index.md
 templates/index.md
