@@ -33,18 +33,17 @@ are reference documentation, specifying interfaces and behavior.
 to teach beginners essential Nix knowledge, show best practices, and help orient
 users in the Nix ecosystem.
 
-[Writing style and guidelines for documentation] are available in the nix.dev
-repository.
+[Guidelines for contributing to documentation] are available in the nix.dev repository.
 
-[Detailed overview of the entire documentation ecosystem in Nix] are available
+A [detailed overview of the entire Nix documentation ecosystem] is available
 in the Nix documentation team repository.
 
 [nix manual]: https://nixos.org/manual/nix/stable/quick-start.html
 [nixpkgs manual]: https://nixos.org/manual/nixpkgs/stable
 [nixos manual]: https://nixos.org/manual/nixos/stable
 [nix.dev]: https://nix.dev
-[Writing style and guidelines for documentation]: https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#user-content-guidelines
-[Detailed overview of the entire documentation ecosystem in Nix]: https://github.com/NixOS/nix.dev/blob/master/maintainers/how-to-contribute-to-documentation.md
+[Guidelines for contributing to documentation]: https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#user-content-guidelines
+[detailed overview of the entire Nix documentation ecosystem]: https://github.com/NixOS/nix.dev/blob/master/maintainers/how-to-contribute-to-documentation.md
 
 ## Contribute to Nix
 
