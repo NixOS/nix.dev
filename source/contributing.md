@@ -72,7 +72,7 @@ You can find inspiration for things to improve in the [reported issues][nixpkgs 
 
 [nixpkgs quick-start]: https://nixos.org/manual/nixpkgs/stable/#chap-quick-start 
 [programming language specific instructions]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
-[nixpkgs issues]: https://github.com/NixOS/nixpkgs/issues?page=3&q=is%3Aissue+is%3Aopen+label%3A%228.has%3A+package+%28update%29%22%2C%228.has%3A+package+%28new%29%22%2C%229.needs%3A+package+%28update%29%22%2C%229.needs%3A+package+%28new%29%22%2C%220.kind%3A+packaging+request%22%2C%220.kind%3A+build+failure%22
+[nixpkgs issues]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+-label%3A%226.topic%3A+nixos%22+-label%3A%226.topic%3A+module+system%22+-label%3A%226.+topic%3A+nixos-container%22
 
 ## Contribute to NixOS
 
