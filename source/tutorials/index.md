@@ -1,6 +1,6 @@
 # Tutorials
 
-This section contains a collection of articles on how to achieve a goal with the Nix ecosystem.
+This section contains a collection of articles on how to get things done in the Nix ecosystem.
 
 ```{toctree}
 :glob: true
