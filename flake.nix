@@ -37,6 +37,12 @@
             }
           );
 
+          sphinx-sitemap = super.sphinx-sitemap.overridePythonAttrs (
+            old: {
+              buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+            }
+          );
+
         };
       in
       rec {
