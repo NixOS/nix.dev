@@ -31,7 +31,7 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 
 ```{toctree}
 :glob: true
-:hidden: true
+:maxdepth: 1
 
 tutorials/index.md
 templates/index.md
