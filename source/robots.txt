@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /_static/
+Disallow: /_sources/
+Sitemap: https://nix.dev/sitemap.xml

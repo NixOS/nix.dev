@@ -42,6 +42,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
     "extractable_code_block",
+    "sphinx_sitemap",
 ]
 
 # Add myst-specific extensions, see what is available on
@@ -135,6 +136,8 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
+html_baseurl = "https://nix.dev"
+
 html_theme = "sphinx_book_theme"
 
 # https://alabaster.readthedocs.io/en/latest/customization.html
@@ -174,7 +177,7 @@ html_static_path = ['_static']
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
-# html_extra_path = []
+html_extra_path = ["robots.txt"]
 
 # If not None, a 'Last updated on:' timestamp is inserted at every page
 # bottom, using the given strftime format.
