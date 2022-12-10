@@ -50,9 +50,8 @@ However, it also contains developer tools: [`curl`] (utility to perform web
 requests) and [`jq`] (utility to parse and format JSON documents). Both of them
 are not Python packages and they are not part of the Python ecosystem.
 
-If we went with Python's [virtualenv], it is not possible to have these
-utilities to be a part of the development environment without additional manual
-steps.
+If we went with Python's [virtualenv], it would not be possible to add these utilities
+to the development environment without additional manual steps.
 
 [`curl`]: https://curl.se
 [`jq`]: https://stedolan.github.io/jq/
