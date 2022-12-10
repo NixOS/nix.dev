@@ -1731,6 +1731,35 @@ Explanation:
 - The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
 - The indented string contains an antiquotation, which will expand the value of `message` to yield `"hello world"`.
 
+<details><summary>To run the shell environment</summary>
+
+Take the snippet from above and save it to a file called `cowsayshell.nix`.
+
+Then run the following commands:
+
+
+```shell-session
+$ nix-shell cowsayshell.nix
+```
+and you can expect to see the following output:
+
+    __________
+    < hello world >
+    ----------
+            \   ^__^
+             \  (oo)\_______
+                (__)\       )\/\
+                    ||----w |
+                    ||     ||
+
+
+Please note that you now have activated a nix shell environment.
+To get back to your normal shell, run `exit` or press `Ctrl+D`. 
+
+You will learn more about nix shell environments in the [declarative-and-reproducible-developer-environments](./declarative-and-reproducible-developer-environments) chapter.
+
+</details>
+
 
 ### NixOS configuration
 
