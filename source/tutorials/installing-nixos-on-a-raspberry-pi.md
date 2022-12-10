@@ -42,6 +42,9 @@ $ nix-shell -p wget zstd
 :::{note}
 You can pick a newer image by going to [Hydra job](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
 clicking on a build and copying the link to the build product image.
+
+There is a [known problem](https://github.com/NixOS/nixpkgs/issues/179701) with the latest SD images on the Pi 4, where it turns off the display while booting up.
+If you are experiencing such problems, please use [the most recent working build](https://hydra.nixos.org/build/134720986/download/1/nixos-sd-image-21.03pre262561.581232454fd-aarch64-linux.img.zst) instead until the issue is fixed.
 :::
 
 Your terminal should be printing kernel messages as they come in.
