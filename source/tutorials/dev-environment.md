@@ -111,5 +111,3 @@ Nix does all of that for us.
 
 We can commit the files we created to version control and share them with other people.
 Others can now use the same shell environment as long as they have Nix installed.
-
-
