@@ -42,7 +42,7 @@ We would be glad to incorporate your insights.
 
 ## Guides
 
-> Please read ["Contributing Documentation"](./source/documentation/contributing.md) first.
+> Please read ["Contributing Documentation"](./source/contributing/documentation.md) first.
 
 ### Licensing and attribution
 

@@ -1,10 +1,16 @@
 # How to Contribute
 
+```{toctree}
+:hidden: true
+
+documentation.md
+```
+
 This guide explains how you can contribute to Nix, Nix packages or
 NixOS.
 
 :::{note}
-Please also consider [contributing documentation](./documentation/contributing.md).
+Please also consider [contributing documentation](./documentation.md).
 :::
 
 ## Report an issue

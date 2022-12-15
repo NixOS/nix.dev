@@ -43,6 +43,5 @@ faq.md
 recommended-reading.md
 influences.md
 glossary.md
-contributing.md
-documentation/index.md
+contributing/index.md
 ```
