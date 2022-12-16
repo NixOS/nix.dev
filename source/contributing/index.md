@@ -1,7 +1,17 @@
 # How to Contribute
 
+```{toctree}
+:hidden: true
+
+documentation.md
+```
+
 This guide explains how you can contribute to Nix, Nix packages or
 NixOS.
+
+:::{note}
+Please also consider [contributing documentation](./documentation.md).
+:::
 
 ## Report an issue
 
@@ -21,29 +31,6 @@ as they help us solve the problem.
 You need a [GitHub] account for that.
 
 [github]: https://github.com/
-
-## Contribute to documentation
-
-Documentation on the Nix ecosystem is divided into several domains based on purpose.
-
-The manuals for [Nix][nix manual], [Nixpkgs][nixpkgs manual], and [NixOS][nixos manual] 
-are reference documentation, specifying interfaces and behavior.
-
-[nix.dev] is a curated repository of guides and tutorials aimed
-to teach beginners essential Nix knowledge, show best practices, and help orient
-users in the Nix ecosystem.
-
-[Guidelines for contributing to documentation] are available in the nix.dev repository.
-
-A [detailed overview of the entire Nix documentation ecosystem] is available
-in the Nix documentation team repository.
-
-[nix manual]: https://nixos.org/manual/nix/stable/quick-start.html
-[nixpkgs manual]: https://nixos.org/manual/nixpkgs/stable
-[nixos manual]: https://nixos.org/manual/nixos/stable
-[nix.dev]: https://nix.dev
-[Guidelines for contributing to documentation]: https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#user-content-guidelines
-[detailed overview of the entire Nix documentation ecosystem]: https://github.com/NixOS/nix.dev/blob/master/maintainers/how-to-contribute-to-documentation.md
 
 ## Contribute to Nix
 

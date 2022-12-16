@@ -414,6 +414,7 @@ linkcheck_anchors_ignore = [
     r"instance_type",
     r"authentication",
     r"community",
+    r"video",
 ]
 
 
