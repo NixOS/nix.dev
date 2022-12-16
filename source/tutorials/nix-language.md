@@ -1402,7 +1402,7 @@ After reading the file, the Nix expression `import ./file.nix` is equivalent to 
 
     2
 
-This applies the function `x: x + 1` to the argument `1`, and therefore evaluates to `3`.
+This applies the function `x: x + 1` to the argument `1`, and therefore evaluates to `2`.
 
 :::{note}
 Parentheses are required to separate function declaration from function application.
