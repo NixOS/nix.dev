@@ -14,6 +14,14 @@ $ sh <(curl -L https://nixos.org/nix/install) --daemon
 For security you may want to [verify the installation script] using GPG signatures.
 :::
 
+:::{note}
+If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
+
+```fish
+$ sh (curl -L https://nixos.org/nix/install | psub) --daemon
+```
+:::
+
 ## macOS
 
 Install Nix via the recommended [multi-user installation]:
@@ -24,6 +32,14 @@ $ sh <(curl -L https://nixos.org/nix/install)
 
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
+:::
+
+:::{note}
+If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
+
+```fish
+$ sh (curl -L https://nixos.org/nix/install | psub)
+```
 :::
 
 ## Windows (WSL2)
@@ -42,6 +58,14 @@ $ sh <(curl -L https://nixos.org/nix/install) --daemon
 
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
+:::
+
+:::{note}
+If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
+
+```fish
+$ sh (curl -L https://nixos.org/nix/install | psub) --daemon
+```
 :::
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
