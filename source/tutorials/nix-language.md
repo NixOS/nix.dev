@@ -143,7 +143,7 @@ $ nix-instantiate --eval file.nix
 3
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The first command writes `1 + 2` to a file `file.nix` in the current directory.
 The contents of `file.nix` are now `1 + 2`, which you can check with
@@ -159,7 +159,7 @@ The resulting value is printed as output.
 `--eval` is required to evaluate the file and do nothing else.
 If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *derivation*, which we will come back to at the end of this tutorial in [](derivations).
 
-</details>
+:::
 
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
@@ -428,7 +428,7 @@ a + a
 2
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
 In this example we assign `a = 1`.
@@ -438,7 +438,7 @@ In this example the expression is `a + a`, where `a` refers to `a = 1`.
 
 By replacing the names with their assigned values, `a + a` evaluates to `2`.
 
-</details>
+:::
 
 Names can be assigned in any order, and expressions on the right of the assignment (`=`) can refer to other assigned names.
 
@@ -458,7 +458,7 @@ a + b
 3
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
 In this example we assign `a = 1` and `b = a + 1`.
@@ -559,7 +559,7 @@ in [ a b c ]
 :class: value
 [ 1 2 3 ]
 ```
-</details>
+:::
 
 Only expressions within the `let` expression itself can access the newly declared names.
 We say: the bindings have local scope.
@@ -787,7 +787,7 @@ in [ x y ]
 [ 1 2 ]
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 While this example is contrived, in more complex code you will regularly see nested `let` expressions that re-use names from their outer scope.
 
@@ -803,7 +803,7 @@ in
 
 The new inner scope now contains `x` and `y`, which are used in the list `[ x y ]`.
 
-</details>
+:::
 
 (antiquotation)=
 ### Antiquotation `${ ... }`
@@ -960,11 +960,11 @@ Example:
 /current/directory
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 Since relative paths must contain a slash (`/`) but must not start with one, and the dot (`.`) denotes no change of directory, the combination `./.` specifies the current directory as a relative path.
 
-</details>
+:::
 
 Two dots (`..`) denote the parent directory.
 
@@ -1224,12 +1224,12 @@ Example:
 2
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 This expression applies an anonymous function `x: x + 1` to the argument `1`.
 The function has to be written in parentheses to distinguish it from the argument.
 
-</details>
+:::
 
 Example:
 
@@ -1573,7 +1573,7 @@ import ./file.nix
 3
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The preceding shell command writes the contents `1 + 2` to the file `file.nix` in the current directory.
 
@@ -1593,7 +1593,7 @@ After reading `file.nix` the Nix expression is equivalent to the file contents:
 :class: value
 3
 ```
-</details>
+:::
 
 Since a Nix file can contain any Nix expression, `import`ed functions can be applied to arguments immediately.
 
@@ -1615,7 +1615,7 @@ import ./file.nix 1
 2
 ```
 
-<details><summary>Detailed explanation</summary>
+::::{dropdown} Detailed explanation
 
 The preceding shell command writes the contents `x: x + 1` to the file `file.nix` in the current directory.
 
@@ -1642,7 +1642,7 @@ This applies the function `x: x + 1` to the argument `1`, and therefore evaluate
 Parentheses are required to separate function declaration from function application.
 :::
 
-</details>
+::::
 
 (pkgs-lib)=
 ### `pkgs.lib`
@@ -1674,7 +1674,7 @@ pkgs.lib.strings.toUpper "search paths considered harmful"
 SEARCH PATHS CONSIDERED HARMFUL
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 This is a more complex example, but by now you should be familiar with all its components.
 
@@ -1767,7 +1767,7 @@ Example:
 # ... multiple uses of `lib`
 ```
 
-</details>
+:::
 
 For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`builtins`](builtins) of the same name.
 
@@ -1822,7 +1822,7 @@ $ echo 123 > data
 "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The preceding shell command writes the characters `123` to the file `data` in the current directory.
 
@@ -1840,7 +1840,7 @@ The file is copied into the Nix store directory `/nix/store` as a side effect of
 
 It is an error if the file system path does not exist.
 
-</details>
+:::
 
 For directories the same thing happens: The entire directory (including nested files and directories) is copied to the Nix store, and the evaluated string becomes the Nix store path of the directory.
 
@@ -1943,7 +1943,7 @@ A derivation's output path is fully determined by its inputs, which in this case
 This is why we recommend to [avoid search paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
 :::
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
@@ -1955,7 +1955,7 @@ The resulting string is the file system path where the build result of that deri
 
 There is more depth to the inner workings of derivations, but at this point it should be enough to know that such expressions evaluate to Nix store paths.
 
-</details>
+:::
 
 Antiquotation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
 
