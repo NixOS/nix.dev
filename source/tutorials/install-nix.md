@@ -2,7 +2,9 @@
 
 # Install Nix
 
-## Linux
+:::::{tab-set}
+
+::::{tab-item} Linux
 
 Install Nix via the recommended [multi-user installation]:
 
@@ -14,7 +16,9 @@ $ sh <(curl -L https://nixos.org/nix/install) --daemon
 For security you may want to [verify the installation script] using GPG signatures.
 :::
 
-## macOS
+::::
+
+::::{tab-item} macOS
 
 Install Nix via the recommended [multi-user installation]:
 
@@ -26,7 +30,9 @@ $ sh <(curl -L https://nixos.org/nix/install)
 For security you may want to [verify the installation script] using GPG signatures.
 :::
 
-## Windows (WSL2)
+::::
+
+::::{tab-item} Windows (WSL2)
 
 Install Nix via the recommended [single-user installation]:
 
@@ -46,7 +52,9 @@ For security you may want to [verify the installation script] using GPG signatur
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
 
-## Docker
+::::
+
+::::{tab-item} Docker
 
 Start a Docker shell with Nix:
 
@@ -69,6 +77,10 @@ $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
 bash-5.1# nix-build -I nixpkgs=/nixpkgs -A hello
 bash-5.1# find ./result # this symlink points to the build package
 ```
+
+::::
+
+:::::
 
 ## Verify installation
 
