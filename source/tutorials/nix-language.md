@@ -298,14 +298,9 @@ Nix language data types *without functions* work just like their counterparts in
 :::
 
 
-<table>
-<tr>
-  <th>Nix language</th>
-  <th>JSON</th>
-</tr>
-<tr>
-<td style="padding-right: 1em">
+::::{grid} 2
 
+:::{grid-item} **Nix**
 ```nix
 {
   string = "hello";
@@ -322,10 +317,9 @@ Nix language data types *without functions* work just like their counterparts in
   }; # comments are supported
 }
 ```
+:::
 
-</td>
-<td>
-
+:::{grid-item} **JSON**
 ```json
 {
   "string": "hello",
@@ -342,10 +336,9 @@ Nix language data types *without functions* work just like their counterparts in
   }
 }
 ```
+:::
 
-</td>
-</tr>
-</table>
+::::
 
 :::{note}
 - Attribute names usually do not need quotes.[^attrnames]
@@ -458,7 +451,7 @@ a + b
 3
 ```
 
-:::{dropdown} Detailed explanation
+:::::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
 In this example we assign `a = 1` and `b = a + 1`.
@@ -493,21 +486,9 @@ in both, the order of assignments does not matter, and names on the left can be 
 
 Example:
 
-<table>
-<tr>
-  <th>
+::::{grid} 2
 
-`let ... in ...`
-
-  </th>
-  <th>
-
-`rec { ... }`
-
-  </th>
-</tr>
-<tr>
-<td style="padding-right: 1em">
+:::{grid-item} `let ... in ...`
 
 ```{code-block} nix
 :class: expression
@@ -522,8 +503,10 @@ in {  c = c; a = a; b = b; }
 :class: value
 { a = 1; b = 2; c = 3; }
 ```
-</td>
-<td>
+
+:::
+
+:::{grid-item} `rec { ... }`
 
 ```{code-block} nix
 :class: expression
@@ -538,9 +521,10 @@ rec {
 :class: value
 { a = 1; b = 2; c = 3; }
 ```
-</td>
-</tr>
-</table>
+
+:::
+
+::::
 
 The difference is that while a recursive attribute set evaluates to an [attribute set](attrset), any expression can follow after the `in` keyword.
 
@@ -559,7 +543,8 @@ in [ a b c ]
 :class: value
 [ 1 2 3 ]
 ```
-:::
+
+:::::
 
 Only expressions within the `let` expression itself can access the newly declared names.
 We say: the bindings have local scope.
