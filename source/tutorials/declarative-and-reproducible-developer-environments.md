@@ -29,7 +29,7 @@ Developer environments allow you to:
 At the top-level of your project create `shell.nix` with the following contents:
 
 ```nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
 
 pkgs.mkShell {
   buildInputs = [
@@ -78,7 +78,7 @@ You should see something similar to this:
 Given the following `shell.nix`:
 
 ```nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
 
 pkgs.mkShell {
   buildInputs = [

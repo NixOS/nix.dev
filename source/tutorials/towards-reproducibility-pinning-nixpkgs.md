@@ -22,7 +22,7 @@ To create **fully reproducible** Nix expressions, we can pin an exact version of
 The simplest way to do this is to fetch the required Nixpkgs version as a tarball specified via the relevant Git commit hash:
 
 ```nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {}
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {}
 }:
 
 ...
