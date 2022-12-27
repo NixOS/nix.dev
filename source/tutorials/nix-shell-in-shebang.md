@@ -68,7 +68,7 @@ Make it executable using
  chmod o+x nixpkgs-releases.sh
  ```
  
-and run it with
+Run the script:
 
 ```console
 ./nixpkgs-releases.sh
