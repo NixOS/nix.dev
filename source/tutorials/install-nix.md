@@ -7,19 +7,11 @@
 Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install) --daemon
+$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
-:::
-
-:::{note}
-If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
-
-```fish
-$ sh (curl -L https://nixos.org/nix/install | psub) --daemon
-```
 :::
 
 ## macOS
@@ -27,19 +19,11 @@ $ sh (curl -L https://nixos.org/nix/install | psub) --daemon
 Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install)
+$ curl -L https://nixos.org/nix/install | sh
 ```
 
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
-:::
-
-:::{note}
-If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
-
-```fish
-$ sh (curl -L https://nixos.org/nix/install | psub)
-```
 :::
 
 ## Windows (WSL2)
@@ -47,25 +31,17 @@ $ sh (curl -L https://nixos.org/nix/install | psub)
 Install Nix via the recommended [single-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 ```
 
 However, if you have [systemd support] enabled, install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install) --daemon
+$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
 :::{note}
 For security you may want to [verify the installation script] using GPG signatures.
-:::
-
-:::{note}
-If using [fish shell](https://fishshell.com/) there is different syntax for process substitution:
-
-```fish
-$ sh (curl -L https://nixos.org/nix/install | psub) --daemon
-```
 :::
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
