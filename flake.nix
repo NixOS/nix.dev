@@ -24,6 +24,12 @@
               buildInputs = (old.buildInputs or [ ]) ++ [ self.flit-core ];
             }
           );
+
+          sphinx-design = super.sphinx-design.overridePythonAttrs (
+            old: {
+              buildInputs = (old.buildInputs or [ ]) ++ [ self.flit-core ];
+            }
+          );
         };
       in rec {
         packages = flake-utils.lib.flattenTree {
