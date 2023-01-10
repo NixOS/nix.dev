@@ -36,7 +36,10 @@ We will use the shebang line `#! /usr/bin/env nix-shell`.
 `/usr/bin/env` is a program available on most modern Unix-like operating systems.
 It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
 
-The command `nix-shell` takes the following parameters relevant for our use case:
+We use [`nix-shell` as a shebang interpreter].
+It takes the following parameters relevant for our use case:
+
+[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
 - `-i` tells which program to use for interpreting the rest of the file
 - `-p` lists packages that should be present in the interpreter's environment
 - `-I` explicitly sets the search path for packages
