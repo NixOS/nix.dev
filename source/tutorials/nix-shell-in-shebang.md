@@ -33,7 +33,8 @@ It determines which program to use for running the script.
 
 We will use the shebang line `#! /usr/bin/env nix-shell`.
 
-`/usr/bin/env` is a program available on most modern Unix-like operating systems. It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
+`/usr/bin/env` is a program available on most modern Unix-like operating systems.
+It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
 
 The command `nix-shell` takes the following parameters relevant for our use case:
 - `-i` tells which program to use for interpreting the rest of the file
