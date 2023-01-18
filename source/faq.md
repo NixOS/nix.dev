@@ -8,12 +8,12 @@ Pass `--option substitute false` to Nix commands.
 
 ### How do I add a new binary cache?
 
-Using NixOS unstable (≥ 22.05):
+Using NixOS (≥ 22.05):
 
 ```nix
 nix.settings = {
   trusted-substituters = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  substituters = trustedBinaryCaches;
+  substituters = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
   trusted-public-keys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
 };
 ```
@@ -23,7 +23,7 @@ Using NixOS (≤ 21.11):
 ```nix
 nix = {
   trustedBinaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  binaryCaches = trustedBinaryCaches;
+  binaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
   binaryCachePublicKeys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
 };
 ```
