@@ -186,7 +186,7 @@ control of in the source code.
 If someone builds the project in a differently named folder, they will get a different hash of the
 `src` and everything that depends on it.
 
-A better way is to use `builtins.path`:
+A better way is to use `builtins.path` with the `name` attribute set to something fixed. This will derive the human readable portion of the store path from `name` instead of the working directory:
 
 ```nix
  { pkgs ? import <nixpkgs> {}
