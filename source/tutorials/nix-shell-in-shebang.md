@@ -43,7 +43,7 @@ It takes the following parameters relevant for our use case:
 - `-i` tells which program to use for interpreting the rest of the file
 - `-p` lists packages that should be present in the interpreter's environment
 - `-I` explicitly sets the search path for packages
-- `--pure` clears almost the entire environment before the shell is started
+- `--pure` clears the environment before start - more details in the [nix-shell man page]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options
 
 Create a file named `nixpkgs-releases.sh` with the following content:
 
