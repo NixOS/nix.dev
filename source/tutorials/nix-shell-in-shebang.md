@@ -1,6 +1,6 @@
 # Reproducible interpreted scripts
 
-In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts.
+In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts with [shebang].
 
 ## Requirements
 
