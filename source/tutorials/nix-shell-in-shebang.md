@@ -29,7 +29,7 @@ A [shebang] is the first line of a script starting with `#!`.
 It determines which program to use for running the script.
 
 [Bash]: https://www.gnu.org/software/bash/
-[shebang]: https://en.m.wikipedia.org/wiki/Shebang_(Unix)
+[shebang]: https://en.wikipedia.org/wiki/Shebang_(Unix)
 
 We will use the shebang line `#! /usr/bin/env nix-shell`.
 
