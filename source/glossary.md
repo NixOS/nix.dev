@@ -7,7 +7,7 @@ attribute name
 Nix
     Build system and package manager.
 
-    Read /nɪks/
+    Read /nɪks/ ("Niks").
 
 Nix language
     Programming language to declare packages and configurations for Nix.
@@ -25,6 +25,8 @@ Nixpkgs
 
 NixOS
     Linux distribution based on Nix and Nixpkgs.
+
+    Read /nɪks oʊ ɛs/ ("Niks Oh Es").
 
 package name
     TODO
