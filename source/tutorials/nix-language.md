@@ -129,6 +129,9 @@ nix-repl> { a.b.c = 1; }
 nix-repl> :p { a.b.c = 1; }
 { a = { b = { c = 1; }; }; }
 ```
+
+Type `:q` to exit [`nix repl`][nix-repl].
+
 :::
 
 [nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
