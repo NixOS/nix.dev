@@ -34,10 +34,6 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [nix.dev](http://nix.dev) author, [Cachix](https://cachix.org)
 
-- Jörg Thalheim ([@Mic92])
-
-  NixOS Wiki maintainer
-
 - Silvan Mosberger ([@infinisil])
 
   Nixpkgs maintainer, [Tweag]
@@ -45,7 +41,6 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 [@lucperkins]: https://github.com/lucperkins
 [@fricklerhandwerk]: https://github.com/fricklerhandwerk
 [@domenkozar]: https://github.com/domenkozar
-[@Mic92]: https://github.com/Mic92
 [@infinisil]: https://github.com/infinisil
 
 [Determinate Systems]: https://determinate.systems
