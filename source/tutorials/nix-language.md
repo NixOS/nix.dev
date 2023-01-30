@@ -276,7 +276,7 @@ let x=1;y=2;in x+y
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
 We show primitive data types and lists as examples in the context of [attribute sets](attrset).
-Later in this section we cover special features of character strings: [antiquotation](antiquotation), [file system paths](file-system-paths), and [indented strings](indented-strings).
+Later in this section we cover special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
 There are two ways to assign names to values in Nix: [attribute sets](attrset) and [`let` expressions](let).
@@ -793,10 +793,10 @@ The new inner scope now contains `x` and `y`, which are used in the list `[ x y 
 
 :::
 
-(antiquotation)=
-### Antiquotation `${ ... }`
+(string-interpolation)=
+### String Interpolation `${ ... }`
 
-Also known as “string interpolation”.
+Also referred to as “antiquotation” in older literature about nix.
 
 The value of a Nix expression can be inserted into a character string with the dollar-sign and braces (`${ }`).
 
@@ -838,7 +838,7 @@ error: cannot coerce an integer to a string
              |  ^
             5|
 ```
-Antiquotation can be arbitrarily nested.
+String interpolation can be arbitrarily nested.
 
 (This can become hard to read, and we recommend to avoid it in practice.)
 
@@ -861,7 +861,7 @@ in
 :::{warning}
 You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
 
-These are *not* antiquotations, but usually denote variables in a shell script.
+These are *not* string interpolations, but usually denote variables in a shell script.
 
 In such cases, the use of names from the surrounding Nix expression is a coincidence.
 
@@ -968,7 +968,7 @@ Example:
 /current
 ```
 :::{note}
-Paths can be used in antiquotation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+Paths can be used in string interpolation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
 :::
 
 #### Search path
@@ -1788,7 +1788,7 @@ We do not cover those here in more detail, as they do not matter for how the Nix
 (path-impurities)=
 ### Paths
 
-Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
+Whenever a file system path is rendered to a character string with [string interpolation](string-interpolation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
 
 The evaluated string then contains the Nix store path assigned to that file.
 
@@ -1814,9 +1814,9 @@ $ echo 123 > data
 
 The preceding shell command writes the characters `123` to the file `data` in the current directory.
 
-The above Nix expression refers to this file as `./data` and converts the file system path to a string with [antiquotation](antiquotation) `${ ... }`.
+The above Nix expression refers to this file as `./data` and converts the file system path to a string with [string interpolation](string-interpolation) `${ ... }`.
 
-Only values that can be represented as a character string are allowed for antiquotation.
+Only values that can be represented as a character string are allowed for string interpolation.
 A file system path is such a value, and its character string representation is the corresponding Nix store path.
 
 The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
@@ -1906,7 +1906,7 @@ Whenever you see `mkDerivation`, it denotes something that Nix will eventually *
 Example: [a package using `mkDerivation`](mkDerivation-example)
 
 The evaluation result of `derivation` (and `mkDerivation`) is an [attribute set](attrset) with a certain structure and a special property:
-It can be used in [antiquotation](antiquotation), and in that case evaluates to the Nix store path of its build result.
+It can be used in [string interpolation](string-interpolation), and in that case evaluates to the Nix store path of its build result.
 
 Example:
 
@@ -1936,7 +1936,7 @@ This is why we recommend to [avoid search paths](search-path) to ensure predicta
 The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
 
-Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a derivation.
+Converting the attribute `pkgs.nix` to a string with [string interpolation](string-interpolation) is allowed, as `pkgs.nix` is a derivation.
 That is, ultimately `pkgs.nix` boils down to a call to `derivation`.
 
 The resulting string is the file system path where the build result of that derivation will end up.
@@ -1945,7 +1945,7 @@ There is more depth to the inner workings of derivations, but at this point it s
 
 :::
 
-Antiquotation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
+String interpolation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
@@ -1983,7 +1983,7 @@ Explanation:
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
 - The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
-- The indented string contains an antiquotation, which will expand the value of `message` to yield `"hello world"`.
+- The indented string contains a string interpolation, which will expand the value of `message` to yield `"hello world"`.
 
 
 ### NixOS configuration
