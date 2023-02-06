@@ -67,7 +67,7 @@ This ensures that the script will always run with the exact same packages versio
 Make the script executable:
 
  ```console
- chmod o+x nixpkgs-releases.sh
+ chmod +x nixpkgs-releases.sh
  ```
  
 Run the script:
