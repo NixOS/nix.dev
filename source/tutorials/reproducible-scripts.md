@@ -6,7 +6,7 @@ In this tutorial, you will learn how to use Nix to create and run reproducible i
 
 ## Requirements
 
-- A working [Nix installation](install-nix)
+- A working {ref}`Nix installation <install-nix>`
 - Familiarity with [Bash]
 
 ## A trivial script with non-trivial dependencies
