@@ -41,10 +41,12 @@ It takes a command name as argument and will run the first executable by that na
 We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
 
-[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
 - `-i` tells which program to use for interpreting the rest of the file
 - `-p` lists packages that should be present in the interpreter's environment
-- `-I` explicitly sets the search path for packages
+- `-I` explicitly sets [the search path] for packages
+
+[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
+[the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
 
 Create a file named `nixpkgs-releases.sh` with the following content:
 
