@@ -5,6 +5,7 @@
 
 install-nix.md
 ad-hoc-developer-environments.md
+reproducible-scripts.rst
 nix-language.md
 towards-reproducibility-pinning-nixpkgs.md
 declarative-and-reproducible-developer-environments.md
