@@ -12,10 +12,6 @@ Install Nix via the recommended [multi-user installation]:
 $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
-
 ::::
 
 ::::{tab-item} macOS
@@ -25,10 +21,6 @@ Install Nix via the recommended [multi-user installation]:
 ```shell-session
 $ curl -L https://nixos.org/nix/install | sh
 ```
-
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
 
 ::::
 
@@ -45,10 +37,6 @@ However, if you have [systemd support] enabled, install Nix via the recommended 
 ```shell-session
 $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
-
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
 
@@ -93,4 +81,3 @@ nix (Nix) 2.11.0
 
 [multi-user installation]: https://nixos.org/manual/nix/stable/installation/multi-user.html
 [single-user installation]: https://nixos.org/manual/nix/stable/installation/single-user.html
-[verify the installation script]: https://nixos.org/download.html#nix-verify-installation
