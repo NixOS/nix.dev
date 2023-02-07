@@ -2052,10 +2052,11 @@ Explanation:
 
 ## References
 
-- [Nix manual: Nix language][manual-language] - Nix language reference
-- [Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
-- [Nixpkgs manual: Functions reference][nixpkgs-functions] - Nixpkgs function library
-- [Nixpkgs manual: Fetchers][nixpkgs-fetchers] - Nixpkgs fetcher library
+- [Nix manual: Nix language][manual-language]
+- [Nix manual: String interpolation][manual-string-interpolation]
+- [Nix manual: Built-in Functions][nix-builtins]
+- [Nixpkgs manual: Functions reference][nixpkgs-functions]
+- [Nixpkgs manual: Fetchers][nixpkgs-fetchers]
 
 ## Next steps
 
