@@ -28,7 +28,7 @@ We are going to set up:
 - A VM named `client` running HTTP client queries using `curl`.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
-… using an example Nix expression adapted from [How to use NixOS for lightweight integration tests](https://www.haskellforall.com/2020/11/how-to-use-nixos-for-lightweight.html).
+The following example Nix expression is adapted from [How to use NixOS for lightweight integration tests](https://www.haskellforall.com/2020/11/how-to-use-nixos-for-lightweight.html).
 
 ## Writing the test
 
