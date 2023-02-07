@@ -796,7 +796,7 @@ The new inner scope now contains `x` and `y`, which are used in the list `[ x y 
 (string-interpolation)=
 ### String Interpolation `${ ... }`
 
-Also referred to as “antiquotation” in older literature about nix.
+Previously known as “antiquotation”.
 
 The value of a Nix expression can be inserted into a character string with the dollar-sign and braces (`${ }`).
 
@@ -838,7 +838,8 @@ error: cannot coerce an integer to a string
              |  ^
             5|
 ```
-String interpolation can be arbitrarily nested.
+
+Interpolated expressions can be arbitrarily nested.
 
 (This can become hard to read, and we recommend to avoid it in practice.)
 
@@ -861,7 +862,7 @@ in
 :::{warning}
 You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
 
-These are *not* string interpolations, but usually denote variables in a shell script.
+These are *not* interpolated strings, but usually denote variables in a shell script.
 
 In such cases, the use of names from the surrounding Nix expression is a coincidence.
 
@@ -968,7 +969,7 @@ Example:
 /current
 ```
 :::{note}
-Paths can be used in string interpolation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+Paths can be used in interpolated expressions – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
 :::
 
 #### Search path
@@ -1788,7 +1789,7 @@ We do not cover those here in more detail, as they do not matter for how the Nix
 (path-impurities)=
 ### Paths
 
-Whenever a file system path is rendered to a character string with [string interpolation](string-interpolation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
+Whenever a file system path is used in [string interpolation](string-interpolation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
 
 The evaluated string then contains the Nix store path assigned to that file.
 
@@ -1814,9 +1815,9 @@ $ echo 123 > data
 
 The preceding shell command writes the characters `123` to the file `data` in the current directory.
 
-The above Nix expression refers to this file as `./data` and converts the file system path to a string with [string interpolation](string-interpolation) `${ ... }`.
+The above Nix expression refers to this file as `./data` and converts the file system path to an [interpolated string](string-interpolation) `${ ... }`.
 
-Only values that can be represented as a character string are allowed for string interpolation.
+Such interpolated expressions must evaluate to something that can be represented as a character string.
 A file system path is such a value, and its character string representation is the corresponding Nix store path.
 
 The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
@@ -1983,7 +1984,7 @@ Explanation:
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
 - The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
-- The indented string contains a string interpolation, which will expand the value of `message` to yield `"hello world"`.
+- The indented string contains an interpolated expression, which will expand the value of `message` to yield `"hello world"`.
 
 
 ### NixOS configuration
