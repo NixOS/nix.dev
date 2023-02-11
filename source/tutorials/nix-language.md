@@ -850,7 +850,7 @@ Example:
 let
   a = "no";
 in
-"${a + "${a + " ${a}"}"}"
+"${a + " ${a + " ${a}"}"}"
 ```
 
 ```{code-block}
