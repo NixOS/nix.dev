@@ -22,28 +22,17 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 ## Members
 
-- Luc Perkins ([@lucperkins]) (lead until 2023-01-31)
-
-  Nix Advocate, [Determinate Systems]
-
 - Valentin Gagarin ([@fricklerhandwerk])
 
   Nix documentarian, [Tweag]
-
-- Domen Kožar ([@domenkozar])
-
-  [nix.dev](http://nix.dev) author, [Cachix](https://cachix.org)
 
 - Silvan Mosberger ([@infinisil])
 
   Nixpkgs maintainer, [Tweag]
 
-[@lucperkins]: https://github.com/lucperkins
 [@fricklerhandwerk]: https://github.com/fricklerhandwerk
-[@domenkozar]: https://github.com/domenkozar
 [@infinisil]: https://github.com/infinisil
 
-[Determinate Systems]: https://determinate.systems
 [Tweag]: https://tweag.io
 
 ## Responsibilities
