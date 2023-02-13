@@ -118,7 +118,7 @@ The complete `configuration.nix` file now looks like this:
     initialPassword = "testpw";
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 }
 ```
 
