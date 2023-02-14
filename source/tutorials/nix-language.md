@@ -75,7 +75,7 @@ Read detailed explanations if you want to make sure you fully understand the exa
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- A [Nix installation](./install-nix) to run the examples
+- A {ref}`Nix installation <install-nix>` to run the examples
 
 ### How to run the examples?
 

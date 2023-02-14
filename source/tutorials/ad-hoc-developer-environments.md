@@ -128,27 +128,6 @@ There are two things going on here:
 1. The `--pure` flag makes sure that the bash environment from your system is not inherited. That means only the `git` that Nix installed is available inside the shell. This is useful for one-liners and scripts that run, for example, within a CI environment. While developing, however, we'd like to have our editor around and a bunch of other things. Therefore we might skip the flag for development environments but use it in build ones.
 2. The `-I` flag pins the Nixpkgs revision to an **exact Git revision**, leaving no doubt about which exact version of Nix packages will be used.
 
-## Reproducible executables
-
-Finally, we can wrap scripts with Nix to provide a reproducible shell environment that we can commit to a Git repository and share with strangers online. As long as they have Nix installed, they'll be able to execute the script without worrying about manually installing (and later uninstalling) dependencies at all.
-
-```python
-#! /usr/bin/env nix-shell
-#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
-
-import django
-
-print(django)
-```
-
-This is essentially the same example as in the previous section, but this time declaratively source controlled! All of the required Nix commands are included as `#!` shebang headers in the script itself.
-
-:::{note}
-The multiline shebang format is a feature of [nix-shell](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter). 
-All the subsequent `#! nix-shell` lines are used to build up the shell's configuration before building the shell and executing the body of the script.
-:::
-
 ## Next steps
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
@@ -160,3 +139,4 @@ We've only covered the bare essentials of Nix here. Once you're comfortable with
 - See `man nix-shell` for all of the options.
 - To quickly setup a Nix project read through
   [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
+- {ref}`reproducible-scripts` to see how to use `nix-shell` as a shebang.
