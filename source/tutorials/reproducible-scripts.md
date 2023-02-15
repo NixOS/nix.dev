@@ -1,10 +1,12 @@
+(reproducible-scripts)=
+
 # Reproducible interpreted scripts
 
 In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts with [shebang].
 
 ## Requirements
 
-- A working [Nix installation](install-nix)
+- A working {ref}`Nix installation <install-nix>`
 - Familiarity with [Bash]
 
 ## A trivial script with non-trivial dependencies
@@ -39,11 +41,14 @@ It takes a command name as argument and will run the first executable by that na
 We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
 
-[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
+html#use-as-a--interpreter
 - `-i` tells which program to use for interpreting the rest of the file
 - `-p` lists packages that should be present in the interpreter's environment
-- `-I` explicitly sets the search path for packages
+- `-I` explicitly sets [the search path] for packages
 - `--pure` clears the environment before start - more details in the [nix-shell man page]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options
+
+[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.
+[the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
 
 Create a file named `nixpkgs-releases.sh` with the following content:
 
@@ -66,7 +71,7 @@ This ensures that the script will always run with the exact same packages versio
 Make the script executable:
 
  ```console
- chmod o+x nixpkgs-releases.sh
+ chmod +x nixpkgs-releases.sh
  ```
  
 Run the script:
