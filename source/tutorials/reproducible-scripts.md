@@ -1,12 +1,10 @@
-(reproducible-scripts)=
-
 # Reproducible interpreted scripts
 
-In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts.
+In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts with [shebang].
 
 ## Requirements
 
-- A working {ref}`Nix installation <install-nix>`
+- A working [Nix installation](install-nix)
 - Familiarity with [Bash]
 
 ## A trivial script with non-trivial dependencies
@@ -31,7 +29,7 @@ A [shebang] is the first line of a script starting with `#!`.
 It determines which program to use for running the script.
 
 [Bash]: https://www.gnu.org/software/bash/
-[shebang]: https://en.m.wikipedia.org/wiki/Shebang_(Unix)
+[shebang]: https://en.wikipedia.org/wiki/Shebang_(Unix)
 
 We will use the shebang line `#! /usr/bin/env nix-shell`.
 
@@ -41,19 +39,18 @@ It takes a command name as argument and will run the first executable by that na
 We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
 
+[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
 - `-i` tells which program to use for interpreting the rest of the file
 - `-p` lists packages that should be present in the interpreter's environment
-- `-I` explicitly sets [the search path] for packages
-
-[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
-[the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
+- `-I` explicitly sets the search path for packages
+- `--pure` clears the environment before start - more details in the [nix-shell man page]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options
 
 Create a file named `nixpkgs-releases.sh` with the following content:
 
 ```shell
 #!/usr/bin/env nix-shell 
-#! nix-shell -i bash
-#! nix-shell -p curl jq python3Packages.xmljson
+#! nix-shell -i bash --pure
+#! nix-shell -p bash cacert curl jq python3Packages.xmljson
 #! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
@@ -69,7 +66,7 @@ This ensures that the script will always run with the exact same packages versio
 Make the script executable:
 
  ```console
- chmod +x nixpkgs-releases.sh
+ chmod o+x nixpkgs-releases.sh
  ```
  
 Run the script:
