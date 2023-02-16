@@ -128,15 +128,18 @@ There are two things going on here:
 1. The `--pure` flag makes sure that the bash environment from your system is not inherited. That means only the `git` that Nix installed is available inside the shell. This is useful for one-liners and scripts that run, for example, within a CI environment. While developing, however, we'd like to have our editor around and a bunch of other things. Therefore we might skip the flag for development environments but use it in build ones.
 2. The `-I` flag pins the Nixpkgs revision to an **exact Git revision**, leaving no doubt about which exact version of Nix packages will be used.
 
+## References
+
+- [Nix manual: `nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell) or `man nix-shell`
+
 ## Next steps
 
 We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
 
+- {ref}`reproducible-scripts` to see how to use `nix-shell` for reproducible scripts.
 - {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
 - {ref}`pinning-nixpkgs` to see different ways to import Nixpkgs.
-- {ref}`declarative-reproducible-envs` to create reproducible shell environments given a declarative configuration file called a Nix expression.
-- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html)- as when using `nix-shell`, packages are downloaded into `/nix/store`, but never removed.
-- See `man nix-shell` for all of the options.
+- {ref}`declarative-reproducible-envs` to create reproducible shell environments with a declarative configuration file.
+- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – free up storage used by the programs made available through Nix
 - To quickly setup a Nix project read through
   [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
-- {ref}`reproducible-scripts` to see how to use `nix-shell` as a shebang.
