@@ -62,7 +62,8 @@ Create a file named `nixpkgs-releases.sh` with the following content:
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
 
-We specify `bash` as the interpreter with the -i option and we include the `bash` package in the environment with the -p option. The -p inclusion of `bash` is necessary as we are setting the --pure option.
+We specify the `bash` program as the interpreter with the `-i` option.
+We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
 
 The command `xml2json` is provided by the package `python3Packages.xmljson`, while the commands `jq`, `curl`, and `cacert` are provided by packages of the same name. Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
 
