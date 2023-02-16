@@ -65,7 +65,8 @@ curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 We specify the `bash` program as the interpreter with the `-i` option.
 We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
 
-The command `xml2json` is provided by the package `python3Packages.xmljson`, while the commands `jq`, `curl`, and `cacert` are provided by packages of the same name. Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
+With the `-p` option we specify the packages required for the script to run.
+The command `xml2json` is provided by the package `python3Packages.xmljson`, while `bash`, `jq`, and `curl` are provided by packages of the same name. `cacert` must be present for SSL authentication to work. Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
 
 The parameter of `-I` refers to a specific Git commit of the Nixpkgs repository.
 This ensures that the script will always run with the exact same packages versions, everywhere.
