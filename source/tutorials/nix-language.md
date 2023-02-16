@@ -130,11 +130,11 @@ nix-repl> :p { a.b.c = 1; }
 { a = { b = { c = 1; }; }; }
 ```
 
-Type `:q` to exit [`nix repl`][nix-repl].
+Type `:q` to exit [`nix repl`].
 
 :::
 
-[nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
+[`nix-repl`]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
 
 #### Evaluating Nix files
 
@@ -1162,7 +1162,7 @@ in f 1
 
 ```{code-block}
 :class: value
-    2
+2
 ```
 
 Example:
@@ -1956,7 +1956,9 @@ So far we have seen artifical examples illustrating the various constructs in th
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following practical examples.
 
-Note that the goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
+::: {note}
+The goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
+:::
 
 ### Shell environment
 
@@ -2055,8 +2057,11 @@ Explanation:
 - [Nix manual: Nix language][manual-language]
 - [Nix manual: String interpolation][manual-string-interpolation]
 - [Nix manual: Built-in Functions][nix-builtins]
+- [Nix manual: `nix repl`][`nix-repl`]
 - [Nixpkgs manual: Functions reference][nixpkgs-functions]
 - [Nixpkgs manual: Fetchers][nixpkgs-fetchers]
+
+[manual-string-interpolation]: https://nixos.org/manual/nix/stable/language/string-interpolation.html
 
 ## Next steps
 
