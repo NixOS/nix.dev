@@ -48,7 +48,6 @@ It takes the following parameters relevant for our use case:
 
 More details on the options can be found in the [`nix-shell` reference documentation](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options).
 
-
 [`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
 [the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
 
