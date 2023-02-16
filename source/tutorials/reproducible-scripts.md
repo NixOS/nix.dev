@@ -42,9 +42,12 @@ We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
 
 - `-i` tells which program to use for interpreting the rest of the file
+- `--pure` excludes most environment variables when the script is run
 - `-p` lists packages that should be present in the interpreter's environment
 - `-I` explicitly sets [the search path] for packages
-- `--pure` clears the environment before start - more details in the [nix-shell man page]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options
+
+More details on the options can be found in the [`nix-shell` reference documentation](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options).
+
 
 [`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
 [the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
