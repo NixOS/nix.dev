@@ -53,7 +53,7 @@ You can help by doing the following:
     
 - working on [open issues][nix.dev issues]
 - reviewing [pull requests][nix.dev prs] by testing new material or features
-- adding guides or tutorials following the [proposed outline][nix docs outline]
+- adding guides or tutorials following the [proposed outline](https://github.com/NixOS/nix.dev/pull/265/files)
 
 New articles can be based on videos such as:
 
