@@ -12,9 +12,8 @@ Using NixOS (≥ 22.05):
 
 ```nix
 nix.settings = {
-  trusted-substituters = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  substituters = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  trusted-public-keys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
+  trusted-substituters = [ "https://cache.nixos.org" ];
+  substituters = [ "https://cache.nixos.org" ];
 };
 ```
 
@@ -22,17 +21,16 @@ Using NixOS (≤ 21.11):
 
 ```nix
 nix = {
-  trustedBinaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  binaryCaches = [ "https://cache.nixos.org" "https://hydra.snabb.co" ];
-  binaryCachePublicKeys = [ "hydra.snabb.co-1:zPzKSJ1mynGtYEVbUR0QVZf9TLcaygz/OyzHlWo5AMM=" ];
+  trustedBinaryCaches = [ "https://cache.nixos.org" ];
+  binaryCaches = [ "https://cache.nixos.org" ];
 };
 ```
 
 Using `Nix`:
 
 ```shell-session
-$ echo "trusted-binary-caches = https://hydra.snabb.co" >> /etc/nix/nix.conf
-$ nix-build helpers/bench.nix --option extra-binary-caches https://hydra.snabb.co
+$ echo "trusted-binary-caches = https://cache.nixos.org" >> /etc/nix/nix.conf
+$ nix-build helpers/bench.nix --option extra-binary-caches https://cache.nixos.org
 ```
 
 ### How do I force nix to re-check whether something exists at a binary cache?
