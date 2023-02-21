@@ -408,6 +408,8 @@ linkcheck_ignore = [
     r"https://app.terraform.io",
     # It's dynamic
     r"https://matrix.to",
+    # returns 403 on CI
+    r"https://www.lesswrong.com",
 ]
 
 # Anchors are not present in HTML
