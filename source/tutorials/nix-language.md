@@ -134,7 +134,7 @@ Type `:q` to exit [`nix repl`].
 
 :::
 
-[`nix-repl`]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
+[nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
 
 #### Evaluating Nix files
 
