@@ -104,7 +104,7 @@ The following example is a Nix expression adding two numbers:
 
 #### Interactive evaluation
 
-Use [`nix repl`][nix-repl] to evaluate Nix expressions interactively (by typing them on the command line):
+Use [`nix repl`] to evaluate Nix expressions interactively (by typing them on the command line):
 
 ```shell-session
 $ nix repl
@@ -134,7 +134,7 @@ Type `:q` to exit [`nix repl`].
 
 :::
 
-[nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
+[`nix repl`]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
 
 #### Evaluating Nix files
 
@@ -2057,7 +2057,7 @@ Explanation:
 - [Nix manual: Nix language][manual-language]
 - [Nix manual: String interpolation][manual-string-interpolation]
 - [Nix manual: Built-in Functions][nix-builtins]
-- [Nix manual: `nix repl`][`nix-repl`]
+- [Nix manual: `nix repl`][`nix repl`]
 - [Nixpkgs manual: Functions reference][nixpkgs-functions]
 - [Nixpkgs manual: Fetchers][nixpkgs-fetchers]
 
