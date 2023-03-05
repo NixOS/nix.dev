@@ -2,6 +2,7 @@
 
 ```{toctree}
 :glob: true
+:maxdepth: 2
 
 install-nix.md
 ad-hoc-developer-environments.md
