@@ -139,7 +139,7 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
 
 <details><summary> Detailed explanation </summary>
 
-The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation that you want to build.
+The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be build.
 With `'<nixpkgs>'` Nix is instructed to resolve the search path defined with the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the [`-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I).
 The virtual machine setup is provided by NixOS, which is part of the `nixpkgs` repository, therefore we use `'<nixpkgs/nixos>'`.
 The [-A option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](nix-language#search-path).
@@ -148,15 +148,14 @@ The [-I option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#
 Here we set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the `configuration.nix` file in the current directory.
 
 :::{admonition} NixOS
-On NixOS you usually have a `$NIX_PATH` environment variable set up. You can use your current version of nixpkgs to build the virtual machine with this simpler command:[^nixosrebuild]
+On NixOS the `$NIX_PATH` environment variable is usually set up automatically, and there is also [a convenience command for building virtual machines](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+You can use the current version of `nixpkgs` to build the virtual machine like this:
 ```shell-session
-nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
+nixos-rebuild build-vm -I nixos-config=./configuration.nix
 ```
 :::
 
 </details>
-
-[^nixosrebuild]: On NixOS you can create a virtual machine using `nixos-rebuild build-vm -I nixos-config=./configuration.nix`, which wraps the original command. its usage is mentioned [here](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 
 ## Running the virtual machine
 
@@ -194,13 +193,13 @@ rm nixos.qcow2
 
 # References
 
-- Nix manual: [`nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
-- Nix manual: [common cli options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
-- Nix manual: [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
-- NixOS Manual: [NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
-- NixOS Manual: [Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
-- NixOS Manual Reference: [Options](https://nixos.org/manual/nixos/stable/options.html).
-- NixOS Manual: [NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
-- Wiki entry: [nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
-- Source code: [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
-- Source code: [vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
+- [Nix manual: `nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
+- [Nix manual: common cli options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
+- [Nix manual: `NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
+- [NixOS Manual: NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
+- [NixOS Manual: Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
+- [NixOS Manual Reference: Options](https://nixos.org/manual/nixos/stable/options.html).
+- [NixOS Manual: NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+- [Wiki entry: nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
+- [Source code: configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
+- [Source code: vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
