@@ -28,19 +28,20 @@ In this tutorial you will use the default configuration that is shipped with Nix
 :::{admonition} NixOS
 
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
-By default, the configuration file is located at `/etc/nixos/configuration.nix` to avoid overwriting this file you have to specify the output directory.
+By default, the configuration file is located at `/etc/nixos/configuration.nix`.
+To avoid overwriting this file you have to specify the output directory.
 Create a NixOS configuration in your working directory:
 
 ```shell-session
 nixos-generate-config --dir ./
 ```
 
-In the working directory you will then find two files: `configuration.nix` and `hardware-configuration.nix`.
+In the working directory you will then find two files:
 
-`hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
-You can ignore that file for this tutorial because it has no effect inside a virtual machine.
+1. `hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
+   You can ignore that file for this tutorial because it has no effect inside a virtual machine.
 
-The `configuration.nix` file contains various suggestions and comments for the initial setup of a desktop computer.
+2. `configuration.nix` contains various suggestions and comments for the initial setup of a desktop computer.
 :::
 
 The default configuration of NixOS without comments is:
@@ -76,7 +77,7 @@ To be able to log in add the following lines to the returned attribute set:
 ```
 
 :::{admonition} NixOS
-On NixOS your configuration generated using `nix-generate-config` contains the user configuration commented out.
+On NixOS your configuration generated using `nix-generate-config` contains this user configuration commented out.
 :::
 
 Additionally, you need to specify a password for this user.
@@ -126,7 +127,7 @@ The complete `configuration.nix` file now looks like this:
 
 A virtual machine is created with the `nix-build` command.
 
-To select `configuration.nix` in the working directory, specify the configuration file as an argument:
+To select `configuration.nix` in the working directory, specify the configuration file on the command line:
 
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm \
@@ -134,18 +135,17 @@ nix-build '<nixpkgs/nixos>' -A vm \
 -I nixos-config=./configuration.nix
 ```
 
-This command builds the attribute `vm` using the version of Nixpkgs as using the [short form for channels](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#env-NIX_PATH) and using the NixOS configuration as specified in the relative path.
+This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, using the NixOS configuration as specified in the relative path.
 
 <details><summary> Detailed explanation </summary>
 
 The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation that you want to build.
-By using `'<nixpkgs>'` you use a named search path that can be defined using the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the `-I` option.
-To build the virtual machine attribute you want to make use of the attributes provided by NixOS in the Nixpkgs, therefore you use `'<nixpkgs/nixos>'`.
-The [-I](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) option allows you to set search paths.
-In this example, you use it to explicitly set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the configuration.nix file in your current folder.
-The [-A](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) option allows you to specify which attribute to build.
-To build the virtual machine, you choose the attribute `vm`.
-The `vm` attribute is inhereted from `eval.config.system.build` as defined in the [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
+With `'<nixpkgs>'` Nix is instructed to resolve the search path defined with the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the [`-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I).
+The virtual machine setup is provided by NixOS, which is part of the `nixpkgs` repository, therefore we use `'<nixpkgs/nixos>'`.
+The [-A option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](nix-language#search-path).
+To build the virtual machine, you choose the `vm` attribute `as defined in [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
+The [-I option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) adds search paths.
+Here we set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the `configuration.nix` file in the current directory.
 
 :::{admonition} NixOS
 On NixOS you usually have a `$NIX_PATH` environment variable set up. You can use your current version of nixpkgs to build the virtual machine with this simpler command:[^nixosrebuild]
@@ -160,8 +160,8 @@ nix-build '<nixpkgs/nixos>' -A vm -I nixos-config=./configuration.nix
 
 ## Running the virtual machine
 
-The previous command creates a link with the name `result` in the working directory.
-It links to the folder that contains the virtual machine.
+The previous command created a link with the name `result` in the working directory.
+It links to the directory that contains the virtual machine.
 
 ```shell-session
 ls -R ./result
@@ -175,7 +175,7 @@ ls -R ./result
     run-nixos-vm
 ```
 
-To run the virtual machine, execute:
+Run the virtual machine:
 
 ```shell-session
 ./result/bin/run-nixos-vm
@@ -183,10 +183,14 @@ To run the virtual machine, execute:
 
 This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
 
-Running the virtual machine will create a `nixos.qcow2` file in the folder from which you start the virtual machine.
+Running the virtual machine will create a `nixos.qcow2` file in the current directory.
 This disk image file contains the dynamic state of the virtual machine.
 It can interfere with debugging as it keeps the state of previous runs, for example the user password.
-You should delete this file when you change the configuration.
+You should delete this file when you change the configuration:
+
+```shell-session
+rm nixos.qcow2
+```
 
 # References
 
