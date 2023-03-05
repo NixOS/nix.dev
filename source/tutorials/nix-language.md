@@ -1850,7 +1850,7 @@ Example:
 
 ```{code-block} nix
 :class: expression
-builtins.fetchurl https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+builtins.fetchurl "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
 ```
 
 ```{code-block}
@@ -1864,7 +1864,7 @@ Example:
 
 ```{code-block} nix
 :class: expression
-builtins.fetchTarball https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+builtins.fetchTarball "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
 ```
 
 ```{code-block}
