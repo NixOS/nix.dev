@@ -201,5 +201,5 @@ rm nixos.qcow2
 - [NixOS Manual Reference: Options](https://nixos.org/manual/nixos/stable/options.html).
 - [NixOS Manual: NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 - [Wiki entry: nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
-- [Source code: configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
-- [Source code: vm attribute](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
+- [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
+- [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
