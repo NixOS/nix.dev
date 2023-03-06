@@ -71,7 +71,7 @@ To be able to log in add the following lines to the returned attribute set:
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       firefox
-      thunderbird
+      tree
     ];
   };
 ```
@@ -114,7 +114,7 @@ The complete `configuration.nix` file now looks like this:
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       firefox
-      thunderbird
+      tree
     ];
     initialPassword = "testpw";
   };
