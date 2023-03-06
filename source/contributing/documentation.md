@@ -1,6 +1,7 @@
 # Contributing Documentation
 
-This guide explains how you can contribute documentation to Nix, Nixpkgs, or NixOS.
+This guide shows how you can contribute documentation to Nix, Nixpkgs, or NixOS.
+It is maintained by the [Nix documentation team](https://nixos.org/community/teams/documentation), your first point of contact if you want to help out.
 
 ## List of available documentation
 
