@@ -83,7 +83,7 @@ On NixOS your configuration generated using `nix-generate-config` contains this 
 Additionally, you need to specify a password for this user.
 For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:[^password]
 
-[^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`] or [`ssh.authorizedKeys`] for more secure alternatives.
+[^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.initialHashedPassword) or [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for more secure alternatives.
 
 ```nix
 initialPassword = "testpw";
@@ -142,8 +142,8 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
 The first optional argument of [nix-build](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be build.
 With `'<nixpkgs>'` Nix is instructed to resolve the search path defined with the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the [`-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I).
 The virtual machine setup is provided by NixOS, which is part of the `nixpkgs` repository, therefore we use `'<nixpkgs/nixos>'`.
-The [-A option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](nix-language#search-path).
-To build the virtual machine, you choose the `vm` attribute `as defined in [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
+The [-A option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](https://nix.dev/tutorials/nix-language#search-path).
+To build the virtual machine, you choose the `vm` attribute as defined in [nixos/default.nix](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
 The [-I option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) adds search paths.
 Here we set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the `configuration.nix` file in the current directory.
 
