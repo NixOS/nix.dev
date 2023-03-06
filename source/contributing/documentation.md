@@ -9,7 +9,7 @@ It is maintained by the [Nix documentation team](https://nixos.org/community/tea
 
 The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][nixos manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
 
-They also show example interactions to show how to use its components, and explain mechanisms where necessary.
+They also show example interactions which demonstrate how to use its components, and explain mechanisms where necessary.
 
 The documentation team watches all pull requests to the manuals and assists contributors to get their changes merged.
 
