@@ -38,7 +38,7 @@ We will use the shebang line `#! /usr/bin/env nix-shell`.
 [`env`] is a program available on most modern Unix-like operating systems at the file system path `/usr/bin/env`.
 It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
 
-[`env`]: https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html
+[`env`]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/env.html
 
 We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
