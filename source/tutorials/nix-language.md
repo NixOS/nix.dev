@@ -972,6 +972,7 @@ Example:
 Paths can be used in interpolated expressions – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
 :::
 
+(search-path-tutorial)=
 #### Search path
 
 Also known as “angle bracket syntax”.

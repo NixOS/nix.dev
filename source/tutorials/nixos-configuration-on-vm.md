@@ -23,7 +23,7 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 ## Starting from the default NixOS configuration
 
 In this tutorial you will use the default configuration that is shipped with NixOS.[^nixosconf]
-[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
+[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
 
 :::{admonition} NixOS
 
@@ -142,7 +142,7 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
 The first optional argument of [`nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be build.
 With `'<nixpkgs>'` Nix is instructed to resolve the search path defined with the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the [`-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I).
 The virtual machine setup is provided by NixOS, which is part of the `nixpkgs` repository, therefore we use `'<nixpkgs/nixos>'`.
-The [`-A` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](https://nix.dev/tutorials/nix-language#search-path).
+The [`-A` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](search-path-tutorial).
 To build the virtual machine, you choose the `vm` attribute as defined in [`nixos/default.nix`](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
 The [`-I` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) adds search paths.
 Here we set `nixpkgs` to refer to a specific version of NixOS and to set `nix-config` to the `configuration.nix` file in the current directory.
@@ -201,5 +201,5 @@ rm nixos.qcow2
 - [NixOS Manual Reference: Options](https://nixos.org/manual/nixos/stable/options.html).
 - [NixOS Manual: NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 - [Wiki entry: nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
-- [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/b4093a24a868708c06d93e9edf13de0b3228b9c7/nixos/modules/installer/tools/tools.nix#L122-L226).
+- [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226).
 - [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
