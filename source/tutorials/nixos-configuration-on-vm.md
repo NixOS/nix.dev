@@ -139,7 +139,7 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
 
 <details><summary> Detailed explanation </summary>
 
-The first optional argument of [`nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be build.
+The first optional argument of [`nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be built.
 With `'<nixpkgs>'` Nix is instructed to resolve the search path defined with the [`NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH) or the [`-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I).
 The virtual machine setup is provided by NixOS, which is part of the `nixpkgs` repository, therefore we use `'<nixpkgs/nixos>'`.
 The [`-A` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided [Nix expression `<nixpkgs>`](search-path-tutorial).
