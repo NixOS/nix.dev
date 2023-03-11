@@ -17,7 +17,7 @@ Communication platforms are distinguished by mode of interaction:
 
 Streams can be appended to:
 
-- The amount of infomation in them grows without bounds.
+- The amount of information in them grows without bounds.
 - Only recent items are relevant.
 
 Artifacts can be changed:
