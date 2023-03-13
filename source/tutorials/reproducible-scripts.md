@@ -35,8 +35,10 @@ It determines which program to use for running the script.
 
 We will use the shebang line `#! /usr/bin/env nix-shell`.
 
-`/usr/bin/env` is a program available on most modern Unix-like operating systems.
+[`env`] is a program available on most modern Unix-like operating systems at the file system path `/usr/bin/env`.
 It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
+
+[`env`]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/env.html
 
 We use [`nix-shell` as a shebang interpreter].
 It takes the following parameters relevant for our use case:
@@ -82,3 +84,9 @@ Run the script:
 ```console
 ./nixpkgs-releases.sh
 ```
+
+# Next steps
+
+- {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
+- {ref}`declarative-reproducible-envs` to create reproducible shell environments with a declarative configuration file.
+- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – free up storage used by the programs made available through Nix
