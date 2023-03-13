@@ -25,15 +25,24 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 - Valentin Gagarin ([@fricklerhandwerk])
 
   Nix documentarian, [Tweag]
+  
+  [@fricklerhandwerk]: https://github.com/fricklerhandwerk
+  [Tweag]: https://tweag.io
 
 - Silvan Mosberger ([@infinisil])
 
+  [@infinisil]: https://github.com/infinisil
+
   Nixpkgs maintainer, [Tweag]
 
-[@fricklerhandwerk]: https://github.com/fricklerhandwerk
-[@infinisil]: https://github.com/infinisil
+- [@pennae](https://github.com/pennae) (they/them)
 
-[Tweag]: https://tweag.io
+  NixOS and Nixpkgs contributors
+
+- Olaf Hochherz (Github: [@olafklingt], Discourse: [@olaf])
+
+  [@olafklingt]: https://github.com/olafklingt
+  [@olaf]: https://discourse.nixos.org/u/olaf
 
 ## Responsibilities
 
