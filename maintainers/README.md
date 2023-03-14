@@ -48,6 +48,10 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [@zmitchell]: https://github.com/zmitchell/
 
+- Brian McGee (Github: [@brianmcgee], Discourse: [@bmg])
+
+  [@brianmcgee]: https://github.com/brianmcgee
+  [@bmg]: https://discourse.nixos.org/u/bmg
 ## Responsibilities
 
 ### Team

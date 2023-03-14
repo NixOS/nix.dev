@@ -1,3 +1,5 @@
+# Learning Journey Working Group
+
 ## Goals
 The primary goal of the Learning Journey Working Group is to provide Nix users with adequate resources to learn Nix on their own. This means that it is the job of the WG to:
 - Ensure that adequate documentation exists
