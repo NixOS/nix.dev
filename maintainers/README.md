@@ -52,6 +52,10 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [@brianmcgee]: https://github.com/brianmcgee
   [@bmg]: https://discourse.nixos.org/u/bmg
+
+## Working Groups
+- [Learning Journey](working_groups/learning_journey/README.md)
+
 ## Responsibilities
 
 ### Team

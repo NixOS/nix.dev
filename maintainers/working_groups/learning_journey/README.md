@@ -1,12 +1,12 @@
 # Learning Journey Working Group
 
 ## Goals
-The primary goal of the Learning Journey Working Group is to provide Nix users with adequate resources to learn Nix on their own. This means that it is the job of the WG to:
-- Ensure that adequate documentation exists
-- Ensure that the documentation is structured in an intuitive way
-- Ensure that the documentation is discoverable
-- Ensure that the documentation meets a minimum standard of quality
-- Establish guidelines for contributions
+The primary goal of the Learning Journey Working Group is to provide Nix users with adequate resources to learn Nix on their own. This means that it is the job of the WG to determine the most effective methods for teaching Nix, including:
+- Ensuring that adequate documentation exists
+- Ensuring that the documentation is structured in an intuitive way
+- Ensuring that the documentation is discoverable
+- Ensuring that the documentation meets a minimum standard of quality
+- Establishing guidelines for contributions
 
 By extension the WG will be responsible for practical aspects such as:
 - Some portion of the structure of `nix.dev` so that documentation is discoverable and organized intuitively
@@ -22,7 +22,7 @@ Members:
 Membership is open to anyone that wants to contribute.
 
 ## Meetings
-Meetings will be held every two weeks to ensure that progress can be made between meetings.
+Meetings will be held every week to ensure that progress can be made between meetings.
 
 ## Immediate projects
 ### Decide on documentation structure
@@ -80,4 +80,6 @@ Examples:
 
 ## Long term projects
 ### Migrate existing documentation
-There is a large body of existing documentation that should not be discounted. We should use the existing documentation to bootstrap the new 
+There is a large body of existing documentation that should not be discounted. We should use the existing documentation to bootstrap the new, reorganized documentation.
+
+Prior art: [Nix Book - Resources](https://github.com/NixOS/nix-book/blob/main/resources.md)
