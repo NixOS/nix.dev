@@ -43,6 +43,11 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [@olafklingt]: https://github.com/olafklingt
   [@olaf]: https://discourse.nixos.org/u/olaf
+  
+- Henrik Karlsson (Github: [@henrik-ch], Discourse: [@i97henka])
+
+  [@henrik-ch]: https://github.com/henrik-ch
+  [@i97henka]: https://discourse.nixos.org/u/i97henka
 
 ## Responsibilities
 
