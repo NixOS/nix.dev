@@ -44,6 +44,10 @@ The team’s reason to exist is to make that principle discoverable and reproduc
   [@olafklingt]: https://github.com/olafklingt
   [@olaf]: https://discourse.nixos.org/u/olaf
 
+- Zach Mitchell (GitHub: [@zmitchell])
+
+  [@zmitchell]: https://github.com/zmitchell/
+
 ## Responsibilities
 
 ### Team
