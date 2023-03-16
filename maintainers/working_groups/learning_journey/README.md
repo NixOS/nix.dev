@@ -18,7 +18,7 @@ Leads: @zmitchell
 Members:
 - @infinisil
 - @brianmcgee 
-
+- @henrik-ch
 Membership is open to anyone that wants to contribute.
 
 ## Meetings
