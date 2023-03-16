@@ -416,6 +416,8 @@ linkcheck_anchors_ignore = [
     r"authentication",
     r"community",
     r"video",
+    # GitHub code line numbers
+    r"^L(\d+)(-L\d+)?$",
 ]
 
 
