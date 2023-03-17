@@ -53,7 +53,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [@zmitchell]: https://github.com/zmitchell/
 
-- [Philipp](httsp://github.com/pstn)
+- [Philipp](https://github.com/pstn)
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
