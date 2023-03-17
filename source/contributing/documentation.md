@@ -223,7 +223,7 @@ The same holds for communication directed to contributors and maintainers: This 
 
 [Blaise Pascal]: https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes
 
-## Guides
+## Guidelines
 
 ### Writing style
 
