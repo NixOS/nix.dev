@@ -85,7 +85,7 @@ Run the script:
 ./nixpkgs-releases.sh
 ```
 
-# Next steps
+## Next steps
 
 - {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
 - {ref}`declarative-reproducible-envs` to create reproducible shell environments with a declarative configuration file.
