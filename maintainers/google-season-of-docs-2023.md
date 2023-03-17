@@ -103,7 +103,7 @@ Since creating documentation is much less "writing things down" and much more "b
 With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate, to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for the Nix ecosystem.
 We also want to support community volunteers to provide documentation-specific technical support to contributors.
 
-This is why we estimate a budget somewhat higher than the estimate of $15000.
+This is why we estimate a budget somewhat higher than the suggested limit of $15000.
 It is in principle possible to adjust project scope, but the budget itself is primarily determined by the largely fixed cost of the design phase.
 
 Domain experts:
