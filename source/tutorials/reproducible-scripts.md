@@ -27,8 +27,7 @@ With Nix, we can declare all dependencies explicitly, and produce a script that 
 
 ## The script
 
-A [shebang] is the first line of a script starting with `#!`.
-It determines which program to use for running the script.
+A [shebang] determines which program to use for running an interpreted script.
 
 [Bash]: https://www.gnu.org/software/bash/
 [shebang]: https://en.wikipedia.org/wiki/Shebang_(Unix)
