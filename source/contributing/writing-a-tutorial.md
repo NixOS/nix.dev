@@ -41,7 +41,7 @@ Examples:
 ### How long does it take?
 
 Estimate the reading time.
-This is important for learners to make sure they have the capacity to achieve the planned tasks and thus avoid amounts frustration that will prevent them from continuing on their journey into the Nix ecosystem.
+This is important for learners to make sure they have the capacity to achieve the planned tasks and thus avoid frustration that may prevent them from continuing on their journey into the Nix ecosystem.
 
 The estimate will depend on the learner's pre-existing knowledge and proficiency.
 You can note how optional skills or knowledge may influence reading time.
