@@ -49,6 +49,13 @@ The team’s reason to exist is to make that principle discoverable and reproduc
   [@henrik-ch]: https://github.com/henrik-ch
   [@i97henka]: https://discourse.nixos.org/u/i97henka
 
+- Zach Mitchell (GitHub: [@zmitchell])
+
+  [@zmitchell]: https://github.com/zmitchell/
+
+## Working Groups
+- [Learning Journey](working_groups/learning_journey/README.md)
+
 ## Responsibilities
 
 ### Team
