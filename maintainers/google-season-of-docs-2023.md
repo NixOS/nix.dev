@@ -107,13 +107,15 @@ This is why we estimate a budget somewhat higher than the estimate of $15000.
 It is in principle possible to adjust project scope, but the budget itself is primarily determined by the largely fixed cost of the design phase.
 
 Domain experts:
-    - Editorial lead ($8000)
-    - Didactics ($5000)
-    - Nix ($5500)
+
+- Editorial lead ($8000)
+- Didactics ($5000)
+- Nix ($5500)
 
 Volunteers:
-    - 5 tutorial authors ($500 each)
-    - Technical support ($500)
+
+- 5 tutorial authors ($500 each)
+- Technical support ($500)
 
 **Total estimate: $21500**
 
