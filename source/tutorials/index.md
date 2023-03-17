@@ -12,6 +12,7 @@ towards-reproducibility-pinning-nixpkgs.md
 declarative-and-reproducible-developer-environments.md
 continuous-integration-github-actions.md
 dev-environment.md
+connect-bash-nix-mkderivation.md
 building-and-running-docker-images.md
 building-bootable-iso-image.md
 deploying-nixos-using-terraform.md
