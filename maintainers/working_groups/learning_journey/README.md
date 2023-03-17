@@ -19,6 +19,8 @@ Members:
 - @infinisil
 - @brianmcgee 
 - @henrik-ch
+- @erooke
+
 Membership is open to anyone that wants to contribute.
 
 ## Meetings
