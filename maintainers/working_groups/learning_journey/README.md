@@ -20,6 +20,7 @@ Members:
 - @brianmcgee 
 - @henrik-ch
 - @erooke
+- @asymmetric
 
 Membership is open to anyone that wants to contribute.
 
