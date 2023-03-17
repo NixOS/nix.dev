@@ -41,7 +41,7 @@ Files ending in `.nix` are expressions written in the Nix programming language.
 :::{dropdown} Detailed explanation of hello.nix line by line
 
 1. builtins.derivation is a built-in Nix function. The opening brace starts an attribute set: a data type very similar to a JavaScript/JSON object or a Python dictionary. The attribute set is passed to the `derivation` function as its argument.
-2. `name` is the full name of the derivation. It's a required argument for the `derivation` function.  `name`is used as part of the build output path (called a store path) when the derivation is built.
+2. `name` is the full name of the derivation. It's a required argument for the `derivation` function.  `name` is used as part of the build output path (called a store path) when the derivation is built.
 3. `builder` is the program that nix-build will run when the derivation is built. It's also required for the `derivation` function. It is typically a shell script, but could be the path to any Unix executable.
 4. `system` is a string specifying the Nix system type that the build can occur on. It's the last required argument for the `derivation` function. `builtins.currentSystem` is used here to say "this derivation can build on whatever system that is currently running".
 5. Any other attributes passed along to the `derivation` are passed along as environment variables to the builder. In this case, the `greeting` environment variable is set to "Hello, World!".
@@ -74,7 +74,8 @@ the `8ny033mhdz8c7187wskdz2k9n83sifbz` part of the store path is based on the ha
 Above `nix-build` was used to build a text file. Below `nix-build` will be used to create some more complex build outputs.
 
 ## Building and using derivations for programs
-Below is a derivation that generates a shell script rather than a text file. The convention for derivations that bundle up programs is to create a small version of the [Filesystem Hierarchy Standard] at the store path. That means that an $out/bin directory shall be created, and the shell script shall be placed there.
+Below is a derivation that generates a shell script rather than a text file. The convention for derivations that bundle up programs is to create a small version of the [Filesystem Hierarchy Standard] at the store path. That means that an `$out/bin` directory shall be created, and the shell script shall be placed there.
+
 [Filesystem Hierarchy Standard]: https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 
 
@@ -89,7 +90,7 @@ echo "#!/bin/sh" > "$out/bin/hello"
 echo "echo '$greeting'" >> "$out/bin/hello"^
 chmod +x "$out/bin/hello"
 ```
-Run `chmod +x build-greeter-script.sh` to make the script executable.`
+Run `chmod +x build-greeter-script.sh` to make the script executable.
 Next make a new derivation named `hello-script.nix` (very similar to the last one):
 ```{code-block} nix
 # First attempt, not the final version:
@@ -116,9 +117,9 @@ error: builder for '/nix/store/d4yfycw4zb33d5syhzarcm7lcmk6y6yn-hello.drv' faile
        For full logs, run 'nix log /nix/store/d4yfycw4zb33d5syhzarcm7lcmk6y6yn-hello.drv'.
 ```
 
-what? `mkdir: not found`? 
+What? `mkdir: not found`? 
 
-When Nix runs a builder program, it sets `PATH=/path-not-set` by default ([source]) and sandboxes the build so that derivations can't use OS-provided programs. In the first example, as only the `echo`command was used, it was able to run successfully. The standard core Unix utilities must be explicitly imported for the build to succeed. On the surface, not including standard Unix utilities in the default build environment may seem like a bug, but this is an intentional design decision to ensure reproducibility. Reproducible builds mean that Nix derivations work the same way on any machine. This is a key part of Nix's value proposition.
+When Nix runs a builder program, it sets `PATH=/path-not-set` by default ([source]) and sandboxes the build so that derivations can't use OS-provided programs. In the first example, as only the `echo` command was used, it was able to run successfully. The standard core Unix utilities must be explicitly imported for the build to succeed. On the surface, not including standard Unix utilities in the default build environment may seem like a bug, but this is an intentional design decision to ensure reproducibility. Reproducible builds mean that Nix derivations work the same way on any machine. This is a key part of Nix's value proposition.
 
 [source]: https://nixos.org/manual/nix/stable/language/derivations.html
 
@@ -146,7 +147,7 @@ builtins.derivation {
 
 The first two lines import nixpkgs into the scope as the variable `pkgs`. A specific commit is used for reproducibility. Notice how the `PATH` variable is set to the `bin` directory of the `coreutils` derivation. It also indicates to Nix that the `hello` derivation depends on the `coreutils` derivation
 
-Running `nix-build``again, and it will download the `coreutils` from the public Nix cache before building the `hello` derivation:
+Running `nix-build` again, and it will download the `coreutils` from the public Nix cache before building the `hello` derivation:
 ```shell-session
 
 $ nix-build hello-script.nix
@@ -227,7 +228,7 @@ builtins.derivation {
 
 Run `nix-build gnu-hello1.nix` followed by `result/bin/hello` like before. Because this downloads a lot more dependencies from the internet, the output is omitted here. The greeting is printed to standard out like in the previous examples. Verify that it is GNU Hello by running `result/bin/hello --version`.
 
-While the above works, the nixpkgs repository has a wrapper function, stdenv.mkDerivation, that makes this easier. It includes [its own builder script], a [library] of utility functions, and runs phases provided by environment variables, and provides [common tooling for compiling C packages]. The [Standard Environment chapter] of the Nixpkgs manual has more information.
+While the above works, the nixpkgs repository has a wrapper function, `stdenv.mkDerivation`, that makes this easier. It includes [its own builder script], a [library] of utility functions, and runs phases provided by environment variables, and provides [common tooling for compiling C packages]. The [Standard Environment chapter] of the Nixpkgs manual has more information.
 
 [its own builder script]: https://github.com/NixOS/nixpkgs/blob/ae8bdd2de4c23b239b5a771501641d2ef5e027d0/pkgs/stdenv/generic/default-builder.sh
 [library]:https://github.com/NixOS/nixpkgs/blob/ae8bdd2de4c23b239b5a771501641d2ef5e027d0/pkgs/stdenv/generic/setup.sh
@@ -235,7 +236,7 @@ While the above works, the nixpkgs repository has a wrapper function, stdenv.mkD
 [Standard Environment chapter]:https://nixos.org/manual/nixpkgs/unstable/#chap-stdenv
 
 
-Below the derivation is rewritten using stdenv.mkDerivation. This time, no builder script is needed. The Bash snippets are included as phases.
+Below the derivation is rewritten using `stdenv.mkDerivation`. This time, no builder script is needed. The Bash snippets are included as phases.
 
 ```{code-block} nix
 # gnu-hello2.nix
@@ -256,9 +257,9 @@ pkgs.stdenv.mkDerivation {
 }
 ```
 
-Build with `nix-build gnu-hello2.nix` it should produce another GNU Hello binary.
+Building with `nix-build gnu-hello2.nix` it should produce another GNU Hello binary.
 
-Since so many existing Unix programs follow this `./configure && make && make install` pattern, this is the default for stdenv.mkDerivation. Thus, the three last lines can be omitted:
+Since so many existing Unix programs follow this `./configure && make && make install` pattern, this is the default for `stdenv.mkDerivation`. Thus, the three last lines can be omitted:
 ```{code-block} nix
 # gnu-hello3.nix
 
