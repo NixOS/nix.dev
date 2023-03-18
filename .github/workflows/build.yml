@@ -21,12 +21,19 @@ jobs:
     - name: Build
       run: nix-build
     - name: Copy build from Nix store
+      if: github.event_name == 'pull_request'
       run: |
         cp -r -L result real-result
         rm result
         mv real-result result
-    - name: Upload artifact
+    - name: Save PR number
+      if: github.event_name == 'pull_request'
+      run: echo ${{ github.event.number }} > .github/pr
+    - name: Upload artifact for deploy preview
       uses: actions/upload-artifact@v3
+      if: github.event_name == 'pull_request'
       with:
-        name: build
-        path: result/
+        name: pr
+        path: |
+          result/
+          .github/pr
