@@ -19,7 +19,7 @@ The starting point is a very simple shell script that takes the contents of a gr
 
 ```{code-block} bash
 #!/bin/sh
-echo $"greeting" > $"out"
+echo "$greeting" > "$out"
 ```
 
 When this file is created, make it executable by running: `chmod +x greet.sh`.
