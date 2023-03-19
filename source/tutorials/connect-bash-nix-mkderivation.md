@@ -87,7 +87,7 @@ First create a new builder script named `build-greeter-script.sh`:
 set -e
 mkdir -p "$out/bin"
 echo "#!/bin/sh" > "$out/bin/hello"
-echo "echo '$greeting'" >> "$out/bin/hello"^
+echo "echo '$greeting'" >> "$out/bin/hello"
 chmod +x "$out/bin/hello"
 ```
 Run `chmod +x build-greeter-script.sh` to make the script executable.
