@@ -40,7 +40,7 @@ Files ending in `.nix` are expressions written in the Nix programming language.
 
 :::{dropdown} Detailed explanation of hello.nix line by line
 
-1. builtins.derivation is a built-in Nix function. The opening brace starts an attribute set: a data type very similar to a JavaScript/JSON object or a Python dictionary. The attribute set is passed to the `derivation` function as its argument.
+1. `builtins.derivation` is a built-in Nix function. The opening brace starts an attribute set: a data type very similar to a JavaScript/JSON object or a Python dictionary. The attribute set is passed to the `derivation` function as its argument.
 2. `name` is the full name of the derivation. It's a required argument for the `derivation` function.  `name` is used as part of the build output path (called a store path) when the derivation is built.
 3. `builder` is the program that nix-build will run when the derivation is built. It's also required for the `derivation` function. It is typically a shell script, but could be the path to any Unix executable.
 4. `system` is a string specifying the Nix system type that the build can occur on. It's the last required argument for the `derivation` function. `builtins.currentSystem` is used here to say "this derivation can build on whatever system that is currently running".
