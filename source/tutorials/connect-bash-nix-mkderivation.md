@@ -33,7 +33,7 @@ builtins.derivation {
   system = builtins.currentSystem;
 
   greeting = "Hello, World!";
-  };
+  }
 ```
 
 Files ending in `.nix` are expressions written in the Nix programming language. 
