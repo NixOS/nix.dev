@@ -72,7 +72,7 @@ Since this is our first one, let's break this down line by line:
 
 To build this derivation, we run the `nix-build` program with our `hello.nix` file:
 
-```plain
+```bash
 $ nix-build hello.nix
 this derivation will be built:
   /nix/store/ymhh65wy3nr7b9w8jl9kqavz9bq57fhp-hello.txt.drv
@@ -85,7 +85,7 @@ This is the same path that will be sent to your `builder` program as the `out` e
 As a convenience, `nix-build` will also create a symlink to the output path in the current directory with the name `result`.
 You can inspect it yourself:
 
-```plain
+```bash
 $ readlink result
 /nix/store/8ny033mhdz8c7187wskdz2k9n83sifbz-hello.txt
 $ cat /nix/store/8ny033mhdz8c7187wskdz2k9n83sifbz-hello.txt
@@ -135,7 +135,7 @@ builtins.derivation {
 
 Let's try to build this with `nix-build` like we did before:
 
-```plain
+```bash
 Z nix-build hello-script.nix
 this derivation will be built:
   /nix/store/d4yfycw4zb33d5syhzarcm7lcmk6y6yn-hello.drv
@@ -185,7 +185,7 @@ _and_ indicate to Nix that `pkgs.coreutils` is a build dependency of our `hello`
 Now we can run `nix-build` again,
 and it will download coreutils from the public Nix cache before building our `hello` derivation:
 
-```plain
+```bash
 $ nix-build hello-script.nix
 this derivation will be built:
   /nix/store/0akibr7h4yyx1hmn1dnjn066gc4yixaw-hello.drv
@@ -212,7 +212,7 @@ building '/nix/store/0akibr7h4yyx1hmn1dnjn066gc4yixaw-hello.drv'...
 
 Excellent! Now we have built a small directory tree around our script:
 
-```plain
+```bash
 $ cat result/bin/hello
 #!/bin/sh
 echo 'Hello, World!'
