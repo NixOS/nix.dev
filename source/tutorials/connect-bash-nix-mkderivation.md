@@ -1,3 +1,4 @@
+# Connecting Bash to Nix and mkDerivation
 Julia Evans wrote a [toot](https://social.jvns.ca/@b0rk/109954253779465018) asking:
 
 > are there any guides to nix that start from the bottom up (for example starting with this bash script [https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/setup.sh](https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/setup.sh "https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/setup.sh")) and then working up the layers of abstraction) instead of from the top down?
