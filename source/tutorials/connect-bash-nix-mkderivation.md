@@ -267,7 +267,7 @@ let pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/ae8bdd
 in
 
 pkgs.stdenv.mkDerivation {
-    name = "hello";
+    name = "gnu-hello";
     src = pkgs.fetchurl {
         url = "mirror://gnu/hello/hello-2.12.1.tar.gz";
         hash = "sha256-jZkUKv2SV28wsM18tCqNxoCZmLxdYH2Idh9RLibH2yA=";
