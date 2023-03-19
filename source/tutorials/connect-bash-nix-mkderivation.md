@@ -68,7 +68,7 @@ Hello, World!
 ```
 
 :::{dropdown} Detailed explanation
-the `8ny033mhdz8c7187wskdz2k9n83sifbz` part of the store path is based on the hash of the derivation and its inputs. If you are following along on a `x86_64-linux` system, you will get the same hashes. This is a key part of how Nix can reuse built derivations across machines. If you are using a non-Intel or non_linx machine, the hashed will be different because the `system` is different.
+The `8ny033mhdz8c7187wskdz2k9n83sifbz` part of the store path is based on the hash of the derivation and its inputs. If you are following along on a `x86_64-linux` system, you will get the same hashes. This is a key part of how Nix can reuse built derivations across machines. If you are using a non-Intel or non-Linux machine, the hashes will be different because the `system` is different.
 :::
 
 Above `nix-build` was used to build a text file. Below `nix-build` will be used to create some more complex build outputs.
