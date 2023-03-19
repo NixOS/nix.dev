@@ -178,7 +178,7 @@ Now a small directory tree has been built:
 ```shell-session
 $ cat result/bin/hello
 #!/bin/sh
-echo "Hello, World!"
+echo 'Hello, World!'
 $ result/bin/hello
 Hello, World!
 ```
