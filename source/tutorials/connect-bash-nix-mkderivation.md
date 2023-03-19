@@ -147,7 +147,7 @@ builtins.derivation {
 
 The first two lines import nixpkgs into the scope as the variable `pkgs`. A specific commit is used for reproducibility. Notice how the `PATH` variable is set to the `bin` directory of the `coreutils` derivation. It also indicates to Nix that the `hello` derivation depends on the `coreutils` derivation
 
-Running `nix-build` again, and it will download the `coreutils` from the public Nix cache before building the `hello` derivation:
+Run `nix-build` again, and it will download the `coreutils` from the public Nix cache before building the `hello` derivation:
 ```shell-session
 
 $ nix-build hello-script.nix
