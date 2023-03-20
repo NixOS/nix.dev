@@ -1,145 +1,194 @@
 (ad-hoc-envs)=
 
-# Ad hoc developer environments
+# Ad hoc shell environments
 
-Assuming you have {ref}`Nix installed <install-nix>`, you can use it
-to download packages and create new **shell environments** that use these packages.
+In a Nix shell environment, you can immediately use any program packaged with Nix, without installing it permanently.
 
-This is a great way to play with Nix tooling and see some of its potential.
+You can also share the command invoking such a shell with others, and it will work on all Linux distributions, WSL, and macOS[^1].
 
-## What is a shell environment?
+[^1]: Not all packages are supported for both Linux and macOS. Especially support for graphical programs may vary.
 
-A shell environment gives you access to the exact versions of packages specified by Nix.
+## Create a shell environment
 
-A hello world example:
+Once you {ref}`install Nix <install-nix>`, you can use it to create new *shell environments* with programs that you want to use.
+
+In this section you will run two exocic programs called `cowsay` and `lolcat` that you will probably not have installed on your machine:
 
 ```shell-session
-$ hello
-The program ‘hello’ is currently not installed.
+$ cowsay no can do
+The program ‘cowsay’ is currently not installed.
 
-$ nix-shell -p hello
+$ echo no chance | lolcat
+The program ‘lolcat’ is currently not installed.
+```
 
-[nix-shell:~]$ hello
-Hello, world!
+Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `cowsay` and `lolcat` packages.
+The first invocation of `nix-shell` may take a while to download all dependencies.
 
+```shell-session
+$ nix-shell -p cowsay lolcat
+these 3 derivations will be built:
+  /nix/store/zx1j8gchgwzfjn7sr4r8yxb7a0afkjdg-builder.pl.drv
+  /nix/store/h9sbaa2k8ivnihw2czhl5b58k0f7fsfh-lolcat-100.0.1.drv
+  ...
+
+[nix-shell:~]$
+```
+
+Within the Nix shell, you can use the programs provided by these packages:
+
+```
+[nix-shell:~]$ cowsay Hello, Nix! | lolcat
+```
+
+Press type `exit` or press `CTRL-D` to exit the shell, and the programs won't be available anymore.
+
+```shell-session
 [nix-shell:~]$ exit
 exit
 
-$ hello
-The program ‘hello’ is currently not installed.
+$ cowsay no more
+The program ‘cowsay’ is currently not installed.
+
+$ echo all gone | lolcat
+The program ‘lolcat’ is currently not installed.
 ```
 
-Here we used the `-p` (packages) flag to specify that we needed the `hello` dependency. Nix found it, downloaded it, and made it available in a shell environment.
-
-## When are shell environments useful?
-
-If you'd like **to use a tool that you do not have installed**. You can use the tool without having to install the software.
-
-If you'd like **to try a tool for a few minutes**. For example, there's a shiny new tool for writing presentation slides.
-
-If you'd like **to give someone else a one-liner to install a set of tools** and you want this to work on all Linux distributions and MacOS.
-
-If you'd like **to provide a script that is reproducible**, meaning it will also provide any tools that it depends on.
-
-## Searching package attribute names
+## Search for packages
 
 What can you put in a shell environment?
+If you can think of it, there's probably a Nix package of it.
 
-Anything that's in the [official package list](https://nixos.org/nixos/packages.html) can become part of the shell environment.
+Enter the program name you want to run in [search.nixos.org](https://search.nixos.org/packages) to find packages that provide it.
 
-You can search the package list using:
+For the following example, find the package names for these programs:
+
+- git
+- nvim
+- npm
+
+In the search results, each item shows the package name, and the details list the available programs.[^2]
+
+[^2]: A package name is not the same as a program name. Many packges provide multiple programs, or no programs at all if they are libraries. Even for packages that provide exactly one program, the package and progam name are not necessarily the same.
+
+## Run any combination of programs
+
+Once you have the package name, you can start a shell with that package.
+The `-p` (`--packages`) argument can take multiple package names.
+
+Start a Nix shell with the packages providing `git`, `nvim`, and `npm`.
+Again, the first invocation may take a while to download all dependencies.
 
 ```shell-session
-$ nix-env -qaP git
-gitAndTools.gitFull  git-2.25.0
-gitMinimal           git-2.25.0
+$ nix-shell -p git neovim nodejs
+these 9 derivations will be built:
+  /nix/store/7gz8jyn99kw4k74bgm4qp6z487l5ap06-packdir-start.drv
+  /nix/store/d6fkgxc3b04m85wrhg6j0l5y0ray82l7-packdir-opt.drv
+  /nix/store/da6njv7r0zzc2n54n2j54g2a5sbi4a5i-manifest.vim.drv
+  /nix/store/zs4jb2ybr4rcyzwq0dagg9rlhlc368h6-builder.pl.drv
+  /nix/store/g8sl2xnsshfrz9f39ki94k8p15vp3xd7-vim-pack-dir.drv
+  /nix/store/jmxkg8b1psk52awsvfziy9nq6dwmxmjp-luajit-2.1.0-2022-10-04-env.drv
+  /nix/store/kn83q8yk6ds74zgyklrjhvv5wkv5wmch-python3-3.10.9-env.drv
+  /nix/store/m445wn3vizcgg7syna2cdkkws3kk1gq8-neovim-ruby-env.drv
+  /nix/store/r2wa882mw99c311a4my7hcis9lq3kp3v-neovim-0.8.1.drv
+these 151 paths will be fetched (186.43 MiB download, 1018.20 MiB unpacked):
+  /nix/store/046zxlxhq4srm3ggafkymx794bn1jksc-bzip2-1.0.8
+  /nix/store/0p1jxcb7b4p8jhhlf8qnjc4cqwy89460-unibilium-2.1.1
+  /nix/store/0q4fpnqmg8liqraj7zidylcyd062f6z0-perl5.36.0-URI-5.05
+  ...
+
+[nix-shell:~]$
 ```
 
-The first column is the {term}`attribute name` and the second is the {term}`package name` and its version.
-
-Once you are comfortable doing this, you can add other things too. For example, packages of your own, or custom shell aliases.
-
-:::{note}
-The query you use for searching packages is a regex, so be aware when it comes to special characters.
-:::
-
-## Ad hoc shell environments
-
-Once you have the {term}`attribute name` for packages, you can start a shell:
+Check that you have indeed the specific version of these programs provided by Nix, even if you had any of them already installed on your machine.
 
 ```shell-session
-$ nix-shell -p gitMinimal vim nano joe
-these paths will be fetched (44.16 MiB download, 236.37 MiB unpacked):
-...
-/nix/store/fsn35pc8njnimgn2sn26dlsyxya1wssb-vim-8.2.0013
-/nix/store/wdqjszpr5dlys53d79fym6rv9vyyz29h-joe-4.6
-/nix/store/hx63qkip16i4wifaqgxwrrmxj4az53h1-git-2.25.0
+[nix-shell:~]$ which git
+/nix/store/3cdi52xh6lk3h1fb51jkxs3p561p37wg-git-2.38.3/bin/git
 
 [nix-shell:~]$ git --version
-git version 2.25.0
+git version 2.38.3
 
-[nix-shell:~]$ which git
-/nix/store/hx63qkip16i4wifaqgxwrrmxj4az53h1-git-2.25.0/bin/git
+[nix-shell:~]$ which nvim
+/nix/store/ynskzgkf07lmrrs3cl2kzr9ah487lwab-neovim-0.8.1/bin/nvim
+
+[nix-shell:~]$ nvim --version | head -1
+NVIM v0.8.1
+
+[nix-shell:~]$ which npm
+/nix/store/q12w83z0i5pi1y0m6am7qmw1r73228sh-nodejs-18.12.1/bin/npm
+
+[nix-shell:~]$ npm --version
+8.19.2
 ```
 
-Note that even if you had Git installed before, in the shell, only the exact version installed by Nix is used.
+## Nested shell sessions
 
-Press `CTRL-D` to exit the shell and those packages won't be available anymore.
-
-## Beyond tooling: Python libraries
-
-`nix-shell` provides a bunch of other bash variables from packages specified.
-
-Let's try a quick example using Python and `$PYTHONPATH`:
+If you need an additional program temporarily, you can run a nested Nix shell.
+The programs provided by the specified packages will be added to the current environment.
 
 ```shell-session
-$ nix-shell -p 'python38.withPackages (packages: [ packages.django ])'
-...
+[nix-shell:~]$ nix-shell -p python2
+this path will be fetched (7.94 MiB download, 46.61 MiB unpacked):
+  /nix/store/i2irgbnhx66ac0am0x19443rv13g39z1-python-2.7.18.6
+copying path '/nix/store/i2irgbnhx66ac0am0x19443rv13g39z1-python-2.7.18.6' from 'https://cache.nixos.org'...
 
-[nix-shell:~]$ python -c 'import django; print(django)'
-<module 'django' from '/nix/store/c8ipxqsgh8xd6zmwb026lldsgr7hi315-python3-3.8.1-env/lib/python3.8/site-packages/django/__init__.py'>
+[nix-shell:~]$ python --version
+Python 2.7.18.6
 ```
 
-We create an ad hoc environment with `$PYTHONPATH` set and `python` available, along with the `django` package.
-
-The `-p` argument can handle more than attribute names. You can use a full Nix expression, but we'll cover that in later tutorials.
+Exit the shell as usual to return to the previous environment.
 
 ## Towards reproducibility
 
-Even running in these basic Nix shells, if you handed over these commands to another developer, they could get different results.
+These shell environments are very convenient, but the examples so far are not reproducible yet.
+Running these commands on another machine may fetch different versions of packages, depending on when Nix was installed there.
 
-These shell environments are **really convenient**, but they are not **perfectly reproducible** in this form.
+What do we mean by reproducible?
+A fully reproducible example would give exactly the same results no matter when or where you run the command.
+The environment provided would be identical each time.
 
-What do we mean by reproducible? A fully reproducible example would give exactly the same results no matter **when** or **on what machine** you run the command. The environment provided would be identical each time.
-
-Nix also offers fully reproducible environments, which it calls pure environments.
-
-The following is a fully reproducible example and something that different colleagues with different machines, for example, could share.
+The following example creates a fully reproducible environment.
+You can run it anywhere, anytime to obtain the exact same version of the `git`.
 
 ```shell-session
-$ nix-shell --pure -p git -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
-
-[nix-shell:~]$ git --version
+$ nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
+...
 git version 2.33.1
 ```
 
-There are two things going on here:
+There are three things going on here:
 
-1. The `--pure` flag makes sure that the bash environment from your system is not inherited. That means only the `git` that Nix installed is available inside the shell. This is useful for one-liners and scripts that run, for example, within a CI environment. While developing, however, we'd like to have our editor around and a bunch of other things. Therefore we might skip the flag for development environments but use it in build ones.
-2. The `-I` flag pins the Nixpkgs revision to an **exact Git revision**, leaving no doubt about which exact version of Nix packages will be used.
+1. `--run` executes the given [Bash](https://www.gnu.org/software/bash/) command within the Nix shell and exits when it's done.
+
+   You can use this with `nix-shell` whenever you want to quickly run a program you don't have installed on your machine.
+
+2. `--pure` discards most environment variables set on your your system when running the shell.
+
+   It means that only the `git` provided by Nix is available inside that shell.
+   This is useful for simple one-liners such as in the example.
+   While developing, however, you will usually want to have your editor and other tools around.
+   Therefore we recommend to omit `--pure` for development environments, and to add it only when the extra isolation is needed.
+
+3. `-I` determines what to use as a source of package declarations.
+
+   Here we provided [a specific Git revision of `nixpkgs`](https://github.com/NixOS/nixpkgs/tree/2a601aafdc5605a5133a2ca506a34a3a73377247), leaving no doubt about which version of the packages in that collection will be used.
+
 
 ## References
 
-- [Nix manual: `nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell) or `man nix-shell`
+- [Nix manual: `nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell) (or run `man nix-shell`)
+- [Nix manual: `-I` option]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
 
 ## Next steps
 
-We've only covered the bare essentials of Nix here. Once you're comfortable with these examples, take a look at:
+- {ref}`reproducible-scripts` – use Nix for reproducible scripts
+- {ref}`reading-nix-language` – learn reading the Nix language, which is used to declare packages and configurations
+- {ref}`declarative-reproducible-envs` – create reproducible shell environments with a declarative configuration file
+- {ref}`pinning-nixpkgs` – learn different ways of specifying exact versions of package sources
 
-- {ref}`reproducible-scripts` to see how to use `nix-shell` for reproducible scripts.
-- {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
-- {ref}`pinning-nixpkgs` to see different ways to import Nixpkgs.
-- {ref}`declarative-reproducible-envs` to create reproducible shell environments with a declarative configuration file.
-- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – free up storage used by the programs made available through Nix
-- To quickly setup a Nix project read through
-  [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
+If you're done trying out Nix for now, you may want to free up some disk space occupied by the different versions of programs you downloaded by running the examples:
+
+```shell-session
+$ nix-collect-garbage
+```
