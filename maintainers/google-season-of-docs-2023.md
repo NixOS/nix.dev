@@ -25,70 +25,69 @@ References:
 
 There is no obvious way for beginners to learn using Nix most effectively.
 There are too many different, contradictory, partially outdated resources all over the internet.
-Even after months of continuous discovery, many users still feel like beginners.
+First-time users quickly get disoriented and confused.
+Even after months of continuous discovery, many still feel like beginners.
 
 ## Solution proposal
 
-A successful learning journey requires a curriculum designed around user needs and implemented according to best practices.
+Design a learning journey ranging from the first encounter with Nix to mastering the skills needed to leverage common use cases.
+
+As a minimum viable product, build a curriculum and associated lesson plans, oriented around user needs and according to best practices.
+As stretch goals, implement particular lessons identified as the most impactful to new users.
 
 ## Scope
 
-Design and implement a learning journey from the first encounter to mastering a particular set of use cases known to work well:
+1.  Design a learning journey on the basis of the [2022 usability studies](https://discourse.nixos.org/t/usability-studies/21404) and sketched in [our vision statement](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#vision).
 
-1.  Outline a learning journey on the basis of the [2022 usability studies](https://discourse.nixos.org/t/usability-studies/21404).
+    - Gather input from community experts on their preferred sequence of introducing topics
+    - Collect feedback on the curriculum draft
+    - Expand preliminary [documentation survey](https://github.com/NixOS/nix-book/blob/main/resources.md)
 
-    The learning journey shall be limited to cover skills and procedures up to an appropriately chosen point in [our vision statement](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#vision).
+1. Categorise existing documentation materials, and arrange them in a meaningful order emerging from the curriculum.
 
-2.  Audit and update or rewrite reference documentation the learning journey will be based on.
+    - Create detailed issue descriptions where we encounter gaps, and use them as placeholders (also to measure demand)
+    - Break down tasks for the writing phase
 
-    The focus is expected to be on:
-    - [Nix manual: Architecture](https://nixos.org/manual/nix/stable/architecture/architecture.html)
-    - [Nix manual: Derivations](https://nixos.org/manual/nix/stable/language/derivations.html)
-    - [Nix manual: Nix Language](https://nixos.org/manual/nixpkgs/stable/#chap-language-support)
-    - [Nixpkgs manual: `stdenv`](https://nixos.org/manual/nixpkgs/stable/#id-1.4)
-    - [Nixpkgs manual: Languages and frameworks](https://nixos.org/manual/nixpkgs/stable/#chap-language-support)
+1. Prepare a contributor workflow
+    - Revise [tutorial template](https://nix.dev/contributing/writing-a-tutorial)
+    - Validate [contribution guidelines](https://nix.dev/contributing/documentation) with new contributors
 
-3.  Write tutorials and guides that line up to a coherent curriculum and are tightly integrated with the reference documentation. 
-    
-    Authors will leverage existing, freely licenced (third-party) materials as much as possible:
-    
-    - Non-reference materials in the manuals
-    - NixOS Wiki
-    - Blog posts
-    
-    There already exists a preliminary [documentation survey](https://github.com/NixOS/nix-book/blob/main/resources.md), a [tutorial template](https://nix.dev/contributing/writing-a-tutorial), and general [contribution guidelines](https://nix.dev/contributing/documentation).
-    
-Out of scope for this project are improvements to the technical infrastructure related to documentation.
+1. Link or migrate existing documentation into a central location, as far as possible.
 
-## Rationale for our approach
+1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
 
-- We have evidence for the current problems in the usability studies (and countless anecdotes).
-- Project direction is determined by well-supported use cases.
-- Project scope is clearly defined by tutorial topics.
-- Guidance by experts will disseminate knowledge and skills in the community.
-    - This will immediately benefit both users and contributors.
-    - Setting good examples will impact the quality of future work.
-- Working visibly in one place will reduce the scatteredness by directing attention to new materials.
-    - Improved quality will encourage beginners to rely on authoritative documentation first.
-- Reference documentation as a prerequisite additionally serves advanced users and contributors.
-  - Writing tutorials without good reference documentation is **very** hard.
-- Immediate user value by enabling quick onboarding.
+    - Prepare and publish a call for contributors for the writing phase
+
+Out of scope for this project:
+
+- Writing tutorials or guides
+- Improvements to the technical infrastructure related to documentation
+
+## Stretch goal
+
+Test run the contribution workflow:
+- Pick a learning topic, for example one particular tutorial, which is identified as most impactful for beginners
+- Audit and update or rewrite reference documentation it will be based on
+- Write a tutorial or guide on that topic
+  - Leverage previously collected (third-party) materials as much as possible
 
 ## Measure of success
 
-At the end of the writing phase we will run another round of usability studies on the new and updated tutorials, and compare with existing results.
-Specifically, we will evaluate how far in the curriculum beginners will progress in a given amount of time.
+At the end of the writing phase we will run another round of usability studies concerning the orientation phase of onboarding, and compare with existing results.
+Specifically, we will evaluate, based on a set of pre-determined tasks:
+- In how far beginners understand the purpose of and follow the proposed curriculum
+- How well beginners are able to address their questions using the available materials
 
-We will also inspect community metrics before the beginning and after the end of the project in order to estimate change in adoption rate.
+We will also inspect community metrics before the beginning and after the end of the project in order to estimate the change in adoption of certain skills.
 Specifically, these metrics may include:
 - Number of questions and answers in the [Discourse Help Category](https://discourse.nixos.org/c/learn/9) on the relevant topics
-- GitHub Stars for [Nix](https://github.com/NixOS/nix/stargazers), [Nixpkgs](https://github.com/NixOS/nixpkgs/stargazers), and [nix.dev](https://github.com/NixOS/nix.dev/stargazers)
-- GitHub issues and pull requests concerning the documentation, particularly the parts worked on in the project
+- GitHub issues and pull requests concerning the documentation
+    - Of particular interest are contributions to fill the gaps left in the curriculum by missing materials
     - We expect this to indicate interaction with the new and updated materials
 - Social media echo and anecdotal evidence
 
 These metrics are so noisy that they have to be considered purely qualitative and best-effort.
-They can be expected to be strongly influenced by accompanied communication by the Nix marketing team, depending on that team's capacity.
+They can be expected to be strongly influenced by accompanied communication by the [Nix marketing team](https://nixos.org/community/teams/marketing), depending on that team's capacity.
 The experience with last year's development of the [Nix language tutorial](https://nix.dev/tutorials/nix-language) may serve as a frame of reference.
 
 ## Budget
@@ -97,27 +96,21 @@ Our main budgeting consideration is that the financial support should enable wor
 
 We consider the greatest leverage of a funded project to be the increased visibility into activities around documentation and the organisational learning we expect to happen in the process.
 Additionally, we see our diverse community as our greatest collective asset.
-A setup that enables beginners growing into proficient contributors, domain experts sharing their experience with the whole community, and engaged volunteers taking first steps into the professional world – to us this promises the greatest long-term payoff.
+A setup that enables beginners to grow into proficient contributors, domain experts sharing their experience with the whole community, and engaged volunteers taking first steps into the professional world – to us this promises the greatest long-term payoff.
 
-Since creating documentation is much less "writing things down" and much more "building and disseminating knowledge", we decided to focus on paid support by domain experts, who shall guide activities, mentor and share knowledge, and supervise progress.
-With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate, to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for the Nix ecosystem.
+Since creating documentation is much less "writing things down" and much more "building and disseminating knowledge", we decided to focus on paid support by domain experts, who shall guide activities, mentor contributors and share knowledge, and supervise progress.
+With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate, to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for all users of the Nix ecosystem.
 We also want to support community volunteers to provide documentation-specific technical support to contributors.
 
-This is why we estimate a budget somewhat higher than the suggested limit of $15000.
-It is in principle possible to adjust project scope, but the budget itself is primarily determined by the largely fixed cost of the design phase.
+This is why we estimate a budget somewhat higher than the original limit of $15000.
 
-Domain experts:
-
-- Editorial lead ($8000)
-- Didactics ($5000)
-- Nix ($5500)
-
-Volunteers:
-
-- 5 tutorial authors ($500 each)
-- Technical support ($500)
-
-**Total estimate: $21500**
+| Budget item    | Amount    | Running total | Notes        |
+|----------------|-----------|---------------|--------------|
+| Editorial lead | 12000 USD | 12000 USD     |              |
+| Nix expert     | 6000 USD  | 18000 USD     |              |
+| 6 contributors | 3000 USD  | 21000 USD     | 500 USD each |
+| 2 volunteers   | 1000 USD  | 22000 USD     | 500 USD each |
+| **total**      |           | 22000 USD     |              |
 
 The amounts will be adjusted according to the Google Summer of Code [Purchasing Power Parity table](https://developers.google.com/open-source/gsoc/help/student-stipends), depending on the country of origin of applicants.
 
@@ -125,22 +118,20 @@ The amounts will be adjusted according to the Google Summer of Code [Purchasing 
 
 We plan for four project phases, each taking roughly a month.
 
-| Time    | Phase      |
-|---------|------------|
-| 2023-05 | Planning   |
-| 2023-06 | Writing    |
-| 2023-07 | Review     |
-| 2023-08 | Evaluation |
+| Time    | Phase          |
+|---------|----------------|
+| 2023-05 | Planning       |
+| 2023-06 | Implementation |
+| 2023-07 | Evaluation     |
+| 2023-08 | (optional) Contributions |
 
 ### Planning
 
-The planning phase is there to refine the project scope according to available capacity.
-It will begin with a briefing and orientation period for everyone to get acquainted with each other and the situation.
+The planning phase will begin with a briefing and orientation period for everyone to get acquainted with each other and the situation.
 This phase involves review of the materials prepared by the documentation team, preliminary research, and creation of a refined project plan.
 
 The refined project plan is to be comprised of
 
-- Outline of the draft and review process
 - Task breakdowns and assigments
 - Timeline with weekly granularity
 - Weekly schedules
@@ -148,27 +139,19 @@ The refined project plan is to be comprised of
 
 for the remaining phases.
 
-Since sufficiently complete and up-to-date reference documentation is the prerequisite for tutorials, work on that part should start immediately, guided by the Nix expert.
+### Design
 
-### Writing
-
-In the writing phase, contributors will go off to write the tutorials on their selected or assigned topics.
-They will consult with the domain experts on a regular basis, and make brief written progress reports for later use in the evaluation phase and the final report.
-Domain experts are expected to be available to answer contributors' questions and assist with solving problems.
-
-Additional routines are possible and recommended:
-- Pair writing sessions
-- Crowd review sessions
-- Knowledge and experience sharing sessions
-
-### Review
-
-The purpose of the review phase is to reserve time for making and addressing asynchronous reviews (we expect that community members and new users will provide early feedback), and possibly resolving technical issues.
-Depending on progress, usability studies may begin here, as well as preparations for evaluating success criteria.
+Implement the project according to the detailed plan based on the [proposed scope](#scope).
 
 ### Evalation
 
-The evaluation phase is for measuring progress success, reflecting on what has been done, compiling a final report, and debriefing.
+The evaluation phase is for [measuring project success](#measure-of-success), reflecting on what has been done, compiling a final report, and debriefing.
+
+### (optional) Writing
+
+In case we are done early, the writing phase will be there to fulfill the [stretch goal](#stretch-goal).
+Depending on motivation and available capacity, the group may create one or multiple articles to become part of the learning journey.
+Authors will consult with the domain experts on a regular basis.
 
 ## Roles
 
@@ -178,65 +161,49 @@ These estimates are based on the experience of running the [Summer of Nix 2022](
 ### Editorial lead
 
 The editorial lead will take responsibility for the overall project and its success.
-The role's focus is to facilitate all activities necessary to reach the project's objectives.
+The role's focus is to facilitate or carry out all activities necessary to reach the project's objectives.
 
 Expected are strong written and verbal communication skills in English, as well as experience in project management.
 A technical background is a strong plus.
 
-| Phase      | Estimated effort |
-|------------|------------------|
-| Design     | 30h/w            |
-| Writing    | 15h/w            |
-| Review     | 20h/w            |
-| Evaluation | 30h/w            |
+| Phase         | Estimated effort |
+|---------------|------------------|
+| Planning      | 20h/w            |
+| Implemenation | 20h/w            |
+| Evaluation    | 20h/w            |
 
-Total estimated effort: 380h
-
-### Didactics expert(s)
-
-One or more experts in didactics, i.e. people with relevant experience in technology, scientific, or adult education, will guide and assist the project participants with designing the curriculum and individual units, following best practices from cognitive and learning science.
-
-| Phase      | Estimated effort |
-|------------|------------------|
-| Design     | 20h/w            |
-| Writing    | 15h/w            |
-| Review     | 5h/w             |
-| Evaluation | 10h/w            |
-
-Total estimated effort: 200h
+Total estimated effort: 240h
 
 ### Nix expert
 
 An expert Nix contributor will be evailable for answering technical questions concerning Nix specifics to everyone involved.
-The main concern is guiding work on the reference documentation, and introducing participants to the Nix ecosystem's particularities.
-We can expect issues to emerge in the process of developing documentation and tutorials, and the Nix expert will be responsible for addressing them within the project's timeline as far as possible.
+The main concern is guiding the curriculum design, and introducing participants to the Nix ecosystem's particularities.
+We can expect issues to emerge in the process, and the Nix expert will be responsible for addressing them within the project's timeline as far as possible.
 
-| Phase      | Estimated effort |
-|------------|------------------|
-| Design     | 20h/w            |
-| Writing    | 20h/w            |
-| Review     | 15h/w            |
-| Evaluation | 10h/w            |
+| Phase         | Estimated effort |
+|---------------|------------------|
+| Planning      | 10h/w            |
+| Implemenation | 15h/w            |
+| Evaluation    | 5h/w             |
 
-Total estimated effort: 260h
+Total estimated effort: 120h
 
-### Authors
+### Contributors
 
 Authors mainly take the role of learners with the responsibility to structure, make use of, and, first and foremost, write down their insights.
 They are assisted by the domain experts to reach a high standard of quality with their work.
 
 Proficiency in written communication in English, and basic experience with Markdown as well as Git version control is required.
 
-| Phase      | Estimated effort |
-|------------|------------------|
-| Design     | 15h/w            |
-| Writing    | 15h/w            |
-| Review     | 10h/w            |
-| Evaluation | 5h/w             |
+| Phase         | Estimated effort |
+|---------------|------------------|
+| Planning      | 5h/w             |
+| Implemenation | 10h/w            |
+| Evaluation    | 5h/w             |
 
-Total estimated effort: 180h
+Total estimated effort: 80h
 
-### Volunteer supporter
+### Volunteer supporters
 
 The purpose of this role is to have someone available to support contributors when they encounter technical problems with the development process.
 This is likely to happen when the level of technical proficiency of participants varies due to their diverse backgrounds.
@@ -252,9 +219,19 @@ He founded the [Nix documentation team](..), and during and after Summer of Nix 
 - led the development of a Nix language tutorial
 - mentored and supported documentation contributors
 
-He currently contributes to the Nix reference manual as a maintainer, and supports the Nix documentation team in its activities.
+Currently he contributes to the Nix reference manual as a maintainer, and supports the Nix documentation team in its activities.
+
+### Rationale for our approach
 
 This project proposal was developed collaboratively by the Nix documentation team.
+
+- We have evidence for the current problems in the usability studies (and countless anecdotes)
+- Project scope is clearly defined by common use cases
+- Guidance by experts will disseminate knowledge and skills in the community
+    - This will immediately benefit both users and contributors
+    - Setting good examples will impact the quality of future work
+- Having a predetermined strucure for contributions will accelerate developing the body of documentation
+- Immediate user value by enabling quicker orientation and onboarding
 
 # Get in touch
 
