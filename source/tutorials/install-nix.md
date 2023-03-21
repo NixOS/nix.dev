@@ -12,6 +12,8 @@ Install Nix via the recommended [multi-user installation]:
 $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
+On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
+
 ::::
 
 ::::{tab-item} macOS
