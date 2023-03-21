@@ -162,7 +162,7 @@ These estimates are based on the experience of running the [Summer of Nix 2022](
 The editorial lead will take responsibility for the overall project and its success.
 The role's focus is to facilitate or carry out all activities necessary to reach the project's objectives.
 
-Expected are strong written and verbal communication skills in English, as well as experience in project management.
+Expected are a qualification or a track record in didactics, strong written and verbal communication skills in English, as well as experience in project management.
 A technical background is a strong plus.
 
 | Phase         | Estimated effort |
