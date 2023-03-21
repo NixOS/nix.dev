@@ -65,11 +65,15 @@ Out of scope for this project:
 
 ## Stretch goal
 
-Test run the contribution workflow:
-- Pick a learning topic, for example one particular tutorial, which is identified as most impactful for beginners
+If time and motivation allows, test run the contribution workflow:
+
+- Pick a topic in the learning journey, for example one particular tutorial, which is identified as most impactful for beginners
 - Audit and update or rewrite reference documentation it will be based on
 - Write a tutorial or guide on that topic
   - Leverage previously collected (third-party) materials as much as possible
+
+Depending on available capacity, the group may create one or multiple articles.
+Authors will consult with the domain experts on a regular basis.
 
 ## Measure of success
 
@@ -102,7 +106,7 @@ Since creating documentation is much less "writing things down" and much more "b
 With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate, to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for all users of the Nix ecosystem.
 We also want to support community volunteers to provide documentation-specific technical support to contributors.
 
-This is why we estimate a budget somewhat higher than the original limit of $15000.
+The large scope and This is why we estimate a budget somewhat higher than the limit of $15000 suggested by Google Season of Docs.
 
 | Budget item    | Amount    | Running total | Notes        |
 |----------------|-----------|---------------|--------------|
@@ -123,7 +127,6 @@ We plan for four project phases, each taking roughly a month.
 | 2023-05 | Planning       |
 | 2023-06 | Implementation |
 | 2023-07 | Evaluation     |
-| 2023-08 | (optional) Contributions |
 
 ### Planning
 
@@ -147,11 +150,7 @@ Implement the project according to the detailed plan based on the [proposed scop
 
 The evaluation phase is for [measuring project success](#measure-of-success), reflecting on what has been done, compiling a final report, and debriefing.
 
-### (optional) Writing
-
-In case we are done early, the writing phase will be there to fulfill the [stretch goal](#stretch-goal).
-Depending on motivation and available capacity, the group may create one or multiple articles to become part of the learning journey.
-Authors will consult with the domain experts on a regular basis.
+Depending on work load and contributor availability, this may be the time to reach for the [stretch goal](#stretch-goal) and fill one or more lesson plans with life.
 
 ## Roles
 
