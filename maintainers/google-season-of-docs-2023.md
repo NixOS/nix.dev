@@ -175,7 +175,7 @@ Total estimated effort: 240h
 
 ### Nix expert
 
-An expert Nix contributor will be evailable for answering technical questions concerning Nix specifics to everyone involved.
+An expert Nix contributor will be available for answering technical questions concerning Nix specifics to everyone involved.
 The main concern is guiding the curriculum design, and introducing participants to the Nix ecosystem's particularities.
 We can expect issues to emerge in the process, and the Nix expert will be responsible for addressing them within the project's timeline as far as possible.
 
@@ -229,7 +229,7 @@ This project proposal was developed collaboratively by the Nix documentation tea
 - Guidance by experts will disseminate knowledge and skills in the community
     - This will immediately benefit both users and contributors
     - Setting good examples will impact the quality of future work
-- Having a predetermined strucure for contributions will accelerate developing the body of documentation
+- Having a predetermined structure for contributions will accelerate developing the body of documentation
 - Immediate user value by enabling quicker orientation and onboarding
 
 # Get in touch
