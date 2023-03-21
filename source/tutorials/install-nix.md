@@ -2,47 +2,49 @@
 
 # Install Nix
 
-## Linux
+:::::{tab-set}
 
-Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
+::::{tab-item} Linux
+
+Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install) --daemon
+$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
-
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
-
-### Arch Linux
 
 On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
 
-## macOS
+::::
 
-Install Nix via the recommended [multi-user installation](https://nixos.org/manual/nix/stable/installation/multi-user.html):
+::::{tab-item} macOS
 
-```shell-session
-$ sh <(curl -L https://nixos.org/nix/install)
-```
-
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
-
-## Windows (WSL2)
-
-Install Nix via the recommended [single-user installation](https://nixos.org/manual/nix/stable/installation/single-user.html):
+Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+$ curl -L https://nixos.org/nix/install | sh
 ```
 
-:::{note}
-For security you may want to [verify the installation script] using GPG signatures.
-:::
+::::
 
-## Docker
+::::{tab-item} Windows (WSL2)
+
+Install Nix via the recommended [single-user installation]:
+
+```shell-session
+$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+```
+
+However, if you have [systemd support] enabled, install Nix via the recommended [multi-user installation]:
+
+```shell-session
+$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+```
+
+[systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
+
+::::
+
+::::{tab-item} Docker
 
 Start a Docker shell with Nix:
 
@@ -66,6 +68,10 @@ bash-5.1# nix-build -I nixpkgs=/nixpkgs -A hello
 bash-5.1# find ./result # this symlink points to the build package
 ```
 
+::::
+
+:::::
+
 ## Verify installation
 
 Check the installation by opening **a new terminal** and typing:
@@ -75,4 +81,5 @@ $ nix --version
 nix (Nix) 2.11.0
 ```
 
-[verify the installation script]: https://nixos.org/download.html#nix-verify-installation
+[multi-user installation]: https://nixos.org/manual/nix/stable/installation/multi-user.html
+[single-user installation]: https://nixos.org/manual/nix/stable/installation/single-user.html

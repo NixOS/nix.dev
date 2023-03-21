@@ -40,6 +40,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_copybutton",
+    "sphinx_design",
     "extractable_code_block",
 ]
 
@@ -407,6 +408,8 @@ linkcheck_ignore = [
     r"https://app.terraform.io",
     # It's dynamic
     r"https://matrix.to",
+    # returns 403 on CI
+    r"https://www.lesswrong.com",
 ]
 
 # Anchors are not present in HTML
@@ -414,6 +417,9 @@ linkcheck_anchors_ignore = [
     r"instance_type",
     r"authentication",
     r"community",
+    r"video",
+    # GitHub code line numbers
+    r"^L(\d+)(-L\d+)?$",
 ]
 
 

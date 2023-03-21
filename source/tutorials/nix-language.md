@@ -75,7 +75,7 @@ Read detailed explanations if you want to make sure you fully understand the exa
 
 - Familiarity with software development
 - Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- A [Nix installation](./install-nix) to run the examples
+- A {ref}`Nix installation <install-nix>` to run the examples
 
 ### How to run the examples?
 
@@ -92,15 +92,19 @@ Each one is followed by the expected evaluation result.
 
 The following example is a Nix expression adding two numbers:
 
-```nix
+```{code-block} nix
+:class: expression
 1 + 2
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
 #### Interactive evaluation
 
-Use [`nix repl`][nix-repl] to evaluate Nix expressions interactively (by typing them on the command line):
+Use [`nix repl`] to evaluate Nix expressions interactively (by typing them on the command line):
 
 ```shell-session
 $ nix repl
@@ -125,9 +129,12 @@ nix-repl> { a.b.c = 1; }
 nix-repl> :p { a.b.c = 1; }
 { a = { b = { c = 1; }; }; }
 ```
+
+Type `:q` to exit [`nix repl`].
+
 :::
 
-[nix-repl]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
+[`nix repl`]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl.html
 
 #### Evaluating Nix files
 
@@ -139,7 +146,7 @@ $ nix-instantiate --eval file.nix
 3
 ```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The first command writes `1 + 2` to a file `file.nix` in the current directory.
 The contents of `file.nix` are now `1 + 2`, which you can check with
@@ -155,7 +162,7 @@ The resulting value is printed as output.
 `--eval` is required to evaluate the file and do nothing else.
 If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *derivation*, which we will come back to at the end of this tutorial in [](derivations).
 
-</details>
+:::
 
 :::{note}
 `nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
@@ -209,15 +216,19 @@ The Nix language has only few basic constructs which can be combined arbitrarily
 
 - Primitive data types
 
-  as basic building blocks
+  such as integers or character strings
 
-- Compound data types and, in the broader sense, functions
+- Compound data types
 
-  to produce and transform complex data
+  that is, lists and attribute sets
+
+- Functions and operators
+
+  to produce and transform data
 
 - Name assignment
 
-  to manipulate complex data as units
+  to manipulate data as units
 
 The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
 reading files, to capture what build tasks will operate on.
@@ -236,20 +247,28 @@ Line breaks, indentation, and additional spaces are for readers' convenience.
 
 The following are equivalent:
 
-```nix
+```{code-block} nix
+:class: expression
 let
  x = 1;
  y = 2;
 in x + y
 ```
 
-   3
+```{code-block}
+:class: value
+3
+```
 
-```nix
+```{code-block} nix
+:class: expression
 let x=1;y=2;in x+y
 ```
 
-   3
+```{code-block}
+:class: value
+3
+```
 
 (names-values)=
 ## Names and values
@@ -257,7 +276,7 @@ let x=1;y=2;in x+y
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
 We show primitive data types and lists as examples in the context of [attribute sets](attrset).
-Later in this section we cover special features of character strings: [antiquotation](antiquotation), [file system paths](file-system-paths), and [indented strings](indented-strings).
+Later in this section we cover special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
 There are two ways to assign names to values in Nix: [attribute sets](attrset) and [`let` expressions](let).
@@ -282,14 +301,9 @@ Nix language data types *without functions* work just like their counterparts in
 :::
 
 
-<table>
-<tr>
-  <th>Nix language</th>
-  <th>JSON</th>
-</tr>
-<tr>
-<td>
+::::{grid} 2
 
+:::{grid-item} **Nix**
 ```nix
 {
   string = "hello";
@@ -306,10 +320,9 @@ Nix language data types *without functions* work just like their counterparts in
   }; # comments are supported
 }
 ```
+:::
 
-</td>
-<td>
-
+:::{grid-item} **JSON**
 ```json
 {
   "string": "hello",
@@ -326,10 +339,9 @@ Nix language data types *without functions* work just like their counterparts in
   }
 }
 ```
+:::
 
-</td>
-</tr>
-</table>
+::::
 
 :::{note}
 - Attribute names usually do not need quotes.[^attrnames]
@@ -349,7 +361,8 @@ This allows access to attributes from within the set.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 rec {
   one = 1;
   two = one + 1;
@@ -357,7 +370,10 @@ rec {
 }
 ```
 
-    { one = 1; three = 3; two = 2; }
+```{code-block}
+:class: value
+{ one = 1; three = 3; two = 2; }
+```
 
 :::{note}
 Elements in an attribute set can be declared in any order, and are ordered on evaluation.
@@ -365,7 +381,8 @@ Elements in an attribute set can be declared in any order, and are ordered on ev
 
 Counter-example:
 
-```nix
+```{code-block} nix
+:class: expression
 {
   one = 1;
   two = one + 1;
@@ -373,14 +390,17 @@ Counter-example:
 }
 ```
 
-    error: undefined variable 'one'
+```{code-block}
+:class: value
+error: undefined variable 'one'
 
-           at «string»:3:9:
+       at «string»:3:9:
 
-                2|   one = 1;
-                3|   two = one + 1;
-                 |         ^
-                4|   three = two + 1;
+            2|   one = 1;
+            3|   two = one + 1;
+             |         ^
+            4|   three = two + 1;
+```
 
 (let)=
 ### `let ... in ...`
@@ -391,16 +411,20 @@ Also known as “`let` expression” or “`let` binding”
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = 1;
 in
 a + a
 ```
 
-    2
+```{code-block}
+:class: value
+2
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
 In this example we assign `a = 1`.
@@ -410,13 +434,14 @@ In this example the expression is `a + a`, where `a` refers to `a = 1`.
 
 By replacing the names with their assigned values, `a + a` evaluates to `2`.
 
-</details>
+:::
 
 Names can be assigned in any order, and expressions on the right of the assignment (`=`) can refer to other assigned names.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   b = a + 1;
   a = 1;
@@ -424,9 +449,12 @@ in
 a + b
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
-<details><summary>Detailed explanation</summary>
+:::::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
 In this example we assign `a = 1` and `b = a + 1`.
@@ -435,7 +463,8 @@ The order of assignments does not matter.
 Therefore the following example, where the assignments are in reverse order, is equivalent:
 
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = 1;
   b = a + 1;
@@ -443,7 +472,10 @@ in
 a + b
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
 Note that the `a` in `b = a + 1` refers to `a = 1`.
 
@@ -457,23 +489,12 @@ in both, the order of assignments does not matter, and names on the left can be 
 
 Example:
 
-<table>
-<tr>
-  <th>
+::::{grid} 2
 
-`let ... in ...`
+:::{grid-item} `let ... in ...`
 
-  </th>
-  <th>
-
-`rec { ... }`
-
-  </th>
-</tr>
-<tr>
-<td>
-
-```nix
+```{code-block} nix
+:class: expression
 let
   b = a + 1;
   c = a + b;
@@ -481,12 +502,17 @@ let
 in {  c = c; a = a; b = b; }
 ```
 
-    { a = 1; b = 2; c = 3; }
+```{code-block}
+:class: value
+{ a = 1; b = 2; c = 3; }
+```
 
-</td>
-<td>
+:::
 
-```nix
+:::{grid-item} `rec { ... }`
+
+```{code-block} nix
+:class: expression
 rec {
   b = a + 1;
   c = a + b;
@@ -494,17 +520,21 @@ rec {
 }
 ```
 
-    { a = 1; b = 2; c = 3; }
+```{code-block}
+:class: value
+{ a = 1; b = 2; c = 3; }
+```
 
-</td>
-</tr>
-</table>
+:::
+
+::::
 
 The difference is that while a recursive attribute set evaluates to an [attribute set](attrset), any expression can follow after the `in` keyword.
 
 In the following example we use the `let` expression to form a list:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   b = a + 1;
   c = a + b;
@@ -512,31 +542,37 @@ let
 in [ a b c ]
 ```
 
-    [ 1 2 3 ]
+```{code-block}
+:class: value
+[ 1 2 3 ]
+```
 
-</details>
+:::::
 
 Only expressions within the `let` expression itself can access the newly declared names.
 We say: the bindings have local scope.
 
 Counter-example:
 
-```nix
+```{code-block} nix
+:class: expression
 {
   a = let x = 1; in x;
   b = x;
 }
 ```
 
-    error: undefined variable 'x'
+```{code-block}
+:class: value
+error: undefined variable 'x'
 
-           at «string»:3:7:
+       at «string»:3:7:
 
-                2|   a = let x = 1; in x;
-                3|   b = x;
-                 |       ^
-                4| }
-
+            2|   a = let x = 1; in x;
+            3|   b = x;
+             |       ^
+            4| }
+```
 
 <!-- TODO: exercise - use let to reuse a value in an attribute set -->
 
@@ -546,37 +582,49 @@ Attributes in a set are accessed with a dot (`.`) and the attribute name.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   attrset = { x = 1; };
 in
 attrset.x
 ```
 
-    1
+```{code-block}
+:class: value
+1
+```
 
 Accessing nested attributes works the same way.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   attrset = { a = { b = { c = 1; }; }; };
 in
 attrset.a.b.c
 ```
 
-    1
+```{code-block}
+:class: value
+1
+```
 
 The dot (`.`) notation can also be used for assigning attributes.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 { a.b.c = 1; }
 ```
 
-    { a = { b = { c = 1; }; }; }
+```{code-block}
+:class: value
+{ a = { b = { c = 1; }; }; }
+```
 
 (with)=
 ### `with ...; ...`
@@ -585,7 +633,8 @@ The `with` expression allows access to attributes without repeatedly referencing
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = {
     x = 1;
@@ -596,21 +645,29 @@ in
 with a; [ x y z ]
 ```
 
-    [ 1 2 3 ]
+```{code-block} 
+:class: value
+[ 1 2 3 ]
+```
 
 The expression
 
-    with a; [ x y z ]
+```{code-block} nix
+with a; [ x y z ]
+```
 
 is equivalent to
 
-    [ a.x a.y a.z ]
+```{code-block} nix
+[ a.x a.y a.z ]
+```
 
 Attributes made available through `with` are only in scope of the expression following the semicolon (`;`).
 
 Counter-example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = {
     x = 1;
@@ -624,14 +681,17 @@ in
 }
 ```
 
-    error: undefined variable 'x'
+```{code-block}
+:class: value
+error: undefined variable 'x'
 
-           at «string»:10:7:
+       at «string»:10:7:
 
-                9|   b = with a; [ x y z ];
-               10|   c = x;
-                 |       ^
-               11| }
+            9|   b = with a; [ x y z ];
+           10|   c = x;
+             |       ^
+           11| }
+```
 
 (inherit)=
 ### `inherit ...`
@@ -641,7 +701,8 @@ It is for convenience to avoid repeating the same name multiple times.
 
 Example:
 
-```
+```{code-block} nix
+:class: expression
 let
   x = 1;
   y = 2;
@@ -651,21 +712,28 @@ in
 }
 ```
 
-    { x = 1; y = 2; }
+```{code-block} 
+:class: value
+{ x = 1; y = 2; }
+```
 
 The fragment
 
-    inherit x y;
-
+```{code-block} nix
+inherit x y;
+```
 is equivalent to
 
-    x = x; y = y;
+```{code-block} nix
+x = x; y = y;
+```
 
 It is also possible to `inherit` names from a specific attribute set with parentheses (`inherit (...) ...`).
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = { x = 1; y = 2; };
 in
@@ -674,36 +742,47 @@ in
 }
 ```
 
-    { x = 1; y = 2; }
+```{code-block}
+:class: value
+{ x = 1; y = 2; }
+```
 
 The fragment
 
-    inherit (a) x y;
+```{code-block} nix
+inherit (a) x y;
+```
 
 is equivalent to
 
-    x = a.x; y = a.y;
+```{code-block} nix
+x = a.x; y = a.y;
+```
 
 `inherit` also works inside `let` expressions.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   inherit ({ x = 1; y = 2; }) x y;
 in [ x y ]
 ```
 
-    [ 1 2 ]
+```{code-block}
+:class: value
+[ 1 2 ]
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 While this example is contrived, in more complex code you will regularly see nested `let` expressions that re-use names from their outer scope.
 
 Here we use the attribute set `{ x = 1; y = 2; }` to have something non-trivial to inherit from.
 The `let` expression inherits `x` and `y` from that attribute set using `( )`, which is equivalent to writing:
 
-```
+```{code-block} nix
 let
   x = { x = 1; y = 2; }.x;
   y = { x = 1; y = 2; }.y;
@@ -712,79 +791,95 @@ in
 
 The new inner scope now contains `x` and `y`, which are used in the list `[ x y ]`.
 
-</details>
+:::
 
-(antiquotation)=
-### Antiquotation `${ ... }`
+(string-interpolation)=
+### String Interpolation `${ ... }`
 
-Also known as “string interpolation”.
+Previously known as “antiquotation”.
 
 The value of a Nix expression can be inserted into a character string with the dollar-sign and braces (`${ }`).
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   name = "Nix";
 in
 "hello ${name}"
 ```
 
-    "hello Nix"
+```{code-block}
+:class: value
+"hello Nix"
+```
 
 Only character strings or values that can be represented as a character string are allowed.
 
 Counter-example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   x = 1;
 in
 "${x} + ${x} = ${x + x}"
 ```
 
-    error: cannot coerce an integer to a string
+```{code-block}
+:class: value
+error: cannot coerce an integer to a string
 
-           at «string»:4:2:
+       at «string»:4:2:
 
-                3| in
-                4| "${x} + ${x} = ${x + x}"
-                 |  ^
-                5|
+            3| in
+            4| "${x} + ${x} = ${x + x}"
+             |  ^
+            5|
+```
 
-Antiquotation can be arbitrarily nested.
+Interpolated expressions can be arbitrarily nested.
 
 (This can become hard to read, and we recommend to avoid it in practice.)
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   a = "no";
 in
-"${a + "${a + " ${a}"}"}"
+"${a + " ${a + " ${a}"}"}"
 ```
 
-    "no no no"
+```{code-block}
+:class: value
+"no no no"
+```
 
 
 :::{warning}
 You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
 
-These are *not* antiquotations, but usually denote variables in a shell script.
+These are *not* interpolated strings, but usually denote variables in a shell script.
 
 In such cases, the use of names from the surrounding Nix expression is a coincidence.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   out = "Nix";
 in
 "echo ${out} > $out"
 ```
 
-    "echo Nix > $out"
+```{code-block}
+:class: value
+"echo Nix > $out"
+```
 :::
 
 <!-- TODO: link to escaping rules -->
@@ -798,11 +893,15 @@ Absolute paths always start with a slash (`/`).
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 /absolute/path
 ```
 
-    /absolute/path
+```{code-block}
+:class: value
+/absolute/path
+```
 
 Paths are relative when they contain at least one slash (`/`) but do not start with one.
 They evaluate to the path relative to the file containing the expression.
@@ -812,20 +911,27 @@ The following examples assume the containing Nix file is in `/current/directory`
 Example:
 
 
-```nix
+```{code-block} nix
+:class: expression
 ./relative
 ```
 
-    /current/directory/relative
+```{code-block}
+:class: value
+/current/directory/relative
+```
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 relative/path
 ```
 
-    /current/directory/relative/path
-
+```{code-block}
+:class: value
+/current/directory/relative/path
+```
 
 One dot (`.`) denotes the current directory within the given path.
 
@@ -833,58 +939,71 @@ You will often see the following expression, which specifies a Nix file's direct
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 ./.
 ```
 
-    /current/directory
+```{code-block}
+:class: value
+/current/directory
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 Since relative paths must contain a slash (`/`) but must not start with one, and the dot (`.`) denotes no change of directory, the combination `./.` specifies the current directory as a relative path.
 
-</details>
+:::
 
 Two dots (`..`) denote the parent directory.
 
-
 Example:
 
-
-```nix
+```{code-block} nix
+:class: expression
 ../.
 ```
 
-    /current
-
+```{code-block}
+:class: value
+/current
+```
 :::{note}
-Paths can be used in antiquotation – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+Paths can be used in interpolated expressions – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
 :::
 
+(search-path-tutorial)=
 #### Search path
 
 Also known as “angle bracket syntax”.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 <nixpkgs>
 ```
 
-    /nix/var/nix/profiles/per-user/root/channels/nixpkgs
+```{code-block}
+:class: value
+/nix/var/nix/profiles/per-user/root/channels/nixpkgs
+```
 
 The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
 
 In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
 
-
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path:
 
-```nix
+```{code-block} nix
+:class: expression
 <nixpkgs/lib>
 ```
 
-    /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
+```{code-block}
+:class: value
+/nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
+```
 
 While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are [impurities](impurities) which are not reproducible.
 
@@ -903,7 +1022,8 @@ Indented strings are denoted by *double single quotes* (`'' ''`).
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 ''
 multi
 line
@@ -911,13 +1031,17 @@ string
 ''
 ```
 
-    "multi\nline\nstring"
+```{code-block}
+:class: value
+"multi\nline\nstring"
+```
 
 Equal amounts of prepended white space are trimmed from the result.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 ''
   one
    two
@@ -925,7 +1049,10 @@ Example:
 ''
 ```
 
-    "one\n two\n  three\n"
+```{code-block}
+:class: value
+"one\n two\n  three\n"
+```
 
 <!-- TODO: See [escaping rules](). -->
 
@@ -946,43 +1073,43 @@ Each of them is explained in the following, and here is an overview:
 
 - Single argument
 
-  ```nix
+  ```{code-block} nix
   x: x + 1
   ```
 
   - Multiple arguments via nesting
 
-    ```nix
+    ```{code-block} nix
     x: y: x + y
     ```
 
 - Attribute set argument
 
-  ```nix
+  ```{code-block} nix
   { a, b }: a + b
   ```
 
   - With default attributes
 
-    ```nix
+    ```{code-block} nix
     { a, b ? 0 }: a + b
     ```
 
   - With additional attributes allowed
 
-    ```nix
+    ```{code-block} nix
     { a, b, ...}: a + b
     ```
 
 - Named attribute set argument
 
-  ```nix
+  ```{code-block} nix
   args@{ a, b, ... }: a + b + args.c
   ```
 
   or
 
-  ```nix
+  ```{code-block} nix
   { a, b, ... }@args: a + b + args.c
   ```
 
@@ -991,11 +1118,15 @@ We say they are anonymous, and call such a function a *lambda*.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 x: x + 1
 ```
 
-    <LAMBDA>
+```{code-block} nix
+:class: value
+<LAMBDA>
+```
 
 The `<LAMBDA>` indicates the resulting value is an anonymous function.
 
@@ -1003,13 +1134,17 @@ As with any other value, functions can be assigned to a name.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: x + 1;
 in f
 ```
 
-    <LAMBDA>
+```{code-block} nix
+:class: value
+<LAMBDA>
+```
 
 ### Calling functions
 
@@ -1019,31 +1154,40 @@ Calling a function with an argument means writing the argument after the functio
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: x + 1;
 in f 1
 ```
 
-    2
+```{code-block}
+:class: value
+2
+```
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: x.a;
 in
 f { a = 1; }
 ```
 
-    1
+```{code-block}
+:class: value
+1
+```
 
 The above example calls `f` on a literal attribute set.
 One can also pass arguments by name.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: x.a;
   v = { a = 1; };
@@ -1051,47 +1195,61 @@ in
 f v
 ```
 
-    1
+```{code-block}
+:class: value
+1
+```
 
 Since function and argument are separated by white space, sometimes parentheses (`( )`) are required to achieve the desired result.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 (x: x + 1) 1
 ```
 
-    2
+```{code-block}
+:class: value
+2
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 This expression applies an anonymous function `x: x + 1` to the argument `1`.
 The function has to be written in parentheses to distinguish it from the argument.
 
-</details>
+:::
 
 Example:
 
 List elements are also separated by white space, therefore the following are different:
 
-```nix
+```{code-block} nix
+:class: expression
 let
  f = x: x + 1;
  a = 1;
 in [ (f a) ]
 ```
 
-   [ 2 ]
+```{code-block} nix
+:class: value
+[ 2 ]
+```
 
-```nix
+```{code-block} nix
+:class: expression
 let
  f = x: x + 1;
  a = 1;
 in [ f a ]
 ```
 
-   [ <LAMBDA> 1 ]
-
+```{code-block}
+:class: value
+[ <LAMBDA> 1 ]
+```
 The first example reads: apply `f` to `a`, and put the result in a list.
 The resulting list has one element.
 
@@ -1111,45 +1269,59 @@ Such a nested function can be used like a function that takes multiple arguments
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 x: y: x + y
 ```
 
-    <LAMBDA>
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 The above function is equivalent to
 
-
-```nix
+```{code-block} nix
+:class: expression
 x: (y: x + y)
 ```
 
-    <LAMBDA>
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 This function takes one argument and returns another function `y: x + y` with `x` set to the value of that argument.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: y: x + y;
 in
 f 1
 ```
 
-    <LAMBDA>
-
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 Applying the function which results from `f 1` to another argument yields the inner body `x + y` (with `x` set to `1` and `y` set to the other argument), which can now be fully evaluated.
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = x: y: x + y;
 in
 f 1 2
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
 <!-- TODO: exercise - assign the lambda a name and do something with it -->
 
@@ -1163,44 +1335,55 @@ This is denoted by listing the expected attribute names separated by commas (`,`
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 {a, b}: a + b
 ```
 
-    <LAMBDA>
+```{code-block} nix
+:class: value
+<LAMBDA>
+```
 
 The argument defines the exact attributes that have to be in that set.
 Leaving out or passing additional attributes is an error.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a, b}: a + b;
 in
 f { a = 1; b = 2; }
 ```
 
-    3
+```{code-block} nix
+:class: value
+3
+```
 
 Counter-example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a, b}: a + b;
 in
 f { a = 1; b = 2; c = 3; }
 ```
 
-    error: 'f' at (string):2:7 called with unexpected argument 'c'
+```{code-block}
+:class: value
+error: 'f' at (string):2:7 called with unexpected argument 'c'
 
-           at «string»:4:1:
+       at «string»:4:1:
 
-                3| in
-                4| f { a = 1; b = 2; c = 3; }
-                 | ^
-                5|
-
+            3| in
+            4| f { a = 1; b = 2; c = 3; }
+             | ^
+            5|
+```
 
 <!-- TODO: not the same as x: x.a + x.b (!!!!) -->
 
@@ -1216,44 +1399,58 @@ Attributes in the argument are not required if they have a default value.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a, b ? 0}: a + b;
 in
 f { a = 1; }
 ```
 
-    1
+```{code-block}
+:class: value
+1
+```
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a ? 0, b ? 0}: a + b;
 in
 f { } # empty attribute set
 ```
 
-    0
+```{code-block}
+:class: value
+0
+```
 
 #### Additional attributes
 
 Additional attributes are allowed with an ellipsis (`...`):
 
-    {a, b, ...}: a + b
+```{code-block} nix
+{a, b, ...}: a + b
+```
 
 Unlike in the previous counter-example, passing an argument that contains additional attributes is not an error.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a, b, ...}: a + b;
 in
 f { a = 1; b = 2; c = 3; }
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
 ### Named attribute set argument
 
@@ -1265,30 +1462,42 @@ This is denoted by prepending or appending the name to the attribute set argumen
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 {a, b, ...}@args: a + b + args.c
 ```
 
-    <LAMBDA>
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 or
 
-```nix
+```{code-block} nix
+:class: expression
 args@{a, b, ...}: a + b + args.c
 ```
-    <LAMBDA>
 
+```{code-block}
+:class: value 
+<LAMBDA>
+```
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   f = {a, b, ...}@args: a + b + args.c;
 in
 f { a = 1; b = 2; c = 3; }
 ```
 
-    6
+```{code-block} nix
+:class: value
+6
+```
 
 (libraries)=
 ## Function libraries
@@ -1318,11 +1527,15 @@ These functions are available under the `builtins` constant.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 builtins.toString
 ```
 
-    <PRIMOP>
+```{code-block}
+:class: value
+<PRIMOP>
+```
 
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
@@ -1336,17 +1549,21 @@ A notable exception is `import`, which is also available at the top level.
 
 Example:
 
-```console
-echo 1 + 2 > file.nix
+```shell-session
+$ echo 1 + 2 > file.nix
 ```
 
-```nix
+```{code-block} nix
+:class: expression
 import ./file.nix
 ```
 
-    3
+```{code-block}
+:class: value
+3
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The preceding shell command writes the contents `1 + 2` to the file `file.nix` in the current directory.
 
@@ -1357,13 +1574,16 @@ It is an error if the file system path does not exist.
 
 After reading `file.nix` the Nix expression is equivalent to the file contents:
 
-```nix
+```{code-block} nix
+:class: expression
 1 + 2
 ```
 
-    3
-
-</details>
+```{code-block}
+:class: value
+3
+```
+:::
 
 Since a Nix file can contain any Nix expression, `import`ed functions can be applied to arguments immediately.
 
@@ -1371,17 +1591,21 @@ That is, whenever you see additional tokens after a call to `import`, the value 
 
 Example:
 
-```console
-echo "x: x + 1" > file.nix
+```shell-session
+$ echo "x: x + 1" > file.nix
 ```
 
-```nix
+```{code-block} nix
+:class: expression
 import ./file.nix 1
 ```
 
-    2
+```{code-block}
+:class: value
+2
+```
 
-<details><summary>Detailed explanation</summary>
+::::{dropdown} Detailed explanation
 
 The preceding shell command writes the contents `x: x + 1` to the file `file.nix` in the current directory.
 
@@ -1392,19 +1616,23 @@ It is an error if the file system path does not exist.
 
 After reading the file, the Nix expression `import ./file.nix` is equivalent to the file contents:
 
-```nix
+```{code-block} nix
+:class: expression
 (x: x + 1) 1
 ```
 
-    2
+```{code-block}
+:class: value
+2
+```
 
-This applies the function `x: x + 1` to the argument `1`, and therefore evaluates to `3`.
+This applies the function `x: x + 1` to the argument `1`, and therefore evaluates to `2`.
 
 :::{note}
 Parentheses are required to separate function declaration from function application.
 :::
 
-</details>
+::::
 
 (pkgs-lib)=
 ### `pkgs.lib`
@@ -1423,16 +1651,20 @@ These functions are usually accessed through `pkgs.lib`, as the Nixpkgs attribut
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   pkgs = import <nixpkgs> {};
 in
 pkgs.lib.strings.toUpper "search paths considered harmful"
 ```
 
-    SEARCH PATHS CONSIDERED HARMFUL
+```{code-block}
+:class: value
+SEARCH PATHS CONSIDERED HARMFUL
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 This is a more complex example, but by now you should be familiar with all its components.
 
@@ -1450,42 +1682,50 @@ The function `toUpper` is trivial enough that we can expect it not to produce di
 Yet, more sophisticated software is likely to suffer from such problems.
 A fully reproducible example would therefore look like this:
 
-```nix
+```{code-block} nix
+:class: expression
 let
-  nixpkgs = fetchTarball https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz;
+  nixpkgs = fetchTarball https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz;
   pkgs = import nixpkgs {};
 in
 pkgs.lib.strings.toUpper "always pin your sources"
 ```
 
-    ALWAYS PIN YOUR SOURCES
+```{code-block}
+:class: value
+ALWAYS PIN YOUR SOURCES
+```
 
 See [](pinning-nixpkgs) for details.
 
 What you will also often see is that `pkgs` is passed as an argument to a function.
 By convention one can assume that it refers to the Nixpkgs attribute set, which has a `lib` attribute:
 
-```nix
+```{code-block} nix
+:class: expression
 { pkgs, ... }:
 pkgs.lib.strings.removePrefix "no " "no true scotsman"
 ```
 
-    <LAMBDA>
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 To make this function produce a result, you can write it to a file (e.g. `file.nix`) and pass it an argument through `nix-instantiate`:
 
-```console
-nix-instantiate --eval test.nix --arg pkgs 'import <nixpkgs> {}'
+```shell-session
+$ nix-instantiate --eval test.nix --arg pkgs 'import <nixpkgs> {}'
+"true scotsman"
 ```
-
-    "true scotsman"
 
 Oftentimes you will see in NixOS configurations, and also within Nixpkgs, that `lib` is passed directly.
 In that case one can assume that this `lib` is equivalent to `pkgs.lib` where only `pkgs` is available.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 { lib, ... }:
 let
   to-be = true;
@@ -1493,15 +1733,17 @@ in
 lib.trivial.or to-be (! to-be)
 ```
 
-    <LAMBDA>
+```{code-block}
+:class: value
+<LAMBDA>
+```
 
 To make this function produce a result, you can write it to a file (e.g. `file.nix`) and pass it an argument through `nix-instantiate`:
 
-```console
-nix-instantiate --eval file.nix --arg lib '(import <nixpkgs> {}).lib'
+```shell-session
+$ nix-instantiate --eval file.nix --arg lib '(import <nixpkgs> {}).lib'
+true
 ```
-
-    true
 
 Sometimes both `pkgs` and `lib` are passed as arguments.
 In that case, one can assume `pkgs.lib` and `lib` to be equivalent.
@@ -1509,13 +1751,13 @@ This is done to improve readability by avoiding repeated use of `pkgs.lib`.
 
 Example:
 
-```nix
+```{code-block} nix
 { pkgs, lib, ... }:
 # ... multiple uses of `pkgs`
 # ... multiple uses of `lib`
 ```
 
-</details>
+:::
 
 For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`builtins`](builtins) of the same name.
 
@@ -1548,7 +1790,7 @@ We do not cover those here in more detail, as they do not matter for how the Nix
 (path-impurities)=
 ### Paths
 
-Whenever a file system path is rendered to a character string with [antiquotation](antiquotation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
+Whenever a file system path is used in [string interpolation](string-interpolation), the contents of that file are copied to a special location in the file system, the *Nix store*, as a side effect.
 
 The evaluated string then contains the Nix store path assigned to that file.
 
@@ -1556,33 +1798,39 @@ The evaluated string then contains the Nix store path assigned to that file.
 
 Example:
 
-```console
-echo 123 > data
+```shell-session
+$ echo 123 > data
 ```
 
-```nix
+```{code-block} nix
+:class: expression
 "${./data}"
 ```
 
-    "/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
+```{code-block}
+:class: value
+"/nix/store/h1qj5h5n05b5dl5q4nldrqq8mdg7dhqk-data"
+```
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The preceding shell command writes the characters `123` to the file `data` in the current directory.
 
-The above Nix expression refers to this file as `./data` and converts the file system path to a string with [antiquotation](antiquotation) `${ ... }`.
+The above Nix expression refers to this file as `./data` and converts the file system path to an [interpolated string](string-interpolation) `${ ... }`.
 
-Only values that can be represented as a character string are allowed for antiquotation.
+Such interpolated expressions must evaluate to something that can be represented as a character string.
 A file system path is such a value, and its character string representation is the corresponding Nix store path.
 
 The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
 The file is copied into the Nix store directory `/nix/store` as a side effect of evaluation:
 
-    /nix/store/<hash>-<name>
+```{code-block}
+/nix/store/<hash>-<name>
+```
 
 It is an error if the file system path does not exist.
 
-</details>
+:::
 
 For directories the same thing happens: The entire directory (including nested files and directories) is copied to the Nix store, and the evaluated string becomes the Nix store path of the directory.
 
@@ -1601,21 +1849,29 @@ These functions evaluate to a file system path in the Nix store.
 
 Example:
 
-```nix
-builtins.fetchurl https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+```{code-block} nix
+:class: expression
+builtins.fetchurl "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
 ```
 
-    "/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+```{code-block}
+:class: value
+"/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+```
 
 Some of them add extra convenience, such as automatically unpacking archives.
 
 Example:
 
-```nix
-builtins.fetchTarball https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz
+```{code-block} nix
+:class: expression
+builtins.fetchTarball "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
 ```
 
-    "/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
+```{code-block}
+:class: value
+"/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
+```
 
 :::{note}
 The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] lists numerous additional library functions to fetch files over the network.
@@ -1652,17 +1908,21 @@ Whenever you see `mkDerivation`, it denotes something that Nix will eventually *
 Example: [a package using `mkDerivation`](mkDerivation-example)
 
 The evaluation result of `derivation` (and `mkDerivation`) is an [attribute set](attrset) with a certain structure and a special property:
-It can be used in [antiquotation](antiquotation), and in that case evaluates to the Nix store path of its build result.
+It can be used in [string interpolation](string-interpolation), and in that case evaluates to the Nix store path of its build result.
 
 Example:
 
-```nix
+```{code-block} nix
+:class: expression
 let
   pkgs = import <nixpkgs> {};
 in "${pkgs.nix}"
 ```
 
-    "/nix/store/sv2srrjddrp2isghmrla8s6lazbzmikd-nix-2.11.0"
+```{code-block}
+:class: value
+"/nix/store/sv2srrjddrp2isghmrla8s6lazbzmikd-nix-2.11.0"
+```
 
 :::{note}
 Your output may differ.
@@ -1673,21 +1933,21 @@ A derivation's output path is fully determined by its inputs, which in this case
 This is why we recommend to [avoid search paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
 :::
 
-<details><summary>Detailed explanation</summary>
+:::{dropdown} Detailed explanation
 
 The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
 
-Converting the attribute `pkgs.nix` to a string with [antiquotation](antiquotation) is allowed, as `pkgs.nix` is a derivation.
+Converting the attribute `pkgs.nix` to a string with [string interpolation](string-interpolation) is allowed, as `pkgs.nix` is a derivation.
 That is, ultimately `pkgs.nix` boils down to a call to `derivation`.
 
 The resulting string is the file system path where the build result of that derivation will end up.
 
 There is more depth to the inner workings of derivations, but at this point it should be enough to know that such expressions evaluate to Nix store paths.
 
-</details>
+:::
 
-Antiquotation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
+String interpolation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
@@ -1697,11 +1957,13 @@ So far we have seen artifical examples illustrating the various constructs in th
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following practical examples.
 
-Note that the goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
+::: {note}
+The goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
+:::
 
 ### Shell environment
 
-```nix
+```{code-block} nix
 { pkgs ? import <nixpkgs> {} }:
 let
   message = "hello world";
@@ -1725,12 +1987,12 @@ Explanation:
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
 - The attribute set passed to `mkShell` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
-- The indented string contains an antiquotation, which will expand the value of `message` to yield `"hello world"`.
+- The indented string contains an interpolated expression, which will expand the value of `message` to yield `"hello world"`.
 
 
 ### NixOS configuration
 
-```nix
+```{code-block} nix
 { config, pkgs, ... }: {
 
   imports = [ ./hardware-configuration.nix ];
@@ -1761,7 +2023,7 @@ Explanation:
 (mkDerivation-example)=
 ### Package
 
-```nix
+```{code-block} nix
 { lib, stdenv }:
 
 stdenv.mkDerivation rec {
@@ -1787,16 +2049,20 @@ This example is a (simplified) package declaration from Nixpkgs.
 Explanation:
 
 - This expression is a function that takes an attribute set which must have exactly the attributes `lib` and `stdenv`.
-- It returns the result of evaluating the function `mkDerivaion`, which is an attribute of `stdenv`, applied to a recursive set.
+- It returns the result of evaluating the function `mkDerivation`, which is an attribute of `stdenv`, applied to a recursive set.
 - The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the built-in function `fetchTarball`.
 - The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
 ## References
 
-- [Nix manual: Nix language][manual-language] - Nix language reference
-- [Nix manual: Built-in Functions][nix-builtins] - Nix language built-in functions
-- [Nixpkgs manual: Functions reference][nixpkgs-functions] - Nixpkgs function library
-- [Nixpkgs manual: Fetchers][nixpkgs-fetchers] - Nixpkgs fetcher library
+- [Nix manual: Nix language][manual-language]
+- [Nix manual: String interpolation][manual-string-interpolation]
+- [Nix manual: Built-in Functions][nix-builtins]
+- [Nix manual: `nix repl`][`nix repl`]
+- [Nixpkgs manual: Functions reference][nixpkgs-functions]
+- [Nixpkgs manual: Fetchers][nixpkgs-fetchers]
+
+[manual-string-interpolation]: https://nixos.org/manual/nix/stable/language/string-interpolation.html
 
 ## Next steps
 
@@ -1816,7 +2082,7 @@ Often it is not possible to determine from the code at hand
 
 Example:
 
-```nix
+```{code-block} nix
 { x, y, z }: (x y) z.a
 ```
 

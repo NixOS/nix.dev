@@ -42,6 +42,9 @@ $ nix-shell -p wget zstd
 :::{note}
 You can pick a newer image by going to [Hydra job](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
 clicking on a build and copying the link to the build product image.
+
+There is a [known problem](https://github.com/NixOS/nixpkgs/issues/179701) with the latest SD images on the Pi 4, where it turns off the display while booting up.
+If you are experiencing such problems, please use [the most recent working build](https://hydra.nixos.org/build/134720986/download/1/nixos-sd-image-21.03pre262561.581232454fd-aarch64-linux.img.zst) instead until the issue is fixed.
 :::
 
 Your terminal should be printing kernel messages as they come in.
@@ -181,4 +184,4 @@ $ sudo -i
 
 - Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and reboot to the old configuration if something broke.
 - To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/) and change the options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
-- To see the power of declarative configuration, try replacing `xfce` with `kodi` in `/etc/nixos/configuration.nix` and `reboot`.
+- To see the power of declarative configuration, try replacing `xfce` with `kodi` in `/etc/nixos/configuration.nix`, run `nixos-rebuild switch` as root and `reboot`.

@@ -49,3 +49,6 @@ run_code_block_tests.sh @domenkozar
 
 # Documentation sources
 source/ @domenkozar @fricklerhandwerk
+
+# Working group docs
+maintainers/working_groups/learning_journey/ @zmitchell

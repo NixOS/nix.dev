@@ -13,6 +13,7 @@ myst-parser = {version = "*", extras = ["linkify"]}
 sphinx = "*"
 sphinx-book-theme = "^0.2.0"
 sphinx-copybutton = "*"
+sphinx-design = "^0.3.0"
 
 [tool.poetry.dev-dependencies]
 black = "==22.8.0"
