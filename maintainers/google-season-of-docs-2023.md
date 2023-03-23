@@ -103,8 +103,8 @@ With a symbolic compensation we intend to encourage those contributors who other
 We also want to incentivise community volunteers to provide documentation-specific technical support to contributors.
 
 The particular scope and setup, based our experience with similar projects in the past, is why we estimate a budget somewhat higher than the limit of $15000 suggested by Google Season of Docs.
-The NixOS Foundation and the Nix documentation team is committed to make the project happen.
-If we are awarded the grant, we are confindent to be able to close a funding gap of up to $5000, for example by soliciting additional sponsoring.
+The NixOS Foundation and the Nix documentation team are committed to make the project happen.
+If we are awarded the grant, we have backing to close a funding gap of up to $5000.
 
 | Budget item    | Amount    | Running total | Notes        |
 |----------------|-----------|---------------|--------------|
