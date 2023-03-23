@@ -103,10 +103,12 @@ Additionally, we see our diverse community as our greatest collective asset.
 A setup that enables beginners to grow into proficient contributors, domain experts sharing their experience with the whole community, and engaged volunteers taking first steps into the professional world – to us this promises the greatest long-term payoff.
 
 Since creating documentation is much less "writing things down" and much more "building and disseminating knowledge", we decided to focus on paid support by domain experts, who shall guide activities, mentor contributors and share knowledge, and supervise progress.
-With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate, to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for all users of the Nix ecosystem.
-We also want to support community volunteers to provide documentation-specific technical support to contributors.
+With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for all users of the Nix ecosystem.
+We also want to incentivise community volunteers to provide documentation-specific technical support to contributors.
 
-The large scope and This is why we estimate a budget somewhat higher than the limit of $15000 suggested by Google Season of Docs.
+The particular scope and setup, based our experience with similar projects in the past, is why we estimate a budget somewhat higher than the limit of $15000 suggested by Google Season of Docs.
+The NixOS Foundation and the Nix documentation team is committed to make the project happen.
+If we are awarded the grant, we are confindent to be able to close a funding gap of up to $5000, for example by soliciting additional sponsoring.
 
 | Budget item    | Amount    | Running total | Notes        |
 |----------------|-----------|---------------|--------------|
