@@ -1,10 +1,6 @@
-> **Important**
->
-> This document is **work in progress** until the submission deadline 2023-03-24.
-
 # Google Season of Docs 2023 Project Proposal
 
-# Offer a learning journey for Nix beginners - NixOS Foundation
+## Offer a learning journey for Nix beginners - NixOS Foundation
 
 Nix is an open source build system, a configuration management system, and a mechanism for deploying software, focused on reproducibility.
 It is the basis of an ecosystem of exceptionally powerful tools – including Nixpkgs, the largest, most up-to-date software repository in the world, and NixOS, a Linux distribution that can be configured fully declaratively.
