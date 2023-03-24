@@ -37,7 +37,7 @@ Since this is rarely needed, we will assume that the target is identical to the 
 To ensure the reproducibility of this tutorial as explained in {ref}`the pinning tutorial <pinning-nixpkgs>`:
 
 ```shell-session
-$ NIX_PATH=https://github.com/NixOS/nixpkgs/archive/9420363b95521e65a76eb5153de1eaee4a2e41c6.tar.gz
+$ NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/9420363b95521e65a76eb5153de1eaee4a2e41c6.tar.gz
 ```
 
 ## Determining the host platform config
