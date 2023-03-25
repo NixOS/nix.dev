@@ -28,42 +28,9 @@ Membership is open to anyone that wants to contribute.
 Meetings will be held every week to ensure that progress can be made between meetings.
 
 ## Immediate projects
-### Decide on documentation structure
-This project will decide on a high level structure for the documentation so that contributors know the audience they are speaking to and where their contributions fit into the Nix documentation landscape.
 
-The documentation will follow the [Diataxis](https://diataxis.fr) framework to the degree that it makes sense. This project will produce a proposal to be submitted to the Documentation Team.
-
-The first draft of this structure is as follows:
-- Tutorials
-    - Installation of Nix
-    - Walking a user through their first derivation
-    - Packaging an existing project for Nix for the first time
-- How-To
-    - Packaging for specific languages
-    - Packaging idioms
-        - `callPackage`, "import from derivation", "fixed output derivation", etc
-    - Day-to-day development and workflows
-        - Integration with IDEs/editors
-        - Nix in CI
-        - Nix and NixOS deployments
-        - Building containers
-    - Rollbacks
-    - Contributing in various ways
-- Explanation
-    - Concepts
-    - What is a derivation?
-    - Cross-compilation as a first-class citizen
-        - Where to put your dependencies (`buildInputs`, `nativeBuildInputs`, etc)
-    - The Nix Store and the database
-    - Channels, profiles, etc
-    - Overlays, overrides, `follows`
-- Reference
-    - Command reference
-    - How store paths are computed
-    - Build phases
-    - How derivations work
-    - Nix language reference
-    - Flake schema
+### Establish structure of documentation
+In order to unblocked contributions, the first priority is deciding on a documentation structure. We should be able to direct new contributors to the exact place to put the materials they want to contribute and understand beforehand whether a contribution overlaps with existing documentation.
 
 ### Set standards for documentation pages
 In order to provide a level of consistent quality for the documentation, we should decide on the bare minimum standards for documentation pages.

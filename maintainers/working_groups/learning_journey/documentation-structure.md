@@ -1,0 +1,24 @@
+- Tutorials
+    - Nix
+    - NixOS
+- How-To
+    - Language guides
+    - Workflows
+        - Nix REPL
+        - IDE integration
+        - CI
+        - Operations
+        - Containers
+        - Shells
+    - Package management
+    - Contributing
+- Explanation
+    - Nix store
+    - Cross-compilation
+    - Packaging conventions
+- Reference
+    - Nix language reference
+    - Commands reference
+    - Derivations
+    - Nix built-ins
+    - Nixpkgs lib
