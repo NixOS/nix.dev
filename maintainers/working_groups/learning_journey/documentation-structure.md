@@ -1,8 +1,14 @@
 - Tutorials
-    - Nix
-    - NixOS
+    - First steps
+        - Nix
+        - Declarative configuration management
+    - Nix workflows (name needs bikeshedding)
+    - Declarative configuration management (name needs bikeshedding)
 - How-To
     - Language guides
+        - Rust
+        - Python
+        - etc
     - Workflows
         - Nix REPL
         - IDE integration
@@ -11,11 +17,13 @@
         - Containers
         - Shells
     - Package management
+    - Configuration management
     - Contributing
 - Explanation
     - Nix store
     - Cross-compilation
     - Packaging conventions
+    - Module system
 - Reference
     - Nix language reference
     - Commands reference
