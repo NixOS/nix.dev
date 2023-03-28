@@ -30,7 +30,7 @@ Meetings will be held every week to ensure that progress can be made between mee
 ## Immediate projects
 
 ### Establish structure of documentation
-In order to unblock contributions, the first priority is deciding on a documentation structure. We should be able to direct new contributors to the exact place to put the materials they want to contribute and understand beforehand whether a contribution overlaps with existing documentation.
+In order to unblock contributions, the first priority is deciding on a documentation structure. We should be able to direct new contributors to the exact place to put the materials they want to contribute and understand beforehand whether a contribution overlaps with existing documentation. The documentation will be organized using the [Diataxis](https://diataxis.fr) framework, so that tutorials, how-to guides, explanatory materials, and reference materials are clearly separated.
 
 ### Set standards for documentation pages
 In order to provide a level of consistent quality for the documentation, we should decide on the bare minimum standards for documentation pages.
