@@ -55,6 +55,9 @@ html:
 	# support for Cloudflare Pages' redirects
 	@cp _redirects build/html/_redirects
 
+	# hack to make live-reload on css update work
+	@cp source/_static/css/custom.css build/html/_static/css/custom.css
+
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 

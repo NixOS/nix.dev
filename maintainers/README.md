@@ -22,34 +22,41 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 ## Members
 
-- Luc Perkins ([@lucperkins]) (lead until 2023-01-31)
-
-  Nix Advocate, [Determinate Systems]
-
 - Valentin Gagarin ([@fricklerhandwerk])
 
   Nix documentarian, [Tweag]
-
-- Domen Kožar ([@domenkozar])
-
-  [nix.dev](http://nix.dev) author, [Cachix](https://cachix.org)
-
-- Jörg Thalheim ([@Mic92])
-
-  NixOS Wiki maintainer
+  
+  [@fricklerhandwerk]: https://github.com/fricklerhandwerk
+  [Tweag]: https://tweag.io
 
 - Silvan Mosberger ([@infinisil])
 
+  [@infinisil]: https://github.com/infinisil
+
   Nixpkgs maintainer, [Tweag]
 
-[@lucperkins]: https://github.com/lucperkins
-[@fricklerhandwerk]: https://github.com/fricklerhandwerk
-[@domenkozar]: https://github.com/domenkozar
-[@Mic92]: https://github.com/Mic92
-[@infinisil]: https://github.com/infinisil
+- [@pennae](https://github.com/pennae) (they/them)
 
-[Determinate Systems]: https://determinate.systems
-[Tweag]: https://tweag.io
+  NixOS and Nixpkgs contributors
+
+- Olaf Hochherz (Github: [@olafklingt], Discourse: [@olaf])
+
+  [@olafklingt]: https://github.com/olafklingt
+  [@olaf]: https://discourse.nixos.org/u/olaf
+  
+- Henrik Karlsson (Github: [@henrik-ch], Discourse: [@i97henka])
+
+  [@henrik-ch]: https://github.com/henrik-ch
+  [@i97henka]: https://discourse.nixos.org/u/i97henka
+
+- Zach Mitchell (GitHub: [@zmitchell])
+
+  [@zmitchell]: https://github.com/zmitchell/
+
+- [Philipp](https://github.com/pstn)
+
+## Working Groups
+- [Learning Journey](working_groups/learning_journey/README.md)
 
 ## Responsibilities
 
@@ -87,9 +94,12 @@ Ordered by priority:
 
 ## Team meetings
 
-The team holds weekly meetings on Thursdays 17:30-18:30 (Europe/Berlin):
+The team holds weekly meetings on **Tuesdays 13:00-14:00 and Thursdays 17:30-18:30 (Europe/Berlin)**:
 - [NixOS calendar](https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com)
 - [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589)
+
+These meetings are free for everyone to join.
+Contact [@fricklerhandwerk] to get a calendar invitation.
 
 ### Meeting links
 
