@@ -1,8 +1,10 @@
 # Tutorials
 
+This section contains a collection of articles on how to get things done in the Nix ecosystem.
+
 ```{toctree}
 :glob: true
-:maxdepth: 2
+:maxdepth: 1
 
 install-nix.md
 ad-hoc-developer-environments.md
