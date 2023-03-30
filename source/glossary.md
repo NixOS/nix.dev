@@ -1,9 +1,6 @@
 # Glossary
 
 ```{glossary}
-attribute name
-    Attribute sets are a collection of key/value pairs. The attribute name is the key.
-
 Nix
     Build system and package manager.
 
@@ -27,9 +24,6 @@ NixOS
     Linux distribution based on Nix and Nixpkgs.
 
     Read /nɪks oʊ ɛs/ ("Niks Oh Es").
-
-package name
-    TODO
 
 reproducible
     Reproducibility would guarantee exactly the same results no matter
