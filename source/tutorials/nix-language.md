@@ -1033,7 +1033,7 @@ string
 
 ```{code-block}
 :class: value
-"multi\nline\nstring"
+"multi\nline\nstring\n"
 ```
 
 Equal amounts of prepended white space are trimmed from the result.
