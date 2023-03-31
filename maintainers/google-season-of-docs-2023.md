@@ -232,6 +232,6 @@ This project proposal was developed collaboratively by the Nix documentation tea
 
 # Get in touch
 
-If you have questions, please contact the [Nix documentation team](..).
+If you have questions, please contact the [Nix documentation team](./README.md).
 
 If you have suggestions, please open a pull request to change this file.
