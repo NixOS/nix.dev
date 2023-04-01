@@ -1545,7 +1545,7 @@ builtins.toString
 Most built-in functions are only accessible through `builtins`.
 A notable exception is `import`, which is also available at the top level.
 
-`import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value.
+`import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value. If the path is a directory, the file `default.nix` in that directory is read.
 
 Example:
 
