@@ -11,7 +11,7 @@ python = "^3.7"
 livereload = "*"
 myst-parser = {version = "*", extras = ["linkify"]}
 sphinx = "*"
-sphinx-book-theme = "^0.2.0"
+sphinx-book-theme = "^1.0.1"
 sphinx-copybutton = "*"
 sphinx-design = "^0.3.0"
 
