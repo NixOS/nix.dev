@@ -12,7 +12,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
 
 - Local file path.
 
-  Using `.` means that nixpkgs is located in the current directory.
+  Using `./.` means that the expression is located in a file `default.nix` the current directory.
 
 - Pinned to a specific commit
 
