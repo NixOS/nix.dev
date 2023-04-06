@@ -90,6 +90,9 @@ Ordered by priority:
   - announce meetings on the calendar
   - moderate and keep schedule
   - take and publish notes
+- support maintainers
+  - assist new maintainers to get commit access
+    ([NixOS GitHub organisation owners](https://github.com/orgs/NixOS/people?query=role%3Aowner) can hand out permissions)
 
 ## Team meetings
 
