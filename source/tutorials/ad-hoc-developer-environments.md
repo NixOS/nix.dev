@@ -12,7 +12,7 @@ You can also share the command invoking such a shell with others, and it will wo
 
 Once you {ref}`install Nix <install-nix>`, you can use it to create new *shell environments* with programs that you want to use.
 
-In this section you will run two exocic programs called `cowsay` and `lolcat` that you will probably not have installed on your machine:
+In this section you will run two exotic programs called `cowsay` and `lolcat` that you will probably not have installed on your machine:
 
 ```shell-session
 $ cowsay no can do
@@ -178,7 +178,7 @@ There are three things going on here:
 ## References
 
 - [Nix manual: `nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell) (or run `man nix-shell`)
-- [Nix manual: `-I` option]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
+- [Nix manual: `-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I)
 
 ## Next steps
 
