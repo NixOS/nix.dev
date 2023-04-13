@@ -29,13 +29,13 @@ Developer environments allow you to:
 At the top-level of your project create `shell.nix` with the following contents:
 
 ```nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
+let pkgs = import (fetchTarball channel:nixos-22.11) {}; in
 
 pkgs.mkShell {
-  buildInputs = [
-    pkgs.which
-    pkgs.htop
-    pkgs.zlib
+  buildInputs = with pkgs; [
+    which
+    htop
+    zlib
   ];
 }
 ```
@@ -78,13 +78,13 @@ You should see something similar to this:
 Given the following `shell.nix`:
 
 ```nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
+let pkgs = import (fetchTarball channel:nixos-22.11) {}; in
 
 pkgs.mkShell {
-  buildInputs = [
-    pkgs.which
-    pkgs.htop
-    pkgs.zlib
+  buildInputs = with pkgs; [
+    which
+    htop
+    zlib
   ];
 
   shellHook = ''
