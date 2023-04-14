@@ -36,10 +36,39 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 tutorials/index.md
 templates/index.md
 anti-patterns/index.md
-reference/index.md
-faq.md
 recommended-reading.md
 influences.md
-glossary.md
-contributing/index.md
+```
+
+```{toctree}
+:glob:
+:caption: Recipes
+:maxdepth: 1
+:hidden:
+
+recipes/*
+```
+
+```{toctree}
+:glob:
+:caption: Reference
+:maxdepth: 1
+:hidden:
+
+reference/pinning-nixpkgs.md
+reference/glossary.md
+Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
+NixOS Manual <https://nixos.org/manual/nixos/stable/>
+Nix Reference Manual <https://nixos.org/manual/nix/stable/>
+```
+
+```{toctree}
+:glob:
+:caption: Contributing
+:maxdepth: 1
+:hidden:
+
+contributing/how-to-contribute.md
+contributing/documentation.md
+contributing/writing-a-tutorial.md
 ```
