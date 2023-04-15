@@ -55,11 +55,11 @@ recipes/*
 :maxdepth: 1
 :hidden:
 
-reference/pinning-nixpkgs.md
-reference/glossary.md
+Nix Reference Manual <https://nixos.org/manual/nix/stable/>
 Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
 NixOS Manual <https://nixos.org/manual/nixos/stable/>
-Nix Reference Manual <https://nixos.org/manual/nix/stable/>
+reference/pinning-nixpkgs.md
+reference/glossary.md
 ```
 
 ```{toctree}
