@@ -2,11 +2,8 @@
 
 If you need assistance with one of your contributions, there are a few places you
 can go for help.
-These are sorted from specific to general, and you typically want to start as
-specific as possible, since this increases your changes to get help.
 
-Initially, you'll want to try to find individuals or groups with specific knowledge of
-your issue:
+For better efficiency and chances of success, you should try to contact individuals or groups with more specific knowledge first:
   - look for the relevant package's maintainers, listed in its `maintainers` attribute
   - look at the git log for the relevant files
   - check out if any teams are responsible for the relevant subsystem:
