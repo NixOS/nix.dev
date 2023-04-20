@@ -1,6 +1,6 @@
-# Google Season of Docs 2023 Project Proposal
+# Documentation Project Proposal 2023
 
-## Offer a learning journey for Nix beginners - NixOS Foundation
+## Offer a learning journey for Nix beginners
 
 Nix is an open source build system, a configuration management system, and a mechanism for deploying software, focused on reproducibility.
 It is the basis of an ecosystem of exceptionally powerful tools – including Nixpkgs, the largest, most up-to-date software repository in the world, and NixOS, a Linux distribution that can be configured fully declaratively.
@@ -11,7 +11,7 @@ The [NixOS Foundation](https://nixos.org/community/#foundation) was founded in 2
 The Nix documentation team was established in mid 2022 in order to ease learning Nix for beginners and support community efforts in that direction.
 Recently the team has gained many new members eager to tackle long-standing issues.
 
-From the perspective of the NixOS Foundation, Google Season of Docs can help the Nix documentation team to substantially improve a crucial part of the Nix onboarding experience in a concerted effort.
+From the perspective of the NixOS Foundation, a concerted effort can help the Nix documentation team to substantially improve a crucial part of the Nix onboarding experience.
 
 References:
 - [Documentation Team: Flattening the learning curve](https://discourse.nixos.org/t/documentation-team-flattening-the-learning-curve/20003)
@@ -102,7 +102,6 @@ Since creating documentation is much less "writing things down" and much more "b
 With a symbolic compensation we intend to encourage those contributors who otherwise would not step up to participate to take the opportunity for learning Nix and developing their technical writing skills, while creating lasting value for all users of the Nix ecosystem.
 We also want to incentivise community volunteers to provide documentation-specific technical support to contributors.
 
-This particular scope and setup, based on our experience with similar projects in the past, is why we estimate a budget somewhat higher than the limit of $15000 suggested by Google Season of Docs.
 The NixOS Foundation and the Nix documentation team are committed to make the project happen.
 If we are awarded the grant, we have backing to close a funding gap of up to $5000.
 
