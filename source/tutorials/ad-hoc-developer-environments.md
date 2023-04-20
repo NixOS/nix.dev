@@ -12,46 +12,74 @@ You can also share the command invoking such a shell with others, and it will wo
 
 Once you {ref}`install Nix <install-nix>`, you can use it to create new *shell environments* with programs that you want to use.
 
-In this section you will run two exotic programs called `cowsay` and `lolcat` that you will probably not have installed on your machine:
+In this section you will run two programs called `gh` and `jq` that you may not have installed on your machine:
 
 ```shell-session
-$ cowsay no can do
-The program ‘cowsay’ is currently not installed.
+$ gh api --method GET /repos/nixos/nix.dev/issues
+The program ‘gh’ is currently not installed.
 
-$ echo no chance | lolcat
-The program ‘lolcat’ is currently not installed.
+$ echo "{}" | jq
+The program ‘jq’ is currently not installed.
 ```
 
-Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `cowsay` and `lolcat` packages.
+Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `gh` and `jq` packages.
 The first invocation of `nix-shell` may take a while to download all dependencies.
 
 ```shell-session
-$ nix-shell -p cowsay lolcat
-these 3 derivations will be built:
-  /nix/store/zx1j8gchgwzfjn7sr4r8yxb7a0afkjdg-builder.pl.drv
-  /nix/store/h9sbaa2k8ivnihw2czhl5b58k0f7fsfh-lolcat-100.0.1.drv
+$ nix-shell -p gh jq
+these 39 paths will be fetched (68.86 MiB download, 322.61 MiB unpacked):
+  /nix/store/12wczkzi5db1ajbjp4hdyif3v9y5rbi5-xz-5.4.1-bin
+  /nix/store/17pkxcz3js3549kn9dc3hhvp4adbwvs1-bzip2-1.0.8-bin
+  /nix/store/1f44s1ddm915dn3kdaycabhf3a8xnfnb-gawk-5.2.1
   ...
 
 [nix-shell:~]$
 ```
 
-Within the Nix shell, you can use the programs provided by these packages:
+Within the Nix shell, you can use the programs provided by these packages. For instance if we wanted to fetch the last five github issues for nix.dev:
 
-```
-[nix-shell:~]$ cowsay Hello, Nix! | lolcat
+```shell-session
+[nix-shell:~]$ gh api --method GET /repos/nixos/nix.dev/issues -F per_page=5 -f state=open | \
+	jq '.[] | { number: .number, title: .title, author: .user.login }'
+
+{
+  "number": 523,
+  "title": "chore(deps): bump sphinx-copybutton from 0.5.0 to 0.5.2",
+  "author": "dependabot[bot]"
+}
+{
+  "number": 522,
+  "title": "Automatically update _redirects file",
+  "author": "zmitchell"
+}
+{
+  "number": 521,
+  "title": "Generate a sitemap.xml for better SEO",
+  "author": "zmitchell"
+}
+{
+  "number": 519,
+  "title": "chore(deps): bump sphinx-design from 0.3.0 to 0.4.1",
+  "author": "dependabot[bot]"
+}
+{
+  "number": 518,
+  "title": "How to relicense a piece of documentation",
+  "author": "fricklerhandwerk"
+}
 ```
 
-Press type `exit` or press `CTRL-D` to exit the shell, and the programs won't be available anymore.
+Type `exit` or press `CTRL-D` to exit the shell, and the programs won't be available anymore.
 
 ```shell-session
 [nix-shell:~]$ exit
 exit
 
-$ cowsay no more
-The program ‘cowsay’ is currently not installed.
+$ gh api --method GET /repos/nixos/nix.dev/issues
+The program ‘gh’ is currently not installed.
 
-$ echo all gone | lolcat
-The program ‘lolcat’ is currently not installed.
+$ echo "all gone" | jq
+The program ‘jq’ is currently not installed.
 ```
 
 ## Search for packages
