@@ -140,11 +140,11 @@ The refined project plan is to be comprised of
 
 for the remaining phases.
 
-### Design
+### Implementation
 
 Implement the project according to the detailed plan based on the [proposed scope](#scope).
 
-### Evalation
+### Evaluation
 
 The evaluation phase is for [measuring project success](#measure-of-success), reflecting on what has been done, compiling a final report, and debriefing.
 
