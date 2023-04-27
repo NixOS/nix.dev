@@ -54,6 +54,8 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 - [Philipp](https://github.com/pstn)
 
+- [Katharina Fey](https://github.com/spacekookie) (they/them)
+
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
 
