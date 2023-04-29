@@ -19,13 +19,23 @@ For better efficiency and chances of success, you should try to contact individu
 Once you have found the people you're looking for (either their email address, or their
 handles in [`maintainers-list.nix`][maintainers-list]), you can contact them via:
 
-- Email.
-- [Matrix], using the Matrix handle found in the [`maintainers-list.nix`
-  file][maintainers-list]. If no Matrix handle is present for a specific maintainer, try
-  searching for them using their GitHub username, as most people tend to use the same one
-  across channels.
-- [Discourse](https://discourse.nixos.org), again trying the GitHub username found in the
-  [`maintainers-list.nix` file][maintainers-list] to search for a specific user.
+- GitHub
+
+  [Mention the GitHub username](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#mentioning-people-and-teams) found in the [`maintainers-list.nix` file][maintainers-list] in issue or pull request descriptions, or comments.
+
+- [Discourse](https://discourse.nixos.org)
+
+  Try the GitHub username found in the [`maintainers-list.nix` file][maintainers-list] mention or directly contact a specific user.
+  Note that some people use a different username on Discourse.
+  
+- [Matrix]
+
+  Use the Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
+  If no Matrix handle is present for a specific maintainer, try searching for them using their GitHub username, as most people tend to use the same one across channels.
+  
+- Email
+
+  Use email addresses found with `git log` as a last resort.
 
 If you haven't found any specific users or groups that could help you with your
 contribution, you can resort to asking the community at large, using one of the following official
