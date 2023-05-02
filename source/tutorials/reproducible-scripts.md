@@ -63,7 +63,10 @@ Create a file named `nixpkgs-releases.sh` with the following content:
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
 
+The first line is a standard hashbang. The additional hashbang lines are a Nix specific construct. The rest of the file is taken to be bash code because of the `-i bash` parameter.
+
 We specify the `bash` program as the interpreter with the `-i` option.
+
 We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
 
 With the `-p` option we specify the packages required for the script to run.
