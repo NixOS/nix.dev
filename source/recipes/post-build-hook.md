@@ -1,35 +1,30 @@
-# Using the `post-build-hook`
+# Upload build results to S3
 
-# Implementation Caveats
+This guide shows how to use the Nix [`post-build-hook`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-post-build-hook) configuration option to automatically upload build results to an S3-compatible binary cache.
 
-Here we use the post-build hook to upload to a binary cache. This is a
-simple and working example, but it is not suitable for all use cases.
+## Implementation Caveats
 
-The post build hook program runs after each executed build, and blocks
-the build loop. The build loop exits if the hook program fails.
+This is a simple and working example, but it is not suitable for all use cases.
 
-Concretely, this implementation will make Nix slow or unusable when the
-internet is slow or unreliable.
+The post-build hook program runs after each executed build, and blocks the build loop.
+The build loop exits if the hook program fails.
 
-A more advanced implementation might pass the store paths to a
-user-supplied daemon or queue for processing the store paths outside of
-the build loop.
+Concretely, this implementation will make Nix slow or unusable when the network connection is slow or unreliable.
+A more advanced implementation might pass the store paths to a user-supplied daemon or queue for processing the store paths outside of the build loop.
 
 # Prerequisites
 
-This tutorial assumes you have [configured an S3-compatible binary
-cache](../package-management/s3-substituter.md), and that the `root`
-user's default AWS profile can upload to the bucket.
+<!-- TODO: this information will move: https://github.com/NixOS/nix/issues/7769 -->
+This tutorial assumes you have [configured an S3-compatible binary cache](https://nixos.org/manual/nix/stable/package-management/s3-substituter.html), and that the `root` user's default AWS profile can upload to the bucket.
 
 # Set up a Signing Key
 
-Use `nix-store --generate-binary-cache-key` to create our public and
-private signing keys. We will sign paths with the private key, and
-distribute the public key for verifying the authenticity of the paths.
+Use [`nix-store --generate-binary-cache-key`](https://nixos.org/manual/nix/stable/command-ref/nix-store/generate-binary-cache-key.html) to create a pair of cryptographic keys.
+You will sign paths with the private key, and distribute the public key for verifying the authenticity of the paths.
 
 ```console
-# nix-store --generate-binary-cache-key example-nix-cache-1 /etc/nix/key.private /etc/nix/key.public
-# cat /etc/nix/key.public
+$ nix-store --generate-binary-cache-key example-nix-cache-1 /etc/nix/key.private /etc/nix/key.public
+$ cat /etc/nix/key.public
 example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
 ```
 
