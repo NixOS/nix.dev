@@ -1,28 +1,24 @@
 # Frequently Asked Questions
 
-## Nix
-
-
-
-### How to build reverse dependencies of a package?
+## How to build reverse dependencies of a package?
 
 ```shell-session
 $ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
 ```
 
-### I'm getting: writing to file: Connection reset by peer
+## I'm getting: writing to file: Connection reset by peer
 
 Too big files in src, out of resources (HDD space, memory)
 
-### What are channels and different branches on github?
+## What are channels and different branches on github?
 
 See <https://nixos.wiki/wiki/Nix_channels>
 
-### How can I manage dotfiles in \$HOME with Nix?
+## How can I manage dotfiles in \$HOME with Nix?
 
 <https://github.com/nix-community/home-manager>
 
-### Are there some known impurities in builds?
+## Are there some known impurities in builds?
 
 Yes.
 
@@ -32,17 +28,11 @@ Yes.
 - Kernel
 - Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
 
-### What's the recommended process for building custom packages?
+## How to build my own ISO?
 
-> E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?
+See <http://nixos.org/nixos/manual/index.html#sec-building-image>
 
-## NixOS
-
-### How to build my own ISO?
-
-<http://nixos.org/nixos/manual/index.html#sec-building-image>
-
-### How do I connect to any of the machines in NixOS tests?
+## How do I connect to any of the machines in NixOS tests?
 
 Apply following patch:
 
@@ -64,7 +54,7 @@ index 8ad0d67..838fbdd 100644
 
 And then the vde_switch network should be accessible locally.
 
-### How to bootstrap NixOS inside an existing Linux installation?
+## How to bootstrap NixOS inside an existing Linux installation?
 
 There are a couple of tools:
 
