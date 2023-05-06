@@ -1,4 +1,4 @@
-# Frequently Asked Questions
+# FAQ
 
 ## How to build reverse dependencies of a package?
 

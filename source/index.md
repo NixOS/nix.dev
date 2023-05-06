@@ -46,7 +46,9 @@ influences.md
 :maxdepth: 1
 :hidden:
 
-recipes/*
+recipes/caches.md
+recipes/nix-store.md
+recipes/faq.md
 ```
 
 ```{toctree}
