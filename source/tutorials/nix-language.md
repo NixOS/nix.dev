@@ -1,6 +1,6 @@
 (reading-nix-language)=
 
-# Nix language basics
+# Nix language primer
 
 The Nix language is used to declare packages and configurations to be built by [Nix][nix-manual].
 
