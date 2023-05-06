@@ -30,12 +30,16 @@ This documentation supplements the official [Nix](http://nixos.org/nix/manual/),
 and [NixOps](http://nixos.org/nixops/manual/) manuals.
 
 ```{toctree}
-:glob: true
+:glob:
+:caption: Tutorials
 :maxdepth: 1
+:hidden:
 
-tutorials/index.md
-templates/index.md
-anti-patterns/index.md
+tutorials/install-nix.md
+tutorials/first-steps/index.md
+tutorials/nixos/*
+tutorials/cross-compilation.md
+tutorials/dev-environment.md
 recommended-reading.md
 influences.md
 ```
@@ -47,6 +51,8 @@ influences.md
 :hidden:
 
 recipes/*
+anti-patterns/*
+templates/*
 ```
 
 ```{toctree}
