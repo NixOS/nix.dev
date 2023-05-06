@@ -410,6 +410,8 @@ linkcheck_ignore = [
     r"https://matrix.to",
     # returns 403 on CI
     r"https://www.lesswrong.com",
+    # Linkcheck fails on anchors in GH READMEs, see https://github.com/sphinx-doc/sphinx/issues/9016
+    r"https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests"
 ]
 
 # Anchors are not present in HTML
