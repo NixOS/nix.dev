@@ -3,7 +3,7 @@ This is a script and template for compiling "This Month in Nix Docs". The proces
 
 A new post is created via:
 ```
-$ ./new-post.sh <from YYYY-MM-DD> <to YYYY-MM-DD> > new-post.md
+$ ./make-post.sh <from YYYY-MM-DD> <to YYYY-MM-DD> > new-post.md
 ```
 
 After this invocation a template post (`new-post.md`) will be filled out with the GitHub query results formatted as markdown at the end of the file.

@@ -44,7 +44,7 @@ list_new_tracking_issues() {
 }
 
 cat << EOF
-# This Month in Nix Docs - #**NUMBER** - **MONTH** **YEAR**
+# This Month in Nix Docs - #NUMBER - MONTH YEAR
 
 ## Community
 The Documentation Team can be found in a number of places. Check the [Documentation Team page](https://nixos.org/community/teams/documentation.html) and drop in if you'd like to contribute!
