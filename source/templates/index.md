@@ -1,6 +1,14 @@
 # Templates
 
-## Getting started Nix template
+## Generic
 
-[Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template)
-gives you best practices learned for setting up any kind of development project using Nix.
+### [Getting started Nix template][getting-started-nix-template]
+
+Provides an example baseline development environment using
+[`devenv.sh`][devenv].
+
+[getting-started-nix-template]: https://github.com/nix-dot-dev/getting-started-nix-template
+
+<!-- General links -->
+
+[devenv]: https://devenv.sh
