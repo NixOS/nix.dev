@@ -2,8 +2,6 @@
 name: Tracking Issue
 about: Create a tracking issue for a collection of issues and pull-requests
 labels: tracking
-assignees: ''
-
 ---
 
 ## Project description
