@@ -30,14 +30,15 @@ This documentation supplements the official [Nix](http://nixos.org/nix/manual/),
 and [NixOps](http://nixos.org/nixops/manual/) manuals.
 
 ```{toctree}
-:glob: true
+:glob:
+:caption: Tutorials
 :maxdepth: 1
+:hidden:
 
-tutorials/index.md
-templates/index.md
-anti-patterns/index.md
-recommended-reading.md
-influences.md
+tutorials/install-nix.md
+tutorials/first-steps/index.md
+tutorials/nixos/index.md
+tutorials/cross-compilation.md
 ```
 
 ```{toctree}
@@ -47,6 +48,8 @@ influences.md
 :hidden:
 
 recipes/*
+anti-patterns/*
+templates/*
 ```
 
 ```{toctree}
@@ -60,6 +63,8 @@ Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
 NixOS Manual <https://nixos.org/manual/nixos/stable/>
 reference/pinning-nixpkgs.md
 reference/glossary.md
+recommended-reading.md
+influences.md
 ```
 
 ```{toctree}
