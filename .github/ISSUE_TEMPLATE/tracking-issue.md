@@ -8,7 +8,7 @@ labels: tracking
 <!-- Briefly describe the project to provide context for the work that needs to be done -->
 
 ## Steps
-<!-- List the steps that are required to deliver the project, linking issues and PRs for each step as they are opened -->
+<!-- List the steps that are required to finish the project, and link issues and pull requests -->
 
 - [ ] Step 1
 - [ ] Step 2
