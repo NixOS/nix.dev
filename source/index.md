@@ -37,11 +37,8 @@ and [NixOps](http://nixos.org/nixops/manual/) manuals.
 
 tutorials/install-nix.md
 tutorials/first-steps/index.md
-tutorials/nixos/*
+tutorials/nixos/index.md
 tutorials/cross-compilation.md
-tutorials/dev-environment.md
-recommended-reading.md
-influences.md
 ```
 
 ```{toctree}
@@ -66,6 +63,8 @@ Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
 NixOS Manual <https://nixos.org/manual/nixos/stable/>
 reference/pinning-nixpkgs.md
 reference/glossary.md
+recommended-reading.md
+influences.md
 ```
 
 ```{toctree}
