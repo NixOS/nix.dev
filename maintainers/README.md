@@ -54,9 +54,12 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 - [Philipp](https://github.com/pstn)
 
-- Jeremiah Secrist ([@JeremiahSecrist])
+- Jeremiah Secrist (GitHub: [@JeremiahSecrist], Discourse: [@Jeremiahs], Matrix: [@jeremiahs:matrix.org])
 
   [@JeremiahSecrist]: https://github.com/JeremiahSecrist/
+  [@Jeremiahs]: https://discourse.nixos.org/
+  [@jeremiahs:matrix.org]: https://matrix.org/
+
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
