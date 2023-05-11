@@ -108,7 +108,7 @@ Use [`nix repl`] to evaluate Nix expressions interactively (by typing them on th
 
 ```shell-session
 $ nix repl
-Welcome to Nix 2.5.1. Type :? for help.
+Welcome to Nix 2.13.3. Type :? for help.
 
 nix-repl> 1 + 2
 3
