@@ -1820,15 +1820,14 @@ The preceding shell command writes the characters `123` to the file `data` in th
 The above Nix expression refers to this file as `./data` and converts the file system path to an [interpolated string](string-interpolation) `${ ... }`.
 
 Such interpolated expressions must evaluate to something that can be represented as a character string.
-A file system path is such a value, and its character string representation is the corresponding Nix store path.
-
-The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
-The file is copied into the Nix store directory `/nix/store` as a side effect of evaluation:
+A file system path is such a value, and its character string representation is the corresponding Nix store path:
 
 ```{code-block}
 /nix/store/<hash>-<name>
 ```
 
+The Nix store path is obtained by taking the hash of the file's contents (`<hash>`) and combining it with the file name (`<name>`).
+The file is copied into the Nix store directory `/nix/store` as a side effect of evaluation.
 It is an error if the file system path does not exist.
 
 :::
