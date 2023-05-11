@@ -165,7 +165,7 @@ If `--eval` is omitted, `nix-instantiate` expects the expression in the given fi
 :::
 
 :::{note}
-`nix-instantiate --eval` will evaluate `default.nix` if no file name is specified.
+`nix-instantiate --eval` will try to read from `default.nix` if no file name is specified.
 
 ```shell-session
 $ echo 1 + 2 > default.nix
