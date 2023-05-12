@@ -48,7 +48,6 @@ tutorials/cross-compilation.md
 :hidden:
 
 recipes/*
-anti-patterns/*
 templates/*
 ```
 
