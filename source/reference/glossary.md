@@ -6,24 +6,44 @@ Nix
 
     Read /nɪks/ ("Niks").
 
+    :::{seealso}
+    - [Nix Reference Manual](https://nixos.org/manual/nix)
+    - [Nix source code](https://github.com/NixOS/nix)
+    :::
+
 Nix language
-    Programming language to declare packages and configurations for Nix.
+    Programming language to declare packages and configurations for {term}`Nix`.
+
+    :::{seealso}
+    - [Nix language tutorial](reading-nix-language)
+    - [Nix language reference](https://nixos.org/manual/nix/stable/language)
+    :::
 
 Nix expression
-    Expression written in the Nix language.
+    Expression written in the {term}`Nix language`.
 
 Nix file
-    File (`.nix`) containing a Nix expression.
+    File (`.nix`) containing a {term}`Nix expression`.
 
 Nixpkgs
-    Software distribution built with Nix.
+    Software distribution built with {term}`Nix`.
 
     Read /nɪks ˈpækɪʤɪz/ ("Nix packages").
 
+    :::{seealso}
+    - [Nixpkgs Reference Manual](https://nixos.org/manual/nixpkgs)
+    - [Nixpkgs source code](https://github.com/NixOS/nixpkgs)
+    :::
+
 NixOS
-    Linux distribution based on Nix and Nixpkgs.
+    Linux distribution based on {term}`Nix` and {term}`Nixpkgs`.
 
     Read /nɪks oʊ ɛs/ ("Niks Oh Es").
+
+    :::{seealso}
+    - [NixOS Reference Manual](https://nixos.org/manual/nixos)
+    - [NixOS source code](https://github.com/NixOS/nixpkgs/tree/master/nixos)
+    :::
 
 reproducible
     Reproducibility would guarantee exactly the same results no matter
