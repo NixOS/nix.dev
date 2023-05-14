@@ -32,7 +32,7 @@
    Determine the appropriate branch in the repository that contains the most up-to-date or relevant information about the project. This is often assumed to be main or master, yet it can be located in other branches such as beta, next, etc. 
 
 ## Visual Quality Assurance
-   1. Please make sure the table of contents is structured correctly on the actual site and navigate as expected.
+   1. Please ensure that the table of contents is structured correctly on the actual site and navigates as expected.
    2. Check the following aspects to function or render as intended:
       - Headings
       - Sections
