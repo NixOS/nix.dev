@@ -32,7 +32,7 @@ Please follow the issue template and fill in all requested information.
 
 ## Contribute to Nix
 
-The Nix is the cornerstone of the ecosystem, and mostly written in C++.
+Nix is the cornerstone of the ecosystem, and is mostly written in C++.
 
 If you want to contribute to its development, you can find information on [how to setup a development environment](https://nixos.org/manual/nix/unstable/contributing/hacking.html) in the manual.
 
