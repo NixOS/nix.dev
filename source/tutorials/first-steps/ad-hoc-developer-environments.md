@@ -128,13 +128,13 @@ If you need an additional program temporarily, you can run a nested Nix shell.
 The programs provided by the specified packages will be added to the current environment.
 
 ```shell-session
-[nix-shell:~]$ nix-shell -p python2
-this path will be fetched (7.94 MiB download, 46.61 MiB unpacked):
-  /nix/store/i2irgbnhx66ac0am0x19443rv13g39z1-python-2.7.18.6
-copying path '/nix/store/i2irgbnhx66ac0am0x19443rv13g39z1-python-2.7.18.6' from 'https://cache.nixos.org'...
+[nix-shell:~]$ nix-shell -p python3
+this path will be fetched (11.42 MiB download, 62.64 MiB unpacked):
+  /nix/store/pwy30a7siqrkki9r7xd1lksyv9fg4l1r-python3-3.10.11
+copying path '/nix/store/pwy30a7siqrkki9r7xd1lksyv9fg4l1r-python3-3.10.11' from 'https://cache.nixos.org'...
 
 [nix-shell:~]$ python --version
-Python 2.7.18.6
+Python 3.10.11
 ```
 
 Exit the shell as usual to return to the previous environment.
