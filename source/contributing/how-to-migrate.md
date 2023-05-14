@@ -1,3 +1,7 @@
+# Migrating Documentation
+
+Migrating documentation is often crucial when reorganizing any project. As such, below is a list of instructions and guidelines to aid you when embarking on the migration journey.
+
 ## Licensing
    1. Familiarize yourself with the licenses governing the documentation you intend to migrate.
    2. Verify that the license of the documentation is compatible with this project's current license.
