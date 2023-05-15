@@ -42,7 +42,7 @@ If you are proficient with C++, addressing one of the [popular issues](https://g
 
 ## Contribute to Nixpkgs
 
-Packaging for Nix is simple when you have understood the basic concepts.
+Contributing to {term}`Nixpkgs` is simple when you have understood the basic concepts.
 
 [The Nixpkgs manual quick start guide][https://nixos.org/manual/nixpkgs/stable/#chap-quick-start] explains step-by-step how to add new packages.
 There are also [programming-language-specific instructions](https://nixos.org/manual/nixpkgs/stable/#chap-language-support).
