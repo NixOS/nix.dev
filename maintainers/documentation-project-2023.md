@@ -33,26 +33,36 @@ As stretch goals, implement particular lessons identified as the most impactful 
 
 ## Scope
 
-1.  Design a learning journey on the basis of the [2022 usability studies](https://discourse.nixos.org/t/usability-studies/21404) and sketched in [our vision statement](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#vision).
+1. Develop a curriculum draft
+    1. Collect inputs
+        - Distill problems with existing approaches revealed by [2022 usability studies](https://discourse.nixos.org/t/usability-studies/21404)
+        - Documentation team's [vision statement](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#vision)
+        - Evaluate and expand preliminary [documentation survey](https://github.com/NixOS/nix.dev/blob/3d23d36bc66448962dfa3c93080bc143e92642f8/maintainers/working_groups/learning_journey/documentation-survey.md)
+        - Experience reports from teaching Nix
+    1. Identify learning objectives
+      - high-level (example: create a development environment with Nix)
+      - mid-level (example: use Nixpkgs to package your JavaScript project)
+      - low-level (example: find a specific version of a package in Nixpkgs history)
+    1. Develop a draft for a learning journey
+    1. Validate the draft with Nix experts
+    1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
 
-    - Gather input from community experts on their preferred sequence of introducing topics
-    - Collect feedback on the curriculum draft
-    - Expand preliminary [documentation survey](https://github.com/NixOS/nix-book/blob/main/resources.md)
+1. Categorise existing documentation materials into the [Diátaxis framework](diataxis.fr/), and arrange them in a meaningful order emerging from the curriculum.
 
-1. Categorise existing documentation materials, and arrange them in a meaningful order emerging from the curriculum.
+  - Create detailed GitHub issue descriptions where we encounter gaps, and use them as placeholders (also to measure demand)
 
-    - Create detailed issue descriptions where we encounter gaps, and use them as placeholders (also to measure demand)
-    - Break down tasks for the writing phase
+1. Break down tasks for the writing phase
+  - Inspiration can be taken from our [contribution guidelines](https://nix.dev/contributing/documentation)
 
 1. Prepare a contributor workflow
-    - Revise [tutorial template](https://nix.dev/contributing/writing-a-tutorial)
-    - Validate [contribution guidelines](https://nix.dev/contributing/documentation) with new contributors
+
+  - Revise [tutorial template](https://nix.dev/contributing/writing-a-tutorial)
+  - Validate [contribution guidelines](https://nix.dev/contributing/documentation) with new contributors
 
 1. Link or migrate existing documentation into a central location, as far as possible.
+    - There are some constraints due to incompatible licenses
 
-1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
-
-    - Prepare and publish a call for contributors for the writing phase
+1.  Prepare and publish a call for contributors for the writing phase
 
 Out of scope for this project:
 
