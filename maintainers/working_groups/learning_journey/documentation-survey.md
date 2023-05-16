@@ -5,10 +5,10 @@
 The first row defines possible values and the second row gives an example for the first entry.
 
 
-|                            URL                            |        Content Type        |      Last Updated      | Nix-Commands                  | Tags                    |
-| :-------------------------------------------------------: | :------------------------: | :--------------------: | ----------------------------- | ----------------------- |
-|                        Content URL                        | video\|freetext\|reference | YYYYMMDD\|YYYYMM\|YYYY | comma delimited listing       | comma delimited listing |
-| https://nixos.org/guides/nix-pills/enter-environment.html |          freetext          |         202110         | nix-env,nix-store,nix-channel |                         |
+|                            URL                            |        Content Type        |                                    Summary                                    | Video length/read estimate | Year Updated | Nix-Commands                  | Author    | Tags                    |
+| :-------------------------------------------------------: | :------------------------: | :---------------------------------------------------------------------------: | :------------------------: | :----------: | ----------------------------- | --------- | ----------------------- |
+|                        Content URL                        | video\|freetext\|reference |                               80 words or less                                |         x minutes          |     YYYY     | comma delimited listing       | name      | comma delimited listing |
+| https://nixos.org/guides/nix-pills/enter-environment.html |          freetext          | nix-env install, generations <br> roll back and switching, closures, channels |         7 minutes          |     2021     | nix-env,nix-store,nix-channel | Nix Pills |                         |
 
 
 ## Tutorials
