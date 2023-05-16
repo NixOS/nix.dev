@@ -1,5 +1,16 @@
 # Documentation survey
 
+## Table template
+
+The first row defines possible values and the second row gives an example for the first entry.
+
+
+|                            URL                            |        Content Type        |      Last Updated      | Nix-Commands                  | Tags                    |
+| :-------------------------------------------------------: | :------------------------: | :--------------------: | ----------------------------- | ----------------------- |
+|                        Content URL                        | video\|freetext\|reference | YYYYMMDD\|YYYYMM\|YYYY | comma delimited listing       | comma delimited listing |
+| https://nixos.org/guides/nix-pills/enter-environment.html |          freetext          |         202110         | nix-env,nix-store,nix-channel |                         |
+
+
 ## Tutorials
 
 ### Nix
