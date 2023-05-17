@@ -158,8 +158,8 @@ If you want to help immediately, please see [How to contribute to documentation]
 
 ## Funding
 
-This effort is sponsored by [Determinate Systems].
-[@lucperkins] will serve as the team lead until 2023-01.
+This effort was sponsored by [Determinate Systems].
+[@lucperkins] served as the team lead until 2023-01.
 
 This effort was sponsored by [Tweag].
 [@fricklerhandwerk] served as the team lead from 2022-05 to 2022-10.
