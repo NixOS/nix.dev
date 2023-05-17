@@ -112,6 +112,7 @@ flowchart TB
     distributed[distributed builds]
     cross-compilation
     bundling[bundling build results]
+    nixos-tests[testing distributed systems with NixOS]
     nix[contributing to Nix]
   end
   install --> first-steps
