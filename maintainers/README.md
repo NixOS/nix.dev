@@ -107,7 +107,7 @@ Ordered by priority:
 
 ## Team meetings
 
-The team holds weekly meetings on **Tuesdays 13:00-14:00 and Thursdays 17:30-18:30 (Europe/Berlin)**:
+The team holds weekly meetings. For an up-to-date schedule, see:
 - [NixOS calendar](https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com)
 - [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589)
 
