@@ -42,15 +42,15 @@ As stretch goals, implement particular lessons identified as the most impactful 
       - Evaluate and expand preliminary [documentation survey](https://github.com/NixOS/nix.dev/blob/3d23d36bc66448962dfa3c93080bc143e92642f8/maintainers/working_groups/learning_journey/documentation-survey.md)
       - Experience reports from teaching Nix
 
-  1. Identify learning objectives
+   1. Identify learning objectives
 
-     - high-level (example: create a development environment with Nix)
-     - mid-level (example: use Nixpkgs to package your JavaScript project)
-     - low-level (example: find a specific version of a package in Nixpkgs history)
+      - high-level (example: create a development environment with Nix)
+      - mid-level (example: use Nixpkgs to package your JavaScript project)
+      - low-level (example: find a specific version of a package in Nixpkgs history)
 
-  1. Develop a draft for a learning journey
-  1. Validate the draft with Nix experts
-  1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
+   1. Develop a draft for a learning journey
+   1. Validate the draft with Nix experts
+   1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
 
 1. Categorise existing documentation materials into the [Diátaxis framework](diataxis.fr/), and arrange them in a meaningful order emerging from the curriculum.
 
