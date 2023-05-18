@@ -52,7 +52,7 @@ As stretch goals, implement particular lessons identified as the most impactful 
    1. Validate the draft with Nix experts
    1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
 
-1. Categorise existing documentation materials into the [Diátaxis framework](diataxis.fr/), and arrange them in a meaningful order emerging from the curriculum.
+1. Categorise existing documentation materials into the [Diátaxis framework](diataxis.fr), and arrange them in a meaningful order emerging from the curriculum.
 
    - Create detailed GitHub issue descriptions where we encounter gaps, and use them as placeholders (also to measure demand)
 
