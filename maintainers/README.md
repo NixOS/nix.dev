@@ -60,6 +60,10 @@ The team’s reason to exist is to make that principle discoverable and reproduc
   [@Jeremiahs]: https://discourse.nixos.org/
   [@jeremiahs:matrix.org]: https://matrix.org/
 
+- asymmetric (he/him)
+
+  - [GitHub](https://github.com/asymmetric)
+  - [Matrix](https://matrix.to/#/@asymmetric:dapp.org.uk)
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
@@ -103,7 +107,7 @@ Ordered by priority:
 
 ## Team meetings
 
-The team holds weekly meetings on **Tuesdays 13:00-14:00 and Thursdays 17:30-18:30 (Europe/Berlin)**:
+The team holds weekly meetings. For an up-to-date schedule, see:
 - [NixOS calendar](https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com)
 - [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589)
 
@@ -154,8 +158,8 @@ If you want to help immediately, please see [How to contribute to documentation]
 
 ## Funding
 
-This effort is sponsored by [Determinate Systems].
-[@lucperkins] will serve as the team lead until 2023-01.
+This effort was sponsored by [Determinate Systems].
+[@lucperkins] served as the team lead until 2023-01.
 
 This effort was sponsored by [Tweag].
 [@fricklerhandwerk] served as the team lead from 2022-05 to 2022-10.
