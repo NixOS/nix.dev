@@ -44,7 +44,7 @@ If you are proficient with C++, addressing one of the [popular issues](https://g
 
 Contributing to {term}`Nixpkgs` is simple when you have understood the basic concepts.
 
-[The Nixpkgs manual quick start guide][https://nixos.org/manual/nixpkgs/stable/#chap-quick-start] explains step-by-step how to add new packages.
+[The Nixpkgs manual quick start guide](https://nixos.org/manual/nixpkgs/stable/#chap-quick-start) explains step-by-step how to add new packages.
 There are also [programming-language-specific instructions](https://nixos.org/manual/nixpkgs/stable/#chap-language-support).
 
 You can find inspiration for things to improve in the [Nixpkgs issue tracker][nixpkgs issues].
