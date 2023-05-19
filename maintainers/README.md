@@ -60,6 +60,10 @@ The team’s reason to exist is to make that principle discoverable and reproduc
   [@Jeremiahs]: https://discourse.nixos.org/
   [@jeremiahs:matrix.org]: https://matrix.org/
 
+- asymmetric (he/him)
+
+  - [GitHub](https://github.com/asymmetric)
+  - [Matrix](https://matrix.to/#/@asymmetric:dapp.org.uk)
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
