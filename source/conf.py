@@ -192,6 +192,7 @@ html_sidebars = {
         "search-field.html",
         "sbt-sidebar-nav.html",
         "subscribe.html",
+        "sponsors.html",
     ],
 }
 
