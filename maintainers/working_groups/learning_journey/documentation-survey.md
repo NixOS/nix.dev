@@ -1,15 +1,20 @@
 # Documentation survey
 
-## Table template
-
-The first row defines possible values and the second row gives an example for the first entry.
 
 
-|                            URL                            |        Content Type        |                                    Summary                                    | Video length/read estimate | Year Updated | Nix-Commands                  | Author    | Tags                    |
-| :-------------------------------------------------------: | :------------------------: | :---------------------------------------------------------------------------: | :------------------------: | :----------: | ----------------------------- | --------- | ----------------------- |
-|                        Content URL                        | video\|freetext\|reference |                               80 words or less                                |         x minutes          |     YYYY     | comma delimited listing       | name      | comma delimited listing |
-| https://nixos.org/guides/nix-pills/enter-environment.html |          freetext          | nix-env install, generations <br> roll back and switching, closures, channels |         7 minutes          |     2021     | nix-env,nix-store,nix-channel | Nix Pills |                         |
-
+## Example and data entry
+- Content URL
+  - summary of 80 words or less
+  - video length/read estimate
+  - year updated
+  - nix-commands
+  
+and example here below for nix pills enter environment:
+- https://nixos.org/guides/nix-pills/enter-environment.html
+  - summary: nix-env install, generations, roll back and switching, closures, channels
+  - time: 7 minutes
+  - year: 2021
+  - nix-commands: nix-env,nix-store,nix-channel
 
 ## Tutorials
 
