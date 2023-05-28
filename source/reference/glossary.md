@@ -24,8 +24,4 @@ NixOS
     Linux distribution based on Nix and Nixpkgs.
 
     Read /nɪks oʊ ɛs/ ("Niks Oh Es").
-
-reproducible
-    Reproducibility would guarantee exactly the same results no matter
-    **when** or **on what machine** you run the command.
 ```
