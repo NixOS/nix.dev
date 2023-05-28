@@ -44,8 +44,4 @@ NixOS
     - [NixOS Reference Manual](https://nixos.org/manual/nixos)
     - [NixOS source code](https://github.com/NixOS/nixpkgs/tree/master/nixos)
     :::
-
-reproducible
-    Reproducibility would guarantee exactly the same results no matter
-    **when** or **on what machine** you run the command.
 ```
