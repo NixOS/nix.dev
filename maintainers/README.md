@@ -39,7 +39,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   NixOS and Nixpkgs contributors
 
-- Olaf Hochherz (Github: [@olafklingt], Discourse: [@olaf])
+- Olaf Hochherz (GitHub: [@olafklingt], Discourse: [@olaf])
 
   [@olafklingt]: https://github.com/olafklingt
   [@olaf]: https://discourse.nixos.org/u/olaf
