@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    "description lang=en": "Opinionated guides to getting things done in the Nix ecosystem."
+    "description lang=en": "The official resource for Nix documentation"
     "keywords": "Nix, Nixpkgs, NixOS, Linux, build systems, deployment, packaging, declarative, reproducible, immutable, software, developer"
     "property=og:locale": "en_GB"
 ---
