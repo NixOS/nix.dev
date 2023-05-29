@@ -1,4 +1,4 @@
 # Sponsors
 
-* [Cachix](https://cachix.io) - binary cache hosting
+* [Cachix](https://cachix.org) - binary cache hosting
 * [Tweag](https://tweag.io)
