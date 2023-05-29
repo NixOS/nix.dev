@@ -121,4 +121,4 @@ Using the Docker CLI, Docker Compose, Docker Swarm or Docker Hub on the other ha
 - More details on how to use `dockerTools` can be found in the [reference documentation](https://nixos.org/nixpkgs/manual/#sec-pkgs-dockerTools).
 - You might like to browse through more [examples of Docker images built with Nix](https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix).
 - Take a look at [Arion](https://docs.hercules-ci.com/arion/), a `docker-compose` wrapper with first-class support for Nix.
-- Build docker images on a {ref}`CI with Github Actions <github-actions>`.
+- Build docker images on a {ref}`CI with GitHub Actions <github-actions>`.
