@@ -1,12 +1,12 @@
 {
   description = "nix.dev static website";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
-  inputs.flake-utils.url = "github:numtide/flake-utils/master";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.poetry2nix = {
     inputs.flake-utils.follows = "flake-utils";
     inputs.nixpkgs.follows = "nixpkgs";
-    url = "github:nix-community/poetry2nix/master";
+    url = "github:nix-community/poetry2nix";
   };
 
   outputs = { self, nixpkgs, flake-utils, poetry2nix }:
@@ -25,18 +25,30 @@
             }
           );
 
-          sphinx-design = super.sphinx-design.overridePythonAttrs (
+          sphinx = super.sphinx.overridePythonAttrs (
             old: {
               buildInputs = (old.buildInputs or [ ]) ++ [ self.flit-core ];
             }
           );
+
+          accessible-pygments = super.accessible-pygments.overridePythonAttrs (
+            old: {
+              buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+            }
+          );
+
         };
-      in rec {
+      in
+      rec {
         packages = flake-utils.lib.flattenTree {
           nix-dev-pyenv = pkgs.poetry2nix.mkPoetryEnv {
             projectDir = self;
             python = pkgs.python39;
             overrides = [
+              (self: super: {
+                pydata-sphinx-theme = super.pydata-sphinx-theme.override { preferWheel = true; };
+                sphinx-book-theme = super.sphinx-book-theme.override { preferWheel = true; };
+              })
               pkgs.poetry2nix.defaultPoetryOverrides
               poetryOverrides
             ];
