@@ -115,9 +115,9 @@ nix-repl> 1 + 2
 ```
 
 :::{note}
-The Nix language by default uses lazy evaluation, and will only compute values when needed.
+The Nix language uses lazy evaluation, and `nix repl` by default only computes values when needed.
 
-Some examples show results of strict evaluation for clarity.
+Some examples show a fully evaluated data structure for clarity.
 If your output does not match the example, try prepending `:p` to the input expression.
 
 Example:
@@ -175,9 +175,9 @@ $ nix-instantiate --eval
 :::
 
 :::{note}
-The Nix language by default uses lazy evaluation, and will only compute values when needed.
+The Nix language uses lazy evaluation, and `nix-instantiate` by default only computes values when needed.
 
-Some examples show results of strict evaluation for clarity.
+Some examples show a fully evaluated data structure for clarity.
 If your output does not match the example, try adding the `--strict` option to `nix-instantiate`.
 
 Example:
