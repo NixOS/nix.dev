@@ -7,7 +7,7 @@ It is maintained by the [Nix documentation team](https://nixos.org/community/tea
 
 ### Manuals
 
-The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][nixos manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
+The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
 
 They also show example interactions which demonstrate how to use its components, and explain mechanisms where necessary.
 
@@ -27,11 +27,11 @@ You can help by doing the following:
   - expanding on sections that appear incomplete
   - identifying sections that are not reference documentation and should be moved to nix.dev
 
-[nix manual]: https://nixos.org/manual/nix
+[Nix manual]: https://nixos.org/manual/nix
 [nix manual src]: https://github.com/NixOS/nix/tree/master/doc/manual
-[nixpkgs manual]: https://nixos.org/manual/nixpkgs
+[Nixpkgs manual]: https://nixos.org/manual/nixpkgs
 [nixpkgs manual src]: https://github.com/NixOS/nixpkgs/tree/master/doc
-[nixos manual]: https://nixos.org/manual/nixos
+[NixOS manual]: https://nixos.org/manual/nixos
 [nixos manual src]: https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 [nix docs issues]: https://github.com/NixOS/nix/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation
@@ -149,9 +149,9 @@ Its purpose is to quickly and conveniently collect insights and make them readil
     
 We recommend to use it as a dumping ground for more obscure Nix knowledge, and strive to make it *smaller* over time (see [NixCon 2015: Make Nix friendlier for Beginners]), by incrementally incorporating its contents into authoritative documentation and curated learning material.
 
-The documentation team monitors changes to maintain an overview of topics of interest and prevent vandalism.
+The documentation team **does not maintain** the Wiki.
     
-You can help with
+You can still help with
     
 - improving discoverability by adding categorization and relevant links
 - clarifying articles and correcting errors
@@ -160,10 +160,10 @@ You can help with
     
 Where to migrate what:
     
-- Nix interaction: [nix manual]
-- Language-specific build instructions: [nixpkgs manual]
-- Package, service, or hardware configuration: [nixos manual]
-- Overviews, tutorials, guides, and best practices: [nix.dev]
+- Nix interaction: [Nix manual]
+- Language-specific build instructions: [Nixpkgs manual]
+- Package, service, or hardware configuration: [NixOS manual]
+- Overviews, tutorials, guides, best practices: [nix.dev]
 
 [NixOS Wiki]: https://nixos.wiki/
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
