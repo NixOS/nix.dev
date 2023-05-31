@@ -1,25 +1,24 @@
 # Documentation survey
 
-
-
-## Example and data entry
-- Content URL
-  - summary of 80 words or less
-  - video length/read estimate
-  - year updated
-  - nix-commands
+To better navigate the material and judge its relevance, every entry should provide
+  - Title (URL)
+  - Brief summary
+  - Video length or estimated reading time
+  - Principal Author(s)
+  - Year created (last update or maintenance status)
   
-and example here below for nix pills enter environment:
-- https://nixos.org/guides/nix-pills/enter-environment.html
-  - summary: nix-env install, generations, roll back and switching, closures, channels
-  - time: 7 minutes
-  - year: 2021
-  - nix-commands: nix-env,nix-store,nix-channel
-
 ## Tutorials
 
 ### Nix
-- https://nixos.org/guides/nix-pills/enter-environment.html
+
+- [Nix Pills Chapter 3: Enter the Environment](https://nixos.org/guides/nix-pills/enter-environment.html)
+  
+  Installation with `nix-env`, rollback and switching generations, showing references and closures.
+  
+  - Reading time: 7 min
+  - Author: Luca Bruno
+  - Created: 2015 (effectively unmaintained since 2017)
+
 - https://nixos.org/guides/nix-pills/our-first-derivation.html
 - https://nixos.org/guides/nix-pills/working-derivation.html
 - https://nixos.org/guides/nix-pills/garbage-collector.html
