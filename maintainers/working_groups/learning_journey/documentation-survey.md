@@ -23,7 +23,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - [Nix Pills Chapter 6. Our First Derivation](https://nixos.org/guides/nix-pills/our-first-derivation.html)
 
-  Fundamentals of nix derivations, function and concept, nix show-derivation. Derivation set and its attributes.   
+  Fundamentals of Nix derivations, function and concept, `nix show-derivation`. Derivation set and its attributes.   
   - Reading time: 20 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
