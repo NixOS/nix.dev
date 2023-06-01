@@ -68,6 +68,14 @@ influences.md
 
 ```{toctree}
 :glob:
+:caption: Concepts
+:maxdepth: 1
+:hidden:
+concepts/*
+```
+
+```{toctree}
+:glob:
 :caption: Contributing
 :maxdepth: 1
 :hidden:
