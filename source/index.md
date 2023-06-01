@@ -85,3 +85,12 @@ contributing/how-to-get-help.md
 contributing/documentation.md
 contributing/writing-a-tutorial.md
 ```
+
+```{toctree}
+:glob:
+:caption: Acknowledgments
+:maxdepth: 1
+:hidden:
+
+acknowledgments/sponsors.md
+```
