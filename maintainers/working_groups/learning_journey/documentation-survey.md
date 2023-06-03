@@ -34,7 +34,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - [Nix Pills Chapter 7. Working Derivation](https://nixos.org/guides/nix-pills/working-derivation.html)
 
-  Fundamentals of Nix derivations, bash, `nix repl`, `nix-store`,  `nix-instantiate`, `nix show-derivation` . Packaging a simple C program + inherit keyword.   
+  Fundamentals of Nix derivations, bash, `nix repl`, `nix-store`,  `nix-instantiate`, `nix show-derivation` . Packaging a simple C program, `inherit` keyword.   
   - Reading time: 16 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
