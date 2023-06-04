@@ -9,7 +9,37 @@ myst:
 
 # Welcome to nix.dev
 
-The Nix ecosystem is a DevOps toolkit to achieve:
+nix.dev is the home of official documentation for the Nix ecosystem, it contains:
+
+::::{grid} 2
+:::{grid-item-card} Tutorials
+:text-align: center
+Guided tour to the Nix ecosystem
+:::
+
+:::{grid-item-card} Recipes
+:text-align: center
+Guides to achieve a goal with the Nix ecosystem
+:::
+::::
+
+::::{grid} 2
+:::{grid-item-card} Reference
+:text-align: center
+Reference materials for details about the Nix ecosystem
+:::
+
+:::{grid-item-card} Concepts
+:text-align: center
+Articles explaining concepts and ideas found in the Nix ecosystem
+:::
+::::
+
+If you're new to the Nix ecosystem, begin your journey with {ref}`First Steps <first-steps>`!
+
+## What can you do with Nix?
+
+The following illustrate of what can be achieved with the Nix ecosystem:
 
 - {ref}`Reproducible development environments <ad-hoc-envs>`.
 - Easy installation of software over URLs.
@@ -24,10 +54,6 @@ The Nix ecosystem is a DevOps toolkit to achieve:
 - Remote builds.
 - Remote deployments.
 - Atomic upgrades and rollbacks.
-
-This documentation supplements the official [Nix](http://nixos.org/nix/manual/),
-[NixOS](http://nixos.org/nixos/manual/), [Nixpkgs](http://nixos.org/nixpkgs/manual/)
-and [NixOps](http://nixos.org/nixops/manual/) manuals.
 
 ```{toctree}
 :glob:

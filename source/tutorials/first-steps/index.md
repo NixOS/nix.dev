@@ -1,3 +1,5 @@
+(first-steps)=
+
 # First Steps
 
 This tutorial series is where you should start learning Nix.
