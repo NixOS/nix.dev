@@ -14,24 +14,24 @@ nix.dev is the home of official documentation for the Nix ecosystem, it contains
 ::::{grid} 2
 :::{grid-item-card} Tutorials
 :text-align: center
-Guided tour to the Nix ecosystem
+Series of lessons to help get started
 :::
 
 :::{grid-item-card} Recipes
 :text-align: center
-Guides to achieve a goal with the Nix ecosystem
+Guides to getting things done
 :::
 ::::
 
 ::::{grid} 2
 :::{grid-item-card} Reference
 :text-align: center
-Reference materials for details about the Nix ecosystem
+Collections of detailed technical descriptions 
 :::
 
 :::{grid-item-card} Concepts
 :text-align: center
-Articles explaining concepts and ideas found in the Nix ecosystem
+Explanations of history and ideas in the Nix ecosystem
 :::
 ::::
 
@@ -54,6 +54,13 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 - Remote builds.
 - Remote deployments.
 - Atomic upgrades and rollbacks.
+
+## What is the origin of the name "Nix"?
+
+> The name *Nix* is derived from the Dutch word niks, meaning *nothing*;
+> build actions do not see anything that has not been explicitly declared as an input.
+>
+> &mdash; <cite>[Nix: A Safe and Policy-Free System for Software Deployment](https://www.semanticscholar.org/paper/Nix%3A-A-Safe-and-Policy-Free-System-for-Software-Dolstra-Jonge/76eb395afe54d526797f6e12ce1c4fa14cda253f?p2df)</cite>
 
 ```{toctree}
 :glob:
