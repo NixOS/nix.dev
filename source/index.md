@@ -9,7 +9,37 @@ myst:
 
 # Welcome to nix.dev
 
-The Nix ecosystem is a DevOps toolkit to achieve:
+nix.dev is the home of official documentation for the Nix ecosystem, it contains:
+
+::::{grid} 2
+:::{grid-item-card} Tutorials
+:text-align: center
+Series of lessons to get started
+:::
+
+:::{grid-item-card} Recipes
+:text-align: center
+Guides to getting things done
+:::
+::::
+
+::::{grid} 2
+:::{grid-item-card} Reference
+:text-align: center
+Collections of detailed technical descriptions 
+:::
+
+:::{grid-item-card} Concepts
+:text-align: center
+Explanations of history and ideas in the Nix ecosystem
+:::
+::::
+
+If you're new to the Nix ecosystem, begin your journey with {ref}`First Steps <first-steps>`!
+
+## What can you do with Nix?
+
+The following illustrate of what can be achieved with the Nix ecosystem:
 
 - {ref}`Reproducible development environments <ad-hoc-envs>`.
 - Easy installation of software over URLs.
@@ -25,9 +55,12 @@ The Nix ecosystem is a DevOps toolkit to achieve:
 - Remote deployments.
 - Atomic upgrades and rollbacks.
 
-This documentation supplements the official [Nix](http://nixos.org/nix/manual/),
-[NixOS](http://nixos.org/nixos/manual/), [Nixpkgs](http://nixos.org/nixpkgs/manual/)
-and [NixOps](http://nixos.org/nixops/manual/) manuals.
+## What is the origin of the name "Nix"?
+
+> The name *Nix* is derived from the Dutch word niks, meaning *nothing*;
+> build actions do not see anything that has not been explicitly declared as an input.
+>
+> &mdash; <cite>[Nix: A Safe and Policy-Free System for Software Deployment](https://www.semanticscholar.org/paper/Nix%3A-A-Safe-and-Policy-Free-System-for-Software-Dolstra-Jonge/76eb395afe54d526797f6e12ce1c4fa14cda253f?p2df)</cite>
 
 ```{toctree}
 :glob:
