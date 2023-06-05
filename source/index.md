@@ -14,7 +14,7 @@ nix.dev is the home of official documentation for the Nix ecosystem, it contains
 ::::{grid} 2
 :::{grid-item-card} Tutorials
 :text-align: center
-Series of lessons to help get started
+Series of lessons to get started
 :::
 
 :::{grid-item-card} Recipes
