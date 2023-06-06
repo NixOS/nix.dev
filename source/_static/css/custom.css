@@ -37,3 +37,35 @@ div.highlight > pre::before {
 div.highlight:hover > pre::before {
   opacity: 0;
 }
+
+.topic {
+  padding: 30px;
+}
+
+.bd-links {
+  padding-bottom: 0 !important;
+}
+
+.logo {
+  margin-bottom: 1rem;
+}
+
+.logo a:hover {
+  text-decoration: none;
+}
+
+.logo img {
+  height: 3rem;
+  vertical-align: middle;
+}
+
+.logo span {
+  margin-left: 0.125em;
+  font-size: 3.25rem;
+  vertical-align: middle;
+}
+
+.bd-search {
+  margin-top: -2rem;
+  margin-bottom: -1rem;
+}
