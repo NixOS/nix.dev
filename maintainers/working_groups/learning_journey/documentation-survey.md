@@ -41,6 +41,13 @@ To better navigate the material and judge its relevance, every entry should prov
 
 
 - https://nixos.org/guides/nix-pills/garbage-collector.html
+
+- [Nix Pills Chapter 11. Garbage Collector](https://nixos.org/guides/nix-pills/garbage-collector.html)
+  Fundamentals of Nix garbage collection, `nix-collect-garbage`, `nix-env`, `nix-store`,  `nix-build`.   
+  - Reading time: 14 min
+  - Author: Luca Bruno
+  - Created: 2015 (effectively unmaintained since 2017)
+
 - https://nixos.org/guides/nix-pills/nix-search-paths.html
 - https://nixos.org/guides/nix-pills/nix-store-paths.html
 
