@@ -136,7 +136,7 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
-html_baseurl = "https://nix.dev"
+html_baseurl = "https://nix.dev/"
 
 html_theme = "sphinx_book_theme"
 
@@ -434,3 +434,5 @@ intersphinx_mapping = {}
 html_css_files = [
     'css/custom.css',
 ]
+
+sitemap_url_scheme = "{link}"
