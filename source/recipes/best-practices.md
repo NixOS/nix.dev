@@ -14,7 +14,7 @@ Always quote URLs.
 (rec-expression)=
 ## Recursive attribute set `rec { ... }`
 
-`rec` allows you to reference variables within an attribute set.
+`rec` allows you to reference names within the same attribute set.
 
 Example:
 
@@ -33,7 +33,7 @@ rec {
 
 There are a couple of pitfalls:
 
-- It's possible to introduce a hard to debug error `infinite recursion` when shadowing a variable, the simplest example being `rec { b = b; }`.
+- It's possible to introduce a hard to debug error `infinite recursion` when shadowing a name, the simplest example being `let b = 1; a = rec { b = b; }; in a`.
 - Combining with overriding logic such as the [`overrideAttrs`](https://nixos.org/manual/nixpkgs/stable/#sec-pkg-overrideAttrs) function in {term}`Nixpkgs` has a surprising behaviour of not overriding every reference.
 
 :::{tip}
@@ -68,8 +68,8 @@ This brings all attributes of the imported expression into scope of the current 
 
 There are a number of problems with that approach:
 
-- Static analysis can't reason about the code, because it would have to actually evaluate this file to see which variables are in scope.
-- As soon as there are two `with` used, it's not clear anymore where the variables are coming from.
+- Static analysis can't reason about the code, because it would have to actually evaluate this file to see which names are in scope.
+- When more than one `with` used, it's not clear anymore where the names are coming from.
 - Scoping rules for `with` are not intuitive, see this [Nix issue for details](https://github.com/NixOS/nix/issues/490).
 
 :::{tip}
@@ -114,7 +114,7 @@ buildInputs = builtins.attrValues {
 
 You will often encounter Nix language code samples that refer to `<nixpkgs>`.
 
-`<...>` is special syntax that was [introduced in 2011] to conveniently access values from the shell environment variable [`$NIX_PATH`].
+`<...>` is special syntax that was [introduced in 2011] to conveniently access values from the environment variable [`$NIX_PATH`].
 
 [introduced in 2011]: https://github.com/NixOS/nix/commit/1ecc97b6bdb27e56d832ca48cdafd3dbb5185a04
 [`$NIX_PATH`]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
