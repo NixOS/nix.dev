@@ -122,13 +122,11 @@ To better navigate the material and judge its relevance, every entry should prov
 - partially in https://edolstra.github.io/pubs/phd-thesis.pdf
 - https://www.zombiezen.com/blog/2023/03/connecting-bash-to-nix/
 
-  Configure derivation using only Bash and builtins. Explains builtins.derivation, attributes, nix build, store path hierarchy, imports. 
-  Relates this to stdenv.mkderivation.
+  Configure derivation using only Bash and `builtins`. Explains `builtins.derivation`, attributes, `nix build`, store path hierarchy, imports. 
+  Relates this to `stdenv.mkDerivation.
   - Reading time: 10 min
   - Author: Ross Light
   - Created: 2023
-
-
 
 ### NixOS
 - https://nixos.org/docs/SCR-2005-091.pdf (2006) 
