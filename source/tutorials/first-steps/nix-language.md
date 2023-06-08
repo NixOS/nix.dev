@@ -348,10 +348,8 @@ Nix language data types *without functions* work just like their counterparts in
 - List elements are separated by white space.[^list-whitespace]
 :::
 
-[^attrnames]: Any name that starts with a letter and contains letters (`a`-`z`, `A`-`Z`), numbers (`0`-`9`), dashes (`-`), underscores (`_`), or apostrophes (`'`) can be used without quotes. <!-- TODO: create and link manual section -->
-[^list-whitespace]: Details: [Nix manual - lists][manual-lists]
-
-[manual-lists]: https://nixos.org/manual/nix/stable/language/values.html#list
+[^attrnames]: Details: [Nix manual - attribute set](https://nixos.org/manual/nix/stable/language/values.html#attribute-set)
+[^list-whitespace]: Details: [Nix manual - list](https://nixos.org/manual/nix/stable/language/values.html#list)
 
 (rec-attrset)=
 #### Recursive attribute set `rec { ... }`
