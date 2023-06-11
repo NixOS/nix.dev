@@ -53,6 +53,15 @@ To better navigate the material and judge its relevance, every entry should prov
 - https://medium.com/@MrJamesFisher/nix-by-example-a0063a1a4c55
 - https://www.youtube.com/watch?v=eCapIx9heBw&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&index=5
 - https://nixos.org/guides/nix-pills/basics-of-language.html
+
+- [Nix Pills Chapter 4. The basics of the language](https://nixos.org/guides/nix-pills/basics-of-language.html)
+  Fundamentals of Nix language, types , expressions `nix repl`.   
+  - Reading time: 16 min
+  - Author: Luca Bruno
+  - Created: 2015 (effectively unmaintained since 2017)
+
+
+
 - https://nixos.org/guides/nix-pills/functions-and-imports.html
 
 ### Nixpkgs
