@@ -60,7 +60,7 @@ To better navigate the material and judge its relevance, every entry should prov
 - https://www.youtube.com/watch?v=m4sv2M9jRLg
 - https://nixos.org/guides/nix-pills/generic-builders.html
 - [Nix Pills Chapter 8. Generic Builders](https://nixos.org/guides/nix-pills/generic-builders.html)
-  Generalized building process (C language ), `derivation`, `nix repl`, `nix-build`.   
+  Generalized building process (C language), `derivation`, `nix repl`, `nix-build`.   
   - Reading time: 14 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
