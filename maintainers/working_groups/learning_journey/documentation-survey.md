@@ -55,7 +55,7 @@ To better navigate the material and judge its relevance, every entry should prov
 - https://nixos.org/guides/nix-pills/basics-of-language.html
 
 - [Nix Pills Chapter 4. The basics of the language](https://nixos.org/guides/nix-pills/basics-of-language.html)
-  Fundamentals of Nix language, types , expressions `nix repl`.   
+  Fundamentals of Nix language, types, expressions `nix repl`.   
   - Reading time: 16 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
