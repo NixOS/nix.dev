@@ -63,7 +63,7 @@ To better navigate the material and judge its relevance, every entry should prov
 - https://nixos.org/guides/nix-pills/developing-with-nix-shell.html
 
 - [Nix Pills Chapter 10. Developing with nix-shell](https://nixos.org/guides/nix-pills/developing-with-nix-shell.html)
-  making a development environment from a derivation that can be launched with `nix-shell`, `derivation`.   
+  Making a development environment from a derivation that can be launched with `nix-shell`, `builtins.derivation`.   
   - Reading time: 9 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
