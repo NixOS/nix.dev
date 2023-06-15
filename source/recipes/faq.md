@@ -13,7 +13,7 @@ Flakes and the `nix` command suite bring multiple improvements that are relevant
 - The flake schema helps with composing Nix projects from multiple sources in an ordered fashion.
 
 Other than that, and below the surface of the flake schema, Nix and the Nix language work the exactly same in both cases.
-The same level of reproducibility can be achieved  with or without flakes.
+In principle, the same level of reproducibility can be achieved  with or without flakes.
 In particular, the process of adding software to {term}`Nixpkgs` or maintaining {term}`NixOS` modules and configurations is not affected by flakes at all.
 
 Both paradigms have their own set of unique concepts and support tooling that have to be learned, with varying ease of use, implementation quality, and support status.
