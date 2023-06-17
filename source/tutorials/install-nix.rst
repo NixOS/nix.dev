@@ -25,7 +25,7 @@ for instance on debian based distributions:
 
 .. code:: bash
 
-   sudo apt install nix
+   sudo apt install nix-bin nix-setup-systemd
 
 .. note::
 
