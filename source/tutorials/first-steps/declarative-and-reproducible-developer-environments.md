@@ -136,6 +136,16 @@ direnv: using nix
 hello
 ```
 
+#### Improvements for `direnv`
+
+`direnv` ships with native Nix integration however the default implementation suffers from two setbacks:
+
+1. `nix-shell` environment is recalculated every time.
+2. environment has no *gcroots* and therefore is eligible for garbage collection.
+
+Consider using the nix-community [implementation](https://github.com/nix-community/nix-direnv) which
+solves the problems mentioned above.
+
 ## Next steps
 
 - {ref}`pinning-nixpkgs` to see different ways to import nixpkgs
