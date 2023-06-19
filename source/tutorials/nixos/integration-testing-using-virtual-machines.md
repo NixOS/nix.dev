@@ -23,14 +23,14 @@ Those tests are widely used to ensure that NixOS works as intended, so in genera
 They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
-## The nixosTest function
+## The `nixosTest` function
 
 To setup a test you make use of the `nixosTest` function.
 The scaffolding of a test nix file looks like the following:
 
 ```nix
 let
-  nixpkgs = <nixpkgs>;
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs {};
 in
   pkgs.nixosTest {
