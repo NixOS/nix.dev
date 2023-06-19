@@ -117,6 +117,7 @@ contributing/how-to-contribute.md
 contributing/how-to-get-help.md
 contributing/documentation.md
 contributing/writing-a-tutorial.md
+contributing/writing-style.md
 ```
 
 ```{toctree}
