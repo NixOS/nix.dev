@@ -12,12 +12,11 @@ This guide introduces the functionality of Nix Package Manager to write automate
 
 - A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
 - Basic knowledge of the [Nix language](https://nixos.org/manual/nix/stable/language/index.html).
-- Basic knowledge of NixOS configuration.
-<!-- - Basic knowledge of [NixOS configuration](<nixos-vms>). -->
+- Basic knowledge of [NixOS configuration](<nixos-vms>).
 
 ## Introduction
 
-NixOS provides a [test environment](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests) to automate integration testing.
+Nixpkgs provides a [test environment](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests) to automate integration testing.
 You can define tests that make use of a set of declarative NixOS configurations and use a Python shell to interact with them through [QEMU](https://www.qemu.org/) as the backend.
 Those tests are widely used to ensure that NixOS works as intended, so in general they are called [NixOS Tests](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
 They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
@@ -49,16 +48,16 @@ in
   }
 ```
 
-The function `nixosTest` takes an attribute set that follows the module convention to specify the test.
+The function `nixosTest` takes an attribute set that follows the module convention to [specify the test](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
 Because the attribute set only defines options, one can use the abbreviated form of the module convention.
 The attribute set needs to define the following options:
 
-- `name` defines the name of the test.
+- [`name`](https://nixos.org/manual/nixos/stable/index.html#test-opt-name) defines the name of the test.
 
-- `nodes` contains a set of named configurations, because a test script can involve more than one virtual machine.
+- [`nodes`](https://nixos.org/manual/nixos/stable/index.html#test-opt-nodes) contains a set of named configurations, because a test script can involve more than one virtual machine.
 Each virtual machine is setup using a NixOS configuration.
 
-- `testScript` defines the Python test script, either as literal string.
+- [`testScript`](https://nixos.org/manual/nixos/stable/index.html#test-opt-testScript) defines the Python test script, either as literal string.
   This Python test script can access the virtual machines via the names used for the `nodes`.
   It has super user rights in the virtual machines.
   In the Python script is each virtual machine is accessible via the `machine` object.
@@ -69,8 +68,6 @@ The test framework automatically starts the virtual machines and runs the Python
 ## Minimal example
 
 As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
-<!-- As a minimal test on the default [configuration](<nixos-vms>), we will check if the user `root` and `alice` can run Firefox. -->
-
 As [recommended](<ref-pinning-nixpkgs>) you use an explicitly pinned version of Nixpkgs:
 
 ```nix
@@ -226,6 +223,8 @@ uname -a
 
 ## Re-run successful tests
 
+<!-- i think this section became relevant to me simply to test the example. maybe more important is to mention how to get test results (like logs etc) -->
+
 Because test results are kept in the Nix store, a successful test is cached.
 This means that Nix will not run the test a second time as long as the test setup (node configuration and test script) stays semantically the same.
 Therefore, to run a test again, one needs to remove the result.
@@ -272,11 +271,9 @@ The setup includes:
 - A virtual machine named `client` running HTTP client queries using `curl`.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
-:::{note}
-Because some of the needed packages of this example are broken in 22.11 release this example uses a specific revision of nixpkgs.
+<!-- Because some of the needed packages of this example are broken in 22.11 release this example uses a specific revision of nixpkgs.
 Additionally this example shows the value of [pinning](<ref-pinning-nixpkgs>) a test to a specific revision of `nixpkgs`.
-Tests that make use of nixpkgs versions before 22.11 need to choose names that do not contain whitespaces.
-:::
+Tests that make use of nixpkgs versions before 22.11 need to choose names that do not contain whitespaces.-->
 
 The complete `postgrest.nix` file looks like the following:
 
