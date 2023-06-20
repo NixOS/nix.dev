@@ -118,7 +118,7 @@ to install it globally.
 
 ### Setting up `direnv`
 
-1. [Install direnv with your OS package manager](https://direnv.net/docs/installation.html#from-system-packages)
+1. [Install nix-direnv with your package manager or from source](https://github.com/nix-community/nix-direnv)
 2. [Hook it into your shell](https://direnv.net/docs/hook.html)
 
 At the top-level of your project run:
