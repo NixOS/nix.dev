@@ -138,6 +138,14 @@ To better navigate the material and judge its relevance, every entry should prov
 ### Nixpkgs
 - https://nixos.org/guides/nix-pills/index.html
 - partially in chapter https://nixos.org/guides/nix-pills/our-first-derivation.html
+   
+  Explains derivations;the derivation function, its attribute set, `.drv` and 'out' files. Explains `outpath`. Regarding `nixpkgs`, shows how to bring `nixpkgs` into scope and how to refer to a package using its `outpath`. Accessing files underneath a package's `out`.
+
+  
+  - Reading time: 25 min
+  - Author: Luca Bruno
+  - Created: 2015 Updated 2017
+
 - https://nixos.org/guides/nix-pills/working-derivation.html
 - https://nixos.org/guides/nix-pills/inputs-design-pattern.html
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
