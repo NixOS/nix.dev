@@ -137,6 +137,12 @@ To better navigate the material and judge its relevance, every entry should prov
 
 ### Nixpkgs
 - https://nixos.org/guides/nix-pills/index.html
+  
+   Index to sections: Why try it; Installing; Environment; Language; Functions & Imports; Derivations; Generic Builders, Dependencies; Nix Shell; Garbage Collection; Design Patterns; Search Paths; NixPkgs Parameters & Overriding; Store Paths; Stdenv; Dependencies & Hooks.
+  - Reading time: 5 min
+  - Author: Luca Bruno
+  - Created: 2014 Updated 2017
+    
 - partially in chapter https://nixos.org/guides/nix-pills/our-first-derivation.html
 - https://nixos.org/guides/nix-pills/working-derivation.html
 - https://nixos.org/guides/nix-pills/inputs-design-pattern.html
