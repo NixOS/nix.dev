@@ -1,1 +1,12 @@
 /tutorials/contributing /contributing 301
+/tutorials/nix-language /tutorials/first-steps/nix-language 301
+/tutorials/ad-hoc-developer-environments /tutorials/first-steps/ad-hoc-shell-environments 301
+/tutorials/towards-reproducibility-pinning-nixpkgs /tutorials/first-steps/towards-reproducibility-pinning-nixpkgs 301
+/tutorials/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-and-reproducible-developer-environments 301
+/tutorials/dev-environment /tutorials/first-steps/dev-environment 301
+/tutorials/continuous-integration-github-actions /tutorials/nixos/continuous-integration-github-actions 301
+/tutorials/building-and-running-docker-images /tutorials/nixos/building-and-running-docker-images 301
+/tutorials/building-bootable-iso-image /tutorials/nixos/building-bootable-iso-image 301
+/tutorials/deploying-nixos-using-terraform /tutorials/nixos/deploying-nixos-using-terraform 301
+/tutorials/installing-nixos-on-a-raspberry-pi /tutorials/nixos/installing-nixos-on-a-raspberry-pi 301
+/tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301

@@ -6,5 +6,5 @@ Learn how to install, configure, and deploy NixOS.
 :glob:
 :maxdepth: 1
 
-build-and-deploy/*
+./*
 ```
