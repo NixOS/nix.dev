@@ -136,7 +136,6 @@ To better navigate the material and judge its relevance, every entry should prov
 - https://edolstra.github.io/pubs/phd-thesis.pdf
 
 ### Nixpkgs
-- https://nixos.org/guides/nix-pills/index.html
 - partially in chapter https://nixos.org/guides/nix-pills/our-first-derivation.html
 - https://nixos.org/guides/nix-pills/working-derivation.html
 - https://nixos.org/guides/nix-pills/inputs-design-pattern.html
