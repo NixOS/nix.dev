@@ -15,7 +15,7 @@ Nix language
     Programming language to declare packages and configurations for {term}`Nix`.
 
     :::{seealso}
-    - [Nix language tutorial](reading-nix-language)
+    - [](reading-nix-language)
     - [Nix language reference](https://nixos.org/manual/nix/stable/language)
     :::
 

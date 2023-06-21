@@ -1,28 +1,53 @@
 (reading-nix-language)=
 
-# Nix language basics
+# Reading the Nix language without fear
 
-The Nix language is used to declare packages and configurations to be built by [Nix][nix-manual].
-
+The Nix language is designed for conveniently creating and composing *derivations* – precise descriptions of how contents of existing files are used to derive new files.
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
-Notable uses of the Nix language are:
+:::{Notable uses of the Nix language}
 
-- [Nixpkgs][nixpkgs]
+- {term}`Nixpkgs`
 
   The largest, most up-to-date software distribution in the world, and written in the Nix language.
 
-- [NixOS][nixos-manual]
+- {term}`NixOS`
 
   A Linux distribution that can be configured fully declaratively and is based on Nix and Nixpkgs.
 
   Its underlying modular configuration system is written in the Nix language, and uses packages from Nixpkgs.
   The operating system environment and services it provides are configured with the Nix language.
 
-[nix-manual]: https://nixos.org/manual/nix/stable
-[nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
-[nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
-[home-manager]: https://github.com/nix-community/home-manager
+:::
+
+You may quickly encounter Nix language expressions that look very complicated.
+As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
+Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
+
+The Nix language has only few basic constructs which can be combined arbitrarily:
+
+- Primitive data types
+
+  such as integers or character strings
+
+- Compound data types
+
+  that is, lists and attribute sets
+
+- Functions and operators
+
+  to produce and transform data
+
+- Name assignment
+
+  to manipulate data as units
+
+Most importantly, the Nix language is *pure*.
+That is, expression evaluation does not observe or interact with the outside world – with one notable exception:
+reading files, to capture what the resulting build tasks will operate on.
+
+There is nothing else to it.
+What may look complicated comes not from the language, but from how it is used.
 
 ## Overview
 
@@ -197,44 +222,6 @@ $ nix-instantiate --eval --strict file.nix
 :::
 
 [nix-instantiate]: https://nixos.org/manual/nix/stable/command-ref/nix-instantiate.html
-
-## Reading the Nix language without fear
-
-You may quickly encounter Nix language expressions that look very complicated.
-
-As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
-
-Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
-
-The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
-
-:::{important}
-A build task in Nix is called a *derivation*.
-:::
-
-The Nix language has only few basic constructs which can be combined arbitrarily:
-
-- Primitive data types
-
-  such as integers or character strings
-
-- Compound data types
-
-  that is, lists and attribute sets
-
-- Functions and operators
-
-  to produce and transform data
-
-- Name assignment
-
-  to manipulate data as units
-
-The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
-reading files, to capture what build tasks will operate on.
-
-There is nothing else to it.
-What may look complicated comes not from the language, but from how it is used.
 
 ### Notes on whitespace
 
