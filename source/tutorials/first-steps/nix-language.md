@@ -240,15 +240,14 @@ let x=1;y=2;in x+y
 
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
-We show primitive data types and lists as examples in the context of [attribute sets](attrset).
+We show examples of primitive data types and lists in the context of [attribute sets](attrset).
 Later in this section we cover special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
-There are two ways to assign names to values in Nix: [attribute sets](attrset) and [`let` expressions](let).
-
+[Attribute sets](attrset) and [`let` expressions](let) are used to assign names to values.
 Assignments are denoted by a single equal sign (`=`).
 
-Whenever you see an equal sign (`=`) in Nix language code:
+Whenever you encounter an equal sign (`=`) in Nix language code:
 - On its left is the assigned name.
 - On its right is the value, delimited by a semicolon (`;`).
 
@@ -1031,6 +1030,9 @@ Wherever you see a colon (`:`) in Nix language code:
 - On its left is the function argument
 - On its right is the function body.
 
+Function arguments are the third way, apart from [attribute sets](attrset) and [`let` expressions](let), to assign names to values.
+Notably, values are not known in advance: the names are used as placeholders that are filled when [calling a function](calling-functions).
+
 Function declarations in the Nix language can appear in different forms.
 Each of them is explained in the following, and here is an overview:
 
@@ -1077,7 +1079,9 @@ Each of them is explained in the following, and here is an overview:
   ```
 
 Functions have no names.
-We say they are anonymous, and call such a function a *lambda*.
+We say they are anonymous, and call such a function a *lambda*.[^lambda]
+
+[^lambda]: The term *lambda* is a shorthand for [lambda abstraction](https://en.m.wikipedia.org/wiki/Lambda_calculus#lambdaAbstr) in the [lambda calculus](https://en.m.wikipedia.org/wiki/Lambda_calculus).
 
 Example:
 
@@ -1109,6 +1113,7 @@ in f
 <LAMBDA>
 ```
 
+(calling-functions)=
 ### Calling functions
 
 Also known as "function application".
@@ -1213,6 +1218,7 @@ in [ f a ]
 :class: value
 [ <LAMBDA> 1 ]
 ```
+
 The first example reads: apply `f` to `a`, and put the result in a list.
 The resulting list has one element.
 
