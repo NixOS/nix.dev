@@ -138,7 +138,7 @@ To better navigate the material and judge its relevance, every entry should prov
 ### Nixpkgs
 - partially in chapter https://nixos.org/guides/nix-pills/our-first-derivation.html
 - https://nixos.org/guides/nix-pills/working-derivation.html
-  Creating a working derivation. Using `nix repl`: `bash` as a builder; the `args` attribute; creating in `$out`;the builder environment; packaging a C program. Using a `.nix` file to define the derivation: `import` function; `inherit` keyword; using `nix-build`. Explains how to use `gcc`, `bash` and `coreutils` from nixpkgs.   
+  Creating a working derivation. Using `nix repl`: `bash` as a builder; the `args` attribute; creating in `$out`; the builder environment; packaging a C program. Using a `.nix` file to define the derivation: `import` function; `inherit` keyword; using `nix-build`. Explains how to use `gcc`, `bash` and `coreutils` from nixpkgs.   
   - Reading time: 15 min
   - Author: Luca Bruno
   - Created: 2015 (effectively unmaintained since 2017)
