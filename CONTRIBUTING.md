@@ -22,6 +22,19 @@ Open an [issue] if you want to clarify something not evident from what is provid
 [issue]: https://github.com/NixOS/nix.dev/issues
 [pull request]: https://github.com/NixOS/nix.dev/pulls
 
+## Code of conduct
+
+Adapted from the [Contributor Covenant] and [The Carpentries Code of Conduct]:
+
+- Use welcoming and inclusive language
+- Show empathy and respect towards other people
+- Be respectful of different viewpoints and experiences
+- Give and gracefully accept constructive criticism
+- Focus on what is best for the community
+
+[Contributor Covenant]: https://github.com/EthicalSource/contributor_covenant/blob/cd7fcf684249786b7f7d47ba49c23a6bcb3233eb/content/version/2/1/code_of_conduct.md
+[The Carpentries Code of Conduct]: https://github.com/carpentries/docs.carpentries.org/blob/4691971d9f49544054410334140a4fd391a738da/topic_folders/policies/code-of-conduct.md
+
 ## What you can do
 
 ### You want to learn and use Nix?
@@ -52,7 +65,7 @@ We would be glad to incorporate your insights.
 
 ## Contributor guides
 
-Please read ["Contributing Documentation"](./source/contributing/documentation.md).
+Please read [Contributing Documentation](https://nix.dev/contributing/documentation).
 
 # Vision
 
@@ -210,24 +223,7 @@ This section shows how the disconnected packages from previous examples can be w
     - Docker containers
 - Contributing to Nix
 
-# Licensing and attribution
-
-When opening pull requests with your own contributions, you agree to licensing your work under [CC-BY-SA 4.0].
-Before merging your work, you have to sign the [contributor agreement](cla/README.md).
-
-Having a single legal entity hold non-exclusive copyright avoids disputes and ensures the material can be put to use more effectively, e.g. by eventually publishing it as a book.
-You will still be considered co-author, as recorded by version history.
-
-When adding material by third parties, make sure it has a matching license that permits this.
-In that case, unambiguously state source, authors, and license.
-Also [add the original author as co-author] to the respective change, so we can track authorship through version history.
-
-Notify the authors *before* using their work.
-
-[CC-BY-SA 4.0]: https://creativecommons.org/licenses/by-sa/4.0/
-[add the original author as co-author]: https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
-
-# Notes
+# Contributor notes
 
 ## GitHub heading anchors fails linkcheck
 
@@ -238,6 +234,13 @@ Until the bug is resolved, add the `user-content-` prefix to GitHub links
 containing heading anchors.
 
 For example, instead of
-`https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests`,
+
+```
+https://github.com/nix-community/nixos-generators#cross-compiling
+```
+
 use
-`https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests`. 
+
+```
+https://github.com/nix-community/nixos-generators#user-content-cross-compiling
+```
