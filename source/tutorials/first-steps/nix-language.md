@@ -24,29 +24,7 @@ You may quickly encounter Nix language expressions that look very complicated.
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
 
-The Nix language has only few basic constructs which can be combined arbitrarily:
-
-- Primitive data types
-
-  such as integers or character strings
-
-- Compound data types
-
-  that is, lists and attribute sets
-
-- Functions and operators
-
-  to produce and transform data
-
-- Name assignment
-
-  to manipulate data as units
-
-Most importantly, the Nix language is *pure*.
-That is, expression evaluation does not observe or interact with the outside world – with one notable exception:
-reading files, to capture what the resulting build tasks will operate on.
-
-There is nothing else to it.
+Yet, the Nix language itself has only few basic concepts that will be introduced in this tutorial, and which can be combined arbitrarily.
 What may look complicated comes not from the language, but from how it is used.
 
 ## Overview
