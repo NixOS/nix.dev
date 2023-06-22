@@ -30,12 +30,13 @@ Follow relevant activities on these communication channels:
 
 ## Take ownership
 
-Maintain your entry in the [`CODEOWNERS`] file in the respective repository.
-GitHub will then request reviews for pull requests that change files you own.
+The team has entries in the [`CODEOWNERS`] file in the respective repositories.
+GitHub will request reviews for pull requests that change files the team owns.
 
 [`CODEOWNERS`]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-As a maintainer, you are responsible for the code you approve and merge.
+Team members can review and approve changes, which then have to merged by the team lead, since GitHub currently does not allow more granular permission management.
+As a maintainer, you and the team lead are responsible for the changes you approve.
 Make sure to follow up on bugs and regressions in the code you maintain.
 
 Respond to `@` mentions on GitHub, Discourse, and Matrix within reasonable time.
@@ -45,10 +46,10 @@ Make sure to reserve time for reviewing pull requests that fall within your area
 
 ## Provide guidance
 
-Guide potential contributors:
+Guide new and potential contributors:
 
-- help answering questions on the [Discourse Help category]
-- encourage question authors to raise or upvote issues on GitHub, if needed
-- assist them with making pull requests to solve the underlying problems, if possible
+- Help answering questions on the [Discourse Help category]
+- Encourage question authors to raise or upvote issues on GitHub, if needed
+- Assist them with making pull requests to solve the underlying problems, if possible
 
 [Discourse Help category]: https://discourse.nixos.org/c/learn/9
