@@ -140,9 +140,10 @@ html_baseurl = "https://nix.dev/"
 
 html_theme = "sphinx_book_theme"
 
-# https://alabaster.readthedocs.io/en/latest/customization.html
+# https://sphinx-book-theme.readthedocs.io/en/stable/reference.html
 html_theme_options = {
-    "repository_url": "https://github.com/nix-dot-dev/nix.dev",
+    "repository_url": "https://github.com/nixos/nix.dev",
+    "repository_branch": "master",
     "path_to_docs": "source",
     "use_repository_button": True,
     "use_issues_button": True,
