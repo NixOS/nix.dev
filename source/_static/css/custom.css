@@ -1,3 +1,7 @@
+:root {
+  --sd-color-card-border-hover: var(--pst-color-primary) !important;
+}
+
 div.highlight-shell-session + div.highlight-none pre {
   background-color: var(--pst-color-preformatted-text),1 !important;
   color: var(--pst-color-preformatted-background),1 !important;
@@ -68,4 +72,21 @@ div.highlight:hover > pre::before {
 .bd-search {
   margin-top: -2rem;
   margin-bottom: -1rem;
+}
+
+.navbar-nav li.toctree-l1 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-nav li.toctree-l1 > .toctree-toggle {
+  display: none;
+}
+
+.navbar-nav li.toctree-l1 > a {
+  font-weight: 600;
+}
+
+.navbar-nav li.toctree-l1 > ul {
+  padding: 0;
 }
