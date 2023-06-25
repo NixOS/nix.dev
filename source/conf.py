@@ -43,6 +43,7 @@ extensions = [
     "sphinx_design",
     "extractable_code_block",
     "sphinx_sitemap",
+    "notfound.extension",
 ]
 
 # Add myst-specific extensions, see what is available on
@@ -437,3 +438,6 @@ html_css_files = [
 ]
 
 sitemap_url_scheme = "{link}"
+
+# Not found
+notfound_urls_prefix = "/"

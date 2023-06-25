@@ -43,6 +43,11 @@
             }
           );
 
+          sphinx-notfound-page = super.sphinx-notfound-page.overridePythonAttrs (
+            old: {
+              buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-core ];
+            }
+          );
         };
       in
       rec {
