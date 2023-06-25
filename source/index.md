@@ -13,24 +13,36 @@ nix.dev is the home of official documentation for the Nix ecosystem, it contains
 
 ::::{grid} 2
 :::{grid-item-card} Tutorials
+:link: tutorials
+:link-type: ref
 :text-align: center
+
 Series of lessons to get started
 :::
 
 :::{grid-item-card} Recipes
+:link: recipes
+:link-type: ref
 :text-align: center
+
 Guides to getting things done
 :::
 ::::
 
 ::::{grid} 2
 :::{grid-item-card} Reference
+:link: reference
+:link-type: ref
 :text-align: center
+
 Collections of detailed technical descriptions 
 :::
 
 :::{grid-item-card} Concepts
+:link: concepts
+:link-type: ref
 :text-align: center
+
 Explanations of history and ideas in the Nix ecosystem
 :::
 ::::
@@ -63,68 +75,12 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 > &mdash; <cite>[Nix: A Safe and Policy-Free System for Software Deployment](https://www.semanticscholar.org/paper/Nix%3A-A-Safe-and-Policy-Free-System-for-Software-Dolstra-Jonge/76eb395afe54d526797f6e12ce1c4fa14cda253f?p2df)</cite>
 
 ```{toctree}
-:glob:
-:caption: Tutorials
-:maxdepth: 1
 :hidden:
 
-tutorials/install-nix.md
-tutorials/first-steps/index.md
-tutorials/nixos/index.md
-tutorials/cross-compilation.md
-```
-
-```{toctree}
-:glob:
-:caption: Recipes
-:maxdepth: 1
-:hidden:
-
-recipes/*
-templates/*
-```
-
-```{toctree}
-:glob:
-:caption: Reference
-:maxdepth: 1
-:hidden:
-
-Nix Reference Manual <https://nixos.org/manual/nix/stable/>
-Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
-NixOS Manual <https://nixos.org/manual/nixos/stable/>
-reference/pinning-nixpkgs.md
-reference/glossary.md
-recommended-reading.md
-influences.md
-```
-
-```{toctree}
-:glob:
-:caption: Concepts
-:maxdepth: 1
-:hidden:
-concepts/*
-```
-
-```{toctree}
-:glob:
-:caption: Contributing
-:maxdepth: 1
-:hidden:
-
-contributing/how-to-contribute.md
-contributing/how-to-get-help.md
-contributing/documentation.md
-contributing/writing-a-tutorial.md
-contributing/writing-style.md
-```
-
-```{toctree}
-:glob:
-:caption: Acknowledgments
-:maxdepth: 1
-:hidden:
-
-acknowledgments/sponsors.md
+tutorials/index.md
+recipes/index.md
+reference/index.md
+concepts/index.md
+contributing/index.md
+acknowledgments/index.md
 ```
