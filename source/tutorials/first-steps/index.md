@@ -9,7 +9,7 @@ You will also learn the Nix language, and use it to build portable, reproducible
 
 ```{toctree}
 :maxdepth: 1
-ad-hoc-developer-environments.md
+ad-hoc-shell-environments.md
 reproducible-scripts.md
 nix-language.md
 towards-reproducibility-pinning-nixpkgs.md
