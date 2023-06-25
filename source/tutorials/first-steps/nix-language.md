@@ -5,7 +5,9 @@
 The Nix language is designed for conveniently creating and composing *derivations* – precise descriptions of how contents of existing files are used to derive new files.
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
-:::{Notable uses of the Nix language}
+:::{admonition} Notable uses of the Nix language
+:class: note
+
 
 - {term}`Nixpkgs`
 
