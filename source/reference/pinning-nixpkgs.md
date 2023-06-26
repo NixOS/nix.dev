@@ -59,7 +59,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
   ```
 
 - ```shell-session
-  $ nix-build -I nixpkgs=channel:nixos-22.11`
+  $ nix-build -I nixpkgs=channel:nixos-22.11
   ```
 
 - ```shell-session
