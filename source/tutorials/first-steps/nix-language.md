@@ -2048,7 +2048,8 @@ Explanation:
 
 - This expression is a function that takes an attribute set which must have exactly the attributes `lib`, `stdenv`, and `fetchurl`.
 - It returns the result of evaluating the function `mkDerivation`, which is an attribute of `stdenv`, applied to a recursive set.
-- The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the function `fetchurl`, which is an attribute of the argument attribute set.
+- The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the function `fetchurl`.
+  `fetchurl` itself comes from the outer function's arguments.
 - The `meta` attribute is itself an attribute set, where the `license` attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
 
 The package can be built by running `nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'`.
