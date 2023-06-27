@@ -25,10 +25,12 @@ In particular, the tutorial outline should:
 
 [tutorial_outline_template]: ./tutorial-outlines/template.md
 [outlines_dir]: ./tutorial-outlines/
-[diataxis]: https://diataxis.fr/tutorials/
+[diataxis_tutorial]: https://diataxis.fr/tutorials/
 
 ### Submit a draft PR
 Once the outline PR has been merged, work can begin on a draft of the tutorial.
+Follow the [how to write a tutorial][tutorial_guide] guide and adhere to the [style guide][style_guide] while writing to follow conventions used throughout the rest of the site's documentation and make review less labor intensive for maintainers.
+
 Submit a PR with a draft of the tutorial using the [tutorial template][tutorial_template], placing the draft in the `source/tutorials/learning-journey`.
 The PR should be opened against the `learning-journey` branch.
 At this point the draft will receive editorial review from @zmitchell and technical review from @infinisil or @roberth.
@@ -36,46 +38,5 @@ At this point the draft will receive editorial review from @zmitchell and techni
 The draft will become an official tutorial if it passes review.
 
 [tutorial_template]: ../../../source/tutorials/learning-journey/template.md
-
-## Style
-
-### Link to other documentation
-If you make a claim about how something works (e.g. that a command line argument exists), link to official documentation for that subject.
-We would like to maintain a network of documentation, so linking to other documentation helps to reinforce the documentation ecosystem.
-
-### Code samples
-At the bare minimum code samples that are _intended_ to work should work.
-If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain so beforehand so that a reader doesn't spend time trying to make it work before continuing to read.
-Code samples should all include a programming language when applicable e.g.
-
-````
-```python
-print("Hello, World!")
-```
-````
-
-### Tone
-Follow the evidence-based [plain language guidelines].
-In short, be concise, prefer smaller words, avoid jargon that readers may not be familiar with, etc.
-
-### Markup
-Reserve the largest header (`#`) for the title e.g. the largest header you should use in the content of the tutorial should be `##`.
-
-Write one sentence per line.
-This makes review easier given `git`'s line-oriented diffs and GitHub's PR comment interface.
-
-Use [reference links][ref_links] to keep the source legible.
-All links in a section should be grouped together at the end.
-For instance:
-
-```
-## This is a section
-Lorem ipsum dolor sit amet, [consectetur][adipiscing] elit. Suspendisse rutrum ligula porta, condimentum dui dignissim, imperdiet mi. Sed interdum lacus nec varius posuere. Duis auctor varius purus, ut ornare purus tempus eu. Aliquam erat volutpat. Etiam eget nunc malesuada, elementum neque eget, mollis metus. Nulla suscipit felis nec accumsan fermentum.
-
-Integer volutpat erat sem, non varius turpis facilisis eu. Nam eu [ullamcorper][magna]. Morbi iaculis vel urna in condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec tellus sit amet tellus venenatis porta in et ex. Nunc sodales nisl magna, at dictum diam sollicitudin id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec facilisis, sapien eu faucibus iaculis, nibh nibh condimentum enim, nec egestas turpis erat nec libero. Curabitur ut tincidunt odio. Praesent sed tincidunt tortor.
-
-[adipiscing]: example.com
-[magna]: example.com
-```
-
-[ref_links]: https://github.github.com/gfm/#reference-link
+[tutorial_guide]: ../../../source/contributing/writing-a-tutorial.md
+[style_guide]: ../../../source/contributing/style-guide.md
