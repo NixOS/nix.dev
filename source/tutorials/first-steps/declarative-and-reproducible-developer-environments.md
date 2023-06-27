@@ -2,9 +2,9 @@
 
 # Declarative and reproducible developer environments
 
-In the {ref}`ad-hoc-envs` tutorial we looked at providing shell environments for when we need a quick 'n dirty way of getting hold of some tools.
+In the {ref}`ad-hoc-envs` tutorial, we looked at imperatively creating shell environments using `nix-shell -p`, for when we need a quick way to access some tools without having to install them globally. We also saw how to execute that command with a specific nixpkgs git commit as an argument, to recreate the same environment used previously.
 
-In this tutorial, we'll take a look how to create {term}`reproducible` shell environments given a declarative configuration file called a Nix expression.
+In this tutorial, we'll see how to *declaratively* create {term}`reproducible` shell environments using a configuration file called a Nix expression.
 
 ## When is a declarative shell environment useful?
 
