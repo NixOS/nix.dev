@@ -64,7 +64,8 @@ Now try `which htop` to check where the `htop` executable is stored in the files
 
 ## Customizing your developer environment
 
-Given the following `shell.nix`:
+We may want to run some commands whenever we enter the environment, for example echoing a message to the console. We may also want to set some variables that are only present within the environment.
+To accomplish these, we can modify the `shell.nix` from the previous section like so:
 
 ```nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
@@ -94,7 +95,7 @@ hello
 world
 ```
 
-- The `shellHook` section allows you to execute bash while entering the shell environment.
+- The `shellHook` section allows you to execute bash commands while entering the shell environment.
 - Any attributes passed to `mkShell` function are available once the shell environment is active.
 
 ## `direnv`: Automatically activating the environment on directory change
