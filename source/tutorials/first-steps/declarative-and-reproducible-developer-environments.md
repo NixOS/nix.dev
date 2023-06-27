@@ -18,7 +18,7 @@ In addition to these, declaring development environments in Nix expression files
 
 ## Getting started
 
-At the top-level of your project create `shell.nix` with the following contents:
+At the top-level of your project, create `shell.nix` with the following contents:
 
 ```nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {} }:
@@ -33,12 +33,12 @@ pkgs.mkShell {
 ```
 
 :::{note}
-To understand the first line, read our tutorial on {ref}`pinning Nixpkgs`<ref-pinning-nixpkgs>.
+To better understand the first line, read through the tutorial on {ref}`pinning nixpkgs <ref-pinning-nixpkgs>`.
 :::
 
-We import `nixpkgs` and make a shell with `which` and `htop` available in `$PATH`. We use `zlib` to provide libraries and headers in case we're compiling something against it.
+This expression imports `nixpkgs`, then creates a shell with `which` and `htop` available in `$PATH`. `zlib` is also added, to provide some common libraries and headers in case we need to compile something against it.
 
-To enter the environment:
+To enter the environment, run `nix-shell` in the same directory as `shell.nix`:
 
 ```shell-session
 $ nix-shell
@@ -51,11 +51,11 @@ copying path '/nix/store/072a6x7rwv5f8wr6f5s1rq8nnm767cfp-htop-2.2.0' from 'http
 
 This command will start downloading the missing packages from the <https://cache.nixos.org> binary cache.
 
-Once the download is done, you are dropped into a new shell. This shell provides the packages specified in `shell.nix`.
+Once the download completes, you are dropped into a new shell, which provides the packages specified in `shell.nix`.
 
 Run `htop` to confirm that it is present. Quit the program by hitting `q`.
 
-Now try `which htop` to check where the `htop` command is on disk. You should see something similar to this:
+Now try `which htop` to check where the `htop` executable is stored in the filesystem. You should see something similar to this:
 
 ```shell-session
 [nix-shell:~]$ which htop
