@@ -6,20 +6,15 @@ In the {ref}`ad-hoc-envs` tutorial, we looked at imperatively creating shell env
 
 In this tutorial, we'll see how to *declaratively* create {term}`reproducible` shell environments using a configuration file called a Nix expression.
 
-## When is a declarative shell environment useful?
+## When are declarative shell environments useful?
 
-A declarative shell environment is the quickest approach to getting started with Nix:
+Both methods of creating development shell environments allow you to provide CLI tools like `psql`, `jq`, and `tmux`, as well as developer libraries like `zlib` and `openssl`. However, only the *declarative* approach allows you to
 
-- Use a single command to invoke it via `nix-shell`.
-- It works across different operating systems (Linux / MacOS).
-- Share the exact same environment with all developers.
+- automatically set shell environment variables,
+- execute bash commands during environment activation, and
+- share the exact same environment with other developers.
 
-Developer environments allow you to:
-
-- Provide CLI tools, such as `psql`, `jq`, `tmux`, etc.
-- Provide developer libraries, such as `zlib`, `openssl`, etc.
-- Set shell environment variables.
-- Execute bash during environment activation.
+In addition to these, declaring development environments in Nix expression files enables you to use all the source code workflows you're used to, like committing that file to version control, using code analysis tools, and so on.
 
 ## Getting started
 
