@@ -100,22 +100,22 @@ world
 
 ## `direnv`: Automatically activating the environment on directory change
 
-Besides activating the environment for each project, every time you change `shell.nix` you need to re-enter the shell.
+In addition to manually activating the environment for each project, you need to re-enter the shell every time you change `shell.nix`.
 
-You can use `direnv` to automate this process for you, with the downside that each developer needs to install it globally.
+You can use `direnv` to automate this process for you, with the tradeoff that each developer using the environment needs to install it globally.
 
 ### Setting up `direnv`
 
 1. [Install nix-direnv with your package manager or from source](https://github.com/nix-community/nix-direnv)
 2. [Hook it into your shell](https://direnv.net/docs/hook.html)
 
-At the top-level of your project run:
+From the top-level directory of your project run:
 
 ```shell-session
 $ echo "use nix" > .envrc && direnv allow
 ```
 
-The next time you launch your terminal and enter the top-level of your project, `direnv` will check for changes.
+The next time you launch your terminal and enter the top-level directory of your project, `direnv` will check for changes to the `shell.nix` file.
 
 ```shell-session
 $ cd myproject
