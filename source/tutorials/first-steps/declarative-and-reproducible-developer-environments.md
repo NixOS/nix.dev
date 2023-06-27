@@ -126,5 +126,5 @@ hello
 
 ## Next steps
 
-- Take a look at our {ref}`pinning Nixpkgs` tutorial to see different ways to import Nixpkgs.
+- Take a look at our {ref}`pinning-nixpkgs` tutorial to see different ways to import Nixpkgs.
 - To quickly set up a Nix project, read [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
