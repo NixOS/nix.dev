@@ -35,7 +35,7 @@
     - Explain that having to repeat yourself in both files is less than ideal and that you could easily forget to add a dependency to one file or the other.
 - Introduce `mkShell.inputsFrom` as a way to prevent duplication.
     - Explain that `inputsFrom` extracts `input` attributes from the supplied derivation and passes them to `mkShell`.
-- Demonstrate how to import the `default.nix` and use its inputs.
+- Demonstrate how to import the `default.nix` expression into `shell.nix` and use its inputs.
 - Demonstrate how to put the `mkShell` call in `default.nix`.
     - Explain that defining the shell this way helps to keep more of the functionality in `default.nix`, leaving `shell.nix` to be the necessary glue to allow `nix-shell` to use the shell we've defined.
 
