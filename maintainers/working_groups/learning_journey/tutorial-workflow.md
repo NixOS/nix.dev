@@ -13,9 +13,7 @@ Make sure to read the issue fully to ensure that you don't duplicate work that s
 [tracking_issues]: https://github.com/NixOS/nix.dev/issues?q=is%3Aissue+is%3Aopen+label%3Atracking+label%3A%22learning+journey%22
 
 ### Submit an outline PR
-Work on the tutorial series will take place in the `learning-journey` branch.
-Submit a PR with an outline of the tutorial using the [tutorial outline template][tutorial_outline_template], making sure to submit the PR against the `learning-journey` branch.
-The outline should be placed in the [tutorial outlines directory][outlines_dir].
+Submit a PR with an outline of the tutorial using the [tutorial outline template][tutorial_outline_template], placing the outline in the [tutorial outlines directory][outlines_dir].
 The outline will go through a review process to ensure that the material is satisfactory and is detailed enough that any other contributor could pick it up and work on it.
 In particular, the tutorial outline should:
 
@@ -32,7 +30,6 @@ Once the outline PR has been merged, work can begin on a draft of the tutorial.
 Follow the [how to write a tutorial][tutorial_guide] guide and adhere to the [style guide][style_guide] while writing to follow conventions used throughout the rest of the site's documentation and make review less labor intensive for maintainers.
 
 Submit a PR with a draft of the tutorial using the [tutorial template][tutorial_template], placing the draft in the `source/tutorials/learning-journey`.
-The PR should be opened against the `learning-journey` branch.
 At this point the draft will receive editorial review from @zmitchell and technical review from @infinisil or @roberth.
 
 The draft will become an official tutorial if it passes review.
