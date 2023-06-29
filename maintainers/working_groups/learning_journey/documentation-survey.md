@@ -158,6 +158,13 @@ To better navigate the material and judge its relevance, every entry should prov
   - Created: 2015 (effectively unmaintained since 2017)
 
 - https://nixos.org/guides/nix-pills/inputs-design-pattern.html
+  Explains the `inputs` design pattern as used by `nixpkgs`. A single customizable repository having a top-level Nix expression, with one expression for each package.
+
+  - Reading time: 20 min
+  - Author: Luca Bruno
+  - Created: 2015 (effectively unmaintained since 2017)
+
+
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
 - partially in https://edolstra.github.io/pubs/phd-thesis.pdf
