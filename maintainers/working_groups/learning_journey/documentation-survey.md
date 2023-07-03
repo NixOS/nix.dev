@@ -167,7 +167,6 @@ To better navigate the material and judge its relevance, every entry should prov
 
 
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
-- https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
 - partially in https://edolstra.github.io/pubs/phd-thesis.pdf
 
 - [Connecting Bash to Nix](https://www.zombiezen.com/blog/2023/03/connecting-bash-to-nix/)
