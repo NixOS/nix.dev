@@ -7,7 +7,7 @@
 
 # [nix.dev](https://nix.dev)
 
-An opinionated guide for developers wanting to get things done with the Nix ecosystem.
+Official documentation for getting things done with Nix.
 
 ## Contributing
 
