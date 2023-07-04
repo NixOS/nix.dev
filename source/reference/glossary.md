@@ -45,10 +45,6 @@ NixOS
     - [NixOS source code](https://github.com/NixOS/nixpkgs/tree/master/nixos)
     :::
 
-Nix platform
-    The set of components that combine to create the official Nix ecosystem:
-    Nix, Nixpkgs, NixOS.
-
 reproducible
     Reproducibility would guarantee exactly the same results no matter
     **when** or **on what machine** you run the command.
