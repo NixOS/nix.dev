@@ -7,7 +7,7 @@
 
 # [nix.dev](https://nix.dev)
 
-Official documentation for the Nix platform.
+Official documentation for getting things done with Nix.
 
 ## Contributing
 
