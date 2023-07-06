@@ -48,7 +48,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
   [@henrik-ch]: https://github.com/henrik-ch
 
-- Zach Mitchell (GitHub: [@zmitchell])
+- Zach Mitchell (GitHub: [@zmitchell]) (he/him)
 
   [@zmitchell]: https://github.com/zmitchell/
 
