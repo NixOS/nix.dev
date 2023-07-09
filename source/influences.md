@@ -4,4 +4,4 @@
 - https://www.habitat.sh/
 - https://www.gnu.org/software/guix/
 - https://github.com/andrewchambers/hermes
-- https://bob.build/
+- https://bobbuildtool.dev/
