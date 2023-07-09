@@ -4,7 +4,28 @@ This document outlines the guidelines we use when writing documentation.
 
 ## Writing style
 
-### Be kind
+### Aim for clarity and brevity
+> I would have written a shorter letter, but I did not have the time.
+>
+> — [Blaise Pascal](https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes)
+
+Readers' time and attention is limited.
+Take the time to be extraordinarily respectful with their cognitive resources.
+
+The same holds for communication directed to contributors and maintainers:
+This is a public project, and many people will read what you write.
+Use this leverage with care.
+
+- Do: Follow the evidence-based [plain language guidelines] i.e. use simple, obvious language.
+    - Don't: Use jargon, many readers may not be familiar with technical terms.
+    - Don't: Use large words if there are smaller, simpler words that convey the same meaning.
+- Do: Use the imperative voice when giving instructions.
+    - Example: "Add the `python310` package to `buildInputs`"
+    - Don't: Use a narrative voice e.g. "Now we'll add the `python310` package to `buildInputs`".
+
+[plain language guidelines]: https://www.plainlanguage.gov/guidelines/
+
+### Use inclusive language
 
 Adapted from [Contributor Covenant] and [The Carpentries Code of Conduct]:
 
@@ -13,18 +34,6 @@ Adapted from [Contributor Covenant] and [The Carpentries Code of Conduct]:
 - Be respectful of different viewpoints and experiences
 - Give and gracefully accept constructive criticism
 - Focus on what is best for the community
-
-[Contributor Covenant]: https://github.com/EthicalSource/contributor_covenant/blob/cd7fcf684249786b7f7d47ba49c23a6bcb3233eb/content/version/2/1/code_of_conduct.md
-[The Carpentries Code of Conduct]: https://github.com/carpentries/docs.carpentries.org/blob/4691971d9f49544054410334140a4fd391a738da/topic_folders/policies/code-of-conduct.md
-
-### Use simple, obvious language
-
-Follow the evidence-based [plain language guidelines].
-In short, prefer smaller words and avoid jargon that readers may not be familiar with.
-
-[plain language guidelines]: https://www.plainlanguage.gov/guidelines/
-
-### Use culturally neutral language
 
 Avoid idioms as they can be hard to understand for non-native English speakers.
 
@@ -35,6 +44,9 @@ At worst, jokes may offend readers and invalidate our effort to help them learn.
 
 Don't use references to popular culture.
 What you may consider well-known may be entirely obscure and distracting to people from different backgrounds.
+
+[Contributor Covenant]: https://github.com/EthicalSource/contributor_covenant/blob/cd7fcf684249786b7f7d47ba49c23a6bcb3233eb/content/version/2/1/code_of_conduct.md
+[The Carpentries Code of Conduct]: https://github.com/carpentries/docs.carpentries.org/blob/4691971d9f49544054410334140a4fd391a738da/topic_folders/policies/code-of-conduct.md
 
 ### Be concise
 
@@ -73,7 +85,7 @@ At the bare minimum code samples that are _intended_ to work should work.
 If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain so beforehand.
 Many readers will get stuck trying to make example code work without reading ahead to find out that the code isn't intended to work.
 
-Code samples should all include a programming language when applicable e.g.
+Code samples should all include a programming language when applicable for syntax highlighting when rendered e.g.
 
 ````
 ```python
@@ -82,7 +94,10 @@ print("Hello, World!")
 ````
 
 ### Headers
-Reserve the largest header (`#`) for the title e.g. the largest header you should use in the content of the tutorial should be `##`.
+Reserve the largest header (`#`) for the title.
+
+Use Markdown headers `##` through `####` to divide up content in the body of the document, but prefer to stay in the `##`-`###` range.
+Finer grained headings are not necessarily better.
 
 ### One line per sentence
 Write one sentence per line.
