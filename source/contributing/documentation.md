@@ -1,7 +1,7 @@
 # Contributing Documentation
 
 This is an overview documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
-Documentation contributions should follow to the [writing style recommendations](./writing-style.md).
+Documentation contributions should follow the [style guide](./style-guide.md).
 
 Feel free to in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
 
