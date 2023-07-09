@@ -7,6 +7,45 @@ Feel free to in touch with the [Nix documentation team](https://nixos.org/commun
 
 If you cannot contribute time, consider [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of reference documentation and learning materials.
 
+## Documentation framework
+We aim to build our documentation according to the [Diataxis][diataxis] framework, which divides documentation into four categories:
+
+- Reference
+- How-to
+- Explanation
+- Tutorial
+
+We've found that contributors struggle to know the difference between these categories, while we _strongly_ recommend reading up on the Diataxis framework, we can summarize it in this way:
+
+- Reference
+  - Reference matieral includes technical documentation, API documentation, etc.
+  - Reference material should be relatively terse, simply listing which functions/classes/etc exist, but should still clearly define how to use the code and how it relates to the rest of the ecosystem.
+- How-to (we call these "Recipes")
+  - A recipe is a list of steps to achieve a specific goal.
+  - The goal is not to show how or why something works, but instead to show how to solve a specific problem.
+  - A Recipe assumes that the reader already has the background to understand the topic at hand and therefore doesn't need to explain the introduction of each new concept.
+- Explanation (we call these "Concepts")
+  - A Concept describes the internals of a piece of code or how to think about a particular concept or entity in the ecosystem.
+  - A Concept can also describe the historical context behind why something works the way that it does today.
+  - If you find yourself wanting to write about the nitty gritty details of how something works, you most likely want to write an Explanation.
+- Tutorial
+  - A tutorial walks the user through a particular activity to help give them muscle memory with accepted tools and patterns in the ecosystem.
+  - While the activity itself is important, the goal is to get the reader familiar with the patterns and tools in the ecosystem.
+
+We also find that people struggle with the difference between a How-to/Recipe and a Tutorial.
+One analogy is landing an airplane.
+A person landing a plane for the first time to avoid a crash landing needs a Recipe for how to land the plane, they don't need to know any history or theory, they just need to get the plane on the ground in one piece.
+The documentation they would refer to in this context should simply be a sequence of steps saying "do this, now do that, and, finally, do this last thing."
+An airline pilot in a simulator would refer to a tutorial to walk them through landing an airplane.
+In this context it's fine if the plane crashes, it's just a simulation.
+What's more important is that the airline pilot learns how to land the plane by being clearly walked through the process.
+
+Finally, one last way of thinking about the difference between How-to/Recipe and Tutorial is like this:
+- Recipe: "step 1: do this, step 2: do that, etc"
+- Tutorial: "take my hand as I show you how to do this"
+
+[diataxis]: https://diataxis.fr
+
 ## Reference manuals
 
 The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
