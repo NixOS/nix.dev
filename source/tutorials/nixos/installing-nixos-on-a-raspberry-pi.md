@@ -29,7 +29,7 @@ This tutorial was written for the Raspberry Pi 4B. Using a previous supported ha
 Booting from USB may require an EEPROM firmware upgrade. This tutorial boots from an SD card to avoid such hiccups.
 :::
 
-Prepare the AArch64 image on your laptop:
+To prepare the AArch64 image on another device with Nix, run the following commands:
 
 ```shell-session
 $ nix-shell -p wget zstd
