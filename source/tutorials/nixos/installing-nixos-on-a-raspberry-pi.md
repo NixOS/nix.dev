@@ -20,7 +20,7 @@ Before starting this tutorial, make sure you have
 - USB keyboard.
 
 :::{note}
-This tutorial was written for the Raspberry Pi 4B. Using a previous supported revision, like the 3B or 3B+, is possible with tweaks.
+This tutorial was written for the Raspberry Pi 4B. Using a previous supported hardware revision, like the 3B or 3B+, is possible with some modifications to this process.
 :::
 
 ## Booting NixOS live image
