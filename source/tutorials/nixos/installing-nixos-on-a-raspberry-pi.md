@@ -34,17 +34,14 @@ To prepare the AArch64 image on another device with Nix, run the following comma
 ```shell-session
 $ nix-shell -p wget zstd
 
-[nix-shell:~]$ wget https://hydra.nixos.org/build/160738647/download/1/nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
-[nix-shell:~]$ unzstd -d nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
+[nix-shell:~]$ wget https://hydra.nixos.org/build/226381178/download/1/nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst
+[nix-shell:~]$ unzstd -d nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst
 [nix-shell:~]$ dmesg --follow
 ```
 
 :::{note}
-You can pick a newer image by going to [Hydra job](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
-clicking on a build and copying the link to the build product image.
-
-There is a [known problem](https://github.com/NixOS/nixpkgs/issues/179701) with the latest SD images on the Pi 4, where it turns off the display while booting up.
-If you are experiencing such problems, please use [the most recent working build](https://hydra.nixos.org/build/134720986/download/1/nixos-sd-image-21.03pre262561.581232454fd-aarch64-linux.img.zst) instead until the issue is fixed.
+You can download a more recent image from [Hydra](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
+clicking on the latest successful build (marked with a green checkmark), and copying the link to the build product image.
 :::
 
 Your terminal should be printing kernel messages as they come in.
@@ -56,7 +53,7 @@ Press `ctrl-c` to stop `dmesg --follow`.
 Copy NixOS to your SD card by replacing `sdX` with the name of your device:
 
 ```console
-[nix-shell:~]$ sudo dd if=nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
+[nix-shell:~]$ sudo dd if=nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst of=/dev/sdX bs=4096 conv=fsync status=progress
 ```
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
