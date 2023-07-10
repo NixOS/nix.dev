@@ -174,6 +174,5 @@ $ sudo -i
 
 ## Next steps
 
-- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and reboot to the old configuration if something broke.
-- To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/) and change the options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
-- To see the power of declarative configuration, try replacing `xfce` with `kodi` in `/etc/nixos/configuration.nix`, run `nixos-rebuild switch` as root and `reboot`.
+- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
+- To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
