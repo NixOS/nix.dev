@@ -142,7 +142,7 @@ in {
 To save time on typing the whole configuration, download it:
 
 ```shell-session
-# curl -L https://tinyurl.com/nixos-rpi4-tutorial > /etc/nixos/configuration.nix
+# curl -L https://tinyurl.com/nixos-install-rpi4-tutorial > /etc/nixos/configuration.nix
 ```
 
 :::{note}
