@@ -91,7 +91,7 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 ## Installing and Configuring NixOS
 Now we'll install NixOS with our own configuration, here creating a `guest` user and enabling the SSH daemon.
 
-In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used in the [Getting internet connection](#Getting-internet-connection) section above:
+In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used previously:
 
 ```nix
 { config, pkgs, lib, ... }:
