@@ -105,6 +105,8 @@ let
   hostname = "myhostname";
 in {
 
+  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
