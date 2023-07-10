@@ -20,7 +20,7 @@ Before starting this tutorial, make sure you have
 - USB keyboard.
 
 :::{note}
-This tutorial was written for the Raspberry Pi 4B. Using a previous supported revision, like the 3B or 3B+, is possible with tweaks.
+This tutorial was written for the Raspberry Pi 4B. Using a previous supported hardware revision, like the 3B or 3B+, is possible with some modifications to this process.
 :::
 
 ## Booting NixOS live image
@@ -29,22 +29,19 @@ This tutorial was written for the Raspberry Pi 4B. Using a previous supported re
 Booting from USB may require an EEPROM firmware upgrade. This tutorial boots from an SD card to avoid such hiccups.
 :::
 
-Prepare the AArch64 image on your laptop:
+To prepare the AArch64 image on another device with Nix, run the following commands:
 
 ```shell-session
 $ nix-shell -p wget zstd
 
-[nix-shell:~]$ wget https://hydra.nixos.org/build/160738647/download/1/nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
-[nix-shell:~]$ unzstd -d nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img.zst
+[nix-shell:~]$ wget https://hydra.nixos.org/build/226381178/download/1/nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst
+[nix-shell:~]$ unzstd -d nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst
 [nix-shell:~]$ dmesg --follow
 ```
 
 :::{note}
-You can pick a newer image by going to [Hydra job](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
-clicking on a build and copying the link to the build product image.
-
-There is a [known problem](https://github.com/NixOS/nixpkgs/issues/179701) with the latest SD images on the Pi 4, where it turns off the display while booting up.
-If you are experiencing such problems, please use [the most recent working build](https://hydra.nixos.org/build/134720986/download/1/nixos-sd-image-21.03pre262561.581232454fd-aarch64-linux.img.zst) instead until the issue is fixed.
+You can download a more recent image from [Hydra](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
+clicking on the latest successful build (marked with a green checkmark), and copying the link to the build product image.
 :::
 
 Your terminal should be printing kernel messages as they come in.
@@ -53,10 +50,10 @@ Plug in your SD card and your terminal should print what device it got assigned,
 
 Press `ctrl-c` to stop `dmesg --follow`.
 
-Copy NixOS to your SD card by replacing `sdX` with the name of your device:
+Copy NixOS to your SD card by replacing `sdX` with the name of your device in the following command:
 
 ```console
-[nix-shell:~]$ sudo dd if=nixos-sd-image-22.05pre335501.c71f061c68b-aarch64-linux.img of=/dev/sdX bs=4096 conv=fsync status=progress
+[nix-shell:~]$ sudo dd if=nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst of=/dev/sdX bs=4096 conv=fsync status=progress
 ```
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
@@ -91,9 +88,10 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 # BOOTFS=/mnt FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 ```
 
-## Installing NixOS
+## Installing and Configuring NixOS
+Now we'll install NixOS with our own configuration, here creating a `guest` user and enabling the SSH daemon.
 
-For the initial installation, we'll install [XFCE](https://www.xfce.org/) desktop environment with user `guest` and SSH daemon.
+In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used previously:
 
 ```nix
 { config, pkgs, lib, ... }:
@@ -106,7 +104,8 @@ let
   interface = "wlan0";
   hostname = "myhostname";
 in {
-  imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz" }/raspberry-pi/4"];
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
 
   fileSystems = {
     "/" = {
@@ -137,32 +136,25 @@ in {
       extraGroups = [ "wheel" ];
     };
   };
-
-  # Enable GPU acceleration
-  hardware.raspberry-pi."4".fkms-3d.enable = true;
-
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    desktopManager.xfce.enable = true;
-  };
-
-  hardware.pulseaudio.enable = true;
 }
 ```
 
 To save time on typing the whole configuration, download it:
 
 ```shell-session
-# curl -L https://tinyurl.com/nixos-rpi4-tutorial > /etc/nixos/configuration.nix
+# curl -L https://tinyurl.com/nixos-install-rpi4-tutorial > /etc/nixos/configuration.nix
 ```
 
-At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure, the most important being your wifi connection details, this time specified in declarative way.
+:::{note}
+Credentials you write into a NixOS configuration will be stored in plain text in your `/nix/store` when that configuration is built.
 
-Once you're ready to install NixOS:
+If you **don't** want this to happen, you can enter your credentials at a console or use one of the community's solutions for encrypted secrets.
+:::
+
+Due to the way the `nixos-sd-image` is designed, NixOS is actually *already installed* at this point, so we only need to `nixos-rebuild` with our new configuration:
 
 ```shell-session
-# nixos-install --root /
+# nixos-rebuild boot
 # reboot
 ```
 
@@ -182,6 +174,5 @@ $ sudo -i
 
 ## Next steps
 
-- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` and reboot to the old configuration if something broke.
-- To tweak bootloader options affecting hardware, [see config.txt options](https://www.raspberrypi.org/documentation/configuration/config-txt/) and change the options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
-- To see the power of declarative configuration, try replacing `xfce` with `kodi` in `/etc/nixos/configuration.nix`, run `nixos-rebuild switch` as root and `reboot`.
+- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
+- To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
