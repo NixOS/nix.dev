@@ -155,7 +155,11 @@ To save time on typing the whole configuration, download it:
 # curl -L https://tinyurl.com/nixos-rpi4-tutorial > /etc/nixos/configuration.nix
 ```
 
-At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure, the most important being your wifi connection details, this time specified in declarative way.
+:::{note}
+Credentials you write into a NixOS configuration will be stored in plain text in your `/nix/store` when that configuration is built.
+
+If you **don't** want this to happen, you can enter your credentials at a console or use one of the community's solutions for encrypted secrets.
+:::
 
 Due to the way the `nixos-sd-image` is designed, NixOS is actually *already installed* at this point, so we only need to `nixos-rebuild` with our new configuration:
 
