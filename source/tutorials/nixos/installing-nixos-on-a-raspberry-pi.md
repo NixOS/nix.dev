@@ -50,7 +50,7 @@ Plug in your SD card and your terminal should print what device it got assigned,
 
 Press `ctrl-c` to stop `dmesg --follow`.
 
-Copy NixOS to your SD card by replacing `sdX` with the name of your device:
+Copy NixOS to your SD card by replacing `sdX` with the name of your device in the following command:
 
 ```console
 [nix-shell:~]$ sudo dd if=nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img.zst of=/dev/sdX bs=4096 conv=fsync status=progress
@@ -88,9 +88,10 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 # BOOTFS=/mnt FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 ```
 
-## Installing NixOS
+## Installing and Configuring NixOS
+Now we'll install NixOS with our own configuration, here creating a `guest` user and enabling the SSH daemon.
 
-For the initial installation, we'll install [XFCE](https://www.xfce.org/) desktop environment with user `guest` and SSH daemon.
+In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used in the [Getting internet connection](#Getting-internet-connection) section above:
 
 ```nix
 { config, pkgs, lib, ... }:
@@ -156,10 +157,10 @@ To save time on typing the whole configuration, download it:
 
 At the top of `/etc/nixos/configuration.nix` there are a few variables that you want to configure, the most important being your wifi connection details, this time specified in declarative way.
 
-Once you're ready to install NixOS:
+Due to the way the `nixos-sd-image` is designed, NixOS is actually *already installed* at this point, so we only need to `nixos-rebuild` with our new configuration:
 
 ```shell-session
-# nixos-install --root /
+# nixos-rebuild boot
 # reboot
 ```
 
