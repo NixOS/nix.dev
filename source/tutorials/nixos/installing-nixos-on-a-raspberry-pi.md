@@ -105,7 +105,14 @@ let
   hostname = "myhostname";
 in {
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
 
   fileSystems = {
     "/" = {
@@ -136,13 +143,16 @@ in {
       extraGroups = [ "wheel" ];
     };
   };
+
+  hardware.enableRedistributableFirmware = true;
+  system.stateVersion = "23.11";
 }
 ```
 
 To save time on typing the whole configuration, download it:
 
 ```shell-session
-# curl -L https://tinyurl.com/nixos-install-rpi4-tutorial > /etc/nixos/configuration.nix
+# curl -L https://tinyurl.com/tutorial-nixos-install-rpi4 > /etc/nixos/configuration.nix
 ```
 
 :::{note}
