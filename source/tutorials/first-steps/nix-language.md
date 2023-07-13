@@ -2,27 +2,32 @@
 
 # Nix language basics
 
-The Nix language is used to declare packages and configurations to be built by [Nix][nix-manual].
-
+The Nix language is designed for conveniently creating and composing *derivations* – precise descriptions of how contents of existing files are used to derive new files.
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
 
-Notable uses of the Nix language are:
+:::{admonition} Notable uses of the Nix language
+:class: note
 
-- [Nixpkgs][nixpkgs]
+
+- {term}`Nixpkgs`
 
   The largest, most up-to-date software distribution in the world, and written in the Nix language.
 
-- [NixOS][nixos-manual]
+- {term}`NixOS`
 
   A Linux distribution that can be configured fully declaratively and is based on Nix and Nixpkgs.
 
   Its underlying modular configuration system is written in the Nix language, and uses packages from Nixpkgs.
   The operating system environment and services it provides are configured with the Nix language.
 
-[nix-manual]: https://nixos.org/manual/nix/stable
-[nixpkgs-manual]: https://nixos.org/manual/nixpkgs/stable/#preface
-[nixos-manual]: https://nixos.org/manual/nixos/stable/index.html#preface
-[home-manager]: https://github.com/nix-community/home-manager
+:::
+
+You may quickly encounter Nix language expressions that look very complicated.
+As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
+Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
+
+Yet, the Nix language itself has only few basic concepts that will be introduced in this tutorial, and which can be combined arbitrarily.
+What may look complicated comes not from the language, but from how it is used.
 
 ## Overview
 
@@ -61,6 +66,12 @@ See the [Nix manual][manual-language] for a full language reference.
 
 [manual-language]: https://nixos.org/manual/nix/stable/language/index.html
 
+### What do you need?
+
+- Familiarity with software development
+- Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
+- A {ref}`Nix installation <install-nix>` to run the examples
+
 ### How long does it take?
 
 - No experience with functional programming: 2 hours
@@ -70,12 +81,6 @@ See the [Nix manual][manual-language] for a full language reference.
 We recommend to run all examples.
 Play with them to validate your assumptions and test what you have learned.
 Read detailed explanations if you want to make sure you fully understand the examples.
-
-### What do you need?
-
-- Familiarity with software development
-- Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- A {ref}`Nix installation <install-nix>` to run the examples
 
 ### How to run the examples?
 
@@ -198,44 +203,6 @@ $ nix-instantiate --eval --strict file.nix
 
 [nix-instantiate]: https://nixos.org/manual/nix/stable/command-ref/nix-instantiate.html
 
-## Reading the Nix language without fear
-
-You may quickly encounter Nix language expressions that look very complicated.
-
-As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
-
-Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
-
-The purpose of the Nix language is to create *build tasks*: precise descriptions of how contents of existing files are used to derive new files.
-
-:::{important}
-A build task in Nix is called a *derivation*.
-:::
-
-The Nix language has only few basic constructs which can be combined arbitrarily:
-
-- Primitive data types
-
-  such as integers or character strings
-
-- Compound data types
-
-  that is, lists and attribute sets
-
-- Functions and operators
-
-  to produce and transform data
-
-- Name assignment
-
-  to manipulate data as units
-
-The language is *pure*, that is, its evaluation does not observe or interact with the outside world – with one notable exception:
-reading files, to capture what build tasks will operate on.
-
-There is nothing else to it.
-What may look complicated comes not from the language, but from how it is used.
-
 ### Notes on whitespace
 
 White space is used to delimit [lexical tokens], where required.
@@ -275,15 +242,14 @@ let x=1;y=2;in x+y
 
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
-We show primitive data types and lists as examples in the context of [attribute sets](attrset).
+We show examples of primitive data types and lists in the context of [attribute sets](attrset).
 Later in this section we cover special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
 We deal with [functions](functions) separately.
 
-There are two ways to assign names to values in Nix: [attribute sets](attrset) and [`let` expressions](let).
-
+[Attribute sets](attrset) and [`let` expressions](let) are used to assign names to values.
 Assignments are denoted by a single equal sign (`=`).
 
-Whenever you see an equal sign (`=`) in Nix language code:
+Whenever you encounter an equal sign (`=`) in Nix language code:
 - On its left is the assigned name.
 - On its right is the value, delimited by a semicolon (`;`).
 
@@ -1066,6 +1032,9 @@ Wherever you see a colon (`:`) in Nix language code:
 - On its left is the function argument
 - On its right is the function body.
 
+Function arguments are the third way, apart from [attribute sets](attrset) and [`let` expressions](let), to assign names to values.
+Notably, values are not known in advance: the names are used as placeholders that are filled when [calling a function](calling-functions).
+
 Function declarations in the Nix language can appear in different forms.
 Each of them is explained in the following, and here is an overview:
 
@@ -1112,7 +1081,9 @@ Each of them is explained in the following, and here is an overview:
   ```
 
 Functions have no names.
-We say they are anonymous, and call such a function a *lambda*.
+We say they are anonymous, and call such a function a *lambda*.[^lambda]
+
+[^lambda]: The term *lambda* is a shorthand for [lambda abstraction](https://en.wikipedia.org/wiki/Lambda_calculus#lambdaAbstr) in the [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 Example:
 
@@ -1144,6 +1115,7 @@ in f
 <LAMBDA>
 ```
 
+(calling-functions)=
 ### Calling functions
 
 Also known as "function application".
@@ -1248,6 +1220,7 @@ in [ f a ]
 :class: value
 [ <LAMBDA> 1 ]
 ```
+
 The first example reads: apply `f` to `a`, and put the result in a list.
 The resulting list has one element.
 
@@ -2127,4 +2100,3 @@ The NixOS Linux distribution has a modular configuration system that imposes its
 [overrides]: https://nixos.org/manual/nixpkgs/stable/#chap-overrides
 [language-support]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
 [nixos-modules]: https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules
-
