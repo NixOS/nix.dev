@@ -21,4 +21,5 @@ installing-nixos-on-a-raspberry-pi.md
 nixos-configuration-on-vm.md
 integration-testing-using-virtual-machines.md
 cross-compilation.md
+module-system/module-system.md
 ```
