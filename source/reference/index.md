@@ -13,5 +13,4 @@ NixOS Manual <https://nixos.org/manual/nixos/stable/>
 pinning-nixpkgs.md
 glossary.md
 ../recommended-reading.md
-../influences.md
 ```
