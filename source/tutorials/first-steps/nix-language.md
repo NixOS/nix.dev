@@ -1,6 +1,6 @@
 (reading-nix-language)=
 
-# Reading the Nix language without fear
+# Nix language basics
 
 The Nix language is designed for conveniently creating and composing *derivations* – precise descriptions of how contents of existing files are used to derive new files.
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
@@ -2100,4 +2100,3 @@ The NixOS Linux distribution has a modular configuration system that imposes its
 [overrides]: https://nixos.org/manual/nixpkgs/stable/#chap-overrides
 [language-support]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
 [nixos-modules]: https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules
-
