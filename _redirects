@@ -12,4 +12,5 @@
 /tutorials/deploying-nixos-using-terraform /tutorials/nixos/deploying-nixos-using-terraform 301
 /tutorials/installing-nixos-on-a-raspberry-pi /tutorials/nixos/installing-nixos-on-a-raspberry-pi 301
 /tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301
+/contributing/writing-style /contributing/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
