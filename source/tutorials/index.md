@@ -12,4 +12,5 @@ nix-language.md
 learning-journey/index.md
 nixos/index.md
 cross-compilation.md
+module-system/module-system.md
 ```
