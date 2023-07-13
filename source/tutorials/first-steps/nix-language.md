@@ -66,6 +66,12 @@ See the [Nix manual][manual-language] for a full language reference.
 
 [manual-language]: https://nixos.org/manual/nix/stable/language/index.html
 
+### What do you need?
+
+- Familiarity with software development
+- Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
+- A {ref}`Nix installation <install-nix>` to run the examples
+
 ### How long does it take?
 
 - No experience with functional programming: 2 hours
@@ -75,12 +81,6 @@ See the [Nix manual][manual-language] for a full language reference.
 We recommend to run all examples.
 Play with them to validate your assumptions and test what you have learned.
 Read detailed explanations if you want to make sure you fully understand the examples.
-
-### What do you need?
-
-- Familiarity with software development
-- Familiarity with Unix shell, to read command line examples <!-- TODO: link to yet-to-be instructions on "how to read command line examples" -->
-- A {ref}`Nix installation <install-nix>` to run the examples
 
 ### How to run the examples?
 
