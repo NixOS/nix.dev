@@ -2,8 +2,8 @@
 
 ## Assumptions
 - The reader has seen a derivation before.
-- The reader understands that builders come from `nixpkgs`.
-- The reader knows what a shell environment is.
+- The reader understands that builders (also referred to as "build helpers") come from `nixpkgs`.
+- The reader knows what a declarative shell environment is.
 
 ## Activity
 
@@ -33,6 +33,12 @@
     - Add the development tools to `shell.nix` so that the reader has access to the during development.
     - Demonstrate that you can still build the application.
     - Explain that having to repeat yourself in both files is less than ideal and that you could easily forget to add a dependency to one file or the other.
+- Explain that one solution is to repeat yourself, but that it isn't ideal and you should avoid it.
+    - Explain that you could:
+        - Create a separate `shell.nix`
+        - Duplicate the build dependencies
+        - Then include the development tools
+    - Explain that the drawback is that the build dependencies could fall out of sync between `default.nix` and `shell.nix` by mistake.
 - Introduce `mkShell.inputsFrom` as a way to prevent duplication.
     - Explain that `inputsFrom` extracts `input` attributes from the supplied derivation and passes them to `mkShell`.
 - Demonstrate how to import the `default.nix` expression into `shell.nix` and use its inputs.
