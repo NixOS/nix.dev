@@ -1,3 +1,5 @@
+/anti-patterns/language /recipes/best-practices 301
+/faq /recipes/faq 301
 /tutorials/contributing /contributing 301
 /tutorials/nix-language /tutorials/first-steps/nix-language 301
 /tutorials/ad-hoc-developer-environments /tutorials/first-steps/ad-hoc-shell-environments 301
@@ -11,3 +13,4 @@
 /tutorials/installing-nixos-on-a-raspberry-pi /tutorials/nixos/installing-nixos-on-a-raspberry-pi 301
 /tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301
 /contributing/writing-style /contributing/style-guide 301
+/tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
