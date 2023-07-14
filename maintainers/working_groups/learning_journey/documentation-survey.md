@@ -168,7 +168,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
   
-  Introduces the callPackage pattern used extensively in `nixpkgs`. Shows how to write and use the function; use builtins.functionArgs to determine arguments, use builtins.intersectAttrs to combine attributes, and override arguments when needed.
+  Introduces the `callPackage` pattern used extensively in Nixpkgs. Shows how to write and use the function; use `builtins.functionArgs` to determine arguments, use `builtins.intersectAttrs` to combine attributes, and override arguments when needed.
 
   - Reading time: 15 min
   - Author: Luca Bruno
