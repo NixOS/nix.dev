@@ -47,6 +47,13 @@ Please also state your learning goals and the paths you have taken so far.
 
 Sharing your first-hand experience is invaluable to better guide our efforts, and will immediately help improve these guides for yourself and everyone else.
 
+### You are a beginner and want to get involved in improving documentation
+
+The documentation team is currently carrying out a documentation survey. We are currently updating this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
+
+To get involved please start making pull requests that update the [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page and adds information to each link (bullet point) according to the format that is described at the top of the page. Two additional tips are to try to adhere to a similar format like the other bullet points, and if the link that you are going to document is a huge one like 
+the [nixpkgs manual](https://nixos.org/manual/nixpkgs) manual, start with putting an outline in place and then fill in that outline piece by piece by PR's on single sections.
+
 ### You have experience teaching Nix?
 
 You will probably have observed where learners get stuck most often, and which typical needs and questions they have.
