@@ -50,6 +50,7 @@ Sharing your first-hand experience is invaluable to better guide our efforts, an
 ### You are a beginner and want to get involved in improving documentation
 
 The documentation team is currently carrying out a documentation survey. As we work through this project, updates are made to this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
+Its purpose is to provide overview of the types, topics, and volume of existing documentation resources and inform future work.
 
 We would love for you to get involved.
 Here is how you can help:
