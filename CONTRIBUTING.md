@@ -51,7 +51,8 @@ Sharing your first-hand experience is invaluable to better guide our efforts, an
 
 The documentation team is currently carrying out a documentation survey. As we work through this project, updates are made to this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
 
-We would love for you to get involved, here is how you can participate:
+We would love for you to get involved.
+Here is how you can help:
 
 1. Familiarize yourself with the format described at the top of the Documentation Survey page.
 2. Contribute by making pull requests. Your pull request should add details to one individual link (bullet point) following the specified format.
