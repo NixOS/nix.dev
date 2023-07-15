@@ -49,10 +49,14 @@ Sharing your first-hand experience is invaluable to better guide our efforts, an
 
 ### You are a beginner and want to get involved in improving documentation
 
-The documentation team is currently carrying out a documentation survey. We are currently updating this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
+The documentation team is currently carrying out a documentation survey. As we work through this project, updates are made to this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
 
-To get involved please start making pull requests that update the [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page and adds information to each link (bullet point) according to the format that is described at the top of the page. Two additional tips are to try to adhere to a similar format like the other bullet points, and if the link that you are going to document is a huge one like 
-the [nixpkgs manual](https://nixos.org/manual/nixpkgs) manual, start with putting an outline in place and then fill in that outline piece by piece by PR's on single sections.
+We would love for you to get involved, here is how you can participate:
+
+1. Familiarize yourself with the format described at the top of the Documentation Survey page.
+2. Contribute by making pull requests. Your pull request should add details to one individual link (bullet point) following the specified format.
+3. Ensure consistency with existing entries. Your contributions should align with the style and format of previously added bullet points.
+4. When dealing with a larger resource like the [nixpkgs manual](https://nixos.org/manual/nixpkgs), start by creating a pull request with a structured outline. Then fill in the details section-by-section, submitting separate pull requests for each section. 
 
 ### You have experience teaching Nix?
 
