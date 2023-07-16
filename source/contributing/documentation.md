@@ -168,6 +168,13 @@ Where to migrate what:
 [NixOS Wiki]: https://nixos.wiki/
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
+### Nix Pills
+[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of blog posts written to give an in-depth introduction and guide to Nix. 
+It was originally written by Luca Bruno. 
+Work is currently being done to update the Nix Pills to be more up-to-date with the current state of Nix.
+Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
+
+
 ## Licensing and attribution
 
 When opening pull requests with your own contributions, you agree to licensing your work under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
