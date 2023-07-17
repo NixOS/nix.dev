@@ -170,7 +170,6 @@ Where to migrate what:
 
 ### Nix Pills
 [Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
-It was originally written by Luca Bruno. 
 Work is currently being done to bring the Nix Pills up-to-date with the current state of Nix and current best-practices of Nixpkgs.
 Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
 
