@@ -174,6 +174,11 @@ It was originally written by Luca Bruno.
 Work is currently being done to update the Nix Pills to be more up-to-date with the current state of Nix.
 Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
 
+You can help by
+
+- opening [issues](https://github.com/NixOS/nix-pills/issues) for any errors or outdated information you find
+- addressing [good first issues](https://github.com/NixOS/nix-pills/labels/good-first-issue) by opening [pull requests](https://github.com/NixOS/nix-pills/pulls)
+
 
 ## Licensing and attribution
 
