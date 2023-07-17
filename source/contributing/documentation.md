@@ -169,7 +169,7 @@ Where to migrate what:
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
 ### Nix Pills
-[Nix Pills](https://nixos.org/guides/nix-pills/) is a series low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
+[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
 It was originally written by Luca Bruno. 
 Work is currently being done to update the Nix Pills to be more up-to-date with the current state of Nix.
 Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
