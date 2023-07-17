@@ -168,6 +168,18 @@ Where to migrate what:
 [NixOS Wiki]: https://nixos.wiki/
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
+### Nix Pills
+[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
+Work is currently being done to bring the Nix Pills up-to-date with the current state of Nix and current best-practices of Nixpkgs.
+Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
+
+You can help by
+
+- opening [issues](https://github.com/NixOS/nix-pills/issues) for any errors or outdated information you find
+- addressing [good first issues](https://github.com/NixOS/nix-pills/labels/good-first-issue) by opening [pull requests](https://github.com/NixOS/nix-pills/pulls)
+- Test code examples to ensure correctness and completeness.
+- Add links to reference documentation where needed.
+
 ## Licensing and attribution
 
 When opening pull requests with your own contributions, you agree to licensing your work under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
