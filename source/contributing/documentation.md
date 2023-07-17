@@ -178,7 +178,8 @@ You can help by
 
 - opening [issues](https://github.com/NixOS/nix-pills/issues) for any errors or outdated information you find
 - addressing [good first issues](https://github.com/NixOS/nix-pills/labels/good-first-issue) by opening [pull requests](https://github.com/NixOS/nix-pills/pulls)
-
+- Test code examples to ensure correctness and completeness.
+- Add links to reference documentation where needed.
 
 ## Licensing and attribution
 
