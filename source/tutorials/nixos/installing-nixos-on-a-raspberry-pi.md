@@ -44,6 +44,10 @@ You can download a more recent image from [Hydra](https://hydra.nixos.org/job/ni
 clicking on the latest successful build (marked with a green checkmark), and copying the link to the build product image.
 :::
 
+:::{note}
+It may be more convenient to use a software like [Etcher](https://www.balena.io/etcher/) to flash the image to your SD card if you are on a non-NixOS system.
+:::
+
 Your terminal should be printing kernel messages as they come in.
 
 Plug in your SD card and your terminal should print what device it got assigned, for example `/dev/sdX`.
