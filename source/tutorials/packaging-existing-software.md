@@ -472,29 +472,6 @@ install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bi
 make: *** No rule to make target 'install'.  Stop.
 error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed with exit code 2;
        last 10 log lines:
-### Debugging with a Development Shell
-This solves some of the errors we just saw, but not all; the `ld` error produced by all the undefined references is gone, but we still see a non-zero `make` return value: `make: *** No rule to make target 'install'`.
-
-Nix is automatically working with the `Makefile` that comes with `icat`, which indeed lacks an `install` target. The `README` in the `icat` repository only mentions using `make` to build the tool, presumably leaving installation up to us. We've now discovered one limit to what Nix can do for us automatically: it doesn't read minds. Fortunately, it does still make the fix quite straightforward to implement.
-
-If you haven't read the tutorials on creating [ad-hoc](https://nix.dev/tutorials/first-steps/dev-environment) or [declarative](https://nix.dev/tutorials/first-steps/declarative-and-reproducible-developer-environments) development environments, do that now before proceeding through the rest of this tutorial; dropping into a `nix-shell` is a crucial component in the Nix user toolbox, and indispensible for debugging.
-
-To enter a useful development shell, we'll pass the dependencies from `nativeBuildInputs` and `buildInputs` to `nix-shell -p`. We'll also make sure to include `git`, so we can clone the `icat` GitHub repository:
-
-```console
-$ nix-shell -p pkg-config imlib2 xorg.libX11.dev git
-```
-
-After many lines of output about Nix copying dependencies, we can use the following commands to retrieve and build the `icat` source code:
-
-```console
-$ git clone https://github.com/atextor/icat
-$ cd icat
-$ make
-```
-
-In the current `master` branch of `icat`, a warning is thrown when building:
-
        >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
        >       |   ^~~~~~~
        > icat.c: In function 'main':
@@ -508,7 +485,6 @@ In the current `master` branch of `icat`, a warning is thrown when building:
        For full logs, run 'nix log /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'.
 ```
 
-However, this does not prevent the binary from being produced; an `icat` executable is now present in the local directory, and it's up to us to decide what to do with it.
 
 ### installPhase
 In order to make packages available for other packages to depend on, Nix copies everything to the Nix store (at `/nix/store`), and symlinks them from there into build contexts and development environments.
@@ -528,48 +504,7 @@ The `icat` executable is only used at runtime, and isn't a compile-time input fo
 
 stdenv.mkDerivation {
   name = "icat";
-  src = pkgs.fetchFromGitHub {
-    owner = "atextor";
-    repo = "icat";
-    rev = "master";
-    sha256 = "sha256-b/2mRzCTyGkz2I1U+leUhspvW77VcHN7Awp+BVdVNRM=";
-  };
 
-  nativeBuildInputs = with pkgs; [ pkg-config ];
-  buildInputs = with pkgs; [ imlib2 xorg.libX11.dev ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    cp icat $out/bin
-  '';
-}
-```
-
-After running our `nix-build` command one last time, we can `ls` in the local directory to find a `result` symlink to the Nix store, with `result/bin/icat` the executable we built. Success!
-
-## Contributing our Work
-Now that we've packaged `icat`, it's time to prepare it for submission upstream to Nixpkgs.
-
-### Building a Release Version
-Our `icat.nix` definition uses the `master` revision of the upstream repository, which is suitable for individual use but not a great practice for submission to Nixpkgs; it would be better to use a fixed revision, corresponding to a particular release version of the software, at least so maintainers (perhaps you!) could easily check when this package should be updated.
-
-The upstream GitHub repository has [several tags available](https://github.com/atextor/icat/tags), which correspond to released versions. We'll modify our existing `icat.nix` to download and build the latest tag instead of what's available on `master`. This time, instead of using the `lib.fakeSha256` trick, we'll use [`nix-prefetch-url`](https://nixos.org/manual/nix/stable/command-ref/nix-prefetch-url.html) to retrieve the hash we need:
-
-```console
-$ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz
-path is '/nix/store/p8jl1jlqxcsc7ryiazbpm7c1mqb6848b-v0.5.tar.gz'
-0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka
-```
-
-```nix
-# icat.nix
-{ pkgs
-, lib
-, stdenv
-}:
-
-stdenv.mkDerivation {
-  name = "icat";
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
@@ -651,28 +586,6 @@ Nix automatically determined the `buildPhase` information for our `icat` package
     cp icat $out/bin
 	runHook postInstall
   '';
-...
-```
-
-### Package Metadata
-By convention, all packages in Nixpkgs have a `meta` attribute in their derivation, which contains information like a description of the package, the homepage of the project it belongs to, the software license, the platforms the package can be built for, and a list of Nixpkgs maintainers for the package. In this case, I'm the contributing user, so I'll add myself to the maintainers list for this package.
-
-:::{note}
-Before contributing your first package, you must add your information to `nixpkgs/maintainers/maintainers-list.nix`, following the instructions [here](https://nixos.org/manual/nixpkgs/stable/#var-meta-maintainers).
-:::
-
-Before we contribute our package, we should add this metadata to the `meta` attribute passed to `mkDerivation`, following the [contribution guidelines](https://nixos.org/manual/nixpkgs/stable/#reviewing-contributions-new-packages):
-
-```nix
-# icat.nix
-...
-  meta = with lib; {
-    description = "icat (Image cat) outputs images in 256-color capable terminals.";
-    homepage = "https://github.com/atextor/icat";
-    license = licenses.bsdOriginal;
-    platforms = platforms.unix;
-    maintainers = [ maintainers.proofconstruction ];
-  };
 ...
 ```
 
