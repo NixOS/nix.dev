@@ -493,13 +493,14 @@ error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed
        For full logs, run 'nix log /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'.
 ```
 
+We've solved the missing dependency, but have another problem: `make: *** No rule to make target 'install'.  Stop.`
 
 ### installPhase
-In order to make packages available for other packages to depend on, Nix copies everything to the Nix store (at `/nix/store`), and symlinks them from there into build contexts and development environments.
+The `stdenv` is automatically working with the `Makefile` that comes with `icat`: we can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully. The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to us.
 
-The `Makefile` doesn't provide an installation step, so we must produce one for our derivation, using the [`installPhase` attribute](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase), which contains a list of command strings to execute to accomplish the installation.
+To add this step to our derivation, we use the [`installPhase` attribute](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase), which contains a list of command strings to execute to perform the installation.
 
-The `icat` executable is only used at runtime, and isn't a compile-time input for anything else at this point, so we only need to concern ourselves with the `bin` output. In Nix, the result of a build is copied to a location stored in the `$out` variable accessible in the derivation's component scripts; we'll create a `bin` directory within that, and then copy our `icat` executable there:
+Because the `make` step completes successfully, the `icat` executable is available in the build directory, and we only need to copy it from there to the output directory. In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; we'll create a `bin` directory within that and copy our `icat` binary there:
 
 ```nix
 # icat.nix
