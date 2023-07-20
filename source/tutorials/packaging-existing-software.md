@@ -90,7 +90,7 @@ error: cannot evaluate a function that has an argument without a value ('pkgs')
 ### Your New Favorite Command
 In order to pass the `pkgs` argument to our derivation, we'll need to import `nixpkgs` in another Nix expression. The `nix-build` command lets us pass whole expressions as an argument following the `-E/--expr` flag.
 
-We'll use the following expression:
+We'll pass the following expression to `nix-build`:
 
 ```console
 with import <nixpkgs> {}; callPackage ./hello.nix {}
@@ -105,7 +105,7 @@ Let's run this now:
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
 error: derivation name missing
 ```
-Progress! The new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `pkgs` argument not having a value; we successfully resolved the previous error by importing `nixpkgs` in the expression we passed to `nix-build`.
+Progress! The new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `pkgs` argument not having a value; we successfully resolved the previous error by changing the expression passed to `nix-build`.
 
 ### Naming a Derivation
 Every derivation needs a `name` attribute, which must either be set directly or constructed by `mkDerivation` from `pname` and `version` attributes, if they exist.
@@ -213,7 +213,9 @@ $ ./result/bin/hello
 Hello, world!
 ```
 
-We've successfully packaged our first program with Nix! The experience was a little bit *too* magical though, so up next we'll package another piece of software which has external dependencies and a different means of building, which will require us to lean more on `mkDerivation`.
+We've successfully packaged our first program with Nix!
+
+Up next, we'll package another piece of software which has external dependencies that present new challenges, requiring us to lean more on `mkDerivation`.
 
 ## Something Bigger
 The `hello` program is a simple and common place to start packaging, but it's not very useful or interesting, so we can't stop there.
@@ -295,7 +297,7 @@ stdenv.mkDerivation {
 ```
 
 ### Missing Dependencies
-Now we run into an entirely new issue:
+Running our previous `nix-build` invocation,  we run into an entirely new issue:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
@@ -337,7 +339,7 @@ error: builder for '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv' failed
        For full logs, run 'nix log /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'.
 ```
 
-Finally, a compiler error! We've successfully pulled the `icat` source from GitHub, and Nix tried to build what it found, but is missing a dependency: the `imlib2` header. If we [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), we'll find that `imlib2` is already in `nixpkgs`.
+Finally, a compiler error! We've successfully pulled the `icat` source from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If we [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), we'll find that `imlib2` is already in `nixpkgs`.
 
 We can add this package to our build environment by either
 - adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`, or
