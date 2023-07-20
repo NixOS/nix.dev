@@ -60,7 +60,7 @@ Depending on how well a use case is supported, these may be
 - overview of available tools, and their state of maturity and maintenance
 - overview of ideas, and state of community discussion.
 
-It is also worthwhile to add contextual explanations within `<details>` tags
+It is also worthwhile to add contextual explanations within `<details>` tags.
 This can help with understanding while keeping distractions minimal.
 
 ### What did you learn?
