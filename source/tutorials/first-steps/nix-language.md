@@ -1687,7 +1687,7 @@ pkgs.lib.strings.removePrefix "no " "no true scotsman"
 To make this function produce a result, you can write it to a file (e.g. `file.nix`) and pass it an argument through `nix-instantiate`:
 
 ```shell-session
-$ nix-instantiate --eval test.nix --arg pkgs 'import <nixpkgs> {}'
+$ nix-instantiate --eval file.nix --arg pkgs 'import <nixpkgs> {}'
 "true scotsman"
 ```
 
