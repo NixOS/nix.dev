@@ -5,6 +5,8 @@ Documentation contributions should follow the [style guide](./style-guide.md).
 
 Feel free to in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
 
+If you cannot contribute time, consider [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of reference documentation and learning materials.
+
 ## Reference manuals
 
 The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.

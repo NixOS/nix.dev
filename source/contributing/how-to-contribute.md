@@ -26,6 +26,10 @@ We're working on it.
 You can help and improve the situation for everyone by immediately solving problems with the contribution workflow as you encounter them.
 While this may slow you down with addressing your original concern, it will make it a lot easier for anyone to make meaningful contributions in the future, and lead to better code and documentation in the long run.
 
+If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
+Currently the focus is on funding in-person events to share knowledge and grow the community of developers proficient with Nix.
+With enough budget, it would be possible to pay for ongoing maintenance and development of critical infrastructure and code – work that we cannot expect to be done by volunteers in the long run.
+
 ## Report an issue
 
 We can only fix issues that we know of, so please report any issue you encounter.
