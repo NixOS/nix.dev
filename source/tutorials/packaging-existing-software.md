@@ -17,7 +17,7 @@ In the long term, Nix helps tremendously in alleviating that stress, but when *f
 
 If you haven't already read the tutorial on making a derivation, please go do so before reading this!
 
-In this tutorial, we'll see how to create Nix derivations to package C/C++ software.
+In this tutorial, we'll see how to create Nix derivations to package C/C++ software, taking advantage of the [`nixpkgs` `stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv) which automates much of the work of building self-contained C/C++ packages.
 
 We'll begin by considering `hello`, a feature-complete implementation of the famous "hello world", which requires no external dependencies.
 
