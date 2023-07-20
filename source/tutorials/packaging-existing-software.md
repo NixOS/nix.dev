@@ -521,53 +521,6 @@ stdenv.mkDerivation {
 }
 ```
 
-And it builds!
-```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
-these 2 derivations will be built:
-  /nix/store/vvjyrngklzxbcsfiyp4hr1z2qcdqm8j7-source.drv
-  /nix/store/x6h1kfd4h16vhj0cxlakrm5igbbbz7v3-icat.drv
-building '/nix/store/vvjyrngklzxbcsfiyp4hr1z2qcdqm8j7-source.drv'...
-
-trying https://github.com/atextor/icat/archive/v0.5.tar.gz
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100 46232    0 46232    0     0  60947      0 --:--:-- --:--:-- --:--:-- 60947
-unpacking source archive /build/v0.5.tar.gz
-building '/nix/store/x6h1kfd4h16vhj0cxlakrm5igbbbz7v3-icat.drv'...
-unpacking sources
-unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
-source root is source
-patching sources
-configuring
-no configure script, doing nothing
-building
-build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
-                 from icat.c:31:
-/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
-  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-      |   ^~~~~~~
-icat.c: In function 'main':
-icat.c:319:33: warning: ignoring return value of 'write' declared with attribute 'warn_unused_result' [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result8;;]
-  319 |                                 write(tempfile, &buf, 1);
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
-gcc -o icat icat.o -lImlib2
-installing
-post-installation fixup
-shrinking RPATHs of ELF executables and libraries in /nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat
-shrinking /nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat/bin/icat
-checking for references to /build/ in /nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat...
-patching script interpreter paths in /nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat
-stripping (with command strip and flags -S -p) in  /nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat/bin
-/nix/store/g6w508vxwr3df25dnl4k3xvcr4pqxprj-icat
-```
-
-We still see the unused-result warning thrown by the compiler, but the package successfully built, and the very last line of output tells us where Nix put the result.
-
 ### Phases and Hooks
 Nix package derivations are separated into [phases](https://nixos.org/manual/nixpkgs/unstable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
