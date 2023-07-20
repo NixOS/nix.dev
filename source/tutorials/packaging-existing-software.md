@@ -34,7 +34,10 @@ For the purposes of this tutorial, by "package" we mean "a Nix function which ta
 To start, we'll write a skeleton derivation, updating this as we go:
 
 ```nix
-{ pkgs, stdenv }:
+{ pkgs
+, stdenv
+}:
+
 stdenv.mkDerivation {	};
 ```
 
@@ -51,7 +54,11 @@ Here is our first iterative debugging technique: we can't actually know the hash
 
 ```nix
 # hello.nix
-{ pkgs, stdenv }:
+{ pkgs
+, lib
+, stdenv
+}:
+
 stdenv.mkDerivation {
   src = builtins.fetchTarball {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
@@ -73,9 +80,9 @@ error: cannot evaluate a function that has an argument without a value ('pkgs')
        at /home/nix-user/hello.nix:2:3:
 
             1| # hello.nix
-            2| { pkgs, stdenv }:
+            2| { pkgs
              |   ^
-            3| stdenv.mkDerivation {
+            3| , lib
 ```
 
 ... and immediately run into a problem: every derivation is a *function*, and functions need *arguments*!
@@ -109,7 +116,11 @@ Every derivation needs a `name` attribute, which must either be set directly or 
 Let's update the file again to add a `name`:
 
 ```nix
-{ pkgs, stdenv }:
+{ pkgs
+, lib
+, stdenv
+}:
+
 stdenv.mkDerivation {
   name = "hello";
   src = builtins.fetchTarball {
@@ -149,7 +160,11 @@ As expected, Nix complained at us for lying about the file hash, and helpfully p
 
 ```nix
 # hello.nix
-{ pkgs, stdenv }:
+{ pkgs
+, lib
+, stdenv
+}:
+
 stdenv.mkDerivation {
   name = "hello";
   src = builtins.fetchTarball {
@@ -334,13 +349,14 @@ We can add this package to our build environment by either
 - adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`, or
 - adding `pkgs.imlib2` to the `buildInputs` directly, since `pkgs` is already in-scope.
 
-We'll do the latter of these here:
+Because `callPackage` is used to provide all necessary inputs in `nixpkgs` as well as in our `nix-build` invocation, the first approach is the one currently favored, and we'll use it here:
 
 ```nix
 # icat.nix
 { pkgs
 , lib
 , stdenv
+, imlib2
 }:
 
 stdenv.mkDerivation {
@@ -352,7 +368,7 @@ stdenv.mkDerivation {
     sha256 = "sha256-b/2mRzCTyGkz2I1U+leUhspvW77VcHN7Awp+BVdVNRM=";
   };
 
-  buildInputs = [ pkgs.imlib2 ];
+  buildInputs = [ imlib2 ];
 }
 
 ```
@@ -398,9 +414,12 @@ error: builder for '/nix/store/0csqp747mfw0v9n103abxgx611s6dkxm-icat.drv' failed
 In Nixpkgs, `Xlib` lives in the `dev` output of `xorg.libX11`, which we can add to `buildInputs` again with `pkgs.xorg.libX11.dev`. To avoid repeating ourselves, we can add `pkgs` to the local scope in `buildInputs` by using the [`with` statement](https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320521984):
 
 ```nix
+# icat.nix
 { pkgs
 , lib
 , stdenv
+, imlib2
+, xorg
 }:
 
 stdenv.mkDerivation {
@@ -538,6 +557,8 @@ The `icat` executable is only used at runtime, and isn't a compile-time input fo
 { pkgs
 , lib
 , stdenv
+, imlib2
+, xorg
 }:
 
 stdenv.mkDerivation {
