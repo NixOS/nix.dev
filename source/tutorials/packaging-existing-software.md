@@ -123,6 +123,7 @@ Let's update the file again to add a `name`:
 
 stdenv.mkDerivation {
   name = "hello";
+
   src = builtins.fetchTarball {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = lib.fakeSha256;
@@ -167,6 +168,7 @@ As expected, Nix complained at us for lying about the file hash, and helpfully p
 
 stdenv.mkDerivation {
   name = "hello";
+
   src = builtins.fetchTarball {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
@@ -232,11 +234,9 @@ We'll start by copying `hello.nix` from the previous section to a new file, `ica
 
 stdenv.mkDerivation {
   name = "icat";
-  src = builtins.fetchFromGitHub {
-    owner = "atextor";
-	repo = "icat";
-	rev = "master";
-	sha256 = lib.fakeSha256;
+
+  src = builtins.fetchTarball {
+	...
   };
 }
 ```
@@ -252,11 +252,9 @@ Now we'll download the source code. `icat`'s upstream repository is hosted on [G
 
 stdenv.mkDerivation {
   name = "icat";
+
   src = pkgs.fetchFromGitHub {
-    owner = "atextor";
-	repo = "icat";
-	rev = "master";
-	sha256 = lib.fakeSha256;
+    ...
   };
 }
 ```
@@ -289,6 +287,7 @@ Now we can supply the correct hash to `fetchFromGitHub`:
 
 stdenv.mkDerivation {
   name = "icat";
+
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
 	repo = "icat";
@@ -359,6 +358,7 @@ Because `callPackage` is used to provide all necessary inputs in `nixpkgs` as we
 
 stdenv.mkDerivation {
   name = "icat";
+
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
 	repo = "icat";
@@ -368,7 +368,6 @@ stdenv.mkDerivation {
 
   buildInputs = [ imlib2 ];
 }
-
 ```
 
 Another error, but we get further this time:
@@ -427,6 +426,7 @@ In Nixpkgs, `Xlib` lives in the `dev` output of `xorg.libX11`, which we can add 
 
 stdenv.mkDerivation {
   name = "icat";
+
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
@@ -434,13 +434,17 @@ stdenv.mkDerivation {
 	sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
-  buildInputs = with pkgs; [ imlib2 xorg.libX11.dev ];
+  buildInputs = [ imlib2 xorg.libX11.dev ];
 }
 ```
 
-### `buildInputs` and `nativeBuildInputs`
-Running our favorite command again, yet more errors arise:
+:::{note}
+We only added the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11.dev` which would cause a syntax error. Because Nix is lazily-evaluated, including the dependency this way doesn't actually include all of `xorg` into our build context.
+:::
 
+
+### `buildInputs` and `nativeBuildInputs`
+Running our favorite command again:
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
 this derivation will be built:
