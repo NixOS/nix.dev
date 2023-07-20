@@ -25,7 +25,6 @@ Then we'll move to progressively more complex packages with their own separate d
 
 Along the way, we'll encounter and address Nix error messages, build failures, and a host of other issues, developing our iterative debugging techniques as we go.
 
-Finally, we'll wrap up by preparing these projects for contribution to `nixpkgs`.
 
 ## A Simple Project
 To start, we'll write a skeleton derivation, updating this as we go:
@@ -822,49 +821,7 @@ Before we contribute our package, we should add this metadata to the `meta` attr
 ...
 ```
 
-### Adding to Nixpkgs
-Now that our derivation is complete, we can copy it into an appropriate location within the `nixpkgs` source tree.
-
-`icat` is a console tool which also displays graphics, so there are a few places within Nixpkgs that we could reasonably move it. Presently, there are two other similar tools already in `nixpkgs`, both of which are stored in `pkgs/applications/graphics`, so we'll put `icat` in its own directory there too.
-
-We'll also keep with the convention of package derivation files being named `default.nix`:
 
 ```console
-$ git clone https://github.com/nixos/nixpkgs
-$ mkdir nixpkgs/pkgs/applications/graphics/icat
-$ mv icat.nix nixpkgs/pkgs/applications/graphics/icat/default.nix
 ```
 
-The relative directory paths to all packages get referenced in `pkgs/top-level/all-packages.nix`, which we should update now, putting our new package next to the other similar tools:
-
-```nix
-...
-icat = callPackage ../applications/graphics/icat { };
-...
-```
-
-### One Final Test, One More Command
-There are [several additional steps](https://nixos.org/manual/nixpkgs/stable/#submitting-changes-making-patches) we should perform before introducing a new package into Nixpkgs, but here we'll just make sure our package builds within its new context. For this, we'll use a new `nix-build` invocation, which we'll run from the root of the Nixpkgs repository:
-
-```console
-nix-build -A icat
-           ^   ^
-           1   2
-```
-
-This expression (1) selects the attribute corresponding to (2) the top-level expression to evaluate, which in this case is our new package `icat`.
-
-Let's change directories to the root of the Nixpkgs repo, and run it now:
-
-```console
-$ cd nixpkgs
-$ nix-build -A icat
-this derivation will be built:
-  /nix/store/kf7na78dhwhfrgxjaj27gjkqs4b3n7wz-icat.drv
-...
-<several lines omitted>
-...
-/nix/store/vr2vk8z8839l5j6gra0qlyxrh5sarmh4-icat
-```
-
-The build completed as expected, and produced a `result` in our current directory. Our package is now ready for submission to Nixpkgs!
