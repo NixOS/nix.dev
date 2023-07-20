@@ -256,11 +256,6 @@ stdenv.mkDerivation {
 }
 ```
 
-### Fetching Source from GitHub
-Rather than `url` and `sha256`, we must now supply the following arguments:
-- `owner`: a string representing the user or organization account which owns the repository. The `nixpkgs` repository lives at `https://github.com/NixOS/nixpkgs`, so if we were fetching the `nixpkgs` source, for example, and in this case the source is hosted at `https://github.com/atextor/icat`, so we want `owner = "atextor"`.
-- `repo`: another string corresponding to the name of the repository. Here we'll use `repo = "icat"`.
-- `rev`: the *revision*, such as the git commit hash or tag (e.g. `v1.0`), to download from GitHub. On GitHub, you can find these on the [Releases page](https://github.com/atextor/icat/releases), but for now we're just going to use `master`.
 
 Updating our file accordingly:
 
@@ -382,6 +377,15 @@ stdenv.mkDerivation {
   };
 }
 ```
+
+### Fetching Source from GitHub
+While `fetchTarball` required `url` and `sha256` arguments, we'll need more than that for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
+
+The source we want is hosted on GitHub at `https://github.com/atextor/icat`, which already gives us the first two arguments:
+- `owner`: the name of the account controlling the repository; `owner = "atextor"`
+- `repo`: the name of the repository we want to fetch; `repo = "icat"`
+
+We can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release we want to fetch. In this case, the latest release tag is `v0.5`.
 
 
 ```console
