@@ -206,106 +206,7 @@ The `hello` program is a simple and common place to start packaging, but it's no
 
 Now, we'll look at packaging a somewhat more complicated program, `icat`, which allows us to render images in our terminal.
 
-Though there are at least two alternative similar tools already in `nixpkgs`, at the time of writing, this particular tool hasn't been packaged, and it is used in  {ref}`another tutorial <ref-module-system-introduction>`.) *fixme: complete and merge https://github.com/NixOS/nix.dev/pull/645, then link it here*, so this is a good opportunity to do something both informative and useful.
-
-We'll start by copying the `hello.nix` from the previous section to a new file, `icat.nix`:
-
-```nix
-# icat.nix
-{ pkgs, stdenv }:
-stdenv.mkDerivation {
-  name = "hello";
-  src = builtins.fetchTarball {
-    url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
-  };
-}
-```
-
-While Nix can sometimes feel magic, it's not *actually* magic, so unfortunately this won't magically produce `icat` for us, and we'll need to make several changes.
-
-To start, we'll need to change the `name` attribute:
-
-```nix
-# icat.nix
-{ pkgs, stdenv }:
-stdenv.mkDerivation {
-  name = "icat";
-  src = builtins.fetchTarball {
-    url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
-  };
-}
-```
-
-Now we'll download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so we should slightly modify our previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers): instead of `fetchTarball`, we'll use [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub):
-
-```nix
-# icat.nix
-{ pkgs, stdenv }:
-stdenv.mkDerivation {
-  name = "icat";
-  src = builtins.fetchFromGitHub {
-    url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
-  };
-}
-```
-
-
-Updating our file accordingly:
-
-```nix
-# icat.nix
-{ pkgs, stdenv }:
-stdenv.mkDerivation {
-  name = "icat";
-  src = builtins.fetchFromGitHub {
-    owner = "atextor";
-	repo = "icat";
-	rev = "master";
-	sha256 = lib.fakeSha256;
-  };
-}
-```
-
-Running our previous `nix-build` invocation:
-
-```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
-error:
-       … while evaluating a branch condition
-
-         at /nix/store/i6w7hmdjp1jg71g7xbjgz5rn96q443c6-nixos-23.05.1471.b72aa95f7f0/nixos/lib/customisation.nix:179:8:
-
-          178|
-          179|     in if missingArgs == [] then makeOverridable f allArgs else abort error;
-             |        ^
-          180|
-
-       … while calling the 'attrNames' builtin
-
-         at /nix/store/i6w7hmdjp1jg71g7xbjgz5rn96q443c6-nixos-23.05.1471.b72aa95f7f0/nixos/lib/customisation.nix:139:21:
-
-          138|       # wouldn't be passed to it
-          139|       missingArgs = lib.attrNames
-             |                     ^
-          140|         # Filter out arguments that have a default value
-
-       (stack trace truncated; use '--show-trace' to show the full trace)
-
-       error: undefined variable 'lib'
-
-       at /home/nix-user/icat.nix:9:12:
-
-            8|     rev = "master";
-            9|     hash = lib.fakeSha256;
-             |            ^
-           10|   };
-```
-
-### Namespacing
-This one is easy: `lib` lives in the `pkgs` namespace, so we can either fix this by invoking `pkgs.lib.fakeSha256` instead, or by taking `lib` as an argument to the whole expression. The latter option is more common, so we'll do that. This is also a good time to rearrange our set of arguments to better conform to the [Nixpkgs syntactic conventions](https://nixos.org/manual/nixpkgs/stable/#chap-conventions):
+We'll start by copying `hello.nix` from the previous section to a new file, `icat.nix`. Then we'll make several changes, starting with the `name` attribute:
 
 ```nix
 # icat.nix
@@ -325,36 +226,7 @@ stdenv.mkDerivation {
 }
 ```
 
-```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
-error:
-       … while calling the 'derivationStrict' builtin
-
-         at /builtin/derivation.nix:9:12: (source not available)
-
-       … while evaluating derivation 'icat'
-         whose name attribute is located at /nix/store/i6w7hmdjp1jg71g7xbjgz5rn96q443c6-nixos-23.05.1471.b72aa95f7f0/nixos/pkgs/stdenv/generic/make-derivation.nix:303:7
-
-       … while evaluating attribute 'src' of derivation 'icat'
-
-         at /home/nix-user/icat.nix:9:3:
-
-            8|   name = "icat";
-            9|   src = builtins.fetchFromGitHub {
-             |   ^
-           10|     owner = "atextor";
-
-       error: attribute 'fetchFromGitHub' missing
-
-       at /home/nix-user/icat.nix:9:9:
-
-            8|   name = "icat";
-            9|   src = builtins.fetchFromGitHub {
-             |         ^
-           10|     owner = "atextor";
-```
-
-Another issue, and the converse of the previous one: `fetchFromGitHub` doesn't live in `builtins`, it lives in `pkgs`:
+Now we'll download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so we should slightly modify our previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers): instead of `builtins.fetchTarball`, we'll use `pkgs.fetchFromGitHub`:
 
 ```nix
 # icat.nix
