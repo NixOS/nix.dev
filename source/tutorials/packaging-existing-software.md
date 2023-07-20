@@ -270,22 +270,15 @@ The source we want is hosted on GitHub at `https://github.com/atextor/icat`, whi
 
 We can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release we want to fetch. In this case, the latest release tag is `v0.5`.
 
+As in the `hello` example, we also need to supply a hash. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, we'll fetch the correct hash in the first place with the `nix-prefetch-url` command. We want the SHA256 hash of the *contents* of the tarball, so we need to pass the `--unpack` and `--type sha256` arguments too:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
-...
-unpacking source archive /build/master.tar.gz
-error: hash mismatch in fixed-output derivation '/nix/store/lgjf8cq63ahqnd3b117g1q58g4nkprmj-source.drv':
-         specified: sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-            got:    sha256-b/2mRzCTyGkz2I1U+leUhspvW77VcHN7Awp+BVdVNRM=
-error: 1 dependencies of derivation '/nix/store/afiw4a1l04pi82k6w630d42iflgfxbl6-icat.drv' failed to build
+$ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz --type sha256
+path is '/nix/store/p8jl1jlqxcsc7ryiazbpm7c1mqb6848b-v0.5.tar.gz'
+0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka
 ```
 
-:::{note}
-We've been faking the hash and letting `nix-build` report the correct one in an error, but we could also fetch the correct hash in the first place with one of the `nix-prefetch` commands, or by downloading the tarball and passing it to the appropriate `nix-hash` invocation. We'll use the `nix-prefetch` trick in the next section.
-:::
-
-Now that we have the correct hash, we'll replace `lib.fakeSha256` in the file and re-run the command:
+Now we can supply the correct hash to `fetchFromGitHub`:
 
 ```nix
 # icat.nix
