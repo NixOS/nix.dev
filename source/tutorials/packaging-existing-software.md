@@ -182,11 +182,7 @@ build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/
 ```
 Great news: our derivation built successfully!
 
-:::{important}
-But how? This looks magical!
-:::
-
-We can see from the console output that `configure` was called, which produced a `Makefile` that was then used to build the project; we didn't actually write any build instructions, so we can surmise that Nix automatically detected the structure of the project directory. Indeed, the build system in Nix is based on `autoconf`.
+We can see from the console output that `configure` was called, which produced a `Makefile` that was then used to build the project; we didn't actually write any build instructions, so we can surmise that Nix automatically detected the structure of the project directory. Indeed, the build system in `stdenv` is based on `autoconf`.
 
 ### Build Result
 We can check our working directory for the result:
