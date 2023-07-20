@@ -304,36 +304,41 @@ Now we run into an entirely new issue:
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
 this derivation will be built:
-  /nix/store/dvqbkap31salw9mbr2xhxnnnb0089x3v-icat.drv
-building '/nix/store/dvqbkap31salw9mbr2xhxnnnb0089x3v-icat.drv'...
+  /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv
+building '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'...
 unpacking sources
-unpacking source archive /nix/store/y4750c9xljqy21b62a03z5xqvl3sd92q-source
+unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
 patching sources
 configuring
 no configure script, doing nothing
 building
 build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
+gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
+In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+                 from icat.c:31:
+/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+      |   ^~~~~~~
 icat.c:39:10: fatal error: Imlib2.h: No such file or directory
    39 | #include <Imlib2.h>
       |          ^~~~~~~~~~
 compilation terminated.
-make: *** [Makefile:20: icat.o] Error 1
-error: builder for '/nix/store/dvqbkap31salw9mbr2xhxnnnb0089x3v-icat.drv' failed with exit code 2;
+make: *** [Makefile:16: icat.o] Error 1
+error: builder for '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv' failed with exit code 2;
        last 10 log lines:
-       > no configure script, doing nothing
-       > building
-       > build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-       > gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-       > /nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
+       >                  from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+       >                  from icat.c:31:
+       > /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+       >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+       >       |   ^~~~~~~
        > icat.c:39:10: fatal error: Imlib2.h: No such file or directory
        >    39 | #include <Imlib2.h>
        >       |          ^~~~~~~~~~
        > compilation terminated.
-       > make: *** [Makefile:20: icat.o] Error 1
-       For full logs, run 'nix log /nix/store/dvqbkap31salw9mbr2xhxnnnb0089x3v-icat.drv'.
+       > make: *** [Makefile:16: icat.o] Error 1
+       For full logs, run 'nix log /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'.
 ```
 
 Finally, a compiler error! We've successfully pulled the `icat` source from GitHub, and Nix tried to build what it found, but is missing a dependency: the `imlib2` header. If we [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), we'll find that `imlib2` is already in `nixpkgs`.
@@ -371,37 +376,42 @@ Another error, but we get further this time:
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
 this derivation will be built:
-  /nix/store/0csqp747mfw0v9n103abxgx611s6dkxm-icat.drv
-building '/nix/store/0csqp747mfw0v9n103abxgx611s6dkxm-icat.drv'...
+  /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv
+building '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'...
 unpacking sources
-unpacking source archive /nix/store/y4750c9xljqy21b62a03z5xqvl3sd92q-source
+unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
 patching sources
 configuring
 no configure script, doing nothing
 building
 build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
+gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
+In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+                 from icat.c:31:
+/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+      |   ^~~~~~~
 In file included from icat.c:39:
 /nix/store/hkgbjcr182m3q9xs0j1qmp3dh08mbg31-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
    45 | #include <X11/Xlib.h>
       |          ^~~~~~~~~~~~
 compilation terminated.
-make: *** [Makefile:20: icat.o] Error 1
-error: builder for '/nix/store/0csqp747mfw0v9n103abxgx611s6dkxm-icat.drv' failed with exit code 2;
+make: *** [Makefile:16: icat.o] Error 1
+error: builder for '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv' failed with exit code 2;
        last 10 log lines:
-       > building
-       > build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-       > gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-       > /nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
+       >                  from icat.c:31:
+       > /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+       >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+       >       |   ^~~~~~~
        > In file included from icat.c:39:
        > /nix/store/hkgbjcr182m3q9xs0j1qmp3dh08mbg31-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
        >    45 | #include <X11/Xlib.h>
        >       |          ^~~~~~~~~~~~
        > compilation terminated.
-       > make: *** [Makefile:20: icat.o] Error 1
-       For full logs, run 'nix log /nix/store/0csqp747mfw0v9n103abxgx611s6dkxm-icat.drv'.
+       > make: *** [Makefile:16: icat.o] Error 1
+       For full logs, run 'nix log /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'.
 ```
 
 In Nixpkgs, `Xlib` lives in the `dev` output of `xorg.libX11`, which we can add to `buildInputs` again with `pkgs.xorg.libX11.dev`. To avoid repeating ourselves, we can add `pkgs` to the local scope in `buildInputs` by using the [`with` statement](https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320521984):
@@ -434,53 +444,33 @@ Running our favorite command again, yet more errors arise:
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
 this derivation will be built:
-  /nix/store/0q6x7g7sz4pds3pgs8yb197fnf4r7rl2-icat.drv
-building '/nix/store/0q6x7g7sz4pds3pgs8yb197fnf4r7rl2-icat.drv'...
+  /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv
+building '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'...
 unpacking sources
-unpacking source archive /nix/store/y4750c9xljqy21b62a03z5xqvl3sd92q-source
+unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
 patching sources
 configuring
 no configure script, doing nothing
 building
 build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
+gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
+In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+                 from icat.c:31:
+/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+      |   ^~~~~~~
 icat.c: In function 'main':
 icat.c:319:33: warning: ignoring return value of 'write' declared with attribute 'warn_unused_result' [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result8;;]
   319 |                                 write(tempfile, &buf, 1);
       |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
-gcc -o icat icat.o  `pkg-config --libs imlib2`
-/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.o: in function `resize_image_if_necessary':
-icat.c:(.text+0x12a): undefined reference to `imlib_create_cropped_scaled_image'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text+0x132): undefined reference to `imlib_free_image_and_decache'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text+0x13a): undefined reference to `imlib_context_set_image'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.o: in function `main':
-icat.c:(.text.startup+0x25b): undefined reference to `imlib_load_image_immediately'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x26c): undefined reference to `imlib_context_set_image'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x271): undefined reference to `imlib_image_get_width'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x27a): undefined reference to `imlib_image_get_height'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x2ea): undefined reference to `imlib_image_query_pixel'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x2f8): undefined reference to `imlib_image_query_pixel'
-/nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x33c): undefined reference to `imlib_free_image_and_decache'
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:23: icat] Error 1
-error: builder for '/nix/store/0q6x7g7sz4pds3pgs8yb197fnf4r7rl2-icat.drv' failed with exit code 2;
+gcc -o icat icat.o -lImlib2
+installing
+install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash install
+make: *** No rule to make target 'install'.  Stop.
+error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed with exit code 2;
        last 10 log lines:
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.o: in function `main':
-       > icat.c:(.text.startup+0x25b): undefined reference to `imlib_load_image_immediately'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x26c): undefined reference to `imlib_context_set_image'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x271): undefined reference to `imlib_image_get_width'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x27a): undefined reference to `imlib_image_get_height'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x2ea): undefined reference to `imlib_image_query_pixel'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x2f8): undefined reference to `imlib_image_query_pixel'
-       > /nix/store/dx8hynidprz3kf4ngcjipnwaxp6h229f-binutils-2.40/bin/ld: icat.c:(.text.startup+0x33c): undefined reference to `imlib_free_image_and_decache'
-       > collect2: error: ld returned 1 exit status
-       > make: *** [Makefile:23: icat] Error 1
-       For full logs, run 'nix log /nix/store/0q6x7g7sz4pds3pgs8yb197fnf4r7rl2-icat.drv'.
-```
-
 There are several issues here, but the first one we can solve is `/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found`. According to the [Nixpkgs Manual](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-dependencies), we should add dependencies to `buildInputs` if they're going to be copied or linked into the final output, or otherwise used somehow at runtime, but we should add dependencies to the `nativeBuildInputs` list if those dependencies are used at *build* time. `pkg-config` isn't needed after we build `icat`, so we'll add it to `nativeBuildInputs`:
 
 ```nix
@@ -526,14 +516,17 @@ $ make
 
 In the current `master` branch of `icat`, a warning is thrown when building:
 
-```console
-[nix-shell:~/icat]$ make
-gcc -c -Wall -pedantic -std=c99 -D_DEFAULT_SOURCE `pkg-config --cflags imlib2` -o icat.o icat.c
-icat.c: In function ‘main’:
-icat.c:319:33: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
-  319 |                                 write(tempfile, &buf, 1);
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
-gcc -o icat icat.o  `pkg-config --libs imlib2`
+       >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+       >       |   ^~~~~~~
+       > icat.c: In function 'main':
+       > icat.c:319:33: warning: ignoring return value of 'write' declared with attribute 'warn_unused_result' [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result8;;]
+       >   319 |                                 write(tempfile, &buf, 1);
+       >       |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+       > gcc -o icat icat.o -lImlib2
+       > installing
+       > install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash install
+       > make: *** No rule to make target 'install'.  Stop.
+       For full logs, run 'nix log /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'.
 ```
 
 However, this does not prevent the binary from being produced; an `icat` executable is now present in the local directory, and it's up to us to decide what to do with it.
