@@ -542,7 +542,11 @@ Nix automatically determined the `buildPhase` information for our `icat` package
 ...
 ```
 
+Running our `nix-build` command once more will finally do what we want, and more safely than before; we can `ls` in the local directory to find a `result` symlink to a location in the Nix store:
 
 ```console
+$ ls
+hello.nix icat.nix result
 ```
 
+`result/bin/icat` is the executable we built previously. Success!
