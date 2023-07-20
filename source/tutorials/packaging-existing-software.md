@@ -532,11 +532,15 @@ stdenv.mkDerivation {
 ### Phases and Hooks
 Nix package derivations are separated into [phases](https://nixos.org/manual/nixpkgs/unstable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
-During derivation realisation, there are a number of shell functions ("hooks", in `nixpkgs`) which may execute in each derivation phase, which do things like set variables, source files, create directories, and so on. These are run both before and after each phase, controlling the build environment and helping to prevent environment-modifying behavior defined within packages from creating sources of nondeterminism within and between Nix derivations.
+We saw earlier how the `stdenv` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, we defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
 
-It's good practice when packaging for `nixpkgs` to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them; this facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later, in addition to the previously-mentioned reproducibility benefits.
+Up to that point, the `stdenv` automatically determined the `buildPhase` information for our `icat` package.
 
-Nix automatically determined the `buildPhase` information for our `icat` package, but we needed to define a custom `installPhase` which we should now adjust to call the appropriate hooks:
+During derivation realisation, there are a number of shell functions ("hooks", in `nixpkgs`) which may execute in each derivation phase, which do things like set variables, source files, create directories, and so on. These are specific to each phase, and run both before and after that phase's execution, controlling the build environment and helping to prevent environment-modifying behavior defined within packages from creating sources of nondeterminism within and between Nix derivations.
+
+It's good practice when packaging software with Nix to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them; this facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later, in addition to the previously-mentioned reproducibility benefits.
+
+We should now adjust our `installPhase` to call the appropriate hooks:
 
 ```nix
 # icat.nix
