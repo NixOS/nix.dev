@@ -94,13 +94,10 @@ We'll use the following expression:
 
 ```console
 with import <nixpkgs> {}; callPackage ./hello.nix {}
-^    ^      ^         ^   ^           ^           ^
-1    2      3         4   5           6           7
 ```
 
 `callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `pkgs`, `lib`, and `stdenv`.
 
-From `nixpkgs`, we use the `callPackage` function (5) to import our `hello.nix` (6). Since the `hello.nix` derivation [is a function](https://nixos.org/manual/nix/stable/language/derivations.html) which takes two arguments [it will already be passed](), we also apply it to an empty attribute set (7). Although `hello.nix` takes a `pkgs` argument, we don't need to apply the function to `nixpkgs`, because the `with` statement has already included the `nixpkgs` we just imported into the local context.
 
 Let's run this now:
 
