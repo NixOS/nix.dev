@@ -47,7 +47,7 @@ Downloading that into our build context is a good first step; we can do this in 
 
 In this case, we'll use `fetchTarball`, which takes the URI path to the download file and a SHA256 hash of its contents.
 
-We won't know what the hash really is until we download it, but fortunately Nix will complain at us if we're wrong, so we can fake it with a bunch of zeroes (53 to be exact):
+Here is our first iterative debugging technique: we can't actually know the hash until after we've downloaded and unpacked the tarball, but Nix will complain at us if the hash we supplied was incorrect, so we can just supply a fake one with `lib.fakeSha256` and change our derivation after Nix informs us of the correct hash:
 
 ```nix
 # hello.nix
@@ -55,14 +55,10 @@ We won't know what the hash really is until we download it, but fortunately Nix 
 stdenv.mkDerivation {
   src = builtins.fetchTarball {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0000000000000000000000000000000000000000000000000000";
+    sha256 = lib.fakeSha256;
   };
 }
 ```
-
-:::{note}
-Instead of typing 53 zeroes, you can use `lib.fakeSha256`. We'll do this in later examples.
-:::
 
 Let's save this file to `hello.nix` and try to build it. To do so, we'll use `nix-build`...
 
@@ -118,7 +114,7 @@ stdenv.mkDerivation {
   name = "hello";
   src = builtins.fetchTarball {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0000000000000000000000000000000000000000000000000000";
+    sha256 = lib.fakeSha256;
   };
 }
 ```
@@ -149,7 +145,7 @@ error:
 ```
 
 ### Finding The File Hash
-As expected, Nix complained at us for lying about the file hash, and helpfully provided the correct one. We can substitute this into our `hello.nix` file, replacing the string of zeroes:
+As expected, Nix complained at us for lying about the file hash, and helpfully provided the correct one. We can substitute this into our `hello.nix` file, replacing `lib.fakeSha256`:
 
 ```nix
 # hello.nix
@@ -265,7 +261,6 @@ Rather than `url` and `sha256`, we must now supply the following arguments:
 - `owner`: a string representing the user or organization account which owns the repository. The `nixpkgs` repository lives at `https://github.com/NixOS/nixpkgs`, so if we were fetching the `nixpkgs` source, for example, and in this case the source is hosted at `https://github.com/atextor/icat`, so we want `owner = "atextor"`.
 - `repo`: another string corresponding to the name of the repository. Here we'll use `repo = "icat"`.
 - `rev`: the *revision*, such as the git commit hash or tag (e.g. `v1.0`), to download from GitHub. On GitHub, you can find these on the [Releases page](https://github.com/atextor/icat/releases), but for now we're just going to use `master`.
-- `hash`: similar to the earlier `hello` example, this corresponds to the hash of the extracted directory after it is downloaded. Several hash algorithms are available, but we used SHA256 before, so we'll do it again here and use `sha256` in place of the `hash` input.  We could fake the hash with 53 zeroes (or any string of characters that doesn't match the *actual* hash) as we did before, but rather than type that out, we'll just use `lib.fakeSha256`.
 
 Updating our file accordingly:
 
@@ -388,7 +383,6 @@ stdenv.mkDerivation {
 }
 ```
 
-We used `lib.fakeSha256`, which does essentially the same thing as our earlier 53 zeroes trick:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
