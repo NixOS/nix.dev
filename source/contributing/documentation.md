@@ -1,6 +1,6 @@
 # Contributing Documentation
 
-This is an overview documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
+This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
 Documentation contributions should follow the [style guide](./style-guide.md).
 
 Feel free to in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
@@ -99,7 +99,7 @@ Old messages are extremely improbable to be read by anyone.
 
 You can help by posting in the appropriate categories on [Discourse] what you have found valuable.
 
-[Nix* Documentation]: https://matrix.to/#/#docs:nixos.org 
+[Nix\* Documentation]: https://matrix.to/#/#docs:nixos.org
 [Discourse]: https://discourse.nixos.org/
 
 ### Discourse
@@ -169,7 +169,8 @@ Where to migrate what:
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
 ### Nix Pills
-[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
+
+[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles.
 Work is currently being done to bring the Nix Pills up-to-date with the current state of Nix and current best-practices of Nixpkgs.
 Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
 

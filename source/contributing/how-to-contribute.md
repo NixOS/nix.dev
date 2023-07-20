@@ -10,7 +10,7 @@ This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term
 [Join our community communication platforms](https://nixos.org/community) to get in contact with other users and developers.
 Check out our [community teams](https://nixos.org/community/#governance-teams) if you're interested in a particular topic.
 
-All the source code and documentation is on [GitHub](https://github.com/), and you need a GitHub account to propose changes.
+All the source code and documentation is on [GitHub](https://github.com/NixOS), and you need a GitHub account to propose changes.
 Technical discussions happen in issue and pull request comments.
 
 :::{tip}
