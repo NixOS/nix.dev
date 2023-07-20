@@ -43,9 +43,9 @@ Since GNU Hello is a popular (in a certain sense) package from the GNU Project, 
 
 In this case, we'll download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello`, currently `2.12.1`.
 
-Downloading that into our build context is a good first step; we can do this in several ways, but it's best to use one of the nixpkgs builtin fetcher functions, in this case `fetchTarball` from nixpkgs.
+Downloading that into our build context is a good first step; we can do this in several ways, but it's best to use one of the nixpkgs builtin fetcher functions.
 
-`fetchTarball` takes as argument an attribute set containing the URI path to the download and a SHA256 hash of the file.
+In this case, we'll use `fetchTarball`, which takes the URI path to the download file and a SHA256 hash of its contents.
 
 We won't know what the hash really is until we download it, but fortunately Nix will complain at us if we're wrong, so we can fake it with a bunch of zeroes (53 to be exact):
 
