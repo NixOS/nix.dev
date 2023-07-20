@@ -472,28 +472,6 @@ install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bi
 make: *** No rule to make target 'install'.  Stop.
 error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed with exit code 2;
        last 10 log lines:
-There are several issues here, but the first one we can solve is `/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash: line 1: pkg-config: command not found`. According to the [Nixpkgs Manual](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-dependencies), we should add dependencies to `buildInputs` if they're going to be copied or linked into the final output, or otherwise used somehow at runtime, but we should add dependencies to the `nativeBuildInputs` list if those dependencies are used at *build* time. `pkg-config` isn't needed after we build `icat`, so we'll add it to `nativeBuildInputs`:
-
-```nix
-{ pkgs
-, lib
-, stdenv
-}:
-
-stdenv.mkDerivation {
-  name = "icat";
-  src = pkgs.fetchFromGitHub {
-    owner = "atextor";
-    repo = "icat";
-    rev = "master";
-    sha256 = "sha256-b/2mRzCTyGkz2I1U+leUhspvW77VcHN7Awp+BVdVNRM=";
-  };
-
-  nativeBuildInputs = with pkgs; [ pkg-config ];
-  buildInputs = with pkgs; [ imlib2 xorg.libX11.dev ];
-}
-```
-
 ### Debugging with a Development Shell
 This solves some of the errors we just saw, but not all; the `ld` error produced by all the undefined references is gone, but we still see a non-zero `make` return value: `make: *** No rule to make target 'install'`.
 
@@ -599,7 +577,6 @@ stdenv.mkDerivation {
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
-  nativeBuildInputs = with pkgs; [ pkg-config ];
   buildInputs = with pkgs; [ imlib2 xorg.libX11.dev ];
 
   installPhase = ''
