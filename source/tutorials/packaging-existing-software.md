@@ -410,7 +410,15 @@ error: builder for '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv' failed
        For full logs, run 'nix log /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'.
 ```
 
-In Nixpkgs, `Xlib` lives in the `dev` output of `xorg.libX11`, which we can add to `buildInputs` again with `pkgs.xorg.libX11.dev`. To avoid repeating ourselves, we can add `pkgs` to the local scope in `buildInputs` by using the [`with` statement](https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320521984):
+We can see a few warnings which should be corrected in the upstream code, but the important bit for our purposes is `fatal error: X11/Xlib.h: No such file or directory`: we're missing another dependency.
+
+In addition to the widespread practice of prefixing a project name with `lib` to indicate the libraries of that project, in Nixpkgs it's also common to separate headers, libraries, binaries, and documentation into different output attributes of a given [derivation](https://nixos.org/manual/nix/stable/language/derivations.html).
+
+:::{note}
+Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords, in addition to checking discussion platforms like [the official NixOS Discourse](https://discourse.nixos.org).
+:::
+
+We need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. The `Xlib` headers in turn live in the `dev` output of `xorg.libX11`. We'll add this to our derivation's input attribute set and to `buildInputs`:
 
 ```nix
 # icat.nix
