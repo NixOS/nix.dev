@@ -163,7 +163,7 @@ There are three things going on here:
 
    You can use this with `nix-shell` whenever you want to quickly run a program you don't have installed on your machine.
 
-2. `--pure` discards most environment variables set on your your system when running the shell.
+2. `--pure` discards most environment variables set on your system when running the shell.
 
    It means that only the `git` provided by Nix is available inside that shell.
    This is useful for simple one-liners such as in the example.
