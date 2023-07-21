@@ -30,7 +30,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
   http://nixos.org/channels/nixos-22.11/nixexprs.tar.xz
   ```
 
-- Shorthand syntax channels:
+- Shorthand syntax for channels:
 
   ```
   channel:nixos-22.11
@@ -63,11 +63,11 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
   ```
 
 - ```shell-session
-  $ NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-22.11/nixexprs.tar.xz nix-build ...
+  $ NIX_PATH=nixpkgs=http://nixos.org/channels/nixos-22.11/nixexprs.tar.xz nix-build
   ```
 
 - ```shell-session
-  $ NIX_PATH=nixpkgs=channel:nixos-22.11 nix-build ...
+  $ NIX_PATH=nixpkgs=channel:nixos-22.11 nix-build
   ```
 
 - In the Nix language:
