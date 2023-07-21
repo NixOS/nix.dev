@@ -45,7 +45,7 @@ clicking on the latest successful build (marked with a green checkmark), and cop
 :::
 
 :::{note}
-It may be more convenient to use a software like [Etcher](https://www.balena.io/etcher/) to flash the image to your SD card if you are on a non-NixOS system.
+It may be more convenient to use a software like [Etcher](https://www.balena.io/etcher/) to flash the image to your SD card if you are on a system where it's available.
 :::
 
 Your terminal should be printing kernel messages as they come in.
