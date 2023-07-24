@@ -41,7 +41,7 @@ Within the Nix shell, you can use the programs provided by these packages:
 [nix-shell:~]$ cowsay Hello, Nix! | lolcat
 ```
 
-Press type `exit` or press `CTRL-D` to exit the shell, and the programs won't be available anymore.
+Type `exit` or press `CTRL-D` to exit the shell, and the programs won't be available anymore.
 
 ```shell-session
 [nix-shell:~]$ exit
