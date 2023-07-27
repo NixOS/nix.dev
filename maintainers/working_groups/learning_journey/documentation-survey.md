@@ -41,7 +41,13 @@ To better navigate the material and judge its relevance, every entry should prov
   - Created: 2015 (effectively unmaintained since 2017)
 
 - https://nixos.org/guides/nix-pills/nix-search-paths.html
+  
 - https://nixos.org/guides/nix-pills/nix-store-paths.html
+
+  Store paths and how they are computed, `nix-store`, `nix-hash`, `nix derivation show`, `nix repl`.
+  - Reading time: 6 min
+  - Author: Luca Bruno
+  - Created: 2015 (effectively unmaintained since 2017)
 
 ### Nix language
 
