@@ -66,7 +66,7 @@ curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 The first line is a standard shebang.
 The additional shebang lines are a Nix-specific construct.
 
-We specify the `bash` program as the interpreter with the `-i` option.
+We specify `bash` as the interpreter for the rest of the file with the `-i` option.
 
 We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
 
