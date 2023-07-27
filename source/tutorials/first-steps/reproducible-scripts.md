@@ -63,7 +63,11 @@ Create a file named `nixpkgs-releases.sh` with the following content:
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
 
-We specify the `bash` program as the interpreter with the `-i` option.
+The first line is a standard shebang.
+The additional shebang lines are a Nix-specific construct.
+
+We specify `bash` as the interpreter for the rest of the file with the `-i` option.
+
 We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
 
 With the `-p` option we specify the packages required for the script to run.
