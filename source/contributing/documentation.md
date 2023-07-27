@@ -1,9 +1,11 @@
 # Contributing Documentation
 
-This is an overview documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
+This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
 Documentation contributions should follow the [style guide](./style-guide.md).
 
 Feel free to in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
+
+If you cannot contribute time, consider [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of reference documentation and learning materials.
 
 ## Reference manuals
 
@@ -47,11 +49,11 @@ You can help by
 The purpose of [nix.dev] ([source][nix.dev src]) is to guide newcomers by teaching essential Nix knowledge, show best practices, and help orient users in the Nix ecosystem.
 
 It goes into breadth, not depth.
-    
+
 The documentation team maintains nix.dev as editors.
-    
+
 You can help by
-    
+
 - working on [open issues][nix.dev issues]
 - reviewing [pull requests][nix.dev prs] by testing new material or features
 - adding guides or tutorials following the [proposed outline](https://github.com/NixOS/nix.dev/blob/master/CONTRIBUTING.md#user-content-vision)
@@ -80,7 +82,7 @@ Since writing a guide or tutorial is a lot of work, please make sure to coordina
 The Nix project web site is [nixos.org] ([source][nixos website src]).
 
 Website contents that concern learning Nix should reference or include material from nix.dev.
-    
+
 The [Nix marketing team] is responsible for the web site, and the documentation team assists with maintaining contents related to onboarding new users.
 
 [nixos.org]: https://nixos.org
@@ -92,28 +94,28 @@ The [Nix marketing team] is responsible for the web site, and the documentation 
 ### Matrix
 
 Use Matrix for casual communication.
-    
+
 The documentation team frequents the [Nix\* Documentation] room.
-    
+
 Old messages are extremely improbable to be read by anyone.
 
 You can help by posting in the appropriate categories on [Discourse] what you have found valuable.
 
-[Nix* Documentation]: https://matrix.to/#/#docs:nixos.org 
+[Nix\* Documentation]: https://matrix.to/#/#docs:nixos.org
 [Discourse]: https://discourse.nixos.org/
 
 ### Discourse
-    
+
 [Discourse] is the central community hub.
 
 This is the place for your questions, suggestions, and discussion.
-    
+
 The documentation team monitors the [Documentation category].
-    
+
 Old threads and especially posts in long threads are improbable to be read by many people.
-    
+
 You can help by
-    
+
 - asking informed questions, showing what you have done so far
 - answering other people's questions
 - writing down what you have learned by updating or adding a [NixOS Wiki] article, nix.dev guide or tutorial, or one of the manuals
@@ -124,9 +126,9 @@ You can help by
 ### Meetings and Events
 
 Check the [Discourse community calendar] for real-time events.
-    
+
 The documentation team holds regular meetings and posts meeting notes in the [Documentation category].
-    
+
 You can help by joining meetings to take notes or clean them up before publishing.
 
 [Discourse community calendar]: https://discourse.nixos.org/t/community-calendar/18589
@@ -140,26 +142,26 @@ You can help by sharing in the [Links category] on Discourse what you have found
 [Links category]: https://discourse.nixos.org/c/links/12
 
 ### Wiki
-    
+
 [NixOS Wiki](https://nixos.wiki/) is a collection of interlinked guides to solve common problems which are otherwise not well-documented.
 
 It is collectively edited by the community, covers a broad range of topics.
 It is only loosely organized, and does not impose quality standards.
 Its purpose is to quickly and conveniently collect insights and make them readily available for everyone.
-    
+
 We recommend to use it as a dumping ground for more obscure Nix knowledge, and strive to make it *smaller* over time (see [NixCon 2015: Make Nix friendlier for Beginners]), by incrementally incorporating its contents into authoritative documentation and curated learning material.
 
 The documentation team **does not maintain** the Wiki.
-    
+
 You can still help with
-    
+
 - improving discoverability by adding categorization and relevant links
 - clarifying articles and correcting errors
 - removing redundant information that is already present in curated sources
 - migrating information to other resources.
-    
+
 Where to migrate what:
-    
+
 - Nix interaction: [Nix manual]
 - Language-specific build instructions: [Nixpkgs manual]
 - Package, service, or hardware configuration: [NixOS manual]
@@ -169,7 +171,8 @@ Where to migrate what:
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
 ### Nix Pills
-[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles. 
+
+[Nix Pills](https://nixos.org/guides/nix-pills/) is a series of low-level tutorials on building software packages with Nix, showing in detail how Nixpkgs is made from first principles.
 Work is currently being done to bring the Nix Pills up-to-date with the current state of Nix and current best-practices of Nixpkgs.
 Furthermore, work is underway to migrate the technical infrastructure of Nix Pills to improve maintainability and make it easier for others to contribute.
 
