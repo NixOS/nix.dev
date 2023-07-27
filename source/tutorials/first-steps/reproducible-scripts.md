@@ -63,7 +63,8 @@ Create a file named `nixpkgs-releases.sh` with the following content:
 curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
 
-The first line is a standard hashbang. The additional hashbang lines are a Nix specific construct. The rest of the file is taken to be bash code because of the `-i bash` parameter.
+The first line is a standard shebang.
+The additional shebang lines are a Nix-specific construct.
 
 We specify the `bash` program as the interpreter with the `-i` option.
 
