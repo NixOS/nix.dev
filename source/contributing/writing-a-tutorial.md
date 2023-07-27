@@ -2,10 +2,15 @@
 
 This is a guide to writing tutorials about Nix.
 
-By [tutorials](https://diataxis.fr/tutorials/) we mean *lessons* as described in the [Diátaxis framework for technical documentation](https://diataxis.fr), and recommend becoming familiar with Diátaxis before proceeding.
-Especially note [the difference between tutorials and guides](https://diataxis.fr/tutorials-how-to/).
+By [tutorials][diataxis_tutorials] we mean *lessons* as described in the [Diátaxis framework for technical documentation][diataxis], and recommend becoming familiar with Diátaxis before proceeding.
+Especially note [the difference between tutorials and guides][diataxis_tut_vs_howto].
 
-We strongly recommend the book [How Learning Works (summary)](https://www.lesswrong.com/posts/mAdMkFqWzbJRB544m/book-review-how-learning-works) as a guide for designing learning materials.
+We strongly recommend the book [How Learning Works (summary)][how_learning_works] as a guide for designing learning materials.
+
+[diataxis]: https://diataxis.fr/
+[diataxis_tutorials]: https://diataxis.fr/tutorials.html
+[diataxis_tut_vs_howto]: https://diataxis.fr/tutorials-how-to.html
+[how_learning_works]: https://www.lesswrong.com/posts/mAdMkFqWzbJRB544m/book-review-how-learning-works
 
 ## Target audience
 
