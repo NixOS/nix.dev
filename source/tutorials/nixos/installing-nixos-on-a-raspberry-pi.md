@@ -8,19 +8,19 @@ myst:
 
 # Installing NixOS on a Raspberry Pi
 
-This tutorial assumes [Raspberry P 4 Model B with 4GB RAM](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
+This tutorial assumes you have a [Raspberry Pi 4 Model B with 4GB RAM](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 
 Before starting this tutorial, make sure you have
-[all necessary hardware](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/1):
+[all the necessary hardware](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/1):
 
 - HDMI cable/adapter.
 - 8GB+ SD card.
-- SD card reader in case your machine doesn't have an SD slot.
+- SD card reader (in case your machine doesn't have an SD slot).
 - Power cable for your Raspberry Pi.
 - USB keyboard.
 
 :::{note}
-This tutorial was written for the Raspberry Pi 4B. Using a previous supported hardware revision, like the 3B or 3B+, is possible with some modifications to this process.
+This tutorial was written for the Raspberry Pi 4B. Using a previously supported model like the 3B or 3B+ is possible with some modifications to this tutorial.
 :::
 
 ## Booting NixOS live image
@@ -40,7 +40,7 @@ $ nix-shell -p wget zstd
 ```
 
 :::{note}
-You can download a more recent image from [Hydra](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
+You can download a recent image from [Hydra](https://hydra.nixos.org/job/nixos/trunk-combined/nixos.sd_image.aarch64-linux),
 clicking on the latest successful build (marked with a green checkmark), and copying the link to the build product image.
 :::
 
@@ -52,7 +52,7 @@ Your terminal should be printing kernel messages as they come in.
 
 Plug in your SD card and your terminal should print what device it got assigned, for example `/dev/sdX`.
 
-Press `ctrl-c` to stop `dmesg --follow`.
+Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop `dmesg --follow`.
 
 Copy NixOS to your SD card by replacing `sdX` with the name of your device in the following command:
 
@@ -70,7 +70,7 @@ In case the image doesn't boot, it's worth [updating the firmware](https://www.r
 
 Run `sudo -i` to get a root shell for the rest of the tutorial.
 
-At this point you'll need an internet connection. If you can use an ethernet cable, plug it in.
+At this point you'll need an internet connection. If you can use an ethernet cable, plug it in and skip to the next section.
 
 If you're connecting to wifi, run `iwconfig` to find the name of your wireless network interface. If it's `wlan0`, replace `SSID` and `passphrase` with your data and run:
 
@@ -93,6 +93,7 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 ```
 
 ## Installing and Configuring NixOS
+
 Now we'll install NixOS with our own configuration, here creating a `guest` user and enabling the SSH daemon.
 
 In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used previously:
@@ -172,7 +173,7 @@ Due to the way the `nixos-sd-image` is designed, NixOS is actually *already inst
 # reboot
 ```
 
-If your system doesn't boot, select the oldest configuration in the bootloader menu to get back to live image and start over.
+If your system doesn't boot, select the oldest configuration in the bootloader menu to get back to the live image and start over.
 
 ## Making changes
 
@@ -188,5 +189,5 @@ $ sudo -i
 
 ## Next steps
 
-- Once you have a successfully running OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
+- Once you have a working OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
 - To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
