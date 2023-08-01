@@ -8,8 +8,8 @@ Especially note [the difference between tutorials and guides][diataxis_tut_vs_ho
 We strongly recommend the book [How Learning Works (summary)][how_learning_works] as a guide for designing learning materials.
 
 [diataxis]: https://diataxis.fr/
-[diataxis_tutorials]: https://diataxis.fr/tutorials.html
-[diataxis_tut_vs_howto]: https://diataxis.fr/tutorials-how-to.html
+[diataxis_tutorials]: https://diataxis.fr/tutorials/
+[diataxis_tut_vs_howto]: https://diataxis.fr/tutorials-how-to/
 [how_learning_works]: https://www.lesswrong.com/posts/mAdMkFqWzbJRB544m/book-review-how-learning-works
 
 ## Target audience
