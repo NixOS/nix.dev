@@ -15,7 +15,6 @@ One of Nix's primary use-cases is in addressing common difficulties encountered 
 
 In the long term, Nix helps tremendously in alleviating that stress, but when *first* (re)packaging existing software with Nix, it's common to encounter missing dependencies preventing builds from succeeding.
 
-If you haven't already read the tutorial on making a derivation, please go do so before reading this!
 
 In this tutorial, we'll see how to create Nix derivations to package C/C++ software, taking advantage of the [`nixpkgs` `stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv) which automates much of the work of building self-contained C/C++ packages.
 
