@@ -28,7 +28,7 @@ Along the way, we'll encounter and address Nix error messages, build failures, a
 ## Packages in Nix
 Before we proceed, an important point of clarification: we conventionally use the term "package" by analogy to other systems, although this term is not a proper concept in Nix.
 
-For the purposes of this tutorial, by "package" we mean "a Nix function which takes an attribute set of 'dependencies' and produces a derivation", where "dependencies" could be other packages or configuration parameters.
+For the purposes of this tutorial, by "package" we mean something like "result of a derivation"; this is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
 
 ## A Simple Project
 To start, we'll write a skeleton derivation, updating this as we go:
