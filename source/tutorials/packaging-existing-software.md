@@ -49,8 +49,7 @@ The hash cannot be known until after the tarball has been downloaded and unpacke
 
 ```nix
 # hello.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
 }:
 
@@ -66,7 +65,7 @@ Save this file to `hello.nix` and try to build it with `nix-build`, observing yo
 
 ```console
 $ nix-build hello.nix
-error: cannot evaluate a function that has an argument without a value ('pkgs')
+error: cannot evaluate a function that has an argument without a value ('lib')
        Nix attempted to evaluate a function as a top level expression; in
        this case it must have its arguments supplied either by default
        values, or passed explicitly with '--arg' or '--argstr'. See
@@ -75,21 +74,21 @@ error: cannot evaluate a function that has an argument without a value ('pkgs')
        at /home/nix-user/hello.nix:2:3:
 
             1| # hello.nix
-            2| { pkgs
+            2| { lib
              |   ^
-            3| , lib
+            3| , stdenv
 ```
 
 Problem: the expression in `hello.nix` is a *function*, which only produces its intended output if it is passed the correct *arguments*.
 
 ### A New Command
-In order to pass the `pkgs` argument to this derivation, you need to import `nixpkgs` with another Nix expression. The `nix-build` command allows passing whole expressions as an argument following the `-E/--expr` flag, like this one:
+`lib` is available from `nixpkgs`, which must be imported with another Nix expression in order to pass it as an argument to this derivation. The `nix-build` command allows passing whole expressions as an argument following the `-E/--expr` flag, like this one:
 
 ```console
 with import <nixpkgs> {}; callPackage ./hello.nix {}
 ```
 
-`callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `pkgs`, `lib`, and `stdenv`.
+`callPackage` automatically passes attributes from `nixpkgs` to the given function (here, the one in `hello.nix`), if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `lib`, and `stdenv`.
 
 Now run the full `nix-build` command with the new expression argument:
 
@@ -98,7 +97,7 @@ $ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
 error: derivation name missing
 ```
 
-This new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `pkgs` argument not having a value; the previous error was successfully resolved by changing the expression passed to `nix-build`.
+This new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `lib` argument not having a value; the previous error was successfully resolved by changing the expression passed to `nix-build`.
 
 ### Naming a Derivation
 Every derivation needs a `name` attribute, which must either be set directly or constructed by `mkDerivation` from `pname` and `version` attributes, if they exist.
@@ -106,8 +105,8 @@ Every derivation needs a `name` attribute, which must either be set directly or 
 Update the file again to add a `name`:
 
 ```nix
-{ pkgs
-, lib
+# hello.nix
+{ lib
 , stdenv
 }:
 
@@ -151,8 +150,7 @@ As expected, the incorrect file hash caused an error, and Nix helpfully provided
 
 ```nix
 # hello.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
 }:
 
@@ -217,8 +215,7 @@ Start by copying `hello.nix` from the previous section to a new file, `icat.nix`
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
 }:
 
