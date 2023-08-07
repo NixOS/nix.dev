@@ -255,7 +255,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Now to download the source code; `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should slightly modify the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers): instead of `builtins.fetchTarball`, use `pkgs.fetchFromGitHub`:
+Now to download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should slightly modify the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers), this time using `pkgs.fetchFromGitHub` instead of `builtins.fetchTarball`, updating the argument attribute set to the function accordingly:
 
 ```nix
 # icat.nix
