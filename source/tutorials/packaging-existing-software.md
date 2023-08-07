@@ -332,12 +332,12 @@ patching sources
 configuring
 no configure script, doing nothing
 building
-build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
+build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
 gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
                  from icat.c:31:
-/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
       |   ^~~~~~~
 icat.c:39:10: fatal error: Imlib2.h: No such file or directory
@@ -345,11 +345,11 @@ icat.c:39:10: fatal error: Imlib2.h: No such file or directory
       |          ^~~~~~~~~~
 compilation terminated.
 make: *** [Makefile:16: icat.o] Error 1
-error: builder for '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv' failed with exit code 2;
+error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed with exit code 2;
        last 10 log lines:
-       >                  from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+       >                  from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
        >                  from icat.c:31:
-       > /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+       > /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
        >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
        >       |   ^~~~~~~
        > icat.c:39:10: fatal error: Imlib2.h: No such file or directory
@@ -357,7 +357,7 @@ error: builder for '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv' failed
        >       |          ^~~~~~~~~~
        > compilation terminated.
        > make: *** [Makefile:16: icat.o] Error 1
-       For full logs, run 'nix log /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'.
+       For full logs, run 'nix log /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'.
 ```
 
 A compiler error! The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), you'll find that `imlib2` is already in `nixpkgs`.
@@ -395,8 +395,9 @@ Another error, but compilation proceeds further this time:
 ```console
 $ nix-build -A icat
 this derivation will be built:
-  /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv
-building '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'...
+  /nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv
+...
+building '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv'...
 unpacking sources
 unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
@@ -404,33 +405,33 @@ patching sources
 configuring
 no configure script, doing nothing
 building
-build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
+build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
 gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
                  from icat.c:31:
-/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
       |   ^~~~~~~
 In file included from icat.c:39:
-/nix/store/hkgbjcr182m3q9xs0j1qmp3dh08mbg31-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
+/nix/store/4fvrh0sjc8sbkbqda7dfsh7q0gxmnh9p-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
    45 | #include <X11/Xlib.h>
       |          ^~~~~~~~~~~~
 compilation terminated.
 make: *** [Makefile:16: icat.o] Error 1
-error: builder for '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv' failed with exit code 2;
+error: builder for '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv' failed with exit code 2;
        last 10 log lines:
        >                  from icat.c:31:
-       > /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+       > /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
        >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
        >       |   ^~~~~~~
        > In file included from icat.c:39:
-       > /nix/store/hkgbjcr182m3q9xs0j1qmp3dh08mbg31-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
+       > /nix/store/4fvrh0sjc8sbkbqda7dfsh7q0gxmnh9p-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
        >    45 | #include <X11/Xlib.h>
        >       |          ^~~~~~~~~~~~
        > compilation terminated.
        > make: *** [Makefile:16: icat.o] Error 1
-       For full logs, run 'nix log /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'.
+       For full logs, run 'nix log /nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv'.
 ```
 
 You can see a few warnings which should be corrected in the upstream code, but the important bit for this tutorial is `fatal error: X11/Xlib.h: No such file or directory`: another dependency is missing.
@@ -476,8 +477,8 @@ Run the last command again:
 ```console
 $ nix-build -A icat
 this derivation will be built:
-  /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv
-building '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'...
+  /nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv
+building '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv'...
 unpacking sources
 unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
@@ -485,12 +486,12 @@ patching sources
 configuring
 no configure script, doing nothing
 building
-build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
+build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
 gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/stdio.h:27,
+In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
+                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
                  from icat.c:31:
-/nix/store/dpk5m64n0axk01fq8h2m0yl9hhpq2nqk-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
+/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
       |   ^~~~~~~
 icat.c: In function 'main':
@@ -499,9 +500,9 @@ icat.c:319:33: warning: ignoring return value of 'write' declared with attribute
       |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
 gcc -o icat icat.o -lImlib2
 installing
-install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash install
+install flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash install
 make: *** No rule to make target 'install'.  Stop.
-error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed with exit code 2;
+error: builder for '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv' failed with exit code 2;
        last 10 log lines:
        >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
        >       |   ^~~~~~~
@@ -511,9 +512,9 @@ error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed
        >       |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
        > gcc -o icat icat.o -lImlib2
        > installing
-       > install flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash install
+       > install flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash install
        > make: *** No rule to make target 'install'.  Stop.
-       For full logs, run 'nix log /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'.
+       For full logs, run 'nix log /nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv'.
 ```
 
 The missing dependency error is solved, but there is now another problem: `make: *** No rule to make target 'install'.  Stop.`
@@ -544,7 +545,7 @@ stdenv.mkDerivation {
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
-  buildInputs = with pkgs; [ imlib2 xorg.libX11.dev ];
+  buildInputs = [ imlib2 xorg.libX11.dev ];
 
   installPhase = ''
     mkdir -p $out/bin
