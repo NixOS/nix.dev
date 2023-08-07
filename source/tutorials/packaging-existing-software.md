@@ -90,10 +90,24 @@ with import <nixpkgs> {}; callPackage ./hello.nix {}
 
 `callPackage` automatically passes attributes from `nixpkgs` to the given function (here, the one in `hello.nix`), if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `lib`, and `stdenv`.
 
-Now run the full `nix-build` command with the new expression argument:
+To avoid having to execute `nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'` each time, create a `default.nix` in the same directory as `hello.nix`, with the following contents:
+
+```nix
+# default.nix
+let
+  pkgs = import <nixpkgs> { };
+in
+{
+  hello = pkgs.callPackage ./hello.nix { };
+}
+```
+
+This allows you to use `nix-build -A hello` to realize the derivation in `hello.nix`, similar to the current convention used in `nixpkgs`.
+
+Now run the `nix-build` command with the new argument:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
+$ nix-build -A hello
 error: derivation name missing
 ```
 
@@ -122,23 +136,23 @@ stdenv.mkDerivation {
 and then re-run the command:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
+$ nix-build -A hello
 error:
        … while calling the 'derivationStrict' builtin
 
          at /builtin/derivation.nix:9:12: (source not available)
 
        … while evaluating derivation 'hello'
-         whose name attribute is located at /nix/store/i6w7hmdjp1jg71g7xbjgz5rn96q443c6-nixos-23.05.1471.b72aa95f7f0/nixos/pkgs/stdenv/generic/make-derivation.nix:303:7
+         whose name attribute is located at /nix/store/5na8c1j0cn5wls2g2d8q357cz3aqlaqj-nixos-23.05.2478.bd836ac5e5a7/nixos/pkgs/stdenv/generic/make-derivation.nix:303:7
 
        … while evaluating attribute 'src' of derivation 'hello'
 
-         at /home/nix-user/hello.nix:5:3:
+         at /home/nix-user/hello.nix:9:3:
 
-            4|   name = "hello";
-            5|   src = builtins.fetchTarball {
+            8|
+            9|   src = builtins.fetchTarball {
              |   ^
-            6|     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
+           10|     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
 
        error: hash mismatch in file downloaded from 'https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz':
          specified: sha256:0000000000000000000000000000000000000000000000000000
@@ -167,7 +181,7 @@ stdenv.mkDerivation {
 Now run the previous command again:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
+$ nix-build -A hello
 this derivation will be built:
   /nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv
 building '/nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv'...
@@ -194,7 +208,7 @@ Check your working directory for the result:
 
 ```console
 $ ls
-hello.nix  result
+default.nix hello.nix  result
 ```
 
 This result is a symbolic link to a Nix store location containing the built binary; you can call `./result/bin/hello` to execute this program:
@@ -211,7 +225,20 @@ Next, you'll package another piece of software with external-to-`stdenv` depende
 ## Something Bigger
 Now you will package a somewhat more complicated program, `icat`, which allows you to render images in your terminal.
 
-Start by copying `hello.nix` from the previous section to a new file, `icat.nix`, then update the `name` attribute in that file:
+To start, modify the `default.nix` from the previous section by adding a new attribute for `icat`:
+
+```nix
+# default.nix
+let
+  pkgs = import <nixpkgs> { };
+in
+{
+  hello = pkgs.callPackage ./hello.nix { };
+  icat = pkgs.callPackage ./icat.nix { };
+}
+```
+
+Now copy `hello.nix` to a new file, `icat.nix`, and update the `name` attribute in that file:
 
 ```nix
 # icat.nix
@@ -285,13 +312,19 @@ stdenv.mkDerivation {
 ```
 
 ### Missing Dependencies
-Running the previous `nix-build` invocation,  an entirely new issue is reported:
+Running `nix-build` with the new `icat` attribute,  an entirely new issue is reported:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
-this derivation will be built:
-  /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv
-building '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'...
+$ nix-build -A icat
+these 2 derivations will be built:
+  /nix/store/86q9x927hsyyzfr4lcqirmsbimysi6mb-source.drv
+  /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv
+these 19 paths will be fetched (4.21 MiB download, 17.65 MiB unpacked):
+...
+trying https://github.com/atextor/icat/archive/v0.5.tar.gz
+...
+unpacking source archive /build/v0.5.tar.gz
+building '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'...
 unpacking sources
 unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
 source root is source
@@ -360,7 +393,7 @@ stdenv.mkDerivation {
 Another error, but compilation proceeds further this time:
 
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
+$ nix-build -A icat
 this derivation will be built:
   /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv
 building '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'...
@@ -441,7 +474,7 @@ Only add the top-level `xorg` derivation to the input attrset, rather than the f
 ### `buildInputs` and `nativeBuildInputs`
 Run the last command again:
 ```console
-$ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
+$ nix-build -A icat
 this derivation will be built:
   /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv
 building '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'...
@@ -549,7 +582,7 @@ Running the `nix-build` command once more will finally do what you want, and mor
 
 ```console
 $ ls
-hello.nix icat.nix result
+default.nix hello.nix icat.nix result
 ```
 
 `result/bin/icat` is the executable built previously. Success!
