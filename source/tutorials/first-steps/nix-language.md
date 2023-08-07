@@ -208,7 +208,7 @@ $ nix-instantiate --eval --strict file.nix
 White space is used to delimit [lexical tokens], where required.
 It is otherwise insignificant.
 
-[lexical tokens]: https://en.m.wikipedia.org/wiki/Lexical_analysis#Token
+[lexical tokens]: https://en.m.wikipedia.org/wiki/Lexical_analysis#Lexical_token_and_lexical_tokenization
 
 Line breaks, indentation, and additional spaces are for readers' convenience.
 
