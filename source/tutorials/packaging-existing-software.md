@@ -15,14 +15,13 @@ One of Nix's primary use-cases is in addressing common difficulties encountered 
 
 In the long term, Nix helps tremendously in alleviating that stress, but when *first* (re)packaging existing software with Nix, it's common to encounter missing dependencies preventing builds from succeeding.
 
+In this tutorial, you'll create your first Nix derivations to package C/C++ software, taking advantage of the [`nixpkgs` `stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv) which automates much of the work of building self-contained C/C++ packages.
 
-In this tutorial, we'll see how to create Nix derivations to package C/C++ software, taking advantage of the [`nixpkgs` `stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv) which automates much of the work of building self-contained C/C++ packages.
+The tutorial begins by considering `hello`, an implementation of "hello world" which only requires dependencies already in `stdenv`.
 
-We'll begin by considering `hello`, a feature-complete implementation of the famous "hello world", which requires no external dependencies.
+Next, you will build more complex packages with their own dependencies, leading you to use additional derivation features.
 
-Then we'll move to progressively more complex packages with their own separate dependencies, leading us to use additional derivation features.
-
-Along the way, we'll encounter and address Nix error messages, build failures, and a host of other issues, developing our iterative debugging techniques as we go.
+You'll encounter and address Nix error messages, build failures, and a host of other issues, developing your iterative debugging techniques along the way.
 
 :::{note}
 An important point of clarification: the term "package" is used conventionally by analogy to other systems, although the term does not refer to a proper concept in Nix.
@@ -39,17 +38,14 @@ To start, consider this skeleton derivation:
 stdenv.mkDerivation {	};
 ```
 
-### Hello, World!
-Since GNU Hello is a popular (in a certain sense) package from the GNU Project, we can easily access its source code [from GNU's FTP](https://ftp.gnu.org/gnu/hello/).
-
-In this case, we'll download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello`, currently `2.12.1`.
 This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing). As you progress through this tutorial, you will update this several times, adding more details while following the general pattern.
 
-Downloading that into our build context is a good first step; we can do this in several ways, but it's best to use one of the nixpkgs builtin fetcher functions.
+### Hello, World!
+GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-In this case, we'll use `fetchTarball`, which takes the URI path to the download file and a SHA256 hash of its contents.
+To begin, you will download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` using `fetchTarball`, which takes the URI path to the download file and a SHA256 hash of its contents.
 
-Here is our first iterative debugging technique: we can't actually know the hash until after we've downloaded and unpacked the tarball, but Nix will complain at us if the hash we supplied was incorrect, so we can just supply a fake one with `lib.fakeSha256` and change our derivation after Nix informs us of the correct hash:
+The hash cannot be known until after the tarball has been downloaded and unpacked, but Nix will complain if the hash supplied to `fetchTarball` was incorrect, so it is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
 
 ```nix
 # hello.nix
@@ -66,7 +62,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Let's save this file to `hello.nix` and try to build it. To do so, we'll use `nix-build`...
+Save this file to `hello.nix` and try to build it with `nix-build`, observing your first build failure:
 
 ```console
 $ nix-build hello.nix
@@ -84,12 +80,10 @@ error: cannot evaluate a function that has an argument without a value ('pkgs')
             3| , lib
 ```
 
-... and immediately run into a problem: every derivation is a *function*, and functions need *arguments*!
+Problem: the expression in `hello.nix` is a *function*, which only produces its intended output if it is passed the correct *arguments*.
 
-### Your New Favorite Command
-In order to pass the `pkgs` argument to our derivation, we'll need to import `nixpkgs` in another Nix expression. The `nix-build` command lets us pass whole expressions as an argument following the `-E/--expr` flag.
-
-We'll pass the following expression to `nix-build`:
+### A New Command
+In order to pass the `pkgs` argument to this derivation, you need to import `nixpkgs` with another Nix expression. The `nix-build` command allows passing whole expressions as an argument following the `-E/--expr` flag, like this one:
 
 ```console
 with import <nixpkgs> {}; callPackage ./hello.nix {}
@@ -97,19 +91,19 @@ with import <nixpkgs> {}; callPackage ./hello.nix {}
 
 `callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `pkgs`, `lib`, and `stdenv`.
 
-
-Let's run this now:
+Now run the full `nix-build` command with the new expression argument:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
 error: derivation name missing
 ```
-Progress! The new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `pkgs` argument not having a value; we successfully resolved the previous error by changing the expression passed to `nix-build`.
+
+This new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `pkgs` argument not having a value; the previous error was successfully resolved by changing the expression passed to `nix-build`.
 
 ### Naming a Derivation
 Every derivation needs a `name` attribute, which must either be set directly or constructed by `mkDerivation` from `pname` and `version` attributes, if they exist.
 
-Let's update the file again to add a `name`:
+Update the file again to add a `name`:
 
 ```nix
 { pkgs
@@ -153,7 +147,7 @@ error:
 ```
 
 ### Finding The File Hash
-As expected, Nix complained at us for lying about the file hash, and helpfully provided the correct one. We can substitute this into our `hello.nix` file, replacing `lib.fakeSha256`:
+As expected, the incorrect file hash caused an error, and Nix helpfully provided the correct one, which you can now substitute into `hello.nix` to replace `lib.fakeSha256`:
 
 ```nix
 # hello.nix
@@ -172,7 +166,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Now let's run that command again:
+Now run the previous command again:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'
@@ -193,35 +187,33 @@ building
 build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
 ... <many more lines omitted>
 ```
-Great news: our derivation built successfully!
+Great news: the derivation built successfully!
 
-We can see from the console output that `configure` was called, which produced a `Makefile` that was then used to build the project; we didn't actually write any build instructions, so we can surmise that Nix automatically detected the structure of the project directory. Indeed, the build system in `stdenv` is based on `autoconf`.
+The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project; it wasn't necessary to write any build instructions in this case, because the `stdenv` build system is based on `autoconf`, which automatically detected the structure of the project directory.
 
 ### Build Result
-We can check our working directory for the result:
+Check your working directory for the result:
 
 ```console
 $ ls
 hello.nix  result
 ```
 
-This result is a symbolic link to a Nix store location containing the built binary; we can call `./result/bin/hello` to execute this program:
+This result is a symbolic link to a Nix store location containing the built binary; you can call `./result/bin/hello` to execute this program:
 
 ```console
 $ ./result/bin/hello
 Hello, world!
 ```
 
-We've successfully packaged our first program with Nix!
+Congratulations, you have successfully packaged your first program with Nix!
 
-Up next, we'll package another piece of software which has external dependencies that present new challenges, requiring us to lean more on `mkDerivation`.
+Next, you'll package another piece of software with external-to-`stdenv` dependencies that present new challenges, requiring you to make use of more `mkDerivation` features.
 
 ## Something Bigger
-The `hello` program is a simple and common place to start packaging, but it's not very useful or interesting, so we can't stop there.
+Now you will package a somewhat more complicated program, `icat`, which allows you to render images in your terminal.
 
-Now, we'll look at packaging a somewhat more complicated program, `icat`, which allows us to render images in our terminal.
-
-We'll start by copying `hello.nix` from the previous section to a new file, `icat.nix`. Then we'll make several changes, starting with the `name` attribute:
+Start by copying `hello.nix` from the previous section to a new file, `icat.nix`, then update the `name` attribute in that file:
 
 ```nix
 # icat.nix
@@ -239,7 +231,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Now we'll download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so we should slightly modify our previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers): instead of `builtins.fetchTarball`, we'll use `pkgs.fetchFromGitHub`:
+Now to download the source code; `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should slightly modify the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers): instead of `builtins.fetchTarball`, use `pkgs.fetchFromGitHub`:
 
 ```nix
 # icat.nix
@@ -258,15 +250,15 @@ stdenv.mkDerivation {
 ```
 
 ### Fetching Source from GitHub
-While `fetchTarball` required `url` and `sha256` arguments, we'll need more than that for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
+While `fetchTarball` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
 
-The source we want is hosted on GitHub at `https://github.com/atextor/icat`, which already gives us the first two arguments:
+The source is hosted on GitHub at `https://github.com/atextor/icat`, which already gives the first two arguments:
 - `owner`: the name of the account controlling the repository; `owner = "atextor"`
-- `repo`: the name of the repository we want to fetch; `repo = "icat"`
+- `repo`: the name of the repository to fetch; `repo = "icat"`
 
-We can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release we want to fetch. In this case, the latest release tag is `v0.5`.
+You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch. In this case, the latest release tag is `v0.5`.
 
-As in the `hello` example, we also need to supply a hash. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, we'll fetch the correct hash in the first place with the `nix-prefetch-url` command. We want the SHA256 hash of the *contents* of the tarball, so we need to pass the `--unpack` and `--type sha256` arguments too:
+As in the `hello` example, a hash must also be supplied. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command. You need the SHA256 hash of the *contents* of the tarball, so you will need to pass the `--unpack` and `--type sha256` arguments too:
 
 ```console
 $ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz --type sha256
@@ -274,7 +266,7 @@ path is '/nix/store/p8jl1jlqxcsc7ryiazbpm7c1mqb6848b-v0.5.tar.gz'
 0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka
 ```
 
-Now we can supply the correct hash to `fetchFromGitHub`:
+Now you can supply the correct hash to `fetchFromGitHub`:
 
 ```nix
 # icat.nix
@@ -296,7 +288,7 @@ stdenv.mkDerivation {
 ```
 
 ### Missing Dependencies
-Running our previous `nix-build` invocation,  we run into an entirely new issue:
+Running the previous `nix-build` invocation,  an entirely new issue is reported:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
@@ -338,13 +330,13 @@ error: builder for '/nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv' failed
        For full logs, run 'nix log /nix/store/al2wld63c66p3ln0rxqlkqqrqpspnicj-icat.drv'.
 ```
 
-Finally, a compiler error! We've successfully pulled the `icat` source from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If we [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), we'll find that `imlib2` is already in `nixpkgs`.
+A compiler error! The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), you'll find that `imlib2` is already in `nixpkgs`.
 
-We can add this package to our build environment by either
+You can add this package to your build environment by either
 - adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`, or
 - adding `pkgs.imlib2` to the `buildInputs` directly, since `pkgs` is already in-scope.
 
-Because `callPackage` is used to provide all necessary inputs in `nixpkgs` as well as in our `nix-build` invocation, the first approach is the one currently favored, and we'll use it here:
+Because `callPackage` is used to provide all necessary inputs in `nixpkgs` as well as in the `nix-build` invocation, the first approach is the one currently favored, and you should use it here:
 
 ```nix
 # icat.nix
@@ -368,7 +360,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Another error, but we get further this time:
+Another error, but compilation proceeds further this time:
 
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
@@ -411,7 +403,7 @@ error: builder for '/nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv' failed
        For full logs, run 'nix log /nix/store/qg9f6zf0vwmvhz1w5i1fy2pw0l3wiqi9-icat.drv'.
 ```
 
-We can see a few warnings which should be corrected in the upstream code, but the important bit for our purposes is `fatal error: X11/Xlib.h: No such file or directory`: we're missing another dependency.
+You can see a few warnings which should be corrected in the upstream code, but the important bit for this tutorial is `fatal error: X11/Xlib.h: No such file or directory`: another dependency is missing.
 
 In addition to the widespread practice of prefixing a project name with `lib` to indicate the libraries of that project, in Nixpkgs it's also common to separate headers, libraries, binaries, and documentation into different output attributes of a given [derivation](https://nixos.org/manual/nix/stable/language/derivations.html).
 
@@ -419,7 +411,7 @@ In addition to the widespread practice of prefixing a project name with `lib` to
 Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords, in addition to checking discussion platforms like [the official NixOS Discourse](https://discourse.nixos.org).
 :::
 
-We need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. The `Xlib` headers in turn live in the `dev` output of `xorg.libX11`. We'll add this to our derivation's input attribute set and to `buildInputs`:
+You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. The `Xlib` headers in turn live in the `dev` output of `xorg.libX11`. Add this to your derivation's input attribute set and to `buildInputs`:
 
 ```nix
 # icat.nix
@@ -445,12 +437,12 @@ stdenv.mkDerivation {
 ```
 
 :::{note}
-We only added the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11.dev` which would cause a syntax error. Because Nix is lazily-evaluated, including the dependency this way doesn't actually include all of `xorg` into our build context.
+Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11.dev`, as the latter would cause a syntax error. Because Nix is lazily-evaluated, including the dependency this way is safe to do and doesn't actually include all of `xorg` into the build context.
 :::
 
 
 ### `buildInputs` and `nativeBuildInputs`
-Running our favorite command again:
+Run the last command again:
 ```console
 $ nix-build -E 'with import <nixpkgs> {}; callPackage ./icat.nix {}'
 this derivation will be built:
@@ -494,14 +486,14 @@ error: builder for '/nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv' failed
        For full logs, run 'nix log /nix/store/p21p5zkbwg83dhmi0bn1yz5ka6phd47x-icat.drv'.
 ```
 
-We've solved the missing dependency, but have another problem: `make: *** No rule to make target 'install'.  Stop.`
+The missing dependency error is solved, but there is now another problem: `make: *** No rule to make target 'install'.  Stop.`
 
 ### installPhase
-The `stdenv` is automatically working with the `Makefile` that comes with `icat`: we can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully. The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to us.
+The `stdenv` is automatically working with the `Makefile` that comes with `icat`: you can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully. The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to users.
 
-To add this step to our derivation, we use the [`installPhase` attribute](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase), which contains a list of command strings to execute to perform the installation.
+To add this step to your derivation, use the [`installPhase` attribute](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase), which contains a list of command strings to execute to perform the installation.
 
-Because the `make` step completes successfully, the `icat` executable is available in the build directory, and we only need to copy it from there to the output directory. In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; we'll create a `bin` directory within that and copy our `icat` binary there:
+Because the `make` step completes successfully, the `icat` executable is available in the build directory, and you only need to copy it from there to the output directory. In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; create a `bin` directory within that and copy the `icat` binary there:
 
 ```nix
 # icat.nix
@@ -534,15 +526,15 @@ stdenv.mkDerivation {
 ### Phases and Hooks
 Nix package derivations are separated into [phases](https://nixos.org/manual/nixpkgs/unstable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
-We saw earlier how the `stdenv` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, we defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
+You saw earlier how the `stdenv` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, you defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
 
-Up to that point, the `stdenv` automatically determined the `buildPhase` information for our `icat` package.
+Up to that point, the `stdenv` automatically determined the `buildPhase` information for the `icat` package.
 
 During derivation realisation, there are a number of shell functions ("hooks", in `nixpkgs`) which may execute in each derivation phase, which do things like set variables, source files, create directories, and so on. These are specific to each phase, and run both before and after that phase's execution, controlling the build environment and helping to prevent environment-modifying behavior defined within packages from creating sources of nondeterminism within and between Nix derivations.
 
 It's good practice when packaging software with Nix to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them; this facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later, in addition to the previously-mentioned reproducibility benefits.
 
-We should now adjust our `installPhase` to call the appropriate hooks:
+You should now adjust your `installPhase` to call the appropriate hooks:
 
 ```nix
 # icat.nix
@@ -551,16 +543,16 @@ We should now adjust our `installPhase` to call the appropriate hooks:
     runHook preInstall
     mkdir -p $out/bin
     cp icat $out/bin
-	runHook postInstall
+    runHook postInstall
   '';
 ...
 ```
 
-Running our `nix-build` command once more will finally do what we want, and more safely than before; we can `ls` in the local directory to find a `result` symlink to a location in the Nix store:
+Running the `nix-build` command once more will finally do what you want, and more safely than before; you can `ls` in the local directory to find a `result` symlink to a location in the Nix store:
 
 ```console
 $ ls
 hello.nix icat.nix result
 ```
 
-`result/bin/icat` is the executable we built previously. Success!
+`result/bin/icat` is the executable built previously. Success!
