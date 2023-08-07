@@ -24,10 +24,11 @@ Then we'll move to progressively more complex packages with their own separate d
 
 Along the way, we'll encounter and address Nix error messages, build failures, and a host of other issues, developing our iterative debugging techniques as we go.
 
-## Packages in Nix
-Before we proceed, an important point of clarification: we conventionally use the term "package" by analogy to other systems, although this term is not a proper concept in Nix.
+:::{note}
+An important point of clarification: the term "package" is used conventionally by analogy to other systems, although the term does not refer to a proper concept in Nix.
 
-For the purposes of this tutorial, by "package" we mean something like "result of a derivation"; this is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
+For the purposes of this tutorial, "package" means something like "result of a derivation"; this is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
+:::
 
 ## A Simple Project
 To start, we'll write a skeleton derivation, updating this as we go:
