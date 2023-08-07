@@ -31,12 +31,10 @@ For the purposes of this tutorial, "package" means something like "result of a d
 :::
 
 ## A Simple Project
-To start, we'll write a skeleton derivation, updating this as we go:
+To start, consider this skeleton derivation:
 
 ```nix
-{ pkgs
-, stdenv
-}:
+{ stdenv }:
 
 stdenv.mkDerivation {	};
 ```
@@ -45,6 +43,7 @@ stdenv.mkDerivation {	};
 Since GNU Hello is a popular (in a certain sense) package from the GNU Project, we can easily access its source code [from GNU's FTP](https://ftp.gnu.org/gnu/hello/).
 
 In this case, we'll download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello`, currently `2.12.1`.
+This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing). As you progress through this tutorial, you will update this several times, adding more details while following the general pattern.
 
 Downloading that into our build context is a good first step; we can do this in several ways, but it's best to use one of the nixpkgs builtin fetcher functions.
 
