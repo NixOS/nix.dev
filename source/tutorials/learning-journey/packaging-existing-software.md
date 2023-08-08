@@ -436,7 +436,7 @@ You can see a few warnings which should be corrected in the upstream code, but t
 In addition to the widespread practice of prefixing a project name with `lib` to indicate the libraries of that project, in Nixpkgs it's also common to separate headers, libraries, binaries, and documentation into different output attributes of a given [derivation](https://nixos.org/manual/nix/stable/language/derivations.html).
 
 :::{note}
-Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords, in addition to checking discussion platforms like [the official NixOS Discourse](https://discourse.nixos.org).
+Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords.
 :::
 
 You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. The `Xlib` headers in turn live in the `dev` output of `xorg.libX11`. Add this to your derivation's input attribute set and to `buildInputs`:
