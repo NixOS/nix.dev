@@ -38,7 +38,9 @@ To start, consider this skeleton derivation:
 stdenv.mkDerivation {	};
 ```
 
-This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing). As you progress through this tutorial, you will update this several times, adding more details while following the general pattern.
+This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing).
+
+As you progress through this tutorial, you will update this several times, adding more details while following the general pattern.
 
 ### Hello, World!
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
@@ -277,9 +279,15 @@ The source is hosted on GitHub at `https://github.com/atextor/icat`, which alrea
 - `owner`: the name of the account controlling the repository; `owner = "atextor"`
 - `repo`: the name of the repository to fetch; `repo = "icat"`
 
-You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch. In this case, the latest release tag is `v0.5`.
+You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch.
 
-As in the `hello` example, a hash must also be supplied. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command. You need the SHA256 hash of the *contents* of the tarball (as opposed to the hash of the tarball file itself), so you will need to pass the `--unpack` and `--type sha256` arguments too:
+In this case, the latest release tag is `v0.5`.
+
+As in the `hello` example, a hash must also be supplied.
+
+This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command.
+
+You need the SHA256 hash of the *contents* of the tarball (as opposed to the hash of the tarball file itself), so you will need to pass the `--unpack` and `--type sha256` arguments too:
 
 ```console
 $ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz --type sha256
@@ -332,7 +340,9 @@ error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed
        For full logs, run 'nix log /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'.
 ```
 
-A compiler error! The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), you'll find that `imlib2` is already in `nixpkgs`.
+A compiler error! The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header.
+
+If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), you'll find that `imlib2` is already in `nixpkgs`.
 
 You can add this package to your build environment by adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`:
 
@@ -387,7 +397,9 @@ You can see a few warnings which should be corrected in the upstream code, but t
 Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords.
 :::
 
-You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. Add this to your derivation's input attribute set and to `buildInputs`:
+You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
+
+Add this to your derivation's input attribute set and to `buildInputs`:
 
 ```nix
 # icat.nix
@@ -413,7 +425,9 @@ stdenv.mkDerivation {
 ```
 
 :::{note}
-Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11`, as the latter would cause a syntax error. Because Nix is lazily-evaluated, including the dependency this way is safe to do and doesn't actually include all of `xorg` into the build context.
+Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11`, as the latter would cause a syntax error.
+
+Because Nix is lazily-evaluated, including the dependency this way is safe to do and doesn't actually include all of `xorg` into the build context.
 :::
 
 Run the last command again:
@@ -440,11 +454,15 @@ error: builder for '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv' failed
 The missing dependency error is solved, but there is now another problem: `make: *** No rule to make target 'install'.  Stop.`
 
 ### installPhase
-The `stdenv` is automatically working with the `Makefile` that comes with `icat`: you can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully. The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to users.
+The `stdenv` is automatically working with the `Makefile` that comes with `icat`: you can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
+
+The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to users.
 
 To add this step to your derivation, use the [`installPhase` attribute](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase), which contains a list of command strings to execute to perform the installation.
 
-Because the `make` step completes successfully, the `icat` executable is available in the build directory, and you only need to copy it from there to the output directory. In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; create a `bin` directory within that and copy the `icat` binary there:
+Because the `make` step completes successfully, the `icat` executable is available in the build directory, and you only need to copy it from there to the output directory.
+
+In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; create a `bin` directory within that and copy the `icat` binary there:
 
 ```nix
 # icat.nix
@@ -477,11 +495,15 @@ stdenv.mkDerivation {
 ### Phases and Hooks
 Nixpkgs `stdenv.mkDerivation` derivations are separated into [phases](https://nixos.org/manual/nixpkgs/stable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
-You saw earlier how the `stdenv.mkDerivation` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, you defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
+You saw earlier how the `stdenv.mkDerivation` expected the project's `Makefile` to have an `install` target, and failed when it didn't.
+
+To fix this, you defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
 
 Up to that point, the `stdenv.mkDerivation` automatically determined the `buildPhase` information for the `icat` package.
 
-During derivation realisation, there are a number of shell functions ("hooks", in `nixpkgs`) which may execute in each derivation phase, which do things like set variables, source files, create directories, and so on. These are specific to each phase, and run both before and after that phase's execution, controlling the build environment and helping to prevent environment-modifying behavior defined within packages from creating sources of nondeterminism within and between Nix derivations.
+During derivation realisation, there are a number of shell functions ("hooks", in `nixpkgs`) which may execute in each derivation phase, which do things like set variables, source files, create directories, and so on.
+
+These are specific to each phase, and run both before and after that phase's execution, controlling the build environment and helping to prevent environment-modifying behavior defined within packages from creating sources of nondeterminism within and between Nix derivations.
 
 It's good practice when packaging software with Nix to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them; this facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later, in addition to the previously-mentioned reproducibility benefits.
 
