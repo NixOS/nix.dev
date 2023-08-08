@@ -223,7 +223,7 @@ Congratulations, you have successfully packaged your first program with Nix!
 Next, you'll package another piece of software with external-to-`stdenv` dependencies that present new challenges, requiring you to make use of more `mkDerivation` features.
 
 ## Something Bigger
-Now you will package a somewhat more complicated program, `icat`, which allows you to render images in your terminal.
+Now you will package a somewhat more complicated program, [`icat`](https://github.com/atextor/icat), which allows you to render images in your terminal.
 
 To start, modify the `default.nix` from the previous section by adding a new attribute for `icat`:
 
