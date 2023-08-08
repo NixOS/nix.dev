@@ -467,8 +467,6 @@ stdenv.mkDerivation {
 Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11.dev`, as the latter would cause a syntax error. Because Nix is lazily-evaluated, including the dependency this way is safe to do and doesn't actually include all of `xorg` into the build context.
 :::
 
-
-### `buildInputs` and `nativeBuildInputs`
 Run the last command again:
 ```console
 $ nix-build -A icat
