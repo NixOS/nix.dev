@@ -51,10 +51,11 @@ The hash cannot be known until after the tarball has been downloaded and unpacke
 # hello.nix
 { lib
 , stdenv
+, fetchzip
 }:
 
 stdenv.mkDerivation {
-  src = builtins.fetchTarball {
+  src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = lib.fakeSha256;
   };
