@@ -251,7 +251,7 @@ stdenv.mkDerivation {
   name = "icat";
 
   src = builtins.fetchTarball {
-	...
+    ...
   };
 }
 ```
@@ -305,9 +305,9 @@ stdenv.mkDerivation {
 
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
-	repo = "icat";
-	rev = "v0.5";
-	sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
+    repo = "icat";
+    rev = "v0.5";
+    sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 }
 ```
@@ -378,9 +378,9 @@ stdenv.mkDerivation {
 
   src = pkgs.fetchFromGitHub {
     owner = "atextor";
-	repo = "icat";
-	rev = "v0.5";
-	sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
+    repo = "icat";
+    rev = "v0.5";
+    sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
   buildInputs = [ imlib2 ];
