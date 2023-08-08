@@ -20,7 +20,7 @@ Both paradigms have their own set of unique concepts and support tooling that ha
 At the moment, neither the stable nor the experimental interface is clearly superior to the other in all aspects.
 While flakes reduce complexity in some regards, they introduce additional concepts and you will have to learn more about the system to fully understand how it works.
 
-There are downsides to relying on [experimental features](https://nixos.org/manual/nix/stable/contributing/experimental-features.html) in general:
+There are downsides to relying on [experimental features](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-experimental-features) in general:
 - Interfaces and behavior of experimental features could still be changed by Nix developers.
   This may require you to adapt your code at some point in the future, which will be more effort when it has grown in complexity.
   Currently there is no agreed-upon plan or timeline for stabilising flakes.
