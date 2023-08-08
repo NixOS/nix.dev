@@ -83,15 +83,9 @@ error: cannot evaluate a function that has an argument without a value ('lib')
 Problem: the expression in `hello.nix` is a *function*, which only produces its intended output if it is passed the correct *arguments*.
 
 ### A New Command
-`lib` is available from `nixpkgs`, which must be imported with another Nix expression in order to pass it as an argument to this derivation. The `nix-build` command allows passing whole expressions as an argument following the `-E/--expr` flag, like this one:
+`lib` is available from `nixpkgs`, which must be imported with another Nix expression in order to pass it as an argument to this derivation.
 
-```console
-with import <nixpkgs> {}; callPackage ./hello.nix {}
-```
-
-`callPackage` automatically passes attributes from `nixpkgs` to the given function (here, the one in `hello.nix`), if they match attributes required by that function's argument attrset. Here, `callPackage` will supply `lib`, and `stdenv`.
-
-To avoid having to execute `nix-build -E 'with import <nixpkgs> {}; callPackage ./hello.nix {}'` each time, create a `default.nix` in the same directory as `hello.nix`, with the following contents:
+The recommended way to do this is to create a `default.nix` in the same directory as `hello.nix`, with the following contents:
 
 ```nix
 # default.nix
@@ -104,6 +98,12 @@ in
 ```
 
 This allows you to use `nix-build -A hello` to realize the derivation in `hello.nix`, similar to the current convention used in `nixpkgs`.
+
+:::{note}
+`callPackage` automatically passes attributes from `nixpkgs` to the given function, if they match attributes required by that function's argument attrset.
+
+In this case, `callPackage` will supply `lib`, and `stdenv` to the function defined in `hello.nix`.
+:::
 
 Now run the `nix-build` command with the new argument:
 
