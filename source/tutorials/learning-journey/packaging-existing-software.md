@@ -553,7 +553,7 @@ stdenv.mkDerivation {
 ### Phases and Hooks
 Nixpkgs `stdenv.mkDerivation` derivations are separated into [phases](https://nixos.org/manual/nixpkgs/stable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
-You saw earlier how the `stdenv` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, you defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
+You saw earlier how the `stdenv.mkDerivation` expected the project's `Makefile` to have an `install` target, and failed when it didn't. To fix this, you defined a custom `installPhase`, containing instructions for copying the `icat` binary to the correct output location, in effect installing it.
 
 Up to that point, the `stdenv` automatically determined the `buildPhase` information for the `icat` package.
 
