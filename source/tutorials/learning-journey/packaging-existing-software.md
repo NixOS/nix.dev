@@ -144,13 +144,7 @@ and then re-run the command:
 ```console
 $ nix-build -A hello
 error:
-       … while calling the 'derivationStrict' builtin
-
-         at /builtin/derivation.nix:9:12: (source not available)
-
-       … while evaluating derivation 'hello'
-         whose name attribute is located at /nix/store/5na8c1j0cn5wls2g2d8q357cz3aqlaqj-nixos-23.05.2478.bd836ac5e5a7/nixos/pkgs/stdenv/generic/make-derivation.nix:303:7
-
+...
        … while evaluating attribute 'src' of derivation 'hello'
 
          at /home/nix-user/hello.nix:9:3:
@@ -192,18 +186,13 @@ $ nix-build -A hello
 this derivation will be built:
   /nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv
 building '/nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv'...
-unpacking sources
-unpacking source archive /nix/store/xdbysilxxgbs55rrdxniglqg9m1v61h4-source
-source root is source
-patching sources
+...
 configuring
-configure flags: --disable-dependency-tracking --prefix=/nix/store/y55w1djfnxkl2jk9w0liancp83zqb7ki-hello
 ...
 configure: creating ./config.status
 config.status: creating Makefile
 ...
 building
-build flags: SHELL=/nix/store/7q1b1bsmxi91zci6g8714rcljl620y7f-bash-5.2-p15/bin/bash
 ... <many more lines omitted>
 ```
 Great news: the derivation built successfully!
@@ -327,32 +316,7 @@ $ nix-build -A icat
 these 2 derivations will be built:
   /nix/store/86q9x927hsyyzfr4lcqirmsbimysi6mb-source.drv
   /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv
-these 19 paths will be fetched (4.21 MiB download, 17.65 MiB unpacked):
 ...
-trying https://github.com/atextor/icat/archive/v0.5.tar.gz
-...
-unpacking source archive /build/v0.5.tar.gz
-building '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'...
-unpacking sources
-unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
-source root is source
-patching sources
-configuring
-no configure script, doing nothing
-building
-build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
-                 from icat.c:31:
-/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
-  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-      |   ^~~~~~~
-icat.c:39:10: fatal error: Imlib2.h: No such file or directory
-   39 | #include <Imlib2.h>
-      |          ^~~~~~~~~~
-compilation terminated.
-make: *** [Makefile:16: icat.o] Error 1
 error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed with exit code 2;
        last 10 log lines:
        >                  from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
@@ -401,28 +365,6 @@ $ nix-build -A icat
 this derivation will be built:
   /nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv
 ...
-building '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv'...
-unpacking sources
-unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
-source root is source
-patching sources
-configuring
-no configure script, doing nothing
-building
-build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
-                 from icat.c:31:
-/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
-  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-      |   ^~~~~~~
-In file included from icat.c:39:
-/nix/store/4fvrh0sjc8sbkbqda7dfsh7q0gxmnh9p-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
-   45 | #include <X11/Xlib.h>
-      |          ^~~~~~~~~~~~
-compilation terminated.
-make: *** [Makefile:16: icat.o] Error 1
 error: builder for '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv' failed with exit code 2;
        last 10 log lines:
        >                  from icat.c:31:
@@ -479,30 +421,7 @@ Run the last command again:
 $ nix-build -A icat
 this derivation will be built:
   /nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv
-building '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv'...
-unpacking sources
-unpacking source archive /nix/store/rx21f6fgnmxgp1sw0wbqll9wds4xc6v0-source
-source root is source
-patching sources
-configuring
-no configure script, doing nothing
-building
-build flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash
-gcc -c -Wall -pedantic -std=c99 -D_BSD_SOURCE -o icat.o icat.c
-In file included from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/bits/libc-header-start.h:33,
-                 from /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/stdio.h:27,
-                 from icat.c:31:
-/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
-  195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-      |   ^~~~~~~
-icat.c: In function 'main':
-icat.c:319:33: warning: ignoring return value of 'write' declared with attribute 'warn_unused_result' [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result8;;]
-  319 |                                 write(tempfile, &buf, 1);
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
-gcc -o icat icat.o -lImlib2
-installing
-install flags: SHELL=/nix/store/8fv91097mbh5049i9rglc73dx6kjg3qk-bash-5.2-p15/bin/bash install
-make: *** No rule to make target 'install'.  Stop.
+...
 error: builder for '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv' failed with exit code 2;
        last 10 log lines:
        >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
