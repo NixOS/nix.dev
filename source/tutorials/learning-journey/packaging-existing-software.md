@@ -438,7 +438,7 @@ You can see a few warnings which should be corrected in the upstream code, but t
 Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords.
 :::
 
-You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. The `Xlib` headers in turn live in the `dev` output of `xorg.libX11`. Add this to your derivation's input attribute set and to `buildInputs`:
+You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set. Add this to your derivation's input attribute set and to `buildInputs`:
 
 ```nix
 # icat.nix
