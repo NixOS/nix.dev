@@ -282,7 +282,7 @@ The source is hosted on GitHub at `https://github.com/atextor/icat`, which alrea
 
 You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch. In this case, the latest release tag is `v0.5`.
 
-As in the `hello` example, a hash must also be supplied. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command. You need the SHA256 hash of the *contents* of the tarball, so you will need to pass the `--unpack` and `--type sha256` arguments too:
+As in the `hello` example, a hash must also be supplied. This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command. You need the SHA256 hash of the *contents* of the tarball (as opposed to the hash of the tarball file itself), so you will need to pass the `--unpack` and `--type sha256` arguments too:
 
 ```console
 $ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz --type sha256
