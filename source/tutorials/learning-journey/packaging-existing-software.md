@@ -43,9 +43,13 @@ This is a function which takes an attribute set containing `stdenv`, and produce
 ### Hello, World!
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-To begin, you will download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` using `fetchTarball`, which takes the URI path to the download file and a SHA256 hash of its contents.
+To begin, you will download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` using `fetchzip`, which takes the URI path to the download file and a SHA256 hash of its contents.
 
-The hash cannot be known until after the tarball has been downloaded and unpacked, but Nix will complain if the hash supplied to `fetchTarball` was incorrect, so it is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
+:::{note}
+`fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just zip files!
+:::
+
+The hash cannot be known until after the tarball has been downloaded and unpacked, but Nix will complain if the hash supplied to `fetchzip` was incorrect, so it is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
 
 ```nix
 # hello.nix
@@ -123,12 +127,13 @@ Update the file again to add a `name`:
 # hello.nix
 { lib
 , stdenv
+, fetchzip
 }:
 
 stdenv.mkDerivation {
   name = "hello";
 
-  src = builtins.fetchTarball {
+  src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = lib.fakeSha256;
   };
@@ -151,7 +156,7 @@ error:
          at /home/nix-user/hello.nix:9:3:
 
             8|
-            9|   src = builtins.fetchTarball {
+            9|   src = fetchzip {
              |   ^
            10|     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
 
@@ -167,12 +172,13 @@ As expected, the incorrect file hash caused an error, and Nix helpfully provided
 # hello.nix
 { lib
 , stdenv
+, fetchzip
 }:
 
 stdenv.mkDerivation {
   name = "hello";
 
-  src = builtins.fetchTarball {
+  src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
   };
@@ -245,18 +251,19 @@ Now copy `hello.nix` to a new file, `icat.nix`, and update the `name` attribute 
 # icat.nix
 { lib
 , stdenv
+, fetchzip
 }:
 
 stdenv.mkDerivation {
   name = "icat";
 
-  src = builtins.fetchTarball {
+  src = fetchzip {
     ...
   };
 }
 ```
 
-Now to download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should slightly modify the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers), this time using `pkgs.fetchFromGitHub` instead of `builtins.fetchTarball`, updating the argument attribute set to the function accordingly:
+Now to download the source code. `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should slightly modify the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers), this time using `fetchFromGitHub` instead of `fetchzip`, updating the argument attribute set to the function accordingly:
 
 ```nix
 # icat.nix
@@ -275,7 +282,7 @@ stdenv.mkDerivation {
 ```
 
 ### Fetching Source from GitHub
-While `fetchTarball` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
+While `fetchzip` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
 
 The source is hosted on GitHub at `https://github.com/atextor/icat`, which already gives the first two arguments:
 - `owner`: the name of the account controlling the repository; `owner = "atextor"`
