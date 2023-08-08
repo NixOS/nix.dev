@@ -433,7 +433,6 @@ error: builder for '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv' failed
 
 You can see a few warnings which should be corrected in the upstream code, but the important bit for this tutorial is `fatal error: X11/Xlib.h: No such file or directory`: another dependency is missing.
 
-In addition to the widespread practice of prefixing a project name with `lib` to indicate the libraries of that project, in Nixpkgs it's also common to separate headers, libraries, binaries, and documentation into different output attributes of a given [derivation](https://nixos.org/manual/nix/stable/language/derivations.html).
 
 :::{note}
 Determining from where to source a dependency is currently a somewhat-involved process: it helps to become familiar with searching the `nixpkgs` source for keywords.
