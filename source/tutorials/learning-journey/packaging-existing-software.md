@@ -362,11 +362,7 @@ error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed
 
 A compiler error! The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header. If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=imlib2), you'll find that `imlib2` is already in `nixpkgs`.
 
-You can add this package to your build environment by either
-- adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`, or
-- adding `pkgs.imlib2` to the `buildInputs` directly, since `pkgs` is already in-scope.
-
-Because `callPackage` is used to provide all necessary inputs in `nixpkgs` as well as in the `nix-build` invocation, the first approach is the one currently favored, and you should use it here:
+You can add this package to your build environment by adding `imlib2` to the set of inputs to the expression in `icat.nix`, and then adding `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`:
 
 ```nix
 # icat.nix
