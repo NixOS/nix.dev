@@ -267,15 +267,15 @@ Now to download the source code. `icat`'s upstream repository is hosted on [GitH
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
+, fetchFromGitHub
 }:
 
 stdenv.mkDerivation {
   name = "icat";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     ...
   };
 }
@@ -302,15 +302,15 @@ Now you can supply the correct hash to `fetchFromGitHub`:
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
+, fetchFromGitHub
 }:
 
 stdenv.mkDerivation {
   name = "icat";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
     rev = "v0.5";
@@ -374,16 +374,16 @@ You can add this package to your build environment by adding `imlib2` to the set
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
+, fetchFromGitHub
 , imlib2
 }:
 
 stdenv.mkDerivation {
   name = "icat";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
     rev = "v0.5";
@@ -449,9 +449,9 @@ You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivat
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
+, fetchFromGitHub
 , imlib2
 , xorg
 }:
@@ -459,7 +459,7 @@ You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivat
 stdenv.mkDerivation {
   name = "icat";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
     rev = "v0.5";
@@ -529,9 +529,9 @@ Because the `make` step completes successfully, the `icat` executable is availab
 
 ```nix
 # icat.nix
-{ pkgs
-, lib
+{ lib
 , stdenv
+, fetchFromGitHub
 , imlib2
 , xorg
 }:
@@ -539,7 +539,7 @@ Because the `make` step completes successfully, the `icat` executable is availab
 stdenv.mkDerivation {
   name = "icat";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
     rev = "v0.5";
