@@ -427,7 +427,7 @@ stdenv.mkDerivation {
 :::{note}
 Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11`, as the latter would cause a syntax error.
 
-Because Nix is lazily-evaluated, including the dependency this way is safe to do and doesn't actually include all of `xorg` into the build context.
+Because Nix is lazily-evaluated, using `xorg.libX11` means that we only include the `libX11` attribute and the derivation doesn't actually include all of `xorg` into the build context.
 :::
 
 Run the last command again:
