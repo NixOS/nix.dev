@@ -199,7 +199,8 @@ building
 ```
 Great news: the derivation built successfully!
 
-The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project; it wasn't necessary to write any build instructions in this case, because the `stdenv` build system is based on `autoconf`, which automatically detected the structure of the project directory.
+The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project.
+It wasn't necessary to write any build instructions in this case because the `stdenv` build system is based on `autoconf`, which automatically detected the structure of the project directory.
 
 ### Build Result
 Check your working directory for the result:
