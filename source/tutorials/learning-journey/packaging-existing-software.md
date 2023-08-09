@@ -462,7 +462,8 @@ To add this step to your derivation, use the [`installPhase` attribute](https://
 
 Because the `make` step completes successfully, the `icat` executable is available in the build directory, and you only need to copy it from there to the output directory.
 
-In Nix, this location is stored in the `$out` variable, accessible in the derivation's component scripts; create a `bin` directory within that and copy the `icat` binary there:
+In Nix, the output directory is stored in the `$out` variable, accessible in the derivation's component scripts.
+Create a `bin` directory within the `$out` directory and copy the `icat` binary there:
 
 ```nix
 # icat.nix
