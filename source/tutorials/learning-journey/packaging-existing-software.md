@@ -371,7 +371,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Another error, but compilation proceeds further this time:
+Run `nix-build -A icat` again and you'll encounter another error, but compilation proceeds further this time:
 
 ```console
 $ nix-build -A icat
