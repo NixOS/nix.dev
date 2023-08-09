@@ -11,7 +11,7 @@ myst:
 
 # Packaging Existing Software With Nix
 
-One of Nix's primary use-cases is in addressing common difficulties encountered while packaging software, like *managing dependencies*.
+One of Nix's primary use-cases is in addressing common difficulties encountered while packaging software, like managing dependencies.
 
 In the long term, Nix helps tremendously in alleviating that stress, but when *first* packaging existing software with Nix, it's common to encounter missing dependencies preventing builds from succeeding.
 
