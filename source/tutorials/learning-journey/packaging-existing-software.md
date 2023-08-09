@@ -210,7 +210,7 @@ $ ls
 default.nix hello.nix  result
 ```
 
-This result is a symbolic link to a Nix store location containing the built binary; you can call `./result/bin/hello` to execute this program:
+This `result` is a symbolic link to a Nix store location containing the built binary; you can call `./result/bin/hello` to execute this program:
 
 ```console
 $ ./result/bin/hello
