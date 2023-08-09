@@ -524,7 +524,7 @@ You should now adjust your `installPhase` to call the appropriate hooks:
   '';
 ...
 ```
-
+### A successful build
 Running the `nix-build` command once more will finally do what you want, and more safely than before; you can `ls` in the local directory to find a `result` symlink to a location in the Nix store:
 
 ```console
