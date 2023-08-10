@@ -24,6 +24,9 @@ We've found that contributors struggle to understand the differences between the
   - Reference material should be relatively terse, simply listing which functions/classes/etc exist, but should still clearly define how to use the code and how it relates to the rest of the ecosystem.
   - Reference material should focus on "what's out there", with the text and layout optimized for scanning and random access.
   - Reference material should be supplemented with examples.
+- Tutorial
+  - Tutorials walk the user through a particular activity to teach them about common tools and patterns in the ecosystem.
+  - While the activity itself is important, the goal is also to connect the dots between other things the reader has learned.
 - How-to (we call these "Recipes")
   - Recipes are a list of steps showing how to achieve a specific goal or solve a specific problem.
   - The goal is to help the reader reach a specific end, not understand the theory or greater context.
@@ -32,9 +35,6 @@ We've found that contributors struggle to understand the differences between the
   - Concepts describe the internals of a piece of code or how to think about a particular idea or entity in the ecosystem.
   - A concept can also describe the historical context behind why something works the way that it does today.
   - If you find yourself wanting to write about the nitty gritty details of how something works, you most likely want to write an explanation.
-- Tutorial
-  - Tutorials walk the user through a particular activity to help give them muscle memory with accepted tools and patterns in the ecosystem.
-  - While the activity itself is important, the goal is to get the reader familiar with the patterns and tools in the ecosystem.
 
 ### Recipe vs. tutorial
 We find that contributors primarily struggle with the difference between a How-to/Recipe and a Tutorial.
@@ -44,7 +44,7 @@ Here are several explanations to help you understand the difference.
 - A recipe is used in a "working" context where the reader just wants a sequence of instructions to achieve an outcome.
   - In this context the reader may already know or may not care how or why these instructions work, they just want to know what to do in order to achieve the desired result.
 - A tutorial is used in a "learning" context where the reader is following a sequence of instructions to gain practice performing a certain task.
-  - Some small bits of motivation or explanation are helpful in this context to help a reader connect the dots with other things they may have already learned or, but the focus is not on _how_ or _why_.
+  - Some small bits of motivation or explanation are helpful in this context to help a reader connect the dots with other things they may have already learned, but the focus is not on _how_ or _why_.
 
 A helpful analogy is landing an airplane in two different contexts.
 
