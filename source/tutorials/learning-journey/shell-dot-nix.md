@@ -20,14 +20,14 @@ WIP
 - A basic understanding of the Nix language
 
 ## Entering a shell with Python installed
-Suppose we wanted to enter a shell in which Python 3.10 was installed.
+Suppose we wanted to enter a shell in which Python 3 was installed.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
 ```
-$ nix-shell -p python310
+$ nix-shell -p python3
 ```
 
 This command works, but there's a number of inefficiences:
-- You have to type out `-p python310` every time you enter the shell.
+- You have to type out `-p python3` every time you enter the shell.
 - It doesn't scale to an arbitrary number of packages (you would have to type out each package name each time).
 - It doesn't (ergonomically) allow you any further customization of your shell environment.
 
@@ -40,13 +40,13 @@ No more specifying packages on the command line.
 Here's what a basic `shell.nix` looks like that installs Python 3.10 as before:
 ```nix
 let
-    pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> {};
 in
-    pkgs.mkShell {
-        packages = [
-          pkgs.python310
-        ];
-    }
+  pkgs.mkShell {
+    packages = [
+      pkgs.python3
+    ];
+  }
 ```
 where `mkShell` is a function that when called produces a shell environment.
 
@@ -58,17 +58,19 @@ For example, let's say we wanted to add `curl` to our shell environment.
 The new `shell.nix` would look like this:
 ```nix
 let
-    pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> {};
 in
-    pkgs.mkShell {
-        packages = [
-          pkgs.python310
-          pkgs.curl  # new package
-        ];
-    }
+  pkgs.mkShell {
+    packages = [
+      pkgs.python3
+      pkgs.curl  # new package
+    ];
+  }
 ```
 
-TODO: go into `packages` vs. `buildInputs`
+:::{note}
+`nix-shell` was originally conceived as a way to construct a shell environment containing the tools needed to *develop software*; only later was it widely used as a general way to construct temporary environments for other purposes. Also note that `mkShell` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell) so strictly speaking you can provide any attributes to `mkShell` that you could to `mkDerivation` such as `buildInputs`. However, the `packages` attribute provided to `mkShell` is an alias for `buildInputs`, so you shouldn't need to provide both `packages` and `buildInputs`.
+:::
 
 ## Environment variables
 It's common to want to automatically export certain environment variables when you enter a shell environment.
@@ -84,44 +86,50 @@ Let's say you wanted to set the database user (`DB_USER`) and password (`DB_PASS
 This is how that would look:
 ```nix
 let
-    pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> {};
 in
-    pkgs.mkShell {
-        packages = [
-          pkgs.python310
-          pkgs.curl
-        ];
+  pkgs.mkShell {
+    packages = [
+      pkgs.python310
+      pkgs.curl
+    ];
 
-        # Database username and password
-        DB_USER = "db_user";
-        DB_PASSWORD = "super secret don't look";
-    }
+    env = {
+      # Database credentials
+      DB_USER = "db_user";
+      DB_PASSWORD = "super secret don't look";
+    };
+  }
 ```
 
-Not only can you set new environment variables, but you can overwrite _existing_ environment variables.
-For instance, the shell prompt format is set by the `PS1` environment variable.
-In order to set your own prompt you can simply set the `PS1` attribute in the attribute set passed to the `mkShell` command
-To set the shell prompt to the format `<username>@<hostname> [myEnv] $ ` the `shell.nix` file would look like this:
 
-FIXME: This doesn't actually set the prompt for some reason
+Some variables are protected.
+For example, the shell prompt format for most shells is set by the `PS1` environment variable, but `nix-shell` already overrides this by default, and does not allow us to alter the `PS1` attribute directly.
+In cases where `nix-shell` prevents you from settings these environment variables directly, we can still set a new value for that environment variable by manually exporting it in the [`shellHook` attribute](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes) passed to `mkShell`.
+
+To set the shell prompt to the format `<username>@<hostname> >>> `, the `shell.nix` file would look like this:
 
 ```nix
 let
-    pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> {};
 in
-    pkgs.mkShell {
-        packages = [
-          pkgs.python310
-          pkgs.curl
-        ];
+  pkgs.mkShell {
+    packages = [
+      pkgs.python310
+      pkgs.curl
+    ];
 
-        # Database username and password
-        DB_USER = "db_user";
-        DB_PASSWORD = "super secret don't look";
+    env = {
+      # Database credentials
+      DB_USER = "db_user";
+      DB_PASSWORD = "super secret don't look";
+    };
 
-        # Set the shell prompt to '<username>@<hostname> [myEnv] $ '
-        PS1 = "\u@\h [myEnv] $ ";
-    }
+    # Set the shell prompt format
+    shellHook = ''
+      export PS1="\u@\h >>> "
+    '';
+  }
 ```
 
 
@@ -129,31 +137,27 @@ in
 You may want to perform some initialization before entering the shell environment (for example, maybe you want to ensure that a file exists).
 Commands you'd like to run before entering the shell environment can be placed in the `shellHook` attribute of the attribute set provided to the `mkShell` function.
 To ensure that a file `should_exist.txt` exists, the `shell.nix` file would look like this:
+
 ```nix
 let
-    pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> {};
 in
-    pkgs.mkShell {
-        packages = [
-          pkgs.python310
-          pkgs.curl
-        ];
+  pkgs.mkShell {
+    packages = [
+      pkgs.python310
+      pkgs.curl
+    ];
 
-        # Database username and password
-        DB_USER = "db_user";
-        DB_PASSWORD = "super secret don't look";
+    env = {
+      # Database credentials
+      DB_USER = "db_user";
+      DB_PASSWORD = "super secret don't look";
+    };
 
-        # Ensure that 'should_exist.txt' exists
-        shellHook = ''
-        touch should_exist.txt
-        '';
-    }
+    # Set shell prompt format, ensure that 'should_exist.txt' exists
+    shellHook = ''
+      export PS1="\u@\h >>> "
+      touch should_exist.txt
+    '';
+  }
 ```
-
-
-## Where to next?
-
-<!-- Is there something the reader should read next? -->
-<!-- Are there other topics they should explore next? -->
-<!-- Provide links to other resources that might be relevant. -->
-WIP
