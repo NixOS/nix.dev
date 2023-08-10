@@ -280,7 +280,7 @@ While `fetchzip` required `url` and `sha256` arguments, more are needed for [`fe
 
 The source is hosted on GitHub at `https://github.com/atextor/icat`, which already gives the first two arguments:
 - `owner`: the name of the account controlling the repository; `owner = "atextor";`
-- `repo`: the name of the repository to fetch; `repo = "icat"`
+- `repo`: the name of the repository to fetch; `repo = "icat";`
 
 You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch.
 
