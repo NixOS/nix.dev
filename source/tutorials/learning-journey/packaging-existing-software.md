@@ -46,7 +46,16 @@ As you progress through this tutorial, you will update this several times, addin
 ### Hello, World!
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-To begin, you will download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` using `fetchzip`, which takes the URI path to the download file and a SHA256 hash of its contents.
+To begin, you should add a `name` attribute to the set passed to `mkDerivation`; every derivation needs a name, and Nix will throw `error: derivation name missing` without one.
+
+```diff
+...
+stdenv.mkDerivation {
++ name = "hello";
+...
+```
+
+Next, you will download the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` using `fetchzip`, which takes the URI path to the download file and a SHA256 hash of its contents.
 
 :::{note}
 `fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just zip files!
@@ -62,6 +71,8 @@ The hash cannot be known until after the tarball has been downloaded and unpacke
 }:
 
 stdenv.mkDerivation {
+  name = "hello";
+
   src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
     sha256 = lib.fakeSha256;
@@ -113,36 +124,6 @@ In this case, `callPackage` will supply `lib`, and `stdenv` to the function defi
 :::
 
 Now run the `nix-build` command with the new argument:
-
-```console
-$ nix-build -A hello
-error: derivation name missing
-```
-
-This new failure occurs with the *derivation*, further down in the file than the initial error on line 2 about the `lib` argument not having a value; the previous error was successfully resolved by changing the expression passed to `nix-build`.
-
-### Naming a Derivation
-Every derivation needs a `name` attribute, which must either be set directly or constructed by `mkDerivation` from `pname` and `version` attributes, if they exist.
-
-Update the file again to add a `name`:
-
-```nix
-# hello.nix
-{ lib
-, stdenv
-, fetchzip
-}:
-
-stdenv.mkDerivation {
-  name = "hello";
-
-  src = fetchzip {
-    url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = lib.fakeSha256;
-  };
-}
-```
-and then re-run the command:
 
 ```console
 $ nix-build -A hello
