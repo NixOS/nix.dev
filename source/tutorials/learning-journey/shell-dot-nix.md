@@ -1,4 +1,4 @@
-# TITLE
+# Creating shell environments
 
 <!-- Include any foreward you want here -->
 
@@ -7,17 +7,17 @@
 ### What will you learn?
 
 <!-- Give a brief description of what the reader will learn so that they know whether the topic interests them. -->
-- How to create reproducible shell environments
+How to create and configure reproducible shell environments
 
 ### How long will it take?
-WIP
+30 minutes
 
 <!-- Give some indication of how long it will take to complete the tutorial so that the reader knows whether to continue. -->
 
 ### What will you need?
 
 <!-- List any prerequisite knowledge or tools the reader will need to complete the tutorial. -->
-- A basic understanding of the Nix language
+A basic understanding of the Nix language
 
 ## Entering a shell with Python installed
 Suppose we wanted to enter a shell in which Python 3 was installed.
@@ -50,7 +50,7 @@ in
 ```
 where `mkShell` is a function that when called produces a shell environment.
 
-If you save this into a file called `shell.nix` and call `nix-shell` in the directory containing this `shell.nix` file, you'll enter a shell with Python 3.10 installed.
+If you save this into a file called `shell.nix` and call `nix-shell` in the directory containing this `shell.nix` file, you'll enter a shell with Python 3 installed.
 
 ## Adding packages
 Additional executable packages are added to the shell by adding them to the `packages` attribute.
@@ -102,35 +102,14 @@ in
   }
 ```
 
+:::{warning}
+Some variables are protected from being overridden via the `env` attribute as described above.
 
-Some variables are protected.
-For example, the shell prompt format for most shells is set by the `PS1` environment variable, but `nix-shell` already overrides this by default, and does not allow us to alter the `PS1` attribute directly.
-In cases where `nix-shell` prevents you from settings these environment variables directly, we can still set a new value for that environment variable by manually exporting it in the [`shellHook` attribute](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes) passed to `mkShell`.
+For example, the shell prompt format for most shells is set by the `PS1` environment variable, but `nix-shell` already overrides this by default, and will ignore a `PS1` attribute listed in `env`.
 
-To set the shell prompt to the format `<username>@<hostname> >>> `, the `shell.nix` file would look like this:
-
-```nix
-let
-  pkgs = import <nixpkgs> {};
-in
-  pkgs.mkShell {
-    packages = [
-      pkgs.python310
-      pkgs.curl
-    ];
-
-    env = {
-      # Database credentials
-      DB_USER = "db_user";
-      DB_PASSWORD = "super secret don't look";
-    };
-
-    # Set the shell prompt format
-    shellHook = ''
-      export PS1="\u@\h >>> "
-    '';
-  }
-```
+If you _really_ need to override these protected environment variables you can use the `shellHook` feature discussed in the next section and `export MYVAR="value"` in the hook script.
+It's generally discouraged to set environment variables this way.
+:::
 
 
 ## Startup commands
@@ -161,3 +140,13 @@ in
     '';
   }
 ```
+
+Some other common use cases for `shellHook` are:
+- Initializing a local data directory for a database used in a development environment
+- Running commands to load secrets into environment variables
+- Installing pre-commit-hooks
+
+## Where to next?
+- [`mkShell` documentation](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell)
+- Nixpkgs [shell functions and utilities](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-functions) documentation
+
