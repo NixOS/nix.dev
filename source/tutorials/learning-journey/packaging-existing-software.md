@@ -24,7 +24,8 @@ Next, you will build more complex packages with their own dependencies, leading 
 You'll encounter and address Nix error messages, build failures, and a host of other issues, developing your iterative debugging techniques along the way.
 
 :::{note}
-An important point of clarification: the term "package" is used conventionally by analogy to other systems, although the term does not refer to a proper concept in Nix.
+A _package_ is an informally defined Nixpkgs concept referring to a Nix derivation representing an installation of some project.
+Packages have mostly standardised attributes and output layouts, allowing them to be discovered in searches and installed into environments alongside other packages.
 
 For the purposes of this tutorial, "package" means something like "result of a derivation"; this is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
 :::
