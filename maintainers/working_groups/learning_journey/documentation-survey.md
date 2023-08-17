@@ -145,14 +145,14 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - https://edolstra.github.io/pubs/phd-thesis.pdf
   
-    Chapter 1:
+  Chapter 1:
     Existing software deployment models and issues faced with them; motivation for developing Nix, features of the Nix deployment system
 
   - Reading time: 15 min
   - Author: Eelco Dolstra
   - Created: 2006
  
-    Chapter 2:
+  Chapter 2:
     
     2.1: The Nix Store, isolation of components, cryptographic hashes, non-destructive upgrades, prevention of undeclared dependencies, closures
     
