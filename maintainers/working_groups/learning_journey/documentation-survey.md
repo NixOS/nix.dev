@@ -151,6 +151,17 @@ To better navigate the material and judge its relevance, every entry should prov
   - Reading time: 15 min
   - Author: Eelco Dolstra
   - Created: 2006
+ 
+    Chapter 2:
+    2.1: The Nix Store, isolation of components, cryptographic hashes, non-destructive upgrades, prevention of undeclared dependencies, closures
+    2.2: Use of Nix expressions to build software, structure of Nixpkgs collection, Hello and SUbversion as examples of derivations.
+    2.3: Package Management: Installations, updates and rollbacks, user environments, uninstalling, garbage collection
+    2.4: Store derivations: Definition, `.drv` files in Nix store. `nix-instantiate`, `nix-store --realise`. Allows various deployment policies, including source and binary.
+    2.5. Deployment models. Mechanisms `nix-instantiate` and `nix-store`. Models: Manual download; vesion management system; channels; one-click installation
+    2.6: Transparent source/binary deployment: `nix-push` and `nix-pull`. Pre-built substitutes.
+
+    - Reading time: 30 min
+    
 
 ### Nixpkgs
 
