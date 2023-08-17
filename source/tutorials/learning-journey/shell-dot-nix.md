@@ -37,7 +37,7 @@ A better solution is to create our shell environment from a `shell.nix` file.
 The `nix-shell` command by default looks for a file called `shell.nix` in the current directory and tries to build a shell environment by evaluating the Nix expression in this file.
 So, if you properly describe the shell environment you want in a `shell.nix` file, you can enter it with just the `nix-shell` command without any further arguments.
 No more specifying packages on the command line.
-Here's what a basic `shell.nix` looks like that installs Python 3.10 as before:
+Here's what a basic `shell.nix` looks like that installs Python 3 as before:
 ```nix
 let
   pkgs = import <nixpkgs> {};
@@ -48,7 +48,7 @@ in
     ];
   }
 ```
-where `mkShell` is a function that when called produces a shell environment.
+where `mkShell` is a function that produces a shell environment.
 
 If you save this into a file called `shell.nix` and call `nix-shell` in the directory containing this `shell.nix` file, you'll enter a shell with Python 3 installed.
 
@@ -69,7 +69,7 @@ in
 ```
 
 :::{note}
-`nix-shell` was originally conceived as a way to construct a shell environment containing the tools needed to *develop software*; only later was it widely used as a general way to construct temporary environments for other purposes. Also note that `mkShell` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell) so strictly speaking you can provide any attributes to `mkShell` that you could to `mkDerivation` such as `buildInputs`. However, the `packages` attribute provided to `mkShell` is an alias for `buildInputs`, so you shouldn't need to provide both `packages` and `buildInputs`.
+`nix-shell` was originally conceived as a way to construct a shell environment containing the tools needed to *develop software*; only later was it widely used as a general way to construct temporary environments for other purposes. Also note that `mkShell` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell) so strictly speaking you can provide any attributes to `mkShell` that you could to `mkDerivation` such as `buildInputs`. However, the `packages` attribute provided to `mkShell` is an alias for `nativeBuildInputs`, so you shouldn't need to provide both `packages` and `nativeBuildInputs`.
 :::
 
 ## Environment variables
@@ -108,7 +108,7 @@ Some variables are protected from being overridden via the `env` attribute as de
 For example, the shell prompt format for most shells is set by the `PS1` environment variable, but `nix-shell` already overrides this by default, and will ignore a `PS1` attribute listed in `env`.
 
 If you _really_ need to override these protected environment variables you can use the `shellHook` feature discussed in the next section and `export MYVAR="value"` in the hook script.
-It's generally discouraged to set environment variables this way.
+In some cases it's necessary to set environment variables this way, but you should use `env` when possible.
 :::
 
 
