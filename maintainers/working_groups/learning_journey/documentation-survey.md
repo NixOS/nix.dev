@@ -144,6 +144,13 @@ To better navigate the material and judge its relevance, every entry should prov
 ### Nix language
 
 - https://edolstra.github.io/pubs/phd-thesis.pdf
+  
+    Chapter 1:
+    Existing software deployment models and issues faced with them; motivation for developing Nix, features of the Nix deployment system
+
+  - Reading time: 15 min
+  - Author: Eelco Dolstra
+  - Created: 2006
 
 ### Nixpkgs
 
