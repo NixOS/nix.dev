@@ -4,20 +4,12 @@
 
 ## Overview
 
-### What will you learn?
-
 <!-- Give a brief description of what the reader will learn so that they know whether the topic interests them. -->
-How to create and configure reproducible shell environments
-
-### How long will it take?
-30 minutes
-
 <!-- Give some indication of how long it will take to complete the tutorial so that the reader knows whether to continue. -->
-
-### What will you need?
-
 <!-- List any prerequisite knowledge or tools the reader will need to complete the tutorial. -->
-A basic understanding of the Nix language
+| What will you learn?                                        | 🕑     | What will you need?                       |
+|------------------------------------------------------------ | ------ | ----------------------------------------- |
+| How to create and configure reproducible shell environments | 30 min | A basic understanding of the Nix language |
 
 ## Entering a shell with Python installed
 Suppose we wanted to enter a shell in which Python 3 was installed.
