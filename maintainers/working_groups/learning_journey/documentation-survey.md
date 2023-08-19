@@ -168,6 +168,11 @@ To better navigate the material and judge its relevance, every entry should prov
 
     - Reading time: 30 min
     
+  Chapter 3:
+    Relates deployment issues to memory management issues in programming languages. Relates files to objects in memory. Describes closures, discusses pointer discipline and conservative garbage collection, shows that persistence is achieved by cryptographic hashes.
+
+  - Reading time: 25 min
+    
 
 ### Nixpkgs
 
