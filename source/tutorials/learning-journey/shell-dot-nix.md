@@ -6,10 +6,12 @@
 <!-- Give a brief description of what the reader will learn so that they know whether the topic interests them. -->
 <!-- Give some indication of how long it will take to complete the tutorial so that the reader knows whether to continue. -->
 <!-- List any prerequisite knowledge or tools the reader will need to complete the tutorial. -->
+[📖]: ## "Reading time"
+[🕑]: ## "Interactive time"
 
-| 🕑     | What will you learn?                                        | What will you need?                       |
-| :---:  | :---                                                        | :---                                      |
-| 30 min | How to create and configure reproducible shell environments | A basic understanding of the Nix language |
+| [📖]     | [🕑]     | What will you learn?                                        | What will you need?                       |
+| :---:  | :---:  | :---                                                        | :---                                      |
+| 10 min | 30 min | How to create and configure reproducible shell environments | A basic understanding of the Nix language |
 
 ## Entering a shell with Python installed
 Suppose we wanted to enter a shell in which Python 3 was installed.
