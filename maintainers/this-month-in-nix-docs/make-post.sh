@@ -68,6 +68,7 @@ echo
 
 echo "### NixOS/nixpkgs"
 list_merged_prs "nixos/nixpkgs" "6.topic: documentation"
+list_merged_prs "nixos/nixpkgs" "8.has: documentation"
 echo
 
 echo "### NixOS/nix-pills"
