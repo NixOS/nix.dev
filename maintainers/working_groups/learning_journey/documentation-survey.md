@@ -174,7 +174,7 @@ To better navigate the material and judge its relevance, every entry should prov
   - Reading time: 25 min
         
   Chapter 4:
-    The Nix language: Functional languages; lazy languages. Lexical syntax of Nix language. Semantics: Basic and compund values, substitutions, function calls, conditionals, assertions, `with`, operators, evaluation rules. Implementation using ATerm library.
+    The Nix language: Functional languages; lazy languages. Lexical syntax of Nix language. Semantics: Basic and compound values, substitutions, function calls, conditionals, assertions, `with`, operators, evaluation rules. Implementation using ATerm library.
 
   - Reading time: 60 min
     
