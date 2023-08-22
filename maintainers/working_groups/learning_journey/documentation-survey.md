@@ -177,9 +177,12 @@ To better navigate the material and judge its relevance, every entry should prov
     The Nix language: Functional languages; lazy languages. Lexical syntax of Nix language. Semantics: Basic and compound values, substitutions, function calls, conditionals, assertions, `with`, operators, evaluation rules. Implementation using ATerm library.
 
   - Reading time: 60 min
+        
+  Chapter 5:
+    Extensional vs intensional. The Nix extensional model: cryptographic hashing; file system objects and the Nix store; adding atomic values to the store; translating Nix expressions to derivations; garbage collection
+
+  - Reading time: 60 min
     
-
-
 ### Nixpkgs
 
 - [Nix Pills Chapter 6: Our First Derivation](https://nixos.org/guides/nix-pills/our-first-derivation.html)
