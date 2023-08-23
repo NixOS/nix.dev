@@ -189,7 +189,7 @@ Use the [`pkgs.lib.recursiveUpdate`](https://nixos.org/manual/nixpkgs/stable/#fu
 ```{code-block} nix
 :class: expression
 let pkgs = import <nixpkgs> {}; in
-pkgs.recursiveUpdate { a = { b = 1; }; } { a = { c = 3;}; }
+pkgs.lib.recursiveUpdate { a = { b = 1; }; } { a = { c = 3;}; }
 ```
 
 ```{code-block} nix
