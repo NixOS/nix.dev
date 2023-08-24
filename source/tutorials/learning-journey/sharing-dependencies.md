@@ -158,12 +158,6 @@ in
   }
 ```
 
-Now create a `shell.nix` file with the following contents:
-
-```nix
-(import ./default.nix).shell
-```
-
 Let's break this all down.
 
 The `pkgs.mkShell` function produces a shell environment, and it's common to put the expression that calls this function in a `shell.nix` file by itself.
@@ -177,6 +171,16 @@ The real magic is the `inputsFrom` attribute passed to `mkShell` on line 8, whic
 **This is what allows you to not repeat yourself.**
 
 Finally, the `packages` attribute passed to `mkShell` is where you list any executable packages you'd like to be available in your shell.
+
+Now create a `shell.nix` file with the following contents:
+
+```nix
+(import ./default.nix).shell
+```
+
+Since `default.nix` produces an attribute set, the `shell.nix` file is able to evaluate `default.nix` and simply access the `shell` attribute.
+
+Now you can build the project by running `nix-build -A build` and you can enter the shell simply by running `nix-shell`.
 
 ## Testing out the shell
 
