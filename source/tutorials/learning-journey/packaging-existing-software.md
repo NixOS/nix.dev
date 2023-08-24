@@ -46,12 +46,21 @@ As you progress through this tutorial, you will update this several times, addin
 ### Hello, World!
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-To begin, you should add a `name` attribute to the set passed to `mkDerivation`; every derivation needs a name, and Nix will throw `error: derivation name missing` without one.
+Every derivation needs a package name and version, so to begin, you should add a `pname` attribute and a `version` string to the set passed to `mkDerivation`.
+
+The most recent version of `hello` available on the FTP server is 2.12.1.
+
+:::{note}
+For historical reasons, Nix uses the `pname` and `version` attributes to construct a `name` attribute.
+
+If either of `pname` or `version` are missing, `name` cannot be produced, and Nix will throw `error: derivation name missing`.
+:::
 
 ```diff
 ...
 stdenv.mkDerivation {
-+ name = "hello";
++ pname = "hello";
++ version = "2.12.1";
 ...
 ```
 
@@ -71,7 +80,8 @@ The hash cannot be known until after the tarball has been downloaded and unpacke
 }:
 
 stdenv.mkDerivation {
-  name = "hello";
+  pname = "hello";
+  version = "2.12.1";
 
   src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
@@ -219,7 +229,7 @@ in
 }
 ```
 
-Now copy `hello.nix` to a new file, `icat.nix`, and update the `name` attribute in that file:
+Now copy `hello.nix` to a new file, `icat.nix`, and update the `pname` attribute in that file, leaving the `version` string unchanged for now:
 
 ```nix
 # icat.nix
@@ -229,7 +239,8 @@ Now copy `hello.nix` to a new file, `icat.nix`, and update the `name` attribute 
 }:
 
 stdenv.mkDerivation {
-  name = "icat";
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchzip {
     ...
@@ -248,7 +259,8 @@ Now to download the source code.
 }:
 
 stdenv.mkDerivation {
-  name = "icat";
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchFromGitHub {
     ...
@@ -289,12 +301,39 @@ Now you can supply the correct hash to `fetchFromGitHub`:
 }:
 
 stdenv.mkDerivation {
-  name = "icat";
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
     rev = "v0.5";
+    sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
+  };
+}
+```
+
+Now is a good time to change the `version` string also.
+
+To avoid repeating yourself, and to make later updates to the package a little bit easier, you should set the `version` to `0.5` and then use [string interpolation](https://nix.dev/tutorials/first-steps/nix-language#string-interpolation) in the `rev` attribute passed to `fetchFromGitHub`.
+
+For `version` to be accessible to `rev`, the attribute set passed to `stdenv.mkDerivation` must be [*recursive*](https://nix.dev/tutorials/first-steps/nix-language#recursive-attribute-set-rec), so you should also add the `rec` keyword to avoid seeing `error: undefined variable 'version':
+
+```nix
+# icat.nix
+{ lib
+, stdenv
+, fetchFromGitHub
+}:
+
+stdenv.mkDerivation rec {
+  pname = "icat";
+  version = "0.5";
+
+  src = fetchFromGitHub {
+    owner = "atextor";
+    repo = "icat";
+    rev = "v${version}";
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 }
@@ -339,13 +378,14 @@ You can add this package to your build environment by adding `imlib2` to the set
 , imlib2
 }:
 
-stdenv.mkDerivation {
-  name = "icat";
+stdenv.mkDerivation rec {
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
-    rev = "v0.5";
+    rev = "v${version}";
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
@@ -397,13 +437,14 @@ Add this to your derivation's input attribute set and to `buildInputs`:
 , xorg
 }:
 
-stdenv.mkDerivation {
-  name = "icat";
+stdenv.mkDerivation rec {
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
-    rev = "v0.5";
+    rev = "v${version}";
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
@@ -461,13 +502,14 @@ Create a `bin` directory within the `$out` directory and copy the `icat` binary 
 , xorg
 }:
 
-stdenv.mkDerivation {
-  name = "icat";
+stdenv.mkDerivation rec {
+  pname = "icat";
+  version = "2.12.1";
 
   src = fetchFromGitHub {
     owner = "atextor";
     repo = "icat";
-    rev = "v0.5";
+    rev = "v${version}";
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
