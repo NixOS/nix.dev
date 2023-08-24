@@ -1,9 +1,5 @@
 <img alt="CI"
      src="https://github.com/nix-dot-dev/nix.dev/workflows/CI/badge.svg">
-<a href="https://gitpod.io/#https://github.com/nix-dot-dev/nix.dev">
-  <img alt="GitPod"
-       src="https://gitpod.io/button/open-in-gitpod.svg">
-</a>
 
 # [nix.dev](https://nix.dev)
 
