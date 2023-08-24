@@ -340,7 +340,7 @@ stdenv.mkDerivation rec {
 ```
 
 ### Missing Dependencies
-Running `nix-build` with the new `icat` attribute,  an entirely new issue is reported:
+Running `nix-build` with the new `icat` attribute, an entirely new issue is reported:
 
 ```console
 $ nix-build -A icat
