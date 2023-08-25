@@ -12,4 +12,5 @@ first-steps/index.md
 learning-journey/index.md
 nixos/index.md
 cross-compilation.md
+contributing-to-nixpkgs.md
 ```
