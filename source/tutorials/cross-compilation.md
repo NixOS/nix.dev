@@ -296,7 +296,7 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically link
 
 ## Next steps
 
-- The [official binary cache](https://cache.nixos.org) has a limited number of binaries for packages that are cross compiled, so to save time recompiling, configure {ref}`a binary cache and CI (GitHub Actions and Cachix) <github-actions>`.
+- The [official binary cache](https://cache.nixos.org) has a limited number of binaries for packages that are cross compiled, so to save time recompiling, configure {ref}`your own binary cache and CI with GitHub Actions <github-actions>`.
 
 - While many compilers in Nixpkgs support cross compilation, not all of them do.
 
