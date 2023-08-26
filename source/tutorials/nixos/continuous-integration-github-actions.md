@@ -15,7 +15,7 @@ One benefit of Nix is that **CI can build and cache developer environments for e
 
 An important aspect of CI is the feedback loop of, **how many minutes does the build take to finish?**
 
-There are a several good options, but Cachix (below) and integrating with GitHub's built in cache (at the end) are the most straightforward.
+There are a several good options, but Cachix (below) and integrating with GitHub's built-in cache (at the end) are the most straightforward.
 
 ## Caching builds using Cachix
 
@@ -78,7 +78,7 @@ A quick and easy way to speed up CI on any GitHub repository is to use the [Magi
 The Magic Nix Cache doesn't require any configuration, secrets, or credentials.
 This means the caching benefits automatically work for anyone who forks the repository.
 
-One down side to the Magic Nix Cache is it only works inide GitHub Actions.
+One downside to the Magic Nix Cache is it only works inside GitHub Actions.
 For more details, check out [the readme][magic-nix-cache] and the [limits of GitHub Actions caching][github-actions-caching-limits].
 
 Create `.github/workflows/test.yml` with:
