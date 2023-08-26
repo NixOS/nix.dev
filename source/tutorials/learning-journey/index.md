@@ -7,6 +7,7 @@ The intention is to unify these tutorials over time.
 
 ```{toctree}
 :maxdepth: 1
-packaging-existing-software.md
 shell-dot-nix.md
+sharing-dependencies.md
+packaging-existing-software.md
 ```
