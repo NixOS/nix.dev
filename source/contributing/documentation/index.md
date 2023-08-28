@@ -9,6 +9,41 @@ Feel free to get in touch with the [Nix documentation team](https://nixos.org/co
 If you cannot contribute time, consider [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of reference documentation and learning materials.
 :::
 
+## What you can do to help
+
+### You want to learn and use Nix?
+
+This project would not be possible without you.
+Try to use it as your primary resource, however incomplete it may appear.
+
+We ask you to liberally open issues and document all problems and questions that arise.
+Please also state your learning goals and the paths you have taken so far.
+
+Sharing your first-hand experience is invaluable to better guide our efforts, and will immediately help improve these guides for yourself and everyone else.
+
+### You are a beginner and want to get involved in improving documentation?
+
+Please go through nix.dev and report any problems you come across in the [issue tracker](https://github.com/NixOS/nix.dev/issues).
+Also check to see if there's already an existing issue or pull request that addresses the problem you encountered.
+
+Another way to help is to help with the [Documentation Survey](https://github.com/NixOS/nix.dev/blob/master/maintainers/documentation-survey.md), which lists other documentation resources as a reference, which can be used to inform new content.
+
+### You have experience teaching Nix?
+
+You will probably have observed where learners get stuck most often, and which typical needs and questions they have.
+You may have your own written notes for classes, trainings, or presentations.
+
+Please share your experience and help us inform the structure and detailed contents of the guides.
+It would be great if you could contribute examples, wordings, or illustrations that proved helpful to your students.
+
+### You are a domain expert using Nix?
+
+If you are proficient in applying Nix to a domain-specific problem, and want to share your expertise on best practices, please check the existing content.
+- Does existing material on your subject meet your standards?
+- How could we improve it?
+- Is there a popular application of Nix' capabilities not yet covered?
+- We would be glad to incorporate your insights.
+
 ## Reference manuals
 
 The manuals for [Nix](nix-manual) ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
