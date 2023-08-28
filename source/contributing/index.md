@@ -8,6 +8,7 @@
 how-to-contribute.md
 how-to-get-help.md
 documentation.md
-writing-a-tutorial.md
+diataxis.md
 style-guide.md
+writing-a-tutorial.md
 ```
