@@ -196,3 +196,11 @@ Notify the authors *before* using their work.
 [Add the original author as co-author](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors) to the first commit of your pull request, which should contain the original document verbatim, so we can track authorship and changes through version history.
 
 Using free licenses other than CC-BY-SA 4.0 is possible for individual documents, and by contributing changes to those documents you agree to license your work accordingly.
+
+```{toctree}
+:hidden:
+
+diataxis.md
+style-guide.md
+writing-a-tutorial.md
+```
