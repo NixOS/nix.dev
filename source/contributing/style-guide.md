@@ -2,9 +2,8 @@
 
 This document outlines the guidelines we use when writing documentation.
 
-## Writing style
+## Aim for clarity and brevity
 
-### Aim for clarity and brevity
 > I would have written a shorter letter, but I did not have the time.
 >
 > — [Blaise Pascal](https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes)
@@ -16,96 +15,68 @@ The same holds for communication directed to contributors and maintainers:
 This is a public project, and many people will read what you write.
 Use this leverage with care.
 
-- Do: Follow the evidence-based [plain language guidelines] i.e. use simple, obvious language.
-    - Don't: Use jargon, many readers may not be familiar with technical terms.
-    - Don't: Use large words if there are smaller, simpler words that convey the same meaning.
-- Do: Use the imperative voice when giving instructions.
-    - Example: "Add the `python310` package to `buildInputs`"
-    - Don't: Use a narrative voice e.g. "Now we'll add the `python310` package to `buildInputs`".
+- Follow the evidence-based [plain language guidelines](https://www.plainlanguage.gov/guidelines/)
 
-[plain language guidelines]: https://www.plainlanguage.gov/guidelines/
+- Use imperative in direct instructions
 
-### Use inclusive language
+- Avoid narrative or discursive style
 
-Adapted from [Contributor Covenant] and [The Carpentries Code of Conduct]:
+## Be truthful
 
-- Use welcoming and inclusive language
-- Show empathy and respect towards other people
-- Be respectful of different viewpoints and experiences
-- Give and gracefully accept constructive criticism
-- Focus on what is best for the community
-
-Avoid idioms as they can be hard to understand for non-native English speakers.
-
-Don't try to be funny.
-Humor is highly culturally sensitive.
-At best, jokes may obfuscate the relevant instructions.
-At worst, jokes may offend readers and invalidate our effort to help them learn.
-
-Don't use references to popular culture.
-What you may consider well-known may be entirely obscure and distracting to people from different backgrounds.
-
-[Contributor Covenant]: https://github.com/EthicalSource/contributor_covenant/blob/cd7fcf684249786b7f7d47ba49c23a6bcb3233eb/content/version/2/1/code_of_conduct.md
-[The Carpentries Code of Conduct]: https://github.com/carpentries/docs.carpentries.org/blob/4691971d9f49544054410334140a4fd391a738da/topic_folders/policies/code-of-conduct.md
-
-### Be concise
-
-> I would have written a shorter letter, but I did not have the time.
+> Incorrect documentation is often worse than no documentation.
 >
-> — [Blaise Pascal][Blaise Pascal]
+> — attributed to [Bertrand Meyer](https://web.archive.org/web/20080706015334/https://www.eskimo.com/~hottub/software/programming_quotes.html)
 
-Readers' time and attention is limited.
+- Describe the subject factually
 
-Take the time to be extraordinarily respectful with their cognitive resources.
+  Avoid value judgement or emotional appeal.
+  We don't know how and for which purpose the tools we document are going to be used, and our goal is not to advertise but to teach and inform.
 
-The same holds for communication directed to contributors and maintainers: This is a public project, and many people will read what you write. Use this leverage with care.
+- Use and provide evidence
 
-[Blaise Pascal]: https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes
+  Provide links to other resources, such as the reference manuals or source code.
+  This helps guide readers on their learning journey, and discover related relevant information.
+  The Nix documentation team explicitly encourages you to update or restructure the manuals where appropriate, to improve the overall experience.
 
-### Voice
-Describe the subject factually and use the imperative voice in direct instructions.
+  Relying on reference documentation as much as possible also reduces the maintenance burden, as many key facts can be documented in a single place.
 
-Do not assume a personal relationship with readers, prefer clarity and brevity to emotional appeal.
+- Show fully working examples
 
-Use second person ("you") to refer to the reader and only use "we" to refer to the Nix Community.
+  Code samples must always be working correctly when run as given.
+  Nix provides us with everything needed to make this happen.
 
-### Be correct, cite sources
-The only thing worse than no documentation is _incorrect documentation_.
-One way to ensure correctness is by citing your sources.
-If you make a claim about how something works (e.g. that a command line argument exists), link to official documentation for that subject.
-We would like to maintain a network of documentation, so linking to other documentation helps to reinforce the documentation ecosystem.
+- State your intent
 
-It is explicitly encouraged to update or restructure the manuals where appropriate, to improve the overall experience.
+  Errors become more obvious and easier to fix if execution can be measured against intent.
+  Therefore, always make explicit the motivation behind your proposed changes.
 
-## Markup and source
+  Add references to any relevant resources in commit messages, if it helps understand the reasoning behind a significant change.
 
-### Code samples
-At the bare minimum code samples that are _intended_ to work should work.
+## Use inclusive language
 
-If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain so beforehand.
-Many readers will get stuck trying to make example code work without reading ahead to find out that the code isn't intended to work.
+- Avoid idioms
 
-Code samples should all include a programming language when applicable for syntax highlighting when rendered e.g.
+  Idioms can be hard to understand for non-native English speakers.
 
-````
-```python
-print("Hello, World!")
-```
-````
+- Don't try to be funny
 
-### Headers
-Reserve the largest header (`#`) for the title.
+  Humor is highly culturally sensitive.
+  At best, jokes may obfuscate the relevant information.
+  At worst, jokes may offend readers and invalidate our effort to help them learn.
 
-Use Markdown headers `##` through `####` to divide up content in the body of the document, but prefer to stay in the `##`-`###` range.
-Finer grained headings are not necessarily better.
+- Don't use references to popular culture
 
-### One line per sentence
-Write one sentence per line.
-This makes review easier since the git diffs are line-oriented and the smallest level of granularity in the GitHub review interface is a line of text.
+  What you may consider well-known may be entirely obscure and distracting to people from different backgrounds.
 
-### Links
+- Do not presuppose a personal relationship with readers
 
-Unless explicitly required to point to the latest version of an external resource, all references should be [permanent links].
+  Address the reader with "you" only when necessary.
+  Clarify identity if you use "we".
+  Generally, "we" are users and contributors in the Nix ecosystem.
+
+## Links
+
+Unless explicitly required to point to the latest version of an external resource, all references should be [permanent links] to ensure that the referenced content is what is intended.
 
 Many web services offer permalinks, such as:
 
@@ -113,22 +84,35 @@ Many web services offer permalinks, such as:
 - [Wikipedia URLs to specific page versions]
 - [Internet Archive "Save Page Now" for persisting web pages]
 
-Use [reference links][ref_links] to keep the source legible.
-All links in a section should be grouped together at the end.
-For instance:
-
-```
-## This is a section
-Lorem ipsum dolor sit amet, [consectetur][adipiscing] elit. Suspendisse rutrum ligula porta, condimentum dui dignissim, imperdiet mi. Sed interdum lacus nec varius posuere. Duis auctor varius purus, ut ornare purus tempus eu. Aliquam erat volutpat. Etiam eget nunc malesuada, elementum neque eget, mollis metus. Nulla suscipit felis nec accumsan fermentum.
-
-Integer volutpat erat sem, non varius turpis facilisis eu. Nam eu [ullamcorper][magna]. Morbi iaculis vel urna in condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec tellus sit amet tellus venenatis porta in et ex. Nunc sodales nisl magna, at dictum diam sollicitudin id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec facilisis, sapien eu faucibus iaculis, nibh nibh condimentum enim, nec egestas turpis erat nec libero. Curabitur ut tincidunt odio. Praesent sed tincidunt tortor.
-
-[adipiscing]: example.com
-[magna]: example.com
-```
-
-[ref_links]: https://github.github.com/gfm/#reference-link
-[permanent links]: https://en.m.wikipedia.org/wiki/Permalink
+[permanent links]: https://en.wikipedia.org/wiki/Permalink
 [GitHub URLs to specific commits]: https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files
-[Wikipedia URLs to specific page versions]: https://en.m.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages
+[Wikipedia URLs to specific page versions]: https://en.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages
 [Internet Archive "Save Page Now" for persisting web pages]: https://web.archive.org/save
+
+## Markdown
+
+- Write one sentence per line.
+
+  This makes long sentences immediately visible, and makes it easier to review changes and make suggestions.
+
+  The rule is unambiguous and does not require tooling support to be applied easily.
+  [Here is a discussion of different line wrapping styles.]
+
+  [Here is a discussion of different line wrapping styles.]: https://web.archive.org/web/20220519121408/https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
+
+- Use [reference links](https://github.github.com/gfm/#reference-link) where needed, either to keep the plain text containing many references readable or to reuse the same link multiple times.
+
+  Keep reference link definitions close to their use site so they are easy to find without additional tooling.
+
+# Licensing and attribution
+
+When opening pull requests with your own contributions, you agree to licensing your work under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+When adding material by third parties, make sure it has a license that permits this.
+In that case, unambiguously state source, authors, and license in the newly added material.
+Notify the authors *before* using their work.
+
+[Add the original author as co-author](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors) to the first commit of your pull request, which should contain the original document verbatim, so we can track authorship and changes through version history.
+
+Using free licenses other than CC-BY-SA 4.0 is possible for individual documents, and by contributing changes to those documents you agree to license your work accordingly.
+
