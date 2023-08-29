@@ -7,9 +7,11 @@ These sections contains series of lessons to get started.
 :glob:
 :maxdepth: 2
 
-install-nix.md
-first-steps/index.md
-learning-journey/index.md
-nixos/index.md
-cross-compilation.md
+temporary-environments/index.md
+nix-language.md
+using-customising-and-creating-packages/index.md
+declarative-user-environments-and-system-configurations/index.md
+building-testing-and-deploying-software/index.md
+Debugging Builds <https://github.com/nixos/nix.dev/issues>
+Debugging Expressions <https://github.com/nixos/nix.dev/issues>
 ```

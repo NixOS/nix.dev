@@ -3,7 +3,6 @@
 nix.dev is a community effort to collect, create, and maintain world-class learning resources for Nix.
 
 It is supposed to fit between first impressions on the [Nix web site](https://nixos.org) and the reference manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][nixos manual] ([source][nixos manual src]).
-See the [vision](#vision) and [textual outline](#outline) for an idea of a desired end state.
 
 [nix manual]: https://nixos.org/manual/nix
 [nix manual src]: https://github.com/NixOS/nix/tree/master/doc/manual

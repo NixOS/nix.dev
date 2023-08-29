@@ -14,3 +14,22 @@
 /tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301
 /contributing/writing-style /contributing/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
+/recipes/faq /concepts/faq 301
+/tutorials/install-nix /install-nix 301
+/reference/pinning-nixpkgs recipes/pinning-nixpkgs 301
+/tutorials/learning-journey/sharing-dependencies /recipes/sharing-dependencies 301
+/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs /recipes/towards-reproducibility-pinning-nixpkgs 301
+/tutorials/nixos/building-and-running-docker-images /tutorials/building-testing-and-deploying-software/building-and-running-docker-images
+/tutorials/nixos/continuous-integration-github-actions /tutorials/building-testing-and-deploying-software/continuous-integration-github-actions 301
+/tutorials/cross-compilation /tutorials/building-testing-and-deploying-software/cross-compilation
+/tutorials/nixos/deploying-nixos-using-terraform /tutorials/building-testing-and-deploying-software/deploying-nixos-using-terraform 301
+/tutorials/nixos/integration-testing-using-virtual-machines /tutorials/building-testing-and-deploying-software/integration-testing-using-virtual-machines 301
+/tutorials/nixos/building-bootable-iso-image /tutorials/declarative-user-environments-and-system-configurations/building-bootable-iso-image 301
+/tutorials/nixos/installing-nixos-on-a-raspberry-pi /tutorials/declarative-user-environments-and-system-configurations/installing-nixos-on-a-raspberry-pi 301
+/tutorials/nixos/nixos-configuration-on-vm /tutorials/declarative-user-environments-and-system-configurations/nixos-configuration-on-vm 301
+/tutorials/first-steps/nix-language /tutorials/nix-language 301
+/tutorials/first-steps/ad-hoc-shell-environments /tutorials/temporary-environments/ad-hoc-shell-environments 301
+/tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/temporary-environments/declarative-and-reproducible-developer-environments 301
+/tutorials/first-steps/reproducible-scripts /tutorials/temporary-environments/reproducible-scripts 301
+/tutorials/learning-journey/shell-dot-nix /tutorials/temporary-environments/shell-dot-nix 301
+/tutorials/learning-journey/packaging-existing-software /tutorials/using-customising-and-creating-packages/packaging-existing-software 301

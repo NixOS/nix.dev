@@ -47,7 +47,7 @@ Explanations of history and ideas in the Nix ecosystem
 :::
 ::::
 
-If you're new to the Nix ecosystem, begin your journey with {ref}`First Steps <first-steps>`!
+If you're new to the Nix ecosystem, begin your journey with our tutorial series!
 
 ## What can you do with Nix?
 
@@ -77,6 +77,7 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 ```{toctree}
 :hidden:
 
+install-nix.md
 tutorials/index.md
 recipes/index.md
 reference/index.md

@@ -10,7 +10,7 @@ These sections contains collections of detailed technical descriptions.
 Nix Reference Manual <https://nixos.org/manual/nix/stable/>
 Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
 NixOS Manual <https://nixos.org/manual/nixos/stable/>
-pinning-nixpkgs.md
-glossary.md
+Recommended support tools <https://github.com/nix-community/awesome-nix>
 ../recommended-reading.md
+glossary.md
 ```
