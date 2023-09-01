@@ -98,7 +98,7 @@ Many web services offer permalinks, such as:
   The rule is unambiguous and does not require tooling support to be applied easily.
   [Here is a discussion of different line wrapping styles.]
 
-  [Here is a discussion of different line wrapping styles.]: https://web.archive.org/web/20220519121408/https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
+  [Here is a discussion of different line wrapping styles.]: https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
 
 - Use [reference links](https://github.github.com/gfm/#reference-link) where needed, either to keep the plain text containing many references readable or to reuse the same link multiple times.
 
