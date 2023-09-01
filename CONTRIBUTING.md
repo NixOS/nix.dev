@@ -15,7 +15,7 @@ See the [vision](#vision) and [textual outline](#outline) for an idea of a desir
 We strongly encourage everyone interested to contribute by asking informed questions or directly proposing changes.
 
 Make a [pull request] if you want to introduce an incremental change.
-Note our [considerations on licensing and attribution](#licensing-and-attribution).
+Note our [considerations on licensing and attribution](https://nix.dev/contributing/style-guide#licensing-and-attribution).
 
 Open an [issue] if you want to clarify something not evident from what is provided in this repository, or if you want to discuss a significant change before starting to work on it.
 
