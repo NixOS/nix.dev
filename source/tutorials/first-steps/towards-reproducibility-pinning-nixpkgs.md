@@ -13,7 +13,7 @@ In various Nix examples, you'll often see references to [\<nixpkgs>](https://git
 
 This is a **convenient** way to quickly demonstrate a Nix expression and get it working by importing Nix packages.
 
-However, <ref-search-path>`the resulting Nix expression is not fully reproducible`.
+However, <ref-search-path>**the resulting Nix expression is not fully reproducible**.
 
 ## Pinning packages with URLs inside a Nix expression
 
