@@ -7,13 +7,14 @@
 You have to judge for yourself based on your needs.
 
 Flakes and the `nix` command suite bring multiple improvements that are relevant for both software users and package authors:
+
 - The new command line interface, together with flakes, makes dealing with existing packages significantly more convenient.
 - The constraints imposed on flakes strengthen reproducibility by default, and enable various performance improvements when interacting with a large Nix package repository like {term}`Nixpkgs`.
 - Flake references allow for easier handling of version upgrades for existing packages or project dependencies.
 - The flake schema helps with composing Nix projects from multiple sources in an ordered fashion.
 
 Other than that, and below the surface of the flake schema, Nix and the Nix language work exactly the same in both cases.
-In principle, the same level of reproducibility can be achieved  with or without flakes.
+In principle, the same level of reproducibility can be achieved with or without flakes.
 In particular, the process of adding software to {term}`Nixpkgs` or maintaining {term}`NixOS` modules and configurations is not affected by flakes at all.
 
 Both paradigms have their own set of unique concepts and support tooling that have to be learned, with varying ease of use, implementation quality, and support status.
@@ -21,6 +22,7 @@ At the moment, neither the stable nor the experimental interface is clearly supe
 While flakes reduce complexity in some regards, they introduce additional concepts and you will have to learn more about the system to fully understand how it works.
 
 There are downsides to relying on [experimental features](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-experimental-features) in general:
+
 - Interfaces and behavior of experimental features could still be changed by Nix developers.
   This may require you to adapt your code at some point in the future, which will be more effort when it has grown in complexity.
   Currently there is no agreed-upon plan or timeline for stabilising flakes.
@@ -93,7 +95,7 @@ $ sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sql
 
 ### How to operate between Nix paths and strings?
 
-<http://stackoverflow.com/a/43850372>
+See <http://stackoverflow.com/a/43850372>
 
 ### How do I fix: error: current Nix store schema is version 10, but I only support 7
 
@@ -126,7 +128,7 @@ See <https://nixos.wiki/wiki/Nix_channels>
 
 ### How can I manage dotfiles in \$HOME with Nix?
 
-<https://github.com/nix-community/home-manager>
+See <https://github.com/nix-community/home-manager>
 
 ### Are there some known impurities in builds?
 
@@ -140,13 +142,13 @@ Yes.
 
 ### What's the recommended process for building custom packages?
 
-> E.g. if I git clone nixpkgs how do I use the  cloned repo to define new / updated packages?
+> E.g. if I git clone nixpkgs how do I use the cloned repo to define new / updated packages?
 
 ## NixOS
 
 ### How to build my own ISO?
 
-<http://nixos.org/nixos/manual/index.html#sec-building-image>
+See <http://nixos.org/nixos/manual/index.html#sec-building-image>
 
 ### How do I connect to any of the machines in NixOS tests?
 
