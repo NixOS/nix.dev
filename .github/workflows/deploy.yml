@@ -1,0 +1,76 @@
+name: "Deploy"
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Download artifact
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "pr"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/artifact.zip`, Buffer.from(download.data));
+      - name: Extract artifact
+        run: unzip artifact.zip
+      - name: Retrieve PR number
+        id: pr
+        run: echo "id=$(cat .github/pr)" >> $GITHUB_OUTPUT
+      - name: Deploy preview
+        id: deploy
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          directory: ./result
+          branch: pr-${{ steps.pr.outputs.id }}
+      - name: Create comment on PR
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ steps.pr.outputs.id }}
+          edit-mode: replace
+          body: |
+            <!-- Deploy Preview Comment -->
+            # Deploy Preview
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Result</th>
+              </tr>
+              <tr>
+                <td><b>Last commit:</b></td>
+                <td>
+                  <a href='https://github.com/${{ github.repository }}/commit/${{ github.event.workflow_run.head_sha }}'>
+                    <code>${{ github.event.workflow_run.head_sha }}</code>
+                  </a>
+                </td>
+              <tr>
+              <tr>
+                <td><b>Preview URL:</b></td>
+                <td><a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</td>
+            </table>
