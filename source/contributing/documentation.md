@@ -3,7 +3,7 @@
 This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
 Documentation contributions should follow the [style guide](./style-guide.md).
 
-Feel free to in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
+Feel free to get in touch with the [Nix documentation team](https://nixos.org/community/teams/documentation) if you want to help out.
 
 :::{attention}
 If you cannot contribute time, consider [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of reference documentation and learning materials.
