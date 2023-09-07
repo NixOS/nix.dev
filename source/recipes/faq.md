@@ -33,7 +33,7 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 
 ### What to do if a binary cache is down or unreachable?
 
-Pass `--option substitute false` to Nix commands.
+Pass `--option substitute false` to Nix commands. 
 
 ### How do I add a new binary cache?
 
