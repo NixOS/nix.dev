@@ -16,7 +16,7 @@ All the source code and documentation is on [GitHub](https://github.com/NixOS), 
 Technical discussions happen in issue and pull request comments.
 
 :::{tip}
-If you are new to Nix, consider [contributing documentation](./documentation.md) first.
+If you are new to Nix, consider [contributing documentation](./documentation/index.md) first.
 
 This is where we need the most help and where it is the easiest to begin.
 :::

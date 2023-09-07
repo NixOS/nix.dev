@@ -7,7 +7,5 @@
 
 how-to-contribute.md
 how-to-get-help.md
-documentation.md
-writing-a-tutorial.md
-style-guide.md
+documentation/index.md
 ```
