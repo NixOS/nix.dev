@@ -142,7 +142,7 @@ Yes.
 
 ### What's the recommended process for building custom packages?
 
-> E.g. if I git clone nixpkgs how do I use the cloned repo to define new / updated packages?
+> E.g. if I git clone nixpkgs how do I use the cloned repo to define new / updated packages? 
 
 ## NixOS
 
