@@ -120,7 +120,7 @@ $ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
 
 ### I'm getting: writing to file: Connection reset by peer
 
-Too big files in src, out of resources (HDD space, memory)
+Too big files in src, out of resources (HDD space, memory).
 
 ### What are channels and different branches on github?
 
