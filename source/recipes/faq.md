@@ -100,7 +100,7 @@ See <http://stackoverflow.com/a/43850372>
 ### How do I fix: error: current Nix store schema is version 10, but I only support 7
 
 This means you have upgraded Nix sqlite schema to a newer version, but then tried
-to use older Nix.
+to use older Nix. 
 
 The solution is to dump the db and use old Nix version to initialize it:
 
