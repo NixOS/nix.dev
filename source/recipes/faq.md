@@ -37,7 +37,7 @@ Pass `--option substitute false` to Nix commands.
 
 ### How do I add a new binary cache?
 
-Using NixOS (≥ 22.05):
+Using NixOS (≥ 22.05): 
 
 ```nix
 nix.settings = {
