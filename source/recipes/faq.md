@@ -128,7 +128,7 @@ See <https://nixos.wiki/wiki/Nix_channels>
 
 ### How can I manage dotfiles in \$HOME with Nix?
 
-See <https://github.com/nix-community/home-manager>
+See <https://github.com/nix-community/home-manager> 
 
 ### Are there some known impurities in builds?
 
