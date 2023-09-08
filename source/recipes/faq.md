@@ -112,7 +112,7 @@ $ nix-store --init # this is the old nix-store
 $ nix-store --load-db < /tmp/db.dump
 ```
 
-### How to build reverse dependencies of a package?
+### How to build reverse dependencies of a package? 
 
 ```shell-session
 $ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
