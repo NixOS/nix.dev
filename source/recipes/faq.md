@@ -124,7 +124,7 @@ Too big files in src, out of resources (HDD space, memory)
 
 ### What are channels and different branches on github?
 
-See <https://nixos.wiki/wiki/Nix_channels>
+See <https://nixos.wiki/wiki/Nix_channels> 
 
 ### How can I manage dotfiles in \$HOME with Nix?
 
