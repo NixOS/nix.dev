@@ -132,7 +132,7 @@ See <https://github.com/nix-community/home-manager>
 
 ### Are there some known impurities in builds?
 
-Yes.
+Yes. 
 
 - CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
 - current time/date
