@@ -66,7 +66,7 @@ $ nix-build helpers/bench.nix --option extra-binary-caches https://cache.nixos.o
 
 Nix caches the contents of binary caches so that it doesn't have to query them
 on every command. This includes negative answers (cache doesn't have something).
-The default timeout for that is 1 hour as of writing.
+The default timeout for that is 1 hour as of writing. 
 
 To wipe all cache-lookup-caches:
 
