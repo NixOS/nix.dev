@@ -79,7 +79,7 @@ cache timeout.
 
 ### How do I fix: error: querying path in database: database disk image is malformed
 
-Try:
+Try: 
 
 ```shell-session
 $ sqlite3 /nix/var/nix/db/db.sqlite "pragma integrity_check"
