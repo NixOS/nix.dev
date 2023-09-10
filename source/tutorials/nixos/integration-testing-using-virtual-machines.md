@@ -420,7 +420,7 @@ $ nix-build postgrest.nix
 ## Additional information regarding NixOS tests:
   - NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
-    To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#user-content-how-can-i-run-nixos-tests).
+    To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests).
   - NixOS comes with a large set of tests that serve also as educational examples.
     A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
   - [NixOS.wiki on  NixOS Testing library](https://nixos.wiki/wiki/NixOS_Testing_library) seems to be mostly outdated (last edit 05.11.2021)
