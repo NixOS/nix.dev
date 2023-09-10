@@ -6,7 +6,7 @@ This tutorial aims to be compatible with NixOS release 22.11.
 
 ## What will you learn?
 
-This guide introduces the functionality of Nix Package Manager to write automated tests to debug NixOS configurations independent of a working NixOS installation.
+This guide introduces the functionality of Nixpkgs to write automated tests to debug NixOS configurations independent of a working NixOS installation.
 
 ## What do you need?
 
