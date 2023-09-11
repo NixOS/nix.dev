@@ -30,7 +30,7 @@ The scaffolding of a test nix file looks like the following:
 ```nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
-  pkgs = import nixpkgs {};
+  pkgs = import nixpkgs {config = {}; overlays = [];};
 in
   pkgs.nixosTest {
     name = "test-name";
@@ -135,7 +135,7 @@ The complete `minimal-test.nix` file content looks like the following:
 ```{code-block}
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz";
-  pkgs = import nixpkgs {};
+  pkgs = import nixpkgs {config = {}; overlays = [];};
 in
   pkgs.nixosTest {
     name = "minimal-test";
@@ -284,7 +284,7 @@ The complete `postgrest.nix` file looks like the following:
 let
   # Pin nixpkgs, see pinning tutorial for more details
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/0f8f64b54ed07966b83db2f20c888d5e035012ef.tar.gz";
-  pkgs = import nixpkgs {};
+  pkgs = import nixpkgs {config = {}; overlays = [];};
 
   # Single source of truth for all tutorial constants
   database      = "postgres";
