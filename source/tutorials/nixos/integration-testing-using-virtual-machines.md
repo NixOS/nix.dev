@@ -140,7 +140,7 @@ The complete `minimal-test.nix` file content looks like the following:
 
 ```{code-block}
 let
-    nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
   pkgs.nixosTest {
@@ -269,18 +269,19 @@ The setup includes:
 - A virtual machine named `client` performing a HTTP request.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
-The test performs the folling steps:
-1) starts the server and waits for it to be ready.
-1) starts the client and waits for it to be ready.
-1) executes curl and uses grep to assess for the expected return string.
-   the test passes or fails on the basis of grep's return value.
+
+The test script performs the following steps:
+1) It starts the server and waits for it to be ready.
+1) It starts the client and waits for it to be ready.
+1) It executes curl and uses grep to assess the expected return string.
+   The test passes or fails on the basis of grep’s return value.
 
 The complete `server-client-test.nix` file content looks like the following:
 
 ```{code-block}
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
-  pkgs = import nixpkgs { };
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 pkgs.testers.runNixOSTest ({ lib, ... }: {
     name = "server-client-test";
