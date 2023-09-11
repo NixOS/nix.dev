@@ -22,6 +22,7 @@ Those tests are widely used to ensure that NixOS works as intended, so in genera
 They can be written and launched outside of NixOS, on any Linux machine[^darwin].
 
 [^darwin]: Support for running NixOS VM tests on macOS is also [implemented](https://github.com/NixOS/nixpkgs/issues/108984) but currently [undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
+
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
 ## The `nixosTest` function
@@ -255,7 +256,7 @@ This can be also done with one command:
 ```shell-session
 result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 ```
-<details>
+</details>
 
 ## Tests that need multiple virtual machines
 
