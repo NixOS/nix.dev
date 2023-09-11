@@ -191,7 +191,7 @@ You should delete this file when you change the configuration:
 rm nixos.qcow2
 ```
 
-# References
+## References
 
 - [Nix manual: `nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
 - [Nix manual: common cli options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
