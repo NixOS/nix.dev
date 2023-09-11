@@ -260,157 +260,55 @@ result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 ## Tests that need multiple virtual machines
 
 Tests can involve multiple virtual machines.
+For example to test server client communication.
 
-This example uses the use-case of a [REST](https://en.m.wikipedia.org/wiki/REST) interface to a [PostgreSQL](https://www.postgresql.org/) database.
-The following example Nix expression is adapted from [How to use NixOS for lightweight integration tests](https://www.haskellforall.com/2020/11/how-to-use-nixos-for-lightweight.html).
-
-This tutorial follows [PostgREST tutorial](https://postgrest.org/en/stable/tutorials/tut0.html), a generic [RESTful API](https://restfulapi.net/) for PostgreSQL.
-
-If you skim over the official tutorial, you'll notice there's quite a bit of setup in order to test if all the steps work.
 
 The setup includes:
-
-- A virtual machine named `server` running PostgreSQL and PostgREST.
-- A virtual machine named `client` running HTTP client queries using `curl`.
+- A virtual machine named `server` running nginx.
+- A virtual machine named `client` performing a HTTP request.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
-The complete `postgrest.nix` file looks like the following:
+The test performs the folling steps:
+1) starts the server and waits for it to be ready.
+1) starts the client and waits for it to be ready.
+1) executes curl and uses grep to assess for the expected return string.
+   the test passes or fails on the basis of grep's return value.
+
+The complete `server-client-test.nix` file content looks like the following:
 
 ```{code-block}
 let
-  # Pin Nixpkgs, as some packages are broken in the 22.11 release
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/0f8f64b54ed07966b83db2f20c888d5e035012ef.tar.gz";
-  pkgs = import nixpkgs { config = {}; overlays = []; };
-
-  # Single source of truth for all tutorial constants
-  database = "postgres";
-  schema        = "api";
-  table         = "todos";
-  username      = "authenticator";
-  password      = "mysecretpassword";
-  webRole       = "web_anon";
-  postgrestPort = 3000;
-
-  # NixOS module shared between server and client
-  sharedModule = {
-    # Since it's common for CI not to have $DISPLAY available, explicitly disable graphics support
-    virtualisation.graphics = false;
-  };
-
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
+  pkgs = import nixpkgs { };
 in
-  pkgs.nixosTest {
-    # NixOS tests are run inside a virtual machine, and here you specify its system type
-    system = "x86_64-linux";
-    name = "postgres-test";
-    nodes = {
-      server = { config, pkgs, ... }: {
-        imports = [ sharedModule ];
-
-        networking.firewall.allowedTCPPorts = [ postgrestPort ];
-
-        services.postgresql = {
-          enable = true;
-
-          initialScript = pkgs.writeText "initialScript.sql" ''
-            create schema ${schema};
-
-            create table ${schema}.${table} (
-                id serial primary key,
-                done boolean not null default false,
-                task text not null,
-                due timestamptz
-            );
-
-            insert into ${schema}.${table} (task) values ('finish tutorial 0'), ('pat self on back');
-
-            create role ${webRole} nologin;
-            grant usage on schema ${schema} to ${webRole};
-            grant select on ${schema}.${table} to ${webRole};
-
-            create role ${username} inherit login password '${password}';
-            grant ${webRole} to ${username};
-          '';
-        };
-
-        users = {
-          mutableUsers = false;
-          users = {
-            # For ease of debugging the VM as the `root` user
-            root.password = "";
-
-            # Create a system user that matches the database user so that you
-            # can use peer authentication. The tutorial defines a password,
-            # but it's not necessary.
-            "${username}".isSystemUser = true;
-          };
-        };
-
-        systemd.services.postgrest = {
-          wantedBy = [ "multi-user.target" ];
-          after = [ "postgresql.service" ];
-          script =
-            let
-              configuration = pkgs.writeText "tutorial.conf" ''
-                  db-uri = "postgres://${username}:${password}@localhost:${toString config.services.postgresql.port}/${database}"
-                  db-schema = "${schema}"
-                  db-anon-role = "${username}"
-              '';
-            in "${pkgs.haskellPackages.postgrest}/bin/postgrest ${configuration}";
-          serviceConfig.User = username;
+pkgs.testers.runNixOSTest ({ lib, ... }: {
+    name = "server-client-test";
+    nodes.server = { pkgs, ... }: {
+      networking = {
+        firewall = {
+          allowedTCPPorts = [ 80 ];
         };
       };
-
-      client = {
-        imports = [ sharedModule ];
+      services.nginx = {
+        enable = true;
+        virtualHosts."server" = {
+          #root = "/var/www/";
+        };
       };
     };
-
-    # Disable linting for simpler debugging of the testScript
-    skipLint = true;
-
+    nodes.client = { pkgs, ... }: {
+      environment.systemPackages = with pkgs; [
+        curl
+      ];
+    };
     testScript = ''
-      import json
-      import sys
-
-      start_all()
-
-      server.wait_for_open_port(${toString postgrestPort})
-
-      expected = [
-          {"id": 1, "done": False, "task": "finish tutorial 0", "due": None},
-          {"id": 2, "done": False, "task": "pat self on back", "due": None},
-      ]
-
-      actual = json.loads(
-          client.succeed(
-              "${pkgs.curl}/bin/curl http://server:${toString postgrestPort}/${table}"
-          )
-      )
-
-      assert expected == actual, "table query returns expected content"
+      server.wait_for_unit("default.target")
+      client.wait_for_unit("default.target")
+      client.succeed("curl http://server/ |grep -o \"Welcome to nginx!\"")
     '';
-}
+  })
 ```
 
-Unlike the previous example, the virtual machines need an expressive name to distinguish them.
-For this example we choose `client` and `server`.
-
-Set up all machines and run the test script:
-
-```shell-session
-nix-build postgrest.nix
-```
-
-    ...
-    test script finished in 10.96s
-    cleaning up
-    killing client (pid 10)
-    killing server (pid 22)
-    (0.00 seconds)
-    /nix/store/bx7z3imvxxpwkkza10vb23czhw7873w2-vm-test-run-unnamed
-
-
-```
 
 ## Additional information regarding NixOS tests:
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
