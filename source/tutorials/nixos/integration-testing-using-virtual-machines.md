@@ -93,12 +93,20 @@ name = "minimal-test";
 #### Nodes
 
 Because this example only uses one virtual machine the node you specify is simply called `machine`.
-As configuration you use the default configuration as discussed before:
-<!-- As configuration you use the default configuration as [discussed before](<nixos-vms>): -->
+As configuration you use the relevant parts of the default configuration, [that we used before](<nixos-vms>):
 
 ```nix
 nodes.machine = { config, pkgs, ... }: {
-  # ...
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      firefox
+      tree
+    ];
+  };
+
+  system.stateVersion = "22.11";
 };
 ```
 
@@ -132,19 +140,13 @@ in
   pkgs.nixosTest {
     name = "minimal-test";
     nodes.machine = { config, pkgs, ... }: {
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-
-      services.xserver.enable = true;
-      services.xserver.displayManager.gdm.enable = true;
-      services.xserver.desktopManager.gnome.enable = true;
 
       users.users.alice = {
         isNormalUser = true;
         extraGroups = [ "wheel" ];
         packages = with pkgs; [
           firefox
-          thunderbird
+          tree
         ];
       };
 
@@ -221,7 +223,7 @@ uname -a
     Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 
 
-## Re-run successful tests
+<details><summary> Re-run successful tests </summary>
 
 <!-- i think this section became relevant to me simply to test the example. maybe more important is to mention how to get test results (like logs etc) -->
 
@@ -253,6 +255,7 @@ This can be also done with one command:
 ```shell-session
 result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 ```
+<details>
 
 ## Tests that need multiple virtual machines
 
