@@ -1,6 +1,6 @@
 (integration-testing-vms)=
 
-# Integration testing using virtual machines (VMs)
+# Integration testing using virtual machines
 
 This tutorial aims to be compatible with NixOS release 22.11.
 
