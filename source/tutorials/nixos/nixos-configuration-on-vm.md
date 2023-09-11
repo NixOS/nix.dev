@@ -193,8 +193,9 @@ rm nixos.qcow2
 
 ## References
 
-- [Nix manual: `nix-build` man page](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
-- [Nix manual: common cli options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
+- NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
+- [Nix manual: `nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
+- [Nix manual: common command-line options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
 - [Nix manual: `NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
 - [NixOS Manual: NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
 - [NixOS Manual: Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).

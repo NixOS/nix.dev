@@ -6,26 +6,26 @@ This tutorial aims to be compatible with NixOS release 22.11.
 
 ## What will you learn?
 
-This guide introduces the functionality of Nixpkgs to write automated tests to debug NixOS configurations independent of a working NixOS installation.
+This tutorial introduces the functionality of Nixpkgs to write automated tests to debug NixOS configurations independent of a working NixOS installation.
 
 ## What do you need?
 
 - A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
-- Basic knowledge of the [Nix language](https://nixos.org/manual/nix/stable/language/index.html).
+- Basic knowledge of the [Nix language](<nix-language>).
 - Basic knowledge of [NixOS configuration](<nixos-vms>).
 
 ## Introduction
 
 Nixpkgs provides a [test environment](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests) to automate integration testing.
-You can define tests that make use of a set of declarative NixOS configurations and use a Python shell to interact with them through [QEMU](https://www.qemu.org/) as the backend.
+It allows defining tests based on a set of declarative NixOS configurations and using a Python shell to interact with them through [QEMU](https://www.qemu.org/) as the backend.
 Those tests are widely used to ensure that NixOS works as intended, so in general they are called [NixOS Tests](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
 They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
 ## The `nixosTest` function
 
-To setup a test you make use of the `nixosTest` function.
-The scaffolding of a test nix file looks like the following:
+NixOS VM tests are defined using the `nixosTest` function.
+The pattern for NixOS VM tests looks like this:
 
 ```nix
 let
@@ -49,7 +49,7 @@ in
 ```
 
 The function `nixosTest` takes an attribute set that follows the module convention to [specify the test](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
-Because the attribute set only defines options, one can use the abbreviated form of the module convention.
+Because the attribute set only defines options, one can use the abbreviated form of the [module convention](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
 The attribute set needs to define the following options:
 
 - [`name`](https://nixos.org/manual/nixos/stable/index.html#test-opt-name) defines the name of the test.
@@ -68,6 +68,8 @@ The test framework automatically starts the virtual machines and runs the Python
 ## Minimal example
 
 As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
+We will build the example up from scratch.
+
 As [recommended](<ref-pinning-nixpkgs>) you use an explicitly pinned version of Nixpkgs:
 
 ```nix
@@ -84,7 +86,7 @@ in
 
 #### Name
 
-You define the name of the test using a descriptive name like "minimal-test":
+Label the test with a descriptive name such as "minimal-test":
 
 ```nix
 name = "minimal-test";
@@ -92,8 +94,9 @@ name = "minimal-test";
 
 #### Nodes
 
-Because this example only uses one virtual machine the node you specify is simply called `machine`.
-As configuration you use the relevant parts of the default configuration, [that we used before](<nixos-vms>):
+Because this example only uses one virtual machine, the node we specify is simply called `machine`.
+This name is arbitrary and can be chosen freely.
+As configuration you use the relevant parts of the default configuration, [that we used in a previous tutorial](<nixos-vms>):
 
 ```nix
 nodes.machine = { config, pkgs, ... }: {
@@ -122,11 +125,11 @@ machine.fail("su -- root -c 'which firefox'")
 
 This Python script is referring to `machine` which is the name chosen for the virtual machine configuration used in the `nodes` attribute set.
 
-The script waits until start up is reaching systemd `default.target`.
-It utilizes the `su` command to switch between users and the `which` command to see if the user has access to `firefox`.
+The script waits until systemd reaches `default.target`.
+It uses the `su` command to switch between users and the `which` command to check if the user has access to `firefox`.
 It expects that the command `which firefox` to succeed for user `alice` and to fail for `root`.
 
-This script needs to be located in a function inside the `testScript` attribute.
+This script will be the value of the `testScript` attribute.
 
 ### Test file
 
@@ -162,7 +165,7 @@ in
 
 ## Running tests
 
-To set up all machines and execute the test script:
+To set up all machines and run the test script:
 
 ```shell-session
 $ nix-build minimal-test.nix
@@ -176,24 +179,24 @@ $ nix-build minimal-test.nix
     /nix/store/bx7z3imvxxpwkkza10vb23czhw7873w2-vm-test-run-minimal-test
 
 
-## Interactive Python shell to interact with virtual machine
+## Interactive Python shell in the virtual machine
 
 When developing tests or when something breaks, it’s useful to interactively tinker with the test or access a terminal for a machine.
 
-To interactively start a Python session with the testing framework:
+To start an interactive Python session with the testing framework:
 
 ```shell-session
 $ $(nix-build -A driverInteractive minimal-test.nix)/bin/nixos-test-driver
 ```
 
-You can run any of the testing operations.
-The `testScript` attribute from `minimal-test.nix` definition can be executed with `test_script()` function.
+Here you can run any of the testing operations.
+Execute the `testScript` attribute from `minimal-test.nix` with the `test_script()` function.
 
 Within this Python shell you can enter a interactive shell and run Python commands like those in the test script.
 
-If a virtual machine is not yet started, the test environment takes care of it on the first call of a method of a `machine` object.
+If a virtual machine is not yet started, the test environment takes care of it on the first call of a method on a `machine` object.
 
-But you can also manually trigger the start of the virtual machine by using
+But you can also manually trigger the start of the virtual machine with:
 
 ```shell-session
 >>> machine.start()
@@ -205,7 +208,7 @@ or
 ```shell-session
 >>> start_all()
 ```
-for all specified nodes.
+for all nodes.
 
 You can enter a interactive shell on the virtual machine using:
 
@@ -213,7 +216,7 @@ You can enter a interactive shell on the virtual machine using:
 >>> machine.shell_interact()
 ```
 
-and run commandline commands like:
+and run shell commands like:
 
 ```shell-session
 uname -a
@@ -222,7 +225,9 @@ uname -a
     Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 
 
-<details><summary> Re-run successful tests </summary>
+<details><summary>Re-running successful tests</summary>
+
+<!-- FIXME: this should be a separate recipe that can be linked to, as it's a bit of knowledge one will need now and again. -->
 
 Because test results are kept in the Nix store, a successful test is cached.
 This means that Nix will not run the test a second time as long as the test setup (node configuration and test script) stays semantically the same.
@@ -254,7 +259,7 @@ result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 
 ## Tests that need multiple virtual machines
 
-Tests can utilize multiple virtual machines.
+Tests can involve multiple virtual machines.
 
 This example uses the use-case of a [REST](https://en.m.wikipedia.org/wiki/REST) interface to a [PostgreSQL](https://www.postgresql.org/) database.
 The following example Nix expression is adapted from [How to use NixOS for lightweight integration tests](https://www.haskellforall.com/2020/11/how-to-use-nixos-for-lightweight.html).
@@ -273,7 +278,7 @@ The complete `postgrest.nix` file looks like the following:
 
 ```{code-block}
 let
-  # Pin nixpkgs, see pinning tutorial for more details
+  # Pin Nixpkgs, as some packages are broken in the 22.11 release
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/0f8f64b54ed07966b83db2f20c888d5e035012ef.tar.gz";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 
@@ -288,13 +293,13 @@ let
 
   # NixOS module shared between server and client
   sharedModule = {
-    # Since it's common for CI not to have $DISPLAY available, you have to explicitly tell the tests "please don't expect any screen available"
+    # Since it's common for CI not to have $DISPLAY available, explicitly disable graphics support
     virtualisation.graphics = false;
   };
 
 in 
   pkgs.nixosTest {
-    # NixOS tests are run inside a virtual machine, and here you specify system of the machine.
+    # NixOS tests are run inside a virtual machine, and here you specify its system type
     system = "x86_64-linux";
     name = "postgres-test";
     nodes = {
@@ -390,7 +395,7 @@ in
 Unlike the previous example, the virtual machines need an expressive name to distinguish them.
 For this example we choose `client` and `server`.
 
-To set up all machines and execute the test script:
+Set up all machines and run the test script:
 
 ```shell-session
 nix-build postgrest.nix
@@ -408,9 +413,11 @@ nix-build postgrest.nix
 ```
 
 ## Additional information regarding NixOS tests:
-  - NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
+
     To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests).
   - NixOS comes with a large set of tests that serve also as educational examples.
+
     A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
-  - [NixOS.wiki on  NixOS Testing library](https://nixos.wiki/wiki/NixOS_Testing_library) seems to be mostly outdated (last edit 05.11.2021)
+
+<!-- TODO: move examples from https://nixos.wiki/wiki/NixOS_Testing_library to the NixOS manual and troubleshooting tips to nix.dev -->
