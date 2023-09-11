@@ -59,7 +59,7 @@ The attribute set needs to define the following options:
 - [`nodes`](https://nixos.org/manual/nixos/stable/index.html#test-opt-nodes) contains a set of named configurations, because a test script can involve more than one virtual machine.
   Each virtual machine is setup using a NixOS configuration.
 
-- [`testScript`](https://nixos.org/manual/nixos/stable/index.html#test-opt-testScript) defines the Python test script, either as literal string.
+- [`testScript`](https://nixos.org/manual/nixos/stable/index.html#test-opt-testScript) defines the Python test script, either as literal string or as a function that takes a `nodes` attribute.
   This Python test script can access the virtual machines via the names used for the `nodes`.
   It has super user rights in the virtual machines.
   In the Python script is each virtual machine is accessible via the `machine` object.
@@ -72,7 +72,7 @@ The test framework automatically starts the virtual machines and runs the Python
 As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
 We will build the example up from scratch.
 
-As [recommended](<ref-pinning-nixpkgs>) you use an explicitly pinned version of Nixpkgs:
+As [recommended](<ref-pinning-nixpkgs>) we use an explicitly pinned version of Nixpkgs, and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig):
 
 ```nix
 let
@@ -193,8 +193,6 @@ $ $(nix-build -A driverInteractive minimal-test.nix)/bin/nixos-test-driver
 
 Here you can run any of the testing operations.
 Execute the `testScript` attribute from `minimal-test.nix` with the `test_script()` function.
-
-Within this Python shell you can enter a interactive shell and run Python commands like those in the test script.
 
 If a virtual machine is not yet started, the test environment takes care of it on the first call of a method on a `machine` object.
 
@@ -417,8 +415,10 @@ nix-build postgrest.nix
 ## Additional information regarding NixOS tests:
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
 
+
     To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests).
   - NixOS comes with a large set of tests that serve also as educational examples.
+
 
     A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
 
