@@ -19,7 +19,9 @@ This tutorial introduces the functionality of Nixpkgs to write automated tests t
 Nixpkgs provides a [test environment](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests) to automate integration testing for distributed systems.
 It allows defining tests based on a set of declarative NixOS configurations and using a Python shell to interact with them through [QEMU](https://www.qemu.org/) as the backend.
 Those tests are widely used to ensure that NixOS works as intended, so in general they are called [NixOS Tests](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
-They can be written and launched outside of NixOS, on any Linux machine (with [MacOS support coming soon](https://github.com/NixOS/nixpkgs/issues/108984)).
+They can be written and launched outside of NixOS, on any Linux machine[^darwin].
+
+[^darwin]: Support for running NixOS VM tests on macOS is also [implemented](https://github.com/NixOS/nixpkgs/issues/108984) but currently [undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
 ## The `nixosTest` function
