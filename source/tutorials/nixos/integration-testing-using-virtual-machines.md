@@ -30,7 +30,7 @@ The scaffolding of a test nix file looks like the following:
 ```nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
-  pkgs = import nixpkgs {config = {}; overlays = [];};
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 in
   pkgs.nixosTest {
     name = "test-name";
@@ -42,7 +42,7 @@ in
         # ...
       };
     }
-    testScript = {nodes, ...}: ''
+    testScript = { nodes, ... }: ''
       # ...
     '';
   }
@@ -55,7 +55,7 @@ The attribute set needs to define the following options:
 - [`name`](https://nixos.org/manual/nixos/stable/index.html#test-opt-name) defines the name of the test.
 
 - [`nodes`](https://nixos.org/manual/nixos/stable/index.html#test-opt-nodes) contains a set of named configurations, because a test script can involve more than one virtual machine.
-Each virtual machine is setup using a NixOS configuration.
+  Each virtual machine is setup using a NixOS configuration.
 
 - [`testScript`](https://nixos.org/manual/nixos/stable/index.html#test-opt-testScript) defines the Python test script, either as literal string.
   This Python test script can access the virtual machines via the names used for the `nodes`.
@@ -72,8 +72,8 @@ As [recommended](<ref-pinning-nixpkgs>) you use an explicitly pinned version of 
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz";
-  pkgs = import nixpkgs {};
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 in
   pkgs.nixosTest {
     # ...
@@ -120,7 +120,7 @@ machine.succeed("su -- alice -c 'which firefox'")
 machine.fail("su -- root -c 'which firefox'")
 ```
 
-This Python script is referring to `machine` which is the name chosen for the virtual machine configuration used in the nodes attribute set.
+This Python script is referring to `machine` which is the name chosen for the virtual machine configuration used in the `nodes` attribute set.
 
 The script waits until start up is reaching systemd `default.target`.
 It utilizes the `su` command to switch between users and the `which` command to see if the user has access to `firefox`.
@@ -134,8 +134,8 @@ The complete `minimal-test.nix` file content looks like the following:
 
 ```{code-block}
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz";
-  pkgs = import nixpkgs {config = {}; overlays = [];};
+    nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 in
   pkgs.nixosTest {
     name = "minimal-test";
@@ -167,7 +167,6 @@ To set up all machines and execute the test script:
 ```shell-session
 $ nix-build minimal-test.nix
 ```
-
 
     ...
     test script finished in 10.96s
@@ -225,8 +224,6 @@ uname -a
 
 <details><summary> Re-run successful tests </summary>
 
-<!-- i think this section became relevant to me simply to test the example. maybe more important is to mention how to get test results (like logs etc) -->
-
 Because test results are kept in the Nix store, a successful test is cached.
 This means that Nix will not run the test a second time as long as the test setup (node configuration and test script) stays semantically the same.
 Therefore, to run a test again, one needs to remove the result.
@@ -237,11 +234,9 @@ If you would try to delete the result using the symbolic link, you will get the 
 nix-store --delete ./result
 ```
 
-
     finding garbage collector roots...
     0 store paths deleted, 0.00 MiB freed
     error: Cannot delete path '/nix/store/4klj06bsilkqkn6h2sia8dcsi72wbcfl-vm-test-run-unnamed' since it is still alive. To find out why, use: nix-store --query --roots
-
 
 Instead, remove the symbolic link and only then remove the cached result:
 
@@ -261,7 +256,7 @@ result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 
 Tests can utilize multiple virtual machines.
 
-This example uses the use-case of a REST interface to a Postgres database.
+This example uses the use-case of a [REST](https://en.m.wikipedia.org/wiki/REST) interface to a [PostgreSQL](https://www.postgresql.org/) database.
 The following example Nix expression is adapted from [How to use NixOS for lightweight integration tests](https://www.haskellforall.com/2020/11/how-to-use-nixos-for-lightweight.html).
 
 This tutorial follows [PostgREST tutorial](https://postgrest.org/en/stable/tutorials/tut0.html), a generic [RESTful API](https://restfulapi.net/) for PostgreSQL.
@@ -270,13 +265,9 @@ If you skim over the official tutorial, you'll notice there's quite a bit of set
 
 The setup includes:
 
-- A virtual machine named `server` running postgreSQL and postgREST.
+- A virtual machine named `server` running PostgreSQL and PostgREST.
 - A virtual machine named `client` running HTTP client queries using `curl`.
 - A `testScript` orchestrating testing logic between `client` and `server`.
-
-<!-- Because some of the needed packages of this example are broken in 22.11 release this example uses a specific revision of nixpkgs.
-Additionally this example shows the value of [pinning](<ref-pinning-nixpkgs>) a test to a specific revision of `nixpkgs`.
-Tests that make use of nixpkgs versions before 22.11 need to choose names that do not contain whitespaces.-->
 
 The complete `postgrest.nix` file looks like the following:
 
@@ -284,10 +275,10 @@ The complete `postgrest.nix` file looks like the following:
 let
   # Pin nixpkgs, see pinning tutorial for more details
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/0f8f64b54ed07966b83db2f20c888d5e035012ef.tar.gz";
-  pkgs = import nixpkgs {config = {}; overlays = [];};
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 
   # Single source of truth for all tutorial constants
-  database      = "postgres";
+  database = "postgres";
   schema        = "api";
   table         = "todos";
   username      = "authenticator";
@@ -414,10 +405,6 @@ nix-build postgrest.nix
     /nix/store/bx7z3imvxxpwkkza10vb23czhw7873w2-vm-test-run-unnamed
 
 
-to run the test run:
-
-```shell-session
-$ nix-build postgrest.nix
 ```
 
 ## Additional information regarding NixOS tests:
