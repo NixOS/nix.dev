@@ -9,7 +9,9 @@ myst:
 
 # Welcome to nix.dev
 
-nix.dev is the home of official documentation for the Nix ecosystem, it contains:
+nix.dev is the home of official documentation for the Nix ecosystem.
+
+If you're new to Nix, begin your journey with {ref}`First Steps <first-steps>`!
 
 ::::{grid} 2
 :::{grid-item-card} Tutorials
@@ -46,8 +48,6 @@ Collections of detailed technical descriptions
 Explanations of history and ideas in the Nix ecosystem
 :::
 ::::
-
-If you're new to the Nix ecosystem, begin your journey with {ref}`First Steps <first-steps>`!
 
 ## What can you do with Nix?
 
