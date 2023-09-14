@@ -214,7 +214,7 @@ Update `default.nix` to add the `config` attribute:
 +{ lib, config, ... }: {
 ```
 
-When a module declaring an option is evaluated, values of the resulting option can be accessed by using attribute names to access the corresponding values.
+When a module setting options is evaluated, these values can be accessed by their corresponding attribute names.
 
 Now make the following changes to `default.nix`:
 
