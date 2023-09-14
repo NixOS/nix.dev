@@ -1,5 +1,6 @@
 # The Module System
-Much of the power in Nixpkgs comes from the module system, which provides mechanisms for automatically merging attribute sets, making it easy to compose configurations in a type-safe way.
+Much of the power in Nixpkgs and NixOS comes from the module system.
+It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
 In this tutorial, you'll write your first modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
