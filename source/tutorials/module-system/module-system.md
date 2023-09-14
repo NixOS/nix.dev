@@ -202,7 +202,7 @@ This option generates the final result to be used elsewhere, which in this case 
 
 Options can depend on other options, making it possible to build more useful abstractions.
 
-Here, the plan is for the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
+Here, we want the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
 
 ### Accessing Option Values
 To make a declared option available, the argument attribute set of the module declaring it must include the `config` attribute.
