@@ -74,7 +74,7 @@ Change `default.nix` to include the following declaration:
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 
-There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the nixpkgs library.
+There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
 
