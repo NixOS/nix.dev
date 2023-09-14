@@ -2,9 +2,9 @@
 Much of the power in Nixpkgs and NixOS comes from the module system.
 It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
-In this tutorial, you'll write your first modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
+In this tutorial you'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and follow extensive demonstration of how to wrap an existing API with Nix modules.
 
-You'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and a practical way to use Nix to wrap external APIs.
+Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
 Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
 
