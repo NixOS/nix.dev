@@ -240,7 +240,7 @@ The result of this represents the list of command line arguments to pass to `map
 
 In this section, you will define a new option, `map.zoom`, to control the zoom level of the map.
 
-You will use a new type, `nullOr <type>`, which can take as values either the values of its argument type or `null`.
+You will use a new type, `nullOr <type>`, which can take either values of its argument type or `null`.
 
 In this case, a `null` value will use the API's default behavior of inferring the zoom level.
 
