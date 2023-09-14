@@ -248,7 +248,7 @@ Here, you will also use `default` from `mkOption`](https://github.com/NixOS/nixp
 
 You will use this option to define another element in `generate.requestParams`, which will only be added if its value is non-null.
 
-To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition holds.
+To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
