@@ -326,7 +326,7 @@ Wrapping shell command execution in Nix modules is a helpful technique for contr
 
 The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
-In particular, this allows you to separate option declarations from their call-sites in your configuration.
+In particular, this allows you to separate option declarations from where they are used in your configuration.
 
 You should now create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
 ```diff
