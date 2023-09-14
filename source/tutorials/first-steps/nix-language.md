@@ -1859,7 +1859,6 @@ It is an error if the network request fails.
 (derivations)=
 ## Derivations
 
-A build task in Nix is called a *derivation*.
 
 Derivations are at the core of both Nix and the Nix language:
 - The Nix language is used to describe derivations.
