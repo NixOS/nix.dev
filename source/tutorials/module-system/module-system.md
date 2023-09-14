@@ -101,7 +101,7 @@ You will see an error message indicating that the `generate.script` option is us
 As previously mentioned, the `lines` type only permits string values.
 
 :::{warning}
-In this section, you will make your first type error. Be prepared!
+In this section, you will set an invalid value and encounter a type error.
 :::
 
 What happens if you instead try to assign an integer to the option?
