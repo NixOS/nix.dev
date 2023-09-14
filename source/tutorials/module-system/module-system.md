@@ -89,7 +89,7 @@ Write a new file, `eval.nix`, which you will use to evaluate `default.nix`:
 }
 ```
 
-Now execute the following command:
+Now run the following command:
 
 ```bash
 nix-instantiate --eval eval.nix -A config.generate.script
