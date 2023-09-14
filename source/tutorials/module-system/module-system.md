@@ -324,7 +324,7 @@ Wrapping shell command execution in Nix modules is a helpful technique for contr
 
 ## Splitting Modules
 
-The module schema includes the `imports` attribute, which allows you to define further modules to import, enabling a *modular* approach where your configuration may be split into multiple files.
+The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
 In particular, this allows you to separate option declarations from their call-sites in your configuration.
 
