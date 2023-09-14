@@ -52,7 +52,6 @@ The ellipsis `...` is necessary because arbitrary arguments can be passed to mod
 
 Modules allow providing *options* that declare which values can be set and used elsewhere.
 
-For your new module to become useful, you will need to add some *options*, which define these named-values.
 
 Options are declared by defining an attribute under the top-level  `options` attribute, using `lib.mkOption`.
 
