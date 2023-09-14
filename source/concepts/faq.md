@@ -1,8 +1,6 @@
 # Frequently Asked Questions
 
-## Nix
-
-### Should I enable flakes?
+## Should I enable flakes?
 
 You have to judge for yourself based on your needs.
 
@@ -30,6 +28,23 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
   Improvements to experimental features have low priority.
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   Using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
+
+## What are channels and different branches on github?
+
+See <https://nixos.wiki/wiki/Nix_channels>
+
+## Are there some known impurities in builds?
+
+Yes.
+
+- CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
+- current time/date
+- FileSystem (ext4 has a known bug creating [empty files on power loss](https://github.com/NixOS/nixpkgs/issues/15581))
+- Kernel
+- Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
+
+<!---
+## Nix
 
 ### How do I add a new binary cache?
 
@@ -83,23 +98,9 @@ See <http://stackoverflow.com/a/43850372>
 $ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
 ```
 
-### What are channels and different branches on github?
-
-See <https://nixos.wiki/wiki/Nix_channels>
-
 ### How can I manage dotfiles in \$HOME with Nix?
 
 See <https://github.com/nix-community/home-manager>
-
-### Are there some known impurities in builds?
-
-Yes.
-
-- CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
-- current time/date
-- FileSystem (ext4 has a known bug creating [empty files on power loss](https://github.com/NixOS/nixpkgs/issues/15581))
-- Kernel
-- Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
 
 ### What's the recommended process for building custom packages?
 
@@ -140,3 +141,4 @@ There are a couple of tools:
 - <https://github.com/jeaye/nixos-in-place>
 - <https://github.com/elitak/nixos-infect>
 - <https://github.com/cleverca22/nix-tests/tree/master/kexec>
+-->
