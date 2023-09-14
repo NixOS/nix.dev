@@ -1,24 +1,26 @@
-# The Module System
-Much of the power in Nixpkgs comes from the module system, which provides mechanisms for automatically merging attribute sets, making it easy to compose configurations in a type-safe way.
+# Deep dive demo: Wrapping the World in Modules
+Much of the power in Nixpkgs and NixOS comes from the module system.
+It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
-In this tutorial, you'll write your first modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
+In this tutorial you'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and follow extensive demonstration of how to wrap an existing API with Nix modules.
 
-You'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and a practical way to use Nix to wrap external APIs.
+Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
 Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
 
 :::{note}
-This tutorial follows [@infinisil's presentation](https://infinisil.com/modules.mp4) of the [Summer of Nix Modules](https://github.com/tweag/summer-of-nix-modules), during the 2021 Summer of Nix.
+This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  [(source)](https://github.com/tweag/summer-of-nix-modules) for 2021 Summer of Nix.
 :::
 
 ## Empty module
 
-The simplest module is just an empty attribute set, which doesn't do anything!
+The simplest module is just a function that takes any attributes and returns empty attribute set.
 
 Write the following into a file called `default.nix`:
 
 ```nix
 # default.nix
+{ ... }:
 {
 
 }
@@ -48,9 +50,8 @@ The ellipsis `...` is necessary because arbitrary arguments can be passed to mod
 
 ## Declaring Options
 
-One of the reasons for writing modules is to declare names which can be assigned values and used in other computations elsewhere.
+Modules allow providing *options* that declare which values can be set and used elsewhere.
 
-For your new module to become useful, you will need to add some *options*, which define these named-values.
 
 Options are declared by defining an attribute under the top-level  `options` attribute, using `lib.mkOption`.
 
@@ -71,9 +72,9 @@ Change `default.nix` to include the following declaration:
  }
 ```
 
-While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option, and how or whether multiple values should be merged together.
+While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 
-There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the nixpkgs library.
+There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
 
@@ -88,7 +89,7 @@ Write a new file, `eval.nix`, which you will use to evaluate `default.nix`:
 }
 ```
 
-Now execute the following command:
+Now run the following command:
 
 ```bash
 nix-instantiate --eval eval.nix -A config.generate.script
@@ -100,7 +101,7 @@ You will see an error message indicating that the `generate.script` option is us
 As previously mentioned, the `lines` type only permits string values.
 
 :::{warning}
-In this section, you will make your first type error. Be prepared!
+In this section, you will set an invalid value and encounter a type error.
 :::
 
 What happens if you instead try to assign an integer to the option?
@@ -158,13 +159,14 @@ TODO: Create derivations to get these commands
 ## Declaring More Options
 In this section, you will introduce another option: `generate.requestParams`.
 
-For its type, you should use `listOf <nestedType>`, which is a generic list type where each element must have the given nested type.
+For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
 
 Instead of `lines`, in this case you will want the nested type to be `str`, a generic string type.
 
 The difference between `str` and `lines` is in their merging behavior:
+Module option types not only check for valid values, but also specify how multiple definitions of an option are to be combined into one.
 - For `lines`, multiple definitions get merged by concatenation with newlines.
-- For `str`, multiple definitions are not allowed. This is mostly irrelevant here however, since it is not really possible to define a list element multiple times.
+- For `str`, multiple definitions are not allowed. This is not a problem here, since one can't define a list element multiple times.
 
 Make the following additions to your `default.nix` file now:
 ```diff
@@ -198,12 +200,12 @@ A given module generally only declares a single option that is meant to be evalu
 
 This option generates the final result to be used elsewhere, which in this case is `generate.script`.
 
-Options have the ability to depend on other options, making it possible to build more useful abstractions.
+Options can depend on other options, making it possible to build more useful abstractions.
 
-Here, the plan is for the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
+Here, we want the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
 
 ### Accessing Option Values
-To make a declared option available, the argument attribute set of the module declaring it must include the `config` attribute.
+To make an option definition available, the argument of the module accessing it must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
 ```diff
@@ -212,7 +214,7 @@ Update `default.nix` to add the `config` attribute:
 +{ lib, config, ... }: {
 ```
 
-When a module declaring an option is evaluated, values of the resulting option can be accessed by using attribute names to access the corresponding values.
+When a module setting options is evaluated, these values can be accessed by their corresponding attribute names.
 
 Now make the following changes to `default.nix`:
 
@@ -227,7 +229,8 @@ Now make the following changes to `default.nix`:
      '';
 ```
 
-Here, the value of the `config.generate.requestParams` attribute is substituted at its call site.
+Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
+This is possible due to lazy evaluation in the Nix language.
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
@@ -237,7 +240,7 @@ The result of this represents the list of command line arguments to pass to `map
 
 In this section, you will define a new option, `map.zoom`, to control the zoom level of the map.
 
-You will use a new type, `nullOr <type>`, which can take as values either the values of its argument type or `null`.
+You will use a new type, `nullOr <type>`, which can take either values of its argument type or `null`.
 
 In this case, a `null` value will use the API's default behavior of inferring the zoom level.
 
@@ -245,7 +248,7 @@ Here, you will also use `default` from `mkOption`](https://github.com/NixOS/nixp
 
 You will use this option to define another element in `generate.requestParams`, which will only be added if its value is non-null.
 
-To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition holds.
+To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
@@ -317,15 +320,15 @@ Add another `mkIf` call to the list of `requestParams` now:
 
 This time, you've used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, interpolating the result back into the `requestParams` string which sets the `center` value.
 
-Wrapping shell command execution in Nix modules is a powerful technique for controlling system changes using the ergnomic attributes and values interface.
+Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, using the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
 ## Splitting Modules
 
-The module schema includes the `imports` attribute, which allows you to define further modules to import, enabling a *modular* approach where your configuration may be split into multiple files.
+The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
-In particular, this allows you to separate option declarations from their call-sites in your configuration.
+In particular, this allows you to separate option declarations from where they are used in your configuration.
 
-You should now create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
+Create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
 ```diff
 # marker.nix
 +{ lib, config, ... }: {
@@ -350,7 +353,6 @@ One of the most useful types included in the module system's type system is `sub
 
 This type allows you to define nested modules with their own options.
 
-Every value of such a type is then interpreted (by default) as a `config` assignment of the nested module evaluation.
 
 Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.
 
@@ -385,7 +387,7 @@ Make the following changes to `marker.nix` now:
 
 Because of the way the module system composes option definitions, you can also freely assign values to options defined in other modules.
 
-In this case, you will use the `map.markers` option to derive and add new `requestParams`, making your declared markers appear on the returned map.
+In this case, you will use the `map.markers` option to produce and add new elements to the `requestParams` list, making your declared markers appear on the returned map.
 
 To implement this behavior, add the following `config` block to `marker.nix`:
 ```diff
@@ -417,7 +419,7 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
-The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default behavior of the `list`-type module.
+The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list`-type module.
 
 ## Multiple Markers
 
@@ -443,11 +445,11 @@ In this case, the default behavior of the Maps API when not passed a center or z
 
 ## Nested Submodules
 
-It's time to introduce the `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
+It's time to introduce a `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
-This will also make use of the `markerType` submodule, giving a nested structure of submodules.
+This will again make use of the `markerType` submodule, giving a nested structure of submodules.
 
 To propagate marker definitions from `users`  to the `map.markers` option, make the following changes now:
 
@@ -504,7 +506,7 @@ The `departure` values of each of the `users` are then joined into a list, and t
 
 The resulting list is stored in `map.markers`.
 
-The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Maps API.
+The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Google Maps API.
 
 Defining the options in this way allows you to set multiple `users.<name>.departure.location` values and generate a map with the appropriate zoom and center, with pins corresponding to the set of `departure.location` values for *all* `users`.
 
@@ -516,9 +518,9 @@ Now that the map can be rendered with multiple markers, it's time to add some st
 
 To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
 
-The API [states](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles) that these labels must be either an uppercase letter or a number.
+The API documentation states that [these labels must be either an uppercase letter or a number](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles).
 
-You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression used for the matching; this will reject any unacceptable (non-uppercase letter or number) values.
+You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression that will accept any matching (uppercase letter or number) values.
 
 - In the `let` block:
 ```diff
@@ -627,8 +629,8 @@ This ensures that other values set for the same option will prevail.
 For better visual contrast, it would also be helpful to have a way to change the *color* of a marker.
 
 Here you will use two new type-functions for this:
-- `either <this> <that>`, which takes two types as arguments, allows either of them
-- `enum [ <allowed values> ]`, which takes a list of allowed values
+- `either <this> <that>`, which takes two types as arguments, and allows either of them
+- `enum [ <allowed values> ]`, which takes a list of allowed values, and allows any of them
 
 In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value:
 ```diff
@@ -678,7 +680,7 @@ Now add a line to the `paramForMarker` list which makes use of the new option:
 
 ## Marker Styling: Size
 
-In case you set many different markers, it would be helpful to have the ability to change their size individually, further improving visual accessibility.
+In case you set many different markers, it would be helpful to have the ability to change their size individually.
 
 Add a new `style.size` option to `marker.nix`, allowing you to do so:
 
@@ -697,7 +699,7 @@ Add a new `style.size` option to `marker.nix`, allowing you to do so:
    };
 ```
 
-Now add a handler for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
+Now add a mapping for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
 ```diff
 # marker.nix
      generate.requestParams = let
@@ -1019,7 +1021,7 @@ Finally, add a line using the `color` option to the `attributes` list:
 
 ## Further Styling
 
-To further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
+Now that you've got this far, to further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
 
 Since this feature can be turned on or off, you can do this using the `bool` type, which can be `true` or `false`.
 
@@ -1056,3 +1058,5 @@ In this tutorial, you've learned how to write custom Nix modules to bring extern
 You defined several modules in multiple files, each with separate submodules making use of the module system's type checking.
 
 These modules exposed features of the external API in a declarative way.
+
+You can now conquer the world with Nix.
