@@ -229,7 +229,8 @@ Now make the following changes to `default.nix`:
      '';
 ```
 
-Here, the value of the `config.generate.requestParams` attribute is substituted at its call site.
+Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
+This is possible due to lazy evaluation in the Nix language.
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
