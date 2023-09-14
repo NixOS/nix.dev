@@ -20,6 +20,7 @@ Write the following into a file called `default.nix`:
 
 ```nix
 # default.nix
+{ ... }:
 {
 
 }
