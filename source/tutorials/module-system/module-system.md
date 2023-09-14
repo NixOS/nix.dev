@@ -320,7 +320,7 @@ Add another `mkIf` call to the list of `requestParams` now:
 
 This time, you've used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, interpolating the result back into the `requestParams` string which sets the `center` value.
 
-Wrapping shell command execution in Nix modules is a powerful technique for controlling system changes using the ergnomic attributes and values interface.
+Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, using the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
 ## Splitting Modules
 
