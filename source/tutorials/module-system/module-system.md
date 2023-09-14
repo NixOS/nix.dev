@@ -166,7 +166,7 @@ Instead of `lines`, in this case you will want the nested type to be `str`, a ge
 The difference between `str` and `lines` is in their merging behavior:
 Module option types not only check for valid values, but also specify how multiple definitions of an option are to be combined into one.
 - For `lines`, multiple definitions get merged by concatenation with newlines.
-- For `str`, multiple definitions are not allowed. This is mostly irrelevant here however, since it is not really possible to define a list element multiple times.
+- For `str`, multiple definitions are not allowed. This is not a problem here, since one can't define a list element multiple times.
 
 Make the following additions to your `default.nix` file now:
 ```diff
