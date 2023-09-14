@@ -205,7 +205,7 @@ Options can depend on other options, making it possible to build more useful abs
 Here, we want the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
 
 ### Accessing Option Values
-To make a declared option available, the argument attribute set of the module declaring it must include the `config` attribute.
+To make an option definition available, the argument of the module accessing it must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
 ```diff
