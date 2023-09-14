@@ -72,7 +72,7 @@ Change `default.nix` to include the following declaration:
  }
 ```
 
-While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option, and how or whether multiple values should be merged together.
+While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 
 There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the nixpkgs library.
 
