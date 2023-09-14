@@ -1,80 +1,83 @@
-# Module system introduction
+# The Module System
+Much of the power in Nixpkgs comes from the module system, which provides mechanisms for automatically merging attribute sets, making it easy to compose configurations in a type-safe way.
 
-Note: This tutorial was created from https://github.com/tweag/summer-of-nix-modules, as presented by @infinisil at Summer of Nix 2021, presentation can be seen here (might not work in browser, `mpv` should work): https://infinisil.com/modules.mp4
+In this tutorial, you'll write your first modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
+
+You'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and a practical way to use Nix to wrap external APIs.
+
+Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
+
+:::{note}
+This tutorial follows [@infinisil's presentation](https://infinisil.com/modules.mp4) of the [Summer of Nix Modules](https://github.com/tweag/summer-of-nix-modules), during the 2021 Summer of Nix.
+:::
 
 ## Empty module
 
-The simplest module you can have is just an empty attribute set, which
-as you might expect, doesn't do anything!
+The simplest module is just an empty attribute set, which doesn't do anything!
 
-```diff
-diff --git a/default.nix b/default.nix
-new file mode 100644
-index 0000000..1797133
---- /dev/null
-+++ b/default.nix
-@@ -0,0 +1,3 @@
-+{
-+  
-+}
+Write the following into a file called `default.nix`:
+
+```nix
+# default.nix
+{
+
+}
 ```
 
-## Module arguments: lib
+## Module Arguments
 
-Modules can be just an attribute set. But if you want access to some
-arguments you need to change it into a function taking an attribute set
-with an ellipsis (that's the "..."). In this case we only match on the
-`lib` argument, which gives us access to nixpkgs library functions.
+In order to make a module actually useful, you will need to write it as a *function*, which takes an attribute set as an argument.
 
-Note that the ellipsis is necessary since arbitrary arguments can be
-passed to modules.
+Do this by adding the following new line to `default.nix`:
 
 ```diff
-diff --git a/default.nix b/default.nix
-index 1797133..f7569bd 100644
---- a/default.nix
-+++ b/default.nix
-@@ -1,3 +1,3 @@
--{
-+{ lib, ... }: {
-   
- }
+# default.nix
++ { lib, ... }:
+{
+
+}
 ```
 
-## Declaring generate.script option
+The addition of this line turns the expression in `default.nix` into a function which takes *at least* one argument, called `lib`, and may accept other arguments (expressed by the ellipsis `...`).
 
-In order for modules to be useful, we need to have options, so let's
-declare one. Options are declared by defining an attribute with
-`lib.mkOption` under the `options` attribute. Here we're defining the
-option `generate.script`.
+Matching on the `lib` argument will make `nixpkgs` library functions available within the function body.
 
-While there are many attributes to customize options, the most
-important one is `type`, which specifies what values are valid for an
-option, and how/whether multiple values should be merged together.
+:::{note}
+The ellipsis `...` is necessary because arbitrary arguments can be passed to modules.
+:::
 
-In the nixpkgs library there are a number of types available under
-`lib.types`. Here we're using the `lines` type, which specifies that:
-- Only strings are valid values
-- Multiple strings are joined with newlines
+## Declaring Options
+
+One of the reasons for writing modules is to declare names which can be assigned values and used in other computations elsewhere.
+
+For your new module to become useful, you will need to add some *options*, which define these named-values.
+
+Options are declared by defining an attribute under the top-level  `options` attribute, using `lib.mkOption`.
+
+In this section, you will define the `generate.script` option.
+
+Change `default.nix` to include the following declaration:
 
 ```diff
-diff --git a/default.nix b/default.nix
-index f7569bd..cb423a9 100644
---- a/default.nix
-+++ b/default.nix
-@@ -1,3 +1,9 @@
+# default.nix
  { lib, ... }: {
-+
-+  options = {
-+    generate.script = lib.mkOption {
-+      type = lib.types.lines;
-+    };
-+  };
-   
+
++ options = {
++   generate.script = lib.mkOption {
++     type = lib.types.lines;
++   };
++ };
+
  }
 ```
 
-Let's try to evaluate this with this file:
+While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option, and how or whether multiple values should be merged together.
+
+There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the nixpkgs library.
+
+You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
+
+Write a new file, `eval.nix`, which you will use to evaluate `default.nix`:
 
 ```nix
 # eval.nix
@@ -85,90 +88,87 @@ Let's try to evaluate this with this file:
 }
 ```
 
-Then we run
+Now execute the following command:
+
 ```bash
 nix-instantiate --eval eval.nix -A config.generate.script
 ```
 
-Trying to evaluate the `generate.script` option however, we get an error
-that the option is used but not defined, indicating that we need to
-actually give a value to the option.
+You will see an error message indicating that the `generate.script` option is used but not defined; you will need to assign a value to the option before using it.
 
+## Type Checking
+As previously mentioned, the `lines` type only permits string values.
 
-## Type checking: Assigning integer to generate.script
+:::{warning}
+In this section, you will make your first type error. Be prepared!
+:::
 
-We can try to assign an integer to our option of type `lines`, but the
-module system correctly throws an error saying that our definition
-doesn't match the options type.
+What happens if you instead try to assign an integer to the option?
+
+Add the following lines to `default.nix`:
 
 ```diff
-diff --git a/default.nix b/default.nix
-index cb423a9..0a9162e 100644
---- a/default.nix
-+++ b/default.nix
-@@ -5,5 +5,9 @@
-       type = lib.types.lines;
-     };
-   };
-+
-+  config = {
-+    generate.script = 42;
-+  };
-   
+# default.nix
+ { lib, ... }: {
+
+  options = {
+    generate.script = lib.mkOption {
+      type = lib.types.lines;
+    };
+  };
+
++ config = {
++   generate.script = 42;
++ };
  }
 ```
 
-## Successful evaluation: Assigning a string to generate.script
+Now try to execute the previous command, and witness your first module error:
 
-We can make type checking pass by assigning a string to the option,
-giving us our first successful evaluation of the `generate.script`
-option.
+```console
+$ nix-instantiate --eval eval.nix -A config.generate.script
+error:
+...
+       error: A definition for option `generate.script' is not of type `strings concatenated with "\n"'. Definition values:
+       - In `/home/nix-user/default.nix': 42
+```
 
-In this case, we assign a script which calls the Google Maps Static API
-to generate a world map, then displaying the result using icat
-(image-cat), both of which are helper scripts.
+This assignment of `generate.script = 42;` caused a type error: integers are not strings concatenated with the newline character.
+
+## Successful Type-checking
+
+To make this module pass the type-checker and successfully evaluate the `generate.script` option, you will now assign a string to `generate.script`.
+
+In this case, you will assign a `map` script which first calls the Google Maps Static API to generate a world map, then displays the result using `icat` (image-cat), both of which are helper scripts.
+
+Update `default.nix` by changing the value of `generate.script` to the following string:
 
 ```diff
-diff --git a/default.nix b/default.nix
-index 0a9162e..24f9c34 100644
---- a/default.nix
-+++ b/default.nix
-@@ -7,7 +7,9 @@
-   };
- 
+# default.nix
    config = {
 -    generate.script = 42;
 +    generate.script = ''
 +      map size=640x640 scale=2 | icat
 +    '';
    };
-   
- }
 ```
 
 TODO: Create derivations to get these commands
 
-## A new list option: Declaring generate.requestParams
+## Declaring More Options
+In this section, you will introduce another option: `generate.requestParams`.
 
-Let's introduce another option, generate.requestParams. For its type,
-we'll use `listOf <nestedType>`, which is a generic list type where each
-element has to match the given nested type. In our case we want `str` to
-be the nested type, which is a generic string type.
+For its type, you should use `listOf <nestedType>`, which is a generic list type where each element must have the given nested type.
 
-Note that the difference between `str` and `lines` is in their merging
-behavior:
-- For `lines`, multiple definitions get merged by concatenation with
-  newlines
-- For `str`, multiple definitions are not allowed. Which in this case is
-  mostly irrelevant however, since we can't really define a list element
-  multiple times.
+Instead of `lines`, in this case you will want the nested type to be `str`, a generic string type.
 
+The difference between `str` and `lines` is in their merging behavior:
+- For `lines`, multiple definitions get merged by concatenation with newlines.
+- For `str`, multiple definitions are not allowed. This is mostly irrelevant here however, since it is not really possible to define a list element multiple times.
+
+Make the following additions to your `default.nix` file now:
 ```diff
-diff --git a/default.nix b/default.nix
-index 24f9c34..fd5027a 100644
---- a/default.nix
-+++ b/default.nix
-@@ -4,12 +4,21 @@
+# default.nix
      generate.script = lib.mkOption {
        type = lib.types.lines;
      };
@@ -177,7 +177,7 @@ index 24f9c34..fd5027a 100644
 +      type = lib.types.listOf lib.types.str;
 +    };
    };
- 
+
    config = {
      generate.script = ''
        map size=640x640 scale=2 | icat
@@ -188,39 +188,36 @@ index 24f9c34..fd5027a 100644
 +      "scale=2"
 +    ];
    };
-   
+
  }
 ```
 
-## Dependencies between options: Using generate.requestParams
+## Dependencies Between Options
 
-A collection of modules generally only has a single option that is meant
-to be evaluated. That's the option that generates the final result we're
-interested in, which in our case is `generate.script`.
+A given module generally only declares a single option that is meant to be evaluated.
 
-In order to build up abstractions on that, we have the ability for
-options to depend on other options. In this case we want the
-`generate.script` option to use the values of `generate.requestParams`.
-We can access the values of options by adding the `config` argument to
-the argument list at the top and using e.g.
-`config.generate.requestParams` to access that options value.
+This option generates the final result to be used elsewhere, which in this case is `generate.script`.
 
-We're then using `lib.concatStringsSep " "` to join each list element
-of the option together into an argument list.
+Options have the ability to depend on other options, making it possible to build more useful abstractions.
 
+Here, the plan is for the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
+
+### Accessing Option Values
+To make a declared option available, the argument attribute set of the module declaring it must include the `config` attribute.
+
+Update `default.nix` to add the `config` attribute:
 ```diff
-diff --git a/default.nix b/default.nix
-index fd5027a..050a98e 100644
---- a/default.nix
-+++ b/default.nix
-@@ -1,4 +1,4 @@
+# default.nix
 -{ lib, ... }: {
 +{ lib, config, ... }: {
- 
-   options = {
-     generate.script = lib.mkOption {
-@@ -12,7 +12,9 @@
- 
+```
+
+When a module declaring an option is evaluated, values of the resulting option can be accessed by using attribute names to access the corresponding values.
+
+Now make the following changes to `default.nix`:
+
+```diff
+# default.nix
    config = {
      generate.script = ''
 -      map size=640x640 scale=2 | icat
@@ -228,33 +225,32 @@ index fd5027a..050a98e 100644
 +            config.generate.requestParams
 +           } | icat
      '';
- 
-     generate.requestParams = [
 ```
 
-## Conditional definitions: Introducing map.zoom option
+Here, the value of the `config.generate.requestParams` attribute is substituted at its call site.
 
-We now introduce the new option `map.zoom` in order to control the zoom
-level of the map. We'll use a new type for it, `nullOr <type>`, which
-accepts the value `null`, but also values of its argument type. We're
-using `null` here to mean an inferred zoom level.
+`lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
-For this option, we'll set a default value which should be used if it's
-not defined otherwise, which we can do using `mkOption`'s `default`
-argument.
+The result of this represents the list of command line arguments to pass to `map`.
 
-Now we want to use this option to define another element in
-`generate.requestParams`, but we only want to add this element if its
-value is non-null. We can do this using the `mkIf <condition>
-<definition>` function, which only adds a definition if the condition
-holds.
+## Conditional Definitions and Default Values
+
+In this section, you will define a new option, `map.zoom`, to control the zoom level of the map.
+
+You will use a new type, `nullOr <type>`, which can take as values either the values of its argument type or `null`.
+
+In this case, a `null` value will use the API's default behavior of inferring the zoom level.
+
+Here, you will also use `default` from `mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix) to declare your first *default* value, which will be used if the option declaring it is not enabled.
+
+You will use this option to define another element in `generate.requestParams`, which will only be added if its value is non-null.
+
+To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition holds.
+
+Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
 ```diff
-diff --git a/default.nix b/default.nix
-index 050a98e..6b6e1e1 100644
---- a/default.nix
-+++ b/default.nix
-@@ -8,6 +8,13 @@
+# default.nix
      generate.requestParams = lib.mkOption {
        type = lib.types.listOf lib.types.str;
      };
@@ -266,9 +262,14 @@ index 050a98e..6b6e1e1 100644
 +      };
 +    };
    };
- 
+ ```
+
+Now make the following additions to the `generate.requestParams` list in the `config` block:
+
+```diff
+# default.nix
    config = {
-@@ -20,6 +27,8 @@
+     ...
      generate.requestParams = [
        "size=640x640"
        "scale=2"
@@ -276,23 +277,15 @@ index 050a98e..6b6e1e1 100644
 +        "zoom=${toString config.map.zoom}")
      ];
    };
-   
 ```
 
-## Declaring map.center option
+## Centering the Map
 
-Similarly, let's declare a map.center option, declaring where the map
-should be centered.
+You have now declared options controlling the map dimensions and zoom level, but have not provided a way to specify where the map should be centered.
 
-We'll be using a small utility for geocoding location names, aka turning
-them from names into coordinates
-
+Add the `center` option now, possibly with your own location as default value:
 ```diff
-diff --git a/default.nix b/default.nix
-index 6b6e1e1..098d135 100644
---- a/default.nix
-+++ b/default.nix
-@@ -14,6 +14,11 @@
+# default.nix
          type = lib.types.nullOr lib.types.int;
          default = 2;
        };
@@ -303,8 +296,14 @@ index 6b6e1e1..098d135 100644
 +      };
      };
    };
- 
-@@ -29,6 +34,10 @@
+```
+
+To implement this behavior, you will use the `geocode` utility, which turns location names into coordinates.
+
+Add another `mkIf` call to the list of `requestParams` now:
+
+```diff
+# default.nix
        "scale=2"
        (lib.mkIf (config.map.zoom != null)
          "zoom=${toString config.map.zoom}")
@@ -314,63 +313,52 @@ index 6b6e1e1..098d135 100644
 +        })\"")
      ];
    };
-   
 ```
 
-## Splitting modules: importing marker.nix
+This time, you've used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, interpolating the result back into the `requestParams` string which sets the `center` value.
 
-The module system allows you to split your config into multiple files
-via the `imports` attribute, which can define further modules to import.
-This allows us to logically separate options and config for different
-parts.
+Wrapping shell command execution in Nix modules is a powerful technique for controlling system changes using the ergnomic attributes and values interface.
 
-Here we create a new module `marker.nix`, where we will declare options
-for defining markers on the map
+## Splitting Modules
 
+The module schema includes the `imports` attribute, which allows you to define further modules to import, enabling a *modular* approach where your configuration may be split into multiple files.
+
+In particular, this allows you to separate option declarations from their call-sites in your configuration.
+
+You should now create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
 ```diff
-diff --git a/default.nix b/default.nix
-index 098d135..9d9f29d 100644
---- a/default.nix
-+++ b/default.nix
-@@ -1,5 +1,9 @@
- { lib, config, ... }: {
- 
-+  imports = [
-+    ./marker.nix
-+  ];
-+
-   options = {
-     generate.script = lib.mkOption {
-       type = lib.types.lines;
-diff --git a/marker.nix b/marker.nix
-new file mode 100644
-index 0000000..035c28d
---- /dev/null
-+++ b/marker.nix
-@@ -0,0 +1,3 @@
+# marker.nix
 +{ lib, config, ... }: {
 +
 +}
 ```
 
-## Submodule types: Declaring map.markers option
-
-One of the most useful types of the module system is the `submodule`
-type. This type allows you to define a nested module system evaluation,
-with its own options. Every value of such a type is then interpreted
-(by default) as a `config` assignment of the nested module evaluation.
-
-In this case we're defining a `map.markers` option, whose type is a list
-of submodules with a nested `location` type, allowing us to define a
-list of markers on the map, where each assignment is type checked
-according to the submodule.
-
+Reference this new file in `default.nix` using the `imports` attribute:
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 035c28d..6a6c686 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -1,3 +1,20 @@
+# default.nix
+ { lib, config, ... }: {
+
++  imports = [
++    ./marker.nix
++  ];
++
+```
+
+## The `submodule` Type
+
+One of the most useful types included in the module system's type system is `submodule`.
+
+This type allows you to define nested modules with their own options.
+
+Every value of such a type is then interpreted (by default) as a `config` assignment of the nested module evaluation.
+
+Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.
+
+Each assignment of markers will be type-checked during evaluation of the top-level `config`.
+
+Make the following changes to `marker.nix` now:
+```diff
+# marker.nix
 -{ lib, config, ... }: {
 +{ lib, config, ... }:
 +let
@@ -390,26 +378,19 @@ index 035c28d..6a6c686 100644
 +      type = lib.types.listOf markerType;
 +    };
 +  };
- 
  }
 ```
 
-## Single option namespace: Defining markers in generate.requestParams
+## Setting Option Values Within Other Modules
 
-Since all modules in `imports` are treated the same, we can also freely
-assign an option defined in our initial module. In this case we want to
-add some request parameters derived from the `map.markers` option, so
-that markers actually show up on the map.
+Because of the way the module system composes option definitions, you can also freely assign values to options defined in other modules.
 
+In this case, you will use the `map.markers` option to derive and add new `requestParams`, making your declared markers appear on the returned map.
+
+To implement this behavior, add the following `config` block to `marker.nix`:
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 6a6c686..c2c5da2 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -17,4 +17,26 @@ in {
-     };
-   };
- 
+# marker.nix
+   ...
 +  config = {
 +
 +    map.markers = [
@@ -431,24 +412,20 @@ index 6a6c686..c2c5da2 100644
 +    in map paramForMarker config.map.markers;
 +
 +  };
-+
  }
 ```
 
-## Set map.{center,zoom} for more than {1,2} markers
+Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
-Let's let the API infer the center if we have more than one marker, and
-let's let it infer the zoom as well if there's more than 2.
+The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default behavior of the `list`-type module.
 
+## Multiple Markers
+
+In case you define multiple markers, determining an appropriate center or zoom level for the map may be challenging; it's easier to let the API do this for you.
+
+To do this, make the following additions to `marker.nix`, above the `generate.requestParams` declaration:
 ```diff
-diff --git a/marker.nix b/marker.nix
-index c2c5da2..b80ddd0 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -23,6 +23,14 @@ in {
-       { location = "new york"; }
-     ];
- 
+# marker.nix
 +    map.center = lib.mkIf
 +      (lib.length config.map.markers >= 1)
 +      null;
@@ -462,30 +439,24 @@ index c2c5da2..b80ddd0 100644
          let
 ```
 
-## Nested submodules: Introducing users option
+In this case, the default behavior of the Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
 
-We will now introduce the option `users`, where we make use of a very
-useful type, `lib.types.attrsOf <subtype>`. This type lets us specify an
-attribute set as a value, where the keys can be arbitrary, but each
-value has to conform to the given <subtype>.
+## Nested Submodules
 
-In this case, we'll use another submodule as the subtype, one that
-allows declaring a departure marker, which notably also makes use of our
-`markerType` submodule, giving us a nested structure of submodules.
+It's time to introduce the `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
 
-We're now propagating each of the users marker definitions to the
-`map.markers` option.
+Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
+
+This will also make use of the `markerType` submodule, giving a nested structure of submodules.
+
+To propagate marker definitions from `users`  to the `map.markers` option, make the following changes now:
+
+- In the `let` block:
 
 ```diff
-diff --git a/marker.nix b/marker.nix
-index b80ddd0..3c54ad8 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -9,9 +9,24 @@ let
-       };
-     };
-   };
-+
+# marker.nix
+ let
+   ...
 +  userType = lib.types.submodule {
 +    options = {
 +      departure = lib.mkOption {
@@ -496,20 +467,24 @@ index b80ddd0..3c54ad8 100644
 +  };
 +
  in {
- 
+```
+
+- In the `options` block, above `map.markers`:
+```diff
+# marker.nix
    options = {
 +
 +    users = lib.mkOption {
 +      type = lib.types.attrsOf userType;
 +    };
 +
-     map.markers = lib.mkOption {
-       type = lib.types.listOf markerType;
-     };
-@@ -19,9 +34,11 @@ in {
- 
+```
+
+- In the `config` block, above `map.center`:
+```diff
+# marker.nix
    config = {
- 
+
 -    map.markers = [
 -      { location = "new york"; }
 -    ];
@@ -518,24 +493,36 @@ index b80ddd0..3c54ad8 100644
 +      (lib.concatMap (user: [
 +        user.departure
 +      ]) (lib.attrValues config.users));
- 
+
      map.center = lib.mkIf
        (lib.length config.map.markers >= 1)
 ```
 
-## Introducing style.label and strMatching type
+The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically.
 
-Let's add an option to customize markers with a label. We can do so by
-just adding another option in our markerType submodule. The API states
-that this has to be an uppercase letter or a number, which we can
-implement with the `strMatching "<regex>"` type.
+The `departure` values of each of the `users` are then joined into a list, and this list is filtered for non-`null` locations.
 
+The resulting list is stored in `map.markers`.
+
+The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Maps API.
+
+Defining the options in this way allows you to set multiple `users.<name>.departure.location` values and generate a map with the appropriate zoom and center, with pins corresponding to the set of `departure.location` values for *all* `users`.
+
+In the 2021 Summer of Nix, this formed the basis of an interactive multi-person map demo.
+
+## Labeling Markers
+
+Now that the map can be rendered with multiple markers, it's time to add some style customization.
+
+To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
+
+The API [states](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles) that these labels must be either an uppercase letter or a number.
+
+You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression used for the matching; this will reject any unacceptable (non-uppercase letter or number) values.
+
+- In the `let` block:
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 3c54ad8..1c9a043 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -7,6 +7,12 @@ let
+# marker.nix
          type = lib.types.nullOr lib.types.str;
          default = null;
        };
@@ -547,8 +534,11 @@ index 3c54ad8..1c9a043 100644
 +      };
      };
    };
- 
-@@ -52,7 +58,10 @@ in {
+```
+
+- In the `paramForMarker` function:
+```diff
+# marker.nix
        paramForMarker = marker:
          let
            attributes =
@@ -562,27 +552,19 @@ index 3c54ad8..1c9a043 100644
                })"
 ```
 
-## Using the attribute name in the submodule to define a default label
+Here, the label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
 
-Let's set a default label by deriving it from the username. By
-transforming the submodule's argument into a function, we can access
-arguments within it. One special argument available to submodules is the
-`name` argument, which when used in `attrsOf`, gives you the name of the
-attribute the submodule is defined under.
+## Defining a Default Label
 
-In this case, we don't easily have access to the name from the marker
-submodules label option (where we could set a `default =`). Instead we
-will use the `config` section of the user submodule to set a default. We
-can do so using the `lib.mkDefault` modifier, which has lower precedence
-than if no modifier were used.
+In case you don't want to manually define a label for every marker, you can set a default value.
+
+The easiest value for a default label is the username, which will always also be set.
+
+This `firstUpperAlnum` function allows you to retrieve the first character of the username, with the correct type for passing to `departure.style.label`:
 
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 1c9a043..53860f1 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -1,5 +1,11 @@
- { lib, config, ... }:
+# marker.nix
+{ lib, config, ... }:
  let
 +  # Returns the uppercased first letter
 +  # or number of a string
@@ -590,13 +572,19 @@ index 1c9a043..53860f1 100644
 +    lib.mapNullable lib.head
 +    (builtins.match "[^A-Z0-9]*([A-Z0-9]).*"
 +    (lib.toUpper str));
- 
+
    markerType = lib.types.submodule {
      options = {
-@@ -16,14 +22,19 @@ let
-     };
-   };
- 
+```
+
+By transforming the argument to `lib.types.submodule` into a function, you can access arguments within it.
+
+One special argument available to submodules is the `name` argument, which when used in `attrsOf`, gives you the name of the attribute the submodule is defined under.
+
+You can use this function argument to retrieve the `name` attribute for use elsewhere:
+
+```diff
+# marker.nix
 -  userType = lib.types.submodule {
 +  userType = lib.types.submodule ({ name, ... }: {
      options = {
@@ -606,34 +594,49 @@ index 1c9a043..53860f1 100644
        };
      };
 -  };
+```
+
+In this case, you don't easily have access to the name from the marker submodules `label` option, where you otherwise could set a `default` value.
+
+Instead you can use the `config` section of the `user` submodule to set a default, like so:
+
+```diff
+# marker.nix
 +
 +    config = {
 +      departure.style.label = lib.mkDefault
 +        (firstUpperAlnum name);
 +    };
 +  });
- 
+
  in {
- 
+
 ```
 
-## Marker colors
+:::{note}
+Module options have a *precedence*, represented as an integer, which determines the priority of setting the option to a particular value.
 
-Let's allow markers to change their color as well. We'll use some new
-type functions for this, namely
-- `either <this> <that>`: Takes two types as arguments, allows either of
-  them
-- `enum [ <allowed values> ]`: Takes a list of allowed values
+The `lib.mkDefault` modifier sets the precedence of its argument value to 1000, the lowest priority.
 
+This ensures that other values set for the same option will prevail.
+:::
+
+
+## Marker Styling: Color
+
+For better visual contrast, it would also be helpful to have a way to change the *color* of a marker.
+
+Here you will use two new type-functions for this:
+- `either <this> <that>`, which takes two types as arguments, allows either of them
+- `enum [ <allowed values> ]`, which takes a list of allowed values
+
+In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value:
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 53860f1..df0d08b 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -7,6 +7,13 @@ let
+# marker.nix
+     ...
      (builtins.match "[^A-Z0-9]*([A-Z0-9]).*"
      (lib.toUpper str));
- 
+
 +  # Either a color name or `0xRRGGBB`
 +  colorType = lib.types.either
 +    (lib.types.strMatching "0x[0-9A-F]{6}")
@@ -644,7 +647,11 @@ index 53860f1..df0d08b 100644
    markerType = lib.types.submodule {
      options = {
        location = lib.mkOption {
-@@ -19,6 +26,11 @@ let
+```
+
+At the bottom of the `let` block, add the `style.color` option:
+```diff
+# marker.nix
            (lib.types.strMatching "[A-Z0-9]");
          default = null;
        };
@@ -655,8 +662,11 @@ index 53860f1..df0d08b 100644
 +      };
      };
    };
- 
-@@ -73,6 +85,7 @@ in {
+```
+
+Now add a line to the `paramForMarker` list which makes use of the new option:
+```diff
+# marker.nix
                (marker.style.label != null)
                "label:${marker.style.label}"
              ++ [
@@ -666,16 +676,14 @@ index 53860f1..df0d08b 100644
                })"
 ```
 
-## Marker size
+## Marker Styling: Size
 
-Let's also allow changing of marker sizes.
+In case you set many different markers, it would be helpful to have the ability to change their size individually, further improving visual accessibility.
+
+Add a new `style.size` option to `marker.nix`, allowing you to do so:
 
 ```diff
-diff --git a/marker.nix b/marker.nix
-index df0d08b..2c0c1a8 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -31,6 +31,12 @@ let
+# marker.nix
          type = colorType;
          default = "red";
        };
@@ -687,8 +695,11 @@ index df0d08b..2c0c1a8 100644
 +      };
      };
    };
- 
-@@ -80,10 +86,20 @@ in {
+```
+
+Now add a handler for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
+```diff
+# marker.nix
      generate.requestParams = let
        paramForMarker = marker:
          let
@@ -699,6 +710,11 @@ index df0d08b..2c0c1a8 100644
 +            large = null;
 +          }.${marker.style.size};
 +
+```
+
+Finally, add another `lib.optional` call to the `attributes` string, making use of the selected size:
+```
+# marker.nix
            attributes =
              lib.optional
                (marker.style.label != null)
@@ -711,37 +727,16 @@ index df0d08b..2c0c1a8 100644
                "$(geocode ${
 ```
 
-## Initial path module
+## The `pathType` Submodule
 
-Let's introduce a new module for declaring paths on the map. We'll
-import a new `path.nix` module from our `marker.nix` module.
+So far, you've created an option for declaring a *destination* marker, as well as several options for configuring the marker's visual representation.
 
-In the path module we'll define an option for declaring paths, and will
-use the same `generate.requestParams` to influence the API call to
-include our defined paths
+The new option defined in the next section will allow you to set an *arrival* marker, which together with a destination allows you to draw *paths* on the map using the new module defined below.
+
+To start, create a new `path.nix` file with the following contents:
 
 ```diff
-diff --git a/marker.nix b/marker.nix
-index 2c0c1a8..ffb8185 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -56,6 +56,10 @@ let
- 
- in {
- 
-+  imports = [
-+    ./path.nix
-+  ];
-+
-   options = {
- 
-     users = lib.mkOption {
-diff --git a/path.nix b/path.nix
-new file mode 100644
-index 0000000..554a88b
---- /dev/null
-+++ b/path.nix
-@@ -0,0 +1,32 @@
+# path.nix
 +{ lib, config, ... }:
 +let
 +  pathType = lib.types.submodule {
@@ -776,18 +771,29 @@ index 0000000..554a88b
 +}
 ```
 
-## Arrival marker
+The `path.nix` module defines an option for declaring paths, augmenting the API call by re-using the `generate.requestParams` option.
 
-Now in order for users to be able to draw a path in their definitions,
-we need to allow them to specify another marker. We will copy the
-`departure` option declaration to a new `arrival` option for that.
+Now import this new `path.nix` module from your `marker.nix` module:
 
 ```diff
-diff --git a/marker.nix b/marker.nix
-index ffb8185..940b8f8 100644
---- a/marker.nix
-+++ b/marker.nix
-@@ -46,11 +46,18 @@ let
+# marker.nix
+ in {
+
++  imports = [
++    ./path.nix
++  ];
++
+   options = {
+
+     users = lib.mkOption {
+```
+
+## The Arrival Marker
+
+Now copy the `departure` option declaration to a new `arrival` option in `marker.nix`, to complete the initial path implementation:
+
+```diff
+# marker.nix
          type = markerType;
          default = {};
        };
@@ -797,7 +803,11 @@ index ffb8185..940b8f8 100644
 +        default = {};
 +      };
      };
- 
+```
+
+Next, add an `arrival.style.label` attribute to the `config` block, mirroring the `departure.style.label`:
+```diff
+# marker.nix
      config = {
        departure.style.label = lib.mkDefault
          (firstUpperAlnum name);
@@ -805,31 +815,29 @@ index ffb8185..940b8f8 100644
 +        (firstUpperAlnum name);
      };
    });
- 
-@@ -76,7 +83,7 @@ in {
+```
+
+Finally, update the return list in the function passed to `concatMap` in `map.markers`:
+```diff
+# marker.nix
      map.markers = lib.filter
        (marker: marker.location != null)
        (lib.concatMap (user: [
 -        user.departure
 +        user.departure user.arrival
        ]) (lib.attrValues config.users));
- 
+
      map.center = lib.mkIf
 ```
 
-## Connecting user paths
+You should now be able to define paths on the map, connecting pairs of departure and arrival points.
 
-In our path module, we can now define a path spanning from every users
-departure location to their arrival location.
+## Connecting Markers by Paths
+
+In the path module, you can now define a path connecting every user's departure and arrival locations.
 
 ```diff
-diff --git a/path.nix b/path.nix
-index 554a88b..d4a3a84 100644
---- a/path.nix
-+++ b/path.nix
-@@ -17,6 +17,17 @@ in {
-   };
- 
+# path.nix
    config = {
 +
 +    map.paths = map (user: {
@@ -847,24 +855,25 @@ index 554a88b..d4a3a84 100644
          "$(geocode ${lib.escapeShellArg loc})";
 ```
 
-## Introducing path weight option
+:::{warning}
+Don't confuse the `map` function with the `map` option or the `map` script!
+:::
 
-Let's also allow some customization of path styles with a `weight` option.
-As already done before, we'll declare a submodule for the path style.
+The new `map.paths` attribute contains a list of all valid paths defined for all users.
 
-While we could also directly define the style.weight option in this
-case, we will use the submodule in a future change to reuse the path
-style definitions.
+A path is valid only if the `departure` and `arrival` attributes are set for that user.
 
-Note how we're using a new type for this, `ints.between <lower>
-<upper>`, which allows integers in the given inclusive range.
+## Path Styling: Weight
 
+Your users have spoken, and they demand the ability to customize the styles of their paths with a `weight` option.
+
+As before, you'll now declare a new submodule for the path style.
+
+While you could also directly define the `style.weight` option, in this case, you should use the submodule in a future change to reuse the path style definitions.
+
+Add the `pathStyleType` submodule option to the `let` block in `path.nix`:
 ```diff
-diff --git a/path.nix b/path.nix
-index d4a3a84..88766a8 100644
---- a/path.nix
-+++ b/path.nix
-@@ -1,11 +1,26 @@
+# path.nix
  { lib, config, ... }:
  let
 +
@@ -878,7 +887,17 @@ index d4a3a84..88766a8 100644
 +  };
 +
    pathType = lib.types.submodule {
- 
+```
+
+:::{note}
+The `ints.between <lower> <upper>` type allows integers in the given (inclusive) range.
+:::
+
+The path weight will default to 5, but can be set to any integer value in the 1 to 20 range, with higher weights producing thicker paths on the map.
+
+Now add a `style` option to the `options` set further down the file:
+```diff
+# path.nix
      options = {
        locations = lib.mkOption {
          type = lib.types.listOf lib.types.str;
@@ -889,9 +908,13 @@ index d4a3a84..88766a8 100644
 +        default = {};
 +      };
      };
- 
+
    };
-@@ -34,7 +49,10 @@ in {
+```
+
+Finally, update the `attributes` list in `paramForPath`:
+```diff
+# path.nix
        paramForPath = path:
          let
            attributes =
@@ -905,23 +928,16 @@ index d4a3a84..88766a8 100644
            }";
 ```
 
-## User path styles
+## The `pathStyle` Submodule
 
-Now users can't actually customize the path style yet, so let's
-introduce a new `pathStyle` option for each user.
+Users still can't actually customize the path style yet, so you should introduce a new `pathStyle` option for each user.
 
-But wait! Didn't we already define the `user` option in the `marker.nix`
-module? Yes we did, but the module system actually allows us to declare
-an option multiple times, and the module system takes care of merging
-each declarations types together (if possible).
+The module system allows you to declare values for an option multiple times, and if the types permit doing so, takes care of merging each declaration's values together.
+
+This makes it possible to have a definition for the `user` option in the `marker.nix` module, as well as a `user` definition in `path.nix`, which you should add now:
 
 ```diff
-diff --git a/path.nix b/path.nix
-index 88766a8..8b56782 100644
---- a/path.nix
-+++ b/path.nix
-@@ -26,6 +26,16 @@ let
-   };
+# path.nix
  in {
    options = {
 +
@@ -937,7 +953,11 @@ index 88766a8..8b56782 100644
      map.paths = lib.mkOption {
        type = lib.types.listOf pathType;
      };
-@@ -38,6 +48,7 @@ in {
+```
+
+Then add a line using the `user.pathStyle` option in `map.paths`:
+```diff
+# path.nix
          user.departure.location
          user.arrival.location
        ];
@@ -947,20 +967,18 @@ index 88766a8..8b56782 100644
        && user.arrival.location != null
 ```
 
-## Introducing path color option
+## Path Styling: Color
 
-Very similar to markers, let's allow customization of the path color,
-using types we've seen before already.
+As with markers, paths should have customizable colors.
 
+You can accomplish this using types you've already seen by now.
+
+Add a new `colorType` block to `path.nix`, specifying the allowed color names and RGB/RGBA values:
 ```diff
-diff --git a/path.nix b/path.nix
-index 8b56782..d2073fe 100644
---- a/path.nix
-+++ b/path.nix
-@@ -1,12 +1,25 @@
+# path.nix
  { lib, config, ... }:
  let
- 
+
 +  # Either a color name, `0xRRGGBB` or `0xRRGGBBAA`
 +  colorType = lib.types.either
 +    (lib.types.strMatching "0x[0-9A-F]{6}[0-9A-F]{2}?")
@@ -970,8 +988,11 @@ index 8b56782..d2073fe 100644
 +    ]);
 +
    pathStyleType = lib.types.submodule {
-     options = {
-       weight = lib.mkOption {
+```
+
+Under the `weight` option, add a new `color` option to use the new `colorType` value:
+```diff
+# path.nix
          type = lib.types.ints.between 1 20;
          default = 5;
        };
@@ -982,8 +1003,11 @@ index 8b56782..d2073fe 100644
 +      };
      };
    };
- 
-@@ -62,6 +75,7 @@ in {
+```
+
+Finally, add a line using the `color` option to the `attributes` list:
+```diff
+# path.nix
            attributes =
              [
                "weight:${toString path.style.weight}"
@@ -993,17 +1017,15 @@ index 8b56782..d2073fe 100644
          in "path=${
 ```
 
-## Introducing geodesic path option
+## Further Styling
 
-Finally, another option for the path style, using a new but very simple
-type, `bool`, which just allows `true` and `false`.
+To further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
 
+Since this feature can be turned on or off, you can do this using the `bool` type, which can be `true` or `false`.
+
+Make the following changes to `path.nix` now:
 ```diff
-diff --git a/path.nix b/path.nix
-index d2073fe..ebd9561 100644
---- a/path.nix
-+++ b/path.nix
-@@ -20,6 +20,11 @@ let
+# path.nix
          type = colorType;
          default = "blue";
        };
@@ -1014,8 +1036,11 @@ index d2073fe..ebd9561 100644
 +      };
      };
    };
- 
-@@ -76,6 +81,7 @@ in {
+```
+
+Make sure to also add a new line using this to the `attributes` list, so the option value is included in the API call:
+```diff
+# path.nix
              [
                "weight:${toString path.style.weight}"
                "color:${path.style.color}"
@@ -1025,3 +1050,9 @@ index d2073fe..ebd9561 100644
          in "path=${
 ```
 
+## Wrapping Up
+In this tutorial, you've learned how to write custom Nix modules to bring external services under declarative control, with the help of several new utility functions from the Nixpkgs `lib`.
+
+You defined several modules in multiple files, each with separate submodules making use of the module system's type checking.
+
+These modules exposed features of the external API in a declarative way.
