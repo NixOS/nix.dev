@@ -1917,7 +1917,7 @@ There is more depth to the inner workings of derivations, but at this point it s
 
 :::
 
-String interpolation on derivations is used to refer to other build results as file system paths when declaring new derivations.
+String interpolation on derivations is used to refer to their build results as file system paths when declaring new derivations.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
