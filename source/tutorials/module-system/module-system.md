@@ -50,7 +50,7 @@ The ellipsis `...` is necessary because arbitrary arguments can be passed to mod
 
 ## Declaring Options
 
-One of the reasons for writing modules is to declare names which can be assigned values and used in other computations elsewhere.
+Modules allow providing *options* that declare which values can be set and used elsewhere.
 
 For your new module to become useful, you will need to add some *options*, which define these named-values.
 
