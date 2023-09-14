@@ -328,7 +328,7 @@ The module schema includes the `imports` attribute, which allows incorporating f
 
 In particular, this allows you to separate option declarations from where they are used in your configuration.
 
-You should now create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
+Create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
 ```diff
 # marker.nix
 +{ lib, config, ... }: {
