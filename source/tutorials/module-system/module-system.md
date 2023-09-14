@@ -9,7 +9,7 @@ Concretely, you'll write modules to interact with the Google Maps API, declaring
 Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
 
 :::{note}
-This tutorial follows [@infinisil's presentation](https://infinisil.com/modules.mp4) of the [Summer of Nix Modules](https://github.com/tweag/summer-of-nix-modules), during the 2021 Summer of Nix.
+This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  [(source)](https://github.com/tweag/summer-of-nix-modules) for 2021 Summer of Nix.
 :::
 
 ## Empty module
