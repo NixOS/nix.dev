@@ -159,7 +159,7 @@ TODO: Create derivations to get these commands
 ## Declaring More Options
 In this section, you will introduce another option: `generate.requestParams`.
 
-For its type, you should use `listOf <nestedType>`, which is a generic list type where each element must have the given nested type.
+For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
 
 Instead of `lines`, in this case you will want the nested type to be `str`, a generic string type.
 
