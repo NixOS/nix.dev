@@ -445,7 +445,7 @@ In this case, the default behavior of the Maps API when not passed a center or z
 
 ## Nested Submodules
 
-It's time to introduce the `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
+It's time to introduce a `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
