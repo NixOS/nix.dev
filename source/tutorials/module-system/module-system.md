@@ -419,7 +419,7 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
-The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default behavior of the `list`-type module.
+The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list`-type module.
 
 ## Multiple Markers
 
