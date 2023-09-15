@@ -449,7 +449,7 @@ It's time to introduce a `users` option with the `lib.types.attrsOf <subtype>` t
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
-This will also make use of the `markerType` submodule, giving a nested structure of submodules.
+This will again make use of the `markerType` submodule, giving a nested structure of submodules.
 
 To propagate marker definitions from `users`  to the `map.markers` option, make the following changes now:
 
