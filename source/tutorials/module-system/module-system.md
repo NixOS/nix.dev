@@ -1021,7 +1021,7 @@ Finally, add a line using the `color` option to the `attributes` list:
 
 ## Further Styling
 
-To further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
+Now that you've got this far, to further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
 
 Since this feature can be turned on or off, you can do this using the `bool` type, which can be `true` or `false`.
 
