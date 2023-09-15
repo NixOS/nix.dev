@@ -699,7 +699,7 @@ Add a new `style.size` option to `marker.nix`, allowing you to do so:
    };
 ```
 
-Now add a handler for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
+Now add a mapping for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
 ```diff
 # marker.nix
      generate.requestParams = let
