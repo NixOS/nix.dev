@@ -387,7 +387,7 @@ Make the following changes to `marker.nix` now:
 
 Because of the way the module system composes option definitions, you can also freely assign values to options defined in other modules.
 
-In this case, you will use the `map.markers` option to derive and add new `requestParams`, making your declared markers appear on the returned map.
+In this case, you will use the `map.markers` option to produce and add new elements to the `requestParams` list, making your declared markers appear on the returned map.
 
 To implement this behavior, add the following `config` block to `marker.nix`:
 ```diff
