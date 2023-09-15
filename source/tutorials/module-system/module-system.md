@@ -353,7 +353,6 @@ One of the most useful types included in the module system's type system is `sub
 
 This type allows you to define nested modules with their own options.
 
-Every value of such a type is then interpreted (by default) as a `config` assignment of the nested module evaluation.
 
 Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.
 
