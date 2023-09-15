@@ -680,7 +680,7 @@ Now add a line to the `paramForMarker` list which makes use of the new option:
 
 ## Marker Styling: Size
 
-In case you set many different markers, it would be helpful to have the ability to change their size individually, further improving visual accessibility.
+In case you set many different markers, it would be helpful to have the ability to change their size individually.
 
 Add a new `style.size` option to `marker.nix`, allowing you to do so:
 
