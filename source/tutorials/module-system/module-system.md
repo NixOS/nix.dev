@@ -518,7 +518,7 @@ Now that the map can be rendered with multiple markers, it's time to add some st
 
 To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
 
-The API [states](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles) that these labels must be either an uppercase letter or a number.
+The API documentation states that [these labels must be either an uppercase letter or a number](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles).
 
 You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression used for the matching; this will reject any unacceptable (non-uppercase letter or number) values.
 
