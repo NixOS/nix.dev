@@ -1058,3 +1058,5 @@ In this tutorial, you've learned how to write custom Nix modules to bring extern
 You defined several modules in multiple files, each with separate submodules making use of the module system's type checking.
 
 These modules exposed features of the external API in a declarative way.
+
+You can now conquer the world with Nix.
