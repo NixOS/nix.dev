@@ -506,7 +506,7 @@ The `departure` values of each of the `users` are then joined into a list, and t
 
 The resulting list is stored in `map.markers`.
 
-The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Maps API.
+The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Google Maps API.
 
 Defining the options in this way allows you to set multiple `users.<name>.departure.location` values and generate a map with the appropriate zoom and center, with pins corresponding to the set of `departure.location` values for *all* `users`.
 
