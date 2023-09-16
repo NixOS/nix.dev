@@ -520,7 +520,7 @@ To tell the markers apart, you should add another option to the `markerType` sub
 
 The API documentation states that [these labels must be either an uppercase letter or a number](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles).
 
-You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression used for the matching; this will reject any unacceptable (non-uppercase letter or number) values.
+You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression that will accept any matching (uppercase letter or number) values.
 
 - In the `let` block:
 ```diff
