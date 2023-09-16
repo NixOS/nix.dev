@@ -630,7 +630,7 @@ For better visual contrast, it would also be helpful to have a way to change the
 
 Here you will use two new type-functions for this:
 - `either <this> <that>`, which takes two types as arguments, and allows either of them
-- `enum [ <allowed values> ]`, which takes a list of allowed values
+- `enum [ <allowed values> ]`, which takes a list of allowed values, and allows any of them
 
 In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value:
 ```diff
