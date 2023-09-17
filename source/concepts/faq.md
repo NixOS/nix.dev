@@ -23,7 +23,7 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 
 - Interfaces and behavior of experimental features could still be changed by Nix developers.
   This may require you to adapt your code at some point in the future, which will require more effort once it has grown in complexity.
-  Currently there is no agreed-upon plan or timeline for stabilizing flakes.
+  Currently there is no agreed-upon plan or timeline for stabilising flakes.
 - The [Nix maintainer team](https://nixos.org/community/teams/nix.html) focuses on fixing bugs and regressions in stable interfaces, supporting well-understood use cases, as well as improving the internal design and overall contributor experience in order to ease future development.
   Improvements to experimental features have low priority.
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
