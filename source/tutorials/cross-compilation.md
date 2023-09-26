@@ -156,17 +156,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
    in
    pkgs.pkgsCross.aarch64-multiplatform.hello
    ```
-  
-   or
-  
-   ```nix
-   let
-     # all packages for `aarch64-multiplatform`
-     pkgs = (import <nixpkgs> {}).pkgsCross.aarch64-multiplatform;
-   in
-   pkgs.hello
-   ```
-  
+
 2. Pass the host platform to `crossSystem` when importing `<nixpkgs>`:
 
    ```nix

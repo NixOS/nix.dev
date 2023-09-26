@@ -51,6 +51,9 @@ The Documentation Team can be found in a number of places. Check the [Documentat
 
 ## Projects
 
+## How You Can Help
+If you like what we're doing, consider [joining the documentation team](https://nixos.org/community/teams/documentation) or [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of learning materials and other documentation.
+
 ## RFCs
 
 ## Documentation PRs Merged
