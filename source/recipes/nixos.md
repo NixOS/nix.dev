@@ -1,10 +1,10 @@
-## NixOS
+# NixOS
 
-### How to build my own ISO?
+## How to build my own ISO?
 
 See <http://nixos.org/nixos/manual/index.html#sec-building-image>
 
-### How do I connect to any of the machines in NixOS tests?
+## How do I connect to any of the machines in NixOS tests?
 
 Apply following patch:
 
@@ -26,7 +26,7 @@ index 8ad0d67..838fbdd 100644
 
 And then the vde_switch network should be accessible locally.
 
-### How to bootstrap NixOS inside an existing Linux installation?
+## How to bootstrap NixOS inside an existing Linux installation?
 
 There are a couple of tools:
 

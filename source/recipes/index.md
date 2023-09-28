@@ -8,6 +8,8 @@ These sections contains guides to getting things done.
 :maxdepth: 2
 
 ./best-practices.md
+./nix.md
+./nixos.md
 ../templates/*
 ./troubleshooting.md
 ```
