@@ -137,6 +137,7 @@ And then the vde_switch network should be accessible locally.
 
 There are a couple of tools:
 
+- <https://github.com/nix-community/nixos-anywhere>
 - <https://github.com/jeaye/nixos-in-place>
 - <https://github.com/elitak/nixos-infect>
 - <https://github.com/cleverca22/nix-tests/tree/master/kexec>
