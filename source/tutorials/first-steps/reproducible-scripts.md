@@ -32,7 +32,7 @@ A [shebang] determines which program to use for running an interpreted script.
 [Bash]: https://www.gnu.org/software/bash/
 [shebang]: https://en.wikipedia.org/wiki/Shebang_(Unix)
 
-We will use the shebang line `#! /usr/bin/env nix-shell`.
+We will use the shebang line `#!/usr/bin/env nix-shell`.
 
 [`env`] is a program available on most modern Unix-like operating systems at the file system path `/usr/bin/env`.
 It takes a command name as argument and will run the first executable by that name it finds in the directories listed in the environment variable `$PATH`.
