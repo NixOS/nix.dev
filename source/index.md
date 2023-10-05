@@ -77,6 +77,7 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 ```{toctree}
 :hidden:
 
+install-nix.md
 tutorials/index.md
 recipes/index.md
 reference/index.md
