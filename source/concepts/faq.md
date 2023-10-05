@@ -1,4 +1,22 @@
-# Frequently Asked Questions
+# Frequentl Asked Questions
+
+## Why are flakes controversial?
+
+Originally proposed in [RFC 49](https://github.com/NixOS/rfcs/pull/49), flakes have been in development since 2019.
+Nix introduced the implementation as its first [experimental feature] in 2021.
+
+The subject is considered controversial among Nix users and developers in terms of design, development processes, and community governance.
+In particular:
+- The RFC was closed without conclusion, and some design and implementation issues are not yet resolved.
+  Examples include the notion of a global [flake registry], the [impossibility of parameterising flakes](https://github.com/NixOS/nix/issues/2861), and the [new command line interface and flakes being closely tied to each other](https://discourse.nixos.org/t/2023-03-06-nix-team-meeting-minutes-38/26056#cli-stabilisation-announcement-draft-4).
+- The original implementation introduced [regressions](https://discourse.nixos.org/t/nix-2-4-and-what-s-next/16257) in the [Nix 2.4 release](https://nixos.org/manual/nix/stable/release-notes/rl-2.4.html), breaking some stable functionality without a [major version](https://semver.org/) increment.
+- New Nix users were and still are encouraged by various individuals to adopt flakes despite there being no concrete plan or timeline for stabilisation.
+
+This led to a situation where the stable interface was only sparsely maintained for multiple years, and repeatedly suffered breakages due to ongoing development.
+Meanwhile, the new interface was adopted widely enough for evolving its design without negatively affecting users to become very challenging.
+
+As of the [2022 community survey](https://discourse.nixos.org/t/2022-nix-survey-results/18983), more than half of the user base, a third of which were relative beginners, relied on experimental features.
+{term}`Nixpkgs` as a contrasting example, while featuring a `flake.nix` for compatibility, does not depend on Nix experimental features in its code base.
 
 ## Should I enable flakes?
 
