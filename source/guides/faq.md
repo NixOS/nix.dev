@@ -54,10 +54,6 @@ See <http://stackoverflow.com/a/43850372>
 $ nix-shell -p nixpkgs-review --run "nixpkgs-review wip"
 ```
 
-### What are channels and different branches on github?
-
-See <https://nixos.wiki/wiki/Nix_channels>
-
 ### How can I manage dotfiles in \$HOME with Nix?
 
 See <https://github.com/nix-community/home-manager>
