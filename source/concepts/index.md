@@ -7,5 +7,6 @@ These sections contains explanations of history and ideas in the Nix ecosystem.
 :glob:
 :maxdepth: 2
 
-*
+flakes.md
+faq.md
 ```
