@@ -29,6 +29,9 @@ updates:
     interval: daily
     time: '00:00'
     timezone: UTC
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-patch"]
   open-pull-requests-limit: 10
   commit-message:
       prefix: "chore"
