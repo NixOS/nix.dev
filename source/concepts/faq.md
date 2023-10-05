@@ -7,6 +7,8 @@
 >
 > &mdash; <cite>[Nix: A Safe and Policy-Free System for Software Deployment](https://edolstra.github.io/pubs/nspfssd-lisa2004-final.pdf), LISA XVIII, 2004</cite>
 
+The Nix logo is inspired by [an idea for the Haskell logo](https://wiki.haskell.org/File:Sgf-logo-blue.png) and the fact that [*nix* is Latin for *snow*](https://nix-dev.science.uu.narkive.com/VDaaP1BY/nix-logo).
+
 ## Why are flakes controversial?
 
 Originally proposed in [RFC 49](https://github.com/NixOS/rfcs/pull/49), flakes have been in development since 2019.
