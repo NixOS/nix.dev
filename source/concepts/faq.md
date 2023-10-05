@@ -1,4 +1,4 @@
-# Frequentl Asked Questions
+# Frequently Asked Questions
 
 ## Why are flakes controversial?
 
