@@ -9,7 +9,7 @@ updates:
     timezone: UTC
   open-pull-requests-limit: 10
   commit-message:
-      prefix: "chore"
+      prefix: "github-actions"
       include: "scope"
 
 - package-ecosystem: gitsubmodule
@@ -20,7 +20,7 @@ updates:
     timezone: UTC
   open-pull-requests-limit: 10
   commit-message:
-      prefix: "chore"
+      prefix: "gitsubmodule"
       include: "scope"
 
 - package-ecosystem: pip
@@ -34,5 +34,5 @@ updates:
       update-types: ["version-update:semver-patch"]
   open-pull-requests-limit: 10
   commit-message:
-      prefix: "chore"
+      prefix: "pip"
       include: "scope"
