@@ -39,7 +39,7 @@ In particular, the process of adding software to {term}`Nixpkgs` or maintaining 
 
 Both paradigms have their own set of unique concepts and support tooling that have to be learned, with varying ease of use, implementation quality, and support status.
 At the moment, neither the stable nor the experimental interface is clearly superior to the other in all aspects.
-While flakes reduce complexity in some regards, they also introduce additional concepts and you will have to learn more about the system to fully understand how it works.
+While flakes reduce complexity in some regards, they also introduce additional mechanisms and you will have to learn more about the system to fully understand how it works.
 
 There are downsides to relying on [experimental features](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-experimental-features) in general:
 
