@@ -11,7 +11,7 @@ myst:
 
 nix.dev is the home of official documentation for the Nix ecosystem.
 
-If you're new to Nix, begin your journey with {ref}`First Steps <first-steps>`!
+If you're new here, {ref}`install Nix <install-nix>` and begin your journey with our tutorial series!
 
 ::::{grid} 2
 :::{grid-item-card} Tutorials
