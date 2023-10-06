@@ -74,97 +74,91 @@ The test framework automatically starts the virtual machines and runs the Python
 As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
 We will build the example up from scratch.
 
-As [recommended](<ref-pinning-nixpkgs>) we use an explicitly pinned version of Nixpkgs, and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig):
+1. As [recommended](<ref-pinning-nixpkgs>) we use an explicitly pinned version of Nixpkgs, and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig):
 
-```nix
-let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
-  pkgs = import nixpkgs { config = {}; overlays = []; };
-in
-  pkgs.nixosTest {
-    # ...
-  }
-```
+   ```nix
+   let
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+     pkgs = import nixpkgs { config = {}; overlays = []; };
+   in
 
-### Options
+   pkgs.nixosTest {
+     # ...
+   }
+   ```
 
-#### Name
+1. Label the test with a descriptive name such as "minimal-test":
 
-Label the test with a descriptive name such as "minimal-test":
+   ```nix
+   name = "minimal-test";
+   ```
 
-```nix
-name = "minimal-test";
-```
+1. Because this example only uses one virtual machine, the node we specify is simply called `machine`.
+   This name is arbitrary and can be chosen freely.
+   As configuration you use the relevant parts of the default configuration, [that we used in a previous tutorial](<nixos-vms>):
 
-#### Nodes
+   ```nix
+   nodes.machine = { config, pkgs, ... }: {
+     users.users.alice = {
+       isNormalUser = true;
+       extraGroups = [ "wheel" ];
+       packages = with pkgs; [
+         firefox
+         tree
+       ];
+     };
 
-Because this example only uses one virtual machine, the node we specify is simply called `machine`.
-This name is arbitrary and can be chosen freely.
-As configuration you use the relevant parts of the default configuration, [that we used in a previous tutorial](<nixos-vms>):
+     system.stateVersion = "22.11";
+   };
+   ```
 
-```nix
-nodes.machine = { config, pkgs, ... }: {
-  users.users.alice = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      firefox
-      tree
-    ];
-  };
+1. This is the test script:
 
-  system.stateVersion = "22.11";
-};
-```
+   ```python
+   machine.wait_for_unit("default.target")
+   machine.succeed("su -- alice -c 'which firefox'")
+   machine.fail("su -- root -c 'which firefox'")
+   ```
 
-#### Test script
+   This Python script refers to `machine` which is the name chosen for the virtual machine configuration used in the `nodes` attribute set.
 
-This is the test script:
+   The script waits until systemd reaches `default.target`.
+   It uses the `su` command to switch between users and the `which` command to check if the user has access to `firefox`.
+   It expects that the command `which firefox` to succeed for user `alice` and to fail for `root`.
 
-```python
-machine.wait_for_unit("default.target")
-machine.succeed("su -- alice -c 'which firefox'")
-machine.fail("su -- root -c 'which firefox'")
-```
-
-This Python script is referring to `machine` which is the name chosen for the virtual machine configuration used in the `nodes` attribute set.
-
-The script waits until systemd reaches `default.target`.
-It uses the `su` command to switch between users and the `which` command to check if the user has access to `firefox`.
-It expects that the command `which firefox` to succeed for user `alice` and to fail for `root`.
-
-This script will be the value of the `testScript` attribute.
-
-### Test file
+   This script will be the value of the `testScript` attribute.
 
 The complete `minimal-test.nix` file content looks like the following:
 
-```{code-block}
+```nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
-  pkgs.nixosTest {
-    name = "minimal-test";
-    nodes.machine = { config, pkgs, ... }: {
 
-      users.users.alice = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        packages = with pkgs; [
-          firefox
-          tree
-        ];
-      };
+pkgs.nixosTest {
+  name = "minimal-test";
 
-      system.stateVersion = "22.11";
+  nodes.machine = { config, pkgs, ... }: {
+
+    users.users.alice = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      packages = with pkgs; [
+        firefox
+        tree
+      ];
     };
-    testScript = ''
-      machine.wait_for_unit("default.target")
-      machine.succeed("su -- alice -c 'which firefox'")
-      machine.fail("su -- root -c 'which firefox'")
-    '';
-  }
+
+    system.stateVersion = "22.11";
+  };
+
+  testScript = ''
+    machine.wait_for_unit("default.target")
+    machine.succeed("su -- alice -c 'which firefox'")
+    machine.fail("su -- root -c 'which firefox'")
+  '';
+}
 ```
 
 ## Running tests
