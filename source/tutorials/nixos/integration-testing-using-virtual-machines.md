@@ -176,7 +176,6 @@ $ nix-build minimal-test.nix
     (0.00 seconds)
     /nix/store/bx7z3imvxxpwkkza10vb23czhw7873w2-vm-test-run-minimal-test
 
-
 ## Interactive Python shell in the virtual machine
 
 When developing tests or when something breaks, it’s useful to interactively tinker with the test or access a terminal for a machine.
