@@ -21,7 +21,7 @@ It allows defining tests based on a set of declarative NixOS configurations and 
 Those tests are widely used to ensure that NixOS works as intended, so in general they are called [NixOS Tests](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests).
 They can be written and launched outside of NixOS, on any Linux machine[^darwin].
 
-[^darwin]: Support for running NixOS VM tests on macOS is also [implemented](https://github.com/NixOS/nixpkgs/issues/108984) but currently [undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
+[^darwin]: Support for [running NixOS VM tests on macOS](https://github.com/NixOS/nixpkgs/issues/108984) is also implemented but [currently undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
 
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
 
