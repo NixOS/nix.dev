@@ -35,20 +35,21 @@ let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
-  pkgs.nixosTest {
-    name = "test-name";
-    nodes = {
-      machine1 = { config, pkgs, ... }: {
-        # ...
-      };
-      machine2 = { config, pkgs, ... }: {
-        # ...
-      };
-    }
-    testScript = { nodes, ... }: ''
+
+pkgs.nixosTest {
+  name = "test-name";
+  nodes = {
+    machine1 = { config, pkgs, ... }: {
       # ...
-    '';
+    };
+    machine2 = { config, pkgs, ... }: {
+      # ...
+    };
   }
+  testScript = { nodes, ... }: ''
+    # ...
+  '';
+}
 ```
 
 The function `nixosTest` takes an attribute set that follows the module convention to [specify the test](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
