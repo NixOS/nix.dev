@@ -609,7 +609,7 @@ in
 with a; [ x y z ]
 ```
 
-```{code-block} 
+```{code-block}
 :class: value
 [ 1 2 3 ]
 ```
@@ -676,7 +676,7 @@ in
 }
 ```
 
-```{code-block} 
+```{code-block}
 :class: value
 { x = 1; y = 2; }
 ```
@@ -1451,7 +1451,7 @@ args@{a, b, ...}: a + b + args.c
 ```
 
 ```{code-block}
-:class: value 
+:class: value
 <LAMBDA>
 ```
 

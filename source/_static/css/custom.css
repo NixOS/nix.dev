@@ -42,23 +42,23 @@ div.highlight:hover > pre::before {
   opacity: 0;
 }
 
-html[data-theme="light"] .highlight .gi { 
+html[data-theme="light"] .highlight .gi {
   background-color: #ccffcc;
   border: 1px solid #ccffcc;
 }
 
-html[data-theme="light"] .highlight .gd { 
+html[data-theme="light"] .highlight .gd {
   background-color: #ffcccc;
   border: 1px solid #ffcccc;
   color: inherit !important;
 }
 
-html[data-theme="dark"] .highlight .gi { 
+html[data-theme="dark"] .highlight .gi {
   background-color: #005400;
   border: 1px solid #005400;
 }
 
-html[data-theme="dark"] .highlight .gd { 
+html[data-theme="dark"] .highlight .gd {
   background-color: #540000;
   border: 1px solid #540000;
   color: inherit !important;

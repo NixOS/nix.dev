@@ -120,7 +120,7 @@ pkgsCross.mmix                        pkgsCross.x86_64-unknown-redox
 pkgsCross.msp430
 ```
 
-These attribute names for cross compilation packages have been chosen somewhat freely over the course of time. 
+These attribute names for cross compilation packages have been chosen somewhat freely over the course of time.
 They usually do not match the corresponding platform config string.
 
 You can retrieve the platform string from `pkgsCross.<platform>.stdenv.hostPlatform.config`:
@@ -140,11 +140,11 @@ The mechanism for setting up cross compilation works as follows:
 
    The build platform is implied in `pkgs = import <nixpkgs> {}` to be the current system.
    This produces a build environment `pkgs.stdenv` with all the dependencies present to compile on the build platform.
-   
+
 2. Apply the appropriate host platform configuration to all the packages in `pkgsCross`.
 
    Taking `pkgs.pkgsCross.<host>.hello` will produce the package `hello` compiled on the build platform to run on the `<host>` platform.
-   
+
 There are multiple equivalent ways to access packages targeted to the host platform.
 
 1. Explicitly pick the host platform package from within the build platform environment:

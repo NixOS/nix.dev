@@ -50,7 +50,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
 
 ## Examples
 
-- ```shell-session 
+- ```shell-session
   $ nix-build -I ~/dev
   ```
 

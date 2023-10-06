@@ -55,7 +55,7 @@ More details on the options can be found in the [`nix-shell` reference documenta
 Create a file named `nixpkgs-releases.sh` with the following content:
 
 ```shell
-#!/usr/bin/env nix-shell 
+#!/usr/bin/env nix-shell
 #! nix-shell -i bash --pure
 #! nix-shell -p bash cacert curl jq python3Packages.xmljson
 #! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
@@ -81,7 +81,7 @@ Make the script executable:
  ```console
  chmod +x nixpkgs-releases.sh
  ```
- 
+
 Run the script:
 
 ```console

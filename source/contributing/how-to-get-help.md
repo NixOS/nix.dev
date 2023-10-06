@@ -27,12 +27,12 @@ Once you've found the people you're looking for, you can contact them via:
 
   Try the GitHub username found in the [`maintainers-list.nix` file][maintainers-list] to mention or directly contact a specific user.
   Note that some people use a different username on Discourse.
-  
+
 - [Matrix]
 
   Use the Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
   If no Matrix handle is present for a specific maintainer, try searching for them using their GitHub username, as most people tend to use the same one across channels.
-  
+
 - Email
 
   Use email addresses found with `git log`.

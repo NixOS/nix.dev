@@ -13,7 +13,7 @@
 
 ## Purpose
 
-<!-- What is the reader supposed to gain from reading this? --> 
+<!-- What is the reader supposed to gain from reading this? -->
 - Show the reader how to set up a development environment.
 - Show the reader how not to repeat themselves.
 - Show the reader how to import one Nix file into another.
@@ -26,7 +26,7 @@
 - Show the reader that the application builds.
 - Present a scenario that prompts for a better working environment.
     - We'd like to include modern development tooling like a test runner, linter, and formatter.
-    - Demonstrate that in order to bring those tools into our environment with the current `default.nix` those packages would also be included in the build even though they aren't necessary to build our application. 
+    - Demonstrate that in order to bring those tools into our environment with the current `default.nix` those packages would also be included in the build even though they aren't necessary to build our application.
         - (Optional) Add the packages to `propagatedBuildInputs` and show that they're included in the closure.
 - Create a `shell.nix` to separate build dependencies from development dependencies.
     - Duplicate dependencies from `default.nix` so that you can still perform the build in `shell.nix`.

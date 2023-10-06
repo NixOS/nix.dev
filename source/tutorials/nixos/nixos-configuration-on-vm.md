@@ -7,7 +7,7 @@ One of the most important features of NixOS is the ability to configure the enti
 NixOS configurations can be used to test and use NixOS using a virtual machine, independent of an installation on a "bare metal" computer.
 
 :::{important}
-A NixOS configuration is a Nix language function following the [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules) convention. 
+A NixOS configuration is a Nix language function following the [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules) convention.
 :::
 
 ## What will you learn?

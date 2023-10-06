@@ -41,7 +41,7 @@ To better navigate the material and judge its relevance, every entry should prov
   - Created: 2015 (effectively unmaintained since 2017)
 
 - https://nixos.org/guides/nix-pills/nix-search-paths.html
-  
+
 - https://nixos.org/guides/nix-pills/nix-store-paths.html
 
   Store paths and how they are computed, `nix-store`, `nix-hash`, `nix derivation show`, `nix repl`.
@@ -144,45 +144,45 @@ To better navigate the material and judge its relevance, every entry should prov
 ### Nix language
 
 - https://edolstra.github.io/pubs/phd-thesis.pdf
-  
+
   Chapter 1:
     Existing software deployment models and issues faced with them; motivation for developing Nix, features of the Nix deployment system
 
   - Reading time: 15 min
   - Author: Eelco Dolstra
   - Created: 2006
- 
+
   Chapter 2:
-    
+
     2.1: The Nix Store, isolation of components, cryptographic hashes, non-destructive upgrades, prevention of undeclared dependencies, closures
-    
+
     2.2: Use of Nix expressions to build software, structure of Nixpkgs collection, Hello and SUbversion as examples of derivations.
-    
+
     2.3: Package Management: Installations, updates and rollbacks, user environments, uninstalling, garbage collection
-    
+
     2.4: Store derivations: Definition, `.drv` files in Nix store. `nix-instantiate`, `nix-store --realise`. Allows various deployment policies, including source and binary.
-    
+
     2.5. Deployment models. Mechanisms `nix-instantiate` and `nix-store`. Models: Manual download; vesion management system; channels; one-click installation
-    
+
     2.6: Transparent source/binary deployment: `nix-push` and `nix-pull`. Pre-built substitutes.
 
     - Reading time: 30 min
-    
+
   Chapter 3:
     Relates deployment issues to memory management issues in programming languages. Relates files to objects in memory. Describes closures, discusses pointer discipline and conservative garbage collection, shows that persistence is achieved by cryptographic hashes.
 
   - Reading time: 25 min
-        
+
   Chapter 4:
     The Nix language: Functional languages; lazy languages. Lexical syntax of Nix language. Semantics: Basic and compound values, substitutions, function calls, conditionals, assertions, `with`, operators, evaluation rules. Implementation using ATerm library.
 
   - Reading time: 60 min
-        
+
   Chapter 5:
     Extensional vs intensional. The Nix extensional model: cryptographic hashing; file system objects and the Nix store; adding atomic values to the store; translating Nix expressions to derivations; garbage collection
 
   - Reading time: 60 min
-    
+
 ### Nixpkgs
 
 - [Nix Pills Chapter 6: Our First Derivation](https://nixos.org/guides/nix-pills/our-first-derivation.html)
@@ -202,7 +202,7 @@ To better navigate the material and judge its relevance, every entry should prov
   - Created: 2015 (effectively unmaintained since 2017)
 
 - https://nixos.org/guides/nix-pills/inputs-design-pattern.html
-  
+
   Explains the `inputs` design pattern as used by `nixpkgs`. A single customizable repository having a top-level Nix expression, with one expression for each package.
 
   - Reading time: 20 min
@@ -211,7 +211,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 
 - https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
-  
+
   Introduces the `callPackage` pattern used extensively in Nixpkgs. Shows how to write and use the function; use `builtins.functionArgs` to determine arguments, use `builtins.intersectAttrs` to combine attributes, and override arguments when needed.
 
   - Reading time: 15 min

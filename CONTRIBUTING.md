@@ -58,7 +58,7 @@ Here is how you can help:
 1. Familiarize yourself with the format described at the top of the Documentation Survey page.
 2. Contribute by making pull requests. Your change should add details to one individual link (bullet point) following the specified format.
 3. Ensure consistency with existing entries. Your contributions should align with the style and format of previously added bullet points.
-4. When dealing with a larger resource like the [Nixpkgs manual](https://nixos.org/manual/nixpkgs), start by creating a pull request with a structured outline. Then fill in the details section-by-section, submitting separate pull requests for each section. 
+4. When dealing with a larger resource like the [Nixpkgs manual](https://nixos.org/manual/nixpkgs), start by creating a pull request with a structured outline. Then fill in the details section-by-section, submitting separate pull requests for each section.
 
 ### You have experience teaching Nix?
 

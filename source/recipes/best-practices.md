@@ -135,7 +135,7 @@ This may limit reproducibility.
 For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of the `nixpkgs` repository.
 Builds may work for one and fail for the other, causing confusion.
 
-:::{tip} 
+:::{tip}
 Declare dependencies explicitly using the techniques shown in [](ref-pinning-nixpkgs).
 
 Do not use search paths, except in examples.
