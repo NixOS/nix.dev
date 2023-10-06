@@ -297,7 +297,7 @@ let
     virtualisation.graphics = false;
   };
 
-in 
+in
   pkgs.nixosTest {
     # NixOS tests are run inside a virtual machine, and here you specify its system type
     system = "x86_64-linux";

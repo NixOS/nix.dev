@@ -37,7 +37,7 @@ Guides to getting things done
 :link-type: ref
 :text-align: center
 
-Collections of detailed technical descriptions 
+Collections of detailed technical descriptions
 :::
 
 :::{grid-item-card} Concepts

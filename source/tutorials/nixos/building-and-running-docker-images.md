@@ -1,6 +1,6 @@
 ---
 myst:
-  html_meta: 
+  html_meta:
     "description lang=en": "Building and running Docker images"
     "keywords": "Docker, containers, Nix, reproducible, build, tutorial"
 ---
@@ -15,7 +15,7 @@ In this tutorial, you will learn how to build Docker containers using Nix.
 ## Prerequisites
 
 You will need both Nix and [Docker](https://docs.docker.com/get-docker/) installed.
-Docker is available in `nixpkgs`, which is the preferred way to install it on NixOS. 
+Docker is available in `nixpkgs`, which is the preferred way to install it on NixOS.
 However, you can also use the native Docker installation of your OS, if you are on another Linux distribution or macOS.
 
 ## Build your first container
@@ -73,7 +73,7 @@ Finished.
 /nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz
 ```
 
-The image tag (`y74sb4nrhxr975xs7h83izgm8z75x5fc`) refers to the Nix build hash and makes sure that the Docker image corresponds to our Nix build. 
+The image tag (`y74sb4nrhxr975xs7h83izgm8z75x5fc`) refers to the Nix build hash and makes sure that the Docker image corresponds to our Nix build.
 The store path in the last line of the output references the Docker image.
 
 ## Run the container
@@ -109,11 +109,11 @@ Hello, world!
 
 ## Working with Docker images
 
-A general introduction to working with Docker images is not part of this tutorial. 
-The [official Docker documentation](https://docs.docker.com/) is a much better place for that. 
+A general introduction to working with Docker images is not part of this tutorial.
+The [official Docker documentation](https://docs.docker.com/) is a much better place for that.
 
 Note that when you build your Docker images with Nix, you will probably not write a `Dockerfile` as Nix replaces the Dockerfile functionality within the Docker ecosystem.
-Nonetheless, understanding the anatomy of a Dockerfile may still be useful to understand how Nix replaces each of its functions. 
+Nonetheless, understanding the anatomy of a Dockerfile may still be useful to understand how Nix replaces each of its functions.
 Using the Docker CLI, Docker Compose, Docker Swarm or Docker Hub on the other hand may still be relevant, depending on your use case.
 
 ## Next steps

@@ -27,7 +27,7 @@ if __name__ == "__main__":
 This is a simple Flask application which serves a JSON document with the message
 "Hello, Nix!".
 
-To declare the development environment, create a new file `shell.nix`: 
+To declare the development environment, create a new file `shell.nix`:
 
 ```{code-block} nix shell.nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz") {} }:
@@ -69,7 +69,7 @@ these 93 paths will be fetched (109.50 MiB download, 468.52 MiB unpacked):
   /nix/store/138azk9hs5a2yp3zzx6iy1vdwi9q26wv-hook
 ...
 
-[nix-shell:~/dev-environment]$ 
+[nix-shell:~/dev-environment]$
 ```
 
 
