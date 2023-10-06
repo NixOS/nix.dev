@@ -310,14 +310,14 @@ Run the test:
 $ nix-build server-client-test.nix
 ```
 
-## Additional information regarding NixOS tests:
-  - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
+## Additional information regarding NixOS tests
 
+- Running integration tests on CI requires hardware acceleration, which many CIs do not support.
 
-    To run integration tests on [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests).
-  - NixOS comes with a large set of tests that serve also as educational examples.
+  To run integration tests in [GitHub Actions](<github-actions>) see [how to disable hardware acceleration](https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests).
 
+- NixOS comes with a large set of tests that can serve as educational examples.
 
-    A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
+  A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
 
 <!-- TODO: move examples from https://nixos.wiki/wiki/NixOS_Testing_library to the NixOS manual and troubleshooting tips to nix.dev -->
