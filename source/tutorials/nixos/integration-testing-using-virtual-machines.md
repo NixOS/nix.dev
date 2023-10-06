@@ -4,13 +4,14 @@
 
 ## What will you learn?
 
-This tutorial introduces the functionality of Nixpkgs to write automated tests to debug NixOS configurations independent of a working NixOS installation.
+This tutorial introduces Nixpkgs functionality for testing NixOS configurations.
+It also shows how to set up distributed test scenarios that involve multiple machines.
 
 ## What do you need?
 
-- A working [Nix installation](<install-nix>) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
-- Basic knowledge of the [Nix language](<reading-nix-language>).
-- Basic knowledge of [NixOS configuration](<nixos-vms>).
+- A working [Nix installation](<install-nix>) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
+- Basic knowledge of the [Nix language](<reading-nix-language>)
+- Basic knowledge of [NixOS configuration](<nixos-vms>)
 
 ## Introduction
 
