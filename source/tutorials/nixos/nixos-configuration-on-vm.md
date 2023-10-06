@@ -44,7 +44,7 @@ In the working directory you will then find two files:
 2. `configuration.nix` contains various suggestions and comments for the initial setup of a desktop computer.
 :::
 
-The default configuration of NixOS without comments is:
+The default NixOS configuration without comments is:
 
 ```nix
 { config, pkgs, ... }:
