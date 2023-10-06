@@ -52,7 +52,8 @@ pkgs.nixosTest {
 ```
 
 The function `nixosTest` takes a [module](https://nixos.org/manual/nixos/stable/#sec-writing-modules) to specify the [test options](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
-Because this module only sets configuration values, one can use the abbreviated form of the module convention.
+Because this module only sets configuration values, one can use the abbreviated module notation.
+
 The following configuration values must be set:
 
 - [`name`](https://nixos.org/manual/nixos/stable/index.html#test-opt-name) defines the name of the test.
