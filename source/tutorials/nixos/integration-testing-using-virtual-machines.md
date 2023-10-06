@@ -252,7 +252,7 @@ result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 ```
 </details>
 
-## Tests that need multiple virtual machines
+## Tests with multiple virtual machines
 
 Tests can involve multiple virtual machines.
 For example to test server client communication.
