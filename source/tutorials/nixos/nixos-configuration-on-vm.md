@@ -77,7 +77,7 @@ To be able to log in add the following lines to the returned attribute set:
 ```
 
 :::{admonition} NixOS
-On NixOS your configuration generated using `nix-generate-config` contains this user configuration commented out.
+On NixOS your configuration generated with `nix-generate-config` contains this user configuration commented out.
 :::
 
 Additionally, you need to specify a password for this user.
