@@ -123,7 +123,7 @@ The complete `configuration.nix` file now looks like this:
 }
 ```
 
-## Creating a QEMU based virtual machine using a configuration
+## Creating a QEMU based virtual machine from a NixOS configuration
 
 A virtual machine is created with the `nix-build` command.
 
