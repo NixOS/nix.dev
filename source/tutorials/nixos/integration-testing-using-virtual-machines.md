@@ -22,7 +22,7 @@ They can be written and launched outside of NixOS, on any Linux machine[^darwin]
 
 [^darwin]: Support for [running NixOS VM tests on macOS](https://github.com/NixOS/nixpkgs/issues/108984) is also implemented but [currently undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
 
-Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a Continuous Integration (CI) pipeline.
+Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a continuous integration (CI) pipeline.
 
 ## The `nixosTest` function
 
