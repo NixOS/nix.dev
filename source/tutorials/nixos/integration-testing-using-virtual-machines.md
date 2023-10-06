@@ -2,8 +2,6 @@
 
 # Integration testing with NixOS virtual machines
 
-This tutorial aims to be compatible with NixOS release 22.11.
-
 ## What will you learn?
 
 This tutorial introduces the functionality of Nixpkgs to write automated tests to debug NixOS configurations independent of a working NixOS installation.
