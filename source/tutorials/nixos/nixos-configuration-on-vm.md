@@ -125,9 +125,7 @@ The complete `configuration.nix` file now looks like this:
 
 ## Creating a QEMU based virtual machine from a NixOS configuration
 
-A virtual machine is created with the `nix-build` command.
-
-To select `configuration.nix` in the working directory, specify the configuration file on the command line:
+A NixOS virtual machine is created with the `nix-build` command:
 
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm \
