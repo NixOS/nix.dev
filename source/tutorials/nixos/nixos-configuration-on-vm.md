@@ -81,13 +81,15 @@ On NixOS your configuration generated using `nix-generate-config` contains this 
 :::
 
 Additionally, you need to specify a password for this user.
-For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:[^password]
-
-[^password]: Warning: Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.initialHashedPassword) or [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for more secure alternatives.
+For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
 
 ```nix
 initialPassword = "testpw";
 ```
+
+:::{warning}
+Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.initialHashedPassword) or [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for more secure alternatives.
+:::
 
 This tutorial focuses on testing NixOS configurations on a virtual machine.
 Therefore you will remove the reference to `hardware-configuration.nix`:
