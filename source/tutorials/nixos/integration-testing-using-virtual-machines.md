@@ -10,7 +10,7 @@ This tutorial introduces the functionality of Nixpkgs to write automated tests t
 
 ## What do you need?
 
-- A working installation of [Nix Package Manager](https://nixos.org/manual/nix/stable/installation/installation.html) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
+- A working [Nix installation](<install-nix>) or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation).
 - Basic knowledge of the [Nix language](<reading-nix-language>).
 - Basic knowledge of [NixOS configuration](<nixos-vms>).
 
