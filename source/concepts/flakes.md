@@ -1,7 +1,8 @@
+(flakes)=
 # Flakes
 
 What is usually referred to as "flakes" is:
-- A policy for managing dependencies between {term}`Nix expression`s.
+- A policy for managing dependencies between {term}`Nix expressions<Nix expression>`.
 - An [experimental feature] in Nix, implementing that policy and supporting functionality.
 
 [experimental feature]: https://nixos.org/manual/nix/unstable/contributing/experimental-features.html
