@@ -59,12 +59,12 @@ The following configuration values must be set:
 - [`name`](https://nixos.org/manual/nixos/stable/index.html#test-opt-name) defines the name of the test.
 
 - [`nodes`](https://nixos.org/manual/nixos/stable/index.html#test-opt-nodes) contains a set of named configurations, because a test script can involve more than one virtual machine.
-  Each virtual machine is setup using a NixOS configuration.
+  Each virtual machine is created from a NixOS configuration.
 
 - [`testScript`](https://nixos.org/manual/nixos/stable/index.html#test-opt-testScript) defines the Python test script, either as literal string or as a function that takes a `nodes` attribute.
   This Python test script can access the virtual machines via the names used for the `nodes`.
   It has super user rights in the virtual machines.
-  In the Python script is each virtual machine is accessible via the `machine` object.
+  In the Python script each virtual machine is accessible via the `machine` object.
   NixOS provides [various methods](https://nixos.org/manual/nixos/stable/index.html#ssec-machine-objects) to run tests on these configurations.
 
 The test framework automatically starts the virtual machines and runs the Python script.
