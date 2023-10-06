@@ -87,7 +87,7 @@ We will build the example up from scratch.
    }
    ```
 
-1. Label the test with a descriptive name such as "minimal-test":
+1. Label the test with a descriptive name:
 
    ```nix
    name = "minimal-test";
