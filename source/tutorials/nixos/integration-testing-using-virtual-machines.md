@@ -254,13 +254,11 @@ result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 
 ## Tests with multiple virtual machines
 
-Tests can involve multiple virtual machines.
-For example to test server client communication.
+Tests can involve multiple virtual machines, for example to test client-server-communication.
 
-
-The setup includes:
-- A virtual machine named `server` running nginx.
-- A virtual machine named `client` performing a HTTP request.
+The following example setup includes:
+- A virtual machine named `server` running [nginx](https://nginx.org/en/) with default configuration.
+- A virtual machine named `client` that has `curl` available to make an HTTP request.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
 
