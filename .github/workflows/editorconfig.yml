@@ -1,0 +1,20 @@
+name: "Check EditorConfig"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v23
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Checking EditorConfig
+      run: nix run nixpkgs#editorconfig-checker
+    - if: ${{ failure() }}
+      run: |
+        echo "::error :: Hey! It looks like your changes don't follow our editorconfig settings. Read https://editorconfig.org/#download to configure your editor so you never see this error again."
+
