@@ -1739,13 +1739,13 @@ For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-In practice, describing build tasks requires observing the outside world.
+In practice, describing derivations requires observing the outside world.
 
 There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*
 
-Build inputs are files that build tasks refer to in order to describe how to derive new files.
-When run, a build task will only have access to explicitly declared build inputs.
+Build inputs are files that derivations refer to in order to describe how to derive new files.
+When run, a derivation will only have access to explicitly declared build inputs.
 
 The only way to specify build inputs in the Nix language is explicitly with:
 
@@ -1859,14 +1859,13 @@ It is an error if the network request fails.
 (derivations)=
 ## Derivations
 
-A build task in Nix is called a *derivation*.
 
-Build tasks are at the core of both Nix and the Nix language:
-- The Nix language is used to describe build tasks.
-- Nix runs build tasks to produce *build results*.
-- Build results can in turn be used as inputs for other build tasks.
+Derivations are at the core of both Nix and the Nix language:
+- The Nix language is used to describe derivations.
+- Nix runs derivations to produce *build results*.
+- Build results can in turn be used as inputs for other derivations.
 
-The Nix language primitive to declare a build task is the built-in impure function `derivation`.
+The Nix language primitive to declare a derivation is the built-in impure function `derivation`.
 
 It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
 
@@ -1918,7 +1917,7 @@ There is more depth to the inner workings of derivations, but at this point it s
 
 :::
 
-String interpolation on derivations is used to refer to other build results as file system paths when declaring new build tasks.
+String interpolation on derivations is used to refer to their build results as file system paths when declaring new derivations.
 
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
 
