@@ -261,48 +261,54 @@ The following example setup includes:
 - A virtual machine named `client` that has `curl` available to make an HTTP request.
 - A `testScript` orchestrating testing logic between `client` and `server`.
 
-
-The test script performs the following steps:
-1) It starts the server and waits for it to be ready.
-1) It starts the client and waits for it to be ready.
-1) It executes curl and uses grep to assess the expected return string.
-   The test passes or fails on the basis of grep’s return value.
-
-The complete `server-client-test.nix` file content looks like the following:
+The complete `client-server-test.nix` file content looks like the following:
 
 ```{code-block}
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
-pkgs.testers.runNixOSTest ({ lib, ... }: {
-    name = "server-client-test";
-    nodes.server = { pkgs, ... }: {
-      networking = {
-        firewall = {
-          allowedTCPPorts = [ 80 ];
-        };
-      };
-      services.nginx = {
-        enable = true;
-        virtualHosts."server" = {
-          #root = "/var/www/";
-        };
+
+pkgs.nixosTest {
+  name = "client-server-test";
+
+  nodes.server = { pkgs, ... }: {
+    networking = {
+      firewall = {
+        allowedTCPPorts = [ 80 ];
       };
     };
-    nodes.client = { pkgs, ... }: {
-      environment.systemPackages = with pkgs; [
-        curl
-      ];
+    services.nginx = {
+      enable = true;
+      virtualHosts."server" = {};
     };
-    testScript = ''
-      server.wait_for_unit("default.target")
-      client.wait_for_unit("default.target")
-      client.succeed("curl http://server/ |grep -o \"Welcome to nginx!\"")
-    '';
-  })
+  };
+
+  nodes.client = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      curl
+    ];
+  };
+
+  testScript = ''
+    server.wait_for_unit("default.target")
+    client.wait_for_unit("default.target")
+    client.succeed("curl http://server/ | grep -o \"Welcome to nginx!\"")
+  '';
+}
 ```
 
+The test script performs the following steps:
+1) Start the server and wait for it to be ready.
+1) Start the client and wait for it to be ready.
+1) Run `curl` on the client and use `grep` to check the expected return string.
+   The test passes or fails based on the return value.
+
+Run the test:
+
+```shell-session
+$ nix-build server-client-test.nix
+```
 
 ## Additional information regarding NixOS tests:
   - Running integration tests on CI requires hardware acceleration, which many CIs do not support.
