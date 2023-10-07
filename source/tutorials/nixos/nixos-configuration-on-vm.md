@@ -143,7 +143,7 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
   That path can be obtained from [a Nix expression that evaluates to a derivation](derivations).
 
   The virtual machine build helper is defined in NixOS, which is part of the [`nixpkgs` repository](https://github.com/NixOS/nixpkgs).
-  Therefore we use the [lookup path](search-path-tutorial) `<nixpkgs/nixos>`.
+  Therefore we use the [lookup path](lookup-path-tutorial) `<nixpkgs/nixos>`.
 
 - The [`-A` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided Nix expression `<nixpkgs/nixos>`.
 
