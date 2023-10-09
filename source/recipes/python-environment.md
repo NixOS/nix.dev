@@ -1,11 +1,12 @@
-# Set up a development environment
+# Setting up a Python development environment
 
-Let's build a Python web application using the Flask web framework as an exercise.
+In this example you will build a Python web application using the Flask web framework as an exercise.
+To make best use of it you should be familiar with [defining declarative shell environments](declarative-reproducible-envs).
 
-For our Flask web application, create a new file called `myapp.py` and add the following code:
+Create a new file called `myapp.py` and add the following code:
 
 ```{code-block} python myapp.py
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 from flask import Flask
 
@@ -30,7 +31,7 @@ This is a simple Flask application which serves a JSON document with the message
 To declare the development environment, create a new file `shell.nix`:
 
 ```{code-block} nix shell.nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz") {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11") {} }:
 
 pkgs.mkShell {
   packages = [
@@ -44,20 +45,20 @@ pkgs.mkShell {
 }
 ```
 
-This creates a shell environment with `python3`, including the `flask` package.
+This creates a shell environment with an instance of `python3` that includes the `flask` package.
 
-However, it also contains developer tools: [`curl`] (utility to perform web
-requests) and [`jq`] (utility to parse and format JSON documents). Both of them
-are not Python packages and they are not part of the Python ecosystem.
-
-If we went with Python's [virtualenv], it would not be possible to add these utilities
-to the development environment without additional manual steps.
+It also contains [`curl`], a utility to perform web
+requests, and [`jq`], a tool to parse and format JSON documents.
 
 [`curl`]: https://curl.se
 [`jq`]: https://stedolan.github.io/jq/
 [virtualenv]: https://virtualenv.pypa.io/en/latest/
 
-We can now use `nix-shell` to launch the shell environment we just declared:
+Both of them are not Python packages.
+If you went with Python's [virtualenv], it would not be possible to add these utilities
+to the development environment without additional manual steps.
+
+Use `nix-shell` to launch the shell environment you just declared:
 
 ```shell-session
 $ nix-shell
@@ -72,8 +73,7 @@ these 93 paths will be fetched (109.50 MiB download, 468.52 MiB unpacked):
 [nix-shell:~/dev-environment]$
 ```
 
-
-Let's start the web application within this shell environment:
+Start the web application within this shell environment:
 
 ```shell-session
 [nix-shell:~/dev-environment]$ python ./myapp.py
@@ -86,11 +86,10 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-We now have a running Python web application now.
-Let's try it out using the developer tools that are also included.
+You now have a running Python web application.
 
-Launch a new terminal to start another session of the shell environment and
-follow the commands below:
+Try it out!
+Open a new terminal to start another session of the shell environment and follow the commands below:
 
 ```shell-session
 $ nix-shell
@@ -105,8 +104,7 @@ $ nix-shell
 "Hello, Nix!"
 ```
 
-As demonstrated, we can use both `curl` and `jq` to test the running web
-application without any manual installation.
+As demonstrated, we can use both `curl` and `jq` to test the running web application without any manual installation.
 Nix does all of that for us.
 
 We can commit the files we created to version control and share them with other people.
