@@ -10,6 +10,16 @@ myst:
 
 # Cross compilation
 
+Nixpkgs offers powerful tools to cross-compile software for various system types.
+
+## What do you need?
+
+
+- Experience using C compilers
+- Basic knowledge of the [Nix language](<reading-nix-language>)
+
+## Platforms
+
 When compiling code, we can distinguish between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
 
 **Native compilation** is the special case where those two platforms are the same.
@@ -32,14 +42,6 @@ In such cases, you would build a compiler on the *build platform*, run it to com
 
 Since this is rarely needed, we will assume that the target is identical to the host.
 
-## Pinning Nixpkgs
-
-To ensure the reproducibility of this tutorial as explained in {ref}`the pinning tutorial <pinning-nixpkgs>`:
-
-```shell-session
-$ NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/9420363b95521e65a76eb5153de1eaee4a2e41c6.tar.gz
-```
-
 ## Determining the host platform config
 
 The build platform is determined automatically by Nix during the configure phase.
@@ -47,7 +49,8 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ bash $(nix-build '<nixpkgs>' -A gnu-config)/config.guess
+$ gnu-config=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)
+$ "$gnu-config"/config.guess
 aarch64-unknown-linux-gnu
 ```
 
@@ -84,7 +87,7 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 It is possible to explore them in `nix repl`:
 
 ```shell-session
-$ nix repl '<nixpkgs>'
+$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-22.11
 Welcome to Nix version 2.3.12. Type :? for help.
 
 Loading '<nixpkgs>'...
@@ -151,7 +154,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     # all packages for the build system
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
      pkgs = import <nixpkgs> {};
    in
    pkgs.pkgsCross.aarch64-multiplatform.hello
@@ -161,8 +164,9 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     # conigure `nixpkgs` such that all its packages are build for the host platform
-     pkgs = import <nixpkgs> { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+     # configure `nixpkgs` such that all its packages are build for the host platform
+     pkgs = import nixpkgs { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
    in
    pkgs.hello
    ```
@@ -178,9 +182,10 @@ There are multiple equivalent ways to access packages targeted to the host platf
 To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
-$ nix-build '<nixpkgs>' -A pkgsCross.aarch64-multiplatform.hello
+$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
+  -A pkgsCross.aarch64-multiplatform.hello
 ...
-/nix/store/pzi2h0d60nb4ydcl3nn7cbxxdnibw3sy-hello-aarch64-unknown-linux-gnu-2.10
+/nix/store/nqy5dlzzkbq6bvz5wknjpb8d64jl7g9x-hello-aarch64-unknown-linux-gnu-2.12.1
 ```
 
 [Search for a package](https://search.nixos.org/packages) attribute name to find the one you're interested in building.
@@ -190,10 +195,10 @@ $ nix-build '<nixpkgs>' -A pkgsCross.aarch64-multiplatform.hello
 To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
 ```nix
-{ pkgs ? import <nixpkgs> {}
-}:
-
 let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+  pkgs = import <nixpkgs> {};
+
   # Create a C program that prints Hello World
   helloWorld = pkgs.writeText "hello.c" ''
     #include <stdio.h>
@@ -246,9 +251,10 @@ It's also possible to provide an environment with a compiler configured for **cr
 Given we have a `shell.nix`:
 
 ```nix
-{ nixpkgs ? fetchTarball "https://github.com/NixOS/nixpkgs/archive/bba3474a5798b5a3a87e10102d1a55f19ec3fca5.tar.gz"
-, pkgs ? (import nixpkgs {}).pkgsCross.aarch64-multiplatform
-}:
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+  pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
+in
 
 # callPackage is needed due to https://github.com/NixOS/nixpkgs/pull/126844
 pkgs.pkgsStatic.callPackage ({ mkShell, zlib, pkg-config, file }: mkShell {
