@@ -71,6 +71,7 @@ In the search results, each item shows the package name, and the details list th
 
 [^2]: A package name is not the same as a program name. Many packages provide multiple programs, or no programs at all if they are libraries. Even for packages that provide exactly one program, the package and progam name are not necessarily the same.
 
+(run-any-program)=
 ## Run any combination of programs
 
 Once you have the package name, you can start a shell with that package.
@@ -99,6 +100,9 @@ these 151 paths will be fetched (186.43 MiB download, 1018.20 MiB unpacked):
 
 [nix-shell:~]$
 ```
+
+(check-package-version)=
+### Check package versions
 
 Check that you have indeed the specific version of these programs provided by Nix, even if you had any of them already installed on your machine.
 
