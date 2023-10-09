@@ -1668,7 +1668,7 @@ pkgs.lib.strings.toUpper "always pin your sources"
 ALWAYS PIN YOUR SOURCES
 ```
 
-See [](pinning-nixpkgs) for details.
+See [](ref-pinning-nixpkgs) for details.
 
 What you will also often see is that `pkgs` is passed as an argument to a function.
 By convention one can assume that it refers to the Nixpkgs attribute set, which has a `lib` attribute:

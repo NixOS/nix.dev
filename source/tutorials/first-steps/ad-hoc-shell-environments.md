@@ -185,7 +185,7 @@ There are three things going on here:
 - {ref}`reproducible-scripts` – use Nix for reproducible scripts
 - {ref}`reading-nix-language` – learn reading the Nix language, which is used to declare packages and configurations
 - {ref}`declarative-reproducible-envs` – create reproducible shell environments with a declarative configuration file
-- {ref}`pinning-nixpkgs` – learn different ways of specifying exact versions of package sources
+- {ref}`ref-pinning-nixpkgs` – learn different ways of specifying exact versions of package sources
 
 If you're done trying out Nix for now, you may want to free up some disk space occupied by the different versions of programs you downloaded by running the examples:
 
