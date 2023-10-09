@@ -7,6 +7,7 @@
 /tutorials/towards-reproducibility-pinning-nixpkgs /tutorials/first-steps/towards-reproducibility-pinning-nixpkgs 301
 /tutorials/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-and-reproducible-developer-environments 301
 /tutorials/dev-environment /tutorials/first-steps/dev-environment 301
+/tutorials/first-steps/dev-environment /recipes/python-environment 301
 /tutorials/continuous-integration-github-actions /tutorials/nixos/continuous-integration-github-actions 301
 /tutorials/building-and-running-docker-images /tutorials/nixos/building-and-running-docker-images 301
 /tutorials/building-bootable-iso-image /tutorials/nixos/building-bootable-iso-image 301
@@ -16,4 +17,3 @@
 /contributing/writing-style /contributing/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
 /tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-shell 301
-/tutorials/learning-journey/shell-dot-nix /tutorials/first-steps/declarative-shell 301
