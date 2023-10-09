@@ -59,3 +59,13 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
   Improvements to experimental features have a low priority.
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
+
+### Are there some known impurities in builds?
+
+Yes.
+
+- CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
+- current time/date
+- FileSystem (ext4 has a known bug creating [empty files on power loss](https://github.com/NixOS/nixpkgs/issues/15581))
+- Kernel
+- Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
