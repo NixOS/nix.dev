@@ -15,3 +15,5 @@
 /tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301
 /contributing/writing-style /contributing/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
+/tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-shell 301
+/tutorials/learning-journey/shell-dot-nix /tutorials/first-steps/declarative-shell 301

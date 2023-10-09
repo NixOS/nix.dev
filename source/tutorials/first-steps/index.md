@@ -13,6 +13,6 @@ ad-hoc-shell-environments.md
 reproducible-scripts.md
 nix-language.md
 towards-reproducibility-pinning-nixpkgs.md
-declarative-and-reproducible-developer-environments.md
+declarative-shell.md
 dev-environment.md
 ```
