@@ -10,6 +10,7 @@ These sections contains guides to getting things done.
 ./best-practices.md
 ./faq.md
 ../templates/*
+./python-environment.md
 ./troubleshooting.md
 ./direnv.md
 ```

@@ -13,5 +13,4 @@ ad-hoc-shell-environments.md
 reproducible-scripts.md
 towards-reproducibility-pinning-nixpkgs.md
 declarative-shell.md
-dev-environment.md
 ```
