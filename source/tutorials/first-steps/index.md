@@ -11,7 +11,6 @@ You will also learn the Nix language, and use it to build portable, reproducible
 :maxdepth: 1
 ad-hoc-shell-environments.md
 reproducible-scripts.md
-nix-language.md
 towards-reproducibility-pinning-nixpkgs.md
 declarative-and-reproducible-developer-environments.md
 dev-environment.md

@@ -2,7 +2,7 @@
 /anti-patterns/language /recipes/best-practices 301
 /faq /recipes/faq 301
 /tutorials/contributing /contributing 301
-/tutorials/nix-language /tutorials/first-steps/nix-language 301
+/tutorials/first-steps/nix-language /tutorials/nix-language 301
 /tutorials/ad-hoc-developer-environments /tutorials/first-steps/ad-hoc-shell-environments 301
 /tutorials/towards-reproducibility-pinning-nixpkgs /tutorials/first-steps/towards-reproducibility-pinning-nixpkgs 301
 /tutorials/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-and-reproducible-developer-environments 301
