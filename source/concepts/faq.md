@@ -60,12 +60,15 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
 
-### Are there some known impurities in builds?
+## Are there any known impurities in builds?
 
-Yes.
+Yes, there are:
 
-- CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
-- current time/date
-- FileSystem (ext4 has a known bug creating [empty files on power loss](https://github.com/NixOS/nixpkgs/issues/15581))
-- Kernel
-- Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
+- CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
+- System's current time/date.
+- Linux kernel parameters e.g. [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
+- Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
+- Builds that access the home directory or fetch data from the Internet.
+- When randomness is added.
+
+See [The Nix Hour #12 \[purity at eval-, build- and runtime\]](https://www.youtube.com/watch?v=96jCLfKAa5M&t=913s) for more information and examples.
