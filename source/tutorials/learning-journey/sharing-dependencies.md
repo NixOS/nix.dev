@@ -205,4 +205,4 @@ You will likely see different store paths and versions depending on when you exe
 ## Next steps
 - [Nixpkgs Manual - `mkShell`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell)
 - [Nix Pills - callPackage Design Pattern][nix_pills_callpackage]
-- [Creating shell environments](https://nix.dev/tutorials/learning-journey/shell-dot-nix.html)
+- [Creating shell environments](https://nix.dev/tutorials/first-steps/declarative-shell.html)

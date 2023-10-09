@@ -11,4 +11,5 @@ These sections contains guides to getting things done.
 ./faq.md
 ../templates/*
 ./troubleshooting.md
+./direnv.md
 ```
