@@ -9,12 +9,17 @@
       let
         pkgs = import nixpkgs {
           inherit system;
+          overlays = [
+            # Add sphinx-sitemap from an overlay until
+            # it becomes available from nixpkgs-unstable
+            (import ./overlay.nix)
+          ];
         };
       in {
         packages.default = pkgs.stdenv.mkDerivation {
           name = "nix-dev";
           src = self;
-          buildInputs = with pkgs.python310Packages; [
+          buildInputs = with pkgs.python310.pkgs; [
             livereload
             linkify-it-py
             myst-parser
@@ -23,6 +28,7 @@
             sphinx-copybutton
             sphinx-design
             sphinx-notfound-page
+            sphinx-sitemap
             black
           ];
           buildPhase = ''
