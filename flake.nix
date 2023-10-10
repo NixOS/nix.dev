@@ -19,7 +19,28 @@
         packages.default = pkgs.stdenv.mkDerivation {
           name = "nix-dev";
           src = self;
+          nativeBuildInputs = with pkgs.python310.pkgs; [
+            linkify-it-py
+            myst-parser
+            sphinx
+            sphinx-book-theme
+            sphinx-copybutton
+            sphinx-design
+            sphinx-notfound-page
+            sphinx-sitemap
+          ];
+          buildPhase = ''
+            make html
+          '';
+          installPhase = ''
+            mkdir -p $out
+            cp -R build/html/* $out/
+          '';
+        };
+
+        devShells.default = pkgs.mkShell {
           buildInputs = with pkgs.python310.pkgs; [
+            black
             livereload
             linkify-it-py
             myst-parser
@@ -29,15 +50,7 @@
             sphinx-design
             sphinx-notfound-page
             sphinx-sitemap
-            black
           ];
-          buildPhase = ''
-            make html
-          '';
-          installPhase = ''
-            mkdir -p $out
-            cp -R build/html/* $out/
-          '';
         };
       }
     );
