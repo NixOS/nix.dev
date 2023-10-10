@@ -16,11 +16,13 @@
           src = self;
           buildInputs = with pkgs.python310Packages; [
             livereload
+            linkify-it-py
             myst-parser
             sphinx
             sphinx-book-theme
             sphinx-copybutton
             sphinx-design
+            sphinx-notfound-page
             black
           ];
           buildPhase = ''
