@@ -68,5 +68,4 @@ Yes, there are:
 - System's current time/date.
 - Linux kernel parameters, such as: [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
-- Builds that access the home directory or fetch data from the Internet.
 - When random values are used, e.g., from `/dev/random` or `/dev/urandom`.
