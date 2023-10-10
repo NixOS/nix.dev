@@ -17,6 +17,9 @@ Use this leverage with care.
 
 - Follow the evidence-based [plain language guidelines](https://www.plainlanguage.gov/guidelines/)
 
+  The linked guidelines take one to two hours to read through completely, but skimming them to get an idea is already a good first step.
+  We really recommend taking the time if you want to contribute high-quality documentation and learning materials that are easy to read and understand.
+
 - Use imperative in direct instructions
 
 - Avoid narrative or discursive style
@@ -44,6 +47,9 @@ Use this leverage with care.
 
   Code samples must always be working correctly when run as given.
   Nix provides us with everything needed to make this happen.
+  
+  If you are going to present an example that does not work, e.g. to illustrate a common mistake, [highlight it appropriately](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#block-attributes) or explain it beforehand.
+  Otherwise readers may get stuck trying to make the code work before reading on.
 
 - State your intent
 
@@ -96,13 +102,22 @@ Many web services offer permalinks, such as:
   This makes long sentences immediately visible, and makes it easier to review changes and make suggestions.
 
   The rule is unambiguous and does not require tooling support to be applied easily.
-  [Here is a discussion of different line wrapping styles.]
+  Here is [a discussion of different line wrapping styles] for reference on the relative merits.
 
   [Here is a discussion of different line wrapping styles.]: https://mtsknn.fi/blog/4-1-wrapping-styles-for-markdown-prose-and-code-comments/
-
+  - Code samples should all include a programming language for syntax highlighting when rendered. For example:
+  ````
+  ```python
+  print("Hello, World!")
+  ```
+  ````
 - Use [reference links](https://github.github.com/gfm/#reference-link) where needed, either to keep the plain text containing many references readable or to reuse the same link multiple times.
 
   Keep reference link definitions close to their use site so they are easy to find without additional tooling.
+  
+-  Reserve the largest header (`#`) for the title.
+
+   Use headers `##` and `###` to divide up content in the body of the document.
 
 # Licensing and attribution
 
@@ -114,5 +129,9 @@ Notify the authors *before* using their work.
 
 [Add the original author as co-author](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors) to the first commit of your pull request, which should contain the original document verbatim, so we can track authorship and changes through version history.
 
-Using free licenses other than CC-BY-SA 4.0 is possible for individual documents, and by contributing changes to those documents you agree to license your work accordingly.
+Adding foreign documents that have free license other than CC-BY-SA 4.0 is possible.
+Add a license note to the respective document in that case.
+By contributing changes to that document you agree to follow the terms of that license.
+
+We would prefer re-licensing to CC-BY-SA 4.0 to keep it consistent and easier to work with, but this requires active cooperation from authors and is therefore not always possible or practical.
 
