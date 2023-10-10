@@ -60,7 +60,7 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
 
-## Are there any known impurities in builds?
+## Are there any impurities left in sandbox builds?
 
 Yes, there are:
 
