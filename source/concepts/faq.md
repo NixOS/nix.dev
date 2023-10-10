@@ -70,5 +70,3 @@ Yes, there are:
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
 - Builds that access the home directory or fetch data from the Internet.
 - When random values are used, e.g., from `/dev/random` or `/dev/urandom`.
-
-See [The Nix Hour #12 \[purity at eval-, build- and runtime\]](https://www.youtube.com/watch?v=96jCLfKAa5M&t=913s) for more information and examples.
