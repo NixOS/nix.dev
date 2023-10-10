@@ -66,9 +66,9 @@ Yes, there are:
 
 - CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
 - System's current time/date.
-- Linux kernel parameters e.g. [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
+- Linux kernel parameters, such as: [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
 - Builds that access the home directory or fetch data from the Internet.
-- When randomness is added.
+- When random values are used, e.g., from `/dev/random` or `/dev/urandom`.
 
 See [The Nix Hour #12 \[purity at eval-, build- and runtime\]](https://www.youtube.com/watch?v=96jCLfKAa5M&t=913s) for more information and examples.
