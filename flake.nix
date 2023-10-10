@@ -11,7 +11,7 @@
           inherit system;
         };
       in {
-        defaultPackage = pkgs.stdenv.mkDerivation {
+        packages.default = pkgs.stdenv.mkDerivation {
           name = "nix-dev";
           src = self;
           buildInputs = with pkgs.python310Packages; [
