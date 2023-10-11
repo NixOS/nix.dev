@@ -17,7 +17,6 @@ Leads: @zmitchell
 
 Members:
 - @infinisil
-- @brianmcgee
 - @henrik-ch
 - @erooke
 - @asymmetric
