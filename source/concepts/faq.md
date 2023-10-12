@@ -70,3 +70,4 @@ Yes. There is:
 - Linux kernel parameters, such as: [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
 - Insertion of random values, e.g., from `/dev/random` or `/dev/urandom`.
+- Differences between Nix versions. For instance, a new Nix version might introduce a new environment variable. A statement like `env > $out` is not promised by Nix to result in the same output, going into the future.
