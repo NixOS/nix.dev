@@ -62,16 +62,6 @@ See <https://nixos.wiki/wiki/Nix_channels>
 
 See <https://github.com/nix-community/home-manager>
 
-### Are there some known impurities in builds?
-
-Yes.
-
-- CPU (we try hard to avoid compiling native instructions, but rather hardcode supported ones)
-- current time/date
-- FileSystem (ext4 has a known bug creating [empty files on power loss](https://github.com/NixOS/nixpkgs/issues/15581))
-- Kernel
-- Timing behaviour of the build system (parallel Make not getting correct inputs in some cases)
-
 ### What's the recommended process for building custom packages?
 
 > E.g. if I git clone nixpkgs how do I use the cloned repo to define new / updated packages?

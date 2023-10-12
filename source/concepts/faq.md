@@ -59,3 +59,17 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
   Improvements to experimental features have a low priority.
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
+
+## Are there any impurities left in sandboxed builds?
+
+Yes. There is:
+
+- CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
+- System's current time/date.
+- The filesystem used for building (see also [`TMPDIR`](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-TMPDIR)).
+- Linux kernel parameters, such as:
+  - [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
+  - binfmt interpreters, e.g., those configured with [`boot.binfmt.emulatedSystems`](https://search.nixos.org/options?show=boot.binfmt.emulatedSystems).
+- Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
+- Insertion of random values, e.g., from `/dev/random` or `/dev/urandom`.
+- Differences between Nix versions. For instance, a new Nix version might introduce a new environment variable. A statement like `env > $out` is not promised by Nix to result in the same output, going into the future.
