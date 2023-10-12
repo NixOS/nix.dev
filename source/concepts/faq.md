@@ -69,4 +69,4 @@ Yes. There is:
 - The filesystem used for building (see also [`TMPDIR`](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-TMPDIR)).
 - Linux kernel parameters, such as: [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
-- When random values are used, e.g., from `/dev/random` or `/dev/urandom`.
+- Insertion of random values, e.g., from `/dev/random` or `/dev/urandom`.
