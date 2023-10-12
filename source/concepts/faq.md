@@ -62,10 +62,11 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 
 ## Are there any impurities left in sandbox builds?
 
-Yes, there are:
+Yes. There is:
 
 - CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
 - System's current time/date.
+- The filesystem used for building (see also [`TMPDIR`](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-TMPDIR)).
 - Linux kernel parameters, such as: [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
 - Timing behaviour of the build system—parallel Make build does not get the correct inputs in some cases.
 - When random values are used, e.g., from `/dev/random` or `/dev/urandom`.
