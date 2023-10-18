@@ -7,7 +7,7 @@ Official documentation for getting things done with Nix.
 
 ## Contributing
 
-Run `./live` and open a browser at <http://localhost:5500>.
+Run `nix-shell --run devmode` and open a browser at <http://localhost:5500>.
 
 As you make changes your browser should auto-reload within a few seconds.
 
