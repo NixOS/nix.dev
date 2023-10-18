@@ -7,7 +7,7 @@ Nix
     Read /nɪks/ ("Niks").
 
     :::{seealso}
-    - [Nix Reference Manual](https://nixos.org/manual/nix)
+    - [Nix Reference Manual](./nix-manual.md)
     - [Nix source code](https://github.com/NixOS/nix)
     :::
 

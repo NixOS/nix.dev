@@ -7,7 +7,7 @@ These sections contains collections of detailed technical descriptions.
 :glob:
 :maxdepth: 2
 
-Nix Reference Manual <https://nixos.org/manual/nix/stable/>
+./nix-manual.md
 Nixpkgs Manual <https://nixos.org/manual/nixpkgs/stable/>
 NixOS Manual <https://nixos.org/manual/nixos/stable/>
 Recommended support tools <https://github.com/nix-community/awesome-nix>
