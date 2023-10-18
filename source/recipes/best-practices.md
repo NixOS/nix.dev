@@ -36,6 +36,10 @@ There are a couple of pitfalls:
 - It's possible to introduce a hard to debug error `infinite recursion` when shadowing a name, the simplest example being `let b = 1; a = rec { b = b; }; in a`.
 - Combining with overriding logic such as the [`overrideAttrs`](https://nixos.org/manual/nixpkgs/stable/#sec-pkg-overrideAttrs) function in {term}`Nixpkgs` has a surprising behaviour of not overriding every reference.
 
+:::{note}
+For packaging functions not supporting `finalAttrs: { ... }`, the use of `rec` is legitimate, see [this post for details](https://discourse.nixos.org/t/avoid-rec-expresions-in-nixpkgs/8293/4).
+:::
+
 :::{tip}
 Avoid `rec`. Use `let ... in`.
 
