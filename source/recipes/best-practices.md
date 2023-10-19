@@ -216,6 +216,7 @@ The problem is that now your build is no longer reproducible, as it depends on t
 That cannot declared in the source code, and results in an impurity.
 
 If someone builds the project in a directory with a different name, they will get a different store path for `src` and everything that depends on it.
+This can be the cause of needless rebuilds.
 
 :::{tip}
 Use [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) with the `name` attribute set to something fixed.
@@ -232,4 +233,3 @@ pkgs.stdenv.mkDerivation {
 }
 ```
 :::
-
