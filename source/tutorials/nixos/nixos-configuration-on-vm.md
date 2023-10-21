@@ -180,13 +180,23 @@ ls -R ./result
     run-nixos-vm
 ```
 
-Run the virtual machine:
+To run the virtual machine in a new window (requires GUI environment):
 
 ```shell-session
 ./result/bin/run-nixos-vm
 ```
 
-This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
+This will spawn a new QEMU window showing the boot process of the virtual machine and end at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
+
+Spawning window requires running the command from a graphical environment.
+To run it in the current terminal instead to get a login via the serial console of the VM, use QEMU's `-nographic` flag (you can pass any QEMU flags to `run-nixos-vm`):
+
+```shell-session
+./result/bin/run-nixos-vm -nographic
+```
+
+Note that serial consoles in VMs do not automatically adapt to your terminal size, likely causing visual corruption when interacting with the prompt line.
+You can [resize](https://www.earth.li/~noodles/blog/2022/04/resizing-consoles-automatically.html) the serial console, or use configure an SSH server into your VM for easier non-GUI interaction.
 
 Running the virtual machine will create a `nixos.qcow2` file in the current directory.
 This disk image file contains the dynamic state of the virtual machine.
