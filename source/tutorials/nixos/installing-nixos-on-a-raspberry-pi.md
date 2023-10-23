@@ -64,8 +64,7 @@ Once that command exits, **move the SD card into your Raspberry Pi and power it 
 
 You should be greeted with a fresh shell!
 
-In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.org/documentation/computers/raspberry-pi.html#updating-the-bootloader) and booting the image again.
-
+In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) and booting the image again.
 ## Getting internet connection
 
 Run `sudo -i` to get a root shell for the rest of the tutorial.
