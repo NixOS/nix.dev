@@ -17,7 +17,7 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## What do you need?
 
-- A working [Nix installation](https://nixos.org/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
+- A working [Nix installation](https://nixos.org/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
 - Basic knowledge of the [Nix language](reading-nix-language)
 
 ## Starting from the default NixOS configuration
@@ -186,12 +186,14 @@ Run the virtual machine:
 ./result/bin/run-nixos-vm
 ```
 
-This command opens a window that shows the boot process of the virtual machine and ends at the `gdm` login screen where you can log in as `alice` with the password `testpw`.
+This command opens a QEMU window that shows the boot process of the virtual machine which ends at the GDM login screen.
+Log in as `alice` with the password `testpw`.
 
 Running the virtual machine will create a `nixos.qcow2` file in the current directory.
 This disk image file contains the dynamic state of the virtual machine.
 It can interfere with debugging as it keeps the state of previous runs, for example the user password.
-You should delete this file when you change the configuration:
+
+Delete this file when you change the configuration:
 
 ```shell-session
 rm nixos.qcow2
@@ -199,14 +201,12 @@ rm nixos.qcow2
 
 ## References
 
-- NixOS Tests section in [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests)
+- [NixOS Manual: NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
+- [NixOS Manual: Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
+- [NixOS Manual Options reference](https://nixos.org/manual/nixos/stable/options.html).
+- [NixOS Manual: Changing the configuration](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+- [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226).
+- [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
 - [Nix manual: `nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
 - [Nix manual: common command-line options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
 - [Nix manual: `NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
-- [NixOS Manual: NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ch-configuration).
-- [NixOS Manual: Modules](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules).
-- [NixOS Manual Reference: Options](https://nixos.org/manual/nixos/stable/options.html).
-- [NixOS Manual: NixOS cli](https://nixos.org/manual/nixos/stable/#sec-changing-config).
-- [Wiki entry: nixos-rebuild build-vm](https://nixos.wiki/wiki/NixOS:nixos-rebuild_build-vm).
-- [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226).
-- [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
