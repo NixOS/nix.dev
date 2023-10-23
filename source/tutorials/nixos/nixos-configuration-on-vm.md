@@ -186,12 +186,14 @@ Run the virtual machine:
 ./result/bin/run-nixos-vm
 ```
 
-This command opens a window that shows the boot process of the virtual machine and ends at the GDM login screen where you can log in as `alice` with the password `testpw`.
+This command opens a QEMU window that shows the boot process of the virtual machine which ends at the GDM login screen.
+Log in as `alice` with the password `testpw`.
 
 Running the virtual machine will create a `nixos.qcow2` file in the current directory.
 This disk image file contains the dynamic state of the virtual machine.
 It can interfere with debugging as it keeps the state of previous runs, for example the user password.
-You should delete this file when you change the configuration:
+
+Delete this file when you change the configuration:
 
 ```shell-session
 rm nixos.qcow2
