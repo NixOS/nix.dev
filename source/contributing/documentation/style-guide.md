@@ -23,12 +23,12 @@ Use this leverage with care.
   - Don't use long, complicated words if there are shorter, simpler words that convey the same meaning.
 
 - Use the imperative voice when giving instructions.
-  Example:
+  For example, write:
 
   > Add the `python310` package to `buildInputs`.
 
   Don't use a conversational tone, as it distracts from the contents.
-  Counter-example:
+  For example, don't write:
 
   > Going forward, let's now add the `python310` package to `buildInputs` as we have seen in the previous tutorial.
 
