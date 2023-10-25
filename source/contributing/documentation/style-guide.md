@@ -5,6 +5,7 @@ This document outlines the guidelines we use when writing documentation.
 ## Writing style
 
 ### Aim for clarity and brevity
+
 > I would have written a shorter letter, but I did not have the time.
 >
 > — [Blaise Pascal](https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes)
@@ -16,12 +17,20 @@ The same holds for communication directed to contributors and maintainers:
 This is a public project, and many people will read what you write.
 Use this leverage with care.
 
-- Do: Follow the evidence-based [plain language guidelines] i.e. use simple, obvious language.
-    - Don't: Use jargon, many readers may not be familiar with technical terms.
-    - Don't: Use large words if there are smaller, simpler words that convey the same meaning.
-- Do: Use the imperative voice when giving instructions.
-    - Example: "Add the `python310` package to `buildInputs`"
-    - Don't: Use a narrative voice e.g. "Now we'll add the `python310` package to `buildInputs`".
+- Follow the evidence-based [plain language guidelines].
+
+  - Don't use jargon. Readers may not be familiar with particular technical terms.
+  - Don't use long, complicated words if there are shorter, simpler words that convey the same meaning.
+
+- Use the imperative voice when giving instructions.
+  For example, write:
+
+  > Add the `python310` package to `buildInputs`.
+
+  Don't use a conversational tone, as it distracts from the contents.
+  For example, don't write:
+
+  > Going forward, let's now add the `python310` package to `buildInputs` as we have seen in the previous tutorial.
 
 [plain language guidelines]: https://www.plainlanguage.gov/guidelines/
 
@@ -48,21 +57,8 @@ What you may consider well-known may be entirely obscure and distracting to peop
 [Contributor Covenant]: https://github.com/EthicalSource/contributor_covenant/blob/cd7fcf684249786b7f7d47ba49c23a6bcb3233eb/content/version/2/1/code_of_conduct.md
 [The Carpentries Code of Conduct]: https://github.com/carpentries/docs.carpentries.org/blob/4691971d9f49544054410334140a4fd391a738da/topic_folders/policies/code-of-conduct.md
 
-### Be concise
-
-> I would have written a shorter letter, but I did not have the time.
->
-> — [Blaise Pascal][Blaise Pascal]
-
-Readers' time and attention is limited.
-
-Take the time to be extraordinarily respectful with their cognitive resources.
-
-The same holds for communication directed to contributors and maintainers: This is a public project, and many people will read what you write. Use this leverage with care.
-
-[Blaise Pascal]: https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes
-
 ### Voice
+
 Describe the subject factually and use the imperative voice in direct instructions.
 
 Do not assume a personal relationship with readers, prefer clarity and brevity to emotional appeal.
@@ -70,6 +66,7 @@ Do not assume a personal relationship with readers, prefer clarity and brevity t
 Use second person ("you") to refer to the reader and only use "we" to refer to the Nix Community.
 
 ### Be correct, cite sources
+
 The only thing worse than no documentation is _incorrect documentation_.
 One way to ensure correctness is by citing your sources.
 If you make a claim about how something works (e.g. that a command line argument exists), link to official documentation for that subject.
