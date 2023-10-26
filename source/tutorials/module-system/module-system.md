@@ -39,19 +39,19 @@ Write the following into a file called `default.nix`:
 
 ## Module Arguments
 
-In order to make a module actually useful, you will need to write it as a *function*, which takes an attribute set as an argument.
-
-Do this by adding the following new line to `default.nix`:
+We will need some helper functions, which will come from the Nixpkgs library.
+Start by changing the first line in `default.nix`:
 
 ```diff
 # default.nix
+- { ... }:
 + { lib, ... }:
 {
 
 }
 ```
 
-The addition of this line turns the expression in `default.nix` into a function which takes *at least* one argument, called `lib`, and may accept other arguments (expressed by the ellipsis `...`).
+Now the module is a function which takes *at least* one argument, called `lib`, and may accept other arguments (expressed by the ellipsis `...`).
 
 On NixOS, `lib` argument is passed automatically.
 This will make Nixpkgs library functions available within the function body.
@@ -85,20 +85,27 @@ Change `default.nix` to include the following declaration:
 ```
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
-There are several types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
+There are several types available under [`lib.types`](https://nixos.org/manual/nixos/stable/#sec-option-types-basic) in the Nixpkgs library.
 
-You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
+You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple definitions should be joined with newlines.
 
 Write a new file, `eval.nix`, which you will use to evaluate `default.nix`:
 
 ```nix
 # eval.nix
-(import <nixpkgs/lib>).evalModules {
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
+in
+pkgs.lib.evalModules {
   modules = [
     ./default.nix
   ];
 }
 ```
+
+[`evalModules`] is the function that evaluates modules, applies type checking, and merges values into the final attribute set.
+It expects a `modules` attribute that takes a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
 
 Now run the following command:
 
