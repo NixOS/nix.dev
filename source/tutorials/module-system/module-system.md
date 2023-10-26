@@ -220,6 +220,34 @@ Then change `default.nix` to have the following contents:
 
 This will access the previously added `pkgs` argument so we can use dependencies, and copy the `map` file in the current directory into the Nix store so it's available to the wrapped script, which will also live in the Nix store.
 
+Run the script with:
+
+```console
+nix-build eval.nix -A config.generate.script
+./result/bin/map
+```
+
+To iterate more quickly, open a new terminal and set up [`entr`](https://github.com/eradman/entr) to re-run the script whenever any source file in the current directory changes:
+
+```console
+nix-shell -p entr findutils bash --run \
+  "ls *.nix | \
+   entr -rs ' \
+     nix-build eval.nix -A config.generate.script --no-out-link \
+     | xargs printf -- \"%s/bin/map\" \
+     | xargs bash \
+   ' \
+  "
+```
+
+This command does the following:
+- List all `.nix` files
+- Make `entr` watch them for changes. Terminate the invoked command on each change with `-r`.
+- On each change:
+    - Run the `nix-build` invocation as above, but without adding a `./result` symlink
+    - Take the resulting store path and append `/bin/map` to it
+    - Run the executable at the path constructed this way
+
 ## Declaring More Options
 
 Rather than setting all script parameters manually, we will to do that through the module system, as this will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
