@@ -19,6 +19,9 @@ Be prepared to see some Nix errors: during the tutorial, you will first write so
 This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  [(source)](https://github.com/tweag/summer-of-nix-modules) for 2021 Summer of Nix.
 :::
 
+You will use need two helper scripts for this exercise.
+Download {download}`map <files/map>` and {download}`geocode <files/geocode>` into your working directory.
+
 ## Empty module
 
 We have to start somewhere.
