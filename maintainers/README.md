@@ -21,7 +21,7 @@ you are in charge if and only if you get the work done.
 The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
 
 ## Members
-The team membership list is maintained on the [nixos community documentation team page]. 
+The team membership list is maintained on the [Nix community documentation team page]. 
 
 [nixos community documentation team page]: https://nixos.org/community/teams/documentation
 
