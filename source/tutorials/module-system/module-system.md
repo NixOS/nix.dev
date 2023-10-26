@@ -80,7 +80,7 @@ Change `default.nix` to include the following declaration:
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 
-There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
+There are several types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
 
@@ -167,14 +167,14 @@ In this section, you will introduce another option: `generate.requestParams`.
 
 For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
 
-Instead of `lines`, in this case you will want the nested type to be `str`, a generic string type.
+Instead of `lines`, in this case you will want the type of the list elements to be `str`, a generic string type.
 
 The difference between `str` and `lines` is in their merging behavior:
 Module option types not only check for valid values, but also specify how multiple definitions of an option are to be combined into one.
 - For `lines`, multiple definitions get merged by concatenation with newlines.
 - For `str`, multiple definitions are not allowed. This is not a problem here, since one can't define a list element multiple times.
 
-Make the following additions to your `default.nix` file now:
+Make the following additions to your `default.nix` file:
 ```diff
 # default.nix
      generate.script = lib.mkOption {
@@ -220,7 +220,7 @@ Update `default.nix` to add the `config` attribute:
 +{ lib, config, ... }: {
 ```
 
-When a module setting options is evaluated, these values can be accessed by their corresponding attribute names.
+When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names.
 
 Now make the following changes to `default.nix`:
 
@@ -236,7 +236,7 @@ Now make the following changes to `default.nix`:
 ```
 
 Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
-This is possible due to lazy evaluation in the Nix language.
+Lazy evaluation in the Nix language allows taking a value from the `config` argument passed to the module which defines the value.
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
