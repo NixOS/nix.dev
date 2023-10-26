@@ -21,6 +21,7 @@ This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation
 
 ## Empty module
 
+We have to start somewhere.
 The simplest module is just a function that takes any attributes and returns an empty attribute set.
 
 Write the following into a file called `default.nix`:
@@ -49,7 +50,8 @@ Do this by adding the following new line to `default.nix`:
 
 The addition of this line turns the expression in `default.nix` into a function which takes *at least* one argument, called `lib`, and may accept other arguments (expressed by the ellipsis `...`).
 
-Matching on the `lib` argument will make `nixpkgs` library functions available within the function body.
+On NixOS, `lib` argument is passed automatically.
+This will make Nixpkgs library functions available within the function body.
 
 :::{note}
 The ellipsis `...` is necessary because arbitrary arguments can be passed to modules.
@@ -57,8 +59,10 @@ The ellipsis `...` is necessary because arbitrary arguments can be passed to mod
 
 ## Declaring Options
 
-Modules allow providing *options* that declare which values can be set and used elsewhere.
-Options are declared by defining an attribute under the top-level  `options` attribute, using `lib.mkOption`.
+To set any values, the module system first has to know which ones are allowed.
+
+This is done by declaring *options* that specify which values can be set and used elsewhere.
+Options are declared by adding an attribute under the top-level `options` attribute, using `lib.mkOption`.
 
 In this section, you will define the `generate.script` option.
 
@@ -102,6 +106,7 @@ nix-instantiate --eval eval.nix -A config.generate.script
 You will see an error message indicating that the `generate.script` option is used but not defined; you will need to assign a value to the option before using it.
 
 ## Type Checking
+
 As previously mentioned, the `lines` type only permits string values.
 
 :::{warning}
