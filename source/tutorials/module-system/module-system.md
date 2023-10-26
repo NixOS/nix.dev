@@ -1,8 +1,14 @@
-# Deep dive demo: Wrapping the World in Modules
+# Deep dive demo: Wrapping the world in modules
 Much of the power in Nixpkgs and NixOS comes from the module system.
 It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
-In this tutorial you'll learn what a module is and how to define one, what options are and how to declare them, how to express dependencies between modules, and follow extensive demonstration of how to wrap an existing API with Nix modules.
+In this tutorial you'll learn
+- what a module is
+- how to define one
+- what options are
+- how to declare them
+- how to express dependencies between modules
+and follow extensive demonstration of how to wrap an existing API with Nix modules.
 
 Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
@@ -14,7 +20,7 @@ This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation
 
 ## Empty module
 
-The simplest module is just a function that takes any attributes and returns empty attribute set.
+The simplest module is just a function that takes any attributes and returns an empty attribute set.
 
 Write the following into a file called `default.nix`:
 
@@ -74,7 +80,7 @@ Change `default.nix` to include the following declaration:
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 
-There are several other types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
+There are several types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
 
@@ -161,14 +167,14 @@ In this section, you will introduce another option: `generate.requestParams`.
 
 For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
 
-Instead of `lines`, in this case you will want the nested type to be `str`, a generic string type.
+Instead of `lines`, in this case you will want the type of the list elements to be `str`, a generic string type.
 
 The difference between `str` and `lines` is in their merging behavior:
 Module option types not only check for valid values, but also specify how multiple definitions of an option are to be combined into one.
 - For `lines`, multiple definitions get merged by concatenation with newlines.
 - For `str`, multiple definitions are not allowed. This is not a problem here, since one can't define a list element multiple times.
 
-Make the following additions to your `default.nix` file now:
+Make the following additions to your `default.nix` file:
 ```diff
 # default.nix
      generate.script = lib.mkOption {
@@ -214,7 +220,7 @@ Update `default.nix` to add the `config` attribute:
 +{ lib, config, ... }: {
 ```
 
-When a module setting options is evaluated, these values can be accessed by their corresponding attribute names.
+When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names.
 
 Now make the following changes to `default.nix`:
 
@@ -230,7 +236,7 @@ Now make the following changes to `default.nix`:
 ```
 
 Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
-This is possible due to lazy evaluation in the Nix language.
+Lazy evaluation in the Nix language allows taking a value from the `config` argument passed to the module which defines the value.
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
@@ -324,7 +330,7 @@ Wrapping shell command execution in Nix modules is a helpful technique for contr
 
 ## Splitting Modules
 
-The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
+The [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules) includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
 In particular, this allows you to separate option declarations from where they are used in your configuration.
 
@@ -441,11 +447,11 @@ To do this, make the following additions to `marker.nix`, above the `generate.re
          let
 ```
 
-In this case, the default behavior of the Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
+In this case, the default behavior of the Google Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
 
 ## Nested Submodules
 
-It's time to introduce a `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
+It's time to introduce a `users` option with type `lib.types.attrsOf <subtype>`, which will allow you to define `users` as an attribute set, whose values have type `<subtype>`.
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
@@ -514,7 +520,7 @@ In the 2021 Summer of Nix, this formed the basis of an interactive multi-person 
 
 ## Labeling Markers
 
-Now that the map can be rendered with multiple markers, it's time to add some style customization.
+Now that the map can be rendered with multiple markers, it's time to add some style customizations.
 
 To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
 
@@ -558,9 +564,9 @@ Here, the label for each `marker` is only propagated to the CLI parameters if `m
 
 ## Defining a Default Label
 
-In case you don't want to manually define a label for every marker, you can set a default value.
+In case you don't want to manually define a label for each marker, you can set a default value.
 
-The easiest value for a default label is the username, which will always also be set.
+The easiest value for a default label is the username, which will always be set.
 
 This `firstUpperAlnum` function allows you to retrieve the first character of the username, with the correct type for passing to `departure.style.label`:
 
@@ -617,6 +623,7 @@ Instead you can use the `config` section of the `user` submodule to set a defaul
 
 :::{note}
 Module options have a *precedence*, represented as an integer, which determines the priority of setting the option to a particular value.
+When merging values, the lowest precedence wins.
 
 The `lib.mkDefault` modifier sets the precedence of its argument value to 1000, the lowest priority.
 
