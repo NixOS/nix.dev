@@ -250,7 +250,8 @@ This command does the following:
 
 ## Declaring More Options
 
-Rather than setting all script parameters manually, we will to do that through the module system, as this will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
+Rather than setting all script parameters directly, we will to do that through the module system.
+This will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
 
 In this section, you will introduce another option: `generate.requestParams`.
 
@@ -308,29 +309,37 @@ Here, we want the `generate.script` option to use the values of `generate.reques
 To make an option definition available, the argument of the module accessing it must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
+
 ```diff
 # default.nix
 -{ pkgs, lib, ... }: {
 +{ pkgs, lib, config, ... }: {
 ```
 
-When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names.
+When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names under `config`.
 
 Now make the following changes to `default.nix`:
 
 ```diff
 # default.nix
+
    config = {
-     generate.script = ''
--      map size=640x640 scale=2 | icat
-+      map ${lib.concatStringsSep " "
-+            config.generate.requestParams
-+           } | icat
-     '';
+     generate.script = pkgs.writeShellApplication {
+       name = "map";
+       runtimeInputs = with pkgs; [ curl feh ];
+       text = ''
+-        ${./map} size=640x640 scale=2 | feh -
++        map ${lib.concatStringsSep " "
++              config.generate.requestParams
++             } | feh -
+       '';
 ```
 
 Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
-Lazy evaluation in the Nix language allows taking a value from the `config` argument passed to the module which defines the value.
+
+:::{note}
+Lazy evaluation in the Nix language allows the module system to make a value available in the `config` argument passed to the module which defines that value.
+:::
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
