@@ -304,7 +304,7 @@ Here, we want the `generate.script` option to use the values of `generate.reques
 
 ### Accessing Option Values
 
-To make an option definition available, the argument of the module accessing it must include the `config` attribute.
+To make option values available, the argument of the module accessing them must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
 
@@ -354,19 +354,12 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 
 The result of this represents the list of command line arguments to pass to the `map` script.
 
-## Conditional Definitions and Default Values
+## Conditional Definitions
 
 In this section, you will define a new option, `map.zoom`, to control the zoom level of the map.
 
-You will use a new type, `nullOr <type>`, which can take either values of its argument type or `null`.
-
-In this case, a `null` value will use the API's default behavior of inferring the zoom level.
-
-Here, you will also use `default` from `mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix) to declare your first *default* value, which will be used if the option declaring it is not enabled.
-
-You will use this option to define another element in `generate.requestParams`, which will only be added if its value is non-null.
-
-To do this, you can use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
+Since the Google Maps API will infer a zoom level if no corresponding argument is passed, we want to represent that at the module level.
+To do that, you will use a new type, `nullOr <type>`, which can take either values of its argument type or `null`.
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
@@ -379,24 +372,44 @@ Add the `map` attribute set with the `zoom` option into the top-level `options` 
 +    map = {
 +      zoom = lib.mkOption {
 +        type = lib.types.nullOr lib.types.int;
-+        default = 2;
 +      };
 +    };
    };
- ```
+```
 
-Now make the following additions to the `generate.requestParams` list in the `config` block:
+To make use of this, use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
+Make the following additions to the `generate.requestParams` list in the `config` block:
 
 ```diff
 # default.nix
-   config = {
-     ...
      generate.requestParams = [
        "size=640x640"
        "scale=2"
 +      (lib.mkIf (config.map.zoom != null)
 +        "zoom=${toString config.map.zoom}")
      ];
+   };
+```
+
+This will will only add a `zoom` parameter to the script call if the value is non-null.
+
+## Default values
+
+Let's say that in our application we want to have a different default behavior that sets the the zoom level to `2`, such that automatic zoom has to be enabled explicitly.
+
+This can be done with the `default` argument to [`mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix).
+Its value will be used if the value of the option declaring it is otherwise specified.
+
+Add the corresponding line:
+
+```diff
+# default.nix
+     map = {
+       zoom = lib.mkOption {
+         type = lib.types.nullOr lib.types.int;
++        default = 2;
+       };
+     };
    };
 ```
 
