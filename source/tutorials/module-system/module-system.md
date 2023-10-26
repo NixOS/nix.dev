@@ -433,9 +433,41 @@ Add the `center` option now, possibly with your own location as default value:
    };
 ```
 
-To implement this behavior, you will use the `geocode` utility, which turns location names into coordinates.
+To implement this behavior, you will use the {download}`geocode <files/geocode>` utility, which turns location names into coordinates.
+There are multiple ways of making a new package accessible, but as an exercise, you will add it as an option in the module system.
 
-Add another `mkIf` call to the list of `requestParams` now:
+First, add a new option to accommodate the package:
+
+
+```diff
+# default.nix
+   options = {
+     generate.script = lib.mkOption {
+       type = lib.types.package;
+     };
++
++    helpers.geocode = lib.mkOption {
++      type = lib.types.package;
++    };
+```
+
+Then define the value for that option where you make the raw script reproducible by wrapping a call to it in `writeShellApplication`:
+
+```diff
+# default.nix
+   config = {
++    helpers.geocode = pkgs.writeShellApplication {
++      name = "geocode";
++      runtimeInputs = with pkgs; [ curl jq ];
++      text = "exec ${./geocode}";
++    };
++
+     generate.script = pkgs.writeShellApplication {
+       name = "map";
+       runtimeInputs = with pkgs; [ curl feh ];
+```
+
+Add another `mkIf` call to the list of `requestParams` now where you access the wrapped package through `config.helpers.geocode`, and run the executable `/bin/geocode` inside:
 
 ```diff
 # default.nix
@@ -443,16 +475,16 @@ Add another `mkIf` call to the list of `requestParams` now:
        (lib.mkIf (config.map.zoom != null)
          "zoom=${toString config.map.zoom}")
 +      (lib.mkIf (config.map.center != null)
-+        "center=\"$(geocode ${
++        "center=\"$(${config.helpers.geocode}/bin/geocode ${
 +          lib.escapeShellArg config.map.center
 +        })\"")
      ];
    };
 ```
 
-This time, you've used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, interpolating the result back into the `requestParams` string which sets the `center` value.
+This time, you've used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, string interpolating the result back into the `requestParams` string which sets the `center` value.
 
-Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, using the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
+Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, as it uses the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
 ## Splitting Modules
 
@@ -460,7 +492,8 @@ The [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules) 
 
 In particular, this allows you to separate option declarations from where they are used in your configuration.
 
-Create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map.
+Create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map:
+
 ```diff
 # marker.nix
 +{ lib, config, ... }: {
@@ -469,9 +502,10 @@ Create a new module, `marker.nix`, where you can declare options for defining lo
 ```
 
 Reference this new file in `default.nix` using the `imports` attribute:
+
 ```diff
 # default.nix
- { lib, config, ... }: {
+ { pkgs, lib, config ... }: {
 
 +  imports = [
 +    ./marker.nix
@@ -481,22 +515,23 @@ Reference this new file in `default.nix` using the `imports` attribute:
 
 ## The `submodule` Type
 
-One of the most useful types included in the module system's type system is `submodule`.
+We want to set multiple markers on the map.
+A marker is a complex type with multiple fields.
 
+This is wher one of the most useful types included in the module system's type system comes into play: `submodule`.
 This type allows you to define nested modules with their own options.
-
 
 Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.
 
 Each assignment of markers will be type-checked during evaluation of the top-level `config`.
 
-Make the following changes to `marker.nix` now:
+Make the following changes to `marker.nix`:
+
 ```diff
 # marker.nix
--{ lib, config, ... }: {
-+{ lib, config, ... }:
+-{ pkgs, lib, config, ... }: {
++{ pkgs, lib, config, ... }:
 +let
-+
 +  markerType = lib.types.submodule {
 +    options = {
 +      location = lib.mkOption {
@@ -512,19 +547,18 @@ Make the following changes to `marker.nix` now:
 +      type = lib.types.listOf markerType;
 +    };
 +  };
- }
 ```
 
 ## Setting Option Values Within Other Modules
 
-Because of the way the module system composes option definitions, you can also freely assign values to options defined in other modules.
+Because of the way the module system composes option definitions, you can freely assign values to options defined in other modules.
 
-In this case, you will use the `map.markers` option to produce and add new elements to the `requestParams` list, making your declared markers appear on the returned map.
+In this case, you will use the `map.markers` option to produce and add new elements to the `requestParams` list, making your declared markers appear on the returned map – but from the module declared in `marker.nix`.
 
 To implement this behavior, add the following `config` block to `marker.nix`:
+
 ```diff
 # marker.nix
-   ...
 +  config = {
 +
 +    map.markers = [
@@ -544,20 +578,18 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 +          lib.concatStringsSep "\\|" attributes
 +        }";
 +    in map paramForMarker config.map.markers;
-+
-+  };
- }
 ```
 
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
-The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list`-type module.
+The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list` type.
 
-## Multiple Markers
+## Dealing with multiple markers
 
-In case you define multiple markers, determining an appropriate center or zoom level for the map may be challenging; it's easier to let the API do this for you.
+When defining multiple markers, determining an appropriate center or zoom level for the map may be challenging; it's easier to let the API do this for you.
 
-To do this, make the following additions to `marker.nix`, above the `generate.requestParams` declaration:
+To achieve this, make the following additions to `marker.nix`, above the `generate.requestParams` declaration:
+
 ```diff
 # marker.nix
 +    map.center = lib.mkIf
@@ -577,20 +609,20 @@ In this case, the default behavior of the Google Maps API when not passed a cent
 
 ## Nested Submodules
 
-It's time to introduce a `users` option with type `lib.types.attrsOf <subtype>`, which will allow you to define `users` as an attribute set, whose values have type `<subtype>`.
+Next, we want to allow multiple named users to define a list of markers each.
+
+For that you'll add a `users` option with type `lib.types.attrsOf <subtype>`, which will allow you to define `users` as an attribute set, whose values have type `<subtype>`.
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
 This will again make use of the `markerType` submodule, giving a nested structure of submodules.
 
-To propagate marker definitions from `users`  to the `map.markers` option, make the following changes now:
+To propagate marker definitions from `users` to the `map.markers` option, make the following changes.
 
-- In the `let` block:
+In the `let` block:
 
 ```diff
 # marker.nix
- let
-   ...
 +  userType = lib.types.submodule {
 +    options = {
 +      departure = lib.mkOption {
@@ -603,18 +635,21 @@ To propagate marker definitions from `users`  to the `map.markers` option, make 
  in {
 ```
 
-- In the `options` block, above `map.markers`:
+This defines a submodule type for a user, with a `departure` option of type `markerType`.
+
+In the `options` block, above `map.markers`:
+
 ```diff
 # marker.nix
-   options = {
-+
 +    users = lib.mkOption {
 +      type = lib.types.attrsOf userType;
 +    };
-+
 ```
 
-- In the `config` block, above `map.center`:
+That allows adding a `users` attribute set to `config` in any submodule that imports `marker.nix`, where each attribute will be of type `userType` as declared in the previous step.
+
+In the `config` block, above `map.center`:
+
 ```diff
 # marker.nix
    config = {
@@ -632,13 +667,11 @@ To propagate marker definitions from `users`  to the `map.markers` option, make 
        (lib.length config.map.markers >= 1)
 ```
 
-The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically.
+This takes all the `departure` markers from all users in the `config` argument, and adds them to `map.markers` if their `location` attribute is not `null`.
 
-The `departure` values of each of the `users` are then joined into a list, and this list is filtered for non-`null` locations.
+The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically (this how attribute names are stored in the Nix language).
 
-The resulting list is stored in `map.markers`.
-
-The resulting `map.markers` option then propagates to the `generate.requestParams` option, which in turn is used to generate arguments to the script which ultimately calls the Google Maps API.
+Back in `default.nix`, the resulting `map.markers` option value is still accessed by `generate.requestParams`, which in turn is used to generate arguments to the script that ultimately calls the Google Maps API.
 
 Defining the options in this way allows you to set multiple `users.<name>.departure.location` values and generate a map with the appropriate zoom and center, with pins corresponding to the set of `departure.location` values for *all* `users`.
 
