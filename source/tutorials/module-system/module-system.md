@@ -330,7 +330,7 @@ Wrapping shell command execution in Nix modules is a helpful technique for contr
 
 ## Splitting Modules
 
-The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
+The [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules) includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
 In particular, this allows you to separate option declarations from where they are used in your configuration.
 
@@ -447,11 +447,11 @@ To do this, make the following additions to `marker.nix`, above the `generate.re
          let
 ```
 
-In this case, the default behavior of the Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
+In this case, the default behavior of the Google Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
 
 ## Nested Submodules
 
-It's time to introduce a `users` option with the `lib.types.attrsOf <subtype>` type, which will allow you to define `users` as an attribute set with arbitrary keys, each value of which has type `<subtype>`.
+It's time to introduce a `users` option with type `lib.types.attrsOf <subtype>`, which will allow you to define `users` as an attribute set, whose values have type `<subtype>`.
 
 Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.
 
@@ -520,7 +520,7 @@ In the 2021 Summer of Nix, this formed the basis of an interactive multi-person 
 
 ## Labeling Markers
 
-Now that the map can be rendered with multiple markers, it's time to add some style customization.
+Now that the map can be rendered with multiple markers, it's time to add some style customizations.
 
 To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
 
@@ -564,9 +564,9 @@ Here, the label for each `marker` is only propagated to the CLI parameters if `m
 
 ## Defining a Default Label
 
-In case you don't want to manually define a label for every marker, you can set a default value.
+In case you don't want to manually define a label for each marker, you can set a default value.
 
-The easiest value for a default label is the username, which will always also be set.
+The easiest value for a default label is the username, which will always be set.
 
 This `firstUpperAlnum` function allows you to retrieve the first character of the username, with the correct type for passing to `departure.style.label`:
 
@@ -623,6 +623,7 @@ Instead you can use the `config` section of the `user` submodule to set a defaul
 
 :::{note}
 Module options have a *precedence*, represented as an integer, which determines the priority of setting the option to a particular value.
+When merging values, the lowest precedence wins.
 
 The `lib.mkDefault` modifier sets the precedence of its argument value to 1000, the lowest priority.
 
