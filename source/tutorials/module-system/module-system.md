@@ -1,4 +1,5 @@
 # Deep dive demo: Wrapping the world in modules
+
 Much of the power in Nixpkgs and NixOS comes from the module system.
 It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
@@ -57,8 +58,6 @@ The ellipsis `...` is necessary because arbitrary arguments can be passed to mod
 ## Declaring Options
 
 Modules allow providing *options* that declare which values can be set and used elsewhere.
-
-
 Options are declared by defining an attribute under the top-level  `options` attribute, using `lib.mkOption`.
 
 In this section, you will define the `generate.script` option.
@@ -79,7 +78,6 @@ Change `default.nix` to include the following declaration:
 ```
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
-
 There are several types available under [`lib.types`](https://github.com/NixOS/nixpkgs/blob/master/lib/types.nix) in the Nixpkgs library.
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple strings should be joined with newlines.
@@ -163,6 +161,7 @@ Update `default.nix` by changing the value of `generate.script` to the following
 TODO: Create derivations to get these commands
 
 ## Declaring More Options
+
 In this section, you will introduce another option: `generate.requestParams`.
 
 For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
@@ -630,7 +629,6 @@ The `lib.mkDefault` modifier sets the precedence of its argument value to 1000, 
 This ensures that other values set for the same option will prevail.
 :::
 
-
 ## Marker Styling: Color
 
 For better visual contrast, it would also be helpful to have a way to change the *color* of a marker.
@@ -1060,6 +1058,7 @@ Make sure to also add a new line using this to the `attributes` list, so the opt
 ```
 
 ## Wrapping Up
+
 In this tutorial, you've learned how to write custom Nix modules to bring external services under declarative control, with the help of several new utility functions from the Nixpkgs `lib`.
 
 You defined several modules in multiple files, each with separate submodules making use of the module system's type checking.
