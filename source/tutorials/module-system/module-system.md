@@ -14,7 +14,7 @@ This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation
 
 ## Empty module
 
-The simplest module is just a function that takes any attributes and returns empty attribute set.
+The simplest module is just a function that takes any attributes and returns an empty attribute set.
 
 Write the following into a file called `default.nix`:
 
