@@ -338,7 +338,7 @@ Now make the following changes to `default.nix`:
        runtimeInputs = with pkgs; [ curl feh ];
        text = ''
 -        ${./map} size=640x640 scale=2 | feh -
-+        map ${lib.concatStringsSep " "
++        builtins.map ${lib.concatStringsSep " "
 +              config.generate.requestParams
 +             } | feh -
        '';
@@ -496,9 +496,9 @@ Create a new module, `marker.nix`, where you can declare options for defining lo
 
 ```diff
 # marker.nix
-+{ lib, config, ... }: {
-+
-+}
+{ lib, config, ... }: {
+
+}
 ```
 
 Reference this new file in `default.nix` using the `imports` attribute:
@@ -577,8 +577,13 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 +        in "markers=${
 +          lib.concatStringsSep "\\|" attributes
 +        }";
-+    in map paramForMarker config.map.markers;
++    in builtins.map paramForMarker config.map.markers;
 ```
+
+:::{warning}
+To avoid confusion with the `map` option setting and the evaluated `config.map` configuration value, here we use the `map` function explicitly as `builtins.map`.
+:::
+
 
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
@@ -681,13 +686,14 @@ In the 2021 Summer of Nix, this formed the basis of an interactive multi-person 
 
 Now that the map can be rendered with multiple markers, it's time to add some style customizations.
 
-To tell the markers apart, you should add another option to the `markerType` submodule, to allow labeling each marker pin.
+To tell the markers apart, add another option to the `markerType` submodule, to allow labeling each marker pin.
 
 The API documentation states that [these labels must be either an uppercase letter or a number](https://developers.google.com/maps/documentation/maps-static/start#MarkerStyles).
 
-You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression that will accept any matching (uppercase letter or number) values.
+You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression that will accept any matching values, in this case an uppercase letter or number.
 
-- In the `let` block:
+In the `let` block:
+
 ```diff
 # marker.nix
          type = lib.types.nullOr lib.types.str;
@@ -703,7 +709,10 @@ You can implement this with the `strMatching "<regex>"` type, where `<regex>` is
    };
 ```
 
-- In the `paramForMarker` function:
+Again, `types.nullOr` allows for `null` values, and the default has been set to `null`.
+
+In the `paramForMarker` function:
+
 ```diff
 # marker.nix
        paramForMarker = marker:
@@ -723,9 +732,8 @@ Here, the label for each `marker` is only propagated to the CLI parameters if `m
 
 ## Defining a Default Label
 
-In case you don't want to manually define a label for each marker, you can set a default value.
-
-The easiest value for a default label is the username, which will always be set.
+Right now, if a label is not explicitly set, none will show up.
+But since every `users` attribute has a name, we could use that as an automatic value instead.
 
 This `firstUpperAlnum` function allows you to retrieve the first character of the username, with the correct type for passing to `departure.style.label`:
 
@@ -746,9 +754,7 @@ This `firstUpperAlnum` function allows you to retrieve the first character of th
 
 By transforming the argument to `lib.types.submodule` into a function, you can access arguments within it.
 
-One special argument available to submodules is the `name` argument, which when used in `attrsOf`, gives you the name of the attribute the submodule is defined under.
-
-You can use this function argument to retrieve the `name` attribute for use elsewhere:
+One special argument automatically available to submodules is `name`, which when used in `attrsOf`, gives you the name of the attribute the submodule is defined under:
 
 ```diff
 # marker.nix
@@ -781,23 +787,24 @@ Instead you can use the `config` section of the `user` submodule to set a defaul
 ```
 
 :::{note}
-Module options have a *precedence*, represented as an integer, which determines the priority of setting the option to a particular value.
-When merging values, the lowest precedence wins.
+Module options have a *priority*, represented as an integer, which determines the precedence for setting the option to a particular value.
+When merging values, the priority with lowest numeric value wins.
 
-The `lib.mkDefault` modifier sets the precedence of its argument value to 1000, the lowest priority.
+The `lib.mkDefault` modifier sets the priority of its argument value to 1000, the lowest precedence.
 
 This ensures that other values set for the same option will prevail.
 :::
 
 ## Marker Styling: Color
 
-For better visual contrast, it would also be helpful to have a way to change the *color* of a marker.
+For better visual contrast, it would be helpful to have a way to change the *color* of a marker.
 
 Here you will use two new type-functions for this:
 - `either <this> <that>`, which takes two types as arguments, and allows either of them
 - `enum [ <allowed values> ]`, which takes a list of allowed values, and allows any of them
 
-In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value:
+In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value add the new compound type:
+
 ```diff
 # marker.nix
      ...
@@ -816,7 +823,10 @@ In the `let` block, add the following `colorType` option, which can hold strings
        location = lib.mkOption {
 ```
 
-At the bottom of the `let` block, add the `style.color` option:
+This allows either strings that matche a 24-bit hexadecimal number or are equal to one of the specified color names.
+
+At the bottom of the `let` block, add the `style.color` option and specify a default value:
+
 ```diff
 # marker.nix
            (lib.types.strMatching "[A-Z0-9]");
@@ -831,7 +841,8 @@ At the bottom of the `let` block, add the `style.color` option:
    };
 ```
 
-Now add a line to the `paramForMarker` list which makes use of the new option:
+Now add an entry to the `paramForMarker` list which makes use of the new option:
+
 ```diff
 # marker.nix
                (marker.style.label != null)
@@ -847,7 +858,7 @@ Now add a line to the `paramForMarker` list which makes use of the new option:
 
 In case you set many different markers, it would be helpful to have the ability to change their size individually.
 
-Add a new `style.size` option to `marker.nix`, allowing you to do so:
+Add a new `style.size` option to `marker.nix`, allowing you to choose from the set of pre-defined sizes:
 
 ```diff
 # marker.nix
@@ -865,6 +876,7 @@ Add a new `style.size` option to `marker.nix`, allowing you to do so:
 ```
 
 Now add a mapping for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
+
 ```diff
 # marker.nix
      generate.requestParams = let
@@ -880,6 +892,7 @@ Now add a mapping for the size parameter in `paramForMarker`, which selects an a
 ```
 
 Finally, add another `lib.optional` call to the `attributes` string, making use of the selected size:
+
 ```
 # marker.nix
            attributes =
@@ -898,47 +911,50 @@ Finally, add another `lib.optional` call to the `attributes` string, making use 
 
 So far, you've created an option for declaring a *destination* marker, as well as several options for configuring the marker's visual representation.
 
+Now we want to compute and display a route from the user's location to some destination.
+
 The new option defined in the next section will allow you to set an *arrival* marker, which together with a destination allows you to draw *paths* on the map using the new module defined below.
 
 To start, create a new `path.nix` file with the following contents:
 
 ```diff
 # path.nix
-+{ lib, config, ... }:
-+let
-+  pathType = lib.types.submodule {
-+
-+    options = {
-+      locations = lib.mkOption {
-+        type = lib.types.listOf lib.types.str;
-+      };
-+    };
-+
-+  };
-+in {
-+  options = {
-+    map.paths = lib.mkOption {
-+      type = lib.types.listOf pathType;
-+    };
-+  };
-+
-+  config = {
-+    generate.requestParams = let
-+      attrForLocation = loc:
-+        "$(geocode ${lib.escapeShellArg loc})";
-+      paramForPath = path:
-+        let
-+          attributes =
-+            map attrForLocation path.locations;
-+        in "path=${
-+            lib.concatStringsSep "\\|" attributes
-+          }";
-+      in map paramForPath config.map.paths;
-+  };
-+}
+{ lib, config, ... }:
+let
+  pathType = lib.types.submodule {
+    options = {
+      locations = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+      };
+    };
+  };
+in {
+  options = {
+    map.paths = lib.mkOption {
+      type = lib.types.listOf pathType;
+    };
+  };
+
+  config = {
+    generate.requestParams = let
+      attrForLocation = loc:
+        "$(geocode ${lib.escapeShellArg loc})";
+      paramForPath = path:
+        let
+          attributes =
+            builtins.map attrForLocation path.locations;
+        in "path=${
+            lib.concatStringsSep "\\|" attributes
+          }";
+      in builtins.map paramForPath config.map.paths;
+  };
+}
 ```
 
-The `path.nix` module defines an option for declaring paths, augmenting the API call by re-using the `generate.requestParams` option.
+The `path.nix` module defines an option for declaring a list of paths on our `map`, where each path is a list of strings for geographic locations.
+
+
+In the `config` attribute we augment the API call by setting the `generate.requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request paremeters set elsewhere.
 
 Now import this new `path.nix` module from your `marker.nix` module:
 
@@ -957,7 +973,7 @@ Now import this new `path.nix` module from your `marker.nix` module:
 
 ## The Arrival Marker
 
-Now copy the `departure` option declaration to a new `arrival` option in `marker.nix`, to complete the initial path implementation:
+Copy the `departure` option declaration to a new `arrival` option in `marker.nix`, to complete the initial path implementation:
 
 ```diff
 # marker.nix
@@ -973,6 +989,7 @@ Now copy the `departure` option declaration to a new `arrival` option in `marker
 ```
 
 Next, add an `arrival.style.label` attribute to the `config` block, mirroring the `departure.style.label`:
+
 ```diff
 # marker.nix
      config = {
@@ -984,7 +1001,8 @@ Next, add an `arrival.style.label` attribute to the `config` block, mirroring th
    });
 ```
 
-Finally, update the return list in the function passed to `concatMap` in `map.markers`:
+Finally, update the return list in the function passed to `concatMap` in `map.markers` to also include the `arrival` marker for each user:
+
 ```diff
 # marker.nix
      map.markers = lib.filter
@@ -997,17 +1015,17 @@ Finally, update the return list in the function passed to `concatMap` in `map.ma
      map.center = lib.mkIf
 ```
 
-You should now be able to define paths on the map, connecting pairs of departure and arrival points.
+Now you have the basesis to define paths on the map, connecting pairs of departure and arrival points.
 
 ## Connecting Markers by Paths
 
-In the path module, you can now define a path connecting every user's departure and arrival locations.
+In the path module, define a path connecting every user's departure and arrival locations:
 
 ```diff
 # path.nix
    config = {
 +
-+    map.paths = map (user: {
++    map.paths = builtins.map (user: {
 +      locations = [
 +        user.departure.location
 +        user.arrival.location
@@ -1022,10 +1040,6 @@ In the path module, you can now define a path connecting every user's departure 
          "$(geocode ${lib.escapeShellArg loc})";
 ```
 
-:::{warning}
-Don't confuse the `map` function with the `map` option or the `map` script!
-:::
-
 The new `map.paths` attribute contains a list of all valid paths defined for all users.
 
 A path is valid only if the `departure` and `arrival` attributes are set for that user.
@@ -1036,7 +1050,7 @@ Your users have spoken, and they demand the ability to customize the styles of t
 
 As before, you'll now declare a new submodule for the path style.
 
-While you could also directly define the `style.weight` option, in this case, you should use the submodule in a future change to reuse the path style definitions.
+While you could also directly declare the `style.weight` option, in this case you should use the submodule to be able reuse the path style type later.
 
 Add the `pathStyleType` submodule option to the `let` block in `path.nix`:
 ```diff
@@ -1063,6 +1077,7 @@ The `ints.between <lower> <upper>` type allows integers in the given (inclusive)
 The path weight will default to 5, but can be set to any integer value in the 1 to 20 range, with higher weights producing thicker paths on the map.
 
 Now add a `style` option to the `options` set further down the file:
+
 ```diff
 # path.nix
      options = {
@@ -1080,16 +1095,17 @@ Now add a `style` option to the `options` set further down the file:
 ```
 
 Finally, update the `attributes` list in `paramForPath`:
+
 ```diff
 # path.nix
        paramForPath = path:
          let
            attributes =
--            map attrForLocation path.locations;
+-            builtins.map attrForLocation path.locations;
 +            [
 +              "weight:${toString path.style.weight}"
 +            ]
-+            ++ map attrForLocation path.locations;
++            ++ builtins.map attrForLocation path.locations;
          in "path=${
              lib.concatStringsSep "\\|" attributes
            }";
@@ -1097,11 +1113,12 @@ Finally, update the `attributes` list in `paramForPath`:
 
 ## The `pathStyle` Submodule
 
-Users still can't actually customize the path style yet, so you should introduce a new `pathStyle` option for each user.
+Users still can't actually customize the path style yet.
+Introduce a new `pathStyle` option for each user.
 
 The module system allows you to declare values for an option multiple times, and if the types permit doing so, takes care of merging each declaration's values together.
 
-This makes it possible to have a definition for the `user` option in the `marker.nix` module, as well as a `user` definition in `path.nix`, which you should add now:
+This makes it possible to have a definition for the `user` option in the `marker.nix` module, as well as a `user` definition in `path.nix`:
 
 ```diff
 # path.nix
@@ -1122,7 +1139,8 @@ This makes it possible to have a definition for the `user` option in the `marker
      };
 ```
 
-Then add a line using the `user.pathStyle` option in `map.paths`:
+Then add a line using the `user.pathStyle` option in `map.paths` where each user's paths are processed:
+
 ```diff
 # path.nix
          user.departure.location
@@ -1138,9 +1156,10 @@ Then add a line using the `user.pathStyle` option in `map.paths`:
 
 As with markers, paths should have customizable colors.
 
-You can accomplish this using types you've already seen by now.
+You can accomplish this using types you've already encountered by now.
 
-Add a new `colorType` block to `path.nix`, specifying the allowed color names and RGB/RGBA values:
+Add a new `colorType` block to `path.nix`, specifying the allowed color names and RGB/RGBA hexadecimal values:
+
 ```diff
 # path.nix
  { lib, config, ... }:
@@ -1158,6 +1177,7 @@ Add a new `colorType` block to `path.nix`, specifying the allowed color names an
 ```
 
 Under the `weight` option, add a new `color` option to use the new `colorType` value:
+
 ```diff
 # path.nix
          type = lib.types.ints.between 1 20;
@@ -1173,6 +1193,7 @@ Under the `weight` option, add a new `color` option to use the new `colorType` v
 ```
 
 Finally, add a line using the `color` option to the `attributes` list:
+
 ```diff
 # path.nix
            attributes =
@@ -1186,11 +1207,12 @@ Finally, add a line using the `color` option to the `attributes` list:
 
 ## Further Styling
 
-Now that you've got this far, to further improve the aesthetics of the rendered map, you should add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
+Now that you've got this far, to further improve the aesthetics of the rendered map, add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
 
 Since this feature can be turned on or off, you can do this using the `bool` type, which can be `true` or `false`.
 
 Make the following changes to `path.nix` now:
+
 ```diff
 # path.nix
          type = colorType;
@@ -1205,7 +1227,8 @@ Make the following changes to `path.nix` now:
    };
 ```
 
-Make sure to also add a new line using this to the `attributes` list, so the option value is included in the API call:
+Make sure to also add a line to use that value in `attributes` list, so the option value is included in the API call:
+
 ```diff
 # path.nix
              [
