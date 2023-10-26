@@ -352,7 +352,7 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
-The result of this represents the list of command line arguments to pass to `map`.
+The result of this represents the list of command line arguments to pass to the `map` script.
 
 ## Conditional Definitions and Default Values
 
