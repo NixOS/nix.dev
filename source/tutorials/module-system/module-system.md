@@ -13,6 +13,10 @@ and follow extensive demonstration of how to wrap an existing API with Nix modul
 
 Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
+:::{warning}
+To run the examples in this tutorial, you will need a [Google API key](https://developers.google.com/maps/documentation/maps-static/start#before-you-begin) in `$XDG_DATA_HOME/google-api/key`.
+:::
+
 Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
 
 :::{note}
@@ -168,14 +172,57 @@ Update `default.nix` by changing the value of `generate.script` to the following
    config = {
 -    generate.script = 42;
 +    generate.script = ''
-+      map size=640x640 scale=2 | icat
++      ./map size=640x640 scale=2 | feh -
 +    '';
    };
 ```
 
-TODO: Create derivations to get these commands
+## Interlude: Reproducible scripts
+
+The simple script will likely not work as intended on your system, as it may lack the required dependencies.
+We can solve this by packaging the raw {download}`map <files/map>` script with `pkgs.writeShellApplication`.
+
+First, make available a `pkgs` argument in your module evaluation by adding a module that sets `config._module.args`:
+
+```diff
+# eval.nix
+ pkgs.lib.evalModules {
+   modules = [
++    ({ config, ... }: { config._module.args = { inherit pkgs; }; })
+     ./test.nix
+   ];
+ }
+```
+
+Then change `default.nix` to have the following contents:
+
+```nix
+# default.nix
+{ pkgs, lib, ... }: {
+
+  options = {
+    generate.script = lib.mkOption {
+      type = lib.types.package;
+    };
+  };
+
+  config = {
+    generate.script = pkgs.writeShellApplication {
+      name = "map";
+      runtimeInputs = with pkgs; [ curl feh ];
+      text = ''
+        ${./map} size=640x640 scale=2 | feh -
+      '';
+    };
+  };
+}
+```
+
+This will access the previously added `pkgs` argument so we can use dependencies, and copy the `map` file in the current directory into the Nix store so it's available to the wrapped script, which will also live in the Nix store.
 
 ## Declaring More Options
+
+Rather than setting all script parameters manually, we will to do that through the module system, as this will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
 
 In this section, you will introduce another option: `generate.requestParams`.
 
@@ -189,10 +236,11 @@ Module option types not only check for valid values, but also specify how multip
 - For `str`, multiple definitions are not allowed. This is not a problem here, since one can't define a list element multiple times.
 
 Make the following additions to your `default.nix` file:
+
 ```diff
 # default.nix
      generate.script = lib.mkOption {
-       type = lib.types.lines;
+       type = lib.types.package;
      };
 +
 +    generate.requestParams = lib.mkOption {
@@ -200,17 +248,20 @@ Make the following additions to your `default.nix` file:
 +    };
    };
 
-   config = {
-     generate.script = ''
-       map size=640x640 scale=2 | icat
-     '';
+  config = {
+    generate.script = pkgs.writeShellApplication {
+      name = "map";
+      runtimeInputs = with pkgs; [ curl feh ];
+      text = ''
+        ${./map} size=640x640 scale=2 | feh -
+      '';
+    };
 +
 +    generate.requestParams = [
 +      "size=640x640"
 +      "scale=2"
 +    ];
    };
-
  }
 ```
 
@@ -225,13 +276,14 @@ Options can depend on other options, making it possible to build more useful abs
 Here, we want the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
 
 ### Accessing Option Values
+
 To make an option definition available, the argument of the module accessing it must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
 ```diff
 # default.nix
--{ lib, ... }: {
-+{ lib, config, ... }: {
+-{ pkgs, lib, ... }: {
++{ pkgs, lib, config, ... }: {
 ```
 
 When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names.
@@ -307,6 +359,7 @@ Now make the following additions to the `generate.requestParams` list in the `co
 You have now declared options controlling the map dimensions and zoom level, but have not provided a way to specify where the map should be centered.
 
 Add the `center` option now, possibly with your own location as default value:
+
 ```diff
 # default.nix
          type = lib.types.nullOr lib.types.int;
