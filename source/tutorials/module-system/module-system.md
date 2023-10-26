@@ -1,4 +1,4 @@
-# Deep dive demo: Wrapping the World in Modules
+# Deep dive demo: Wrapping the world in modules
 Much of the power in Nixpkgs and NixOS comes from the module system.
 It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
