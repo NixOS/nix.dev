@@ -296,9 +296,7 @@ Make the following additions to your `default.nix` file:
 
 ## Dependencies Between Options
 
-A given module generally only declares a single option that is meant to be evaluated.
-
-This option generates the final result to be used elsewhere, which in this case is `generate.script`.
+A given module generally declares one option that produces a result to be used elsewhere, which in this case is `generate.script`.
 
 Options can depend on other options, making it possible to build more useful abstractions.
 
@@ -317,6 +315,17 @@ Update `default.nix` to add the `config` attribute:
 ```
 
 When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names under `config`.
+
+:::{note}
+Option values can't be accessed directly from the same module.
+
+The module system evaluates all modules it receives, and any of them can define a particular option's value.
+What happens when an option is set by multiple modules is determined by that option's type.
+
+The `config` argument is *not the same* as the `config` attribute where option values are set:
+- The `config` argument holds the module system's evaluation result that takes into account all modules passed to `evalModules` and their `imports`.
+- The `config` attribute of a module exposes that particular module's option values to the module system for evaluation.
+:::
 
 Now make the following changes to `default.nix`:
 
