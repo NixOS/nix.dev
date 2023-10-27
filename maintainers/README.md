@@ -23,7 +23,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 ## Members
 The team membership list is maintained on the [Nix community documentation team page]. 
 
-[nixos community documentation team page]: https://nixos.org/community/teams/documentation
+[Nix community documentation team page]: https://nixos.org/community/teams/documentation
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
