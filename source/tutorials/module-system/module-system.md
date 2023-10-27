@@ -20,7 +20,7 @@ In this tutorial you'll learn
 
 and follow an extensive demonstration of how to wrap an existing API with Nix modules.
 
-Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
+Concretely, you'll write modules to interact with the [Google Maps API](https://developers.google.com/maps/documentation/maps-static), declaring options which represent map geometry, location pins, and more.
 
 During the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
 
