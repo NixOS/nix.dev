@@ -1,5 +1,5 @@
-(recipes)=
-# Recipes
+(guides)=
+# Guides
 
 These sections contains guides to getting things done.
 
@@ -7,10 +7,8 @@ These sections contains guides to getting things done.
 :glob:
 :maxdepth: 2
 
+./recipes/index.md
 ./best-practices.md
-./faq.md
-../templates/*
-./python-environment.md
 ./troubleshooting.md
-./direnv.md
+./faq.md
 ```

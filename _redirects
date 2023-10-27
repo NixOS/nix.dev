@@ -17,3 +17,8 @@
 /contributing/writing-style /contributing/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
 /tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-shell 301
+/recipes/best-practices /guides/best-practices 301
+/recipes/troubleshooting /guides/troubleshooting 301
+/recipes/faq /guides/faq 301
+/recipes/python-environment /guides/recipes/python-environment 301
+/recipes/direnv /guides/recipes/direnv 301

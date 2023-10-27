@@ -22,8 +22,8 @@ If you're new here, {ref}`install Nix <install-nix>` and begin your journey with
 Series of lessons to get started
 :::
 
-:::{grid-item-card} Recipes
-:link: recipes
+:::{grid-item-card} Guides
+:link: guides
 :link-type: ref
 :text-align: center
 
@@ -73,7 +73,7 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 
 install-nix.md
 tutorials/index.md
-recipes/index.md
+guides/index.md
 reference/index.md
 concepts/index.md
 contributing/index.md

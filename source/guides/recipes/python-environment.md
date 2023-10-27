@@ -1,3 +1,4 @@
+(python-dev-environment)=
 # Setting up a Python development environment
 
 In this example you will build a Python web application using the Flask web framework as an exercise.
