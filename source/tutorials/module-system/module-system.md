@@ -26,7 +26,7 @@ During the tutorial, you will first write some *incorrect* configurations, creat
 
 ### What do you need?
 
-- Familiarity with data types and general programming
+- Familiarity with data types and general programming concepts
 - A {ref}`Nix installation <install-nix>` to run the examples
 - Intermediate proficiency in reading and writing the Nix language
 
