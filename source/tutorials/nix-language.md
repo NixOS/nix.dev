@@ -955,7 +955,7 @@ Example:
 
 The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
 
-In practice, `<nixpkgs>` points to the file system path of some revision of [`nixpkgs`][nixpkgs], the source repository of Nixpkgs.
+In practice, `<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`.
 
 For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file system path:
 
@@ -969,7 +969,7 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
 ```
 
-While you will see many such examples, we recommend to [avoid search paths](search-path) in practice, as they are [impurities](impurities) which are not reproducible.
+While you will encounter many such examples, we recommend to [avoid search paths](search-path) in production code, as they are [impurities](impurities) which are not reproducible.
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
@@ -1811,10 +1811,10 @@ Files to be used as build inputs do not have to come from the file system.
 
 The Nix language provides built-in impure functions to fetch files over the network during evaluation:
 
-- [builtins.fetchurl][fetchurl]
-- [builtins.fetchTarball][fetchTarball]
-- [builtins.fetchGit][fetchGit]
-- [builtins.fetchClosure][fetchClosure]
+- [`builtins.fetchurl`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchurl)
+- [`builtins.fetchTarball`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchTarball)
+- [`builtins.fetchGit`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchGit)
+- [`builtins.fetchClosure`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchClosure)
 
 These functions evaluate to a file system path in the Nix store.
 
@@ -1850,10 +1850,6 @@ The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] lists numerous additional lib
 
 It is an error if the network request fails.
 
-[fetchurl]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchurl
-[fetchTarball]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchTarball
-[fetchGit]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchGit
-[fetchClosure]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-fetchClosure
 [nixpkgs-fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 
 (derivations)=
