@@ -359,7 +359,9 @@ Option values can't be accessed directly from the same module.
 
 The module system evaluates all modules it receives, and any of them can define a particular option's value.
 What happens when an option is set by multiple modules is determined by that option's type.
+:::
 
+:::{warning}
 The `config` argument is *not the same* as the `config` attribute where option values are set:
 - The `config` argument holds the module system's evaluation result that takes into account all modules passed to `evalModules` and their `imports`.
 - The `config` attribute of a module exposes that particular module's option values to the module system for evaluation.
