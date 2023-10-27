@@ -9,7 +9,7 @@ These sections contains series of lessons to get started.
 
 first-steps/index.md
 nix-language.md
-learning-journey/index.md
+Packaging existing software <packaging-existing-software.md>
 nixos/index.md
 cross-compilation.md
 ```

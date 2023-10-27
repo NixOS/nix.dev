@@ -1,4 +1,4 @@
-(automatic-direnv)=
+(direnv)=
 # Automatic environment activation with `direnv`
 
 Instead of manually activating the environment for each project, you can reload a [declarative shell](declarative-reproducible-envs) every time you enter the project's directory or change the `shell.nix` inside it.

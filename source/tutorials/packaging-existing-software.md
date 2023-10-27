@@ -5,17 +5,14 @@ myst:
     "keywords": "Nix, packaging"
 ---
 
-
 (packaging-existing-software)=
-
-
 # Packaging Existing Software With Nix
 
 One of Nix's primary use-cases is in addressing common difficulties encountered while packaging software, like managing dependencies.
 
 In the long term, Nix helps tremendously in alleviating that stress, but when *first* packaging existing software with Nix, it's common to encounter missing dependencies preventing builds from succeeding.
 
-In this tutorial, you'll create your first Nix derivations to package C/C++ software, taking advantage of the [`nixpkgs stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv) which automates much of the work of building self-contained C/C++ packages.
+In this tutorial, you'll create your first Nix derivations to package C/C++ software, taking advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`) which automates much of the work of building self-contained C/C++ packages.
 
 The tutorial begins by considering `hello`, an implementation of "hello world" which only requires dependencies provided by `stdenv`.
 
@@ -118,7 +115,7 @@ in
 This allows you to use `nix-build -A hello` to realize the derivation in `hello.nix`, similar to the current convention used in `nixpkgs`.
 
 :::{note}
-`callPackage` automatically passes attributes from `nixpkgs` to the given function, if they match attributes required by that function's argument attrset.
+[`callPackage`] automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset.
 
 In this case, `callPackage` will supply `lib`, and `stdenv` to the function defined in `hello.nix`.
 :::
@@ -517,3 +514,16 @@ default.nix hello.nix icat.nix result
 ```
 
 `result/bin/icat` is the executable built previously. Success!
+
+## References
+
+- [Nixpkgs Manual - Standard Environment](https://nixos.org/manual/nixpkgs/unstable/#part-stdenv)
+- [Nix Pills - `callPackage` Design Pattern][`callPackage`]
+
+[`callPackage`]: https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
+
+## Next steps
+
+- [](sharing-dependencies)
+- [](direnv)
+- [](python-dev-environment)
