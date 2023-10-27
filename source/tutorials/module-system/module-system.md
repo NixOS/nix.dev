@@ -989,7 +989,7 @@ in {
 }
 ```
 
-The `path.nix` module defines an option for declaring a list of paths on our `map`, where each path is a list of strings for geographic locations.
+The `path.nix` module declares an option for defining a list of paths on our `map`, where each path is a list of strings for geographic locations.
 
 
 In the `config` attribute we augment the API call by setting the `requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request paremeters set elsewhere.
