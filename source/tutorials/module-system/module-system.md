@@ -134,13 +134,22 @@ pkgs.lib.evalModules {
 [`evalModules`](https://nixos.org/manual/nixpkgs/unstable/#module-system-lib-evalModules) is the function that evaluates modules, applies type checking, and merges values into the final attribute set.
 It expects a `modules` attribute that is a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
 
-Now run the following command:
+Run the following command:
+
+:::{warning}
+This will result in an error.
+:::
 
 ```bash
 nix-instantiate --eval eval.nix -A config.scripts.output
 ```
 
-You will see an error message indicating that the `scripts.output` option is used but not defined; you will need to assign a value to the option before using it.
+[`nix-instantiate --eval`](https://nixos.org/manual/nix/stable/command-ref/nix-instantiate) parses and evaluates the Nix file at the specified path, and prints the result.
+`evalModules` produces an attribute set where the final configuration values appear in the `config` attribute.
+Therefore we evaluate the Nix expression in `eval.nix` at the [attribute path](https://nixos.org/manual/nix/stable/language/operators#attribute-selection) `config.scripts.output`.
+
+The error message indicates that the `scripts.output` option is used but not defined: a value must be set for the option before accessing it.
+You will do this in the next steps.
 
 ## Type Checking
 
@@ -186,7 +195,9 @@ This assignment of `scripts.output = 42;` caused a type error: integers are not 
 
 To make this module pass the type-checker and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
 
-In this case, you will assign a `map` script which first calls the Google Maps Static API to generate a world map, then displays the result using `icat` (image-cat), both of which are helper scripts.
+In this case, you will assign a shell command that runs the {download}`map <files/map>` script in the current directory.
+That in turn calls the Google Maps Static API to generate a world map.
+The output is passed on to display it with [`feh`](https://feh.finalrewind.org/), a minimalistic image viewer.
 
 Update `default.nix` by changing the value of `scripts.output` to the following string:
 
@@ -202,7 +213,7 @@ Update `default.nix` by changing the value of `scripts.output` to the following 
 
 ## Interlude: Reproducible scripts
 
-The simple script will likely not work as intended on your system, as it may lack the required dependencies.
+That simple command will likely not work as intended on your system, as the script may lack the required dependencies.
 We can solve this by packaging the raw {download}`map <files/map>` script with `pkgs.writeShellApplication`.
 
 First, make available a `pkgs` argument in your module evaluation by adding a module that sets `config._module.args`:
