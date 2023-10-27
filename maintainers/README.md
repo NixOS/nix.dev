@@ -65,9 +65,6 @@ The team’s reason to exist is to make that principle discoverable and reproduc
   - [GitHub](https://github.com/asymmetric)
   - [Matrix](https://matrix.to/#/@asymmetric:dapp.org.uk)
 
-## Working Groups
-- [Learning Journey](working_groups/learning_journey/README.md)
-
 ## Responsibilities
 
 ### Team

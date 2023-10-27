@@ -87,3 +87,25 @@ We recommend making an explicit separation of practical from theoretical learnin
 
 External resources should have a summary to set expectations, ideally including reading time.
 Blog posts should have their original title in the link, and `(<author>, <year>)`: give authors credit, give readers an idea of how up to date the information is.
+
+## Process
+
+### Pick a topic
+
+There are [tracking issues] for tutorials that the working group has decided should exist as part of the tutorial series.
+Pick an issue that covers a topic that you're either knowledgeable about or have a particular interest in, then comment on the issue indicating your interest in working on the tutorial.
+
+The tracking issue will contain status information such as whether PRs have been submitted to create an outline or a draft of the article or whether someone else has already started work on the tutorial.
+Make sure to read the issue fully to ensure that you don't duplicate work that someone else is already doing!
+
+[tracking issues]: https://github.com/NixOS/nix.dev/issues?q=is%3Aissue+is%3Aopen+label%3Atracking+label%3A%22learning+journey%22
+
+### Submit an pull request with an outline
+
+Submit a pull request with an outline of the tutorial following the above structure and containing bullet points on each section's content.
+A review will ensure the work is going in the right direction in terms of learning objectives and technical details.
+
+### Expand on the outline
+
+Elaborate the contents of the tutorial following your outline and the [](style-guide).
+In a final review will check that everything is technically correct.
