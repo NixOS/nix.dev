@@ -619,7 +619,7 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 ```
 
 :::{warning}
-To avoid confusion with the `map` option setting and the evaluated `config.map` configuration value, here we use the `map` function explicitly as `builtins.map`.
+To avoid confusion with the `map` option setting and the final `config.map` configuration value, here we use the `map` function explicitly as `builtins.map`.
 :::
 
 
