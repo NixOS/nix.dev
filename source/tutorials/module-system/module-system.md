@@ -109,6 +109,8 @@ There are several types available under [`lib.types`](https://nixos.org/manual/n
 
 You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple definitions should be joined with newlines.
 
+## Evaluating modules
+
 Write a new file, `eval.nix`, which you will use to evaluate `default.nix`:
 
 ```nix
@@ -124,8 +126,8 @@ pkgs.lib.evalModules {
 }
 ```
 
-[`evalModules`] is the function that evaluates modules, applies type checking, and merges values into the final attribute set.
-It expects a `modules` attribute that takes a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
+[`evalModules`](https://nixos.org/manual/nixpkgs/unstable/#module-system-lib-evalModules) is the function that evaluates modules, applies type checking, and merges values into the final attribute set.
+It expects a `modules` attribute that is a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
 
 Now run the following command:
 
