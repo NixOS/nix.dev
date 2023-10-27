@@ -22,48 +22,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 ## Members
 
-- Valentin Gagarin ([@fricklerhandwerk])
-
-  Nix documentarian, [Tweag]
-
-  [@fricklerhandwerk]: https://github.com/fricklerhandwerk
-  [Tweag]: https://tweag.io
-
-- Silvan Mosberger ([@infinisil])
-
-  [@infinisil]: https://github.com/infinisil
-
-  Nixpkgs maintainer, [Tweag]
-
-- [@pennae](https://github.com/pennae) (they/them)
-
-  NixOS and Nixpkgs contributors
-
-- Olaf Hochherz (GitHub: [@olafklingt], Discourse: [@olaf])
-
-  [@olafklingt]: https://github.com/olafklingt
-  [@olaf]: https://discourse.nixos.org/u/olaf
-
-- Henrik Karlsson ([@henrik-ch]) (he/him)
-
-  [@henrik-ch]: https://github.com/henrik-ch
-
-- Zach Mitchell (GitHub: [@zmitchell]) (he/him)
-
-  [@zmitchell]: https://github.com/zmitchell/
-
-- [Philipp](https://github.com/pstn)
-
-- Jeremiah Secrist (GitHub: [@JeremiahSecrist], Discourse: [@Jeremiahs], Matrix: [@jeremiahs:matrix.org])
-
-  [@JeremiahSecrist]: https://github.com/JeremiahSecrist/
-  [@Jeremiahs]: https://discourse.nixos.org/
-  [@jeremiahs:matrix.org]: https://matrix.org/
-
-- asymmetric (he/him)
-
-  - [GitHub](https://github.com/asymmetric)
-  - [Matrix](https://matrix.to/#/@asymmetric:dapp.org.uk)
+The team member list is maintained on the [Nix community documentation team page](https://nixos.org/community/teams/documentation).
 
 ## Working Groups
 - [Learning Journey](working_groups/learning_journey/README.md)
