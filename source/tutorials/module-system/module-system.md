@@ -228,6 +228,10 @@ First, make available a `pkgs` argument in your module evaluation by adding a mo
  }
 ```
 
+:::{note}
+This mechanism is currently only [documented in the module system code](https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix#L140-L182), and that documentation is incomplete and out of date.
+:::
+
 Then change `default.nix` to have the following contents:
 
 ```nix
