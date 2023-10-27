@@ -18,7 +18,7 @@ In this tutorial you'll learn
 - how to declare them
 - how to express dependencies between modules
 
-and follow extensive demonstration of how to wrap an existing API with Nix modules.
+and follow an extensive demonstration of how to wrap an existing API with Nix modules.
 
 Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
 
