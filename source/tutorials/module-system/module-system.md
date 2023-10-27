@@ -87,7 +87,7 @@ To set any values, the module system first has to know which ones are allowed.
 This is done by declaring *options* that specify which values can be set and used elsewhere.
 Options are declared by adding an attribute under the top-level `options` attribute, using `lib.mkOption`.
 
-In this section, you will define the `generate.script` option.
+In this section, you will define the `scripts.output` option.
 
 Change `default.nix` to include the following declaration:
 
@@ -96,7 +96,7 @@ Change `default.nix` to include the following declaration:
  { lib, ... }: {
 
 + options = {
-+   generate.script = lib.mkOption {
++   scripts.output = lib.mkOption {
 +     type = lib.types.lines;
 +   };
 + };
@@ -107,7 +107,12 @@ Change `default.nix` to include the following declaration:
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
 There are several types available under [`lib.types`](https://nixos.org/manual/nixos/stable/#sec-option-types-basic) in the Nixpkgs library.
 
-You have just declared `generate.script` with the `lines` type, which specifies that the only valid values are strings, and that multiple definitions should be joined with newlines.
+You have just declared `scripts.output` with the `lines` type, which specifies that the only valid values are strings, and that multiple definitions should be joined with newlines.
+
+:::{note}
+The name and attribute path of the option is arbitrary.
+Here we use `scripts`, because we will add another script later, and call this one `output`, because it will output the resulting map.
+:::
 
 ## Evaluating modules
 
@@ -132,10 +137,10 @@ It expects a `modules` attribute that is a list, where each element can be a pat
 Now run the following command:
 
 ```bash
-nix-instantiate --eval eval.nix -A config.generate.script
+nix-instantiate --eval eval.nix -A config.scripts.output
 ```
 
-You will see an error message indicating that the `generate.script` option is used but not defined; you will need to assign a value to the option before using it.
+You will see an error message indicating that the `scripts.output` option is used but not defined; you will need to assign a value to the option before using it.
 
 ## Type Checking
 
@@ -154,13 +159,13 @@ Add the following lines to `default.nix`:
  { lib, ... }: {
 
   options = {
-    generate.script = lib.mkOption {
+    scripts.output = lib.mkOption {
       type = lib.types.lines;
     };
   };
 
 + config = {
-+   generate.script = 42;
++   scripts.output = 42;
 + };
  }
 ```
@@ -168,28 +173,28 @@ Add the following lines to `default.nix`:
 Now try to execute the previous command, and witness your first module error:
 
 ```console
-$ nix-instantiate --eval eval.nix -A config.generate.script
+$ nix-instantiate --eval eval.nix -A config.scripts.output
 error:
 ...
-       error: A definition for option `generate.script' is not of type `strings concatenated with "\n"'. Definition values:
+       error: A definition for option `scripts.output' is not of type `strings concatenated with "\n"'. Definition values:
        - In `/home/nix-user/default.nix': 42
 ```
 
-This assignment of `generate.script = 42;` caused a type error: integers are not strings concatenated with the newline character.
+This assignment of `scripts.output = 42;` caused a type error: integers are not strings concatenated with the newline character.
 
 ## Successful Type-checking
 
-To make this module pass the type-checker and successfully evaluate the `generate.script` option, you will now assign a string to `generate.script`.
+To make this module pass the type-checker and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
 
 In this case, you will assign a `map` script which first calls the Google Maps Static API to generate a world map, then displays the result using `icat` (image-cat), both of which are helper scripts.
 
-Update `default.nix` by changing the value of `generate.script` to the following string:
+Update `default.nix` by changing the value of `scripts.output` to the following string:
 
 ```diff
 # default.nix
    config = {
--    generate.script = 42;
-+    generate.script = ''
+-    scripts.output = 42;
++    scripts.output = ''
 +      ./map size=640x640 scale=2 | feh -
 +    '';
    };
@@ -219,13 +224,13 @@ Then change `default.nix` to have the following contents:
 { pkgs, lib, ... }: {
 
   options = {
-    generate.script = lib.mkOption {
+    scripts.output = lib.mkOption {
       type = lib.types.package;
     };
   };
 
   config = {
-    generate.script = pkgs.writeShellApplication {
+    scripts.output = pkgs.writeShellApplication {
       name = "map";
       runtimeInputs = with pkgs; [ curl feh ];
       text = ''
@@ -241,7 +246,7 @@ This will access the previously added `pkgs` argument so we can use dependencies
 Run the script with:
 
 ```console
-nix-build eval.nix -A config.generate.script
+nix-build eval.nix -A config.scripts.output
 ./result/bin/map
 ```
 
@@ -251,7 +256,7 @@ To iterate more quickly, open a new terminal and set up [`entr`](https://github.
 nix-shell -p entr findutils bash --run \
   "ls *.nix | \
    entr -rs ' \
-     nix-build eval.nix -A config.generate.script --no-out-link \
+     nix-build eval.nix -A config.scripts.output --no-out-link \
      | xargs printf -- \"%s/bin/map\" \
      | xargs bash \
    ' \
@@ -271,7 +276,7 @@ This command does the following:
 Rather than setting all script parameters directly, we will to do that through the module system.
 This will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
 
-In this section, you will introduce another option: `generate.requestParams`.
+In this section, you will introduce another option: `requestParams`.
 
 For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
 
@@ -286,17 +291,17 @@ Make the following additions to your `default.nix` file:
 
 ```diff
 # default.nix
-     generate.script = lib.mkOption {
+     scripts.output = lib.mkOption {
        type = lib.types.package;
      };
 +
-+    generate.requestParams = lib.mkOption {
++    requestParams = lib.mkOption {
 +      type = lib.types.listOf lib.types.str;
 +    };
    };
 
   config = {
-    generate.script = pkgs.writeShellApplication {
+    scripts.output = pkgs.writeShellApplication {
       name = "map";
       runtimeInputs = with pkgs; [ curl feh ];
       text = ''
@@ -304,7 +309,7 @@ Make the following additions to your `default.nix` file:
       '';
     };
 +
-+    generate.requestParams = [
++    requestParams = [
 +      "size=640x640"
 +      "scale=2"
 +    ];
@@ -314,11 +319,11 @@ Make the following additions to your `default.nix` file:
 
 ## Dependencies Between Options
 
-A given module generally declares one option that produces a result to be used elsewhere, which in this case is `generate.script`.
+A given module generally declares one option that produces a result to be used elsewhere, which in this case is `scripts.output`.
 
 Options can depend on other options, making it possible to build more useful abstractions.
 
-Here, we want the `generate.script` option to use the values of `generate.requestParams` as arguments to the `map` command.
+Here, we want the `scripts.output` option to use the values of `requestParams` as arguments to the `map` command.
 
 ### Accessing Option Values
 
@@ -351,24 +356,24 @@ Now make the following changes to `default.nix`:
 # default.nix
 
    config = {
-     generate.script = pkgs.writeShellApplication {
+     scripts.output = pkgs.writeShellApplication {
        name = "map";
        runtimeInputs = with pkgs; [ curl feh ];
        text = ''
 -        ${./map} size=640x640 scale=2 | feh -
 +        builtins.map ${lib.concatStringsSep " "
-+              config.generate.requestParams
++              config.requestParams
 +             } | feh -
        '';
 ```
 
-Here, the value of the `config.generate.requestParams` attribute is populated by the module system based on the definitions in the same file.
+Here, the value of the `config.requestParams` attribute is populated by the module system based on the definitions in the same file.
 
 :::{note}
 Lazy evaluation in the Nix language allows the module system to make a value available in the `config` argument passed to the module which defines that value.
 :::
 
-`lib.concatStringsSep " "` is then used to join each list element from the value of `config.generate.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
+`lib.concatStringsSep " "` is then used to join each list element from the value of `config.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
 The result of this represents the list of command line arguments to pass to the `map` script.
 
@@ -383,7 +388,7 @@ Add the `map` attribute set with the `zoom` option into the top-level `options` 
 
 ```diff
 # default.nix
-     generate.requestParams = lib.mkOption {
+     requestParams = lib.mkOption {
        type = lib.types.listOf lib.types.str;
      };
 +
@@ -396,11 +401,11 @@ Add the `map` attribute set with the `zoom` option into the top-level `options` 
 ```
 
 To make use of this, use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
-Make the following additions to the `generate.requestParams` list in the `config` block:
+Make the following additions to the `requestParams` list in the `config` block:
 
 ```diff
 # default.nix
-     generate.requestParams = [
+     requestParams = [
        "size=640x640"
        "scale=2"
 +      (lib.mkIf (config.map.zoom != null)
@@ -460,11 +465,11 @@ First, add a new option to accommodate the package:
 ```diff
 # default.nix
    options = {
-     generate.script = lib.mkOption {
+     scripts.output = lib.mkOption {
        type = lib.types.package;
      };
 +
-+    helpers.geocode = lib.mkOption {
++    scripts.geocode = lib.mkOption {
 +      type = lib.types.package;
 +    };
 ```
@@ -474,18 +479,18 @@ Then define the value for that option where you make the raw script reproducible
 ```diff
 # default.nix
    config = {
-+    helpers.geocode = pkgs.writeShellApplication {
++    scripts.geocode = pkgs.writeShellApplication {
 +      name = "geocode";
 +      runtimeInputs = with pkgs; [ curl jq ];
 +      text = "exec ${./geocode}";
 +    };
 +
-     generate.script = pkgs.writeShellApplication {
+     scripts.output = pkgs.writeShellApplication {
        name = "map";
        runtimeInputs = with pkgs; [ curl feh ];
 ```
 
-Add another `mkIf` call to the list of `requestParams` now where you access the wrapped package through `config.helpers.geocode`, and run the executable `/bin/geocode` inside:
+Add another `mkIf` call to the list of `requestParams` now where you access the wrapped package through `config.scripts.geocode`, and run the executable `/bin/geocode` inside:
 
 ```diff
 # default.nix
@@ -493,7 +498,7 @@ Add another `mkIf` call to the list of `requestParams` now where you access the 
        (lib.mkIf (config.map.zoom != null)
          "zoom=${toString config.map.zoom}")
 +      (lib.mkIf (config.map.center != null)
-+        "center=\"$(${config.helpers.geocode}/bin/geocode ${
++        "center=\"$(${config.scripts.geocode}/bin/geocode ${
 +          lib.escapeShellArg config.map.center
 +        })\"")
      ];
@@ -583,7 +588,7 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 +      { location = "new york"; }
 +    ];
 +
-+    generate.requestParams = let
++    requestParams = let
 +      paramForMarker = marker:
 +        let
 +          attributes =
@@ -605,13 +610,13 @@ To avoid confusion with the `map` option setting and the evaluated `config.map` 
 
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
-The `generate.requestParams` value was also set to the resulting list of strings, which gets appended to the `generate.requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list` type.
+The `requestParams` value was also set to the resulting list of strings, which gets appended to the `requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list` type.
 
 ## Dealing with multiple markers
 
 When defining multiple markers, determining an appropriate center or zoom level for the map may be challenging; it's easier to let the API do this for you.
 
-To achieve this, make the following additions to `marker.nix`, above the `generate.requestParams` declaration:
+To achieve this, make the following additions to `marker.nix`, above the `requestParams` declaration:
 
 ```diff
 # marker.nix
@@ -623,7 +628,7 @@ To achieve this, make the following additions to `marker.nix`, above the `genera
 +      (lib.length config.map.markers >= 2)
 +      null;
 +
-     generate.requestParams = let
+     requestParams = let
        paramForMarker = marker:
          let
 ```
@@ -694,7 +699,7 @@ This takes all the `departure` markers from all users in the `config` argument, 
 
 The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically (this how attribute names are stored in the Nix language).
 
-Back in `default.nix`, the resulting `map.markers` option value is still accessed by `generate.requestParams`, which in turn is used to generate arguments to the script that ultimately calls the Google Maps API.
+Back in `default.nix`, the resulting `map.markers` option value is still accessed by `requestParams`, which in turn is used to generate arguments to the script that ultimately calls the Google Maps API.
 
 Defining the options in this way allows you to set multiple `users.<name>.departure.location` values and generate a map with the appropriate zoom and center, with pins corresponding to the set of `departure.location` values for *all* `users`.
 
@@ -897,7 +902,7 @@ Now add a mapping for the size parameter in `paramForMarker`, which selects an a
 
 ```diff
 # marker.nix
-     generate.requestParams = let
+     requestParams = let
        paramForMarker = marker:
          let
 +          size = {
@@ -954,7 +959,7 @@ in {
   };
 
   config = {
-    generate.requestParams = let
+    requestParams = let
       attrForLocation = loc:
         "$(geocode ${lib.escapeShellArg loc})";
       paramForPath = path:
@@ -972,7 +977,7 @@ in {
 The `path.nix` module defines an option for declaring a list of paths on our `map`, where each path is a list of strings for geographic locations.
 
 
-In the `config` attribute we augment the API call by setting the `generate.requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request paremeters set elsewhere.
+In the `config` attribute we augment the API call by setting the `requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request paremeters set elsewhere.
 
 Now import this new `path.nix` module from your `marker.nix` module:
 
@@ -1053,7 +1058,7 @@ In the path module, define a path connecting every user's departure and arrival 
 +      && user.arrival.location != null
 +    ) (lib.attrValues config.users));
 +
-     generate.requestParams = let
+     requestParams = let
        attrForLocation = loc:
          "$(geocode ${lib.escapeShellArg loc})";
 ```
