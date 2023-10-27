@@ -1,5 +1,5 @@
 (guides)=
-# Recipes
+# Guides
 
 These sections contains guides to getting things done.
 
