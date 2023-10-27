@@ -436,7 +436,7 @@ This will will only add a `zoom` parameter to the script call if the value is no
 Let's say that in our application we want to have a different default behavior that sets the the zoom level to `2`, such that automatic zoom has to be enabled explicitly.
 
 This can be done with the `default` argument to [`mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix).
-Its value will be used if the value of the option declaring it is otherwise specified.
+Its value will be used if the value of the option declaring it is not specified otherwise.
 
 Add the corresponding line:
 
