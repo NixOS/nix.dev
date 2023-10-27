@@ -338,7 +338,7 @@ A given module generally declares one option that produces a result to be used e
 
 Options can depend on other options, making it possible to build more useful abstractions.
 
-Here, we want the `scripts.output` option to use the values of `requestParams` as arguments to the `map` command.
+Here, we want the `scripts.output` option to use the values of `requestParams` as arguments to the `./map` script.
 
 ### Accessing Option Values
 
@@ -371,16 +371,14 @@ Now make the following changes to `default.nix`:
 
 ```diff
 # default.nix
-
    config = {
      scripts.output = pkgs.writeShellApplication {
        name = "map";
        runtimeInputs = with pkgs; [ curl feh ];
        text = ''
 -        ${./map} size=640x640 scale=2 | feh -
-+        builtins.map ${lib.concatStringsSep " "
-+              config.requestParams
-+             } | feh -
++        ${./map} ${lib.concatStringsSep " "
++          config.requestParams} | feh -
        '';
 ```
 
@@ -392,7 +390,7 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 
 `lib.concatStringsSep " "` is then used to join each list element from the value of `config.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.
 
-The result of this represents the list of command line arguments to pass to the `map` script.
+The result of this represents the list of command line arguments to pass to the `./map` script.
 
 ## Conditional Definitions
 
