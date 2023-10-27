@@ -3,28 +3,44 @@
 Much of the power in Nixpkgs and NixOS comes from the module system.
 It provides mechanisms for conveniently declaring and automatically merging interdependent attribute sets that follow dynamic type constraints, making it easy to express modular configurations.
 
+## Overview
+
+This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  ([source](https://github.com/tweag/summer-of-nix-modules)) for  participants of 2021 Summer of Nix.
+
+It may help playing it back alongside the tutorial to better keep track of changes to the code you will work on.
+
+### What will you learn?
+
 In this tutorial you'll learn
 - what a module is
 - how to define one
 - what options are
 - how to declare them
 - how to express dependencies between modules
+
 and follow extensive demonstration of how to wrap an existing API with Nix modules.
 
 Concretely, you'll write modules to interact with the Google Maps API, declaring options which represent map geometry, location pins, and more.
+
+During the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
+
+### What do you need?
+
+- Familiarity with data types and general programming
+- A {ref}`Nix installation <install-nix>` to run the examples
+- Intermediate proficiency in reading and writing the Nix language
+
+You will use two helper scripts for this exercise.
+Download {download}`map <files/map>` and {download}`geocode <files/geocode>` to your working directory.
 
 :::{warning}
 To run the examples in this tutorial, you will need a [Google API key](https://developers.google.com/maps/documentation/maps-static/start#before-you-begin) in `$XDG_DATA_HOME/google-api/key`.
 :::
 
-Be prepared to see some Nix errors: during the tutorial, you will first write some *incorrect* configurations, creating opportunities to discuss the resulting error messages and how to resolve them, particularly when discussing type checking.
+### How long will it take?
 
-:::{note}
-This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  [(source)](https://github.com/tweag/summer-of-nix-modules) for 2021 Summer of Nix.
-:::
-
-You will use need two helper scripts for this exercise.
-Download {download}`map <files/map>` and {download}`geocode <files/geocode>` into your working directory.
+This is a very long tutorial.
+Prepare for at least 3 hours of work.
 
 ## Empty module
 
