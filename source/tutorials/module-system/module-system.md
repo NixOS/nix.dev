@@ -73,8 +73,8 @@ Start by changing the first line in `default.nix`:
 
 Now the module is a function which takes *at least* one argument, called `lib`, and may accept other arguments (expressed by the ellipsis `...`).
 
-On NixOS, `lib` argument is passed automatically.
 This will make Nixpkgs library functions available within the function body.
+The `lib` argument is passed automatically by the module system.
 
 :::{note}
 The ellipsis `...` is necessary because arbitrary arguments can be passed to modules.
