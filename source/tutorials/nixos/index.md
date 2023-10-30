@@ -1,3 +1,4 @@
+(nixostutorial)=
 # NixOS
 
 Learn how to install, configure, and deploy NixOS.
