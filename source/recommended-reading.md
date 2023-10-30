@@ -26,7 +26,7 @@
 
 - [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023) 
   
-  This tutorial uses the [NixOS](nixostutorial) operating system and the experimental Nix [Flakes](flakes) functionality.
+  This tutorial is an introduction to {term}`NixOS` using the experimental Nix [Flakes](flakes) functionality.
 
 - [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
 
