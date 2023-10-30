@@ -25,6 +25,7 @@
 ## Other Articles
 
 - [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023) 
+  
   This tutorial uses the NixOS operating system and the experimental Nix Flakes functionality.
 
 - [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
