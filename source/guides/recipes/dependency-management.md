@@ -1,0 +1,101 @@
+(dependency-management-niv)=
+# Managing remote sources with niv
+
+The Nix language can be used to describe dependencies between files managed by Nix.
+Nix expressions themselves can depend on remote sources, and there are multiple ways to specify their origin, as shown in [](pinning-nixpkgs).
+
+For more automation around handling remote sources, set up [niv](https://github.com/nmattia/niv/) in your project:
+
+```shell-session
+$ nix-shell -p niv --run "niv init"
+```
+
+This command will generate `nix/sources.json` in the current directory, which is a lock file for dependencies.
+It will also create `nix/sources.nix`, which exposes those dependencies as an attribute set.
+
+:::{note}
+By default, `niv init` will add the latest revision of `nixpkgs-unstable` as a source.
+If you need the latest revision of a specific branch:
+
+```shell-session
+niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.05
+```
+:::
+
+Import the generated `nix/sources.nix` for the top-level argument in the top-level `default.nix` and use it to refer to the Nixpkgs source directory:
+
+```nix
+{ sources ? import ./nix/sources.nix }:
+let
+  pkgs = import sources.nixpkgs {};
+  build = pkgs.hello;
+in {
+  inherit build;
+}
+```
+
+`nix-build` will call the top-level function with the default argument.
+This pattern allows [overriding remote sources](overriding-sources-niv) programmatically.
+
+Add niv to the development environment for your project to have it readily available:
+
+```diff
+ { sources ? import ./nix/sources.nix }:
+ let
+   pkgs = import sources.nixpkgs {};
+   build = pkgs.hello;
+ in {
+   inherit build;
++  shell = pkgs.mkShell {
++    inputsFrom = [ build ];
++    packages = with pkgs; [
++      niv
++    ];
++  };
+ }
+```
+
+See [](./sharing-dependencies) for details.
+
+(overriding-sources-niv)=
+## Overriding sources
+
+As an example, we will use the previously created expression with an older version of Nixpkgs.
+
+Create a new directory and set up niv with a different version of Nixpkgs:
+
+```shell-session
+mkdir old
+cd old
+niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 18.09
+```
+
+Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
+
+```nix
+import ../default.nix { sources = import ./nix/sources.nix; }
+```
+
+This will result in a different version being built:
+
+```shell-session
+$ nix-build -A build
+$ ./result/bin/hello --version | head -1
+hello (GNU Hello) 2.10
+```
+
+Sources can also be overridden on the command line:
+
+```shell-session
+nix-build .. -A build --arg sources 'import ./nix/sources.nix'
+```
+
+Check the built-in help for details:
+
+```shell-session
+niv --help
+```
+
+## Next steps
+
+- For more details and examples of the different ways to specify remote sources, see [](pinning-nixpkgs).
