@@ -16,7 +16,7 @@ Nix language
 
     :::{seealso}
     - [](reading-nix-language)
-    - [Nix language reference](https://nixos.org/manual/nix/stable/language)
+    - [Nix language reference](https://nix.dev/manual/nix/2.18/language)
     :::
 
 Nix expression

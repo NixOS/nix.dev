@@ -17,7 +17,7 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## What do you need?
 
-- A working [Nix installation](https://nixos.org/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
+- A working [Nix installation](https://nix.dev/manual/nix/2.18/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
 - Basic knowledge of the [Nix language](reading-nix-language)
 
 ## Starting from a default NixOS configuration
@@ -162,17 +162,17 @@ This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, 
 
 <details><summary> Detailed explanation </summary>
 
-- The positional argument to [`nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html) is a path to the derivation to be built.
+- The positional argument to [`nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html) is a path to the derivation to be built.
   That path can be obtained from [a Nix expression that evaluates to a derivation](derivations).
 
   The virtual machine build helper is defined in NixOS, which is part of the [`nixpkgs` repository](https://github.com/NixOS/nixpkgs).
   Therefore we use the [lookup path](lookup-path-tutorial) `<nixpkgs/nixos>`.
 
-- The [`-A` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided Nix expression `<nixpkgs/nixos>`.
+- The [`-A` option](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-attr) specifies the attribute to pick from the provided Nix expression `<nixpkgs/nixos>`.
 
   To build the virtual machine, we choose the `vm` attribute as defined in [`nixos/default.nix`](https://github.com/NixOS/nixpkgs/blob/7c164f4bea71d74d98780ab7be4f9105630a2eba/nixos/default.nix#L19).
 
-- The [`-I` option](https://nixos.org/manual/nix/stable/command-ref/opt-common.html#opt-I) prepends entries to the search path.
+- The [`-I` option](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-I) prepends entries to the search path.
 
   Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
 
@@ -230,6 +230,6 @@ rm nixos.qcow2
 - [NixOS Manual: Changing the configuration](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 - [NixOS source code: `configuration template` in `tools.nix`](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226).
 - [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
-- [Nix manual: `nix-build`](https://nixos.org/manual/nix/stable/command-ref/nix-build.html).
-- [Nix manual: common command-line options](https://nixos.org/manual/nix/stable/command-ref/opt-common.html).
-- [Nix manual: `NIX_PATH` environment variable](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
+- [Nix manual: `nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html).
+- [Nix manual: common command-line options](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html).
+- [Nix manual: `NIX_PATH` environment variable](https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-NIX_PATH).

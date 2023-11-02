@@ -81,5 +81,5 @@ $ nix --version
 nix (Nix) 2.11.0
 ```
 
-[multi-user installation]: https://nixos.org/manual/nix/stable/installation/multi-user.html
-[single-user installation]: https://nixos.org/manual/nix/stable/installation/single-user.html
+[multi-user installation]: https://nix.dev/manual/nix/2.18/installation/multi-user.html
+[single-user installation]: https://nix.dev/manual/nix/2.18/installation/single-user.html

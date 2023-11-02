@@ -181,8 +181,8 @@ There are three things going on here:
 
 ## References
 
-- [Nix manual: `nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell) (or run `man nix-shell`)
-- [Nix manual: `-I` option](https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I)
+- [Nix manual: `nix-shell`](https://nix.dev/manual/nix/2.18/command-ref/nix-shell) (or run `man nix-shell`)
+- [Nix manual: `-I` option](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-I)
 
 ## Next steps
 

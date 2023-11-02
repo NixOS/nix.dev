@@ -160,7 +160,7 @@ $ terraform apply
 ## Caveats
 
 - The `deploy_nixos` module requires NixOS to be installed on the target machine and Nix on the host machine.
-- The `deploy_nixos` module doesn't work when the client and target architectures are different (unless you use [distributed builds](https://nixos.org/manual/nix/unstable/advanced-topics/distributed-builds.html)).
+- The `deploy_nixos` module doesn't work when the client and target architectures are different (unless you use [distributed builds](https://nix.dev/manual/nix/2.18/advanced-topics/distributed-builds.html)).
 - If you need to inject a value into Nix, there is no elegant solution.
 - Each machine is evaluated separately, so note that your memory requirements will grow linearly with the number of machines.
 

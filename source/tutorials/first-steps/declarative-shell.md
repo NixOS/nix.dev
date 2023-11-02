@@ -165,5 +165,5 @@ Set `shellHook` to output the current repository status:
 
 - [`mkShell` documentation](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell)
 - Nixpkgs [shell functions and utilities](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-functions) documentation
-- [`nix-shell` documentation](https://nixos.org/manual/nix/stable/command-ref/nix-shell)
+- [`nix-shell` documentation](https://nix.dev/manual/nix/2.18/command-ref/nix-shell)
 
