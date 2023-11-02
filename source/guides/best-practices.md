@@ -151,6 +151,35 @@ On NixOS, `$NIX_PATH` can be set permanently with the [`nix.nixPath`](https://se
 :::
 ::::
 
+(nixpkgs-config)=
+## Reproducible Nixpkgs configuration
+
+To quickly obtain packages for demonstration, we use the following concise pattern:
+
+```nix
+import <nixpkgs> {}
+```
+
+However, even when `<nixpkgs>` is replaced as shown in [](pinning-nixpkgs), the result may still not be fully reproducible.
+This is because, for historical reasons, the [Nixpkgs top-level expression] by default impurely reads from the file system to obtain configuration parameters.
+Systems that have the appropriate files populated may end up with different results.
+
+[Nixpkgs top-level expression]: https://github.com/NixOS/nixpkgs/blob/master/default.nix
+
+It is a well-known problem that can't be resolved without breaking existing setups.
+
+:::{tip}
+Explicitly set [`config`](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig) and [`overlays`](https://nixos.org/manual/nixpkgs/stable/#chap-overlays) when importing Nixpkgs:
+
+
+```nix
+import <nixpkgs> { config = {}; overlays = []; }
+```
+:::
+
+This is what we do in our tutorials to ensure that the examples will behave exactly as expected.
+We skip it in minimal examples reduce distractions.
+
 ## Updating nested attribute sets
 
 The [attribute set update operator](https://nixos.org/manual/nix/stable/language/operators.html#update) merges two attribute sets.

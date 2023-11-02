@@ -74,7 +74,7 @@ The test framework automatically starts the virtual machines and runs the Python
 As a minimal test on the default configuration, we will check if the user `root` and `alice` can run Firefox.
 We will build the example up from scratch.
 
-1. Use a [pinned version of Nixpkgs](<ref-pinning-nixpkgs>), and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig):
+1. Use a [pinned version of Nixpkgs](ref-pinning-nixpkgs), and [explicitly set configuration options and overlays](nixpkgs-config) to avoid them being inadvertently overridden by global configuration:
 
    ```nix
    let
