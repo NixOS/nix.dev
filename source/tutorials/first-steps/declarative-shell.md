@@ -117,7 +117,7 @@ Set your `GIT_EDITOR` to use the `nvim` from the shell environment:
  }
 ```
 
-Any attribute name passed to `mkShell` that is not [reserved otherwise] and has a value which can be coerced to a string will end up as an environment variable.
+Any attribute name passed to `mkShell` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
 
 :::{dropdown} Detailed explanation
 
