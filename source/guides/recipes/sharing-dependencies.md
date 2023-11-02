@@ -1,4 +1,5 @@
-# Sharing dependencies between `default.nix` and `shell.nix`
+(sharing-dependencies)=
+# Dependencies in the development shell
 
 <!-- Include any foreward you want here -->
 
