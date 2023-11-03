@@ -7,7 +7,7 @@ It provides mechanisms for conveniently declaring and automatically merging inte
 
 This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  ([source](https://github.com/tweag/summer-of-nix-modules)) for  participants of [Summer of Nix](https://github.com/ngi-nix/summer-of-nix) 2021.
 
-It may help playing it back alongside the tutorial to better keep track of changes to the code you will work on.
+It may help playing it alongside this tutorial to better keep track of changes to the code you will work on.
 
 ### What will you learn?
 
