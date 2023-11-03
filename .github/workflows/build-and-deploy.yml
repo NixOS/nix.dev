@@ -32,7 +32,7 @@ jobs:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       with:
-        production-deploy: ${{ github.event_name == 'push' && github.event.push.ref == 'refs/heads/master' }}
+        production-deploy: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         publish-dir: './dist'
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: 'Deploy from GitHub Actions'
