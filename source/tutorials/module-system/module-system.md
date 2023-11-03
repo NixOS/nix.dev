@@ -132,7 +132,7 @@ pkgs.lib.evalModules {
 ```
 
 [`evalModules`](https://nixos.org/manual/nixpkgs/unstable/#module-system-lib-evalModules) is the function that evaluates modules, applies type checking, and merges values into the final attribute set.
-It expects a `modules` attribute that is a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
+It expects a `modules` attribute whose value is a list, where each element can be a path to a module or an expression that follows the [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules).
 
 Run the following command:
 
@@ -140,7 +140,7 @@ Run the following command:
 This will result in an error.
 :::
 
-```bash
+```console
 nix-instantiate --eval eval.nix -A config.scripts.output
 ```
 
@@ -189,11 +189,11 @@ error:
        - In `/home/nix-user/default.nix': 42
 ```
 
-This assignment of `scripts.output = 42;` caused a type error: integers are not strings concatenated with the newline character.
+The definition `scripts.output = 42;` caused a type error: integers are not strings concatenated with the newline character.
 
 ## Successful Type-checking
 
-To make this module pass the type-checker and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
+To make this module pass the type checks and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
 
 In this case, you will assign a shell command that runs the {download}`map <files/map>` script in the current directory.
 That in turn calls the Google Maps Static API to generate a world map.
@@ -213,7 +213,7 @@ Update `default.nix` by changing the value of `scripts.output` to the following 
 
 ## Interlude: Reproducible scripts
 
-That simple command will likely not work as intended on your system, as the script may lack the required dependencies.
+That simple command will likely not work as intended on your system, as it may lack the required dependencies (curl and feh).
 We can solve this by packaging the raw {download}`map <files/map>` script with `pkgs.writeShellApplication`.
 
 First, make available a `pkgs` argument in your module evaluation by adding a module that sets `config._module.args`:
@@ -289,11 +289,11 @@ This command does the following:
 ## Declaring More Options
 
 Rather than setting all script parameters directly, we will to do that through the module system.
-This will not just add some safety through type checking, but also allows to build abstractions in order to manage growing complexity and changing requirements.
+This will not just add some safety through type checking, but also allow to build abstractions to manage growing complexity and changing requirements.
 
-In this section, you will introduce another option: `requestParams`.
+Let's begin by introducing another option, `requestParams`, which will represent the parameters of the request made to the Google Maps API.
 
-For its type, you should use `listOf <elementType>`, which is a list type where each element must have the specified type.
+Its type will be `listOf <elementType>`, which is a list of elements of one type.
 
 Instead of `lines`, in this case you will want the type of the list elements to be `str`, a generic string type.
 
@@ -334,7 +334,7 @@ Make the following additions to your `default.nix` file:
 
 ## Dependencies Between Options
 
-A given module generally declares one option that produces a result to be used elsewhere, which in this case is `scripts.output`.
+A given module generally declares one option that produces a result to be used elsewhere, in this case `scripts.output`.
 
 Options can depend on other options, making it possible to build more useful abstractions.
 
@@ -342,7 +342,7 @@ Here, we want the `scripts.output` option to use the values of `requestParams` a
 
 ### Accessing Option Values
 
-To make option values available, the argument of the module accessing them must include the `config` attribute.
+To make option values available to a module, the arguments of the function declaring the module must include the `config` attribute.
 
 Update `default.nix` to add the `config` attribute:
 
@@ -362,9 +362,9 @@ What happens when an option is set by multiple modules is determined by that opt
 :::
 
 :::{warning}
-The `config` argument is *not the same* as the `config` attribute where option values are set:
-- The `config` argument holds the module system's evaluation result that takes into account all modules passed to `evalModules` and their `imports`.
-- The `config` attribute of a module exposes that particular module's option values to the module system for evaluation.
+The `config` *argument* is **not** the same as the `config` *attribute*:
+- The `config` *argument* holds the result of the module system's lazy evaluation, which takes into account all modules passed to `evalModules` and their `imports`.
+- The `config` *attribute* of a module exposes that particular module's option values to the module system for evaluation.
 :::
 
 Now make the following changes to `default.nix`:
@@ -393,11 +393,9 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 The result of this represents the list of command line arguments to pass to the `./map` script.
 
 ## Conditional Definitions
+Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case. 
 
-In this section, you will define a new option, `map.zoom`, to control the zoom level of the map.
-
-Since the Google Maps API will infer a zoom level if no corresponding argument is passed, we want to represent that at the module level.
-To do that, you will use a new type, `nullOr <type>`, which can take either values of its argument type or `null`.
+You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This means that when the option isn't defined, the value of such an option is `null`, a value that can be checked against in a conditional.
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
@@ -429,11 +427,11 @@ Make the following additions to the `requestParams` list in the `config` block:
    };
 ```
 
-This will will only add a `zoom` parameter to the script call if the value is non-null.
+This will will only add a `zoom` parameter to the script invocation if the value of `config.map.zoom` is not `null`.
 
 ## Default values
 
-Let's say that in our application we want to have a different default behavior that sets the the zoom level to `2`, such that automatic zoom has to be enabled explicitly.
+Let's say that in our application we want to have a different default behavior that sets the zoom level to `2`, such that automatic zooming has to be enabled explicitly.
 
 This can be done with the `default` argument to [`mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix).
 Its value will be used if the value of the option declaring it is not specified otherwise.
@@ -712,7 +710,7 @@ In the `config` block, above `map.center`:
 
 This takes all the `departure` markers from all users in the `config` argument, and adds them to `map.markers` if their `location` attribute is not `null`.
 
-The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically (this how attribute names are stored in the Nix language).
+The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you've defined), sorted alphabetically (which is how attribute names are stored in the Nix language).
 
 Back in `default.nix`, the resulting `map.markers` option value is still accessed by `requestParams`, which in turn is used to generate arguments to the script that ultimately calls the Google Maps API.
 
@@ -955,7 +953,7 @@ The new option defined in the next section will allow you to set an *arrival* ma
 
 To start, create a new `path.nix` file with the following contents:
 
-```diff
+```nix
 # path.nix
 { lib, config, ... }:
 let
