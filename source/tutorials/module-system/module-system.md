@@ -393,7 +393,7 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 The result of this represents the list of command line arguments to pass to the `./map` script.
 
 ## Conditional Definitions
-Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case. 
+Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case.
 
 You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This means that when the option isn't defined, the value of such an option is `null`, a value that can be checked against in a conditional.
 
