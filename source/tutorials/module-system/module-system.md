@@ -62,10 +62,10 @@ Write the following into a file called `default.nix`:
 We will need some helper functions, which will come from the Nixpkgs library.
 Start by changing the first line in `default.nix`:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
-- { ... }:
-+ { lib, ... }:
+:emphasize-lines: 1
+{ lib, ... }:
 {
 
 }
@@ -91,17 +91,18 @@ In this section, you will define the `scripts.output` option.
 
 Change `default.nix` to include the following declaration:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
- { lib, ... }: {
+:emphasize-lines: 3-7
+{ lib, ... }: {
 
-+ options = {
-+   scripts.output = lib.mkOption {
-+     type = lib.types.lines;
-+   };
-+ };
+  options = {
+    scripts.output = lib.mkOption {
+      type = lib.types.lines;
+    };
+  };
 
- }
+}
 ```
 
 While many attributes for customizing options are available, the most important one is `type`, which specifies which values are valid for an option.
@@ -163,9 +164,10 @@ What happens if you instead try to assign an integer to the option?
 
 Add the following lines to `default.nix`:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
- { lib, ... }: {
+:emphasize-lines: 9-11
+{ lib, ... }: {
 
   options = {
     scripts.output = lib.mkOption {
@@ -173,10 +175,10 @@ Add the following lines to `default.nix`:
     };
   };
 
-+ config = {
-+   scripts.output = 42;
-+ };
- }
+  config = {
+    scripts.output = 42;
+  };
+}
 ```
 
 Now try to execute the previous command, and witness your first module error:
@@ -201,14 +203,19 @@ The output is passed on to display it with [`feh`](https://feh.finalrewind.org/)
 
 Update `default.nix` by changing the value of `scripts.output` to the following string:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
-   config = {
--    scripts.output = 42;
-+    scripts.output = ''
-+      ./map size=640x640 scale=2 | feh -
-+    '';
-   };
+:emphasize-lines: 6-8
+{ lib, ... }: {
+
+  # ...
+
+  config = {
+    scripts.output = ''
+      ./map size=640x640 scale=2 | feh -
+    '';
+  };
+};
 ```
 
 ## Interlude: Reproducible scripts
@@ -218,12 +225,14 @@ We can solve this by packaging the raw {download}`map <files/map>` script with `
 
 First, make available a `pkgs` argument in your module evaluation by adding a module that sets `config._module.args`:
 
-```{code-block} diff
+```{code-block} nix
 :caption: eval.nix
+:emphasize-lines: 4
+{ lib, ... }: {
  pkgs.lib.evalModules {
    modules = [
-+    ({ config, ... }: { config._module.args = { inherit pkgs; }; })
-     ./test.nix
+     ({ config, ... }: { config._module.args = { inherit pkgs; }; })
+     ./default.nix
    ];
  }
 ```
@@ -304,16 +313,21 @@ Module option types not only check for valid values, but also specify how multip
 
 Make the following additions to your `default.nix` file:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
-     scripts.output = lib.mkOption {
-       type = lib.types.package;
-     };
-+
-+    requestParams = lib.mkOption {
-+      type = lib.types.listOf lib.types.str;
-+    };
-   };
+:emphasize-lines: 9-11,23-26
+{ lib, ... }: {
+
+  # ...
+
+    scripts.output = lib.mkOption {
+      type = lib.types.package;
+    };
+
+    requestParams = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+    };
+  };
 
   config = {
     scripts.output = pkgs.writeShellApplication {
@@ -323,11 +337,11 @@ Make the following additions to your `default.nix` file:
         ${./map} size=640x640 scale=2 | feh -
       '';
     };
-+
-+    requestParams = [
-+      "size=640x640"
-+      "scale=2"
-+    ];
+
+     requestParams = [
+       "size=640x640"
+       "scale=2"
+     ];
    };
  }
 ```
@@ -346,10 +360,9 @@ To make option values available to a module, the arguments of the function decla
 
 Update `default.nix` to add the `config` attribute:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
--{ pkgs, lib, ... }: {
-+{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }: {
 ```
 
 When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names under `config`.
@@ -369,17 +382,20 @@ The `config` *argument* is **not** the same as the `config` *attribute*:
 
 Now make the following changes to `default.nix`:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
-   config = {
-     scripts.output = pkgs.writeShellApplication {
-       name = "map";
-       runtimeInputs = with pkgs; [ curl feh ];
-       text = ''
--        ${./map} size=640x640 scale=2 | feh -
-+        ${./map} ${lib.concatStringsSep " "
-+          config.requestParams} | feh -
-       '';
+:emphasize-lines: 7,8
+{ lib, ... }: {
+  config = {
+    scripts.output = pkgs.writeShellApplication {
+      name = "map";
+      runtimeInputs = with pkgs; [ curl feh ];
+      text = ''
+       ${./map} ${lib.concatStringsSep " "
+         config.requestParams} | feh -
+      '';
+
+  # ...
 ```
 
 Here, the value of the `config.requestParams` attribute is populated by the module system based on the definitions in the same file.
@@ -399,18 +415,24 @@ You will define a new option, `map.zoom`, to control the zoom level of the map. 
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
-```{code-block} diff
+```{code-block} nix
 :caption: default.nix
+:emphasize-lines: 8-12
+{ lib, ... }: {
+     # ...
+
      requestParams = lib.mkOption {
        type = lib.types.listOf lib.types.str;
      };
-+
-+    map = {
-+      zoom = lib.mkOption {
-+        type = lib.types.nullOr lib.types.int;
-+      };
-+    };
+
+     map = {
+       zoom = lib.mkOption {
+         type = lib.types.nullOr lib.types.int;
+       };
+     };
    };
+
+   # ...
 ```
 
 To make use of this, use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.
