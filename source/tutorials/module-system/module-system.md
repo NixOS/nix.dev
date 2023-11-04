@@ -929,7 +929,7 @@ Now add a mapping for the size parameter in `paramForMarker`, which selects an a
 
 Finally, add another `lib.optional` call to the `attributes` string, making use of the selected size:
 
-```
+```{code-block} diff
 :caption: marker.nix
            attributes =
              lib.optional
