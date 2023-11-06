@@ -15,34 +15,16 @@
             (import ./overlay.nix)
           ];
         };
-        devmode =
-          let
-            pythonEnvironment = pkgs.python310.withPackages (ps: with ps; [
-              livereload
-            ]);
-            script = ''
-              from livereload import Server, shell
 
-              server = Server()
-
-              build_docs = shell("nix build")
-
-              print("Doing an initial build of the docs...")
-              build_docs()
-
-              server.watch("source/*", build_docs)
-              server.watch("source/**/*", build_docs)
-              server.watch("_templates/*.html", build_docs)
-              server.serve(root="result/")
-            '';
-          in
-          pkgs.writeShellApplication {
-            name = "devmode";
-            runtimeInputs = [ pythonEnvironment ];
-            text = ''
-              python ${pkgs.writeText "live.py" script}
-            '';
-          };
+        devmode = let
+          outputPath = "share/doc/nixpkgs";
+          indexPath = "manual.html";
+        in
+        pkgs.devmode-init {
+          inherit pkgs;
+          buildArgs = "./.";
+          open = "/index.html";
+        };
       in
       {
         packages.default = pkgs.stdenv.mkDerivation {
