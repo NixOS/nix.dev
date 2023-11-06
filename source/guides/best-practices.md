@@ -31,10 +31,8 @@ rec {
 { a = 1; b = 3; }
 ```
 
-There are a couple of pitfalls:
-
-- It's possible to introduce a hard to debug error `infinite recursion` when shadowing a name, the simplest example being `let b = 1; a = rec { b = b; }; in a`.
-- Combining with overriding logic such as the [`overrideAttrs`](https://nixos.org/manual/nixpkgs/stable/#sec-pkg-overrideAttrs) function in {term}`Nixpkgs` has a surprising behaviour of not overriding every reference.
+A common pitfall is to introduce a hard to debug error `infinite recursion` when shadowing a name.
+The simplest example for this is: `let a = 1; in rec { a = a; }`.
 
 :::{tip}
 Avoid `rec`. Use `let ... in`.
