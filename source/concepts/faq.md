@@ -60,6 +60,36 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
 
+## Which channel branch should I use?
+
+Nixpkgs and NixOS have both stable and rolling releases.
+
+### Stable
+
+- On Linux (including NixOS and WSL), use [`nixos-*`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-).
+
+  These branches only contain commits that passed the NixOS test suite.
+- On any other platform, use [`nixpkgs-*`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-).
+
+  These branches contain commits that passed the test suites specific to other platforms.
+
+All of these "channel branches" follow the corresponding [`release-*`](https://github.com/NixOS/nixpkgs/branches/all?query=release-) branch.
+
+:::{admonition} Example
+`nixos-23.05` and `nixpkgs-23.05-darwin` are both based on `release-23.05`.
+:::
+
+### Rolling
+
+- On Linux (including NixOS and WSL), use [`nixos-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-unstable).
+- On any other platform, use [`nixpkgs-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-unstable).
+
+These branches follow `master`, the main development development branch.
+
+[`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch but offer fewer stability guarantees.
+
+Consult the [`nix-channel`](https://nixos.org/manual/nix/unstable/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
+
 ## Are there any impurities left in sandboxed builds?
 
 Yes. There is:
