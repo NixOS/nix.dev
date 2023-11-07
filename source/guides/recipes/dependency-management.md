@@ -7,20 +7,12 @@ Nix expressions themselves can depend on remote sources, and there are multiple 
 For more automation around handling remote sources, set up [niv](https://github.com/nmattia/niv/) in your project:
 
 ```shell-session
-$ nix-shell -p niv --run "niv init"
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.05"
 ```
 
-This command will generate `nix/sources.json` in the current directory, which is a lock file for dependencies.
+This command will fetch the latest revision of the Nixpkgs 23.05 release branch.
+In the current directory it will generate `nix/sources.json`, which will contain a pinned reference to the obtained revision.
 It will also create `nix/sources.nix`, which exposes those dependencies as an attribute set.
-
-:::{note}
-By default, `niv init` will add the latest revision of `nixpkgs-unstable` as a source.
-If you need the latest revision of a specific branch:
-
-```shell-session
-niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.05
-```
-:::
 
 Import the generated `nix/sources.nix` for the top-level argument in the top-level `default.nix` and use it to refer to the Nixpkgs source directory:
 
