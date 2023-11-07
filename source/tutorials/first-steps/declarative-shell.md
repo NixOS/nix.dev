@@ -17,7 +17,7 @@ Declarative shell environments allow you to
 
 ### What will you learn?
 
-In the {ref}`ad-hoc-envs` tutorial, we looked at imperatively creating shell environments using `nix-shell -p`, for when we need a quick way to access some tools without having to install them globally.
+In the {ref}`ad-hoc-envs` tutorial, we looked at imperatively creating shell environments using `nix-shell -p`, when we need a quick way to access tools without having to install them globally.
 We also saw how to execute that command with a specific Nixpkgs revision using a Git commit as an argument, to recreate the same environment used previously.
 
 In this tutorial we'll take a look how to create reproducible shell environments given a declarative configuration in a {term}`Nix file`.
@@ -32,7 +32,7 @@ In this tutorial we'll take a look how to create reproducible shell environments
 
 ## Entering a shell with Python installed
 
-Suppose we a development environment in which Python 3 was installed.
+Suppose we want a development environment in which `git, neovim and nodejs` was installed.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
 ```
 $ nix-shell -p git neovim nodejs
