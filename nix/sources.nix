@@ -7,22 +7,16 @@ let
   #
 
   fetch_file = pkgs: name: spec:
-    let
-      name' = sanitizeName name + "-src";
-    in
     if spec.builtin or true then
-      builtins_fetchurl { inherit (spec) url sha256; name = name'; }
+      builtins_fetchurl { inherit (spec) url sha256; name = "source"; }
     else
-      pkgs.fetchurl { inherit (spec) url sha256; name = name'; };
+      pkgs.fetchurl { inherit (spec) url sha256; name = "source"; };
 
   fetch_tarball = pkgs: name: spec:
-    let
-      name' = sanitizeName name + "-src";
-    in
     if spec.builtin or true then
-      builtins_fetchTarball { name = name'; inherit (spec) url sha256; }
+      builtins_fetchTarball { name = "source"; inherit (spec) url sha256; }
     else
-      pkgs.fetchzip { name = name'; inherit (spec) url sha256; };
+      pkgs.fetchzip { name = "source"; inherit (spec) url sha256; };
 
   fetch_git = name: spec:
     let
