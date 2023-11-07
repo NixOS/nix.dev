@@ -1,8 +1,12 @@
-{ inputs ? import ./nix/sources.nix }:
+{
+  inputs ? import ./nix/sources.nix,
+  system ? builtins.currentSystem,
+}:
 let
   pkgs = import inputs.nixpkgs {
     config = { };
     overlays = [ (import ./overlay.nix) ];
+    inherit system;
   };
 
   nix-dev = pkgs.stdenv.mkDerivation {
