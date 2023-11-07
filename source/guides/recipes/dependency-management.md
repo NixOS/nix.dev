@@ -54,12 +54,13 @@ See [](./sharing-dependencies) for details.
 
 As an example, we will use the previously created expression with an older version of Nixpkgs.
 
-Create a new directory and set up niv with a different version of Nixpkgs:
+Enter the development environment, create a new directory, and set up niv with a different version of Nixpkgs:
 
 ```shell-session
-mkdir old
-cd old
-niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 18.09
+$ nix-shell
+[nix-shell]$ mkdir old
+[nix-shell]$ cd old
+[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 18.09
 ```
 
 Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
