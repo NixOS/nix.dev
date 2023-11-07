@@ -1,5 +1,5 @@
 (dependency-management-niv)=
-# Managing remote sources with niv
+# Automatically managing remote sources with niv
 
 The Nix language can be used to describe dependencies between files managed by Nix.
 Nix expressions themselves can depend on remote sources, and there are multiple ways to specify their origin, as shown in [](pinning-nixpkgs).
@@ -14,7 +14,7 @@ This command will fetch the latest revision of the Nixpkgs 23.05 release branch.
 In the current directory it will generate `nix/sources.json`, which will contain a pinned reference to the obtained revision.
 It will also create `nix/sources.nix`, which exposes those dependencies as an attribute set.
 
-Import the generated `nix/sources.nix` for the top-level argument in the top-level `default.nix` and use it to refer to the Nixpkgs source directory:
+Import the generated `nix/sources.nix` as the default value for the argument to the function in `default.nix` and use it to refer to the Nixpkgs source directory:
 
 ```nix
 { sources ? import ./nix/sources.nix }:
@@ -26,7 +26,7 @@ in {
 }
 ```
 
-`nix-build` will call the top-level function with the default argument.
+`nix-build` will call the top-level function with the empty attribute set `{}`, or with the attributes passed via [`--arg`](https://nixos.org/manual/nix/stable/command-ref/nix-build#opt-arg) or [`--argstr`](https://nixos.org/manual/nix/stable/command-ref/nix-build#opt-argstr).
 This pattern allows [overriding remote sources](overriding-sources-niv) programmatically.
 
 Add niv to the development environment for your project to have it readily available:
@@ -47,7 +47,13 @@ Add niv to the development environment for your project to have it readily avail
  }
 ```
 
-See [](./sharing-dependencies) for details.
+Also add a `shell.nix` to enter that environment more conveniently:
+
+```nix
+(import ./. {}).shell
+```
+
+See [](./sharing-dependencies) for details, and note that here you have to pass an empty attribute set to the imported expression, since `default.nix` now contains a function.
 
 (overriding-sources-niv)=
 ## Overriding sources
