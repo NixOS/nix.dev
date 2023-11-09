@@ -30,7 +30,7 @@ In this tutorial we'll take a look how to create reproducible shell environments
 
 - A basic understanding of the [Nix language](reading-nix-language)
 
-## Entering a shell with Python installed
+## Entering a temporary shell
 
 Suppose we want a development environment in which Git, Neovim, and Node.js were installed.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
