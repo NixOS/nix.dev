@@ -32,7 +32,11 @@ rec {
 ```
 
 A common pitfall is to introduce a hard to debug error `infinite recursion` when shadowing a name.
-The simplest example for this is: `let a = 1; in rec { a = a; }`.
+The simplest example for this is:
+
+```{code-block} nix
+let a = 1; in rec { a = a; }
+```
 
 :::{tip}
 Avoid `rec`. Use `let ... in`.
