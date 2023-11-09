@@ -32,7 +32,7 @@ In this tutorial we'll take a look how to create reproducible shell environments
 
 ## Entering a shell with Python installed
 
-Suppose we want a development environment in which `git, neovim and nodejs` was installed.
+Suppose we want a development environment in which Git, Neovim, and Node.js were installed.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
 ```
 $ nix-shell -p git neovim nodejs
