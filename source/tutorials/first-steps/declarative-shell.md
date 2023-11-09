@@ -30,9 +30,9 @@ In this tutorial we'll take a look how to create reproducible shell environments
 
 - A basic understanding of the [Nix language](reading-nix-language)
 
-## Entering a shell with Python installed
+## Entering a shell with Node JS installed
 
-Suppose we a development environment in which Python 3 was installed.
+Suppose we a development environment in which Node JS was installed.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
 ```
 $ nix-shell -p git neovim nodejs
