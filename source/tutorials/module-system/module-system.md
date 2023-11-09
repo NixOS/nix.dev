@@ -44,7 +44,7 @@ To run the examples in this tutorial, you will need a [Google API key](https://d
 This is a very long tutorial.
 Prepare for at least 3 hours of work.
 
-## Empty module
+## The Empty Module
 
 We have to start somewhere.
 The simplest module is just a function that takes any attributes and returns an empty attribute set.
@@ -192,8 +192,6 @@ error:
 ```
 
 The definition `scripts.output = 42;` caused a type error: integers are not strings concatenated with the newline character.
-
-## Successful Type-checking
 
 To make this module pass the type checks and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
 
@@ -451,7 +449,7 @@ Add the corresponding line:
    };
 ```
 
-## Centering the Map
+## Wrapping Shell Commands
 
 You have now declared options controlling the map dimensions and zoom level, but have not provided a way to specify where the map should be centered.
 
@@ -587,7 +585,7 @@ Make the following changes to `marker.nix`:
 +  };
 ```
 
-## Setting Option Values Within Other Modules
+## Defining Options in Other Modules
 
 Because of the way the module system composes option definitions, you can freely assign values to options defined in other modules.
 
@@ -626,8 +624,6 @@ To avoid confusion with the `map` option setting and the final `config.map` conf
 Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.
 
 The `requestParams` value was also set to the resulting list of strings, which gets appended to the `requestParams` list defined in `default.nix`, thanks to the default merging behavior of the `list` type.
-
-## Dealing with multiple markers
 
 When defining multiple markers, determining an appropriate center or zoom level for the map may be challenging; it's easier to let the API do this for you.
 
@@ -720,7 +716,7 @@ Defining the options in this way allows you to set multiple `users.<name>.depart
 
 In the 2021 Summer of Nix, this formed the basis of an interactive multi-person map demo.
 
-## Labeling Markers
+## The `strMatching` Type
 
 Now that the map can be rendered with multiple markers, it's time to add some style customizations.
 
@@ -768,7 +764,7 @@ In the `paramForMarker` function:
 
 Here, the label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
 
-## Defining a Default Label
+## Functions as Submodule Arguments
 
 Right now, if a label is not explicitly set, none will show up.
 But since every `users` attribute has a name, we could use that as an automatic value instead.
@@ -833,7 +829,7 @@ The `lib.mkDefault` modifier sets the priority of its argument value to 1000, th
 This ensures that other values set for the same option will prevail.
 :::
 
-## Marker Styling: Color
+## The `either` and `enum` Types
 
 For better visual contrast, it would be helpful to have a way to change the *color* of a marker.
 
@@ -891,8 +887,6 @@ Now add an entry to the `paramForMarker` list which makes use of the new option:
                  lib.escapeShellArg marker.location
                })"
 ```
-
-## Marker Styling: Size
 
 In case you set many different markers, it would be helpful to have the ability to change their size individually.
 
@@ -1009,8 +1003,6 @@ Now import this new `path.nix` module from your `marker.nix` module:
      users = lib.mkOption {
 ```
 
-## The Arrival Marker
-
 Copy the `departure` option declaration to a new `arrival` option in `marker.nix`, to complete the initial path implementation:
 
 ```{code-block} diff
@@ -1055,8 +1047,6 @@ Finally, update the return list in the function passed to `concatMap` in `map.ma
 
 Now you have the basesis to define paths on the map, connecting pairs of departure and arrival points.
 
-## Connecting Markers by Paths
-
 In the path module, define a path connecting every user's departure and arrival locations:
 
 ```{code-block} diff
@@ -1082,7 +1072,7 @@ The new `map.paths` attribute contains a list of all valid paths defined for all
 
 A path is valid only if the `departure` and `arrival` attributes are set for that user.
 
-## Path Styling: Weight
+## The `between` subdomain
 
 Your users have spoken, and they demand the ability to customize the styles of their paths with a `weight` option.
 
