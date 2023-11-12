@@ -47,7 +47,7 @@ In the working directory you will then find two files:
 The default NixOS configuration without comments is:
 
 :::{admonition} NixOS
-If you used the Plasma image instead of the Gnome image, your config may look a bit different.
+Depending on the base image and NixOS Version, your config file may look a bit different.
 :::
 
 ```nix
@@ -105,7 +105,7 @@ Therefore you will remove the reference to `hardware-configuration.nix`:
 The complete `configuration.nix` file now looks like this:
 
 :::{admonition} NixOS
-If you used the Plasma image instead of the Gnome image, your config may look a bit different.
+Depending on the base image and NixOS Version, your config file may look a bit different.
 :::
 
 ```nix
