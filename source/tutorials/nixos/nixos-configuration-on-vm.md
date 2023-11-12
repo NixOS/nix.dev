@@ -59,7 +59,7 @@ The default NixOS configuration without comments is:
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.05";
 }
 ```
 
