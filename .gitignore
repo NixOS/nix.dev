@@ -1,5 +1,4 @@
 .direnv/
-.envrc
 build/
 extracted/
 requirements_frozen.txt
