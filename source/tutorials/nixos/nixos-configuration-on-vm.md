@@ -46,6 +46,10 @@ In the working directory you will then find two files:
 
 The default NixOS configuration without comments is:
 
+:::{admonition} NixOS
+If you used the Plasma image instead of the Gnome image, your config may look a bit different.
+:::
+
 ```nix
 { config, pkgs, ... }:
 {
@@ -100,6 +104,10 @@ Therefore you will remove the reference to `hardware-configuration.nix`:
 
 The complete `configuration.nix` file now looks like this:
 
+:::{admonition} NixOS
+If you used the Plasma image instead of the Gnome image, your config may look a bit different.
+:::
+
 ```nix
 { config, pkgs, ... }:
 {
@@ -121,7 +129,7 @@ The complete `configuration.nix` file now looks like this:
     initialPassword = "testpw";
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
 ```
 
@@ -131,11 +139,11 @@ A NixOS virtual machine is created with the `nix-build` command:
 
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm \
--I nixpkgs=channel:nixos-22.11 \
+-I nixpkgs=channel:nixos-23.05 \
 -I nixos-config=./configuration.nix
 ```
 
-This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, using the NixOS configuration as specified in the relative path.
+This command builds the attribute `vm` from the `nixos-23.05` release of NixOS, using the NixOS configuration as specified in the relative path.
 
 <details><summary> Detailed explanation </summary>
 
