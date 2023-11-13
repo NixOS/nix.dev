@@ -936,8 +936,8 @@ Example:
 Paths can be used in interpolated expressions – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
 :::
 
-(search-path-tutorial)=
-#### Search path
+(lookup-path-tutorial)=
+#### Lookup paths
 
 Also known as “angle bracket syntax”.
 
@@ -953,7 +953,7 @@ Example:
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs
 ```
 
-The value of a named path is a file system path that depends on the contents of the [`$NIX_PATH`][NIX_PATH] environment variable.
+The value of a [lookup path](https://nixos.org/manual/nix/unstable/language/constructs/lookup-path) is a file system path that depends on the value of [`builtins.nixPath`](https://nixos.org/manual/nix/stable/language/builtin-constants#builtins-nixPath).
 
 In practice, `<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`.
 
@@ -969,7 +969,7 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
 ```
 
-While you will encounter many such examples, we recommend to [avoid search paths](search-path) in production code, as they are [impurities](impurities) which are not reproducible.
+While you will encounter many such examples, we recommend to [avoid lookup paths](search-path) in production code, as they are [impurities](impurities) which are not reproducible.
 
 [NIX_PATH]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
@@ -1628,12 +1628,12 @@ Example:
 let
   pkgs = import <nixpkgs> {};
 in
-pkgs.lib.strings.toUpper "search paths considered harmful"
+pkgs.lib.strings.toUpper "lookup paths considered harmful"
 ```
 
 ```{code-block}
 :class: value
-SEARCH PATHS CONSIDERED HARMFUL
+LOOKUP PATHS CONSIDERED HARMFUL
 ```
 
 :::{dropdown} Detailed explanation
@@ -1641,7 +1641,7 @@ SEARCH PATHS CONSIDERED HARMFUL
 This is a more complex example, but by now you should be familiar with all its components.
 
 The name `pkgs` is declared to be the expression `import`ed from some file.
-That file's path is determined by the value of the search path `<nixpkgs>`, which in turn is determined by the `$NIX_PATH` environment variable at the time this expression is evaluated.
+That file's path is determined by the value of the lookup path `<nixpkgs>`, which in turn is determined by the `$NIX_PATH` environment variable at the time this expression is evaluated.
 As this expression happens to be a function, it requires an argument to evaluate, and in this case passing an empty attribute set `{}` is sufficient.
 
 Now that `pkgs` is in scope of `let ... in ...`, its attributes can be accessed.
@@ -1649,7 +1649,7 @@ From the Nixpkgs manual one can determine that there exists a function under [`l
 
 [`lib.strings.toUpper`]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.strings.toUpper
 
-For brevity, this example uses a search path to obtain *some version* of Nixpkgs.
+For brevity, this example uses a lookup path to obtain *some version* of Nixpkgs.
 The function `toUpper` is trivial enough that we can expect it not to produce different results for different versions of Nixpkgs.
 Yet, more sophisticated software is likely to suffer from such problems.
 A fully reproducible example would therefore look like this:
@@ -1755,7 +1755,7 @@ The only way to specify build inputs in the Nix language is explicitly with:
 Nix and the Nix language refer to files by their content hash. If file contents are not known in advance, it's unavoidable to read files during expression evaluation.
 
 :::{note}
-Nix supports other types of impure expressions, such as [search paths](search-path) or the constant [`builtins.currentSystem`](https://nixos.org/manual/nix/stable/language/builtin-constants.html#builtins-currentSystem).
+Nix supports other types of impure expressions, such as [lookup paths](search-path) or the constant [`builtins.currentSystem`](https://nixos.org/manual/nix/stable/language/builtin-constants.html#builtins-currentSystem).
 We do not cover those here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
@@ -1896,12 +1896,12 @@ It may produce a different hash or even a different package version.
 
 A derivation's output path is fully determined by its inputs, which in this case come from *some* version of Nixpkgs.
 
-This is why we recommend to [avoid search paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
+This is why we recommend to [avoid lookup paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
 :::
 
 :::{dropdown} Detailed explanation
 
-The example imports the Nix expression from the search path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
+The example imports the Nix expression from the lookup path `<nixpkgs>`, and applies the resulting function to an empty attribute set `{}`.
 Its output is assigned the name `pkgs`.
 
 Converting the attribute `pkgs.nix` to a string with [string interpolation](string-interpolation) is allowed, as `pkgs.nix` is a derivation.
@@ -1948,7 +1948,7 @@ Explanation:
 
 - This expression is a function that takes an attribute set as an argument.
 - If the argument has the attribute `pkgs`, it will be used in the function body.
-  Otherwise, by default, import the Nix expression in the file found on the search path `<nixpkgs>` (which is a function in this case), call the function with an empty attribute set, and use the resulting value.
+  Otherwise, by default, import the Nix expression in the file found on the lookup path `<nixpkgs>` (which is a function in this case), call the function with an empty attribute set, and use the resulting value.
 - The name `message` is bound to the string value `"hello world"`.
 - The attribute `mkShell` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.

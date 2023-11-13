@@ -112,7 +112,7 @@ buildInputs = builtins.attrValues {
 :::
 
 (search-path)=
-## `<...>` search path
+## `<...>` lookup paths
 
 You will often encounter Nix language code samples that refer to `<nixpkgs>`.
 
@@ -121,8 +121,8 @@ You will often encounter Nix language code samples that refer to `<nixpkgs>`.
 [introduced in 2011]: https://github.com/NixOS/nix/commit/1ecc97b6bdb27e56d832ca48cdafd3dbb5185a04
 [`$NIX_PATH`]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html#env-NIX_PATH
 
-This means, the value of a search path depends on external system state.
-When using search paths, the same Nix expression can produce different results.
+This means, the value of a lookup path depends on external system state.
+When using lookup paths, the same Nix expression can produce different results.
 
 In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, and is therefore likely to differ from machine to machine.
 
@@ -140,10 +140,10 @@ Builds may work for one and fail for the other, causing confusion.
 :::{tip}
 Declare dependencies explicitly using the techniques shown in [](pinning-nixpkgs).
 
-Do not use search paths, except in minimal examples.
+Do not use lookup paths, except in minimal examples.
 :::
 
-Some tools expect the search path to be set. In that case:
+Some tools expect the lookup path to be set. In that case:
 
 ::::{tip}
 Set `$NIX_PATH` to a known value in a central location under version control.
