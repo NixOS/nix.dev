@@ -66,9 +66,10 @@ in
 
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
-    packages = with pkgs.python310.pkgs; [
-      black
+    packages = [
       devmode
+      pkgs.python310.pkgs.black
+      pkgs.vale
     ];
   };
 }
