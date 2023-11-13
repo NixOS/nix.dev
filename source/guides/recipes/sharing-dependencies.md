@@ -32,14 +32,19 @@ Import the `shell` attribute in `shell.nix`:
 
 ## Complete example
 
-Assuming your build is defined in `build.nix`:
+Assume your build is defined in `build.nix`:
 
 ```nix
 # build.nix
-{ hello }: hello
+{ cowsay, runCommand }:
+runCommand "cowsay-output" { buildInputs = [ cowsay ]; } ''
+  cowsay Hello, Nix! > $out
+''
 ```
 
-and your project is defined in `default.nix`:
+In this example, `cowsay` is declared as a build-time dependency using `buildInputs`.
+
+Further assume your project is defined in `default.nix`:
 
 ```nix
 # default.nix
@@ -81,14 +86,9 @@ Then take the package's dependencies into the environment with `inputsFrom`:
 +  inherit build;
    shell = pkgs.mkShell {
 +    inputsFrom = [ build ];
-+    packages = [ which ];
    };
  }
 ```
-
-:::{note}
-Here we also added `which` to the shell's `packages` to be able to quickly check the presence of the build inputs.
-:::
 
 Finally, import the `shell` attribute in `shell.nix`:
 
@@ -97,11 +97,11 @@ Finally, import the `shell` attribute in `shell.nix`:
 (import ./.).shell
 ```
 
-Test the development environment:
+Check the development environment, it contains the build-time dependency `cowsay`:
 
 ```console
 $ nix-shell --pure
-[nix-shell]$ which gcc
+[nix-shell]$ cowsay shell.nix
 ```
 
 ## Next steps
