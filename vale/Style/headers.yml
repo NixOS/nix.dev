@@ -4,3 +4,6 @@ level: error
 scope: heading
 # $title, $sentence, $lower, $upper, or a pattern.
 match: $sentence
+indicators:
+  # For headers like `1. Foo`
+  - "."
