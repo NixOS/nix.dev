@@ -1,4 +1,0 @@
-Nixpkgs
-Eelco
-Dolstra
-Tweag
