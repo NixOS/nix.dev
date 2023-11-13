@@ -39,7 +39,7 @@ A concept can also describe the historical context behind why something works th
 
 If you find yourself wanting to write about the nitty gritty details of how something works, you most likely want to write an explanation.
 
-### Guides vs. Tutorials
+### Guides vs. tutorials
 
 We find that contributors primarily struggle with the difference between a Guide and a Tutorial.
 

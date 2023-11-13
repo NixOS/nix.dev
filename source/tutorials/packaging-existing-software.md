@@ -6,7 +6,7 @@ myst:
 ---
 
 (packaging-existing-software)=
-# Packaging Existing Software With Nix
+# Packaging existing software with Nix
 
 One of Nix's primary use-cases is in addressing common difficulties encountered while packaging software, like managing dependencies.
 
@@ -27,7 +27,7 @@ Packages have mostly standardised attributes and output layouts, allowing them t
 For the purposes of this tutorial, "package" means something like "result of a derivation"; this is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
 :::
 
-## A Simple Project
+## A simple project
 To start, consider this skeleton derivation:
 
 ```nix
@@ -97,7 +97,7 @@ error: cannot evaluate a function that has an argument without a value ('lib')
 
 Problem: the expression in `hello.nix` is a *function*, which only produces its intended output if it is passed the correct *arguments*.
 
-### A New Command
+### A new command
 `lib` is available from `nixpkgs`, which must be imported with another Nix expression in order to pass it as an argument to this derivation.
 
 The recommended way to do this is to create a `default.nix` in the same directory as `hello.nix`, with the following contents:
@@ -140,7 +140,7 @@ error:
          got:       sha256:0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn
 ```
 
-### Finding The File Hash
+### Finding the file hash
 As expected, the incorrect file hash caused an error, and Nix helpfully provided the correct one, which you can now substitute into `hello.nix` to replace `lib.fakeSha256`:
 
 ```nix
@@ -181,7 +181,7 @@ Great news: the derivation built successfully!
 The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project.
 It wasn't necessary to write any build instructions in this case because the `stdenv` build system is based on `autoconf`, which automatically detected the structure of the project directory.
 
-### Build Result
+### Build result
 Check your working directory for the result:
 
 ```console
@@ -200,7 +200,7 @@ Congratulations, you have successfully packaged your first program with Nix!
 
 Next, you'll package another piece of software with external-to-`stdenv` dependencies that present new challenges, requiring you to make use of more `mkDerivation` features.
 
-## Something Bigger
+## Something bigger
 Now you will package a somewhat more complicated program, [`icat`](https://github.com/atextor/icat), which allows you to render images in your terminal.
 
 To start, modify the `default.nix` from the previous section by adding a new attribute for `icat`:
@@ -253,7 +253,7 @@ stdenv.mkDerivation {
 }
 ```
 
-### Fetching Source from GitHub
+### Fetching source from GitHub
 While `fetchzip` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
 
 The source is hosted on GitHub at `https://github.com/atextor/icat`, which already gives the first two arguments:
@@ -297,7 +297,7 @@ stdenv.mkDerivation {
 }
 ```
 
-### Missing Dependencies
+### Missing dependencies
 Running `nix-build` with the new `icat` attribute,  an entirely new issue is reported:
 
 ```console
@@ -437,7 +437,7 @@ error: builder for '/nix/store/x1d79ld8jxqdla5zw2b47d2sl87mf56k-icat.drv' failed
 
 The missing dependency error is solved, but there is now another problem: `make: *** No rule to make target 'install'.  Stop.`
 
-### installPhase
+### `installPhase`
 The `stdenv` is automatically working with the `Makefile` that comes with `icat`: you can see in the console output that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
 
 The failure occurs when the `stdenv` attempts to run `make install`: the `Makefile` included in the project happens to lack an `install` target, and the `README` in the `icat` repository only mentions using `make` to build the tool, leaving the installation step up to users.
@@ -477,7 +477,7 @@ stdenv.mkDerivation {
 }
 ```
 
-### Phases and Hooks
+### Phases and hooks
 Nixpkgs `stdenv.mkDerivation` derivations are separated into [phases](https://nixos.org/manual/nixpkgs/stable/#sec-stdenv-phases), each of which is intended to control some aspect of the build process.
 
 You saw earlier how `stdenv.mkDerivation` expected the project's `Makefile` to have an `install` target, and failed when it didn't.

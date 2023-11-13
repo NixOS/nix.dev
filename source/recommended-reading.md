@@ -22,7 +22,7 @@
 
   Introduction to writing derivations.
 
-## Other Articles
+## Other articles
 
 - [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023)
 

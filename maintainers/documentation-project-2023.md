@@ -1,4 +1,4 @@
-# Documentation Project Proposal 2023
+# Documentation project proposal 2023
 
 ## Offer a learning journey for Nix beginners
 
