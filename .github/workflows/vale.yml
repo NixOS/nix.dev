@@ -10,4 +10,4 @@ jobs:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v23
     - name: Vale
-      run: nix run nixpkgs#vale -- source
+      run: nix run nixpkgs#vale -- maintainers source
