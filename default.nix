@@ -1,6 +1,6 @@
-{
-  inputs ? import ./nix/sources.nix,
-  system ? builtins.currentSystem,
+{ inputs ? import ./nix/sources.nix
+, system ? builtins.currentSystem
+,
 }:
 let
   pkgs = import inputs.nixpkgs {
@@ -37,19 +37,32 @@ let
         livereload
       ]);
       script = ''
-        from livereload import Server, shell
+        from livereload import Server
+        from subprocess import Popen, PIPE
+        import shlex
 
         server = Server()
 
-        build_docs = shell("make html")
+        def nix_build():
+          p = Popen(
+            shlex.split("nix-build -A build"),
+            # capture output as text
+            stdout=PIPE,
+            stderr=PIPE,
+            text=True,
+          )
+          # we only care about failures
+          stdout, stderr = p.communicate()
+          if p.returncode:
+            print(stderr)
+          return p
 
-        print("Doing an initial build of the docs...")
-        build_docs()
+        # (re-)build once before serving
+        nix_build().wait()
 
-        server.watch("source/*", build_docs)
-        server.watch("source/**/*", build_docs)
-        server.watch("_templates/*.html", build_docs)
-        server.serve(root="build/html")
+        server.watch("source/*", nix_build)
+        server.watch("source/**/*", nix_build)
+        server.serve(root="result")
       '';
     in
     pkgs.writeShellApplication {
