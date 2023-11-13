@@ -7,7 +7,7 @@ myst:
 
 (github-actions)=
 
-# Continuous Integration with GitHub Actions
+# Continuous integration with GitHub Actions
 
 In this tutorial, we'll show you **a few short steps** to get started using [GitHub Actions](https://github.com/features/actions) as your continuous integration (CI) workflow for commits and pull requests.
 
@@ -72,7 +72,7 @@ jobs:
 Once you commit and push to your GitHub repository,
 you should see status checks appearing on commits and PRs.
 
-## Caching builds using GitHub's Cache Service
+## Caching builds using GitHub Actions Cache
 
 A quick and easy way to speed up CI on any GitHub repository is to use the [Magic Nix Cache][magic-nix-cache].
 The Magic Nix Cache doesn't require any configuration, secrets, or credentials.

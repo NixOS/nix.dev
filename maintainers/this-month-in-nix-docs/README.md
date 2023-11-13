@@ -1,4 +1,4 @@
-# This Month in Nix Docs
+# This month in Nix docs
 This is a script and template for compiling "This Month in Nix Docs". The process is semi-automated. The script queries a collection of Nix repositories, looking for merged PRs with documentation-related labels, RFCs (you have to look through these manually), and tracking issues in this repository.
 
 A new post is created via:

@@ -1,4 +1,4 @@
-# Contributing Documentation
+# Contributing documentation
 
 This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
 Documentation contributions should follow the [style guide](./style-guide.md).
@@ -125,7 +125,7 @@ You can help by
 
 [Documentation category]: https://discourse.nixos.org/c/dev/documentation/25
 
-### Meetings and Events
+### Meetings and events
 
 Check the [Discourse community calendar] for real-time events.
 

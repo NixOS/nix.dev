@@ -92,7 +92,7 @@ To benefit from updates and bug fixes from the vendor, we'll start by updating R
 # BOOTFS=/mnt FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 ```
 
-## Installing and Configuring NixOS
+## Installing and configuring NixOS
 
 Now we'll install NixOS with our own configuration, here creating a `guest` user and enabling the SSH daemon.
 

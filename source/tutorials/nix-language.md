@@ -758,7 +758,7 @@ The new inner scope now contains `x` and `y`, which are used in the list `[ x y 
 :::
 
 (string-interpolation)=
-### String Interpolation `${ ... }`
+### String interpolation `${ ... }`
 
 Previously known as “antiquotation”.
 

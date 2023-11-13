@@ -100,7 +100,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - https://www.youtube.com/watch?v=jf0nIn2oS8A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&index=4
 
-## How-To Guides
+## How-to guides
 
 ### Nix
 
