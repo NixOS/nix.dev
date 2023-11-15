@@ -14,7 +14,7 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 # Explicitly set SOURCE_DATE_EPOCH for Sphinx copyright
-SOURCE_DATE_EPOCH = $(shell date +%s)
+SOURCE_DATE_EPOCH = $(shell date +%s --date='Jan 1')
 
 .PHONY: help
 help:
