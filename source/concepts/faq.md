@@ -68,10 +68,16 @@ Nixpkgs and NixOS have both stable and rolling releases.
 
 - On Linux (including NixOS and WSL), use [`nixos-*`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-).
 
-  These branches only contain commits that passed the NixOS test suite.
-- On any other platform, use [`nixpkgs-*`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-).
+  These branches point to commits where most Linux packages got pre-built and can be fetched from the binary cache.
+  Furthermore, these commits passed the basic NixOS test suite.
 
-  These branches contain commits that passed the test suites specific to other platforms.
+- On macOS/Darwin, use [`nixpkgs-*-darwin`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-)
+
+  These branches point to commits where most Darwin packages got pre-built and can be fetched from the binary cache.
+
+- On any other platform it doesn't matter which one of the above is used.
+
+  Hydra doesn't pre-build any binaries for other platforms.
 
 All of these "channel branches" follow the corresponding [`release-*`](https://github.com/NixOS/nixpkgs/branches/all?query=release-) branch.
 
