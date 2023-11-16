@@ -20,7 +20,7 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 - A working [Nix installation](https://nixos.org/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
 - Basic knowledge of the [Nix language](reading-nix-language)
 
-## Starting from the default NixOS configuration
+## Starting from a default NixOS configuration
 
 In this tutorial you will use the default configuration that is shipped with NixOS.[^nixosconf]
 [^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
