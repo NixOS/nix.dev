@@ -829,7 +829,7 @@ The `lib.mkDefault` modifier sets the priority of its argument value to 1000, th
 This ensures that other values set for the same option will prevail.
 :::
 
-## The `either` and `enum` Types
+## The `either` and `enum` types
 
 For better visual contrast, it would be helpful to have a way to change the *color* of a marker.
 
@@ -1072,7 +1072,7 @@ The new `map.paths` attribute contains a list of all valid paths defined for all
 
 A path is valid only if the `departure` and `arrival` attributes are set for that user.
 
-## The `between` subdomain
+## The `between` constraint on integer values
 
 Your users have spoken, and they demand the ability to customize the styles of their paths with a `weight` option.
 
