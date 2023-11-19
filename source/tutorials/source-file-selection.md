@@ -85,15 +85,11 @@ Let's create a local `string.txt` file:
 $ echo "This is a string" > string.txt
 ```
 
-:::{note}
-Flakes in Git directories requires git add.
-:::
-
 The two main ways to coerce paths to strings are:
 - Interpolating paths in strings. To try that, change your `package.nix` file to:
   ```nix
   { runCommand }:
-  runCommand "file-interpolation" { } ''
+  runCommand "file-coercion" { } ''
     (
       set -x
       cat ${./string.txt}
@@ -110,7 +106,7 @@ The two main ways to coerce paths to strings are:
 - Using paths as derivation attributes. To try that, change your `package.nix` file to:
   ```nix
   { runCommand }:
-  runCommand "file-interpolation" {
+  runCommand "file-coercion" {
     stringFile = ./string.txt;
   } ''
     (
@@ -125,7 +121,7 @@ The two main ways to coerce paths to strings are:
   `env` doesn't implicitly coerce paths to strings, so it requires using string intepolation instead:
   ```nix
   { runCommand }:
-  runCommand "file-interpolation" {
+  runCommand "file-coercion" {
     env.stringFile = "${./string.txt}";
   } ''
     (
@@ -139,7 +135,7 @@ The two main ways to coerce paths to strings are:
 These all do the same when built:
 ```shell-session
 $ nix-build
-building '/nix/store/9fi0khrkmqw5srjzjsfa0b05hf8div4c-file-interpolation.drv'...
+building '/nix/store/9fi0khrkmqw5srjzjsfa0b05hf8div4c-file-coercion.drv'...
 ++ cat /nix/store/j5lwpnlfrngks3bpidfr5hcrhgq0fy78-string.txt
 This is a string
 ```
@@ -159,7 +155,7 @@ This path coercion also works on directories the same as it does on files, let's
 
 ```nix
 { runCommand, tree }:
-runCommand "directory-interpolation" {
+runCommand "directory-coercion" {
   # To nicely show path contents
   nativeBuildInputs = [ tree ];
 } ''
@@ -180,7 +176,41 @@ building '/nix/store/6ybg4v48xy8azhrnfdccdmhd2gr938f5-directory-interpolation.dr
 `-- string.txt
 ```
 
-But here we can get into some subtle trouble:
+It's also very common to use this for the [`src`](https://nixos.org/manual/nixpkgs/stable/#var-stdenv-src) variable in `stdenv.mkDerivation` like so:
+
+```nix
+{ stdenv, tree }:
+stdenv.mkDerivation {
+  name = "directory-coercion";
+  src = ./.;
+  nativeBuildInputs = [ tree ];
+  postInstall = ''
+    touch created-in-the-build
+    tree
+  '';
+}
+```
+
+Setting `src` will copy the resulting store path into the build directory and mark it as mutable.
+For the many commands that expect to be able to write to the current directory, this is great:
+
+```shell-session
+$ nix-build
+building '/nix/store/2cqd93fpnb4vqwkwmbl66dbxhndq1vhh-directory-coercion.drv'...
+unpacking sources
+unpacking source archive /nix/store/178fbwa8iwdl6b85yafksdbwlxf6mjca-select
+[...]
+.
+|-- created-in-the-build
+|-- default.nix
+|-- nix
+|   |-- sources.json
+|   `-- sources.nix
+|-- package.nix
+`-- string.txt
+```
+
+However there are some subtle problems with this approach:
 - Note how the name of the store path ends with `-select`.
   So the name of the local directory influenced the result.
 
@@ -195,24 +225,52 @@ But here we can get into some subtle trouble:
     changing _any_ file in the directory requires rebuilding the derivation,
     potentially wasting a lot of time.
 
-  - If you have any secrets stored in the current directory,
+  - If you have any secrets in the current directory,
     they get imported into the Nix store too, exposing them to all users on the system!
 
 ## `builtins.path`
+
+<!-- TODO: Use lib.cleanSourceWith instead and only briefly mention builtins.path? -->
 
 The above problems can be fixed by using [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) instead.
 It allows customising the name of the resulting store path with its `name` argument.
 And it allows selecting the files that should be included with its `filter` argument.
 
 ```nix
-builtins.path {
-  name = "source";
-  path = ./.;
-  filter = pathString: type:
-    baseNameOf pathString != "default.nix";
+{ runCommand, tree, lib }:
+let
+  source = builtins.path {
+    # The convention is to use "source"
+    name = "source";
+    path = ./.;
+
+    filter = pathString: type:
+      # Recurse into directories
+      type == "directory"
+      # Don't include .nix files
+      || ! lib.hasSuffix ".nix" pathString;
+  };
+in
+runCommand "builtins-path" {
+  nativeBuildInputs = [ tree ];
+} ''
+  tree ${source}
+''
 ```
 
-However, this function is notoriously hard to use correctly by itself.
+The shown filter will recurse into all directories and filter out all `.nix` files:
+
+```shell-session
+$ nix-build
+building '/nix/store/3x051rr6fainqi3a4mmmb06145m0j0mw-builtins-path.drv'...
+/nix/store/95mlqjmm13vd4ambw2pac5gj6i4wxcx4-source
+|-- nix
+|   `-- sources.json
+`-- string.txt
+```
+
+Writing more complex `filter` functions however is notoriously tricky,
+which is why it's not recommended to use this function directly.
 
 <!--
 
