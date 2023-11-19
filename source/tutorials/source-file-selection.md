@@ -6,45 +6,199 @@ To build a local project in a Nix derivation, its source files must be accessibl
 But since the builder runs in an isolated environment (if the [sandbox](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) is enabled),
 it won't have access to the local project files by default.
 
-To make this work, the Nix language has certain builtin features to copy local paths to the Nix store,
+To make this work regardless, the Nix language has certain builtin features to copy local paths to the Nix store,
 whose paths are then accessible to derivation builders [^1].
 
 [^1]: Technically only Nix store paths from the derivations inputs can be accessed,
 but in practice this distinction is not important.
 
-These builtin features are very limited in functionality and are not recommended if you need to do anything more advanced.
+These builtin features are very limited in functionality and are not recommended for anything non-trivial. For more advanced use cases, the file set library should be used instead.
 
-For advanced uses, use the file set library instead.
+In this tutorial you'll learn both how to use the builtins and the file set library.
 
-## Builtins
+## Setting up a local experiment
 
-### Path coercion to strings
+To experiment with source file selection, we'll set up a local project.
 
-The most transparent builtin feature is coercion of paths to strings, such as:
-- Interpolating paths in strings:
+To start out, create a new directory, enter it, and set up `niv` to manage the Nixpkgs dependency:
+```shell-session
+$ mkdir select
+$ cd select
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-unstable"
+```
+
+<!-- TODO: Switch to 23.11 once out -->
+:::{note}
+For now we're using the nixos-unstable channel, since no stable channel has all the features we need yet.
+:::
+
+Then create a `default.nix` file with these contents:
+```nix
+{
+  system ? builtins.currentSystem,
+  sources ? import ./nix/sources.nix,
+}:
+let
+  pkgs = import sources.nixpkgs {
+    # Ensure purity
+    config = { };
+    overlays = [ ];
+    inherit system;
+  };
+in
+pkgs.callPackage ./package.nix { }
+```
+
+In this tutorial we'll experiment with different `package.nix` contents, while keeping `default.nix` the same.
+
+For now, let's have a simple `package.nix` to verify everything works so far:
+
+```nix
+{ runCommand }:
+runCommand "hello" { } ''
+  echo hello world
+''
+```
+
+And try it out:
+```shell-session
+$ nix-build
+this derivation will be built:
+  /nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv
+building '/nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv'...
+hello world
+error: builder for '/nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv'
+  failed to produce output path for output 'out'
+```
+
+We could also add `touch $out` to make the build succeed,
+but we'll omit that for the sake of the tutorial, since we only need the build logs.
+This also makes it easier to build it again, since successful derivation builds would get cached.
+From now on we'll also make build outputs a bit shorter for the sake of brevity.
+
+## Builtin coercion of paths to strings
+
+The easiest way to use local files in builds is using the built-in coercion of [paths](https://nixos.org/manual/nix/stable/language/values.html#type-path) to strings.
+
+Let's create a local `string.txt` file:
+```
+$ echo "This is a string" > string.txt
+```
+
+:::{note}
+Flakes in Git directories requires git add.
+:::
+
+The two main ways to coerce paths to strings are:
+- Interpolating paths in strings. To try that, change your `package.nix` file to:
   ```nix
-  { runCommandCC }:
-  runCommandCC "test" { } ''
-    cc ${./main.c} -o $out
+  { runCommand }:
+  runCommand "file-interpolation" { } ''
+    (
+      set -x
+      cat ${./string.txt}
+    )
   ''
   ```
-- Using paths as derivation attributes:
+
+  :::{note}
+  Interpolation into bash scripts generally requires [`lib.escapeShellArg`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.strings.escapeShellArg) for correct escaping.
+  In this case however, the interpolation results in a Nix store path of the form `/nix/store/<hash>-<name>`,
+  and all valid characters of such store paths don't need to be escaped in bash.
+  :::
+
+- Using paths as derivation attributes. To try that, change your `package.nix` file to:
   ```nix
-  { stdenv }:
-  stdenv.mkDerivation {
-    name = "test";
-    src = ./.;
-  }
+  { runCommand }:
+  runCommand "file-interpolation" {
+    stringFile = ./string.txt;
+  } ''
+    (
+      set -x
+      cat "$stringFile"
+    )
+  ''
   ```
 
-In both of these cases, the path gets imported into the Nix store
-and transparently converted to its Nix store path.
+  :::{note}
+  Nowadays using the explicit `env` attribute is recommended to set environment variables.
+  `env` doesn't implicitly coerce paths to strings, so it requires using string intepolation instead:
+  ```nix
+  { runCommand }:
+  runCommand "file-interpolation" {
+    env.stringFile = "${./string.txt}";
+  } ''
+    (
+      set -x
+      cat "$stringFile"
+    )
+  ''
+  ```
+  :::
 
-Some problems with this approach include:
-- The base name of the path influences the store path, even for `./.`.
-- All files in directories are unconditionally imported, even if they're unnecessary, impure or even meant to be private.
+These all do the same when built:
+```shell-session
+$ nix-build
+building '/nix/store/9fi0khrkmqw5srjzjsfa0b05hf8div4c-file-interpolation.drv'...
+++ cat /nix/store/j5lwpnlfrngks3bpidfr5hcrhgq0fy78-string.txt
+This is a string
+```
 
-### `builtins.path`
+As you can see, the `string.txt` file was hashed and added to the store,
+which then allowed the build to access it.
+
+The underlying functionality is the same as `nix-store --add` on an absolute path:
+```shell-session
+$ nix-store --add $(pwd)/string.txt
+/nix/store/j5lwpnlfrngks3bpidfr5hcrhgq0fy78-string.txt
+```
+
+## Built-in path coercion on directories
+
+This path coercion also works on directories the same as it does on files, let's try it out:
+
+```nix
+{ runCommand, tree }:
+runCommand "directory-interpolation" {
+  # To nicely show path contents
+  nativeBuildInputs = [ tree ];
+} ''
+  tree ${./.}
+''
+```
+
+Running it gives us:
+```shell-session
+$ nix-build
+building '/nix/store/6ybg4v48xy8azhrnfdccdmhd2gr938f5-directory-interpolation.drv'...
+/nix/store/xdfchqpfx20ar9jil9kys99wc6hnm9zx-select
+|-- default.nix
+|-- nix
+|   |-- sources.json
+|   `-- sources.nix
+|-- package.nix
+`-- string.txt
+```
+
+But here we can get into some subtle trouble:
+- Note how the name of the store path ends with `-select`.
+  So the name of the local directory influenced the result.
+
+  This means that whenever you rename the project directory
+  or a collegue runs it in a different directory name,
+  you're going to get different build results!
+
+- All files in the directory are unconditionally added to the Nix store.
+
+  This means that:
+  - Even if your build only needs a few files,
+    changing _any_ file in the directory requires rebuilding the derivation,
+    potentially wasting a lot of time.
+
+  - If you have any secrets stored in the current directory,
+    they get imported into the Nix store too, exposing them to all users on the system!
+
+## `builtins.path`
 
 The above problems can be fixed by using [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) instead.
 It allows customising the name of the resulting store path with its `name` argument.
@@ -58,7 +212,7 @@ builtins.path {
     baseNameOf pathString != "default.nix";
 ```
 
-This function is notoriously hard to use correctly by itself.
+However, this function is notoriously hard to use correctly by itself.
 
 <!--
 
@@ -69,5 +223,19 @@ Section on file sets:
 - Coercing file sets from paths
 - Using files from a file set as a derivation source
 - Migrate/integrate with lib.source-based filtering
+
+A file structure to show?
+- `.envrc`:
+- `README.md`
+- `Makefile`
+- `nix`
+  - `package.nix`
+  - `sources.nix`
+  - `sources.json`
+- `src`
+  - `main.c`
+  - `main.o`
+- `.gitignore`
+- `.git`
 
 -->
