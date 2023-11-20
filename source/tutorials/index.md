@@ -12,4 +12,5 @@ nix-language.md
 Packaging existing software <packaging-existing-software.md>
 nixos/index.md
 cross-compilation.md
+module-system/module-system.md
 ```
