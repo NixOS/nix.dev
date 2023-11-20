@@ -44,7 +44,7 @@ To run the examples in this tutorial, you will need a [Google API key](https://d
 This is a very long tutorial.
 Prepare for at least 3 hours of work.
 
-## The Empty Module
+## The empty module
 
 We have to start somewhere.
 The simplest module is just a function that takes any attributes and returns an empty attribute set.
@@ -59,7 +59,7 @@ Write the following into a file called `default.nix`:
 }
 ```
 
-## Module Arguments
+## Module arguments
 
 We will need some helper functions, which will come from the Nixpkgs library.
 Start by changing the first line in `default.nix`:
@@ -82,7 +82,7 @@ The `lib` argument is passed automatically by the module system.
 The ellipsis `...` is necessary because arbitrary arguments can be passed to modules.
 :::
 
-## Declaring Options
+## Declaring options
 
 To set any values, the module system first has to know which ones are allowed.
 
@@ -153,7 +153,7 @@ Therefore we evaluate the Nix expression in `eval.nix` at the [attribute path](h
 The error message indicates that the `scripts.output` option is used but not defined: a value must be set for the option before accessing it.
 You will do this in the next steps.
 
-## Type Checking
+## Type checking
 
 As previously mentioned, the `lines` type only permits string values.
 
@@ -211,7 +211,7 @@ Update `default.nix` by changing the value of `scripts.output` to the following 
    };
 ```
 
-## Interlude: Reproducible scripts
+## Interlude: reproducible scripts
 
 That simple command will likely not work as intended on your system, as it may lack the required dependencies (curl and feh).
 We can solve this by packaging the raw {download}`map <files/map>` script with `pkgs.writeShellApplication`.
@@ -286,7 +286,7 @@ This command does the following:
     - Take the resulting store path and append `/bin/map` to it
     - Run the executable at the path constructed this way
 
-## Declaring More Options
+## Declaring more options
 
 Rather than setting all script parameters directly, we will to do that through the module system.
 This will not just add some safety through type checking, but also allow to build abstractions to manage growing complexity and changing requirements.
@@ -332,7 +332,7 @@ Make the following additions to your `default.nix` file:
  }
 ```
 
-## Dependencies Between Options
+## Dependencies between options
 
 A given module generally declares one option that produces a result to be used elsewhere, in this case `scripts.output`.
 
@@ -340,7 +340,7 @@ Options can depend on other options, making it possible to build more useful abs
 
 Here, we want the `scripts.output` option to use the values of `requestParams` as arguments to the `./map` script.
 
-### Accessing Option Values
+### Accessing option values
 
 To make option values available to a module, the arguments of the function declaring the module must include the `config` attribute.
 
@@ -392,7 +392,7 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 
 The result of this represents the list of command line arguments to pass to the `./map` script.
 
-## Conditional Definitions
+## Conditional definitions
 Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case.
 
 You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This means that when the option isn't defined, the value of such an option is `null`, a value that can be checked against in a conditional.
@@ -449,7 +449,7 @@ Add the corresponding line:
    };
 ```
 
-## Wrapping Shell Commands
+## Wrapping shell commands
 
 You have now declared options controlling the map dimensions and zoom level, but have not provided a way to specify where the map should be centered.
 
@@ -522,7 +522,7 @@ This time, you've used `escapeShellArg` to pass the `config.map.center` value as
 
 Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, as it uses the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
-## Splitting Modules
+## Splitting modules
 
 The [module schema](https://nixos.org/manual/nixos/stable/#sec-writing-modules) includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.
 
@@ -549,7 +549,7 @@ Reference this new file in `default.nix` using the `imports` attribute:
 +
 ```
 
-## The `submodule` Type
+## The `submodule` type
 
 We want to set multiple markers on the map.
 A marker is a complex type with multiple fields.
@@ -585,7 +585,7 @@ Make the following changes to `marker.nix`:
 +  };
 ```
 
-## Defining Options in Other Modules
+## Defining options in other modules
 
 Because of the way the module system composes option definitions, you can freely assign values to options defined in other modules.
 
@@ -646,7 +646,7 @@ To achieve this, make the following additions to `marker.nix`, above the `reques
 
 In this case, the default behavior of the Google Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
 
-## Nested Submodules
+## Nested submodules
 
 Next, we want to allow multiple named users to define a list of markers each.
 
@@ -716,7 +716,7 @@ Defining the options in this way allows you to set multiple `users.<name>.depart
 
 In the 2021 Summer of Nix, this formed the basis of an interactive multi-person map demo.
 
-## The `strMatching` Type
+## The `strMatching` type
 
 Now that the map can be rendered with multiple markers, it's time to add some style customizations.
 
@@ -764,7 +764,7 @@ In the `paramForMarker` function:
 
 Here, the label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
 
-## Functions as Submodule Arguments
+## Functions as submodule arguments
 
 Right now, if a label is not explicitly set, none will show up.
 But since every `users` attribute has a name, we could use that as an automatic value instead.
@@ -939,7 +939,7 @@ Finally, add another `lib.optional` call to the `attributes` string, making use 
                "$(geocode ${
 ```
 
-## The `pathType` Submodule
+## The `pathType` submodule
 
 So far, you've created an option for declaring a *destination* marker, as well as several options for configuring the marker's visual representation.
 
@@ -1139,7 +1139,7 @@ Finally, update the `attributes` list in `paramForPath`:
            }";
 ```
 
-## The `pathStyle` Submodule
+## The `pathStyle` submodule
 
 Users still can't actually customize the path style yet.
 Introduce a new `pathStyle` option for each user.
@@ -1180,7 +1180,7 @@ Then add a line using the `user.pathStyle` option in `map.paths` where each user
        && user.arrival.location != null
 ```
 
-## Path Styling: Color
+## Path styling: color
 
 As with markers, paths should have customizable colors.
 
@@ -1233,7 +1233,7 @@ Finally, add a line using the `color` option to the `attributes` list:
          in "path=${
 ```
 
-## Further Styling
+## Further styling
 
 Now that you've got this far, to further improve the aesthetics of the rendered map, add another style option allowing paths to be drawn as *geodesics*, the shortest "as the crow flies" distance between two points on Earth.
 
@@ -1268,7 +1268,7 @@ Make sure to also add a line to use that value in `attributes` list, so the opti
          in "path=${
 ```
 
-## Wrapping Up
+## Wrapping up
 
 In this tutorial, you've learned how to write custom Nix modules to bring external services under declarative control, with the help of several new utility functions from the Nixpkgs `lib`.
 
