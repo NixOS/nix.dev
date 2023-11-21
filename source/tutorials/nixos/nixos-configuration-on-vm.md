@@ -22,12 +22,20 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 ## Starting from a default NixOS configuration
 
-In this tutorial you will use the default configuration that is shipped with NixOS.[^nixosconf]
-[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
+In this tutorial you will use a default configuration that is shipped with NixOS.
 
 :::{admonition} NixOS
 
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
+
+The result of this command depends on your curent Nixos configuration.
+We can configure the generation of the 'nixos-generate-config' in a repoducable way in a nix-shell. 
+We provide a configuration that is replicating nixos gnome graphical iso image.
+
+```shell-session
+nix-shell -p "with (import <nixpkgs> {}); (nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true;}).config.system.build.nixos-generate-config" -I nixpkgs=channel:nixos-21.05
+```
+
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
 To avoid overwriting this file you have to specify the output directory.
 Create a NixOS configuration in your working directory:
