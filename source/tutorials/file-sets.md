@@ -21,7 +21,7 @@ Using these features directly can be tricky however:
 - The [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) function
   (and equivalently [`lib.sources.cleanSourceWith`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith))
   can address these problems.
-  However, it's hard to get the desired path selection using function-based interface.
+  However, it's hard to get the desired path selection using the `filter` function interface.
 
 In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset) instead.
 It abstracts over these functions with essentially the same functionality,
