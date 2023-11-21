@@ -28,12 +28,27 @@ In this tutorial you will use a default configuration that is shipped with NixOS
 
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
 
-The result of this command depends on your curent Nixos configuration.
+Beware that the result of this command depends on your current NixOS configuration.
 We can configure the generation of the 'nixos-generate-config' in a repoducable way in a nix-shell.
 We provide a configuration that is replicating nixos gnome graphical iso image.
 
+```bash
+nix-shell -I nixpkgs=channel:nixos-21.05 -p "$(cat <<EOF
+let
+  pkgs = import <nixpkgs> { config = {}; overlays = []; };
+  nixos = pkgs.nixos {
+    services.xserver.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+  };
+in nixos.config.system.build.nixos-generate-config
+EOF
+)" 
+```
+
+Or as a one-liner:
+
 ```shell-session
-nix-shell -p "with (import <nixpkgs> {}); (nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true;}).config.system.build.nixos-generate-config" -I nixpkgs=channel:nixos-21.05
+nix-shell -I nixpkgs=channel:nixos-21.05 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; nixos = pkgs.nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true; }; in nixos.config.system.build.nixos-generate-config"
 ```
 
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
