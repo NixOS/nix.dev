@@ -40,4 +40,5 @@ jobs:
         overwrites-pull-request-comment: true
         enable-commit-comment: false
         enable-commit-status: true
+        enable-github-deployment: false
       if: github.repository_owner == 'NixOS'
