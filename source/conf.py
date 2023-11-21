@@ -59,7 +59,7 @@ myst_heading_anchors = 3
 
 myst_number_code_blocks = [ "nix", "python" ]
 
-copybutton_prompt_text = r"\$ "
+copybutton_prompt_text = r"\$ |nix-repl> "
 copybutton_prompt_is_regexp = True
 
 # Add any paths that contain templates here, relative to this directory.

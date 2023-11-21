@@ -8,7 +8,7 @@ it won't have access to the local project files by default.
 
 To make this work regardless, the Nix language has certain builtin features to copy local paths to the Nix store,
 whose paths are then accessible to derivation builders [^1].
-However using the builtin features directly can be very tricky.
+However, using the builtin features directly can be very tricky.
 
 [^1]: Technically only Nix store paths from the derivations inputs can be accessed,
 but in practice this distinction is not important.
@@ -20,10 +20,10 @@ but an easier and safer interface.
 ## Basics
 
 The file set library is based on the concept of _file sets_,
-a conceptual data type representing a collection of local files.
+a data type representing a collection of local files.
 File sets can be created, composed and used with the various functions of the library.
 
-The easiest way to experiment with the file set library is to first use it through `nix repl`.
+The easiest way to experiment with the library is to use it through `nix repl`.
 
 ```shell-session
 $ nix repl -f channel:nixos-unstable
@@ -37,19 +37,33 @@ which pretty-prints the files included in a given file set:
 
 ```shell-session
 nix-repl> fs.trace ./. null
-trace: /home/user/select (all files in directory)
+trace: /home/user (all files in directory)
 null
 ```
 
-You might wonder where the file set here is, because we just passed a _path_ to the function!
+You might wonder where the file set here is, because we just passed a [_path_](https://nixos.org/manual/nix/stable/language/values#type-path) to the function!
 
-The key is that for all functions that expect a file set for an argument, they also accepts paths instead.
-Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion)
-to file sets containing _all files under the given path_.
-We can see this from the trace `/home/user/select (all files in directory)`
+The key is that for all functions that expect a file set for an argument, they _also_ accepts paths.
+Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion).
+The resulting file sets contain _all_ files under the given path.
+We can see this from the trace `/home/user (all files in directory)`
 
-File sets _never_ add their files to the Nix store unless explicitly requested.
+Even though file sets conceptually contain local files,
+they _never_ add these files to the Nix store unless explicitly requested.
+So even though we pretty-printed all files in your home directory, none of its contained files were imported because of that.
+This is also evident from the expression evaluating instantly.
 So you don't have to worry about accidentally copying secrets into the store.
+
+:::{note}
+This is in contrast to coercion of paths to strings like in `"${./.}"`,
+which _does_ add all of its contained files to the Nix store!
+:::
+
+:::{warning}
+With current experimental Flakes,
+the local files always get copied into the Nix store
+unless you use it within a Git repository!
+:::
 
 :::{tip}
 The `trace` function pretty-prints its first agument and returns its second argument.
@@ -57,7 +71,7 @@ But since you often just need the pretty-printing in `nix repl`, you can omit th
 
 ```shell-session
 nix-repl> fs.trace ./.
-trace: /home/user/select (all files in directory)
+trace: /home/user (all files in directory)
 «lambda @ /nix/store/1czr278x24s3bl6qdnifpvm5z03wfi2p-nixpkgs-src/lib/fileset/default.nix:555:8»
 ```
 :::
@@ -65,27 +79,29 @@ trace: /home/user/select (all files in directory)
 This implicit coercion also works for files:
 
 ```shell-session
-nix-repl> fs.trace ./string.txt
-trace: /home/user/select
-trace: - string.txt (regular)
+nix-repl> fs.trace /etc/nix/nix.conf
+trace: /etc/nix
+trace: - nix.conf (symlink)
 ```
 
 We can see that in addition to the included file,
 it also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
 
-And if we make a typo for a path that doesn't exist, the file set library adequately complains about it:
+But if we make a typo for a path that doesn't exist,
+the library adequately complains about it:
 
 ```shell-session
-nix-repl> fs.trace ./string.nix
-error: lib.fileset.trace: Argument (/home/user/select/string.nix)
+nix-repl> fs.trace /etc/nix/nix.nix
+error: lib.fileset.trace: Argument (/etc/nix/nix.nix)
   is a path that does not exist.
 ```
 
-## Setting up a local experiment
+## A local directory
 
-To further experiment with the library, let's set up a local project.
+To further experiment with the library, let's set up a local directory.
+To start out, create a new directory, enter it,
+and set up `niv` to pin the Nixpkgs dependency:
 
-To start out, create a new directory, enter it, and set up `niv` to pin the Nixpkgs dependency:
 ```shell-session
 $ mkdir select
 $ cd select
@@ -96,15 +112,16 @@ $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixo
 For now we're using the nixos-unstable channel, since no stable channel has all the features we need yet.
 :::
 
-Then create a `default.nix` file with these contents:
-```nix
+Then create a `default.nix` file:
+
+```{code-block} nix
+:caption: default.nix
 {
   system ? builtins.currentSystem,
   sources ? import ./nix/sources.nix,
 }:
 let
   pkgs = import sources.nixpkgs {
-    # Ensure purity
     config = { };
     overlays = [ ];
     inherit system;
@@ -117,7 +134,8 @@ From now on we'll just change the contents of `package.nix` while keeping `defau
 
 For now, let's have a simple `package.nix` to verify everything works so far:
 
-```nix
+```{code-block} nix
+:caption: package.nix
 { runCommand }:
 runCommand "hello" { } ''
   echo hello world
@@ -125,6 +143,7 @@ runCommand "hello" { } ''
 ```
 
 And try it out:
+
 ```shell-session
 $ nix-build
 this derivation will be built:
@@ -149,7 +168,8 @@ added to the Nix store rooted at a specific path.
 
 Let's try it out by defining `package.nix` as follows:
 
-```nix
+```{code-block} nix
+:caption: package.nix
 { stdenv, lib }:
 let
   fs = lib.fileset;
@@ -182,7 +202,9 @@ To show some more motivation,
 let's first use the file set library to include all files from the local directory in the build,
 and have it succeed by coping the `string.txt` file to the output:
 
-```nix
+```{code-block} nix
+:caption: package.nix
+:emphasize-lines: 4, 13-15
 { stdenv, lib }:
 let
   fs = lib.fileset;
@@ -213,6 +235,7 @@ this derivation will be built:
 ```
 
 But if you rebuild again, you get something different!
+
 ```shell-session
 $ nix-build
 trace: /home/user/select (all files in directory)
@@ -223,21 +246,26 @@ this derivation will be built:
 ```
 
 The problem here is that `nix-build` by default creates a symlink in the local directory, pointing to the result of the build:
+
 ```
 $ ls -l result
 result -> /nix/store/n9i6gaf80hvbfplsv7zilkbfrz47s4kn-filesets
 ```
 
 In such a case, we can use the [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function.
-It allows subtracting a file set from another,
-resulting in a new file set that contains all files from the first argument that aren't in the second argument.
+It allows "subtracting" one file set from another,
+resulting in a new file set that contains all files from the first argument
+that aren't in the second argument.
 
 Let's use it to filter out `./result` by changing the `sourceFiles` definition:
-```nix
+
+```{code-block} nix
+:caption: package.nix
   sourceFiles = fs.difference ./. ./result;
 ```
 
 Building it now we get:
+
 ```shell-session
 $ nix-build
 trace: /home/user/select
@@ -260,6 +288,7 @@ because we don't include `./result` anymore.
 Also, running the build always gives the same result, no more rebuilding necessary!
 
 If we try to remove the `./result` symlink however, we run into a problem:
+
 ```shell-session
 $ rm result
 $ nix-build
@@ -272,7 +301,8 @@ It helpfully explains to us that for files that may not exist,
 we should use `maybeMissing` <!-- https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.maybeMissing -->,
 so let's try it:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
 ```
 
@@ -320,7 +350,8 @@ One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstab
 to create a file set containing all of the files we don't want,
 and removing that instead:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles =
     fs.difference
       ./.
@@ -336,7 +367,8 @@ This also gives us the opportunity to show the [`fileFilter`](https://nixos.org/
 which as the name implies, allows filtering the files in a local path.
 We use it to select all files whose name ends with `.nix`:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles =
     fs.difference
       ./.
@@ -380,7 +412,8 @@ $ touch build.sh src/select.{c,h}
 
 And then create a file set from just the ones we're interested in:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles = fs.unions [
     ./build.sh
     ./string.txt
@@ -445,7 +478,8 @@ $ git reset src/select.o result
 
 Now we can re-use this selection of files using `gitTracked`:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles = fs.gitTracked ./.;
 ```
 
@@ -477,7 +511,8 @@ This is where `intersection` comes in.
 It allows us to create a file set consisting only of files that are in _both_ of two file sets.
 In this case we only want files that are both tracked by git, and included in our exclusive selection:
 
-```nix
+```{code-block} nix
+:caption: package.nix
   sourceFiles =
     fs.intersection
       (fs.gitTracked ./.)
