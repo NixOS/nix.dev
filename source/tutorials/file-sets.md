@@ -8,13 +8,23 @@ it won't have access to the local project files by default.
 
 To make this work regardless, the Nix language has certain builtin features to copy local paths to the Nix store,
 whose paths are then accessible to derivation builders [^1].
-However, using the builtin features directly can be very tricky.
 
 [^1]: Technically only Nix store paths from the derivations inputs can be accessed,
 but in practice this distinction is not important.
 
+Using these features directly can be tricky however:
+
+- Coercion of paths to strings, such as the wide-spread pattern of `src = ./.`,
+  makes the derivation dependent on the name of the current directory.
+  It also doesn't allow being more precise about which files to use.
+
+- The [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) function
+  (and equivalently [`lib.sources.cleanSourceWith`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith))
+  can address these problems.
+  However, it's hard to get the desired path selection using the `filter` interface.
+
 In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset) instead.
-It abstracts over the builtin features with essentially the same functionality,
+It abstracts over these functions with essentially the same functionality,
 but an easier and safer interface.
 
 ## Basics
