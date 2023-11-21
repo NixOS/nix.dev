@@ -179,7 +179,7 @@ These allow you to compose file sets in different ways to achieve complex behavi
 ## Avoiding unnecessary rebuilds
 
 To show some more motivation,
-let's first use the file set library to include all files in the local directory in the build,
+let's first use the file set library to include all files from the local directory in the build,
 and have it succeed by coping the `string.txt` file to the output:
 
 ```nix
@@ -204,7 +204,7 @@ stdenv.mkDerivation {
 Building this we get:
 
 ```shell-session
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/d8mj3z49s24q46rncma6v9kvi6xbx4vq-filesets.drv
@@ -214,7 +214,7 @@ this derivation will be built:
 
 But if you rebuild again, you get something different!
 ```shell-session
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/1xb412x3fzavr8d8c3hbl3fv9kyvj77c-filesets.drv
@@ -239,7 +239,7 @@ Let's use it to filter out `./result` by changing the `sourceFiles` definition:
 
 Building it now we get:
 ```shell-session
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
@@ -262,7 +262,7 @@ Also, running the build always gives the same result, no more rebuilding necessa
 If we try to remove the `./result` symlink however, we run into a problem:
 ```shell-session
 $ rm result
-$ nix-build -A package
+$ nix-build
 error: lib.fileset.difference: Second argument (negative set)
   (/home/user/select/result) is a path that does not exist.
   To create a file set from a path that may not exist, use `lib.fileset.maybeMissing`.
@@ -279,14 +279,14 @@ so let's try it:
 This now works, reliably filtering out `./result` if it exists:
 
 ```
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/ygpx17kshzc6bj3c71xlda8szw6qi1sr-filesets.drv
 [...]
 /nix/store/bzvhlr9h2zwqi7rr9i1j193z9hkskhmk-filesets
 
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
@@ -304,8 +304,8 @@ even though it doesn't depend on those files.
 ```shell-session
 $ echo "# Just a comment" >> package.nix
 
-$ nix-build -A package
-trace: /home/tweagysil/select
+$ nix-build
+trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
 trace: - package.nix (regular)
@@ -317,7 +317,8 @@ this derivation will be built:
 ```
 
 One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.unions)
-to create a file set containing all of the files we don't want:
+to create a file set containing all of the files we don't want,
+and removing that instead:
 
 ```nix
   sourceFiles =
@@ -349,47 +350,161 @@ We use it to select all files whose name ends with `.nix`:
 Changing any of the removed files now doesn't necessarily require a rebuild anymore:
 
 ```shell-session
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select
 trace: - string.txt (regular)
 /nix/store/clrd19vn5cv6n7x7hzajq1fv43qig7cp-filesets
 
 $ echo "# Just a comment" >> package.nix
 
-$ nix-build -A package
+$ nix-build
 trace: /home/user/select
 trace: - string.txt (regular)
 /nix/store/clrd19vn5cv6n7x7hzajq1fv43qig7cp-filesets
 ```
 
-Notable with this approach is that new files added to the current directory are **included by default**.
+Notable with this approach is that new files added to the current directory are _included_ by default.
 Depending on your project, this might be a better fit than the alternative in the next section.
-
-## Git
 
 ## Only including necessary files
 
-<!--
+To contrast the above approach, we can also directly use `unions` to select only the files we want to _include_.
+This means that new files added to the current directory would be _excluded_ by default.
 
-- git init
-- Non-flakes only: gitTracked
-- union to select some files
+To demonstrate, let's create some extra files to select:
 
-Section on file sets:
-- Migrate/integrate with lib.source-based filtering
+```shell-session
+$ mkdir src
+$ touch build.sh src/select.{c,h}
+```
 
-A file structure to show?
-- `.envrc`:
-- `README.md`
-- `Makefile`
-- `nix`
-  - `package.nix`
-  - `sources.nix`
-  - `sources.json`
-- `src`
-  - `main.c`
-  - `main.o`
-- `.gitignore`
-- `.git`
+And then create a file set from just the ones we're interested in:
 
--->
+```nix
+  sourceFiles = fs.unions [
+    ./build.sh
+    ./string.txt
+    (fs.fileFilter
+      (file:
+        lib.hasSuffix ".c" file.name
+        || lib.hasSuffix ".h" file.name
+      )
+      ./src
+    )
+  ];
+```
+
+When building this you'll see that only the specified files are used, even when a new one is added:
+
+```shell-session
+$ nix-build
+trace: /home/user/select
+trace: - build.sh (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - string.txt (regular)
+this derivation will be built:
+  /nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv
+building '/nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv'...
+[...]
+/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+
+$ touch src/select.o
+
+$ nix-build
+trace: /home/user/select
+trace: - build.sh (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - string.txt (regular)
+/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+```
+
+## Git
+
+In case we track files with Git, we can use [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) to re-use the same set of files by Git.
+
+:::{note}
+With current experimental Flakes,
+it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function,
+even with `nix build path:.`.
+However it's also not needed, because by default,
+`nix build` only allows access to Git-tracked files.
+:::
+
+Let's create a local Git repository and add track all files except `src/select.o` and `./result` to it:
+
+```shell-session
+$ git init
+Initialized empty Git repository in /home/user/select/.git/
+$ git add -A
+$ git reset src/select.o result
+```
+
+Now we can re-use this selection of files using `gitTracked`:
+
+```nix
+  sourceFiles = fs.gitTracked ./.;
+```
+
+Building we get
+
+```shell-session
+$ nix-build
+warning: Git tree '/home/user/select' is dirty
+trace: /home/user/select
+trace: - build.sh (regular)
+trace: - default.nix (regular)
+trace: - nix (all files in directory)
+trace: - package.nix (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - string.txt (regular)
+this derivation will be built:
+  /nix/store/vn21azx8y06cjq80lrvib8ia4xxpwn3d-filesets.drv
+[...]
+/nix/store/4xdfxm910x1i2qapv49caiibymfjhvla-filesets
+```
+
+This includes too much though, we don't need all of these files to build the derivation.
+
+## Intersection
+
+This is where `intersection` comes in.
+It allows us to create a file set consisting only of files that are in _both_ of two file sets.
+In this case we only want files that are both tracked by git, and included in our exclusive selection:
+
+```nix
+  sourceFiles =
+    fs.intersection
+      (fs.gitTracked ./.)
+      (fs.unions [
+        ./build.sh
+        ./string.txt
+        ./src
+      ]);
+```
+
+At last we get what we expect:
+
+```shell-session
+$ nix-build
+warning: Git tree '/home/user/select' is dirty
+trace: /home/user/select
+trace: - build.sh (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - string.txt (regular)
+/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+```
+
+## Conclusion
+
+You've now seen some examples on how to use all of the fundamental file set combinator functions.
+But if you need more complex behavior, you can compose them however necessary.
+
+For the complete list and more details, see the [reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset).
