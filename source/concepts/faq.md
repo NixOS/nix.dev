@@ -90,7 +90,7 @@ All of these "channel branches" follow the corresponding [`release-*`](https://g
 - On Linux (including NixOS and WSL), use [`nixos-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-unstable).
 - On any other platform, use [`nixpkgs-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-unstable).
 
-These branches follow `master`, the main development development branch.
+These branches follow `master`, the main development branch.
 
 [`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch but offer fewer stability guarantees.
 
