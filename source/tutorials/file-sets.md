@@ -203,7 +203,7 @@ t.drv'.
 That's where [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) comes in:
 It adds exactly the files in the given file set to a directory in the Nix store, starting from a specified root path.
 
-Define `package.nix` as follows:
+Define `build.nix` as follows:
 
 ```{code-block} nix
 :caption: build.nix
