@@ -42,12 +42,9 @@ trace: /home/user (all files in directory)
 null
 ```
 
-You might wonder where the file set here is, because we just passed a [_path_](https://nixos.org/manual/nix/stable/language/values#type-path) to the function!
-
-The key is that for all functions that expect a file set for an argument, they _also_ accepts paths.
-Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion).
-The resulting file sets contain _all_ files under the given path.
-We can see this from the trace `/home/user (all files in directory)`
+All functions that expect a file set for an argument also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
+Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion), and the resulting file sets contain _all_ files under the given path.
+In the previous trace this is indicated by `(all files in directory)`.
 
 Even though file sets conceptually contain local files,
 they _never_ add these files to the Nix store unless explicitly requested.
