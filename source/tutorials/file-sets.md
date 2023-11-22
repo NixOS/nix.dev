@@ -1,5 +1,5 @@
 (file-sets)=
-# File sets
+# Working with local files
 <!-- TODO: Switch all mentions of unstable to stable once 23.11 is out -->
 
 To build a local project in a Nix derivation, its source files must be accessible to the builder.
