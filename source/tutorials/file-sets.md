@@ -103,7 +103,7 @@ $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixo
 ```
 
 :::{note}
-For now we're using the nixos-unstable channel, since no stable channel has all the features we need yet.
+We're using the `nixos-unstable` channel branch here, since no stable release has all the features needed for this tutorial.
 :::
 
 Then create a `default.nix` file:
