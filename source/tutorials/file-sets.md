@@ -90,10 +90,10 @@ error: lib.fileset.trace: Argument (/etc/nix/nix.nix)
   is a path that does not exist.
 ```
 
-## A local directory
+## Example project
 
-To further experiment with the library, let's set up a local directory.
-To start out, create a new directory, enter it,
+To further experiment with the library, make a sample project.
+Create a new directory, enter it,
 and set up `niv` to pin the Nixpkgs dependency:
 
 ```shell-session
