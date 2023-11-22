@@ -20,7 +20,7 @@ Using these features directly can be tricky however:
 In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
 It abstracts over built-in functionality and offers a safer and more convenient interface.
 
-## Basics
+## File sets
 
 The file set library is based on the concept of _file sets_,
 a data type representing a collection of local files.
