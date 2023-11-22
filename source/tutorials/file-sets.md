@@ -61,11 +61,8 @@ Even though file sets conceptually contain local files, these files are *never* 
 You don't have to worry as much about accidentally copying secrets into the world-readable store.
 
 In this example, although we pretty-printed the home directory, no files were copied.
-
-:::{note}
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
 which copies the whole directory to the Nix store on evaluation!
-:::
 
 :::{warning}
 With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), a local directory containing `flake.nix` is always copied into the Nix store *completely* unless it is a Git repository!
