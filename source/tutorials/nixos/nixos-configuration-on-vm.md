@@ -33,7 +33,7 @@ The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` 
 Here we provide a configuration that corresponds to the NixOS GNOME graphical ISO image:
 
 ```bash
-nix-shell -I nixpkgs=channel:nixos-21.05 -p "$(cat <<EOF
+nix-shell -I nixpkgs=channel:nixos-22.05 -p "$(cat <<EOF
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
   nixos = pkgs.nixos {
@@ -48,7 +48,7 @@ EOF
 Or as a one-liner:
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-21.05 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; nixos = pkgs.nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true; }; in nixos.config.system.build.nixos-generate-config"
+nix-shell -I nixpkgs=channel:nixos-22.05 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; nixos = pkgs.nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true; }; in nixos.config.system.build.nixos-generate-config"
 ```
 
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
