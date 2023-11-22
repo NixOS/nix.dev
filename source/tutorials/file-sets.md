@@ -69,7 +69,7 @@ which copies the whole directory to the Nix store on evaluation!
 :::
 
 :::{warning}
-With the [`flakes` experimental feature](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake) enabled, a local directory containing `flake.nix` is always copied into the Nix store *completely* unless it is a Git repository!
+With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), a local directory containing `flake.nix` is always copied into the Nix store *completely* unless it is a Git repository!
 :::
 
 This implicit coercion also works for files:
@@ -514,7 +514,7 @@ trace: - world.txt (regular)
 Notably, the approach of using `difference ./.` explicitly selects the files to _exclude_, which means that new files added to the source directory are included by default.
 Depending on your project, this might be a better fit than the alternative in the next section.
 
-## Union (include)
+## Union (explicitly include files)
 
 To contrast the previous approach, `unions` can also be used to select only the files to _include_.
 This means that new files added to the current directory would be ignored by default.
@@ -556,7 +556,7 @@ stdenv.mkDerivation {
     fileset = sourceFiles;
   };
   postInstall = ''
-    cp -vr $src $out
+    cp -vr . $out
   '';
 }
 ```
@@ -573,20 +573,13 @@ trace: - world.txt (regular)
 this derivation will be built:
   /nix/store/sjzkn07d6a4qfp60p6dc64pzvmmdafff-fileset.drv
 ...
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source' -> '/nix/store/zl4n1g6is4cmsqf02
-dci5b2h5zd0ia4r-fileset'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/build.sh' -> '/nix/store/zl4n1g6i
-s4cmsqf02dci5b2h5zd0ia4r-fileset/build.sh'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/hello.txt' -> '/nix/store/zl4n1g6
-is4cmsqf02dci5b2h5zd0ia4r-fileset/hello.txt'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/world.txt' -> '/nix/store/zl4n1g6
-is4cmsqf02dci5b2h5zd0ia4r-fileset/world.txt'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src' -> '/nix/store/zl4n1g6is4cms
-qf02dci5b2h5zd0ia4r-fileset/src'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src/select.c' -> '/nix/store/zl4n
-1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.c'
-'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src/select.h' -> '/nix/store/zl4n
-1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.h'
+'.' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset'
+'./build.sh' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/build.sh'
+'./hello.txt' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/hello.txt'
+'./world.txt' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/world.txt'
+'./src' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src'
+'./src/select.c' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.c'
+'./src/select.h' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.h'
 ...
 /nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
 ```
@@ -650,7 +643,7 @@ this derivation will be built:
 This includes too much though, as not all of these files are needed to build the derivation as originally intended.
 
 :::{note}
-With the [`flakes` experimental feature](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake) enabled, it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
+With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
 
 ```shell-session
 nix build path:.
