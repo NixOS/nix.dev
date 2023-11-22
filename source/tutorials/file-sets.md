@@ -10,14 +10,14 @@ Using these features directly can be tricky however:
 
 - Coercion of paths to strings, such as the wide-spread pattern of `src = ./.`,
   makes the derivation dependent on the name of the current directory.
-  It also doesn't allow being more precise about which files to use.
+  It always adds the entire directory, including unneeded files that cause unnecessary new builds when they change.
 
 - The [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) function
   (and equivalently [`lib.sources.cleanSourceWith`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith))
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
 
-In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
+In this tutorial you'll learn how to use the Nixpkgs [`fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
 It abstracts over built-in functionality and offers a safer and more convenient interface.
 
 ## File sets
@@ -26,7 +26,7 @@ The file set library is based on the concept of _file sets_,
 a data type representing a collection of local files.
 File sets can be created, composed, and manipulated with the various functions of the library.
 
-The easiest way to experiment with the library is to use it through [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
+You can explore and learn about the library with [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
 
 ```shell-session
 $ nix repl -f channel:nixos-unstable
@@ -43,11 +43,11 @@ null
 ```
 
 All functions that expect a file set for an argument also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
-Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion), and the resulting file sets contain _all_ files under the given path.
+Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
 :::{tip}
-The `trace` function pretty-prints its first agument and returns its second argument.
+The `trace` function pretty-prints its first argument and returns its second argument.
 But since you often just need the pretty-printing in `nix repl`, you can omit the second argument:
 
 ```shell-session
@@ -58,10 +58,9 @@ trace: /home/user (all files in directory)
 :::
 
 Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
-You don't have to worry about accidentally copying secrets into the world-readable store.
+You don't have to worry as much about accidentally copying secrets into the world-readable store.
 
 In this example, although we pretty-printed the home directory, no files were copied.
-This is also evident from the expression evaluating instantly.
 
 :::{note}
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
@@ -82,13 +81,6 @@ trace: - nix.conf (symlink)
 
 In addition to the included file, this also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
 
-If a given path doesn't exist, the library will complain:
-
-```shell-session
-nix-repl> fs.trace /etc/nix/nix.nix
-error: lib.fileset.trace: Argument (/etc/nix/nix.nix)
-  is a path that does not exist.
-```
 
 ## Example project
 
@@ -103,7 +95,7 @@ $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixo
 ```
 
 :::{note}
-We're using the `nixos-unstable` channel branch here, since no stable release has all the features needed for this tutorial.
+We're using the `nixos-unstable` channel branch here, because the library is part of NixOS 23.11 and up, which has not been released at the time of writing.
 :::
 
 Then create a `default.nix` file with the following contents:
@@ -461,7 +453,7 @@ Create a file set containing a union of the files to exclude (`fs.unions [ ... ]
  in
 ```
 
-Changing any of the excluded files now doesn't necessarily require a rebuild anymore.
+Changing any of the excluded files now doesn't necessarily cause a new build anymore.
 
 Check it and modify one of the excluded files again:
 
@@ -501,7 +493,7 @@ Use it to select all files with a name ending in `.nix`:
  in
 ```
 
-This does not change the result:
+This does not change the result, even if we add a new `.nix` file.
 
 ```shell-session
 $ nix-build
@@ -597,7 +589,7 @@ this derivation will be built:
 Only the specified files are used, even when a new one is added:
 
 ```shell-session
-$ touch src/select.o
+$ touch src/select.o src/README.md
 
 $ nix-build
 trace: - build.sh (regular)
@@ -720,6 +712,6 @@ trace: - world.txt (regular)
 ## Conclusion
 
 We have shown some examples on how to use all of the fundamental file set functions.
-For more complex behavior, they can be composed as needed.
+For more complex use cases, they can be composed as needed.
 
 For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset).
