@@ -106,16 +106,16 @@ $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixo
 We're using the `nixos-unstable` channel branch here, since no stable release has all the features needed for this tutorial.
 :::
 
-Then create a `default.nix` file:
+Then create a `default.nix` file with the following contents:
 
 ```{code-block} nix
 :caption: default.nix
 {
   system ? builtins.currentSystem,
-  sources ? import ./nix/sources.nix,
+  inputs ? import ./nix/sources.nix,
 }:
 let
-  pkgs = import sources.nixpkgs {
+  pkgs = import inputs.nixpkgs {
     config = { };
     overlays = [ ];
     inherit system;
