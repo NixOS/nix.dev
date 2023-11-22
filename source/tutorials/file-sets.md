@@ -1,6 +1,10 @@
 (file-sets)=
 # Working with local files
-<!-- TODO: Switch all mentions of unstable to stable once 23.11 is out -->
+<!-- TODO: Switch all mentions of unstable to stable once 23.11 is out
+Also remove mention of using unstable
+Also use https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset
+instead of https://nixos.org/manual/nixpkgs/unstable/#sec-fileset
+-->
 
 To build a local project in a Nix derivation,
 its source files must be [accessible](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox)
@@ -94,11 +98,11 @@ and set up `niv` to pin the Nixpkgs dependency:
 ```shell-session
 $ mkdir fileset
 $ cd fileset
-$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-unstable"
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch master"
 ```
 
 :::{note}
-We're using the `nixos-unstable` channel branch here, because the library is part of NixOS 23.11 and up, which has not been released at the time of writing.
+We're using the `master` branch here, because the covered library features are part of NixOS 23.11 and up, which has not been released at the time of writing.
 :::
 
 Then create a `default.nix` file with the following contents:
@@ -718,4 +722,4 @@ trace: - world.txt (regular)
 We have shown some examples on how to use all of the fundamental file set functions.
 For more complex use cases, they can be composed as needed.
 
-For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset).
+For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset).
