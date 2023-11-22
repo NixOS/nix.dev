@@ -20,14 +20,37 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 - A working [Nix installation](https://nixos.org/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
 - Basic knowledge of the [Nix language](reading-nix-language)
 
-## Starting from the default NixOS configuration
+## Starting from a default NixOS configuration
 
-In this tutorial you will use the default configuration that is shipped with NixOS.[^nixosconf]
-[^nixosconf]: This [configuration template](https://github.com/NixOS/nixpkgs/blob/4e0525a8cdb370d31c1e1ba2641ad2a91fded57d/nixos/modules/installer/tools/tools.nix#L122-L226) is used.
+In this tutorial you will use a default configuration that is shipped with NixOS.
 
 :::{admonition} NixOS
 
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
+
+Beware that the result of this command depends on your current NixOS configuration.
+The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
+Here we provide a configuration that corresponds to the NixOS GNOME graphical ISO image:
+
+```bash
+nix-shell -I nixpkgs=channel:nixos-22.05 -p "$(cat <<EOF
+let
+  pkgs = import <nixpkgs> { config = {}; overlays = []; };
+  nixos = pkgs.nixos {
+    services.xserver.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+  };
+in nixos.config.system.build.nixos-generate-config
+EOF
+)"
+```
+
+Or as a one-liner:
+
+```shell-session
+nix-shell -I nixpkgs=channel:nixos-22.05 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; nixos = pkgs.nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true; }; in nixos.config.system.build.nixos-generate-config"
+```
+
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
 To avoid overwriting this file you have to specify the output directory.
 Create a NixOS configuration in your working directory:
