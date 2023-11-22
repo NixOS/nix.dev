@@ -29,8 +29,8 @@ In this tutorial you will use a default configuration that is shipped with NixOS
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
 
 Beware that the result of this command depends on your current NixOS configuration.
-We can configure the generation of the 'nixos-generate-config' in a repoducable way in a nix-shell.
-We provide a configuration that is replicating nixos gnome graphical iso image.
+The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment. 
+Here we provide a configuration that corresponds to the NixOS GNOME graphical ISO image:
 
 ```bash
 nix-shell -I nixpkgs=channel:nixos-21.05 -p "$(cat <<EOF
