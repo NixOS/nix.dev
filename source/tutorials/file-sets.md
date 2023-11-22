@@ -2,15 +2,9 @@
 # Working with local files
 <!-- TODO: Switch all mentions of unstable to stable once 23.11 is out -->
 
-To build a local project in a Nix derivation, its source files must be accessible to the builder.
-But since the builder runs in an isolated environment (if the [sandbox](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) is enabled),
-it won't have access to the local project files by default.
-
-To make this work regardless, the Nix language has certain builtin features to copy local paths to the Nix store,
-whose paths are then accessible to derivation builders [^1].
-
-[^1]: Technically only Nix store paths from the derivations inputs can be accessed,
-but in practice this distinction is not important.
+To build a local project in a Nix derivation, its source files must be accessible to the [`builder` executable](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
+Since by default the `builder` runs in an isolated environment that only allows reading from the Nix store,
+the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
 
