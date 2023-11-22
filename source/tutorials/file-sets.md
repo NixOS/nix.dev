@@ -71,9 +71,13 @@ With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-c
 This implicit coercion also works for files:
 
 ```shell-session
-nix-repl> fs.trace /etc/nix/nix.conf
-trace: /etc/nix
-trace: - nix.conf (symlink)
+$ touch some-file
+```
+
+```shell-session
+nix-repl> fs.trace ./some-file
+trace: /home/user
+trace: - some-file (regular)
 ```
 
 In addition to the included file, this also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
