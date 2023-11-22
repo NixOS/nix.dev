@@ -220,7 +220,7 @@ stdenv.mkDerivation {
 }
 ```
 
-The call to `fs.trace` will print the file set that will be used as a derivation input.
+The call to `fs.trace` prints the file set that will be used as a derivation input.
 
 The build will succeed:
 
@@ -408,7 +408,7 @@ trace: - world.txt (regular)
 ## Union (explicitly exclude files)
 
 There is still a problem:
-Changing _any_ of the included files causes the derivation to be rebuilt, even though it doesn't depend on those files.
+Changing _any_ of the included files causes the derivation to be built again, even though it doesn't depend on those files.
 
 Append an empty line to `build.nix`:
 
@@ -471,7 +471,8 @@ trace: - world.txt (regular)
 
 ## Filter
 
-Dealing with a large number of files, independent of their location, can be done programmatically with the [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function.
+With the [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function,
+you can find sets of files satisfying a criteria.
 
 Use it to select all files with a name ending in `.nix`:
 
