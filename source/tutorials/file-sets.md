@@ -17,9 +17,8 @@ Using these features directly can be tricky however:
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
 
-In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset) instead.
-It abstracts over these functions with essentially the same functionality,
-but an easier and safer interface.
+In this tutorial you'll learn how to use the [file set library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
+It abstracts over built-in functionality and offers a safer and more convenient interface.
 
 ## Basics
 
