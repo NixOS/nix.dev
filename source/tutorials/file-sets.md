@@ -30,7 +30,7 @@ The easiest way to experiment with the library is to use it through [`nix repl`]
 
 ```shell-session
 $ nix repl -f channel:nixos-unstable
-[...]
+...
 nix-repl> fs = lib.fileset
 ```
 
@@ -231,7 +231,7 @@ $ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/d8mj3z49s24q46rncma6v9kvi6xbx4vq-filesets.drv
-[...]
+...
 /nix/store/v5sx60xd9lvylgqcyqpchac1a2k8300c-filesets
 ```
 
@@ -242,7 +242,7 @@ $ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/1xb412x3fzavr8d8c3hbl3fv9kyvj77c-filesets.drv
-[...]
+...
 /nix/store/n9i6gaf80hvbfplsv7zilkbfrz47s4kn-filesets
 ```
 
@@ -276,11 +276,11 @@ trace: - package.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/7960rh64d4zlkspmf4h51g4zys3lcjyj-filesets.drv
-[...]
+...
 /nix/store/aicvbzjvqzn06nbgpbrwqi47rxqdiqv9-filesets
 
 $ nix-build
-[...]
+...
 /nix/store/aicvbzjvqzn06nbgpbrwqi47rxqdiqv9-filesets
 ```
 
@@ -314,7 +314,7 @@ $ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
   /nix/store/ygpx17kshzc6bj3c71xlda8szw6qi1sr-filesets.drv
-[...]
+...
 /nix/store/bzvhlr9h2zwqi7rr9i1j193z9hkskhmk-filesets
 
 $ nix-build
@@ -343,7 +343,7 @@ trace: - package.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/zmgpqlpfz2jq0w9rdacsnpx8ni4n77cn-filesets.drv
-[...]
+...
 /nix/store/6pffjljjy3c7kla60nljk3fad4q4kkzn-filesets
 ```
 
@@ -441,7 +441,7 @@ trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv
 building '/nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv'...
-[...]
+...
 /nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
 
 $ touch src/select.o
@@ -500,7 +500,7 @@ trace:   - select.h (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/vn21azx8y06cjq80lrvib8ia4xxpwn3d-filesets.drv
-[...]
+...
 /nix/store/4xdfxm910x1i2qapv49caiibymfjhvla-filesets
 ```
 
