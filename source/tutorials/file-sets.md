@@ -69,9 +69,7 @@ which copies the whole directory to the Nix store on evaluation!
 :::
 
 :::{warning}
-With current experimental Flakes,
-the local files always get copied into the Nix store
-unless you use it within a Git repository!
+With the [`flakes` experimental feature](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake) enabled, a local directory containing `flake.nix` is always copied into the Nix store *completely* unless it is a Git repository!
 :::
 
 This implicit coercion also works for files:
