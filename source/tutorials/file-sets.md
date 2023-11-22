@@ -106,7 +106,6 @@ $ cd fileset
 $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch master"
 ```
 
-
 Then create a `default.nix` file with the following contents:
 
 ```{code-block} nix
@@ -132,79 +131,12 @@ $ echo hello > hello.txt
 $ echo world > world.txt
 ```
 
-Start with a minimal `build.nix` based on [`stdenv.mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#part-stdenv):
-
-```{code-block} nix
-:caption: build.nix
-{ stdenv }:
-stdenv.mkDerivation {
-  name = "fileset";
-  # This doesn't use the file set library just yet!
-  src = ./.;
-  postInstall = ''
-    mkdir $out
-    cp -v hello.txt $out
-  '';
-}
-```
-
-Try it out (note that it will take some time to fetch the first time around):
-
-```shell-session
-$ nix-build
-this derivation will be built:
-  /nix/store/36p7xhc0rr8jvslban0zba0f7aij8cmb-fileset.drv
-building '/nix/store/36p7xhc0rr8jvslban0zba0f7aij8cmb-fileset.drv'...
-...
-'hello.txt' -> '/nix/store/zdljz7v5bhv1nnh5mdh3xf418cf7z622-fileset/hello.txt'
-...
-/nix/store/zdljz7v5bhv1nnh5mdh3xf418cf7z622-fileset
-```
-
-Since only `hello.txt` is needed to build the derivation,
-we can try passing it directly in `src`.
-But this will result in an error, because `mkDerivation` expects a directory:
-
-```{code-block} diff
-:caption: build.nix
- { stdenv }:
- stdenv.mkDerivation {
-   name = "fileset";
-   # This doesn't use the file set library just yet!
--  src = ./.;
-+  src = ./hello.txt;
-   postInstall = ''
-     mkdir $out
-     cp -v hello.txt $out
-   '';
- }
-```
-
-```shell-session
-$ nix-build
-this derivation will be built:
-  /nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv
-building '/nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv'...
-unpacking sources
-unpacking source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-hello.txt
-do not know how to unpack source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-
-hello.txt
-error: builder for '/nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv' failed w
-ith exit code 1;
-       last 3 log lines:
-       > unpacking sources
-       > unpacking source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-hello.t
-xt
-       > do not know how to unpack source archive /nix/store/i9pmrzmpshapij2kin22pff6
-fc2adavx-hello.txt
-       For full logs, run 'nix log /nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-filese
-t.drv'.
-```
-
 ## Adding files to the Nix store
 
-That's where [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) comes in:
-It adds exactly the files in the given file set to a directory in the Nix store, starting from a specified root path.
+To add files in a given file set to the Nix store,
+we use [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource).
+This function needs a `root` attribute to know which path to use as the root of the resulting store path,
+but only exactly the files in the `fileset` argument are included in the result.
 
 Define `build.nix` as follows:
 
@@ -233,7 +165,7 @@ stdenv.mkDerivation {
 
 The call to `fs.trace` prints the file set that will be used as a derivation input.
 
-The build will succeed:
+The build will succeed (note that it will take some time to fetch the first time around):
 
 ```
 $ nix-build
