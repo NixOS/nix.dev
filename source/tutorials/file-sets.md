@@ -124,6 +124,12 @@ in
 pkgs.callPackage ./build.nix { }
 ```
 
+Add a source file to work with:
+
+```shell-session
+echo Hello, file set! > string.txt
+```
+
 From now on we'll just change the contents of `build.nix` while keeping `default.nix` the same.
 
 For now, let's have a simple `build.nix` to verify everything works so far:
