@@ -112,10 +112,10 @@ Then create a `default.nix` file with the following contents:
 :caption: default.nix
 {
   system ? builtins.currentSystem,
-  inputs ? import ./nix/sources.nix,
+  sources ? import ./nix/sources.nix,
 }:
 let
-  pkgs = import inputs.nixpkgs {
+  pkgs = import sources.nixpkgs {
     config = { };
     overlays = [ ];
     inherit system;
