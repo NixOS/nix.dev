@@ -29,7 +29,7 @@ In this tutorial you will use a default configuration that is shipped with NixOS
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
 
 Beware that the result of this command depends on your current NixOS configuration.
-The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment. 
+The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
 Here we provide a configuration that corresponds to the NixOS GNOME graphical ISO image:
 
 ```bash
@@ -42,7 +42,7 @@ let
   };
 in nixos.config.system.build.nixos-generate-config
 EOF
-)" 
+)"
 ```
 
 Or as a one-liner:
