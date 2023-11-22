@@ -413,7 +413,7 @@ trace: - world.txt (regular)
 /nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
 ```
 
-## Union (exclude)
+## Union (explicitly exclude files)
 
 There is still a problem:
 Changing _any_ of the included files causes the derivation to be rebuilt, even though it doesn't depend on those files.
