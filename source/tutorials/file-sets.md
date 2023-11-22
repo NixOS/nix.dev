@@ -511,7 +511,7 @@ trace: - world.txt (regular)
 /nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
 ```
 
-Notably, with this approach, new files added to the source directory are _included_ by default.
+Notably, the approach of using `difference ./.` explicitly selects the files to _exclude_, which means that new files added to the source directory are included by default.
 Depending on your project, this might be a better fit than the alternative in the next section.
 
 ## Union (include)
