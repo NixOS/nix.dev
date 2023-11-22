@@ -97,8 +97,8 @@ Create a new directory, enter it,
 and set up `niv` to pin the Nixpkgs dependency:
 
 ```shell-session
-$ mkdir select
-$ cd select
+$ mkdir fileset
+$ cd fileset
 $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-unstable"
 ```
 
@@ -124,170 +124,248 @@ in
 pkgs.callPackage ./build.nix { }
 ```
 
-Add a source file to work with:
+Add two source files to work with:
 
 ```shell-session
-echo Hello, file set! > string.txt
+echo hello > hello.txt
+echo world > world.txt
 ```
 
-From now on we'll just change the contents of `build.nix` while keeping `default.nix` the same.
-
-For now, let's have a simple `build.nix` to verify everything works so far:
+Start with a minimal `build.nix` based on `stdenv.mkDerivation`:
 
 ```{code-block} nix
 :caption: build.nix
-{ runCommand }:
-runCommand "hello" { } ''
-  echo hello world
-''
+{ stdenv }:
+stdenv.mkDerivation {
+  name = "fileset";
+  src = ./.;
+  postInstall = ''
+    mkdir $out
+    cp -v hello.txt $out
+  '';
+}
 ```
 
-And try it out:
+Try it out:
 
 ```shell-session
 $ nix-build
 this derivation will be built:
-  /nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv
-building '/nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv'...
-hello world
-error: builder for '/nix/store/kmf9sw8fn7ps3ndqs31hvqwsa35b8l3g-hello.drv'
-  failed to produce output path for output 'out'
+  /nix/store/36p7xhc0rr8jvslban0zba0f7aij8cmb-fileset.drv
+building '/nix/store/36p7xhc0rr8jvslban0zba0f7aij8cmb-fileset.drv'...
+...
+'hello.txt' -> '/nix/store/zdljz7v5bhv1nnh5mdh3xf418cf7z622-fileset/hello.txt'
+...
+/nix/store/zdljz7v5bhv1nnh5mdh3xf418cf7z622-fileset
 ```
 
-We could also add `touch $out` to make the build succeed,
-but we'll omit that for the sake of the tutorial, since we only need the build logs.
-This also makes it easier to build it again, since successful derivation builds would get cached.
-From now on we'll also make build outputs a bit shorter for the sake of brevity.
+You may have already noticed a problem:
+Only one file is needed to build the derivation.
+But passing the path to `hello.txt` will result in an error, because `mkDerivation` expects a directory:
+
+```{code-block} diff
+:caption: build.nix
+ { stdenv }:
+ stdenv.mkDerivation {
+   name = "fileset";
+-  src = ./.;
++  src = ./hello.txt;
+   postInstall = ''
+     mkdir $out
+     cp -v hello.txt $out
+   '';
+ }
+```
+
+```shell-session
+$ nix-build
+this derivation will be built:
+  /nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv
+building '/nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv'...
+unpacking sources
+unpacking source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-hello.txt
+do not know how to unpack source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-
+hello.txt
+error: builder for '/nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-fileset.drv' failed w
+ith exit code 1;
+       last 3 log lines:
+       > unpacking sources
+       > unpacking source archive /nix/store/i9pmrzmpshapij2kin22pff6fc2adavx-hello.t
+xt
+       > do not know how to unpack source archive /nix/store/i9pmrzmpshapij2kin22pff6
+fc2adavx-hello.txt
+       For full logs, run 'nix log /nix/store/kaik07l2i7s7wh7lcxpwynv4lmn4h742-filese
+t.drv'.
+```
 
 ## Adding files to the Nix store
 
-The file set library wouldn't be very useful if you couldn't also add its files to the Nix store for use in derivations.
-That's where [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) comes in.
-It allows us to create a Nix store path containing exactly only the files that are in the file set,
-added to the Nix store rooted at a specific path.
+That's where [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) comes in:
+It adds exactly the files in the given file set to a directory in the Nix store, starting from a specified root path.
 
-Let's try it out by defining `build.nix` as follows:
+Define `package.nix` as follows:
 
 ```{code-block} nix
 :caption: build.nix
 { stdenv, lib }:
 let
   fs = lib.fileset;
-  sourceFiles = ./string.txt;
+  sourceFiles = ./hello.txt;
 in
+
 fs.trace sourceFiles
+
 stdenv.mkDerivation {
-  name = "filesets";
-  src = fs.toSource {
-    root = ./.;
-    fileset = sourceFiles;
-  };
-}
-```
-
-And building it:
-
-```
-$ nix-build
-trace: /home/user/select
-trace: - string.txt (regular)
-```
-
-But the real benefit of the file set library lies in its combinator functions.
-These allow you to compose file sets in different ways to achieve complex behavior.
-
-## Avoiding unnecessary rebuilds
-
-To show some more motivation,
-let's first use the file set library to include all files from the local directory in the build,
-and have it succeed by coping the `string.txt` file to the output:
-
-```{code-block} nix
-:caption: build.nix
-:emphasize-lines: 4, 13-15
-{ stdenv, lib }:
-let
-  fs = lib.fileset;
-  sourceFiles = ./.;
-in
-fs.trace sourceFiles
-stdenv.mkDerivation {
-  name = "filesets";
+  name = "fileset";
   src = fs.toSource {
     root = ./.;
     fileset = sourceFiles;
   };
   postInstall = ''
-    cp -v string.txt $out
+    mkdir $out
+    cp -v hello.txt $out
   '';
 }
 ```
 
-Building this we get:
+The call to `fs.trace` will print the file set that will be used as a derivation input.
+
+The build will succeed:
+
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+this derivation will be built:
+  /nix/store/3ci6avmjaijx5g8jhb218i183xi7bi2n-fileset.drv
+...
+'hello.txt' -> '/nix/store/sa4g6h13v0zbpfw6pzva860kp5aks44n-fileset/hello.txt'
+...
+/nix/store/sa4g6h13v0zbpfw6pzva860kp5aks44n-fileset
+```
+
+But the real benefit of the file set library comes from its facilities for composing file sets in different ways.
+
+## Difference
+
+To be able to copy both files `hello.txt` and `world.txt` to the output, add the whole project directory as a source again:
+
+```{code-block} diff
+:caption: build.nix
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = ./hello.txt;
++  sourceFiles = ./.;
+ in
+
+ fs.trace sourceFiles
+
+ stdenv.mkDerivation {
+   name = "fileset";
+   src = fs.toSource {
+     root = ./.;
+     fileset = sourceFiles;
+   };
+   postInstall = ''
+     mkdir $out
+-    cp -v hello.txt $out
++    cp -v {hello,world}.txt $out
+   '';
+ }
+```
+
+This will work as expected:
 
 ```shell-session
 $ nix-build
-trace: /home/user/select (all files in directory)
+trace: /home/user/fileset (all files in directory)
 this derivation will be built:
-  /nix/store/d8mj3z49s24q46rncma6v9kvi6xbx4vq-filesets.drv
+  /nix/store/fsihp8872vv9ngbkc7si5jcbigs81727-fileset.drv
 ...
-/nix/store/v5sx60xd9lvylgqcyqpchac1a2k8300c-filesets
+'hello.txt' -> '/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset/hello.txt'
+'world.txt' -> '/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset/world.txt'
+...
+/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset
 ```
 
-But if you rebuild again, you get something different!
+However, if you run `nix-build` again, the output path will be different!
 
 ```shell-session
 $ nix-build
-trace: /home/user/select (all files in directory)
+trace: /home/user/fileset (all files in directory)
 this derivation will be built:
-  /nix/store/1xb412x3fzavr8d8c3hbl3fv9kyvj77c-filesets.drv
+  /nix/store/nlh7ismrf27xsnl3m20vfz6rvwlbbbca-fileset.drv
 ...
-/nix/store/n9i6gaf80hvbfplsv7zilkbfrz47s4kn-filesets
+'hello.txt' -> '/nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset/hello.txt'
+'world.txt' -> '/nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset/world.txt'
+...
+/nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset
 ```
 
-The problem here is that `nix-build` by default creates a symlink in the local directory, pointing to the result of the build:
+The problem here is that `nix-build` by default creates a `result` symlink in the working directory, which points to the store path just produced:
 
 ```
 $ ls -l result
-result -> /nix/store/n9i6gaf80hvbfplsv7zilkbfrz47s4kn-filesets
+result -> /nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset
 ```
 
-In such a case, we can use the [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function.
-It allows "subtracting" one file set from another,
-resulting in a new file set that contains all files from the first argument
-that aren't in the second argument.
+Since `src` refers to the whole directory, and its contents change when `nix-build` succeeds, Nix will have to start over every time.
 
-Let's use it to filter out `./result` by changing the `sourceFiles` definition:
+:::{note}
+This will also happen without the file set library, e.g. when setting `src = ./.;` directly.
+:::
 
-```{code-block} nix
+The [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function subtracts one file set from another.
+The result is a new file set that contains all files from the first argument that aren't in the second argument.
+
+Use it to filter out `./result` by changing the `sourceFiles` definition:
+
+```{code-block} diff
 :caption: build.nix
-  sourceFiles = fs.difference ./. ./result;
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = ./.;
++  sourceFiles = fs.difference ./. ./result;
+ in
 ```
 
-Building it now we get:
+Building this, the file set library will specify which files are taken from the directory:
 
 ```shell-session
 $ nix-build
-trace: /home/user/select
-trace: - default.nix (regular)
-trace: - nix (all files in directory)
+trace: /home/user/fileset
 trace: - build.nix (regular)
-trace: - string.txt (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - nix (all files in directory)
+trace: - world.txt (regular)
 this derivation will be built:
-  /nix/store/7960rh64d4zlkspmf4h51g4zys3lcjyj-filesets.drv
+  /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
 ...
-/nix/store/aicvbzjvqzn06nbgpbrwqi47rxqdiqv9-filesets
-
-$ nix-build
+'hello.txt' -> '/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset/hello.txt'
+'world.txt' -> '/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset/world.txt'
 ...
-/nix/store/aicvbzjvqzn06nbgpbrwqi47rxqdiqv9-filesets
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
 ```
 
-You can see that the trace now doesn't print "all files in directory" anymore,
-because we don't include `./result` anymore.
-Also, running the build always gives the same result, no more rebuilding necessary!
+An attempt to repeat the build will re-use the existing store path:
 
-If we try to remove the `./result` symlink however, we run into a problem:
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - build.nix (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - nix (all files in directory)
+trace: - world.txt (regular)
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+
+## Missing files
+
+Removing the `./result` symlink creates a new problem, though:
 
 ```shell-session
 $ rm result
@@ -297,43 +375,58 @@ error: lib.fileset.difference: Second argument (negative set)
   To create a file set from a path that may not exist, use `lib.fileset.maybeMissing`.
 ```
 
-It helpfully explains to us that for files that may not exist,
-we should use `maybeMissing` <!-- https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.maybeMissing -->,
-so let's try it:
+Follow the instructions in the error message, and use `maybeMissing` to create a file set from a path that may not exist (in which case the file set will be empty):
 
-```{code-block} nix
+<!-- https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.maybeMissing -->
+
+```{code-block} diff
 :caption: build.nix
-  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = fs.difference ./. ./result;
++  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
+ in
 ```
 
-This now works, reliably filtering out `./result` if it exists:
+This now works, using the whole directory since `./result` is not present:
 
 ```
 $ nix-build
 trace: /home/user/select (all files in directory)
 this derivation will be built:
-  /nix/store/ygpx17kshzc6bj3c71xlda8szw6qi1sr-filesets.drv
+  /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
 ...
-/nix/store/bzvhlr9h2zwqi7rr9i1j193z9hkskhmk-filesets
-
-$ nix-build
-trace: /home/user/select
-trace: - default.nix (regular)
-trace: - nix (all files in directory)
-trace: - build.nix (regular)
-trace: - string.txt (regular)
-/nix/store/bzvhlr9h2zwqi7rr9i1j193z9hkskhmk-filesets
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
 ```
 
-## Adding file sets together
+Another build attempt will produce a different trace, but the same output path:
 
-We still have a problem however:
-Changing _any_ of the included files causes the derivation to be rebuilt,
-even though it doesn't depend on those files.
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - build.nix (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - nix (all files in directory)
+trace: - world.txt (regular)
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+
+## Union (exclude)
+
+There is still a problem:
+Changing _any_ of the included files causes the derivation to be rebuilt, even though it doesn't depend on those files.
+
+Append an empty line to `build.nix`:
 
 ```shell-session
-$ echo "# Just a comment" >> build.nix
+$ echo >> build.nix
+```
 
+Again, Nix will start from scratch:
+
+```shell-session
 $ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
@@ -346,77 +439,104 @@ this derivation will be built:
 /nix/store/6pffjljjy3c7kla60nljk3fad4q4kkzn-filesets
 ```
 
-One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.unions)
-to create a file set containing all of the files we don't want,
-and removing that instead:
+One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.unions).
 
-```{code-block} nix
+Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
+
+```{code-block} diff
 :caption: build.nix
-  sourceFiles =
-    fs.difference
-      ./.
-      (fs.unions [
-        (fs.maybeMissing ./result)
-        ./default.nix
-        ./build.nix
-        ./nix
-      ]);
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
++  sourceFiles =
++    fs.difference
++      ./.
++      (fs.unions [
++        (fs.maybeMissing ./result)
++        ./default.nix
++        ./build.nix
++        ./nix
++      ]);
+ in
 ```
 
-This also gives us the opportunity to show the [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function,
-which as the name implies, allows filtering the files in a local path.
-We use it to select all files whose name ends with `.nix`:
+Changing any of the excluded files now doesn't necessarily require a rebuild anymore.
 
-```{code-block} nix
-:caption: build.nix
-  sourceFiles =
-    fs.difference
-      ./.
-      (fs.unions [
-        (fs.maybeMissing ./result)
-        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
-        ./nix
-      ]);
+Check it and modify one of the excluded files again:
+
+```
+$ echo >> build.nix
 ```
 
-Changing any of the removed files now doesn't necessarily require a rebuild anymore:
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
+```
+
+## Filter
+
+Dealing with a large number of files, independent of their location, can be done programmatically with the [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function.
+
+Use it to select all files with a name ending in `.nix`:
+
+```{code-block} diff
+:caption: build.nix
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+   sourceFiles =
+     fs.difference
+       ./.
+       (fs.unions [
+         (fs.maybeMissing ./result)
+-        ./default.nix
+-        ./build.nix
++        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
+         ./nix
+       ]);
+ in
+```
+
+This does not change the result:
 
 ```shell-session
 $ nix-build
-trace: /home/user/select
-trace: - string.txt (regular)
-/nix/store/clrd19vn5cv6n7x7hzajq1fv43qig7cp-filesets
-
-$ echo "# Just a comment" >> build.nix
-
-$ nix-build
-trace: /home/user/select
-trace: - string.txt (regular)
-/nix/store/clrd19vn5cv6n7x7hzajq1fv43qig7cp-filesets
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
 ```
 
-Notable with this approach is that new files added to the current directory are _included_ by default.
+Notably, with this approach, new files added to the source directory are _included_ by default.
 Depending on your project, this might be a better fit than the alternative in the next section.
 
-## Only including necessary files
+## Union (include)
 
-To contrast the above approach, we can also directly use `unions` to select only the files we want to _include_.
-This means that new files added to the current directory would be _excluded_ by default.
+To contrast the previous approach, `unions` can also be used to select only the files to _include_.
+This means that new files added to the current directory would be ignored by default.
 
-To demonstrate, let's create some extra files to select:
+Create some additional files:
 
 ```shell-session
 $ mkdir src
 $ touch build.sh src/select.{c,h}
 ```
 
-And then create a file set from just the ones we're interested in:
+Then create a file set from only the files to be included explicitly:
 
 ```{code-block} nix
 :caption: build.nix
+{ stdenv, lib }:
+let
+  fs = lib.fileset;
   sourceFiles = fs.unions [
+    ./hello.txt
+    ./world.txt
     ./build.sh
-    ./string.txt
     (fs.fileFilter
       (file:
         lib.hasSuffix ".c" file.name
@@ -425,49 +545,72 @@ And then create a file set from just the ones we're interested in:
       ./src
     )
   ];
+in
+
+fs.trace sourceFiles
+
+stdenv.mkDerivation {
+  name = "fileset";
+  src = fs.toSource {
+    root = ./.;
+    fileset = sourceFiles;
+  };
+  postInstall = ''
+    cp -vr $src $out
+  '';
+}
 ```
 
-When building this you'll see that only the specified files are used, even when a new one is added:
+The `postInstall` script is simplified to rely on the sources to be pre-filtered appropriately:
 
 ```shell-session
 $ nix-build
-trace: /home/user/select
+trace: /home/user/fileset
 trace: - build.sh (regular)
-trace: - src
-trace:   - select.c (regular)
-trace:   - select.h (regular)
-trace: - string.txt (regular)
+trace: - hello.txt (regular)
+trace: - src (all files in directory)
+trace: - world.txt (regular)
 this derivation will be built:
-  /nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv
-building '/nix/store/gzj9j9dk2qyd46y1g2wkpkrbc3f2nm5g-filesets.drv'...
+  /nix/store/sjzkn07d6a4qfp60p6dc64pzvmmdafff-fileset.drv
 ...
-/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source' -> '/nix/store/zl4n1g6is4cmsqf02
+dci5b2h5zd0ia4r-fileset'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/build.sh' -> '/nix/store/zl4n1g6i
+s4cmsqf02dci5b2h5zd0ia4r-fileset/build.sh'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/hello.txt' -> '/nix/store/zl4n1g6
+is4cmsqf02dci5b2h5zd0ia4r-fileset/hello.txt'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/world.txt' -> '/nix/store/zl4n1g6
+is4cmsqf02dci5b2h5zd0ia4r-fileset/world.txt'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src' -> '/nix/store/zl4n1g6is4cms
+qf02dci5b2h5zd0ia4r-fileset/src'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src/select.c' -> '/nix/store/zl4n
+1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.c'
+'/nix/store/6k6pv78b1dkdhbdlzxar5vb3z3c8fwza-source/src/select.h' -> '/nix/store/zl4n
+1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.h'
+...
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
+```
 
+Only the specified files are used, even when a new one is added:
+
+```shell-session
 $ touch src/select.o
 
 $ nix-build
-trace: /home/user/select
 trace: - build.sh (regular)
+trace: - hello.txt (regular)
 trace: - src
 trace:   - select.c (regular)
 trace:   - select.h (regular)
-trace: - string.txt (regular)
-/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+trace: - world.txt (regular)
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
 ```
 
-## Git
+## Matching files tracked by Git
 
-In case we track files with Git, we can use [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) to re-use the same set of files by Git.
+If a directory is part of a Git repository, [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) automatically filters for files that are tracked by Git.
 
-:::{note}
-With current experimental Flakes,
-it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function,
-even with `nix build path:.`.
-However it's also not needed, because by default,
-`nix build` only allows access to Git-tracked files.
-:::
-
-Let's create a local Git repository and add track all files except `src/select.o` and `./result` to it:
+Create a local Git repository and add all files except `src/select.o` and `./result` to it:
 
 ```shell-session
 $ git init
@@ -488,28 +631,40 @@ Building we get
 ```shell-session
 $ nix-build
 warning: Git tree '/home/user/select' is dirty
-trace: /home/user/select
+trace: /home/vg/src/nix.dev/fileset
+trace: - build.nix (regular)
 trace: - build.sh (regular)
 trace: - default.nix (regular)
+trace: - hello.txt (regular)
 trace: - nix (all files in directory)
-trace: - build.nix (regular)
 trace: - src
 trace:   - select.c (regular)
 trace:   - select.h (regular)
-trace: - string.txt (regular)
+trace: - world.txt (regular)
 this derivation will be built:
-  /nix/store/vn21azx8y06cjq80lrvib8ia4xxpwn3d-filesets.drv
+  /nix/store/p9aw3fl5xcjbgg9yagykywvskzgrmk5y-fileset.drv
 ...
-/nix/store/4xdfxm910x1i2qapv49caiibymfjhvla-filesets
+/nix/store/cw4bza1r27iimzrdbfl4yn5xr36d6k5l-fileset
 ```
 
-This includes too much though, we don't need all of these files to build the derivation.
+This includes too much though, as not all of these files are needed to build the derivation as originally intended.
+
+:::{note}
+With the [`flakes` experimental feature](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake) enabled, it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
+
+```shell-session
+nix build path:.
+```
+
+However it's also not needed, because by default, `nix build` only allows access to files tracked by Git.
+:::
 
 ## Intersection
 
 This is where `intersection` comes in.
-It allows us to create a file set consisting only of files that are in _both_ of two file sets.
-In this case we only want files that are both tracked by git, and included in our exclusive selection:
+It allows creating a file set that consists only of files that are in _both_ of the two given file sets.
+
+Select all files that are both tracked by Git *and* relevant for the build:
 
 ```{code-block} nix
 :caption: build.nix
@@ -517,24 +672,25 @@ In this case we only want files that are both tracked by git, and included in ou
     fs.intersection
       (fs.gitTracked ./.)
       (fs.unions [
+        ./hello.txt
+        ./world.txt
         ./build.sh
-        ./string.txt
         ./src
       ]);
 ```
 
-At last we get what we expect:
+This will produce the same output as in the other approach and therefore re-use a previous build result:
 
 ```shell-session
 $ nix-build
 warning: Git tree '/home/user/select' is dirty
-trace: /home/user/select
 trace: - build.sh (regular)
+trace: - hello.txt (regular)
 trace: - src
 trace:   - select.c (regular)
 trace:   - select.h (regular)
-trace: - string.txt (regular)
-/nix/store/sb4g8skwvpwbay5kdpnyhwjglxqzim28-filesets
+trace: - world.txt (regular)
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
 ```
 
 ## Conclusion
