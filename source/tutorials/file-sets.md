@@ -121,15 +121,15 @@ let
     inherit system;
   };
 in
-pkgs.callPackage ./package.nix { }
+pkgs.callPackage ./build.nix { }
 ```
 
-From now on we'll just change the contents of `package.nix` while keeping `default.nix` the same.
+From now on we'll just change the contents of `build.nix` while keeping `default.nix` the same.
 
-For now, let's have a simple `package.nix` to verify everything works so far:
+For now, let's have a simple `build.nix` to verify everything works so far:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
 { runCommand }:
 runCommand "hello" { } ''
   echo hello world
@@ -160,10 +160,10 @@ That's where [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-li
 It allows us to create a Nix store path containing exactly only the files that are in the file set,
 added to the Nix store rooted at a specific path.
 
-Let's try it out by defining `package.nix` as follows:
+Let's try it out by defining `build.nix` as follows:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
 { stdenv, lib }:
 let
   fs = lib.fileset;
@@ -197,7 +197,7 @@ let's first use the file set library to include all files from the local directo
 and have it succeed by coping the `string.txt` file to the output:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
 :emphasize-lines: 4, 13-15
 { stdenv, lib }:
 let
@@ -254,7 +254,7 @@ that aren't in the second argument.
 Let's use it to filter out `./result` by changing the `sourceFiles` definition:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles = fs.difference ./. ./result;
 ```
 
@@ -265,7 +265,7 @@ $ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
-trace: - package.nix (regular)
+trace: - build.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/7960rh64d4zlkspmf4h51g4zys3lcjyj-filesets.drv
@@ -296,7 +296,7 @@ we should use `maybeMissing` <!-- https://nixos.org/manual/nixpkgs/unstable/#fun
 so let's try it:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
 ```
 
@@ -314,7 +314,7 @@ $ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
-trace: - package.nix (regular)
+trace: - build.nix (regular)
 trace: - string.txt (regular)
 /nix/store/bzvhlr9h2zwqi7rr9i1j193z9hkskhmk-filesets
 ```
@@ -326,13 +326,13 @@ Changing _any_ of the included files causes the derivation to be rebuilt,
 even though it doesn't depend on those files.
 
 ```shell-session
-$ echo "# Just a comment" >> package.nix
+$ echo "# Just a comment" >> build.nix
 
 $ nix-build
 trace: /home/user/select
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
-trace: - package.nix (regular)
+trace: - build.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/zmgpqlpfz2jq0w9rdacsnpx8ni4n77cn-filesets.drv
@@ -345,14 +345,14 @@ to create a file set containing all of the files we don't want,
 and removing that instead:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles =
     fs.difference
       ./.
       (fs.unions [
         (fs.maybeMissing ./result)
         ./default.nix
-        ./package.nix
+        ./build.nix
         ./nix
       ]);
 ```
@@ -362,7 +362,7 @@ which as the name implies, allows filtering the files in a local path.
 We use it to select all files whose name ends with `.nix`:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles =
     fs.difference
       ./.
@@ -381,7 +381,7 @@ trace: /home/user/select
 trace: - string.txt (regular)
 /nix/store/clrd19vn5cv6n7x7hzajq1fv43qig7cp-filesets
 
-$ echo "# Just a comment" >> package.nix
+$ echo "# Just a comment" >> build.nix
 
 $ nix-build
 trace: /home/user/select
@@ -407,7 +407,7 @@ $ touch build.sh src/select.{c,h}
 And then create a file set from just the ones we're interested in:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles = fs.unions [
     ./build.sh
     ./string.txt
@@ -473,7 +473,7 @@ $ git reset src/select.o result
 Now we can re-use this selection of files using `gitTracked`:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles = fs.gitTracked ./.;
 ```
 
@@ -486,7 +486,7 @@ trace: /home/user/select
 trace: - build.sh (regular)
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
-trace: - package.nix (regular)
+trace: - build.nix (regular)
 trace: - src
 trace:   - select.c (regular)
 trace:   - select.h (regular)
@@ -506,7 +506,7 @@ It allows us to create a file set consisting only of files that are in _both_ of
 In this case we only want files that are both tracked by git, and included in our exclusive selection:
 
 ```{code-block} nix
-:caption: package.nix
+:caption: build.nix
   sourceFiles =
     fs.intersection
       (fs.gitTracked ./.)
