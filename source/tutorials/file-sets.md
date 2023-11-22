@@ -80,11 +80,9 @@ trace: /etc/nix
 trace: - nix.conf (symlink)
 ```
 
-We can see that in addition to the included file,
-it also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
+In addition to the included file, this also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
 
-But if we make a typo for a path that doesn't exist,
-the library adequately complains about it:
+If a given path doesn't exist, the library will complain:
 
 ```shell-session
 nix-repl> fs.trace /etc/nix/nix.nix
