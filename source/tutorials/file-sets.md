@@ -57,15 +57,15 @@ trace: /home/user (all files in directory)
 ```
 :::
 
-Even though file sets conceptually contain local files,
-they _never_ add these files to the Nix store unless explicitly requested.
-So even though we pretty-printed all files in your home directory, none of its contained files were imported because of that.
+Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
+You don't have to worry about accidentally copying secrets into the world-readable store.
+
+In this example, although we pretty-printed the home directory, no files were copied.
 This is also evident from the expression evaluating instantly.
-So you don't have to worry about accidentally copying secrets into the store.
 
 :::{note}
-This is in contrast to coercion of paths to strings like in `"${./.}"`,
-which _does_ add all of its contained files to the Nix store!
+This is in contrast to coercion of paths to strings such as in `"${./.}"`,
+which copies the whole directory to the Nix store on evaluation!
 :::
 
 :::{warning}
