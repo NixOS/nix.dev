@@ -46,6 +46,17 @@ All functions that expect a file set for an argument also accept a [path](https:
 Such path arguments are then [implicitly coerced](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion), and the resulting file sets contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
+:::{tip}
+The `trace` function pretty-prints its first agument and returns its second argument.
+But since you often just need the pretty-printing in `nix repl`, you can omit the second argument:
+
+```shell-session
+nix-repl> fs.trace ./.
+trace: /home/user (all files in directory)
+«lambda @ /nix/store/1czr278x24s3bl6qdnifpvm5z03wfi2p-nixpkgs-src/lib/fileset/default.nix:555:8»
+```
+:::
+
 Even though file sets conceptually contain local files,
 they _never_ add these files to the Nix store unless explicitly requested.
 So even though we pretty-printed all files in your home directory, none of its contained files were imported because of that.
@@ -61,17 +72,6 @@ which _does_ add all of its contained files to the Nix store!
 With current experimental Flakes,
 the local files always get copied into the Nix store
 unless you use it within a Git repository!
-:::
-
-:::{tip}
-The `trace` function pretty-prints its first agument and returns its second argument.
-But since you often just need the pretty-printing in `nix repl`, you can omit the second argument:
-
-```shell-session
-nix-repl> fs.trace ./.
-trace: /home/user (all files in directory)
-«lambda @ /nix/store/1czr278x24s3bl6qdnifpvm5z03wfi2p-nixpkgs-src/lib/fileset/default.nix:555:8»
-```
 :::
 
 This implicit coercion also works for files:
