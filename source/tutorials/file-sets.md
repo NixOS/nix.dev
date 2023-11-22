@@ -539,7 +539,7 @@ trace: - string.txt (regular)
 
 ## Conclusion
 
-You've now seen some examples on how to use all of the fundamental file set combinator functions.
-But if you need more complex behavior, you can compose them however necessary.
+We have shown some examples on how to use all of the fundamental file set functions.
+For more complex behavior, they can be composed as needed.
 
-For the complete list and more details, see the [reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset).
+For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset).
