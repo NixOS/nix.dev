@@ -127,8 +127,8 @@ pkgs.callPackage ./build.nix { }
 Add two source files to work with:
 
 ```shell-session
-echo hello > hello.txt
-echo world > world.txt
+$ echo hello > hello.txt
+$ echo world > world.txt
 ```
 
 Start with a minimal `build.nix` based on `stdenv.mkDerivation`:
@@ -146,7 +146,7 @@ stdenv.mkDerivation {
 }
 ```
 
-Try it out:
+Try it out (note that it will take some time to fetch the first time around):
 
 ```shell-session
 $ nix-build
@@ -528,37 +528,47 @@ $ touch build.sh src/select.{c,h}
 
 Then create a file set from only the files to be included explicitly:
 
-```{code-block} nix
+```{code-block} diff
 :caption: build.nix
-{ stdenv, lib }:
-let
-  fs = lib.fileset;
-  sourceFiles = fs.unions [
-    ./hello.txt
-    ./world.txt
-    ./build.sh
-    (fs.fileFilter
-      (file:
-        lib.hasSuffix ".c" file.name
-        || lib.hasSuffix ".h" file.name
-      )
-      ./src
-    )
-  ];
-in
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles =
+-    fs.difference
+-      ./.
+-      (fs.unions [
+-        (fs.maybeMissing ./result)
+-        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
+-        ./nix
+-      ]);
++  sourceFiles = fs.unions [
++    ./hello.txt
++    ./world.txt
++    ./build.sh
++    (fs.fileFilter
++      (file:
++        lib.hasSuffix ".c" file.name
++        || lib.hasSuffix ".h" file.name
++      )
++      ./src
++    )
++  ];
+ in
 
-fs.trace sourceFiles
+ fs.trace sourceFiles
 
-stdenv.mkDerivation {
-  name = "fileset";
-  src = fs.toSource {
-    root = ./.;
-    fileset = sourceFiles;
-  };
-  postInstall = ''
-    cp -vr . $out
-  '';
-}
+ stdenv.mkDerivation {
+   name = "fileset";
+   src = fs.toSource {
+     root = ./.;
+     fileset = sourceFiles;
+   };
+   postInstall = ''
+-    mkdir $out
+-    cp -v {hello,world}.txt $out
++    cp -vr . $out
+   '';
+ }
 ```
 
 The `postInstall` script is simplified to rely on the sources to be pre-filtered appropriately:
@@ -614,9 +624,25 @@ $ git reset src/select.o result
 
 Now we can re-use this selection of files using `gitTracked`:
 
-```{code-block} nix
+```{code-block} diff
 :caption: build.nix
-  sourceFiles = fs.gitTracked ./.;
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = fs.unions [
+-    ./hello.txt
+-    ./world.txt
+-    ./build.sh
+-    (fs.fileFilter
+-      (file:
+-        lib.hasSuffix ".c" file.name
+-        || lib.hasSuffix ".h" file.name
+-      )
+-      ./src
+-    )
+-  ];
++  sourceFiles = fs.gitTracked ./.;
+ in
 ```
 
 Building we get
@@ -646,7 +672,7 @@ This includes too much though, as not all of these files are needed to build the
 With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
 
 ```shell-session
-nix build path:.
+$ nix build path:.
 ```
 
 However it's also not needed, because by default, `nix build` only allows access to files tracked by Git.
@@ -659,17 +685,22 @@ It allows creating a file set that consists only of files that are in _both_ of 
 
 Select all files that are both tracked by Git *and* relevant for the build:
 
-```{code-block} nix
+```{code-block} diff
 :caption: build.nix
-  sourceFiles =
-    fs.intersection
-      (fs.gitTracked ./.)
-      (fs.unions [
-        ./hello.txt
-        ./world.txt
-        ./build.sh
-        ./src
-      ]);
+ { stdenv, lib }:
+ let
+   fs = lib.fileset;
+-  sourceFiles = fs.gitTracked ./.;
++  sourceFiles =
++    fs.intersection
++      (fs.gitTracked ./.)
++      (fs.unions [
++        ./hello.txt
++        ./world.txt
++        ./build.sh
++        ./src
++      ]);
+ in
 ```
 
 This will produce the same output as in the other approach and therefore re-use a previous build result:
