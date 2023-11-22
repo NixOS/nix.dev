@@ -24,7 +24,7 @@ It abstracts over built-in functionality and offers a safer and more convenient 
 
 The file set library is based on the concept of _file sets_,
 a data type representing a collection of local files.
-File sets can be created, composed and used with the various functions of the library.
+File sets can be created, composed, and manipulated with the various functions of the library.
 
 The easiest way to experiment with the library is to use it through `nix repl`.
 
