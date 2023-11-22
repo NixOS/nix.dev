@@ -7,9 +7,10 @@ instead of https://nixos.org/manual/nixpkgs/unstable/#sec-fileset
 -->
 
 To build a local project in a Nix derivation,
-its source files must be [accessible](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox)
+its source files must be accessible
 to the [derivation builder](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
-Since by default the `builder` runs in an isolated environment that only allows reading from the Nix store,
+Since by default, derivations get built in an [isolated environment](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox)
+that only allows reading from the Nix store,
 the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
@@ -23,22 +24,26 @@ Using these features directly can be tricky however:
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
 
-In this tutorial you'll learn how to use the Nixpkgs [`fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
-It abstracts over built-in functionality and offers a safer and more convenient interface.
+In this tutorial you'll learn how to use Nixpkgs' [`lib.fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
+It abstracts over built-in functionality with a safer and more convenient interface.
 
 ## File sets
 
-The file set library is based on the concept of _file sets_,
+The basic concept is that of a _file set_,
 a data type representing a collection of local files.
 File sets can be created, composed, and manipulated with the various functions of the library.
 
 You can explore and learn about the library with [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
 
 ```shell-session
-$ nix repl -f channel:nixos-unstable
+$ nix repl -f https://github.com/NixOS/nixpkgs/tarball/master
 ...
 nix-repl> fs = lib.fileset
 ```
+
+:::{note}
+We're using the `master` branch here, because the covered library features are part of NixOS 23.11 and up, which has not been released at the time of writing.
+:::
 
 The [`trace`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.trace) function pretty-prints the files included in a given file set:
 
@@ -48,7 +53,7 @@ trace: /home/user (all files in directory)
 null
 ```
 
-All functions that expect a file set for an argument also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
+All functions that expect a file set for an argument also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path) instead.
 Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
@@ -64,14 +69,14 @@ trace: /home/user (all files in directory)
 :::
 
 Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
-You don't have to worry as much about accidentally copying secrets into the world-readable store.
+So You don't have to worry as much about accidentally copying secrets into the world-readable store.
 
 In this example, although we pretty-printed the home directory, no files were copied.
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
 which copies the whole directory to the Nix store on evaluation!
 
 :::{warning}
-With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), a local directory containing `flake.nix` is always copied into the Nix store *completely* unless it is a Git repository!
+When using [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), local directories with a `flake.nix` are always copied into the Nix store *completely* unless it is a Git repository!
 :::
 
 This implicit coercion also works for files:
@@ -101,9 +106,6 @@ $ cd fileset
 $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch master"
 ```
 
-:::{note}
-We're using the `master` branch here, because the covered library features are part of NixOS 23.11 and up, which has not been released at the time of writing.
-:::
 
 Then create a `default.nix` file with the following contents:
 
@@ -130,13 +132,14 @@ $ echo hello > hello.txt
 $ echo world > world.txt
 ```
 
-Start with a minimal `build.nix` based on `stdenv.mkDerivation`:
+Start with a minimal `build.nix` based on [`stdenv.mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#part-stdenv):
 
 ```{code-block} nix
 :caption: build.nix
 { stdenv }:
 stdenv.mkDerivation {
   name = "fileset";
+  # This doesn't use the file set library just yet!
   src = ./.;
   postInstall = ''
     mkdir $out
@@ -158,15 +161,16 @@ building '/nix/store/36p7xhc0rr8jvslban0zba0f7aij8cmb-fileset.drv'...
 /nix/store/zdljz7v5bhv1nnh5mdh3xf418cf7z622-fileset
 ```
 
-You may have already noticed a problem:
-Only one file is needed to build the derivation.
-But passing the path to `hello.txt` will result in an error, because `mkDerivation` expects a directory:
+Since only `hello.txt` is needed to build the derivation,
+we can try passing it directly in `src`.
+But this will result in an error, because `mkDerivation` expects a directory:
 
 ```{code-block} diff
 :caption: build.nix
  { stdenv }:
  stdenv.mkDerivation {
    name = "fileset";
+   # This doesn't use the file set library just yet!
 -  src = ./.;
 +  src = ./hello.txt;
    postInstall = ''
@@ -312,7 +316,7 @@ result -> /nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset
 Since `src` refers to the whole directory, and its contents change when `nix-build` succeeds, Nix will have to start over every time.
 
 :::{note}
-This will also happen without the file set library, e.g. when setting `src = ./.;` directly.
+This will also happen with `src = ./.`, without using the file set library.
 :::
 
 The [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function subtracts one file set from another.
@@ -370,7 +374,7 @@ Removing the `./result` symlink creates a new problem, though:
 $ rm result
 $ nix-build
 error: lib.fileset.difference: Second argument (negative set)
-  (/home/user/select/result) is a path that does not exist.
+  (/home/user/fileset/result) is a path that does not exist.
   To create a file set from a path that may not exist, use `lib.fileset.maybeMissing`.
 ```
 
@@ -392,7 +396,7 @@ This now works, using the whole directory since `./result` is not present:
 
 ```
 $ nix-build
-trace: /home/user/select (all files in directory)
+trace: /home/user/fileset (all files in directory)
 this derivation will be built:
   /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
 ...
@@ -427,7 +431,7 @@ Again, Nix will start from scratch:
 
 ```shell-session
 $ nix-build
-trace: /home/user/select
+trace: /home/user/fileset
 trace: - default.nix (regular)
 trace: - nix (all files in directory)
 trace: - build.nix (regular)
@@ -460,9 +464,7 @@ Create a file set containing a union of the files to exclude (`fs.unions [ ... ]
  in
 ```
 
-Changing any of the excluded files now doesn't necessarily cause a new build anymore.
-
-Check it and modify one of the excluded files again:
+Changing any of the excluded files now doesn't necessarily cause a new build anymore:
 
 ```
 $ echo >> build.nix
@@ -597,7 +599,7 @@ this derivation will be built:
 Only the specified files are used, even when a new one is added:
 
 ```shell-session
-$ touch src/select.o src/README.md
+$ touch src/select.o README.md
 
 $ nix-build
 trace: - build.sh (regular)
@@ -611,13 +613,13 @@ trace: - world.txt (regular)
 
 ## Matching files tracked by Git
 
-If a directory is part of a Git repository, [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) automatically filters for files that are tracked by Git.
+If a directory is part of a Git repository, passing it to [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) gives you a file set that only includes files tracked by Git.
 
 Create a local Git repository and add all files except `src/select.o` and `./result` to it:
 
 ```shell-session
 $ git init
-Initialized empty Git repository in /home/user/select/.git/
+Initialized empty Git repository in /home/user/fileset/.git/
 $ git add -A
 $ git reset src/select.o result
 ```
@@ -649,8 +651,9 @@ Building we get
 
 ```shell-session
 $ nix-build
-warning: Git tree '/home/user/select' is dirty
+warning: Git tree '/home/user/fileset' is dirty
 trace: /home/vg/src/nix.dev/fileset
+trace: - README.md (regular)
 trace: - build.nix (regular)
 trace: - build.sh (regular)
 trace: - default.nix (regular)
@@ -669,7 +672,8 @@ this derivation will be built:
 This includes too much though, as not all of these files are needed to build the derivation as originally intended.
 
 :::{note}
-With [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
+When using [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
+
 
 ```shell-session
 $ nix build path:.
@@ -681,7 +685,7 @@ However it's also not needed, because by default, `nix build` only allows access
 ## Intersection
 
 This is where `intersection` comes in.
-It allows creating a file set that consists only of files that are in _both_ of the two given file sets.
+It allows creating a file set that consists only of files that are in _both_ of two given file sets.
 
 Select all files that are both tracked by Git *and* relevant for the build:
 
@@ -707,7 +711,7 @@ This will produce the same output as in the other approach and therefore re-use 
 
 ```shell-session
 $ nix-build
-warning: Git tree '/home/user/select' is dirty
+warning: Git tree '/home/user/fileset' is dirty
 trace: - build.sh (regular)
 trace: - hello.txt (regular)
 trace: - src
