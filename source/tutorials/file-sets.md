@@ -34,9 +34,7 @@ $ nix repl -f channel:nixos-unstable
 nix-repl> fs = lib.fileset
 ```
 
-It's probably the easiest to just jump right in
-by using the [`trace`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.trace) function,
-which pretty-prints the files included in a given file set:
+The [`trace`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.trace) function pretty-prints the files included in a given file set:
 
 ```shell-session
 nix-repl> fs.trace ./. null
