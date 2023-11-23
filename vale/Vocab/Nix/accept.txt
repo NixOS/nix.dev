@@ -3,6 +3,7 @@ Docker
 Dolstra
 Eelco
 Frequently Asked Questions
+Git
 GitHub
 GitHub Actions
 GitHub Actions Cache

@@ -10,6 +10,7 @@ These sections contains series of lessons to get started.
 first-steps/index.md
 nix-language.md
 Packaging existing software <packaging-existing-software.md>
+file-sets.md
 nixos/index.md
 cross-compilation.md
 module-system/module-system.md
