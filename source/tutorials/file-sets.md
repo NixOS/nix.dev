@@ -20,13 +20,12 @@ Using these features directly can be tricky however:
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
 
-In this tutorial you'll learn how to use Nixpkgs' [`lib.fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
-It abstracts over built-in functionality with a safer and more convenient interface.
+In this tutorial you'll learn how to use the Nixpkgs [`lib.fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
+It abstracts over built-in functionality and offers a safer and more convenient interface.
 
 ## File sets
 
-The basic concept is that of a _file set_,
-a data type representing a collection of local files.
+A _file set_ is a data type representing a collection of local files.
 File sets can be created, composed, and manipulated with the various functions of the library.
 
 You can explore and learn about the library with [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
@@ -49,7 +48,7 @@ trace: /home/user (all files in directory)
 null
 ```
 
-All functions that expect a file set for an argument also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path) instead.
+All functions that expect a file set for an argument can also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
 Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
@@ -65,14 +64,15 @@ trace: /home/user (all files in directory)
 :::
 
 Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
-So You don't have to worry as much about accidentally copying secrets into the world-readable store.
+Therefore you don't have to worry as much about accidentally copying secrets into the world-readable store.
 
 In this example, although we pretty-printed the home directory, no files were copied.
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
 which copies the whole directory to the Nix store on evaluation!
 
 :::{warning}
-When using [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), local directories with a `flake.nix` are always copied into the Nix store *completely* unless it is a Git repository!
+When using the [`flakes` and `nix-command` experimental features](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
+a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository!
 :::
 
 This implicit coercion also works for files:
@@ -129,10 +129,9 @@ $ echo world > world.txt
 
 ## Adding files to the Nix store
 
-To add files in a given file set to the Nix store,
-we use [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource).
-This function needs a `root` attribute to know which path to use as the root of the resulting store path,
-but only exactly the files in the `fileset` argument are included in the result.
+Files in a given file set can be added to the Nix store with [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource).
+The argument to this function requires a `root` attribute to determine which source directory to copy to the store.
+Only the files in the `fileset` attribute are included in the result.
 
 Define `build.nix` as follows:
 
@@ -161,7 +160,11 @@ stdenv.mkDerivation {
 
 The call to `fs.trace` prints the file set that will be used as a derivation input.
 
-The build will succeed (note that it will take some time to fetch the first time around):
+Try building it:
+
+:::{note}
+It will take a while to fetch Nixpkgs the first time around.
+:::
 
 ```
 $ nix-build
@@ -244,7 +247,7 @@ result -> /nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset
 Since `src` refers to the whole directory, and its contents change when `nix-build` succeeds, Nix will have to start over every time.
 
 :::{note}
-This will also happen with `src = ./.`, without using the file set library.
+This will also happen without the file set library, e.g. when setting `src = ./.;` directly.
 :::
 
 The [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function subtracts one file set from another.
@@ -374,22 +377,17 @@ One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstab
 
 Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
 
-```{code-block} diff
+```{code-block} nix
 :caption: build.nix
- { stdenv, lib }:
- let
-   fs = lib.fileset;
--  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
-+  sourceFiles =
-+    fs.difference
-+      ./.
-+      (fs.unions [
-+        (fs.maybeMissing ./result)
-+        ./default.nix
-+        ./build.nix
-+        ./nix
-+      ]);
- in
+  sourceFiles =
+    fs.difference
+      ./.
+      (fs.unions [
+        (fs.maybeMissing ./result)
+        ./default.nix
+        ./build.nix
+        ./nix
+      ]);
 ```
 
 Changing any of the excluded files now doesn't necessarily cause a new build anymore:
@@ -408,16 +406,12 @@ trace: - world.txt (regular)
 
 ## Filter
 
-With the [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function,
-you can find sets of files satisfying a criteria.
+The [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function allows filtering file sets such that each included file satisfies the given criteria.
 
 Use it to select all files with a name ending in `.nix`:
 
 ```{code-block} diff
 :caption: build.nix
- { stdenv, lib }:
- let
-   fs = lib.fileset;
    sourceFiles =
      fs.difference
        ./.
@@ -428,7 +422,6 @@ Use it to select all files with a name ending in `.nix`:
 +        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
          ./nix
        ]);
- in
 ```
 
 This does not change the result, even if we add a new `.nix` file.
@@ -458,47 +451,37 @@ $ touch build.sh src/select.{c,h}
 
 Then create a file set from only the files to be included explicitly:
 
-```{code-block} diff
+```{code-block} nix
 :caption: build.nix
- { stdenv, lib }:
- let
-   fs = lib.fileset;
--  sourceFiles =
--    fs.difference
--      ./.
--      (fs.unions [
--        (fs.maybeMissing ./result)
--        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
--        ./nix
--      ]);
-+  sourceFiles = fs.unions [
-+    ./hello.txt
-+    ./world.txt
-+    ./build.sh
-+    (fs.fileFilter
-+      (file:
-+        lib.hasSuffix ".c" file.name
-+        || lib.hasSuffix ".h" file.name
-+      )
-+      ./src
-+    )
-+  ];
- in
+{ stdenv, lib }:
+let
+  fs = lib.fileset;
+  sourceFiles = fs.unions [
+    ./hello.txt
+    ./world.txt
+    ./build.sh
+    (fs.fileFilter
+      (file:
+        lib.hasSuffix ".c" file.name
+        || lib.hasSuffix ".h" file.name
+      )
+      ./src
+    )
+  ];
+in
 
- fs.trace sourceFiles
+fs.trace sourceFiles
 
- stdenv.mkDerivation {
-   name = "fileset";
-   src = fs.toSource {
-     root = ./.;
-     fileset = sourceFiles;
-   };
-   postInstall = ''
--    mkdir $out
--    cp -v {hello,world}.txt $out
-+    cp -vr . $out
-   '';
- }
+stdenv.mkDerivation {
+  name = "fileset";
+  src = fs.toSource {
+    root = ./.;
+    fileset = sourceFiles;
+  };
+  postInstall = ''
+    cp -vr . $out
+  '';
+}
 ```
 
 The `postInstall` script is simplified to rely on the sources to be pre-filtered appropriately:
@@ -552,30 +535,14 @@ $ git add -A
 $ git reset src/select.o result
 ```
 
-Now we can re-use this selection of files using `gitTracked`:
+Re-use this selection of files with `gitTracked`:
 
-```{code-block} diff
+```{code-block} nix
 :caption: build.nix
- { stdenv, lib }:
- let
-   fs = lib.fileset;
--  sourceFiles = fs.unions [
--    ./hello.txt
--    ./world.txt
--    ./build.sh
--    (fs.fileFilter
--      (file:
--        lib.hasSuffix ".c" file.name
--        || lib.hasSuffix ".h" file.name
--      )
--      ./src
--    )
--  ];
-+  sourceFiles = fs.gitTracked ./.;
- in
+  sourceFiles = fs.gitTracked ./.;
 ```
 
-Building we get
+Build it again:
 
 ```shell-session
 $ nix-build
@@ -600,7 +567,8 @@ this derivation will be built:
 This includes too much though, as not all of these files are needed to build the derivation as originally intended.
 
 :::{note}
-When using [experimental Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake), it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
+When using the [`flakes` and `nix-command` experimental features](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
+it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
 
 
 ```shell-session
@@ -617,22 +585,17 @@ It allows creating a file set that consists only of files that are in _both_ of 
 
 Select all files that are both tracked by Git *and* relevant for the build:
 
-```{code-block} diff
+```{code-block} nix
 :caption: build.nix
- { stdenv, lib }:
- let
-   fs = lib.fileset;
--  sourceFiles = fs.gitTracked ./.;
-+  sourceFiles =
-+    fs.intersection
-+      (fs.gitTracked ./.)
-+      (fs.unions [
-+        ./hello.txt
-+        ./world.txt
-+        ./build.sh
-+        ./src
-+      ]);
- in
+  sourceFiles =
+    fs.intersection
+      (fs.gitTracked ./.)
+      (fs.unions [
+        ./hello.txt
+        ./world.txt
+        ./build.sh
+        ./src
+      ]);
 ```
 
 This will produce the same output as in the other approach and therefore re-use a previous build result:
