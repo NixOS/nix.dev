@@ -30,16 +30,14 @@ On NixOS, use the `nixos-generate-config` command to create a configuration file
 
 Beware that the result of this command depends on your current NixOS configuration.
 The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
-Here we provide a configuration that corresponds to the NixOS GNOME graphical ISO image:
+Here we provide a configuration that is used for the NixOS GNOME graphical ISO image:
 
 ```bash
-nix-shell -I nixpkgs=channel:nixos-22.05 -p "$(cat <<EOF
+nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
-  nixos = pkgs.nixos {
-    services.xserver.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
-  };
+  iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
+  nixos = pkgs.nixos iso-config;
 in nixos.config.system.build.nixos-generate-config
 EOF
 )"
@@ -48,7 +46,7 @@ EOF
 Or as a one-liner:
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-22.05 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; nixos = pkgs.nixos { services.xserver.enable = true; services.xserver.desktopManager.gnome.enable = true; }; in nixos.config.system.build.nixos-generate-config"
+nix-shell -I nixpkgs=channel:nixos-23.11 -p "((import <nixpkgs> { config = {}; overlays = []; }).nixos (pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix)).config.system.build.nixos-generate-config"
 ```
 
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
@@ -82,7 +80,7 @@ The default NixOS configuration without comments is:
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.11";
 }
 ```
 
@@ -144,7 +142,7 @@ The complete `configuration.nix` file now looks like this:
     initialPassword = "testpw";
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 }
 ```
 
@@ -154,11 +152,11 @@ A NixOS virtual machine is created with the `nix-build` command:
 
 ```shell-session
 nix-build '<nixpkgs/nixos>' -A vm \
--I nixpkgs=channel:nixos-22.11 \
+-I nixpkgs=channel:nixos-23.11 \
 -I nixos-config=./configuration.nix
 ```
 
-This command builds the attribute `vm` from the `nixos-22.11` release of NixOS, using the NixOS configuration as specified in the relative path.
+This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
 
 <details><summary> Detailed explanation </summary>
 
