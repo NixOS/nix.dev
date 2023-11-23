@@ -6,12 +6,8 @@ Also use https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-filese
 instead of https://nixos.org/manual/nixpkgs/unstable/#sec-fileset
 -->
 
-To build a local project in a Nix derivation,
-its source files must be accessible
-to the [derivation builder](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
-Since by default, derivations get built in an [isolated environment](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox)
-that only allows reading from the Nix store,
-the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
+To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
+Since by default, the `builder` runs in an [isolated environment](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
 
