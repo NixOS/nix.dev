@@ -191,10 +191,10 @@ $ sudo -i
 
 - Once you have a working OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
 - To enable hardware acceleration for a nice graphical desktop experience, you can enable the [`nixos-hardware` module](https://github.com/nixos/nixos-hardware) by adding the following to your configuration:
-
-```nix
-imports = [
-  "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
-];
-```
+  ```nix
+  imports = [
+    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
+  ];
+  ```
+  Ensure that you have `git` available in your current shell first ([via](https://github.com/NixOS/nix/issues/1923#issuecomment-1665509352)).
 - To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
