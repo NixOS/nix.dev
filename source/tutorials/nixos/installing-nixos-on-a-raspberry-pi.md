@@ -196,5 +196,13 @@ $ sudo -i
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
   ];
   ```
-  Ensure that you have `git` available in your current shell first ([via](https://github.com/NixOS/nix/issues/1923#issuecomment-1665509352)).
+  :::{warning}
+  If you encountered the following error while running `nixos-rebuild switch` after adding this import statement:
+
+  ```
+  fatal: Couldn't find remote ref master
+  ```
+  
+  ensure that you have `git` available in your current shell first. You can do this by creating an ephemeral shell with `nix-shell -p git`. Alternatively, if you have already added `git` to `environment.systemPackages` and applied the change to your NixOS, it should work fine as well. (This was suggested in [this GitHub Issue comment](https://github.com/NixOS/nix/issues/1923#issuecomment-1665509352).)
+  :::
 - To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
