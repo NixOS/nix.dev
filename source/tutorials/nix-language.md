@@ -1511,6 +1511,7 @@ builtins.toString
 [nix-operators]: https://nixos.org/manual/nix/unstable/language/operators.html
 [nix-builtins]: https://nixos.org/manual/nix/stable/language/builtins.html
 
+(reading-nix-language-import)=
 #### `import`
 
 Most built-in functions are only accessible through `builtins`.

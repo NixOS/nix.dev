@@ -32,21 +32,40 @@ Beware that the result of this command depends on your current NixOS configurati
 The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
 Here we provide a configuration that is used for the NixOS GNOME graphical ISO image:
 
+<details><summary> Detailed explanation </summary>
+<!-- I would prefer :::{dropdown} but ::: cannot be nested i think -->
+
+The following bash command uses `cat` to let us use line breaks for improved readability.
+First we provide `nixpkgs` from a [channel](ref-pinning-nixpkgs).
+We [import](reading-nix-language-import) `nixpkgs` to make it available in the current scope, under the name `pkgs`.
+In our case `nixpkgs` is in the nix store.
+To get it's path we look it up using the name `pkgs.path`.
+We make the absolute path to `installation-cd-graphical-gnome.nix` under the name `iso-config` available.
+This file is used to generate the NixOS GNOME graphical ISO image.
+This path is given to the [`pkgs.nixos` function](https://nix-community.github.io/docnix/reference/pkgs/pkgs-nixos/) to generate `gnome-nixos`.
+From `gnome-nixos` we take `config.system.build.nixos-generate-config`.
+Because Nix is lazy, only the necessary parts of `gnome-nixos` are instantiated.
+For example, no new version of gnome is made available in the store.
+
 ```bash
 nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
   iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
-  nixos = pkgs.nixos iso-config;
-in nixos.config.system.build.nixos-generate-config
+  gnome-nixos = pkgs.nixos iso-config;
+in gnome-nixos.config.system.build.nixos-generate-config
 EOF
 )"
 ```
 
-Or as a one-liner:
+The following shell command aims to be short.
+It uses `(...)` to evaluate functions instead of assigning their result to names.
+We still need to use `let pkgs = ... in` to override the name `pkgs`, so that we use the functions from the specified nixpkgs and not from the current installation of Nix.
+
+</details>
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p "((import <nixpkgs> { config = {}; overlays = []; }).nixos (pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix)).config.system.build.nixos-generate-config"
+nix-shell -I nixpkgs=channel:nixos-23.11 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; in (pkgs.nixos (pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix)).config.system.build.nixos-generate-config"
 ```
 
 By default, the configuration file is located at `/etc/nixos/configuration.nix`.
