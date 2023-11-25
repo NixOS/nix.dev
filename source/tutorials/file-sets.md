@@ -524,7 +524,7 @@ trace: - world.txt (regular)
 
 ## Matching files tracked by Git
 
-If a directory is part of a Git repository, passing it to [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource) gives you a file set that only includes files tracked by Git.
+If a directory is part of a Git repository, passing it to [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.gitTracked) gives you a file set that only includes files tracked by Git.
 
 Create a local Git repository and add all files except `src/select.o` and `./result` to it:
 
