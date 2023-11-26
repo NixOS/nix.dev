@@ -60,6 +60,7 @@ There are downsides to relying on [experimental features](https://nix.dev/manual
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
 
+(channel-branches)=
 ## Which channel branch should I use?
 
 Nixpkgs and NixOS have both stable and rolling releases.

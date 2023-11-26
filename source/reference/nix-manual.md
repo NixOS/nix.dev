@@ -25,3 +25,7 @@ Nix 2.13 (stable) <https://nix.dev/manual/nix/2.18/>
 - [Nix 2.13](https://nix.dev/manual/nix/2.13/)
 
   Reference documentation for the Nix version shipped with the current {term}`Nixpkgs` and {term}`NixOS` stable release
+
+:::{tip}
+More information on Nixpkgs and NixOS releases: [](channel-branches)
+:::

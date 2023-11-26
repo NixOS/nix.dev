@@ -11,7 +11,7 @@ If you cannot contribute time, consider [donating to the NixOS Foundation's docu
 
 ## Reference manuals
 
-The manuals for [Nix][nix manual] ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
+The manuals for [Nix](nix-manual) ([source][nix manual src]), [Nixpkgs][Nixpkgs manual] ([source][nixpkgs manual src]), and [NixOS][NixOS manual] ([source][nixos manual src]) are purely reference documentation, specifying interfaces and behavior.
 
 They also show example interactions which demonstrate how to use its components, and explain mechanisms where necessary.
 
@@ -31,7 +31,6 @@ You can help by
   - expanding on sections that appear incomplete
   - identifying sections that are not reference documentation and should be moved to nix.dev
 
-[Nix manual]: https://nixos.org/manual/nix
 [nix manual src]: https://github.com/NixOS/nix/tree/master/doc/manual
 [Nixpkgs manual]: https://nixos.org/manual/nixpkgs
 [nixpkgs manual src]: https://github.com/NixOS/nixpkgs/tree/master/doc
