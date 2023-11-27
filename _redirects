@@ -14,7 +14,8 @@
 /tutorials/deploying-nixos-using-terraform /tutorials/nixos/deploying-nixos-using-terraform 301
 /tutorials/installing-nixos-on-a-raspberry-pi /tutorials/nixos/installing-nixos-on-a-raspberry-pi 301
 /tutorials/integration-testing-using-virtual-machines /tutorials/nixos/integration-testing-using-virtual-machines 301
-/contributing/writing-style /contributing/style-guide 301
+/contributing/writing-style /contributing/documentation/style-guide 301
+/contributing/style-guide /contributing/documentation/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
 /tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-shell 301
 /recipes/best-practices /guides/best-practices 301
