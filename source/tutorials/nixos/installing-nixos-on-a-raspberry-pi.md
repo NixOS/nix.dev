@@ -190,19 +190,14 @@ $ sudo -i
 ## Next steps
 
 - Once you have a working OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
-- To enable hardware acceleration for a nice graphical desktop experience, you can enable the [`nixos-hardware` module](https://github.com/nixos/nixos-hardware) by adding the following to your configuration:
+- To enable hardware acceleration for a nice graphical desktop experience, add the [`nixos-hardware`](https://github.com/nixos/nixos-hardware) module to your configuration:
+
   ```nix
   imports = [
-    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
+    "${fetchTarball "https://github.com/NixOS/nixos-hardware/tarball/master"}/raspberry-pi/4"
   ];
   ```
-  :::{warning}
-  If you encountered the following error while running `nixos-rebuild switch` after adding this import statement:
 
-  ```
-  fatal: Couldn't find remote ref master
-  ```
-  
-  ensure that you have `git` available in your current shell first. You can do this by creating an ephemeral shell with `nix-shell -p git`. Alternatively, if you have already added `git` to `environment.systemPackages` and applied the change to your NixOS, it should work fine as well. (This was suggested in [this GitHub Issue comment](https://github.com/NixOS/nix/issues/1923#issuecomment-1665509352).)
-  :::
+  We recommend pinning the reference to `nixos-hardware`: [](ref-pinning-nixpkgs)
+
 - To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
