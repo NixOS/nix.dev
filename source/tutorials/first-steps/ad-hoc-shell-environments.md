@@ -69,7 +69,7 @@ For the following example, find the package names for these programs:
 
 In the search results, each item shows the package name, and the details list the available programs.[^2]
 
-[^2]: A package name is not the same as a program name. Many packages provide multiple programs, or no programs at all if they are libraries. Even for packages that provide exactly one program, the package and progam name are not necessarily the same.
+[^2]: A package name is not the same as a program name. Many packages provide multiple programs, or no programs at all if they are libraries. Even for packages that provide exactly one program, the package and program name are not necessarily the same.
 
 (run-any-program)=
 ## Run any combination of programs
