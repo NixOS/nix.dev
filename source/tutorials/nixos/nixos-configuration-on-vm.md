@@ -24,30 +24,24 @@ Virtual machines are a practical tool for debugging NixOS configurations.
 
 In this tutorial you will use a default configuration that is shipped with NixOS.
 
-:::{admonition} NixOS
+::::{admonition} NixOS
 
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
 
 Beware that the result of this command depends on your current NixOS configuration.
 The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
-Here we provide a configuration that is used for the NixOS GNOME graphical ISO image:
+Here we provide a configuration that is used for the [NixOS GNOME graphical ISO image](https://nixos.org/download#nixos-iso):
 
-<details><summary> Detailed explanation </summary>
-<!-- I would prefer :::{dropdown} but ::: cannot be nested i think -->
+```shell-session
+nix-shell -I nixpkgs=channel:nixos-23.11 -p 'let pkgs = import <nixpkgs> { config = {}; overlays = []; }; iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix; gnome-nixos = pkgs.nixos iso-config; in gnome-nixos.config.system.build.nixos-generate-config'
+```
 
-The following bash command uses `cat` to let us use line breaks for improved readability.
-First we provide `nixpkgs` from a [channel](ref-pinning-nixpkgs).
-We [import](reading-nix-language-import) `nixpkgs` to make it available in the current scope, under the name `pkgs`.
-In our case `nixpkgs` is in the nix store.
-To get it's path we look it up using the name `pkgs.path`.
-We make the absolute path to `installation-cd-graphical-gnome.nix` under the name `iso-config` available.
-This file is used to generate the NixOS GNOME graphical ISO image.
-This path is given to the [`pkgs.nixos` function](https://nix-community.github.io/docnix/reference/pkgs/pkgs-nixos/) to generate `gnome-nixos`.
-From `gnome-nixos` we take `config.system.build.nixos-generate-config`.
-Because Nix is lazy, only the necessary parts of `gnome-nixos` are instantiated.
-For example, no new version of gnome is made available in the store.
+:::{dropdown} Detailed explanation
 
-```bash
+The above shell command is a one-liner so it's easier to copy and paste.
+This is the readable long form using a [heredoc](https://en.wikipedia.org/wiki/Here_document):
+
+```{code-block} bash
 nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
@@ -58,17 +52,15 @@ EOF
 )"
 ```
 
-The following shell command aims to be short.
-It uses `(...)` to evaluate functions instead of assigning their result to names.
-We still need to use `let pkgs = ... in` to override the name `pkgs`, so that we use the functions from the specified nixpkgs and not from the current installation of Nix.
+It does the following:
+- Provide Nixpkgs from a [channel](ref-pinning-nixpkgs)
+- Take the configuration file for the GNOME ISO image from the obtained version of the Nixpkgs repository
+- Evaluate that NixOS configuration with `pkgs.nixos`
+- Return the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
 
-</details>
+:::
 
-```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p "let pkgs = import <nixpkgs> { config = {}; overlays = []; }; in (pkgs.nixos (pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix)).config.system.build.nixos-generate-config"
-```
-
-By default, the configuration file is located at `/etc/nixos/configuration.nix`.
+By default, the generated configuration file is written to `/etc/nixos/configuration.nix`.
 To avoid overwriting this file you have to specify the output directory.
 Create a NixOS configuration in your working directory:
 
@@ -82,7 +74,7 @@ In the working directory you will then find two files:
    You can ignore that file for this tutorial because it has no effect inside a virtual machine.
 
 2. `configuration.nix` contains various suggestions and comments for the initial setup of a desktop computer.
-:::
+::::
 
 The default NixOS configuration without comments is:
 
