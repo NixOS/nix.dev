@@ -495,7 +495,7 @@ Then define the value for that option where you make the raw script reproducible
 +    scripts.geocode = pkgs.writeShellApplication {
 +      name = "geocode";
 +      runtimeInputs = with pkgs; [ curl jq ];
-+      text = "exec ${./geocode}";
++      text = ''exec ${./geocode} "$@"'';
 +    };
 +
      scripts.output = pkgs.writeShellApplication {
