@@ -605,7 +605,7 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 +      paramForMarker =
 +        builtins.map (marker: "$(${config.scripts.geocode}/bin/geocode ${
 +          lib.escapeShellArg marker.location})") config.map.markers;
-+    in ["markers=\"${lib.concatStringsSep "|" paramForMarker}\""];
++    in [ "markers=\"${lib.concatStringsSep "|" paramForMarker}\"" ];
 +  };
 ```
 
