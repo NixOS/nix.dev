@@ -602,18 +602,11 @@ To implement this behavior, add the following `config` block to `marker.nix`:
 +    ];
 +
 +    requestParams = let
-+      paramForMarker = marker:
-+        let
-+          attributes =
-+            [
-+              "$(geocode ${
-+                lib.escapeShellArg marker.location
-+              })"
-+            ];
-+        in "markers=${
-+          lib.concatStringsSep "\\|" attributes
-+        }";
-+    in builtins.map paramForMarker config.map.markers;
++      paramForMarker =
++        builtins.map (marker: "$(${config.scripts.geocode}/bin/geocode ${
++          lib.escapeShellArg marker.location})") config.map.markers;
++    in [ "markers=\"${lib.concatStringsSep "|" paramForMarker}\"" ];
++  };
 ```
 
 :::{warning}
