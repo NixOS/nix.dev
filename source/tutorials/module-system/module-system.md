@@ -966,15 +966,16 @@ in {
   config = {
     requestParams = let
       attrForLocation = loc:
-        "$(geocode ${lib.escapeShellArg loc})";
+        "$(${config.scripts.geocode}/bin/geocode ${
+        lib.escapeShellArg loc
+        })";
       paramForPath = path:
         let
           attributes =
             builtins.map attrForLocation path.locations;
-        in "path=${
-            lib.concatStringsSep "\\|" attributes
-          }";
-      in builtins.map paramForPath config.map.paths;
+        in "path=\"${lib.concatStringsSep "|" attributes}\"";
+    in
+      builtins.map paramForPath config.map.paths;
   };
 }
 ```
@@ -1130,9 +1131,7 @@ Finally, update the `attributes` list in `paramForPath`:
 +              "weight:${toString path.style.weight}"
 +            ]
 +            ++ builtins.map attrForLocation path.locations;
-         in "path=${
-             lib.concatStringsSep "\\|" attributes
-           }";
+         in "path=\"${lib.concatStringsSep "|" attributes}\"";
 ```
 
 ## The `pathStyle` submodule
