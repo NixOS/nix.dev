@@ -758,7 +758,8 @@ In the `paramForMarker` function:
 +        builtins.map paramForMarker config.map.markers;
 ```
 
-Notice here how we now create a unique `marker` for each user by concatenating the `label` and `location` attributes together, and assigning them to the `requestParams`. The label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
+Note how we now create a unique `marker` for each user by concatenating the `label` and `location` attributes together, and assigning them to the `requestParams`.
+The label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
 
 ## Functions as submodule arguments
 
