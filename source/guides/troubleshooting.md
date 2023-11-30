@@ -1,10 +1,19 @@
 # Troubleshooting
 
+This page is a collection of tips to solve problems you may encounter using Nix.
+
 ## What to do if a binary cache is down or unreachable?
 
 Pass [`--option substitute false`](https://nixos.org/manual/nix/stable/command-ref/conf-file#conf-substitute) to Nix commands.
 
-### How to fix: `error: querying path in database: database disk image is malformed`
+## How to force Nix to re-check if something exists in the binary cache?
+
+Nix keeps track of what's available in binary caches so it doesn't have to query them on every command.
+This includes negative answers, that is, if a given store path cannot substituted.
+
+Pass the [`--narinfo-cache-negative-ttl`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-narinfo-cache-negative-ttl) option to set the cache timeout in seconds.
+
+## How to fix: `error: querying path in database: database disk image is malformed`
 
 This is a [known issue](https://github.com/NixOS/nix/issues/1353).
 Try:
@@ -21,7 +30,7 @@ $ mv /nix/var/nix/db/db.sqlite /nix/var/nix/db/db.sqlite-bkp
 $ sqlite3 /nix/var/nix/db/db.sqlite-bkp ".dump" | sqlite3 /nix/var/nix/db/db.sqlite
 ```
 
-### How to fix: `error: current Nix store schema is version 10, but I only support 7`
+## How to fix: `error: current Nix store schema is version 10, but I only support 7`
 
 This is a [known issue](https://github.com/NixOS/nix/issues/1251).
 
@@ -37,7 +46,7 @@ $ nix-store --init # this is the old nix-store
 $ nix-store --load-db < /tmp/db.dump
 ```
 
-### How to fix: `writing to file: Connection reset by peer`
+## How to fix: `writing to file: Connection reset by peer`
 
 This may mean you are trying to import a too large file or directory into the [Nix store](https://nixos.org/manual/nix/stable/glossary#gloss-store), or your machine is running out of resources, such as disk space or memory.
 
