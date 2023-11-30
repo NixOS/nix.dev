@@ -18,7 +18,7 @@ in
 {
   inherit build;
   shell = pkgs.mkShell {
-    inputsfrom = [ build ];
+    inputsFrom = [ build ];
   };
 }
 ```
