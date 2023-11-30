@@ -63,9 +63,9 @@ Enter the program name you want to run in [search.nixos.org](https://search.nixo
 
 For the following example, find the package names for these programs:
 
-- git
-- nvim
-- npm
+- `git`
+- `nvim`
+- `npm`
 
 In the search results, each item shows the package name, and the details list the available programs.[^2]
 
