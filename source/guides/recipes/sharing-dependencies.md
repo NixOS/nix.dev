@@ -7,7 +7,7 @@ How to share the package's dependencies in `default.nix` with the development en
 
 ## Summary
 
-Use the `inputsFrom` attribute to `pkgs.mkShell`:
+Use the [`inputsFrom` attribute to `pkgs.mkShell`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes):
 
 ```nix
 # default.nix
@@ -73,7 +73,7 @@ Add an attribute to `default.nix` specifying an environment:
 ```
 
 Move the `build` attribute into the `let` binding to be able to re-use it.
-Then take the package's dependencies into the environment with `inputsFrom`:
+Then take the package's dependencies into the environment with [`inputsFrom`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes):
 
 ```diff
  let
