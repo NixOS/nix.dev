@@ -18,3 +18,5 @@ maintainers/working_groups/learning_journey/ @NixOS/learning-journey-working-gro
 source/tutorials/learning_journey/ @NixOS/learning-journey-working-group @NixOS/documentation-team
 
 /.github/workflows/ @asymmetric
+
+/source/tutorials/file-sets.md @infinisil
