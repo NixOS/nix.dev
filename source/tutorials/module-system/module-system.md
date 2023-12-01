@@ -742,20 +742,24 @@ In the `paramForMarker` function:
 
 ```{code-block} diff
 :caption: marker.nix
-       paramForMarker = marker:
-         let
-           attributes =
--            [
-+            lib.optional
-+              (marker.style.label != null)
-+              "label:${marker.style.label}"
+     requestParams = let
++      paramForMarker = marker:
++        let
++          attributes =
++            lib.optional (marker.style.label != null)
++            "label:${marker.style.label}"
 +            ++ [
-               "$(geocode ${
-                 lib.escapeShellArg marker.location
-               })"
++              "$(${config.scripts.geocode}/bin/geocode ${
++                lib.escapeShellArg marker.location
++              })"
++            ];
++        in "markers=\"${lib.concatStringsSep "|" attributes}\"";
++      in
++        builtins.map paramForMarker config.map.markers;
 ```
 
-Here, the label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
+Note how we now create a unique `marker` for each user by concatenating the `label` and `location` attributes together, and assigning them to the `requestParams`.
+The label for each `marker` is only propagated to the CLI parameters if `marker.style.label` is set.
 
 ## Functions as submodule arguments
 
@@ -876,7 +880,7 @@ Now add an entry to the `paramForMarker` list which makes use of the new option:
                "label:${marker.style.label}"
              ++ [
 +              "color:${marker.style.color}"
-               "$(geocode ${
+               "$(${config.scripts.geocode}/bin/geocode ${
                  lib.escapeShellArg marker.location
                })"
 ```
@@ -929,7 +933,7 @@ Finally, add another `lib.optional` call to the `attributes` string, making use 
 +              "size:${size}"
              ++ [
                "color:${marker.style.color}"
-               "$(geocode ${
+               "$(${config.scripts.geocode}/bin/geocode ${
 ```
 
 ## The `pathType` submodule
@@ -953,25 +957,26 @@ let
       };
     };
   };
-in {
+in
+{
   options = {
     map.paths = lib.mkOption {
       type = lib.types.listOf pathType;
     };
   };
-
   config = {
-    requestParams = let
-      attrForLocation = loc:
-        "$(geocode ${lib.escapeShellArg loc})";
-      paramForPath = path:
-        let
-          attributes =
-            builtins.map attrForLocation path.locations;
-        in "path=${
-            lib.concatStringsSep "\\|" attributes
-          }";
-      in builtins.map paramForPath config.map.paths;
+    requestParams =
+      let
+        attrForLocation = loc:
+          "$(${config.scripts.geocode}/bin/geocode ${lib.escapeShellArg loc})";
+        paramForPath = path:
+          let
+            attributes =
+              builtins.map attrForLocation path.locations;
+          in
+          ''path="${lib.concatStringsSep "|" attributes}"'';
+      in
+      builtins.map paramForPath config.map.paths;
   };
 }
 ```
@@ -1127,9 +1132,7 @@ Finally, update the `attributes` list in `paramForPath`:
 +              "weight:${toString path.style.weight}"
 +            ]
 +            ++ builtins.map attrForLocation path.locations;
-         in "path=${
-             lib.concatStringsSep "\\|" attributes
-           }";
+         in "path=\"${lib.concatStringsSep "|" attributes}\"";
 ```
 
 ## The `pathStyle` submodule
