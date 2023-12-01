@@ -1,10 +1,5 @@
 (file-sets)=
 # Working with local files
-<!-- TODO: Switch all mentions of unstable to stable once 23.11 is out
-Also remove mention of using unstable
-Also use https://nixos.org/manual/nixpkgs/unstable/#sec-functions-library-fileset
-instead of https://nixos.org/manual/nixpkgs/unstable/#sec-fileset
--->
 
 To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
 Since by default, the `builder` runs in an [isolated environment](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
@@ -20,7 +15,7 @@ Using these features directly can be tricky however:
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
 
-In this tutorial you'll learn how to use the Nixpkgs [`lib.fileset` library](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset) to work with local files in derivations.
+In this tutorial you'll learn how to use the Nixpkgs [`lib.fileset` library](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-fileset) to work with local files in derivations.
 It abstracts over built-in functionality and offers a safer and more convenient interface.
 
 ## File sets
@@ -31,16 +26,12 @@ File sets can be created, composed, and manipulated with the various functions o
 You can explore and learn about the library with [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
 
 ```shell-session
-$ nix repl -f https://github.com/NixOS/nixpkgs/tarball/master
+$ nix repl -f channel:nixos-23.11
 ...
 nix-repl> fs = lib.fileset
 ```
 
-:::{note}
-We're using the `master` branch here, because the covered library features are part of NixOS 23.11 and up, which has not been released at the time of writing.
-:::
-
-The [`trace`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.trace) function pretty-prints the files included in a given file set:
+The [`trace`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.trace) function pretty-prints the files included in a given file set:
 
 ```shell-session
 nix-repl> fs.trace ./. null
@@ -49,7 +40,7 @@ null
 ```
 
 All functions that expect a file set for an argument can also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
-Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
+Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/stable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
 :::{tip}
@@ -99,7 +90,7 @@ and set up `niv` to pin the Nixpkgs dependency:
 ```shell-session
 $ mkdir fileset
 $ cd fileset
-$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch master"
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.11"
 ```
 
 Then create a `default.nix` file with the following contents:
@@ -129,7 +120,7 @@ $ echo world > world.txt
 
 ## Adding files to the Nix store
 
-Files in a given file set can be added to the Nix store with [`toSource`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.toSource).
+Files in a given file set can be added to the Nix store with [`toSource`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.toSource).
 The argument to this function requires a `root` attribute to determine which source directory to copy to the store.
 Only the files in the `fileset` attribute are included in the result.
 
@@ -250,7 +241,7 @@ Since `src` refers to the whole directory, and its contents change when `nix-bui
 This will also happen without the file set library, e.g. when setting `src = ./.;` directly.
 :::
 
-The [`difference`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.difference) function subtracts one file set from another.
+The [`difference`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.difference) function subtracts one file set from another.
 The result is a new file set that contains all files from the first argument that aren't in the second argument.
 
 Use it to filter out `./result` by changing the `sourceFiles` definition:
@@ -309,9 +300,7 @@ error: lib.fileset.difference: Second argument (negative set)
   To create a file set from a path that may not exist, use `lib.fileset.maybeMissing`.
 ```
 
-Follow the instructions in the error message, and use `maybeMissing` to create a file set from a path that may not exist (in which case the file set will be empty):
-
-<!-- https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.maybeMissing -->
+Follow the instructions in the error message, and use [`maybeMissing`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.maybeMissing) to create a file set from a path that may not exist (in which case the file set will be empty):
 
 ```{code-block} diff
 :caption: build.nix
@@ -373,7 +362,7 @@ this derivation will be built:
 /nix/store/6pffjljjy3c7kla60nljk3fad4q4kkzn-filesets
 ```
 
-One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.unions).
+One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.unions).
 
 Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
 
@@ -406,7 +395,7 @@ trace: - world.txt (regular)
 
 ## Filter
 
-The [`fileFilter`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.fileFilter) function allows filtering file sets such that each included file satisfies the given criteria.
+The [`fileFilter`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.fileFilter) function allows filtering file sets such that each included file satisfies the given criteria.
 
 Use it to select all files with a name ending in `.nix`:
 
@@ -524,7 +513,7 @@ trace: - world.txt (regular)
 
 ## Matching files tracked by Git
 
-If a directory is part of a Git repository, passing it to [`gitTracked`](https://nixos.org/manual/nixpkgs/unstable/#function-library-lib.fileset.gitTracked) gives you a file set that only includes files tracked by Git.
+If a directory is part of a Git repository, passing it to [`gitTracked`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.gitTracked) gives you a file set that only includes files tracked by Git.
 
 Create a local Git repository and add all files except `src/select.o` and `./result` to it:
 
@@ -617,4 +606,4 @@ trace: - world.txt (regular)
 We have shown some examples on how to use all of the fundamental file set functions.
 For more complex use cases, they can be composed as needed.
 
-For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/unstable/#sec-fileset).
+For the complete list and more details, see the [`lib.fileset` reference documentation](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-fileset).
