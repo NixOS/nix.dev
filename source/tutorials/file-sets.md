@@ -408,7 +408,7 @@ Use it to select all files with a name ending in `.nix`:
          (fs.maybeMissing ./result)
 -        ./default.nix
 -        ./build.nix
-+        (fs.fileFilter (file: lib.hasSuffix ".nix" file.name) ./.)
++        (fs.fileFilter (file: file.hasExt "nix") ./.)
          ./nix
        ]);
 ```
@@ -450,10 +450,7 @@ let
     ./world.txt
     ./build.sh
     (fs.fileFilter
-      (file:
-        lib.hasSuffix ".c" file.name
-        || lib.hasSuffix ".h" file.name
-      )
+      (file: file.hasExt "c" || file.hasExt "h")
       ./src
     )
   ];
