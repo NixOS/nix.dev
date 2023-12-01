@@ -957,25 +957,25 @@ let
       };
     };
   };
-in {
+in
+{
   options = {
     map.paths = lib.mkOption {
       type = lib.types.listOf pathType;
     };
   };
-
   config = {
-    requestParams = let
-      attrForLocation = loc:
-        "$(${config.scripts.geocode}/bin/geocode ${
-        lib.escapeShellArg loc
-        })";
-      paramForPath = path:
-        let
-          attributes =
-            builtins.map attrForLocation path.locations;
-        in "path=\"${lib.concatStringsSep "|" attributes}\"";
-    in
+    requestParams =
+      let
+        attrForLocation = loc:
+          "$(${config.scripts.geocode}/bin/geocode ${lib.escapeShellArg loc})";
+        paramForPath = path:
+          let
+            attributes =
+              builtins.map attrForLocation path.locations;
+          in
+          ''path="${lib.concatStringsSep "|" attributes}"'';
+      in
       builtins.map paramForPath config.map.paths;
   };
 }
