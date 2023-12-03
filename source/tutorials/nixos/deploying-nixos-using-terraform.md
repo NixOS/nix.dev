@@ -9,15 +9,13 @@ myst:
 
 # Deploying NixOS using Terraform
 
-Assuming you're [familiar with the basics of Terraform](https://www.terraform.io/intro/index.html),
-by the end of tutorial you will have provisioned an Amazon AWS instance with Terraform
-and will be able to use Nix to deploy incremental changes to NixOS, running on the instance.
+Assuming you're [familiar with the basics of Terraform](https://www.terraform.io/intro/index.html), by the end of this tutorial you will have provisioned an Amazon Web Services (AWS) instance with Terraform, and will be able to use Nix to deploy incremental changes to NixOS running on the instance.
 
-We'll look at how to boot a NixOS machine and how to deploy the incremental changes:
+We'll look at how to boot a NixOS machine and how to deploy the incremental changes.
 
 ## Booting NixOS image
 
-1. Start by providing the terraform executable:
+1. Start by providing the Terraform executable:
 
 ```shell-session
 $ nix-shell -p terraform
@@ -29,10 +27,10 @@ $ nix-shell -p terraform
 $ terraform login
 ```
 
-3. Make sure to [create an organization](https://app.terraform.io/app/organizations/new) like `myorganization` in your Terraform Cloud account.
-4. Inside `myorganization` [create a workspace](https://app.terraform.io/app/cachix/workspaces/new) by choosing **CLI-driven workflow** and pick a name like  `myapp`.
-5. Inside your workspace, under `Settings` / `General` change Execution Mode to `Local`.
-6. Inside a new directory create a `main.tf` file with the following contents. This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
+3. Make sure to [create an organization](https://app.terraform.io/app/organizations/new), like `myorganization`, in your Terraform Cloud account.
+4. Inside `myorganization`, [create a workspace](https://app.terraform.io/app/cachix/workspaces/new) by choosing **CLI-driven workflow** and pick a name, like  `myapp`.
+5. Inside your workspace, under `Settings / General`, change Execution Mode to `Local`.
+6. Inside a new directory, create a `main.tf` file with the following contents. This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
 
 ```terraform
 terraform {
@@ -111,8 +109,8 @@ module "nixos_image" {
 ```
 
 :::{note}
-The `aws_image_nixos` module will return an NixOS AMI given a [NixOS release number](https://status.nixos.org)
-so that `aws_instance` resource can reference the AMI in [instance_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#instance_type) argument.
+The `aws_image_nixos` module will return a NixOS AMI given a [NixOS release number](https://status.nixos.org)
+so that the `aws_instance` resource can reference the AMI in [instance_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#instance_type) argument.
 :::
 
 5. Make sure to [configure AWS credentials](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication).
@@ -125,8 +123,7 @@ $ terraform apply
 
 ## Deploying NixOS changes
 
-Once the AWS instance is running an NixOS image via Terraform, we can teach Terraform to always build
-the latest NixOS configuration and apply those changes to your instance.
+Once the AWS instance is running a NixOS image via Terraform, we can teach Terraform to always build the latest NixOS configuration and apply those changes to your instance.
 
 1. Create `configuration.nix` with the following contents:
 
@@ -166,5 +163,5 @@ $ terraform apply
 
 ## Next steps
 
-- It's possible to [switch to use Google Compute Engine provider](https://github.com/tweag/terraform-nixos/tree/master/google_image_nixos#readme).
-- [deploy_nixos module](https://github.com/tweag/terraform-nixos/tree/master/deploy_nixos#readme) supports a number arguments, for example to upload keys, etc.
+- It's possible to [switch to Google Compute Engine](https://github.com/tweag/terraform-nixos/tree/master/google_image_nixos#readme).
+- The [`deploy_nixos` module](https://github.com/tweag/terraform-nixos/tree/master/deploy_nixos#readme) supports a number of arguments, for example to upload keys.
