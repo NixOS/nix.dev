@@ -7,7 +7,7 @@ Nix
     Read /nɪks/ ("Niks").
 
     :::{seealso}
-    - [Nix Reference Manual](https://nixos.org/manual/nix)
+    - [Nix reference manual](./nix-manual.md)
     - [Nix source code](https://github.com/NixOS/nix)
     :::
 
@@ -16,7 +16,7 @@ Nix language
 
     :::{seealso}
     - [](reading-nix-language)
-    - [Nix language reference](https://nixos.org/manual/nix/stable/language)
+    - [Nix language reference](https://nix.dev/manual/nix/2.18/language)
     :::
 
 Nix expression
@@ -31,7 +31,7 @@ Nixpkgs
     Read /nɪks ˈpækɪʤɪz/ ("Nix packages").
 
     :::{seealso}
-    - [Nixpkgs Reference Manual](https://nixos.org/manual/nixpkgs)
+    - [Nixpkgs reference manual](https://nixos.org/manual/nixpkgs)
     - [Nixpkgs source code](https://github.com/NixOS/nixpkgs)
     :::
 
@@ -41,7 +41,7 @@ NixOS
     Read /nɪks oʊ ɛs/ ("Niks Oh Es").
 
     :::{seealso}
-    - [NixOS Reference Manual](https://nixos.org/manual/nixos)
+    - [NixOS reference manual](https://nixos.org/manual/nixos)
     - [NixOS source code](https://github.com/NixOS/nixpkgs/tree/master/nixos)
     :::
 ```

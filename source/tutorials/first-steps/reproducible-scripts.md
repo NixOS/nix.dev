@@ -47,10 +47,10 @@ It takes the following parameters relevant for our use case:
 - `-p` lists packages that should be present in the interpreter's environment
 - `-I` explicitly sets [the search path] for packages
 
-More details on the options can be found in the [`nix-shell` reference documentation](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#options).
+More details on the options can be found in the [`nix-shell` reference documentation](https://nix.dev/manual/nix/2.18/command-ref/nix-shell.html#options).
 
-[`nix-shell` as a shebang interpreter]: https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
-[the search path]: https://nixos.org/manual/nix/unstable/command-ref/opt-common.html#opt-I
+[`nix-shell` as a shebang interpreter]: https://nix.dev/manual/nix/2.18/command-ref/nix-shell.html#use-as-a--interpreter
+[the search path]: https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-I
 
 Create a file named `nixpkgs-releases.sh` with the following content:
 
@@ -92,4 +92,4 @@ Run the script:
 
 - {ref}`reading-nix-language` to learn about the Nix language, which is used to declare packages and configurations.
 - {ref}`declarative-reproducible-envs` to create reproducible shell environments with a declarative configuration file.
-- [Garbage Collection](https://nixos.org/manual/nix/stable/package-management/garbage-collection.html) – free up storage used by the programs made available through Nix
+- [Garbage Collection](https://nix.dev/manual/nix/2.18/package-management/garbage-collection.html) – free up storage used by the programs made available through Nix

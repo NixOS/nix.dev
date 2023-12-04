@@ -236,13 +236,13 @@ To better navigate the material and judge its relevance, every entry should prov
 
 ### Nix
 
-- https://nixos.org/manual/nix/stable/command-ref/command-ref.html
+- https://nix.dev/manual/nix/2.18/command-ref/command-ref.html
 - https://edolstra.github.io/pubs/phd-thesis.pdf
 
 ### Nix language
 
 - https://edolstra.github.io/pubs/phd-thesis.pdf
-- https://nixos.org/manual/nix/stable/expressions/writing-nix-expressions.html
+- https://nix.dev/manual/nix/2.18/expressions/writing-nix-expressions.html
 - https://github.com/tazjin/nix-1p
 
 ### Nixpkgs

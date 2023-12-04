@@ -14,16 +14,16 @@ The Nix logo is inspired by [an idea for the Haskell logo](https://wiki.haskell.
 {ref}`Flakes <flakes>` were originally proposed in [RFC 49](https://github.com/NixOS/rfcs/pull/49), and have been in development since 2019.
 Nix introduced the implementation as its first [experimental feature] in 2021.
 
-[experimental feature]: https://nixos.org/manual/nix/unstable/contributing/experimental-features.html
+[experimental feature]: https://nix.dev/manual/nix/2.18/contributing/experimental-features.html
 
 The subject is considered controversial among Nix users and developers in terms of design, development processes, and community governance.
 In particular:
 - The RFC was closed without conclusion, and some design and implementation issues are not yet resolved.
   Examples include the notion of a global [flake registry], the [impossibility of parameterising flakes](https://github.com/NixOS/nix/issues/2861), and the [new command line interface and flakes being closely tied to each other](https://discourse.nixos.org/t/2023-03-06-nix-team-meeting-minutes-38/26056#cli-stabilisation-announcement-draft-4).
-- The original implementation introduced [regressions](https://discourse.nixos.org/t/nix-2-4-and-what-s-next/16257) in the [Nix 2.4 release](https://nixos.org/manual/nix/stable/release-notes/rl-2.4.html), breaking some stable functionality without a [major version](https://semver.org/) increment.
+- The original implementation introduced [regressions](https://discourse.nixos.org/t/nix-2-4-and-what-s-next/16257) in the [Nix 2.4 release](https://nix.dev/manual/nix/2.18/release-notes/rl-2.4.html), breaking some stable functionality without a [major version](https://semver.org/) increment.
 - New Nix users were and still are encouraged by various individuals to adopt flakes despite there being no concrete plan or timeline for stabilisation.
 
-[flake registry]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-registry.html
+[flake registry]: https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-registry.html
 
 This led to a situation where the stable interface was only sparsely maintained for multiple years, and repeatedly suffered breakages due to ongoing development.
 Meanwhile, the new interface was adopted widely enough for evolving its design without negatively affecting users to become very challenging.
@@ -50,7 +50,7 @@ Both paradigms have their own set of unique concepts and support tooling that ha
 At the moment, neither the stable nor the experimental interface is clearly superior to the other in all aspects.
 While flakes reduce complexity in some regards, they also introduce additional mechanisms and you will have to learn more about the system to fully understand how it works.
 
-There are downsides to relying on [experimental features](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-experimental-features) in general:
+There are downsides to relying on [experimental features](https://nix.dev/manual/nix/2.18/command-ref/conf-file.html#conf-experimental-features) in general:
 
 - Interfaces and behaviour of experimental features could still be changed by Nix developers.
   This may require you to adapt your code at some point in the future, which will be more effort when it has grown in complexity.
@@ -60,6 +60,7 @@ There are downsides to relying on [experimental features](https://nixos.org/manu
 - The [Nix documentation team](https://nixos.org/community/teams/documentation.html) focuses on improving documentation and learning materials for stable features and common principles.
   When using flakes, you will have to rely more heavily on user-to-user support, third-party documentation, and the source code.
 
+(channel-branches)=
 ## Which channel branch should I use?
 
 Nixpkgs and NixOS have both stable and rolling releases.
@@ -102,7 +103,7 @@ Yes. There is:
 
 - CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
 - System's current time/date.
-- The filesystem used for building (see also [`TMPDIR`](https://nixos.org/manual/nix/stable/command-ref/env-common.html#env-TMPDIR)).
+- The filesystem used for building (see also [`TMPDIR`](https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-TMPDIR)).
 - Linux kernel parameters, such as:
   - [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
   - binfmt interpreters, e.g., those configured with [`boot.binfmt.emulatedSystems`](https://search.nixos.org/options?show=boot.binfmt.emulatedSystems).

@@ -119,7 +119,7 @@ You will often encounter Nix language code samples that refer to `<nixpkgs>`.
 `<...>` is special syntax that was [introduced in 2011] to conveniently access values from the environment variable [`$NIX_PATH`].
 
 [introduced in 2011]: https://github.com/NixOS/nix/commit/1ecc97b6bdb27e56d832ca48cdafd3dbb5185a04
-[`$NIX_PATH`]: https://nixos.org/manual/nix/unstable/command-ref/env-common.html#env-NIX_PATH
+[`$NIX_PATH`]: https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-NIX_PATH
 
 This means, the value of a lookup path depends on external system state.
 When using lookup paths, the same Nix expression can produce different results.
@@ -127,7 +127,7 @@ When using lookup paths, the same Nix expression can produce different results.
 In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, and is therefore likely to differ from machine to machine.
 
 :::{note}
-[Channels](https://nixos.org/manual/nix/stable/command-ref/nix-channel.html) are a mechanism for referencing remote Nix expressions and retrieving their latest version.
+[Channels](https://nix.dev/manual/nix/2.18/command-ref/nix-channel.html) are a mechanism for referencing remote Nix expressions and retrieving their latest version.
 :::
 
 The state of a subscribed channel is external to the Nix expressions relying on it.
@@ -184,7 +184,7 @@ We skip it in minimal examples reduce distractions.
 
 ## Updating nested attribute sets
 
-The [attribute set update operator](https://nixos.org/manual/nix/stable/language/operators.html#update) merges two attribute sets.
+The [attribute set update operator](https://nix.dev/manual/nix/2.18/language/operators.html#update) merges two attribute sets.
 
 Example:
 
@@ -250,7 +250,7 @@ If someone builds the project in a directory with a different name, they will ge
 This can be the cause of needless rebuilds.
 
 :::{tip}
-Use [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) with the `name` attribute set to something fixed.
+Use [`builtins.path`](https://nix.dev/manual/nix/2.18/language/builtins.html#builtins-path) with the `name` attribute set to something fixed.
 
 This will derive the symbolic name of the store path from `name` instead of the working directory:
 

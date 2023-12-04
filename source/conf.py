@@ -423,6 +423,11 @@ linkcheck_ignore = [
     # Linkcheck fails on anchors in GH browser/file viewer, see https://github.com/sphinx-doc/sphinx/issues/11484
     r"https://github\.com/.+/.+/blob/.*#.*$",
     r"https://github\.com/.+/.+/tree/.*#.*$",
+    # XXX: we use the web URL to the manuals we host within the build output,
+    # because Sphinx does not have facilities to deploy arbitrary files.
+    # since linkchecking those URLs will fail before actually deploying them,
+    # we ignore them here.
+    r"https://nix.dev/manual/.*$",
 ]
 
 # Anchors are not present in HTML
