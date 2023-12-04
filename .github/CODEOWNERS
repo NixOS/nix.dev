@@ -16,3 +16,6 @@
 /.github/workflows/ @asymmetric
 
 /source/tutorials/file-sets.md @infinisil
+
+/source/tutorials/integration-testing-using-virtual-machines.md @olafklingt
+/source/tutorials/nixos-configuration-on-vm.md @olafklingt
