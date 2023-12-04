@@ -106,7 +106,7 @@ But that is still problematic, unless:
 2. you control the shell environment via your source code, setting `$NIX_PATH` via `nix-shell` or NixOS options.
 
 :::{note}
-We recommend to avoid using extra search paths and to switch to flakes and disable channels by permanently setting `NIX_PATH=` to be empty.
+We recommend to avoid using search paths and disable channels by permanently setting `NIX_PATH=` to be empty.
 :::
 
 See {ref}`pinning-nixpkgs` for a tutorial on how to do better.
