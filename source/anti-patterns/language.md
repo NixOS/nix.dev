@@ -31,7 +31,7 @@ There are a couple of pitfalls:
 - combining with overriding logic such as `overrideAttrs` function in nixpkgs has a surprising behaviour
   of not overriding every reference.
 
-A better way is to use simpler but more verbose `let .. in`:
+A better way is to use `let ... in`:
 
 ```nix
 let
