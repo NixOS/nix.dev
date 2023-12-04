@@ -90,7 +90,7 @@ In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, a
 
 :::{note}
 [Channels](https://nixos.wiki/wiki/Nix_channels) are a way of distributing Nix software.
-They are being phased out by flakes, but still used by default.
+They are used by default, but there are plans to replace them with a more robust system.
 :::
 
 For example, two developers on different machines are likely to have `<nixpkgs>` point to different revisions of `nixpkgs`.
