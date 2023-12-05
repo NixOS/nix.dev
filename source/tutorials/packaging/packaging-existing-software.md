@@ -14,6 +14,8 @@ In the long term, Nix helps tremendously in alleviating that stress, but when *f
 
 In this tutorial, you'll create your first Nix derivations to package C/C++ software, taking advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`) which automates much of the work of building self-contained C/C++ packages.
 
+While an automated tool like [`nix-init`](https://github.com/nix-community/nix-init) can produce Nix derivations from a given software repository for many common project types, it is not uncommon for such an automatic generation to not work, or to encounter project types it does not cover. This tutorial will let you handle such failures without frustration, give you the insight needed to modify automatically generated derivations appropriately for your use case, and perhaps even contribute new generators to `nix-init`!
+
 The tutorial begins by considering `hello`, an implementation of "hello world" which only requires dependencies provided by `stdenv`.
 
 Next, you will build more complex packages with their own dependencies, leading you to use additional derivation features.
