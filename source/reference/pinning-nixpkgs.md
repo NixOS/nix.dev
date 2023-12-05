@@ -16,7 +16,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
   ./path/to/expression.nix
   ```
 
-  Using `./.` means that the expression is located in a file `default.nix` the current directory.
+  Using `./.` means that the expression is located in a file `default.nix` in the current directory.
 
 - Pinned to a specific commit:
 
