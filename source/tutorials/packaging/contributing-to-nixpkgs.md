@@ -76,7 +76,7 @@ in
 }
 ```
 
-Copy both of these into `icat.nix` and `default.nix` files on your own machine, and then verify that you can build the derivation:
+Copy both of `icat.nix` and `default.nix` onto your own machine, and then verify that you can build the derivation:
 
 ```console
 $ nix-build -A icat
