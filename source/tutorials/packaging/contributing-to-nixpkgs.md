@@ -110,7 +110,7 @@ A number of other hooks are available, and when packaging for `nixpkgs` you shou
 ## Package Metadata
 The Nixpkgs [contribution guidelines](https://nixos.org/manual/nixpkgs/stable/#part-contributing) require all packages in Nixpkgs to have a `meta` attribute in their derivation, which contains information like a description of the package, the homepage of the project it belongs to, the software license, which platforms the package can be built for, and a list of Nixpkgs maintainers for the package.
 
-Usually, the required metadata can be gotten from the upstream repository.
+Usually, the required metadata can be found in the upstream repository.
 
 For `icat`, add the following `meta` attribute to the attrset passed to `stdenv.mkDerivation` in `icat.nix`:
 
