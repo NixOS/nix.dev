@@ -184,18 +184,20 @@ this derivation will be built:
 
 The build completed as expected, and produced a `result` in the current directory. So as a sanity check, we ought to confirm that the program does run on our system.
 
+```console
+$ nix-shell --run
+```
+
 Assuming that the package builds and run on our machine, it is now ready for submission to Nixpkgs!
 
 ## Next Steps
-With the package building successfully, you're almost ready to contribute your work to Nixpkgs.
 
-Be sure to read the [contributing documentation](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) to understand the current submission conventions before proceeding.
+All that remains is to make sure your familiarise yourself with the conventions of [contributing to `nixpkgs`](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) and the conventions defining [package maintainers](https://github.com/NixOS/nixpkgs/tree/master/maintainers#readme).
 
 :::{note}
-Before contributing your first package, you *must* add your information to [`nixpkgs/maintainers/maintainers-list.nix`](https://github.com/NixOS/nixpkgs/blob/master/maintainers/maintainer-list.nix), following the instructions [here](https://nixos.org/manual/nixpkgs/stable/#var-meta-maintainers).
-:::
-
-When you contribute a package, you will also need to add yourself to the list of maintainers for that package, using the name you set in `maintainer-list.nix`:
+Before you submit your package, you must:
+* ensure you are [registered](https://github.com/NixOS/nixpkgs/tree/master/maintainers#how-to-become-a-maintainer) as a maintainer by listing yourself in [`nixpkgs/maintainers/maintainers-list.nix`](https://github.com/NixOS/nixpkgs/blob/master/maintainers/maintainer-list.nix).
+* ensure you add yourself to the list of maintainers for the package you're about to submit, using the name you set in `maintainer-list.nix`:
 
 ```diff
 # icat.nix
@@ -207,3 +209,4 @@ When you contribute a package, you will also need to add yourself to the list of
   };
 ...
 ```
+:::
