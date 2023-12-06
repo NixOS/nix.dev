@@ -105,7 +105,7 @@ Finally, you used this new knowledge to update the `installPhase` of the `icat` 
 ...
 ```
 
-A number of other hooks are available, and when packaging for `nixpkgs` you should remember to include calls to these hooks in the phases you define, to make it easy for other contributors to [override](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) parts of your derivations in the future.
+A number of other hooks are available, and when packaging for Nixpkgs you should remember to include calls to these hooks in the phases you define, to make it easy for other contributors to [override](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) parts of your derivations in the future.
 
 ## Package Metadata
 The Nixpkgs [contribution guidelines](https://nixos.org/manual/nixpkgs/stable/#part-contributing) require all packages in Nixpkgs to have a `meta` attribute in their derivation, which contains information like a description of the package, the homepage of the project it belongs to, the software license, which platforms the package can be built for, and a list of Nixpkgs maintainers for the package.
@@ -129,7 +129,7 @@ For `icat`, add the following `meta` attribute to the attrset passed to `stdenv.
 With no further technical changes necessary, this derivation is now complete.
 
 ## Adding to Nixpkgs
-You can now clone a local copy of `nixpkgs`, and move your derivation into an appropriate location within that source tree.
+You can now clone a local copy of Nixpkgs, and move your derivation into an appropriate location within that source tree.
 
 ```console
 $ git clone https://github.com/nixos/nixpkgs
@@ -137,7 +137,7 @@ $ git clone https://github.com/nixos/nixpkgs
 
 `icat` is a console tool which also displays graphics, so there are a few places within Nixpkgs that you could reasonably move it.
 
-In the past, packages were contributed based on the category they might fit in. For example: there are currently two other similar tools already in `nixpkgs`, both of which are stored in `pkgs/applications/graphics`, so that might have been a good home for `icat` too. However, [`nixpkgs` now prefers organization of packages by the the two-letter prefix of their package name](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#readme) within the `pkgs/by-name/` directory, [when possible](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#limitations). This eliminates to decide upon a particular category if a package fits into multiple, and it also eliminates the requirement of [updating `all-packages.nix` when using the category-based hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#versioning), and since our case isn't bound by any naming limitations, let's use the two-letter prefix system:
+In the past, packages were contributed based on the category they might fit in. For example: there are currently two other similar tools already in Nixpkgs, both of which are stored in `pkgs/applications/graphics`, so that might have been a good home for `icat` too. However, [Nixpkgs now prefers organization of packages by the the two-letter prefix of their package name](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#readme) within the `pkgs/by-name/` directory, [when possible](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#limitations). This eliminates to decide upon a particular category if a package fits into multiple, and it also eliminates the requirement of [updating `all-packages.nix` when using the category-based hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#versioning), and since our case isn't bound by any naming limitations, let's use the two-letter prefix system:
 
 ```console
 $ mkdir nixpkgs/pkgs/by-name/ic/icat
@@ -192,7 +192,7 @@ Assuming that the package builds and run on our machine, it is now ready for sub
 
 ## Next Steps
 
-All that remains is to make sure your familiarise yourself with the conventions of [contributing to `nixpkgs`](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) and the conventions defining [package maintainers](https://github.com/NixOS/nixpkgs/tree/master/maintainers#readme).
+All that remains is to make sure your familiarise yourself with the conventions of [contributing to Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) and the conventions defining [package maintainers](https://github.com/NixOS/nixpkgs/tree/master/maintainers#readme).
 
 :::{note}
 Before you submit your package, you must:
