@@ -137,19 +137,22 @@ $ git clone https://github.com/nixos/nixpkgs
 
 `icat` is a console tool which also displays graphics, so there are a few places within Nixpkgs that you could reasonably move it.
 
-There are currently two other similar tools already in `nixpkgs`, both of which are stored in `pkgs/applications/graphics`, so this is a good candidate for a home for `icat` too.
+In the past, packages were contributed based on the category they might fit in. For example: there are currently two other similar tools already in `nixpkgs`, both of which are stored in `pkgs/applications/graphics`, so that might have been a good home for `icat` too. However, [`nixpkgs` now prefers organization of packages by the the two-letter prefix of their package name](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#readme) within the `pkgs/by-name/` directory, [when possible](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#limitations). This eliminates to decide upon a particular category if a package fits into multiple, and it also eliminates the requirement of [updating `all-packages.nix` when using the category-based hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#versioning), and since our case isn't bound by any naming limitations, let's use the two-letter prefix system:
 
 ```console
-$ mkdir nixpkgs/pkgs/applications/graphics/icat
+$ mkdir nixpkgs/pkgs/by-name/ic/icat
 ```
 
-You should rename `icat.nix` when you copy it to its new home, to keep to the convention of package derivation files being named `default.nix`:
+You should rename `icat.nix` when you copy it to its new home, to keep to the convention of package derivation files [being named `package.nix`](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#example) when using the two-letter prefix system:
 
 ```console
 $ mv icat.nix nixpkgs/pkgs/applications/graphics/icat/default.nix
 ```
 
-The relative directory paths to all packages get referenced in `pkgs/top-level/all-packages.nix`, which you should update now, putting the new package next to the other similar tools:
+:::{note}
+Other organization systems might specify a different standard name for the derivation root. For example, the [category hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#category-hierarchy) system requires the standard name `default.nix`.
+
+Additionally, as alluded to above, other hierarchy systems might require additional steps. For example, when using the categorical hierarchy, the relative directory paths to all packages get referenced in `pkgs/top-level/all-packages.nix`, which you would also need to update, putting the new package next to the other similar tools:
 
 ```diff
 # all-packages.nix
@@ -164,6 +167,7 @@ The relative directory paths to all packages get referenced in `pkgs/top-level/a
 
 :::{note}
 Attributes in `all-packages.nix` are arranged *approximately* in alphabetical order, either by attribute name or by the directory containing their corresponding `default.nix`.
+:::
 :::
 
 ## One Final Test

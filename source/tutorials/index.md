@@ -9,9 +9,9 @@ These sections contains series of lessons to get started.
 
 first-steps/index.md
 nix-language.md
-packaging/index.md
 file-sets.md
 nixos/index.md
 cross-compilation.md
 module-system/module-system.md
+packaging/index.md
 ```
