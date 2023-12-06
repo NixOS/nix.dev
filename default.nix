@@ -27,25 +27,28 @@ let
     '';
     installPhase =
       let
-        # Various versions of the Nix manuals, grep for (nix-manual)=
-        # FIXME: This requires human interaction to update!
-        # See ./CONTRIBUTING.md for details.
+        # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed
+        # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
         releases = [
           "2.19"
           "2.18"
           "2.13"
         ];
         inputName = version: pkgs.lib.strings.replaceStrings [ "." ] [ "-" ] version;
-        src = version: (import inputs."nix_${inputName version}").default.doc;
+        src = version: inputs."nix_${inputName version}";
+        manual = version: (import (src version)).default.doc;
         copy = version: ''
-          cp -R ${src version}/share/doc/nix/manual/* $out/manual/nix/${version}
+          cp -Rf ${manual version}/share/doc/nix/manual/* $out/manual/nix/${version}
+          # add upstream page redirects of the form `<from> <to> <status>`, excluding comment lines and empty
+          sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${src version}/doc/manual/_redirects >> $out/_redirects
         '';
       in
       with pkgs.lib.strings;
       ''
-        mkdir -p $out/manual/nix/{${concatStringsSep "," releases}}
-        ${concatStringsSep "\n" (map copy releases)}
+        # NOTE: the comma in the shell expansion makes it also work for singleton lists
+        mkdir -p $out/manual/nix/{${concatStringsSep "," releases},}
         cp -R build/html/* $out/
+        ${concatStringsSep "\n" (map copy releases)}
       '';
   };
 
