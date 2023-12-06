@@ -1,35 +1,41 @@
 (nix-manual)=
 # Nix reference manual
 
+<!--
+This page is pre-processed before rendering with Sphinx. For details:
+
+    grep -n nix-manual.md default.nix
+-->
+
 ```{toctree}
 :hidden:
 
 Nix pre-release (development) <https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download>
-Nix 2.19 (latest) <https://nix.dev/manual/nix/2.19/>
-Nix 2.18 (rolling) <https://nix.dev/manual/nix/2.18/>
-Nix 2.18 (stable 23.11) <https://nix.dev/manual/nix/2.18/>
-Nix 2.13 (stable 23.05) <https://nix.dev/manual/nix/2.13/>
+Nix @latest@ (latest) <https://nix.dev/manual/nix/latest/>
+Nix @rolling@ (in rolling) <https://nix.dev/manual/nix/rolling/>
+Nix @stable@ (in stable @nixpkgs-stable@) <https://nix.dev/manual/nix/stable/>
+Nix @prev-stable@ (in stable @nixpkgs-prev-stable@) <https://nix.dev/manual/nix/prev-stable/>
 ```
 
 - [Nix pre-release](https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download)
 
-  Reference documentation for the latest build from the `master` branch of the [Nix repository](https://github.com/NixOS/nix)
+  Latest build from the `master` branch of the [Nix repository](https://github.com/NixOS/nix)
 
-- [Nix 2.19](https://nix.dev/manual/nix/2.19/)
+- [Nix @latest@](https://nix.dev/manual/nix/latest/)
 
-  Reference documentation for the latest Nix release
+  Latest Nix release
 
-- [Nix 2.18](https://nix.dev/manual/nix/2.18/)
+- [Nix @rolling@](https://nix.dev/manual/nix/rolling/)
 
-  Reference documentation for the Nix version shipped with the {term}`Nixpkgs` and {term}`NixOS` rolling release
+  Shipped with the {term}`Nixpkgs` and {term}`NixOS` rolling release
 
-- [Nix 2.18](https://nix.dev/manual/nix/2.18/)
+- [Nix @stable@](https://nix.dev/manual/nix/stable/)
 
-  Reference documentation for the Nix version shipped with the current {term}`Nixpkgs` and {term}`NixOS` stable release
+  Shipped with the current {term}`Nixpkgs` and {term}`NixOS` @nixpkgs-stable@ stable release
 
-- [Nix 2.13](https://nix.dev/manual/nix/2.13/)
+- [Nix @prev-stable@](https://nix.dev/manual/nix/prev-stable/)
 
-  Reference documentation for the Nix version shipped with the previous {term}`Nixpkgs` and {term}`NixOS` stable release
+  Shipped with the previous {term}`Nixpkgs` and {term}`NixOS` @nixpkgs-prev-stable@ stable release
 
 :::{tip}
 More information on Nixpkgs and NixOS releases: [](channel-branches)
