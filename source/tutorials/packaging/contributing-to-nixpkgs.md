@@ -170,7 +170,7 @@ Attributes in `all-packages.nix` are arranged *approximately* in alphabetical or
 :::
 :::
 
-## One Final Test
+## Two Final Tests: Build and Run
 To confirm that the package builds within its new context, you should change directories to the root of the Nixpkgs repo and run `nix-build -A icat` a final time:
 
 ```console
@@ -182,9 +182,9 @@ this derivation will be built:
 /nix/store/vr2vk8z8839l5j6gra0qlyxrh5sarmh4-icat
 ```
 
-The build completed as expected, and produced a `result` in the current directory.
+The build completed as expected, and produced a `result` in the current directory. So as a sanity check, we ought to confirm that the program does run on our system.
 
-The package is now ready for submission to Nixpkgs!
+Assuming that the package builds and run on our machine, it is now ready for submission to Nixpkgs!
 
 ## Next Steps
 With the package building successfully, you're almost ready to contribute your work to Nixpkgs.
