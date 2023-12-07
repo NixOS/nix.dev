@@ -25,3 +25,4 @@
 /recipes/direnv /guides/recipes/direnv 301
 /tutorials/learning-journey/sharing-dependencies /guides/recipes/sharing-dependencies 301
 /tutorials/learning-journey/packaging-existing-software /tutorials/packaging-existing-software 301
+/permalink/stub-ld /guides/faq#how-to-run-non-nix-executables 301
