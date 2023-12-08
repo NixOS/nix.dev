@@ -9,7 +9,7 @@ myst:
 
 ## Overview
 
-Declarative shell environments allow you to
+Declarative shell environments allow you to:
 
 - Automatically run bash commands during environment activation
 - Automatically set environment variables
@@ -20,7 +20,7 @@ Declarative shell environments allow you to
 In the {ref}`ad-hoc-envs` tutorial, we looked at imperatively creating shell environments using `nix-shell -p`, when we need a quick way to access tools without having to install them globally.
 We also saw how to execute that command with a specific Nixpkgs revision using a Git commit as an argument, to recreate the same environment used previously.
 
-In this tutorial we'll take a look how to create reproducible shell environments given a declarative configuration in a {term}`Nix file`.
+In this tutorial we'll take a look at how to create reproducible shell environments given a declarative configuration in a {term}`Nix file`.
 
 ### How long will it take?
 
