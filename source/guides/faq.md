@@ -49,6 +49,54 @@ See <https://github.com/nix-community/home-manager>
 
 ## NixOS
 
+### How to run non-nix executables?
+
+NixOS cannot run dynamically linked executables intended for generic Linux environments out of the box.
+This is because, by design, it does not have a global library path, nor does it follow the [Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) (FHS).
+
+There are a few ways to resolve this mismatch in environment expectations:
+
+- Use the version packaged in Nixpkgs, if there is one.
+  You can search available packages at <https://search.nixos.org/packages>.
+
+- Write a Nix expression for the program to package it in your own configuration.
+
+  There are multiple approaches to this:
+  - Build from source.
+
+    Many open-source programs are highly flexible at compile time in terms of where their files go.
+    For an introduction to this, see [](../tutorials/packaging-existing-software).
+  - Modify the program's [ELF header](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) to include paths to libraries using [`autoPatchelfHook`](https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook).
+
+    Do this if building from source isn't feasible.
+  - Wrap the program to run in an FHS-like environment using [`buildFHSEnv`](https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments).
+
+    This is a last resort, but sometimes necessary, for example if the program downloads and runs other executables.
+
+- Create a library path that only applies to unpackaged programs by using [`nix-ld`](https://github.com/Mic92/nix-ld).
+  Add this to your `configuration.nix`:
+
+  ```nix
+    programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+    ];
+  ```
+
+  Then run `nixos-rebuild switch`, and log out and back in again to propagate the new environment variables.
+  (This is only necessary when enabling `nix-ld`; changes in included libraries take effect immediately on rebuild.)
+
+  :::{note}
+  `nix-ld` does not work for 32-bit executables on `x86_64` machines.
+  :::
+
+- Run your program in the FHS-like environment made for the Steam package using [`steam-run`](https://nixos.org/manual/nixpkgs/stable/#sec-steam-run):
+
+  ```shell-session
+  $ nix-shell -p steam-run --run "steam-run <command>"
+  ```
+
 ### How to build my own ISO?
 
 See <http://nixos.org/nixos/manual/index.html#sec-building-image>
