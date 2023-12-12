@@ -190,7 +190,9 @@ this derivation will be built:
 /nix/store/vr2vk8z8839l5j6gra0qlyxrh5sarmh4-icat
 ```
 
-The build completed as expected, and produced a `result` in the current directory. So as a sanity check, we ought to confirm that the program does run on our system.
+The build completed as expected, and produced a `result` symbolic link in the current directory.
+
+It's good practice to confirm that the program actually runs:
 
 ```console
 $ nix-shell --run
