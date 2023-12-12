@@ -202,7 +202,7 @@ If the package builds and runs as you'd expect, it is ready for submission to Ni
 
 ## Next Steps
 
-All that remains is to make sure your familiarise yourself with the conventions of [contributing to Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) and the conventions defining [package maintainers](https://github.com/NixOS/nixpkgs/tree/master/maintainers#readme).
+All that remains is to make sure you familiarise yourself with the conventions for [contributing to Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), starting with defining [package maintainers](https://github.com/NixOS/nixpkgs/tree/master/maintainers#readme).
 
 :::{note}
 Before you submit your package, you must:
