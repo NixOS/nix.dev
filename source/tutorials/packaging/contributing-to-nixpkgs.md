@@ -152,7 +152,9 @@ $ mv icat.nix nixpkgs/pkgs/applications/graphics/icat/default.nix
 :::{note}
 Other organization systems might specify a different standard name for the derivation root. For example, the [category hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#category-hierarchy) system requires the standard name `default.nix`.
 
-Additionally, as alluded to above, other hierarchy systems might require additional steps. For example, when using the categorical hierarchy, the relative directory paths to all packages get referenced in `pkgs/top-level/all-packages.nix`, which you would also need to update, putting the new package next to the other similar tools:
+Additionally, as alluded to above, other hierarchy systems might require additional steps.
+
+For example, when using the categorical hierarchy, the relative directory paths to all packages get referenced in `pkgs/top-level/all-packages.nix`, which you would also need to update, putting the new package next to the other similar tools:
 
 ```diff
 # all-packages.nix
