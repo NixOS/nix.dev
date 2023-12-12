@@ -137,7 +137,13 @@ $ git clone https://github.com/nixos/nixpkgs
 
 `icat` is a console tool which also displays graphics, so there are a few places within Nixpkgs that you could reasonably move it.
 
-In the past, packages were contributed based on the category they might fit in. For example: there are currently two other similar tools already in Nixpkgs, both of which are stored in `pkgs/applications/graphics`, so that might have been a good home for `icat` too. However, [Nixpkgs now prefers organization of packages by the the two-letter prefix of their package name](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#readme) within the `pkgs/by-name/` directory, [when possible](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#limitations). This eliminates to decide upon a particular category if a package fits into multiple, and it also eliminates the requirement of [updating `all-packages.nix` when using the category-based hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#versioning), and since our case isn't bound by any naming limitations, let's use the two-letter prefix system:
+In the past, packages were contributed based on the category they might fit in.
+
+For example: there are currently two other similar tools already in Nixpkgs, both of which are stored in `pkgs/applications/graphics`, so that might have been a good home for `icat` too.
+
+However, [Nixpkgs now prefers organization of packages by the the two-letter prefix of their package name](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#readme) within the `pkgs/by-name/` directory, [when possible](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#limitations).
+
+This eliminates the need to decide upon a particular category if a package fits into multiple, and it also eliminates the requirement of [updating `all-packages.nix` when using the category-based hierarchy](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#versioning), and since our case isn't bound by any naming limitations, let's use the two-letter prefix system:
 
 ```console
 $ mkdir nixpkgs/pkgs/by-name/ic/icat
