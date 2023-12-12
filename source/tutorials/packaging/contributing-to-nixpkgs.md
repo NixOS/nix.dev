@@ -198,7 +198,7 @@ It's good practice to confirm that the program actually runs:
 $ nix-shell --run
 ```
 
-Assuming that the package builds and run on our machine, it is now ready for submission to Nixpkgs!
+If the package builds and runs as you'd expect, it is ready for submission to Nixpkgs!
 
 ## Next Steps
 
