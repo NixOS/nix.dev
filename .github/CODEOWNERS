@@ -23,3 +23,5 @@ source/tutorials/packaging-existing-software.md @proofconstruction
 
 /source/tutorials/integration-testing-using-virtual-machines.md @olafklingt
 /source/tutorials/nixos-configuration-on-vm.md @olafklingt
+
+/maintainers/documentation-survey.md @henrik-ch
