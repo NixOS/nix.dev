@@ -1,11 +1,29 @@
 # Documentation survey
 
+The documentation team is currently carrying out a documentation survey in this page.
+Its purpose is to provide overview of the types, topics, and volume of existing documentation resources and inform future work.
+
+## Contributing
+
+We would love for you to get involved.
+Here is how you can help:
+
+- If you know of a documentation resource that isn't listed yet, make a pull request to add it.
+- Alternatively pick an item in the Documentation Survey that has no summary yet.
+
+Work though the linked resource and add a summary and other metadata in a pull request.
+Your change should add details to one bullet point, following the specified format.
+
+When dealing with a larger resource like the [Nixpkgs manual](https://nixos.org/manual/nixpkgs), pick smaller pieces such as chapters.
+
+## Metadata
+
 To better navigate the material and judge its relevance, every entry should provide
-  - Title (URL)
-  - Brief summary
-  - Video length or estimated reading time
-  - Principal Author(s)
-  - Year created (last update or maintenance status)
+- Title (URL)
+- Brief summary
+- Video length or estimated reading time
+- Principal Author(s)
+- Year created (last update or maintenance status)
 
 ## Tutorials
 
