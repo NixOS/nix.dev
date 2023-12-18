@@ -195,7 +195,8 @@ The build completed as expected, and produced a `result` symbolic link in the cu
 It's good practice to confirm that the program actually runs:
 
 ```console
-$ nix-shell --run
+$ wget https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/white.png
+$ result/bin/icat white.png
 ```
 
 If the package builds and runs as you'd expect, it is ready for submission to Nixpkgs!
