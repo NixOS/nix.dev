@@ -15,7 +15,7 @@ myst:
 In this tutorial, which follows {ref}`the tutorial on packaging existing software <packaging-existing-software>`, you will learn how to prepare newly-packaged software for submission to Nixpkgs, becoming a Nixpkgs contributor in the process.
 
 ## Tags, Revisions, and Releases
-An earlier version of the `icat.nix` definition created in the {ref}`Packaging Existing Software <packaging-existing-software>` tutorial used the `master` revision of the [upstream `icat` repository](https://github.com/atextor/icat), which would be suitable for individual use but isn't good practice for submission to Nixpkgs.
+An earlier version of the `icat.nix` definition created in the {ref}`Packaging Existing Software <packaging-existing-software>` tutorial used the `master` revision of the [upstream `icat` repository](https://github.com/atextor/icat), which could be suitable for individual use but isn't good practice for submission to Nixpkgs.
 
 It is much better to use a fixed revision corresponding to a particular release version of the software so maintainers (perhaps you!) can easily check whether the package should be updated.
 
