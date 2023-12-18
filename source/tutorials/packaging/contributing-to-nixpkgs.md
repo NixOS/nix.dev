@@ -152,7 +152,7 @@ $ mkdir nixpkgs/pkgs/by-name/ic/icat
 You should rename `icat.nix` when you copy it to its new home, to keep to the convention of package derivation files [being named `package.nix`](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name#example) when using the two-letter prefix system:
 
 ```console
-$ mv icat.nix nixpkgs/pkgs/applications/graphics/icat/default.nix
+$ mv icat.nix nixpkgs/pkgs/by-name/ic/icat/package.nix
 ```
 
 :::{note}
