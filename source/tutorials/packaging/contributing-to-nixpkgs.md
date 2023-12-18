@@ -21,7 +21,7 @@ It is much better to use a fixed revision corresponding to a particular release 
 
 This was already done in the previous tutorial, but as a reminder, here are the steps:
 1. Check the upstream repository for tags or releases. On GitHub, these are available at `https://github.com/<owner>/<repo>/tags` and `https://github.com/<owner>/<repo>/releases` respectively.
-2. Choose the latest tag or release and write it into a string literal as the value of the `rev` attribute passed to the [fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers).
+2. Choose the latest tag or release and write it into a string literal as the value of the `rev` attribute passed to a Git [fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers).
 3. Use `nix-prefetch-url` or a similar tool to fetch, unpack, and hash the files marked by the tag or release you selected.
 4. Alternatively, you can also use a tool such as `nix-init` to automatically generate a required derivation for some common project types, or use its output to help lay down a skeleton implementation of the above steps.
 
