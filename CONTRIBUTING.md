@@ -27,15 +27,6 @@ Adapted from the [Contributor Covenant] and [The Carpentries Code of Conduct]:
 With the current setup, the Nix manual hosted on nix.dev does not get updated automatically with new releases.
 The following manual steps are required:
 
-- Regularly update the inputs to use the latest versions of the Nix release branches with `nix shell --run "niv update"`
-
-  To avoid long build times, make sure Nix can be fetched from the cache.
-  If it doesn't, find the latest commit that is [built by Hydra](https://hydra.nixos.org/project/nix). For example, to pin Nix 2.18:
-
-  ```bash
-  niv update nix_2-18 -r f5f4de6a550327b4b1a06123c2e450f1b92c73b6
-  ```
-
 - On each new Nix release:
 
   1. Add the latest version in [`default.nix`](./default.nix).

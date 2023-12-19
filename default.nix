@@ -29,7 +29,7 @@ let
       let
         # Various versions of the Nix manuals, grep for (nix-manual)=
         # FIXME: This requires human interaction to update!
-        # See ./CONTRIBUTING.md for details.
+        # See ./CONTRIBUTING.md, "Updating reference manuals" section for details.
         releases = [
           "2.19"
           "2.18"
