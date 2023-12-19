@@ -1,0 +1,19 @@
+name: Automated niv-managed dependency updates
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # run this every day at 4:00am
+    - cron:  '0 4 * * *'
+jobs:
+  niv-updater:
+    name: 'Create PRs for niv-managed dependencies'
+    runs-on: ubuntu-latest
+    steps:
+      # notice there is no checkout step
+      - name: niv-updater-action
+        uses: knl/niv-updater-action@v12
+        with:
+          keep-updating: true
+          labels: |
+            dependencies
+            github_actions
