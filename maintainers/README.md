@@ -88,6 +88,7 @@ Contact [@fricklerhandwerk] to get a calendar invitation.
 ### Meeting links
 
 - [Jitsi conference](https://jitsi.lassul.us/nix-documentation)
+  - (when joining, make sure to use [the link provided at the latest commit](https://github.com/NixOS/nix.dev/blob/master/maintainers/README.md))
 - [Meeting notes scratchpad][collaborative scratchpad]
 - [GitHub project board]
 
