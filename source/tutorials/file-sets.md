@@ -554,14 +554,8 @@ This includes too much though, as not all of these files are needed to build the
 
 :::{note}
 When using the [`flakes` and `nix-command` experimental features](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
-it's [not really possible](https://github.com/NixOS/nix/issues/9292) to use this function, even with
-
-
-```shell-session
-$ nix build path:.
-```
-
-However it's also not needed, because by default, `nix build` only allows access to files tracked by Git.
+this function isn't needed, because `nix build` by default only allows access to files tracked by Git.
+However, in order to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
 :::
 
 ## Intersection
