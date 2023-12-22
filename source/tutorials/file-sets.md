@@ -8,7 +8,8 @@ Using these features directly can be tricky however:
 
 - Coercion of paths to strings, such as the wide-spread pattern of `src = ./.`,
   makes the derivation dependent on the name of the current directory.
-  It always adds the entire directory, including unneeded files that cause unnecessary new builds when they change.
+  Furthermore, it always adds the entire directory to the store, including unneeded files,
+  which causes unnecessary new builds when they change.
 
 - The [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) function
   (and equivalently [`lib.sources.cleanSourceWith`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith))
