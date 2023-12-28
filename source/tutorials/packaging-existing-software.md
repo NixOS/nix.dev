@@ -260,7 +260,7 @@ The source is hosted on GitHub at `https://github.com/atextor/icat`, which alrea
 - `owner`: the name of the account controlling the repository; `owner = "atextor";`
 - `repo`: the name of the repository to fetch; `repo = "icat";`
 
-You can navigate to the project's [Releases page](https://github.com/atextor/icat/releases) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch.
+You can navigate to the project's [Tags page](https://github.com/atextor/icat/tags) to find a suitable `rev`, such as the git commit hash or tag (e.g. `v1.0`) corresponding to the release you want to fetch.
 
 In this case, the latest release tag is `v0.5`.
 
