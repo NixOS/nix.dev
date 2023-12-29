@@ -49,7 +49,7 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ gnu-config=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)
+$ gnu-config=$(nix-build '<nixpkgs>' -A gnu-config)
 $ "$gnu-config"/config.guess
 aarch64-unknown-linux-gnu
 ```
@@ -87,7 +87,7 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 It is possible to explore them in `nix repl`:
 
 ```shell-session
-$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-22.11
+$ nix repl '<nixpkgs>'
 Welcome to Nix version 2.3.12. Type :? for help.
 
 Loading '<nixpkgs>'...
@@ -182,8 +182,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
-$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
-  -A pkgsCross.aarch64-multiplatform.hello
+$ nix-build '<nixpkgs>' -A pkgsCross.aarch64-multiplatform.hello
 ...
 /nix/store/nqy5dlzzkbq6bvz5wknjpb8d64jl7g9x-hello-aarch64-unknown-linux-gnu-2.12.1
 ```
