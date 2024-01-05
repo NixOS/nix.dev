@@ -36,13 +36,12 @@ This is a [known issue](https://github.com/NixOS/nix/issues/1251).
 
 It means that using a new version of Nix upgraded the SQLite schema of the [database](https://nix.dev/manual/nix/2.18/glossary#gloss-nix-database), and then you tried to use an older version Nix.
 
-The solution is to dump the database, use the old Nix version to initialize it, and then re-import the data:
+The solution is to dump the database, and use the old Nix version to re-import the data:
 
 ```shell-session
 $ /path/to/nix/unstable/bin/nix-store --dump-db > /tmp/db.dump
 $ mv /nix/var/nix/db /nix/var/nix/db.toonew
 $ mkdir /nix/var/nix/db
-$ nix-store --init # this is the old nix-store
 $ nix-store --load-db < /tmp/db.dump
 ```
 
