@@ -453,3 +453,18 @@ sitemap_url_scheme = "{link}"
 
 # Not found
 notfound_urls_prefix = "/"
+
+def ultimateReplace(app, docname, source):
+    result = source[0]
+    for key in app.config.ultimate_replacements:
+        result = result.replace(key, app.config.ultimate_replacements[key])
+    source[0] = result
+
+ultimate_replacements = {
+    "{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}" : "22.11"
+}
+
+def setup(app):
+   app.add_config_value('ultimate_replacements', {}, True)
+   app.connect('source-read', ultimateReplace)
+

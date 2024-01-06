@@ -14,7 +14,6 @@ Nixpkgs offers powerful tools to cross-compile software for various system types
 
 ## What do you need?
 
-
 - Experience using C compilers
 - Basic knowledge of the [Nix language](<reading-nix-language>)
 
@@ -49,7 +48,7 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ mygnuconfig=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)
+$ mygnuconfig=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION} -A gnu-config)
 $ "$mygnuconfig"/config.guess
 aarch64-unknown-linux-gnu
 ```
@@ -87,7 +86,7 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 It is possible to explore them in `nix repl`:
 
 ```shell-session
-$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-22.11
+$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}
 Welcome to Nix version 2.3.12. Type :? for help.
 
 Loading '<nixpkgs>'...
@@ -154,7 +153,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}";
      pkgs = import <nixpkgs> {};
    in
    pkgs.pkgsCross.aarch64-multiplatform.hello
@@ -164,7 +163,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}";
      # configure `nixpkgs` such that all its packages are build for the host platform
      pkgs = import nixpkgs { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
    in
@@ -182,7 +181,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
-$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
+$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION} \
   -A pkgsCross.aarch64-multiplatform.hello
 ...
 /nix/store/nqy5dlzzkbq6bvz5wknjpb8d64jl7g9x-hello-aarch64-unknown-linux-gnu-2.12.1
@@ -196,7 +195,7 @@ To show off the power of cross compilation in Nix, let's build our own Hello Wor
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}";
   pkgs = import <nixpkgs> {};
 
   # Create a C program that prints Hello World
@@ -252,7 +251,7 @@ Given we have a `shell.nix`:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION}";
   pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
 in
 
