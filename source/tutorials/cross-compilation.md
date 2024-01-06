@@ -46,6 +46,7 @@ Since this is rarely needed, we will assume that the target is identical to the 
 The build platform is determined automatically by Nix during the configure phase.
 
 The host platform is best determined by running this command on the host platform:
+<!-- ..NIXOS_VERSION below is substituted from the source/conf.py file -->
 
 ```shell-session
 $ mygnuconfig=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-{CROSS_COMPILATION_TUTORIAL_NIXOS_VERSION} -A gnu-config)
