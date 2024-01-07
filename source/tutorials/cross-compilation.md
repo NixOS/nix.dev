@@ -49,8 +49,7 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ mygnuconfig=$(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)
-$ "$mygnuconfig"/config.guess
+$ $(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)/config.guess
 aarch64-unknown-linux-gnu
 ```
 
