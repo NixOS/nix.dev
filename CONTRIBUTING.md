@@ -99,23 +99,3 @@ We would be glad to incorporate your insights.
 ## Contributor guides
 
 Please read [Contributing Documentation](https://nix.dev/contributing/documentation).
-
-## GitHub heading anchors fails linkcheck
-
-Due to a [Sphinx bug][linkcheck gh bug], linkcheck fails when it verifies the
-existence of GitHub heading anchors on rendered Markdown documents.
-
-Until the bug is resolved, add the `user-content-` prefix to GitHub links
-containing heading anchors.
-
-For example, instead of
-
-```
-https://github.com/nix-community/nixos-generators#cross-compiling
-```
-
-use
-
-```
-https://github.com/nix-community/nixos-generators#user-content-cross-compiling
-```

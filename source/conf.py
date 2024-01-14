@@ -419,7 +419,7 @@ linkcheck_ignore = [
     # returns 403 on CI
     r"https://www.lesswrong.com",
     # Linkcheck fails on anchors in GH READMEs, see https://github.com/sphinx-doc/sphinx/issues/9016
-    r"https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests",
+    r"https://github.com/.+/.+#.+$",
     # Linkcheck fails on anchors in GH browser/file viewer, see https://github.com/sphinx-doc/sphinx/issues/11484
     r"https://github\.com/.+/.+/blob/.*#.*$",
     r"https://github\.com/.+/.+/tree/.*#.*$",
