@@ -11,11 +11,15 @@
 # This also holds true for GitHub teams. Since almost none of our teams have write
 # permissions, you need to list all members of the team with commit access individually.
 
-* @NixOS/documentation-team
+* @NixOS/documentation-reviewers
 
 /.github/workflows/ @asymmetric
 
 /source/tutorials/file-sets.md @infinisil
+source/guides/recipes/dependency-management.md @infinisil
+source/guides/recipes/python-environment.md @alejandrosame
+source/tutorials/module-system @infinisil @asymmetric @proofconstruction
+source/tutorials/packaging-existing-software.md @proofconstruction
 
 /source/tutorials/integration-testing-using-virtual-machines.md @olafklingt
 /source/tutorials/nixos-configuration-on-vm.md @olafklingt
