@@ -371,7 +371,7 @@ error: undefined variable 'one'
 
 Also known as “`let` expression” or “`let` binding”
 
-`let` expressions allow assigning names to values for repeated use.
+`let` expressions allow assigning names to values for scoped use.
 
 Example:
 
@@ -380,13 +380,31 @@ Example:
 let
   a = 1;
 in
-a + a
+  a + a
 ```
 
 ```{code-block}
 :class: value
 2
 ```
+
+Attempting to use the value outside of the binding produces an error:
+
+```{code-block} nix
+:class: expression
+a
+```
+
+```{code-block}
+:class: value
+error: undefined variable 'a'
+
+       at «string»:1:1:
+
+            1| a
+             | ^
+```
+
 
 :::{dropdown} Detailed explanation
 
