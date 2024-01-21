@@ -388,24 +388,6 @@ in
 2
 ```
 
-Attempting to use the value outside of the binding produces an error:
-
-```{code-block} nix
-:class: expression
-a
-```
-
-```{code-block}
-:class: value
-error: undefined variable 'a'
-
-       at «string»:1:1:
-
-            1| a
-             | ^
-```
-
-
 :::{dropdown} Detailed explanation
 
 Assignments are placed between the keywords `let` and `in`.
