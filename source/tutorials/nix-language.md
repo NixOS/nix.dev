@@ -371,7 +371,7 @@ error: undefined variable 'one'
 
 Also known as “`let` expression” or “`let` binding”
 
-`let` expressions allow assigning names to values for scoped use.
+`let` expressions allow assigning names to values for repeated and scoped use.
 
 Example:
 
