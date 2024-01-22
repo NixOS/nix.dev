@@ -44,7 +44,7 @@ pkgs.nixosTest {
     machine2 = { config, pkgs, ... }: {
       # ...
     };
-  }
+  };
   testScript = { nodes, ... }: ''
     # ...
   '';
