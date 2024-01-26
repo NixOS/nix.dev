@@ -68,6 +68,28 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 - Atomic upgrades and rollbacks.
 
 
+## Who is Nix for?
+
+Nix is a tool for software developers.
+
+You don't have to be a professional and you don't need formal education in informatics to greatly benefit from Nix.
+For our purposes here, you are a software developer if you manipulate character strings to make computers do exactly what you want.
+
+However, experience with complex software projects helps understanding why Nix is useful, knowing some informatics helps appreciating how it works, and either one is a good starting point to [help improve it](how-to-contribute).
+
+You probably won't want to go back to a world without Nix if you're a:
+
+- Full-stack or back-end developer
+- Test engineer
+- Embedded systems developer
+- DevOps engineer
+- System administrator
+- Data scientist
+- Natural scientist
+- Student of a technical field
+- Open source software enthusiast
+
+
 ```{toctree}
 :hidden:
 
