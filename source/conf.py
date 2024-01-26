@@ -200,7 +200,6 @@ html_sidebars = {
         "about.html",
         "search-field.html",
         "sbt-sidebar-nav.html",
-        "subscribe.html",
     ],
 }
 
