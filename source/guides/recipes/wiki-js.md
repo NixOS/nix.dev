@@ -3,7 +3,7 @@
 
 [Wiki.js](https://js.wiki/) is a modern, open-source wiki engine running on Node.js and written in JavaScript. It offers a sleek and user-friendly platform for managing and sharing knowledge.
 
-To quickly set up an instance of Wiki.js on your local NixOS machine, a database service is required, and optionnaly a reverse proxy for HTTPS URLs.
+To quickly set up an instance of Wiki.js on your local NixOS machine, a database service is required, and optionally a reverse proxy for HTTPS URLs.
 
 Below is a streamlined and ready-to-use recipe to spawn this service on your server:
 
