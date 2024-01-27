@@ -70,12 +70,11 @@ The following illustrate of what can be achieved with the Nix ecosystem:
 
 ## Who is Nix for?
 
-Nix is primarily a tool for software developers.
+Nix is a tool for people who both need computers to do exactly as intended, repeatably, far into the future, and who are familiar with command line interfaces and plain text editors.
 
-You don't have to be a professional and you don't need formal education in informatics to greatly benefit from Nix.
-For our purposes here, you are a software developer if you manipulate character strings to make computers do exactly what you want.
-
-However, experience with complex software projects helps understanding why Nix is useful, knowing some informatics helps appreciating how it works, and either one is a good starting point to [help improve it](how-to-contribute).
+You don't have to be a professional software developer and you don't need formal education in informatics to greatly benefit from Nix.
+However, experience with complex software projects and knowing some informatics helps with appreciating why it's useful and how it works.
+And it helps with learning how to use it effectively and [how to make improvements](how-to-contribute).
 
 You probably won't want to go back to a world without Nix if you're a:
 
