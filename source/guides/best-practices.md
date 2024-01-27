@@ -231,6 +231,10 @@ pkgs.lib.recursiveUpdate { a = { b = 1; }; } { a = { c = 3;}; }
 
 ## Reproducible source paths
 
+Create a file `myscript` that contains `echo "Hello World` and run `chmod +x myscript` to make it executable.
+Then copy the following snippet to a `.nix` file and build it.
+
+
 ```{code-block} nix
 :class: expression
 let pkgs = import <nixpkgs> {}; in
@@ -238,10 +242,16 @@ let pkgs = import <nixpkgs> {}; in
 pkgs.stdenv.mkDerivation {
   name = "foo";
   src = ./.;
+
+  installPhase = ''
+    mkdir -p $out/bin
+    cp myscript $out/bin/
+  '';
+
 }
 ```
 
-If the Nix file containing this expression is in `/home/myuser/myproject`, then the store path of `src` will be `/nix/store/<hash>-myproject`.
+<del>If the Nix file containing this expression is in `/home/myuser/myproject`, then the store path of `src` will be `/nix/store/<hash>-myproject`.</del>
 
 The problem is that now your build is no longer reproducible, as it depends on the parent directory name.
 That cannot declared in the source code, and results in an impurity.
