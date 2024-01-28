@@ -28,9 +28,9 @@ This file can be shared with anyone to recreate the same environment on a differ
 
 30 minutes
 
-### What will you need?
+### What do you need?
 
-- A basic understanding of the [Nix language](reading-nix-language)
+- A very basic understanding of the [Nix language](reading-nix-language)
 
 ## Entering a temporary shell
 
