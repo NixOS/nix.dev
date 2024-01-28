@@ -45,7 +45,9 @@ See <https://github.com/nix-community/home-manager>
 
 ### What's the recommended process for building custom packages?
 
-> E.g. if I git clone nixpkgs how do I use the cloned repo to define new / updated packages?
+How to use a clone of the Nixpkgs repository to update or write new packages?
+
+Please read [](packaging-existing-software) and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).
 
 ## NixOS
 
