@@ -1028,12 +1028,12 @@ Functions are everywhere in the Nix language and deserve particular attention.
 A function always takes exactly one argument.
 Argument and function body are separated by a colon (`:`).
 
-Wherever you see a colon (`:`) in Nix language code:
+Wherever you find a colon (`:`) in Nix language code:
 - On its left is the function argument
 - On its right is the function body.
 
 Function arguments are the third way, apart from [attribute sets](attrset) and [`let` expressions](let), to assign names to values.
-Notably, values are not known in advance: the names are used as placeholders that are filled when [calling a function](calling-functions).
+Notably, values are not known in advance: the names are placeholders that are filled when [calling a function](calling-functions).
 
 Function declarations in the Nix language can appear in different forms.
 Each of them is explained in the following, and here is an overview:
@@ -1560,7 +1560,7 @@ After reading `file.nix` the Nix expression is equivalent to the file contents:
 
 Since a Nix file can contain any Nix expression, `import`ed functions can be applied to arguments immediately.
 
-That is, whenever you see additional tokens after a call to `import`, the value it returns should be a function, and anything that follows are arguments to that function.
+That is, whenever you find additional tokens after a call to `import`, the value it returns should be a function, and anything that follows are arguments to that function.
 
 Example:
 
@@ -1870,7 +1870,7 @@ It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, whic
 You will probably never encounter `derivation` in practice.
 :::
 
-Whenever you see `mkDerivation`, it denotes something that Nix will eventually *build*.
+Whenever you encounter `mkDerivation`, it denotes something that Nix will eventually *build*.
 
 Example: [a package using `mkDerivation`](mkDerivation-example)
 
