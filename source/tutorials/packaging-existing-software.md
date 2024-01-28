@@ -525,5 +525,5 @@ default.nix hello.nix icat.nix result
 ## Next steps
 
 - [](sharing-dependencies)
-- [](direnv)
+- [](automatic-direnv)
 - [](python-dev-environment)
