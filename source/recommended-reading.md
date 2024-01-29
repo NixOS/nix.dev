@@ -55,3 +55,4 @@
 - [Overlays](https://www.youtube.com/watch?v=dGAL3gMXvug) (Jon Ringer, 2020)
 - [Adding a module to NixOS](https://www.youtube.com/watch?v=bkDYmvKINm8) (Jon Ringer, 2022)
 - [Upgrade kernel](https://www.youtube.com/watch?v=Zi_vbddNXtg) (Jon Ringer, 2020)
+- [NixOS Foundation on YouTube](https://www.youtube.com/@NixOS-Foundation/playlists)
