@@ -54,6 +54,20 @@ $ echo all gone | lolcat
 The program ‘lolcat’ is currently not installed.
 ```
 
+## Running programs once
+
+You can go even faster, by running any program directly:
+
+```console
+$ nix-shell -p cowsay --run "cowsay Nix"
+```
+
+If the command consists only of the program name, no quotes are needed:
+
+```console
+$ nix-shell -p hello --run hello
+```
+
 ## Search for packages
 
 What can you put in a shell environment?
