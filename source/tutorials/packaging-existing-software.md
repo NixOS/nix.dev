@@ -13,7 +13,7 @@ One of Nix's primary use-cases is in addressing common difficulties encountered 
 In the long term, Nix helps tremendously with alleviating such problems.
 But when *first* packaging existing software with Nix, it's common to encounter errors that seem inscrutable.
 
-## Introducton
+## Introduction
 
 In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/2.18/language/derivations) to package C/C++ software.
 This takes advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which reliably automates much of the work involved.
