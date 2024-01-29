@@ -65,7 +65,7 @@ $ nix-shell -p cowsay --run "cowsay Nix"
 If the command consists only of the program name, no quotes are needed:
 
 ```console
-$ nix-shell -p cowsay --run hello
+$ nix-shell -p hello --run hello
 ```
 
 ## Search for packages
