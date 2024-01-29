@@ -8,7 +8,7 @@ myst:
 (packaging-existing-software)=
 # Packaging existing software with Nix
 
-One of Nix's primary use-cases is in addressing common difficulties encountered with compiling software, such as specifying and obtaining dependencies.
+One of Nix's primary use-cases is in addressing common difficulties encountered with packaging software, such as specifying and obtaining dependencies.
 
 In the long term, Nix helps tremendously with alleviating such problems.
 But when *first* packaging existing software with Nix, it's common to encounter errors that seem inscrutable.
