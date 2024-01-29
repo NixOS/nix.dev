@@ -59,7 +59,9 @@ The program ‘lolcat’ is currently not installed.
 What can you put in a shell environment?
 If you can think of it, there's probably a Nix package of it.
 
+:::{tip}
 Enter the program name you want to run in [search.nixos.org](https://search.nixos.org/packages) to find packages that provide it.
+:::
 
 For the following example, find the package names for these programs:
 
