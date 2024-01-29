@@ -1,4 +1,4 @@
-# Recommended reading
+# Further reading
 
 ## Nix language tutorials
 
