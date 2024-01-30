@@ -1,14 +1,14 @@
 # NixOS
 
-Learn how to install, configure, and deploy NixOS.
+Learn how to configure, install, and deploy NixOS.
 
 ```{toctree}
 :maxdepth: 1
-building-and-running-docker-images.md
-building-bootable-iso-image.md
-deploying-nixos-using-terraform.md
-installing-nixos-on-a-raspberry-pi.md
 nixos-configuration-on-vm.md
 integration-testing-using-virtual-machines.md
+building-bootable-iso-image.md
+installing-nixos-on-a-raspberry-pi.md
 continuous-integration-github-actions.md
+building-and-running-docker-images.md
+deploying-nixos-using-terraform.md
 ```
