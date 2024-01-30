@@ -37,11 +37,15 @@ Going through all the steps carefully will take ca. 60 minutes.
 ## Your first package
 
 :::{note}
-A _package_ is a loosely defined Nixpkgs concept that refers to both a collection of files and other data, or a Nix derivation representing such a collection before it comes into being.
-Packages have mostly standardised attributes and output layouts, allowing them to be discovered in searches and installed into environments alongside other packages.
+<!--
+TODO: link to the Nix manual glossary entry once it's in a released build:
+https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download/manual/glossary.html#package
+-->
+A _package_ is a loosely defined concept that refers to both a collection of files and other data, or a {term}`Nix expression` representing such a collection before it comes into being.
+Packages in Nixpkgs have conventional, mostly standardised structure, allowing them to be discovered in searches and composed in environments alongside other packages.
 
-For the purposes of this tutorial, "package" means something like "result of a derivation".
-This is the artifact you or others will use, as a consequence of having "packaged existing software with Nix".
+For the purposes of this tutorial, "package" means: a Nix language function that will evaluate to a derivation.
+It will enable you or others to produce an artifact for practical use, as a consequence of having "packaged existing software with Nix".
 :::
 
 To start, consider this skeleton derivation:
