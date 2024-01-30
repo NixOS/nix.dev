@@ -1,3 +1,4 @@
+(bootable-iso-image)=
 # Building a bootable ISO image
 
 :::{note}

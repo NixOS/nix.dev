@@ -5,6 +5,7 @@ myst:
     "keywords": "Docker, containers, Nix, reproducible, build, tutorial"
 ---
 
+(nixos-docker-images)=
 # Building and running Docker images
 
 [Docker](https://www.docker.com/) is a set of tools and services used to build, manage and deploy containers.

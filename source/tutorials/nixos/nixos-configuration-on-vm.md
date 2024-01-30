@@ -6,19 +6,20 @@ One of the most important features of NixOS is the ability to configure the enti
 
 NixOS configurations can be used to test and use NixOS using a virtual machine, independent of an installation on a "bare metal" computer.
 
-:::{important}
-A NixOS configuration is a Nix language function following the [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules) convention.
-:::
-
 ## What will you learn?
 
 This tutorial serves as an introduction creating NixOS virtual machines.
-Virtual machines are a practical tool for debugging NixOS configurations.
+Virtual machines are a practical tool for experimenting with or debugging NixOS configurations.
 
 ## What do you need?
 
 - A working [Nix installation](https://nix.dev/manual/nix/2.18/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
 - Basic knowledge of the [Nix language](reading-nix-language)
+
+:::{important}
+A NixOS configuration is a Nix language function following the [NixOS module](https://nixos.org/manual/nixos/stable/index.html#sec-writing-modules) convention.
+For a thorough treatment of the module system, check the [](module-system-deep-dive) tutorial.
+:::
 
 ## Starting from a default NixOS configuration
 
@@ -95,7 +96,7 @@ The default NixOS configuration without comments is:
 }
 ```
 
-To be able to log in add the following lines to the returned attribute set:
+To be able to log in, add the following lines to the returned attribute set:
 
 ```nix
   users.users.alice = {
@@ -242,3 +243,9 @@ rm nixos.qcow2
 - [Nix manual: `nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html).
 - [Nix manual: common command-line options](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html).
 - [Nix manual: `NIX_PATH` environment variable](https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-NIX_PATH).
+
+## Next steps
+
+- [](module-system-deep-dive)
+- [](integration-testing-vms)
+- [](bootable-iso-image)
