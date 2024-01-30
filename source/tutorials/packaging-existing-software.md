@@ -117,7 +117,7 @@ This allows you to use `nix-build -A hello` to realize the derivation in `hello.
 :::{note}
 [`callPackage`] automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset.
 
-In this case, `callPackage` will supply `lib`, and `stdenv` to the function defined in `hello.nix`.
+In this case, `callPackage` will supply `lib`, `stdenv`, and `fetchzip` to the function defined in `hello.nix`.
 :::
 
 Now run the `nix-build` command with the new argument:
