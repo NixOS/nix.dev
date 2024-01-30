@@ -173,6 +173,6 @@ Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with
 
 ## Next steps
 
-- [](direnv)
+- [](automatic-direnv)
 - [](../../guides/recipes/sharing-dependencies.md)
 - [](../../guides/recipes/dependency-management.md)
