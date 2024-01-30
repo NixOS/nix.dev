@@ -1,3 +1,4 @@
+(module-system-deep-dive)=
 # Module system deep dive
 
 Or: *Wrapping the world in modules*
