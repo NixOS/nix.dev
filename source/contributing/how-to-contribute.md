@@ -1,3 +1,4 @@
+(how-to-contribute)=
 # How to contribute
 
 The Nix ecosystem is developed by many volunteers and a few paid developers, maintaining one of the largest open source software distributions in the world.
