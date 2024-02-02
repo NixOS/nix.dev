@@ -77,7 +77,7 @@ stdenv.mkDerivation {
 
 ```
 
-Next, you will declare a dependency the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` and instruct Nix to use `fetchzip`.
+Next, you will declare a dependency on the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` and instruct Nix to use `fetchzip`.
 It takes the URL to the file and a [SHA256 hash](https://en.wikipedia.org/wiki/SHA-2) of its contents.
 
 :::{note}
