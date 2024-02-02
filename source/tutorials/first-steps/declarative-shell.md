@@ -30,7 +30,7 @@ This file can be shared with anyone to recreate the same environment on a differ
 
 ### What do you need?
 
-- A very basic understanding of the [Nix language](reading-nix-language)
+- A rudimentary understanding of the [Nix language](reading-nix-language)
 
 ## Entering a temporary shell
 
