@@ -97,7 +97,7 @@ So it is common practice to supply a fake one with `lib.fakeSha256` and change t
 }:
 
 stdenv.mkDerivation {
-  name = "hello";
+  pname = "hello";
   version = "2.12.1";
 
   src = fetchzip {
