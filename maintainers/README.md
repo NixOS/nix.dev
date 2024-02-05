@@ -130,7 +130,29 @@ If you want to help immediately, please see [How to contribute to documentation]
 ## Sponsoring
 
 - [@fricklerhandwerk] serves as the team lead since 2023-02, sponsored by [Antithesis](https://antithesis.com)
-- [@infinisil] works on the team since 2022-11, sponsored by [Tweag]
+- [@zmitchell] led the Learning Journey Working Group from 2023-03 to 2023-08, sponsored by [flox](https://floxdev.com)
+- [@infinisil](https://github.com/infinisil) works on the team since 2022-11, sponsored by [Tweag]
 - [@lucperkins](https://github.com/lucperkins) served as the team lead from 2022-11 to 2023-01, sponsored by [Determinate Systems](https://determinate.systems)
 - [@fricklerhandwerk] served as the team lead from 2022-05 to 2022-10, sponsored by [Tweag]
+
+[@fricklerhandwerk]: https://github.com/fricklerhandwerk
+[@zmitchell]: https://github.com/zmitchell
+[Tweag]: https://tweag.io
+
+## History
+
+Many thanks to past members, who helped make Nix documentation what it is today:
+
+- [@brianmcgee](https://github.com/brianmcgee) was part of the team from 2023-03 to 2023-10 and contributed to the Learning Journey Working Group effort.
+
+- [@zmitchell] led the [Learning Journey Working Group](https://discourse.nixos.org/search?q=learning%20journey%20working%20group%20-%20meeting%20notes%20in%3Atitle%20order%3Alatest_topic) from 2023-03 to 2023-08 that added a number of tutorials.
+  He published [regular updates on developments in documentation](regular updates on developments in documentation) in that period.
+
+- [@Mic92](https://github.com/Mic92) was a founding member and part of the team from 2022-05 to 2023-01.
+  Jörg had written a great deal of documentation on the NixOS Wiki, and shared his experience to set a direction for the documentation team.
+
+- [@domenkozar](https://github.com/domenkozar) was a founding member and part of the team from 2022-05 to 2023-01.
+  Domen originally started nix.dev, wrote many basic tutorials, and funded editorial work through [Cachix](https://www.cachix.org/).
+  He helped bootstrap the documentation team, handed out permissions, and advised us on many aspects.
+  Domen donated nix.dev to the NixOS Foundation 2023-07.
 
