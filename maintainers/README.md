@@ -1,12 +1,12 @@
 # Nix documentation team
 
-The Nix documentation team was formed to flatten the infamous learning curve.
+The Nix documentation team was formed to [flatten the infamous learning curve](https://discourse.nixos.org/t/documentation-team-flattening-the-learning-curve/20003).
 
 ## Goals
 
-- ease learning, increase onboarding success and user retention
-- improve organization of knowledge
-- lead, guide, and support related community efforts
+- Ease learning, increase onboarding success and user retention
+- Improve organisation of knowledge
+- Lead, guide, and support related community efforts
 
 ## Motivation
 
@@ -16,13 +16,15 @@ fix numerous little problems and help people get their contributions merged.
 
 It requires significant time or resources to do this consistently.
 The team is built around that limitation, and therefore organized as a praxicracy:
-you are in charge if and only if you get the work done.
+You are in charge if and only if you get the work done.
 
 The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
 
 ## Members
 
-The team member list is maintained on the [Nix community documentation team page](https://nixos.org/community/teams/documentation).
+Current members are listed on the GitHub team [`@NixOS/documentation-team`](https://github.com/orgs/NixOS/teams/documentation-team).
+
+Ping [`@NixOS/documentation-reviewers`](https://github.com/orgs/NixOS/teams/documentation-reviewers) for documentation reviews.
 
 ## Responsibilities
 
@@ -91,7 +93,7 @@ Contact [@fricklerhandwerk] to get a calendar invitation.
 - [Meeting notes scratchpad][collaborative scratchpad]
 - [GitHub project board]
 
-[Previous meeting notes](https://discourse.nixos.org/search?q=documentation%20team%20meeting%20%23dev%3Adocumentation%20order%3Alatest)
+[Previous meeting notes](https://discourse.nixos.org/search?q=documentation%20team%20meeting%20notes%20%23%20%23dev%3Adocumentation%20in%3Atitle%20order%3Alatest_topic)
 
 ### Meeting protocol
 
