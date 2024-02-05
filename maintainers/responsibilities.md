@@ -2,9 +2,7 @@
 
 ## Join the team meetings
 
-Participate in the regular team meetings, see [meeting information and protocol] for details.
-
-[meeting information and protocol]: ./README.md#team-meetings
+Participate in the regular team meetings, see [meeting information and protocol](./README.md#team-meetings) for details.
 
 If you can't participate, notify other team members.
 
@@ -18,15 +16,13 @@ Follow relevant activities on these communication channels:
 
 - Discourse
 
-  Set the notification level on the [Development > Documentation] Discourse category to "watching".
-
-  [Development > Documentation]: https://discourse.nixos.org/c/dev/documentation/25
+  Set the notification level on the [Development > Documentation](https://discourse.nixos.org/c/dev/documentation/25) Discourse category to "watching".
 
 - Matrix
 
-  Join the [Nix\* Documentation] Matrix room and enable relevant notifications.
+  Join the public [Nix\* Documentation](https://matrix.to/#/#docs:nixos.org) Matrix room and enable relevant notifications.
 
-  [Nix\* Documentation]: https://matrix.to/#/#docs:nixos.org
+  There is also a [private Matrix room](https://matrix.to/#/!DersLzqcNaaZvpnxKk:matrix.org) for exceptional, internal issues.
 
 ## Take ownership
 
@@ -48,8 +44,6 @@ Make sure to reserve time for reviewing pull requests that fall within your area
 
 Guide new and potential contributors:
 
-- Help answering questions on the [Discourse Help category]
+- Help answering questions on the [Discourse Help category](https://discourse.nixos.org/c/learn/9)
 - Encourage question authors to raise or upvote issues on GitHub, if needed
 - Assist them with making pull requests to solve the underlying problems, if possible
-
-[Discourse Help category]: https://discourse.nixos.org/c/learn/9
