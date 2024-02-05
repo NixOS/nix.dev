@@ -11,7 +11,7 @@ The Nix logo is inspired by [an idea for the Haskell logo](https://wiki.haskell.
 
 ## What are flakes?
 
-See [](flakes).
+See [](flakes-definition).
 
 (channel-branches)=
 ## Which channel branch should I use?
