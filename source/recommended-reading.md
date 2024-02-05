@@ -36,13 +36,15 @@
 
   A tutorial for getting started with Home Manager.
 
+- [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix) (Mattia Gheda, 2021)
+
 - [Nix Shorts](https://github.com/justinwoo/nix-shorts)
 
   A series of posts on basics of how packaging with Nix works.
 
 - [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023)
 
-  This tutorial is an introduction to {term}`NixOS` using the experimental Nix [Flakes](flakes) functionality.
+  This tutorial is an introduction to {term}`NixOS` using the experimental Nix [Flakes](flakes-definition) functionality.
 
 ## Other videos
 
