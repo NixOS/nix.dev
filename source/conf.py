@@ -78,7 +78,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "nix.dev"
-author = "the nix.dev contributors."
+author = "the <a href=\"https://nixos.org/community/teams/documentation\">Nix documentation team</a> and contributors."
 copyright = "2016-" + str(date.today().year) + ", NixOS Foundation"
 
 # The version info for the project you're documenting, acts as replacement for

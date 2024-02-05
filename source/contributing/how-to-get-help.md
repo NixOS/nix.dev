@@ -3,39 +3,53 @@
 If you need assistance with one of your contributions, there are a few places you
 can go for help.
 
-For better efficiency and chances of success, you should try contacting individuals or
-groups with more specific knowledge first:
+## How to find maintainers
+
+For better efficiency and higher chance of success, you should try contacting individuals or groups with more specific knowledge first:
 
 - If your contribution is for a package in Nixpkgs, look for its maintainers in the
   [`maintainers`](https://nixos.org/manual/nixpkgs/stable/#var-meta-maintainers)
   attribute.
-- Check out if any teams are responsible for the relevant subsystem:
+- Check if any teams are responsible for the relevant subsystem:
   - On the [NixOS website](https://nixos.org/community/#governance-teams).
   - In the [list of Nixpkgs maintainer teams](https://github.com/NixOS/nixpkgs/blob/master/maintainers/team-list.nix).
   - In the `CODEOWNERS` files for [Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/.github/CODEOWNERS) or
     [Nix](https://github.com/NixOS/nix/blob/master/.github/CODEOWNERS).
-- Look at the [git log](https://www.git-scm.com/docs/git-log) for the files you need help
-  with, and take note of the email addresses of people who committed.
+- Check the output of [`git blame`](https://git-scm.com/docs/git-blame) or [`git log`](https://www.git-scm.com/docs/git-log) for the files you need help with.
+  Take note of the email addresses of people who committed relevant code.
 
-Once you've found the people you're looking for, you can contact them via:
+## Which communication channels to use
+
+Once you've found the people you're looking for, you can contact them on one of the following platforms:
 
 - GitHub
 
-  [Mention the GitHub username](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#mentioning-people-and-teams) found in the [`maintainers-list.nix` file][maintainers-list] in issue or pull request descriptions, or comments.
+  All the source code is maintained on GitHub.
+  This is the right place to discuss implementation details.
+
+  In issue comments or pull request descriptions, [mention the GitHub username](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#mentioning-people-and-teams) found in the [`maintainers-list.nix` file][maintainers-list].
 
 - [Discourse](https://discourse.nixos.org)
+
+  Discourse is used for announcements, coordination, and open-ended questions.
 
   Try the GitHub username found in the [`maintainers-list.nix` file][maintainers-list] to mention or directly contact a specific user.
   Note that some people use a different username on Discourse.
 
 - [Matrix]
 
-  Use the Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
-  If no Matrix handle is present for a specific maintainer, try searching for them using their GitHub username, as most people tend to use the same one across channels.
+  Matrix is used for direct messages and short-lived, timely exchanges.
+
+  To contact a maintainer, use their Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
+  If no Matrix handle is present for a specific maintainer, try searching for their GitHub username, as most people tend to use the same one across channels.
+
+  Maintainer teams usually have their own public Matrix room.
 
 - Email
 
   Use email addresses found with `git log`.
+
+## Other venues
 
 If you haven't found any specific users or groups that could help you with your
 contribution, you can resort to asking the community at large, using one of the following official
