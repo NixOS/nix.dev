@@ -29,26 +29,37 @@ let
       let
         # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed
         # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
-        releases = [
-          "2.19"
-          "2.18"
-          "2.13"
-        ];
+        releases = {
+          latest = "2.19";
+          rolling = "2.18";
+          stable = "2.18";
+          prev-stable = "2.13";
+        };
         inputName = version: pkgs.lib.strings.replaceStrings [ "." ] [ "-" ] version;
         src = version: inputs."nix_${inputName version}";
         manual = version: (import (src version)).default.doc;
         copy = version: ''
           cp -Rf ${manual version}/share/doc/nix/manual/* $out/manual/nix/${version}
-          # add upstream page redirects of the form `<from> <to> <status>`, excluding comment lines and empty
+        '';
+        # add upstream page redirects of the form `<from> <to> <status>`, excluding comment lines and empty
+        redirects = version: ''
           sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${src version}/doc/manual/_redirects >> $out/_redirects
         '';
+        shortlink = release: version: ''
+          echo /nix/manual/${release} /nix/manual/${version} >> $out/_redirects
+        '';
+        versions = with pkgs.lib; lists.unique (attrsets.attrValues releases);
       in
+      with pkgs.lib.attrsets;
       with pkgs.lib.strings;
       ''
-        # NOTE: the comma in the shell expansion makes it also work for singleton lists
-        mkdir -p $out/manual/nix/{${concatStringsSep "," releases},}
+        mkdir -p $out
         cp -R build/html/* $out/
-        ${concatStringsSep "\n" (map copy releases)}
+        # NOTE: the comma in the shell expansion makes it also work for singleton lists
+        mkdir -p $out/manual/nix/{${concatStringsSep "," versions},}
+        ${concatStringsSep "\n" (map copy versions)}
+        ${concatStringsSep "\n" (map redirects versions)}
+        ${concatStringsSep "\n" (mapAttrsToList shortlink releases)}
       '';
   };
 
