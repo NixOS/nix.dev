@@ -14,7 +14,7 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   packages = with pkgs; [
     hello
   ];
@@ -45,7 +45,7 @@ Make the following addition:
    pkgs = import nixpkgs { config = {}; overlays = []; };
  in
 
- pkgs.mkShell {
+ pkgs.mkShellNoCC {
    packages = with pkgs; [
      hello
    ];
