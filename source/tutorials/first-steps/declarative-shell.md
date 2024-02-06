@@ -30,18 +30,20 @@ This file can be shared with anyone to recreate the same environment on a differ
 
 ### What do you need?
 
+- Familiarity with the Unix shell
 - A rudimentary understanding of the [Nix language](reading-nix-language)
 
 ## Entering a temporary shell
 
-Suppose we want a development environment in which Git, Neovim, and Node.js were installed.
+Suppose we want an environment where `cowsay` and `lolcat` are available.
 The simplest possible way to accomplish this is via the `nix-shell -p` command:
+
 ```
-$ nix-shell -p git neovim nodejs
+$ nix-shell -p cowsay lolcat
 ```
 
 This command works, but there's a number of drawbacks:
-- You have to type out `-p git neovim nodejs` every time you enter the shell.
+- You have to type out `-p cowsay lolcat` every time you enter the shell.
 - It doesn't (ergonomically) allow you any further customization of your shell environment.
 
 A better solution is to create our shell environment from a `shell.nix` file.
@@ -58,9 +60,8 @@ in
 
 pkgs.mkShell {
   packages = with pkgs; [
-    git
-    neovim
-    nodejs
+    cowsay
+    lolcat
   ];
 }
 ```
@@ -87,20 +88,17 @@ Enter the environment by running `nix-shell` in the same directory as `shell.nix
 
 ```console
 $ nix-shell
-[nix-shell]$
+[nix-shell]$ cowsay hello | lolcat
 ```
 
 `nix-shell` by default looks for a file called `shell.nix` in the current directory and builds a shell environment from the Nix expression in this file.
 Packages defined in the `packages` attribute will be available in `$PATH`.
 
-Check that the desired packages are indeed available in the expected version as we did in the [previous tutorial](check-package-version).
-
 ## Environment variables
 
 You may want to automatically export certain environment variables when you enter a shell environment.
 
-
-Set your `GIT_EDITOR` to use the `nvim` from the shell environment:
+Set `MANPATH` and `MANPAGER` such that `man cowsay` in the shell environment is displayed with colors.
 
 ```diff
  let
@@ -110,22 +108,38 @@ Set your `GIT_EDITOR` to use the `nvim` from the shell environment:
 
  pkgs.mkShell {
    packages = with pkgs; [
-     git
-     neovim
-     nodejs
+     cowsay
+     lolcat
++    man
    ];
 
-+  GIT_EDITOR = "${pkgs.neovim}/bin/nvim";
++  MANPATH = "${pkgs.cowsay.man}/share/man";
++  MANPAGER = ''
++    ${pkgs.bash}/bin/bash -c "${pkgs.lolcat}/bin/lolcat --force | ${pkgs.less}/bin/less -R"
++  '';
  }
 ```
 
 Any attribute name passed to `mkShell` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
 
+Try it out!
+Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell`.
+
+```console
+[nix-shell]$ man cowsay
+```
+
 :::{dropdown} Detailed explanation
 
-The newly added attribute `GIT_EDITOR` is set to a string composed of the output store path of the `neovim` derivation and the relative path to the `nvim` executable inside that store path.
+We added `man` from `pkgs` to the `packages` list to make sure that the command is always available.
+This is especially important if you run `nix-shell --pure`, which strips most environment variables.
 
-See the [Nix language tutorial on derivations for details](derivations).
+The newly added attribute `MANPATH` is set to a string composed of the output store path of the `cowsay` derivation's `man` [output](https://nix.dev/manual/nix/2.19/language/derivations#attr-outputs) and the relative path to the manual files inside that store path.
+It is needed here because documentation is not provided with the regular `cowsay` derivation.
+
+The attribute `MANPAGER` is also a string – an [indented string](https://nix.dev/manual/nix/2.19/language/values#type-string) – that encodes the invocation of a Bash command.
+
+See the [Nix reference manual on derivations for details](https://nix.dev/manual/nix/2.19/language/derivations).
 
 :::{warning}
 Some variables are protected from being set as described above.
@@ -140,7 +154,7 @@ If you really need to override these protected environment variables, use the `s
 You may want to run some commands before entering the shell environment.
 These commands can be placed in the `shellHook` attribute provided to `mkShell`.
 
-Set `shellHook` to output the current repository status:
+Set `shellHook` to output a colorful greeting by the Linux mascot Tux:
 
 ```diff
  let
@@ -150,19 +164,23 @@ Set `shellHook` to output the current repository status:
 
  pkgs.mkShell {
    packages = with pkgs; [
-     git
-     neovim
-     nodejs
+     cowsay
+     lolcat
+     man
    ];
 
-   GIT_EDITOR = "${pkgs.neovim}/bin/nvim";
+   MANPATH = "${pkgs.cowsay.man}/share/man";
+   MANPAGER = ''
+     ${pkgs.bash}/bin/bash -c "${pkgs.lolcat}/bin/lolcat --force | ${pkgs.less}/bin/less -R"
+   '';
 +
 +  shellHook = ''
-+    git status
++    ${pkgs.fortune}/bin/fortune | cowsay -f tux | lolcat
 +  '';
  }
 ```
 
+Try it again!
 Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell` to observe the effect.
 
 ## References
@@ -173,6 +191,7 @@ Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with
 
 ## Next steps
 
+- [](reading-nix-language)
 - [](automatic-direnv)
 - [](../../guides/recipes/sharing-dependencies.md)
 - [](../../guides/recipes/dependency-management.md)
