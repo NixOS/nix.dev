@@ -46,7 +46,7 @@ let
           sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${src version}/doc/manual/_redirects >> $out/_redirects
         '';
         shortlink = release: version: ''
-          echo /nix/manual/${release} /nix/manual/${version} >> $out/_redirects
+          echo /nix/manual/${release} /nix/manual/${version} 302 >> $out/_redirects
         '';
         versions = with pkgs.lib; lists.unique (attrsets.attrValues releases);
       in
