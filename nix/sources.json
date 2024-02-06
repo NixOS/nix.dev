@@ -1,5 +1,5 @@
 {
-    "nix_2-13": {
+    "nix-prev-stable": {
         "branch": "2.13-maintenance",
         "description": "Nix, the purely functional package manager",
         "homepage": "https://nixos.org/",
@@ -11,7 +11,7 @@
         "url": "https://github.com/nixos/nix/archive/25f2dfc6e41d8c30e7abc443a7b262e34e49253b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nix_2-18": {
+    "nix-rolling": {
         "branch": "2.18-maintenance",
         "description": "Nix, the purely functional package manager",
         "homepage": "https://nixos.org/",
@@ -23,7 +23,7 @@
         "url": "https://github.com/nixos/nix/archive/60eb80593f3a18aebc7672ad7007cb23c14db061.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nix_2-19": {
+    "nix-latest": {
         "branch": "2.19-maintenance",
         "description": "Nix, the purely functional package manager",
         "homepage": "https://nixos.org/",
@@ -35,7 +35,19 @@
         "url": "https://github.com/nixos/nix/archive/dc09e6193bffcab37d3d43107eae9464395ab51d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs": {
+    "nix-stable": {
+        "branch": "2.18-maintenance",
+        "description": "Nix, the purely functional package manager",
+        "homepage": "https://nixos.org/",
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "60eb80593f3a18aebc7672ad7007cb23c14db061",
+        "sha256": "0nyssab6skn9qd7mz4v0y3ycnhck7is6agm0i26l1anrgs90x37l",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nix/archive/60eb80593f3a18aebc7672ad7007cb23c14db061.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-prev-stable": {
         "branch": "nixos-23.05",
         "description": "Nix Packages collection & NixOS",
         "homepage": "",
@@ -45,6 +57,30 @@
         "sha256": "0ha53gbglrcnpzfc4lwzgyvlsagvm1m2q9z5i5b4nfahplnqpsbj",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/898cb2064b6e98b8c5499f37e81adbdf2925f7c5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-rolling": {
+        "branch": "nixpkgs-unstable",
+        "description": "Nix Packages collection & NixOS",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8cc79aa39bbc6eaedaf286ae655b224c71e02907",
+        "sha256": "08yj32spm74bqnwq7wyaxzqjw3dc67bb3myx1baix506as54jr3y",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/8cc79aa39bbc6eaedaf286ae655b224c71e02907.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-stable": {
+        "branch": "nixos-23.11",
+        "description": "Nix Packages collection & NixOS",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9f2ee8c91ac42da3ae6c6a1d21555f283458247e",
+        "sha256": "0imgfxzq7d7l6fcgnzzjvv6ch560svcm8s8bx8vqyvf60w24ma1d",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/9f2ee8c91ac42da3ae6c6a1d21555f283458247e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "poetry2nix": {
