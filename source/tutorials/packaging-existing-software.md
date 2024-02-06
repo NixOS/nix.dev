@@ -86,7 +86,7 @@ It takes the URL to the file and a [SHA256 hash](https://en.wikipedia.org/wiki/S
 
 The hash cannot be known until after the tarball has been downloaded and unpacked.
 Nix will complain if the hash supplied to `fetchzip` is incorrect.
-So it is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
+It is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
 
 ```nix
 # hello.nix
