@@ -196,6 +196,11 @@ Notify the authors *before* using their work.
 
 Using free licenses other than CC-BY-SA 4.0 is possible for individual documents, and by contributing changes to those documents you agree to license your work accordingly.
 
+:::{note}
+If you have written a tutorial or guide related to Nix, please consider licensing it under CC-BY-SA 4.0!
+This will allow us to feature your work as official documentation if it complements or improves upon existing materials.
+:::
+
 ```{toctree}
 :hidden:
 
