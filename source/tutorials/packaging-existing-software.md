@@ -15,8 +15,7 @@ But when *first* packaging existing software with Nix, it's common to encounter 
 
 ## Introduction
 
-In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/2.18/language/derivations) to package C/C++ software.
-This takes advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
+In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/2.18/language/derivations) to package C/C++ software, taking advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
 
 ### What will you learn?
 
@@ -32,7 +31,7 @@ You'll encounter and address Nix error messages, build failures, and a host of o
 
 ### How long does it take?
 
-Going through all the steps carefully will take ca. 60 minutes.
+Going through all the steps carefully will take around 60 minutes.
 
 ## Your first package
 
@@ -41,10 +40,10 @@ Going through all the steps carefully will take ca. 60 minutes.
 TODO: link to the Nix manual glossary entry once it's in a released build:
 https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download/manual/glossary.html#package
 -->
-A _package_ is a loosely defined concept that refers to both a collection of files and other data, or a {term}`Nix expression` representing such a collection before it comes into being.
-Packages in Nixpkgs have conventional, mostly standardised structure, allowing them to be discovered in searches and composed in environments alongside other packages.
+A _package_ is a loosely defined concept that refers to either a collection of files and other data, or a {term}`Nix expression` representing such a collection before it comes into being.
+Packages in Nixpkgs have a conventional structure, allowing them to be discovered in searches and composed in environments alongside other packages.
 
-For the purposes of this tutorial, "package" means: a Nix language function that will evaluate to a derivation.
+For the purposes of this tutorial, a "package" is a Nix language function that will evaluate to a derivation.
 It will enable you or others to produce an artifact for practical use, as a consequence of having "packaged existing software with Nix".
 :::
 
@@ -57,10 +56,6 @@ stdenv.mkDerivation {	};
 ```
 
 This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing).
-
-:::{note}
-For Nix, a recipe to build a package is a function that takes references to – immutable – files and produces new files.
-:::
 
 ### A package function
 
@@ -77,14 +72,13 @@ stdenv.mkDerivation {
 
 ```
 
-Next, you will declare a dependency on the [latest version](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz) of `hello` and instruct Nix to use `fetchzip`.
-It takes the URL to the file and a [SHA256 hash](https://en.wikipedia.org/wiki/SHA-2) of its contents.
+Next, you will declare a dependency on the latest version of `hello`, and instruct Nix to use `fetchzip` to download the [source code archive](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz).
 
 :::{note}
-`fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just zip files!
+`fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just] zip files!
 :::
 
-The hash cannot be known until after the tarball has been downloaded and unpacked.
+The hash cannot be known until after the archive has been downloaded and unpacked.
 Nix will complain if the hash supplied to `fetchzip` is incorrect.
 It is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
 
@@ -174,7 +168,7 @@ error:
 
 ### Finding the file hash
 As expected, the incorrect file hash caused an error, and Nix helpfully provided the correct one.
-Substitute substitute it into `hello.nix` to replace `lib.fakeSha256`:
+In `hello.nix`, replace `lib.fakeSha256` with the correct hash:
 
 ```nix
 # hello.nix
@@ -435,11 +429,14 @@ But the important bit for this tutorial is `fatal error: X11/Xlib.h: No such fil
 
 Determining from where to source a dependency is currently a somewhat involved, because package names don't always correspond to library or program names.
 
+You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
+There are multiple ways to figure this out:
+
+### `search.nixos.org`
+
 :::{tip}
 The easiest way to find what you need is on search.nixos.org/packages.
 :::
-
-### search.nixos.org
 
 Unfortunately in this case, [searching for `x11`](https://search.nixos.org/packages?query=x11) produces too many irrelevant results because X11 is ubiquitous.
 On the left side bar there is a list package sets, and [selecting `xorg`](https://search.nixos.org/packages?channel=23.11&buckets={%22package_attr_set%22%3A[%22xorg%22]%2C%22package_license_set%22%3A[]%2C%22package_maintainers_set%22%3A[]%2C%22package_platforms%22%3A[]}&query=x11) shows something promising.
@@ -459,7 +456,8 @@ Only clone the latest revision if you don't want to wait a long time:
 $ nix-shell -p git ripgrep
 [nix-shell:~]$ git glone https://github.com/NixOS/nixpkgs --depth 1
 ```
-Nixpkgs is *huge*, therefore specify which subdirectory you want to search:
+
+To narrow down results, specify which subdirectory you want to search:
 
 ```console
 [nix-shell:~]$ rg "x11 =" pkgs
@@ -499,8 +497,6 @@ pkgs/servers/x11/xorg/overrides.nix
 ### `nix-locate`
 
 Consider using `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index) tool to find derivations that provide what you need.
-
-You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
 
 ### Adding package sets as dependencies
 
