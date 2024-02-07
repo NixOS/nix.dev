@@ -42,7 +42,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 - https://nixos.org/guides/nix-pills/nix-search-paths.html
 
-- https://nixos.org/guides/nix-pills/nix-store-paths.html
+- [Nix Pills Chapter 18. Nix Store Paths](https://nixos.org/guides/nix-pills/nix-store-paths.html)
 
   Store paths and how they are computed, `nix-store`, `nix-hash`, `nix derivation show`, `nix repl`.
   - Reading time: 6 min
