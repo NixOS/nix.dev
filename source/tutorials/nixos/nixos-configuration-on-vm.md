@@ -24,6 +24,7 @@ For a thorough treatment of the module system, check the [](module-system-deep-d
 ## Starting from a default NixOS configuration
 
 In this tutorial you will use a default configuration that is shipped with NixOS.
+You can also skip this section and copy the [sample configuration](sample-nixos-config) for this tutorial into a file `configuration.nix` in the current directory.
 
 ::::{admonition} NixOS
 
@@ -31,10 +32,10 @@ On NixOS, use the `nixos-generate-config` command to create a configuration file
 
 Beware that the result of this command depends on your current NixOS configuration.
 The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
-Here we provide a configuration that is used for the [NixOS GNOME graphical ISO image](https://nixos.org/download#nixos-iso):
+Here we provide a configuration that is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p 'let pkgs = import <nixpkgs> { config = {}; overlays = []; }; iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix; gnome-nixos = pkgs.nixos iso-config; in gnome-nixos.config.system.build.nixos-generate-config'
+nix-shell -I nixpkgs=channel:nixos-23.11 -p 'let pkgs = import <nixpkgs> { config = {}; overlays = []; }; iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix; nixos = pkgs.nixos iso-config; in nixos.config.system.build.nixos-generate-config'
 ```
 
 :::{dropdown} Detailed explanation
@@ -46,16 +47,16 @@ This is the readable long form using a [heredoc](https://en.wikipedia.org/wiki/H
 nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
 let
   pkgs = import <nixpkgs> { config = {}; overlays = []; };
-  iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
-  gnome-nixos = pkgs.nixos iso-config;
-in gnome-nixos.config.system.build.nixos-generate-config
+  iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix;
+  nixos = pkgs.nixos iso-config;
+in nixos.config.system.build.nixos-generate-config
 EOF
 )"
 ```
 
 It does the following:
 - Provide Nixpkgs from a [channel](ref-pinning-nixpkgs)
-- Take the configuration file for the GNOME ISO image from the obtained version of the Nixpkgs repository
+- Take the configuration file for the minimal ISO image from the obtained version of the Nixpkgs repository
 - Evaluate that NixOS configuration with `pkgs.nixos`
 - Return the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
 
@@ -87,11 +88,6 @@ The default NixOS configuration without comments is:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.enable = true;
-
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   system.stateVersion = "23.11";
 }
 ```
@@ -103,8 +99,8 @@ To be able to log in, add the following lines to the returned attribute set:
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
-      firefox
-      tree
+      cowsay
+      lolcat
     ];
   };
 ```
@@ -117,7 +113,7 @@ Additionally, you need to specify a password for this user.
 For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
 
 ```nix
-initialPassword = "testpw";
+initialPassword = "test";
 ```
 
 :::{warning}
@@ -131,7 +127,10 @@ Therefore you will remove the reference to `hardware-configuration.nix`:
 -  imports =  [ ./hardware-configuration.nix ];
 ```
 
-The complete `configuration.nix` file now looks like this:
+(sample-nixos-config)=
+### Sample configuration
+
+The complete `configuration.nix` file looks like this:
 
 ```nix
 { config, pkgs, ... }:
@@ -139,19 +138,14 @@ The complete `configuration.nix` file now looks like this:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.enable = true;
-
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      firefox
-      tree
+      cowsay
+      lolcat
     ];
-    initialPassword = "testpw";
+    initialPassword = "test";
   };
 
   system.stateVersion = "23.11";
@@ -216,11 +210,32 @@ ls -R ./result
 Run the virtual machine:
 
 ```shell-session
-./result/bin/run-nixos-vm
+QEMU_KERNEL_PARAMS=console=ttyS0 ./result/bin/run-nixos-vm -nographic; reset
 ```
 
-This command opens a QEMU window that shows the boot process of the virtual machine which ends at the GDM login screen.
-Log in as `alice` with the password `testpw`.
+This command will run QEMU in the current terminal due to `-nographic`.
+`console=ttyS0` will also show the boot process, which ends at the console login screen.
+
+Log in as `alice` with the password `test`.
+Check that the programs are indeed available as specified:
+
+```shell-session
+cowsay hello | lolcat
+```
+
+Exit the virtual machine by shutting it down:
+
+```shell-session
+sudo poweroff
+```
+
+:::{note}
+If you forgot to add the user to `wheel` or didn't set a password, stop the virtual machine from a different terminal:
+
+```shell-session
+sudo pkill qemu
+```
+:::
 
 Running the virtual machine will create a `nixos.qcow2` file in the current directory.
 This disk image file contains the dynamic state of the virtual machine.
