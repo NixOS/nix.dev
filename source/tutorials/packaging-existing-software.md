@@ -75,7 +75,7 @@ stdenv.mkDerivation {
 Next, you will declare a dependency on the latest version of `hello`, and instruct Nix to use `fetchzip` to download the [source code archive](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz).
 
 :::{note}
-`fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just] zip files!
+`fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just zip files!
 :::
 
 The hash cannot be known until after the archive has been downloaded and unpacked.
