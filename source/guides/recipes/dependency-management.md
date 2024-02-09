@@ -10,7 +10,7 @@ For more automation around handling remote sources, set up [niv](https://github.
 $ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.11"
 ```
 
-This command will fetch the latest revision of the Nixpkgs 23.05 release branch.
+This command will fetch the latest revision of the Nixpkgs 23.11 release branch.
 In the current directory it will generate `nix/sources.json`, which will contain a pinned reference to the obtained revision.
 It will also create `nix/sources.nix`, which exposes those dependencies as an attribute set.
 
