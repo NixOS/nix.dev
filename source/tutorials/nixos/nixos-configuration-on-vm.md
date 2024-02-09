@@ -258,6 +258,8 @@ rm nixos.qcow2
 - [Nix manual: `nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html).
 - [Nix manual: common command-line options](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html).
 - [Nix manual: `NIX_PATH` environment variable](https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-NIX_PATH).
+- [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for more runtime options
+- [NixOS option search: `virtualisation.qemu`](https://search.nixos.org/options?query=virtualisation.qemu) for declarative virtual machine configuration
 
 ## Next steps
 
