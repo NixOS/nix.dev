@@ -98,7 +98,7 @@ Packages defined in the `packages` attribute will be available in `$PATH`.
 
 You may want to automatically export certain environment variables when you enter a shell environment.
 
-Set `MANPATH` and `MANPAGER` such that `man cowsay` in the shell environment is displayed with colors.
+Set `GREETING` so it can be used in the shell environment:
 
 ```diff
  let
@@ -110,13 +110,9 @@ Set `MANPATH` and `MANPAGER` such that `man cowsay` in the shell environment is 
    packages = with pkgs; [
      cowsay
      lolcat
-+    man
    ];
 
-+  MANPATH = "${pkgs.cowsay.man}/share/man";
-+  MANPAGER = ''
-+    ${pkgs.bash}/bin/bash -c "${pkgs.lolcat}/bin/lolcat --force | ${pkgs.less}/bin/less -R"
-+  '';
++  GREETING = "Hello, Nix!";
  }
 ```
 
@@ -126,27 +122,15 @@ Try it out!
 Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell`.
 
 ```console
-[nix-shell]$ man cowsay
+[nix-shell]$ echo $GREETING
 ```
-
-:::{dropdown} Detailed explanation
-
-We added `man` from `pkgs` to the `packages` list to make sure that the command is always available.
-This is especially important if you run `nix-shell --pure`, which strips most environment variables.
-
-The newly added attribute `MANPATH` is set to a string composed of the output store path of the `cowsay` derivation's `man` [output](https://nix.dev/manual/nix/2.19/language/derivations#attr-outputs) and the relative path to the manual files inside that store path.
-It is needed here because documentation is not provided with the regular `cowsay` derivation.
-
-The attribute `MANPAGER` is also a string – an [indented string](https://nix.dev/manual/nix/2.19/language/values#type-string) – that encodes the invocation of a Bash command.
-
-See the [Nix reference manual on derivations for details](https://nix.dev/manual/nix/2.19/language/derivations).
 
 :::{warning}
 Some variables are protected from being set as described above.
 
 For example, the shell prompt format for most shells is set by the `PS1` environment variable, but `nix-shell` already sets this by default, and will ignore a `PS1` attribute set in the argument.
 
-If you really need to override these protected environment variables, use the `shellHook` attribute as described in the next section.
+If you need to override these protected environment variables, use the `shellHook` attribute as described in the next section.
 :::
 
 ## Startup commands
@@ -154,7 +138,7 @@ If you really need to override these protected environment variables, use the `s
 You may want to run some commands before entering the shell environment.
 These commands can be placed in the `shellHook` attribute provided to `mkShell`.
 
-Set `shellHook` to output a colorful greeting by the Linux mascot Tux:
+Set `shellHook` to output a colorful greeting:
 
 ```diff
  let
@@ -166,16 +150,12 @@ Set `shellHook` to output a colorful greeting by the Linux mascot Tux:
    packages = with pkgs; [
      cowsay
      lolcat
-     man
    ];
 
-   MANPATH = "${pkgs.cowsay.man}/share/man";
-   MANPAGER = ''
-     ${pkgs.bash}/bin/bash -c "${pkgs.lolcat}/bin/lolcat --force | ${pkgs.less}/bin/less -R"
-   '';
+   GREETING = "Hello, Nix!";
 +
 +  shellHook = ''
-+    ${pkgs.fortune}/bin/fortune | cowsay -f tux | lolcat
++    echo $GREETING | cowsay | lolcat
 +  '';
  }
 ```
