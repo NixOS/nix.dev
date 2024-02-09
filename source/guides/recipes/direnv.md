@@ -10,7 +10,7 @@ For example, write a `shell.nix` with the following contents:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
@@ -19,8 +19,8 @@ pkgs.mkShell {
     hello
   ];
 }
-
 ```
+
 From the top-level directory of your project run:
 
 ```shell-session
@@ -41,7 +41,7 @@ Make the following addition:
 
 ```diff
  let
-   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
    pkgs = import nixpkgs { config = {}; overlays = []; };
  in
 
