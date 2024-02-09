@@ -7,7 +7,7 @@ Nix expressions themselves can depend on remote sources, and there are multiple 
 For more automation around handling remote sources, set up [niv](https://github.com/nmattia/niv/) in your project:
 
 ```shell-session
-$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.05"
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.11"
 ```
 
 This command will fetch the latest revision of the Nixpkgs 23.05 release branch.
@@ -66,7 +66,7 @@ Enter the development environment, create a new directory, and set up niv with a
 $ nix-shell
 [nix-shell]$ mkdir old
 [nix-shell]$ cd old
-[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 18.09
+[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 23.05
 ```
 
 Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
@@ -80,7 +80,7 @@ This will result in a different version being built:
 ```shell-session
 $ nix-build -A build
 $ ./result/bin/hello --version | head -1
-hello (GNU Hello) 2.10
+hello (GNU Hello) 2.12
 ```
 
 Sources can also be overridden on the command line:
