@@ -11,6 +11,6 @@ You will also learn reading the Nix language, and later use it to build portable
 :maxdepth: 1
 ad-hoc-shell-environments.md
 reproducible-scripts.md
-declarative-shell.md
+Declarative shell environments <declarative-shell.md>
 towards-reproducibility-pinning-nixpkgs.md
 ```
