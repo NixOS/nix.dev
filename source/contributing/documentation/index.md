@@ -163,7 +163,7 @@ You can still help with
 
 Where to migrate what:
 
-- Nix interaction: [Nix manual]
+- Nix interaction: [Nix manual](nix-manual)
 - Language-specific build instructions: [Nixpkgs manual]
 - Package, service, or hardware configuration: [NixOS manual]
 - Overviews, tutorials, guides, best practices: [nix.dev]
