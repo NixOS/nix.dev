@@ -125,7 +125,7 @@ Integer volutpat erat sem, non varius turpis facilisis eu. Nam eu [ullamcorper][
 ```
 
 [ref_links]: https://github.github.com/gfm/#reference-link
-[permanent links]: https://en.m.wikipedia.org/wiki/Permalink
+[permanent links]: https://en.wikipedia.org/wiki/Permalink
 [GitHub URLs to specific commits]: https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files
-[Wikipedia URLs to specific page versions]: https://en.m.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages
+[Wikipedia URLs to specific page versions]: https://en.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages
 [Internet Archive "Save Page Now" for persisting web pages]: https://web.archive.org/save

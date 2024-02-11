@@ -208,7 +208,7 @@ $ nix-instantiate --eval --strict file.nix
 White space is used to delimit [lexical tokens], where required.
 It is otherwise insignificant.
 
-[lexical tokens]: https://en.m.wikipedia.org/wiki/Lexical_analysis#Lexical_token_and_lexical_tokenization
+[lexical tokens]: https://en.wikipedia.org/wiki/Lexical_analysis#Lexical_token_and_lexical_tokenization
 
 Line breaks, indentation, and additional spaces are for readers' convenience.
 
@@ -1236,7 +1236,7 @@ Multiple arguments can be handled by nesting functions.
 
 Such a nested function can be used like a function that takes multiple arguments, but offers additional flexibility.
 
-[curried]: https://en.m.wikipedia.org/wiki/Currying
+[curried]: https://en.wikipedia.org/wiki/Currying
 
 Example:
 
