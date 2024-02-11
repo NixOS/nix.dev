@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    "description lang=en": "Continuous Integration with GitHub Actions and a cache"
+    "description lang=en": "Continuous Integration with GitHub Actions and a binary cache"
     "keywords": "CI, Continuous Integration, GitHub Actions, Binary Cache, Nix"
 ---
 
@@ -54,11 +54,11 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v20
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - uses: cachix/cachix-action@v12
+    - uses: cachix/cachix-action@v14
       with:
         name: mycache
         # If you chose signing key for write access
@@ -92,8 +92,8 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v20
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: DeterminateSystems/magic-nix-cache-action@v2
