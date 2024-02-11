@@ -50,7 +50,7 @@ As stretch goals, implement particular lessons identified as the most impactful 
 
    1. Develop a draft for a learning journey
    1. Validate the draft with Nix experts
-   1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.m.wikipedia.org/wiki/Touchpoint).
+   1. Make the resulting outline immediately visible for beginners at well-known [touchpoints](https://en.wikipedia.org/wiki/Touchpoint).
 
 1. Categorise existing documentation materials into the [Diátaxis framework](https://diataxis.fr), and arrange them in a meaningful order emerging from the curriculum.
 
