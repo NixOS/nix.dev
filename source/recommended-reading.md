@@ -24,35 +24,47 @@
 
 ## Other articles
 
-- [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023)
-
-  This tutorial is an introduction to {term}`NixOS` using the experimental Nix [Flakes](flakes) functionality.
-
-- [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
-
-  An overview of different methods to customize Nix packages.
-
-- [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix) (Mattia Gheda, 2021)
-
 - [Nix Pills](https://nixos.org/nixos/nix-pills/index.html)
 
   A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.
+
+- [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
+
+- [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix) (Mattia Gheda, 2021)
+
+  An overview of different methods to customize Nix packages.
 
 - [Nix Shorts](https://github.com/justinwoo/nix-shorts)
 
   A series of posts on basics of how packaging with Nix works.
 
-- [awesome-nix](https://nix-community.github.io/awesome-nix/)
+- [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023)
 
-  A collection of Nix resources.
+  This tutorial is an introduction to {term}`NixOS` using the experimental Nix [Flakes](flakes) functionality.
 
 ## Other videos
 
-- [Nix Fundamentals](https://www.youtube.com/watch?v=m4sv2M9jRLg) (Jakub Grzegorz Sokolowski, 2020)
-- [Nix Shell Overview](https://www.youtube.com/watch?v=SGekN4pDExY) (Wil Taylor, 2021)
-- [How to update a package](https://www.youtube.com/watch?v=D_IZ2EfW_8U) (Jon Ringer, 2020)
-- [How to create a patch for any package](https://www.youtube.com/watch?v=5K_2RSjbdXc) (Jon Ringer, 2020)
-- [Overlays](https://www.youtube.com/watch?v=dGAL3gMXvug) (Jon Ringer, 2020)
-- [Adding a module to NixOS](https://www.youtube.com/watch?v=bkDYmvKINm8) (Jon Ringer, 2022)
-- [Upgrade kernel](https://www.youtube.com/watch?v=Zi_vbddNXtg) (Jon Ringer, 2020)
+- [Nixology](https://www.youtube.com/playlist?list=PLRGI9KQ3_HP_OFRG6R-p4iFgMSK1t5BHs) (Burke Libbey, 2020)
+
+  Video series introducing fundamental Nix concepts.
+
+- [The Nix Hour](https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in) (Silvan Mosberger, since 2022)
+
+  Weekly series exploring topics and answering questions from all around the Nix ecosystem.
+
+- [Nixpkgs](https://www.youtube.com/@jonringer117/videos) (Jon Ringer, 2020-22)
+
+  Video series with tutorials on various activities around Nixpkgs.
+
+- [NixOS](https://www.youtube.com/playlist?list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-) (Wil Taylor, 2021)
+
+  Series of tutorials on getting started with NixOS.
+
 - [NixOS Foundation on YouTube](https://www.youtube.com/@NixOS-Foundation/playlists)
+
+  The official NixOS Foundation channel.
+
+- [NixCon on YouTube](https://www.youtube.com/@NixCon)
+
+  Recordings of NixCon talks and discussions.
+
