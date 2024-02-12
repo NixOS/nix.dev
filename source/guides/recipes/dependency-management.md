@@ -80,7 +80,7 @@ This will result in a different version being built:
 ```shell-session
 $ nix-build -A build
 $ ./result/bin/hello --version | head -1
-hello (GNU Hello) 2.12
+hello (GNU Hello) 2.10
 ```
 
 Sources can also be overridden on the command line:
