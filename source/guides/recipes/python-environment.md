@@ -33,7 +33,7 @@ Create a new file `shell.nix` to declare the development environment:
 ```{code-block} nix shell.nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11") {} }:
 
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   packages = with pkgs; [
     (python3.withPackages (ps: [ ps.flask ]))
     curl

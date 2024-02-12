@@ -58,7 +58,7 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   packages = with pkgs; [
     cowsay
     lolcat
@@ -69,18 +69,19 @@ pkgs.mkShell {
 ::::{dropdown} Detailed explanation
 We use a version of [Nixpkgs pinned to a release branch](<ref-pinning-nixpkgs>), and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig).
 
-`mkShell` is a function that produces a shell environment.
-It takes as argument an attribute set.
+`nix-shell` was originally conceived as a way to construct a shell environment containing the [tools needed to debug package builds](https://nixos.org/manual/nixpkgs/stable/#sec-tools-of-stdenv), such as Make or GCC.
+Only later it became widely used as a general way to make temporary environments for other purposes.
+`mkShellNoCC` is a function that produces a such an environment, but without a compiler toolchain.
+
+`mkShellNoCC` takes as argument an attribute set.
 Here we give it an attribute `packages` with a list containing one item from the `pkgs` attribute set.
 
 :::{Dropdown} Side note on `packages` and `buildInputs`
-You may encounter examples of `mkShell` that add packages to the `buildInputs` or `nativeBuildInputs` attributes instead.
+You may encounter examples of `mkShell` or `mkShellNoCC` that add packages to the `buildInputs` or `nativeBuildInputs` attributes instead.
 
-`nix-shell` was originally conceived as a way to construct a shell environment containing the tools needed to debug package builds.
-Only later it became widely used as a general way to make temporary environments for other purposes.
 
-`mkShell` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell), so it takes the same arguments as `mkDerivation`, such as `buildInputs` or `nativeBuildInputs`.
-The `packages` attribute argument to `mkShell` is simply an alias for `nativeBuildInputs`.
+`mkShellNoCC` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell), so it takes the same arguments as `mkDerivation`, such as `buildInputs` or `nativeBuildInputs`.
+The `packages` attribute argument to `mkShellNoCC` is simply an alias for `nativeBuildInputs`.
 :::
 ::::
 
@@ -106,7 +107,7 @@ Set `GREETING` so it can be used in the shell environment:
    pkgs = import nixpkgs { config = {}; overlays = []; };
  in
 
- pkgs.mkShell {
+ pkgs.mkShellNoCC {
    packages = with pkgs; [
      cowsay
      lolcat
@@ -116,7 +117,7 @@ Set `GREETING` so it can be used in the shell environment:
  }
 ```
 
-Any attribute name passed to `mkShell` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
+Any attribute name passed to `mkShellNoCC` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
 
 Try it out!
 Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell`.
@@ -136,7 +137,7 @@ If you need to override these protected environment variables, use the `shellHoo
 ## Startup commands
 
 You may want to run some commands before entering the shell environment.
-These commands can be placed in the `shellHook` attribute provided to `mkShell`.
+These commands can be placed in the `shellHook` attribute provided to `mkShellNoCC`.
 
 Set `shellHook` to output a colorful greeting:
 
@@ -146,7 +147,7 @@ Set `shellHook` to output a colorful greeting:
    pkgs = import nixpkgs { config = {}; overlays = []; };
  in
 
- pkgs.mkShell {
+ pkgs.mkShellNoCC {
    packages = with pkgs; [
      cowsay
      lolcat

@@ -38,7 +38,7 @@ Add niv to the development environment for your project to have it readily avail
    build = pkgs.hello;
  in {
    inherit build;
-+  shell = pkgs.mkShell {
++  shell = pkgs.mkShellNoCC {
 +    inputsFrom = [ build ];
 +    packages = with pkgs; [
 +      niv

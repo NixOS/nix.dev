@@ -7,7 +7,7 @@ How to share the package's dependencies in `default.nix` with the development en
 
 ## Summary
 
-Use the [`inputsFrom` attribute to `pkgs.mkShell`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes):
+Use the [`inputsFrom` attribute to `pkgs.mkShellNoCC`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes):
 
 ```nix
 # default.nix
@@ -17,7 +17,7 @@ let
 in
 {
   inherit build;
-  shell = pkgs.mkShell {
+  shell = pkgs.mkShellNoCC {
     inputsFrom = [ build ];
   };
 }
@@ -67,7 +67,7 @@ Add an attribute to `default.nix` specifying an environment:
  in
  {
    build = pkgs.callPackage ./build.nix {};
-+  shell = pkgs.mkShell {
++  shell = pkgs.mkShellNoCC {
 +  };
  }
 ```
@@ -84,7 +84,7 @@ Then take the package's dependencies into the environment with [`inputsFrom`](ht
  {
 -  build = pkgs.callPackage ./build.nix {};
 +  inherit build;
-   shell = pkgs.mkShell {
+   shell = pkgs.mkShellNoCC {
 +    inputsFrom = [ build ];
    };
  }
