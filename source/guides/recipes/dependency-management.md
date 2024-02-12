@@ -66,7 +66,7 @@ Enter the development environment, create a new directory, and set up niv with a
 $ nix-shell
 [nix-shell]$ mkdir old
 [nix-shell]$ cd old
-[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 23.05
+[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 21.11
 ```
 
 Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
