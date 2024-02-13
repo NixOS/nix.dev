@@ -10,6 +10,7 @@ myst:
 # Welcome to nix.dev
 
 nix.dev is the home of official documentation for the Nix ecosystem.
+It is maintained by the [Nix documentation team](https://nixos.org/community/teams/documentation).
 
 If you're new here, {ref}`install Nix <install-nix>` and begin your journey with our tutorial series!
 

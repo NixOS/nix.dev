@@ -6,6 +6,13 @@ Keeping it working and up to date – and improving it continuously – would no
 
 This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term}`NixOS`.
 
+:::{important}
+If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
+
+Currently the focus is on funding in-person events to share knowledge and grow the community of developers proficient with Nix.
+With enough budget, it would be possible to pay for ongoing maintenance and development of critical infrastructure and code – demanding work that we cannot expect to be done by volunteers indefinitely.
+:::
+
 ## Getting started
 
 Start with asking informed questions, after reading reference documentation and the code relevant to what you care about.
@@ -25,22 +32,17 @@ This is where we need the most help and where it is the easiest to begin.
 Documentation and contribution guides are often incomplete or outdated, much as we would like them to be otherwise.
 We're working on it.
 You can help and improve the situation for everyone by immediately solving problems with the contribution workflow as you encounter them.
-While this may slow you down with addressing your original concern, it will make it a lot easier for anyone to make meaningful contributions in the future, and lead to better code and documentation in the long run.
-
-:::{attention}
-If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
-
-Currently the focus is on funding in-person events to share knowledge and grow the community of developers proficient with Nix.
-With enough budget, it would be possible to pay for ongoing maintenance and development of critical infrastructure and code – demanding work that we cannot expect to be done by volunteers indefinitely.
-:::
+This may slow you down with addressing your original concern.
+But it will make it a lot easier for anyone to make meaningful contributions in the future.
+And it will lead to better code and documentation in the long run.
 
 ## Report an issue
 
 We can only fix issues that we know of, so please report any issue you encounter.
 
-- Issues with {term}`Nix` (including the [Nix reference manual](https://nixos.org/manual/nix/stable)) are reported at <https://github.com/NixOS/nix/issues>.
+- Report issues with {term}`Nix` (including the [Nix reference manual](https://nixos.org/manual/nix/stable)) at <https://github.com/NixOS/nix/issues>.
 
-- Issues with {term}`Nixpkgs` or {term}`NixOS` (including packages, configuration modules, the [Nixpkgs manual](https://nixos.org/manual/nixpkgs/stable), and the [NixOS manual](https://nixos.org/manual/nixos/stable)) are reported at <https://github.com/NixOS/nixpkgs/issues>.
+- Report issues with {term}`Nixpkgs` or {term}`NixOS` (including packages, configuration modules, the [Nixpkgs manual](https://nixos.org/manual/nixpkgs/stable), and the [NixOS manual](https://nixos.org/manual/nixos/stable)) at <https://github.com/NixOS/nixpkgs/issues>.
 
 Make sure that there is not already an open issue for your problem.
 Please follow the issue template and fill in all requested information.
