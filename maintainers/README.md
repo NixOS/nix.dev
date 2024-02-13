@@ -148,7 +148,7 @@ Many thanks to past members, who helped make Nix documentation what it is today:
 - [@brianmcgee](https://github.com/brianmcgee) was part of the team from 2023-03 to 2023-10 and contributed to the Learning Journey Working Group effort.
 
 - [@zmitchell] led the [Learning Journey Working Group](https://discourse.nixos.org/search?q=learning%20journey%20working%20group%20-%20meeting%20notes%20in%3Atitle%20order%3Alatest_topic) from 2023-03 to 2023-08 that added a number of tutorials.
-  He published [regular updates on developments in documentation](regular updates on developments in documentation) in that period.
+  He published [regular updates on developments in documentation](https://discourse.nixos.org/search?q=This%20Month%20in%20Nix%20Docs%20in%3Atitle%20order%3Alatest_topic) in that period.
 
 - [@Mic92](https://github.com/Mic92) was a founding member and part of the team from 2022-05 to 2023-01.
   Jörg had written a great deal of documentation on the NixOS Wiki, and shared his experience to set a direction for the documentation team.
