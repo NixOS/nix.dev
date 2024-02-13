@@ -55,47 +55,6 @@ The following manual steps are required:
   sed -i 's#https://nix.dev/manual/nix/2.18/#https://nix.dev/manual/nix/2.19/#g' $(ls **/*.md)
   ```
 
-## What you can do
-
-### You want to learn and use Nix?
-
-This project would not be possible without you.
-Try to use it as your primary resource, however incomplete it may appear.
-
-We ask you to liberally open issues and document all problems and questions that arise.
-Please also state your learning goals and the paths you have taken so far.
-
-Sharing your first-hand experience is invaluable to better guide our efforts, and will immediately help improve these guides for yourself and everyone else.
-
-### You are a beginner and want to get involved in improving documentation
-
-The documentation team is currently carrying out a documentation survey. As we work through this project, updates are made to this [Documentation Survey](./maintainers/working_groups/learning_journey/documentation-survey.md) markdown page.
-Its purpose is to provide overview of the types, topics, and volume of existing documentation resources and inform future work.
-
-We would love for you to get involved.
-Here is how you can help:
-
-1. Familiarize yourself with the format described at the top of the Documentation Survey page.
-2. Contribute by making pull requests. Your change should add details to one individual link (bullet point) following the specified format.
-3. Ensure consistency with existing entries. Your contributions should align with the style and format of previously added bullet points.
-4. When dealing with a larger resource like the [Nixpkgs manual](https://nixos.org/manual/nixpkgs), start by creating a pull request with a structured outline. Then fill in the details section-by-section, submitting separate pull requests for each section.
-
-### You have experience teaching Nix?
-
-You will probably have observed where learners get stuck most often, and which typical needs and questions they have.
-You may have your own written notes for classes, trainings, or presentations.
-
-Please share your experience and help us inform the structure and detailed contents the guides.
-It would be great if you could contribute examples, wordings, or illustrations that proved helpful to your students.
-
-### You are a domain expert using Nix?
-
-If you are proficient in applying Nix to a domain-specific problem, and want to share your expertise on best practices, please check the table of contents.
-Does existing material on your subject meet your standards?
-How could we improve it?
-Is there a popular application of Nix' capabilities not yet covered?
-We would be glad to incorporate your insights.
-
 ## Contributor guides
 
 Please read [Contributing Documentation](https://nix.dev/contributing/documentation).
