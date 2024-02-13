@@ -2,15 +2,10 @@
 
 This is a guide to writing tutorials about Nix.
 
-By [tutorials][diataxis_tutorials] we mean *lessons* as described in the [Diátaxis framework for technical documentation][diataxis], and recommend becoming familiar with Diátaxis before proceeding.
-Especially note [the difference between tutorials and guides][diataxis_tut_vs_howto].
+By tutorials we mean *lessons* as described in the [Diátaxis framework for technical documentation](https://diataxis.fr/), and recommend becoming familiar with Diátaxis before proceeding.
+Especially note [the difference between tutorials and guides](https://diataxis.fr/tutorials-how-to/).
 
-We strongly recommend the book [How Learning Works (summary)][how_learning_works] as a guide for designing learning materials.
-
-[diataxis]: https://diataxis.fr/
-[diataxis_tutorials]: https://diataxis.fr/tutorials/
-[diataxis_tut_vs_howto]: https://diataxis.fr/tutorials-how-to/
-[how_learning_works]: https://www.lesswrong.com/posts/mAdMkFqWzbJRB544m/book-review-how-learning-works
+We strongly recommend the book [How Learning Works (summary)](https://www.lesswrong.com/posts/mAdMkFqWzbJRB544m/book-review-how-learning-works) as a guide for designing learning materials.
 
 ## Target audience
 
@@ -31,7 +26,7 @@ Each tutorial should have the following structure:
 
 Describe the problem statement and learning goals.
 
-The learning goal of a tutorial is always a skill, which is distinguished by being applicable to a set of situations with recurrent patterns.
+The learning goal of a tutorial is always acquiring a skill, which is distinguished by being applicable to a set of situations with recurrent patterns.
 
 ### What do you need?
 
@@ -57,20 +52,14 @@ This will both help with revealing implicit prerequisites as well as provide a r
 ### Tutorial
 
 Provide steps to achieve the learning goal.
+These should take the form of direct instructions which repeatably lead to the desired outcome.
 
-Depending on how well a use case is supported, these may be
-
-- instructions and examples
-- links to known-good external resources, with summaries
-- overview of available tools, and their state of maturity and maintenance
-- overview of ideas, and state of community discussion.
-
-It is also worthwhile to add contextual explanations within `<details>` tags.
+It is also worthwhile to add contextual explanations within `:::{dropdown}` blocks.
 This can help with understanding while keeping distractions minimal.
 
 ### What did you learn?
 
-Provide exercises or worked examples, and offer means of self-assessment.
+Provide exercises or worked examples, and other means of self-assessment.
 
 This is also a good place to offer the readers ways to give feedback or ask the authors questions in order to continue improving the tutorial.
 
@@ -79,30 +68,31 @@ This is also a good place to offer the readers ways to give feedback or ask the 
 Depending on how well a use case is explored, point the reader to
 
 - reference manuals
-- other chapters
-- ongoing community discussion
-- additional resources
+- guides or other tutorials
+- links to known-good external resources, with summaries
+- overview of available support tools, and their state of maturity and maintenance
+- overview of ideas, and state of community discussion.
 
 We recommend making an explicit separation of practical from theoretical learning resources, as then readers will be able to quickly decide to either get things done or learn more.
 
 External resources should have a summary to set expectations, ideally including reading time.
-Blog posts should have their original title in the link, and `(<author>, <year>)`: give authors credit, give readers an idea of how up to date the information is.
+Blog posts should have their original title in the link, and `(<author>, <year>)`:
+Give authors credit, give readers an idea of how up to date the information is.
 
 ## Process
 
 ### Pick a topic
 
-There are [tracking issues] for tutorials that the working group has decided should exist as part of the tutorial series.
-Pick an issue that covers a topic that you're either knowledgeable about or have a particular interest in, then comment on the issue indicating your interest in working on the tutorial.
+There is a [tracking issue](https://github.com/NixOS/nix.dev/issues/572) for tutorials that the documentation team has decided should exist as part of the tutorial series.
+Pick an issue that covers a topic that you're either knowledgeable about or have a particular interest in.
 
-The tracking issue will contain status information such as whether PRs have been submitted to create an outline or a draft of the article or whether someone else has already started work on the tutorial.
-Make sure to read the issue fully to ensure that you don't duplicate work that someone else is already doing!
-
-[tracking issues]: https://github.com/NixOS/nix.dev/issues?q=is%3Aissue+is%3Aopen+label%3Atracking+label%3A%22learning+journey%22
+Check referenced issues and pull request to make sure you won't duplicate work that someone else has already started!
 
 ### Submit an pull request with an outline
 
 Submit a pull request with an outline of the tutorial following the above structure and containing bullet points on each section's content.
+Reference the tracking issue from the pull request description to announce that you're working on a tutorial.
+
 A review will ensure the work is going in the right direction in terms of learning objectives and technical details.
 
 ### Expand on the outline
