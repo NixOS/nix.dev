@@ -26,7 +26,7 @@ Sharing your first-hand experience is invaluable to better guide our efforts, an
 Please go through nix.dev and report any problems you come across in the [issue tracker](https://github.com/NixOS/nix.dev/issues).
 Also check to see if there's already an existing issue or pull request that addresses the problem you encountered.
 
-Another way to help is to help with the [Documentation Survey](https://github.com/NixOS/nix.dev/blob/master/maintainers/documentation-survey.md), which lists other documentation resources as a reference, which can be used to inform new content.
+Another way to help is to help with the [Documentation Survey](https://github.com/NixOS/nix.dev/blob/master/maintainers/documentation-survey.md), which lists other documentation resources as a reference, and can be used to inform new content.
 
 ### You have experience teaching Nix?
 
