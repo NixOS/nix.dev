@@ -38,7 +38,7 @@ Once you've found the people you're looking for, you can contact them on one of 
 
 - [Matrix]
 
-  Matrix is used for direct messages and short-lived, timely exchanges.
+  Matrix is used for short-lived, timely exchanges, and direct messages.
 
   To contact a maintainer, use their Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
   If no Matrix handle is present for a specific maintainer, try searching for their GitHub username, as most people tend to use the same one across channels.
