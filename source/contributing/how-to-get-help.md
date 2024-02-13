@@ -43,7 +43,7 @@ Once you've found the people you're looking for, you can contact them on one of 
   To contact a maintainer, use their Matrix handle found in the [`maintainers-list.nix` file][maintainers-list].
   If no Matrix handle is present for a specific maintainer, try searching for their GitHub username, as most people tend to use the same one across channels.
 
-  Maintainer teams usually have their own public Matrix room.
+  Maintainer teams sometimes have their own public Matrix room.
 
 - Email
 
