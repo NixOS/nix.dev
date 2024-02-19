@@ -55,7 +55,7 @@ In particular:
 - The RFC was closed without conclusion, and some fundamental issues are not yet resolved.
   For example:
   - The notion of a [global flake registry](https://github.com/NixOS/flake-registry) saw [substantial criticism](https://github.com/NixOS/rfcs/pull/49#issuecomment-635635333) that was never addressed.
-    Additionally, local registry names in Nix expressions [introduce mutable system state](https://github.com/NixOS/nix/issues/7422) and are thus no improvement over [channels](https://nix.dev/manual/nix/2.18/command-ref/nix-channel) in that regard.
+    While the source references of [registry entries can be pinned](https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-registry-pin), local registry names in Nix expressions [introduce mutable system state](https://github.com/NixOS/nix/issues/7422) and are thus, in that regard, no improvement over channels as managed by [`nix-channel`](https://nix.dev/manual/nix/2.18/command-ref/nix-channel).
   - It is [impossible to parameterise flakes](https://github.com/NixOS/nix/issues/2861).
     This means that [flakes downgrade ease of use of the `system` parameter](https://github.com/NixOS/nix/issues/3843) of derivations, for producers and consumers.
   - the flakes proposal was criticised for [trying to solve too many problems at once](https://github.com/nixos/rfcs/pull/49#issuecomment-521998933) and [at the wrong abstraction layer](https://discourse.nixos.org/t/nixpkgs-cli-working-group-member-search/30517).
