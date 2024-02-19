@@ -31,7 +31,7 @@ $ nix-build helpers/bench.nix --option extra-binary-caches https://cache.nixos.o
 
 ### How to operate between Nix paths and strings?
 
-See <http://stackoverflow.com/a/43850372>
+See the [Nix reference manual](nix-manual) on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
 
 ### How to build reverse dependencies of a package?
 
