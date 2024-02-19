@@ -30,9 +30,11 @@
 
 - [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/) (2022)
 
+  An overview of different methods to customize Nix packages.
+
 - [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix) (Mattia Gheda, 2021)
 
-  An overview of different methods to customize Nix packages.
+  A tutorial for getting started with Home Manager.
 
 - [Nix Shorts](https://github.com/justinwoo/nix-shorts)
 
