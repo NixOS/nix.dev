@@ -49,7 +49,7 @@ It will enable you or others to produce an artifact for practical use, as a cons
 
 To start, consider this skeleton derivation:
 
-```nix
+```nix skip
 { stdenv }:
 
 stdenv.mkDerivation {	};
@@ -82,7 +82,7 @@ The hash cannot be known until after the archive has been downloaded and unpacke
 Nix will complain if the hash supplied to `fetchzip` is incorrect.
 It is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
 
-```nix
+```nix skip
 # hello.nix
 {
   lib,
@@ -127,7 +127,7 @@ Problem: the expression in `hello.nix` is a *function*, which only produces its 
 
 The recommended way to do this is to create a `default.nix` file in the same directory as `hello.nix`, with the following contents:
 
-```nix
+```nix skip
 # default.nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
@@ -170,7 +170,7 @@ error:
 As expected, the incorrect file hash caused an error, and Nix helpfully provided the correct one.
 In `hello.nix`, replace `lib.fakeSha256` with the correct hash:
 
-```nix
+```nix skip
 # hello.nix
 {
   lib,
@@ -235,7 +235,7 @@ Now you will package a somewhat more complicated program, [`icat`](https://githu
 
 Change the `default.nix` from the previous section by adding a new attribute for `icat`:
 
-```nix
+```nix skip
 # default.nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
@@ -249,7 +249,7 @@ in
 
 Copy `hello.nix` to a new file `icat.nix`, and update the `pname` and `version` attributes in that file:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -271,7 +271,7 @@ Now to download the source code.
 `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should replace the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers).
 This time you will use [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub) instead of `fetchzip`, by updating the argument attribute set to the function accordingly:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -322,7 +322,7 @@ path is '/nix/store/p8jl1jlqxcsc7ryiazbpm7c1mqb6848b-v0.5.tar.gz'
 
 Set the correct hash for `fetchFromGitHub`:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -376,7 +376,7 @@ If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packag
 Add this package to your build environment by adding `imlib2` to the arguments of the function in `icat.nix`.
 Then add the argument's value `imlib2` to the list of `buildInputs` in `stdenv.mkDerivation`:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -502,7 +502,7 @@ Consider using `nix-locate` from the [`nix-index`](https://github.com/nix-commun
 
 Add this to your derivation's input attribute set and to `buildInputs`:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -577,7 +577,7 @@ In Nix, the output directory is stored in the `$out` variable.
 That variable is accessible in the derivation's [`builder` execution environment](https://nix.dev/manual/nix/2.19/language/derivations#builder-execution).
 Create a `bin` directory within the `$out` directory and copy the `icat` binary there:
 
-```nix
+```nix skip
 # icat.nix
 {
   lib,
@@ -628,7 +628,7 @@ And it keeps the code tidy and makes it easier to read.
 
 Adjust your `installPhase` to call the appropriate hooks:
 
-```nix
+```nix skip
 # icat.nix
 
 # ...

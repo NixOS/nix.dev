@@ -80,7 +80,7 @@ In the working directory you will then find two files:
 
 The default NixOS configuration without comments is:
 
-```nix
+```nix skip
 { config, pkgs, ... }:
 {
   imports =  [ ./hardware-configuration.nix ];
@@ -94,7 +94,7 @@ The default NixOS configuration without comments is:
 
 To be able to log in, add the following lines to the returned attribute set:
 
-```nix
+```nix skip
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -112,7 +112,7 @@ On NixOS your configuration generated with `nixos-generate-config` contains this
 Additionally, you need to specify a password for this user.
 For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
 
-```nix
+```nix skip
 initialPassword = "test";
 ```
 
@@ -132,7 +132,7 @@ Therefore you will remove the reference to `hardware-configuration.nix`:
 
 The complete `configuration.nix` file looks like this:
 
-```nix
+```nix skip
 { config, pkgs, ... }:
 {
   boot.loader.systemd-boot.enable = true;

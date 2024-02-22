@@ -29,7 +29,7 @@ Integration tests are reproducible due to the design properties of Nix, making t
 NixOS VM tests are defined using the `nixosTest` function.
 The pattern for NixOS VM tests looks like this:
 
-```nix
+```nix skip
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
@@ -76,7 +76,7 @@ We will build the example up from scratch.
 
 1. Use a [pinned version of Nixpkgs](ref-pinning-nixpkgs), and [explicitly set configuration options and overlays](nixpkgs-config) to avoid them being inadvertently overridden by global configuration:
 
-   ```nix
+   ```nix skip
    let
      nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
      pkgs = import nixpkgs { config = {}; overlays = []; };
@@ -89,7 +89,7 @@ We will build the example up from scratch.
 
 1. Label the test with a descriptive name:
 
-   ```nix
+   ```nix skip
    name = "minimal-test";
    ```
 
@@ -97,7 +97,7 @@ We will build the example up from scratch.
    This name is arbitrary and can be chosen freely.
    As configuration you use the relevant parts of the default configuration, [that we used in a previous tutorial](<nixos-vms>):
 
-   ```nix
+   ```nix skip
    nodes.machine = { config, pkgs, ... }: {
      users.users.alice = {
        isNormalUser = true;
@@ -130,7 +130,7 @@ We will build the example up from scratch.
 
 The complete `minimal-test.nix` file content looks like the following:
 
-```nix
+```nix skip
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };

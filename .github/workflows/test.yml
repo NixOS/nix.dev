@@ -20,7 +20,7 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: Run linkcheck
       run: nix-shell --run "make linkcheck"
-  codeblock:
+  test-examples:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -33,7 +33,5 @@ jobs:
       with:
         name: nix-dev
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - name: Run builder
-      run: nix-shell --run "make dummy"
-    - name: Test code blocks
-      run: nix-shell --run "./run_code_block_tests.sh"
+    - name: Test examples
+      run: nix run -f . test-examples

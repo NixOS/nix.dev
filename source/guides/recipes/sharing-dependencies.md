@@ -9,7 +9,7 @@ How to share the package's dependencies in `default.nix` with the development en
 
 Use the [`inputsFrom` attribute to `pkgs.mkShellNoCC`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes):
 
-```nix
+```nix skip
 # default.nix
 let
   pkgs = import <nixpkgs> {};
@@ -25,7 +25,7 @@ in
 
 Import the `shell` attribute in `shell.nix`:
 
-```nix
+```nix skip
 # shell.nix
 (import ./.).shell
 ```
@@ -34,7 +34,7 @@ Import the `shell` attribute in `shell.nix`:
 
 Assume your build is defined in `build.nix`:
 
-```nix
+```nix skip
 # build.nix
 { cowsay, runCommand }:
 runCommand "cowsay-output" { buildInputs = [ cowsay ]; } ''
@@ -46,7 +46,7 @@ In this example, `cowsay` is declared as a build-time dependency using `buildInp
 
 Further assume your project is defined in `default.nix`:
 
-```nix
+```nix skip
 # default.nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
@@ -92,7 +92,7 @@ Then take the package's dependencies into the environment with [`inputsFrom`](ht
 
 Finally, import the `shell` attribute in `shell.nix`:
 
-```nix
+```nix skip
 # shell.nix
 (import ./.).shell
 ```

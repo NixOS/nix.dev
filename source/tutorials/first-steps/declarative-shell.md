@@ -52,7 +52,7 @@ A better solution is to create our shell environment from a `shell.nix` file.
 
 Create a file called `shell.nix` with these contents:
 
-```nix
+```nix skip
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };

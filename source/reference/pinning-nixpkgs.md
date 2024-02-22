@@ -72,7 +72,7 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
 
 - In the Nix language:
 
-  ```nix
+  ```nix skip
   let
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz") {};
   in pkgs.stdenv.mkDerivation { ... }

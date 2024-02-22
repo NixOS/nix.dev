@@ -16,7 +16,7 @@ It will also create `nix/sources.nix`, which exposes those dependencies as an at
 
 Import the generated `nix/sources.nix` as the default value for the argument to the function in `default.nix` and use it to refer to the Nixpkgs source directory:
 
-```nix
+```nix skip
 { sources ? import ./nix/sources.nix }:
 let
   pkgs = import sources.nixpkgs {};
@@ -49,7 +49,7 @@ Add niv to the development environment for your project to have it readily avail
 
 Also add a `shell.nix` to enter that environment more conveniently:
 
-```nix
+```nix skip
 (import ./. {}).shell
 ```
 
@@ -71,7 +71,7 @@ $ nix-shell
 
 Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
 
-```nix
+```nix skip
 import ../default.nix { sources = import ./nix/sources.nix; }
 ```
 

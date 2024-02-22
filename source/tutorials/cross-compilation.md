@@ -151,7 +151,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
 1. Explicitly pick the host platform package from within the build platform environment:
 
-   ```nix
+   ```nix skip
    let
      nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
      pkgs = import <nixpkgs> {};
@@ -161,7 +161,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
 2. Pass the host platform to `crossSystem` when importing `<nixpkgs>`:
 
-   ```nix
+   ```nix skip
    let
      nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
      # configure `nixpkgs` such that all its packages are build for the host platform
@@ -193,7 +193,7 @@ $ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
 
 To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
-```nix
+```nix skip
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
   pkgs = import <nixpkgs> {};
@@ -249,7 +249,7 @@ It's also possible to provide an environment with a compiler configured for **cr
 
 Given we have a `shell.nix`:
 
-```nix
+```nix skip
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
   pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
