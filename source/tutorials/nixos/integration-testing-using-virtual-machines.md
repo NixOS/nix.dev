@@ -307,7 +307,7 @@ The test script performs the following steps:
 Run the test:
 
 ```shell-session
-$ nix-build server-client-test.nix
+$ nix-build client-server-test.nix
 ```
 
 ## Additional information regarding NixOS tests
