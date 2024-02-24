@@ -454,7 +454,7 @@ Only clone the latest revision if you don't want to wait a long time:
 
 ```console
 $ nix-shell -p git ripgrep
-[nix-shell:~]$ git glone https://github.com/NixOS/nixpkgs --depth 1
+[nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
 ```
 
 To narrow down results, specify which subdirectory you want to search:
