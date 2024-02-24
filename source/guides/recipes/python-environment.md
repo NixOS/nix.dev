@@ -106,6 +106,6 @@ Others can now use the same shell environment as long as they have [Nix installe
 ## Next steps
 
 - [](packaging-existing-software)
-- [](file-sets)
+- [](file-sets-tutorial)
 - [](automatic-direnv)
 - [](./dependency-management.md)
