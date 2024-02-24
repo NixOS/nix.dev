@@ -1,4 +1,4 @@
-(file-sets)=
+(file-sets-tutorial)=
 # Working with local files
 
 To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
