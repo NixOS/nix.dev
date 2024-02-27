@@ -417,6 +417,7 @@ linkcheck_ignore = [
     r"https://matrix.to",
     # returns 403 on CI
     r"https://www.lesswrong.com",
+    r"https://www.raspberrypi.(com|org)",
     # Linkcheck fails on anchors in GH READMEs, see https://github.com/sphinx-doc/sphinx/issues/9016
     r"https://github.com/.+/.+#.+$",
     # Linkcheck fails on anchors in GH browser/file viewer, see https://github.com/sphinx-doc/sphinx/issues/11484
