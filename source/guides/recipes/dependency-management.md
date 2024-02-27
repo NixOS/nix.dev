@@ -7,10 +7,10 @@ Nix expressions themselves can depend on remote sources, and there are multiple 
 For more automation around handling remote sources, set up [niv](https://github.com/nmattia/niv/) in your project:
 
 ```shell-session
-$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.05"
+$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.11"
 ```
 
-This command will fetch the latest revision of the Nixpkgs 23.05 release branch.
+This command will fetch the latest revision of the Nixpkgs 23.11 release branch.
 In the current directory it will generate `nix/sources.json`, which will contain a pinned reference to the obtained revision.
 It will also create `nix/sources.nix`, which exposes those dependencies as an attribute set.
 
@@ -66,7 +66,7 @@ Enter the development environment, create a new directory, and set up niv with a
 $ nix-shell
 [nix-shell]$ mkdir old
 [nix-shell]$ cd old
-[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 18.09
+[nix-shell]$ niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch 21.11
 ```
 
 Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.

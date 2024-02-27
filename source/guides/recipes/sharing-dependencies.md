@@ -49,7 +49,7 @@ Further assume your project is defined in `default.nix`:
 ```nix
 # default.nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 {
@@ -62,7 +62,7 @@ Add an attribute to `default.nix` specifying an environment:
 
 ```diff
  let
-   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
    pkgs = import nixpkgs { config = {}; overlays = []; };
  in
  {
@@ -77,7 +77,7 @@ Then take the package's dependencies into the environment with [`inputsFrom`](ht
 
 ```diff
  let
-   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
    pkgs = import nixpkgs { config = {}; overlays = []; };
 +  build = pkgs.callPackage ./build.nix {};
  in

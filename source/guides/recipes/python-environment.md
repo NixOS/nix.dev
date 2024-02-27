@@ -31,7 +31,7 @@ This is a simple Flask application which serves a JSON document with the message
 Create a new file `shell.nix` to declare the development environment:
 
 ```{code-block} nix shell.nix
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11") {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11") {} }:
 
 pkgs.mkShellNoCC {
   packages = with pkgs; [
