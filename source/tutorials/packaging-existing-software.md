@@ -61,7 +61,7 @@ This is a function which takes an attribute set containing `stdenv`, and produce
 
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-To begin, add a `name` attribute to the set passed to `mkDerivation`.
+To begin, add a `pname` attribute to the set passed to `mkDerivation`.
 Every package needs a name and a version, and Nix will throw `error: derivation name missing` without.
 
 ```diff
@@ -292,7 +292,7 @@ stdenv.mkDerivation {
 ### Fetching source from GitHub
 While `fetchzip` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
 
-The source is URL is `https://github.com/atextor/icat`, which already gives the first two arguments:
+The source URL is `https://github.com/atextor/icat`, which already gives the first two arguments:
 - `owner`: the name of the account controlling the repository
 
   ```
