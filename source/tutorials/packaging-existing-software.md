@@ -292,7 +292,7 @@ stdenv.mkDerivation {
 ### Fetching source from GitHub
 While `fetchzip` required `url` and `sha256` arguments, more are needed for [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub).
 
-The source is URL is `https://github.com/atextor/icat`, which already gives the first two arguments:
+The source URL is `https://github.com/atextor/icat`, which already gives the first two arguments:
 - `owner`: the name of the account controlling the repository
 
   ```
