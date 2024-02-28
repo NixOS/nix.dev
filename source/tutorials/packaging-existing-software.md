@@ -61,7 +61,7 @@ This is a function which takes an attribute set containing `stdenv`, and produce
 
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
-To begin, add a `name` attribute to the set passed to `mkDerivation`.
+To begin, add a `pname` attribute to the set passed to `mkDerivation`.
 Every package needs a name and a version, and Nix will throw `error: derivation name missing` without.
 
 ```diff
