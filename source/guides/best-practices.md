@@ -180,7 +180,7 @@ import <nixpkgs> { config = {}; overlays = []; }
 :::
 
 This is what we do in our tutorials to ensure that the examples will behave exactly as expected.
-We skip it in minimal examples reduce distractions.
+We skip it in minimal examples to reduce distractions.
 
 ## Updating nested attribute sets
 
