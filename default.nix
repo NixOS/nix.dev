@@ -85,7 +85,7 @@ let
             sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version nix}\1 /manual/nix/${version nix}\2 #g' ${nix.src}/doc/manual/_redirects >> $out/_redirects
           '';
           shortlink = release: nix: ''
-            echo /nix/manual/${release} /nix/manual/${nix.version}/ 302 >> $out/_redirects
+            echo /nix/manual/${release}/* /nix/manual/${nix.version}/:splat 302 >> $out/_redirects
           '';
         in
         ''
