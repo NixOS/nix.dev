@@ -5,7 +5,7 @@ The Nix documentation team was formed to [flatten the infamous learning curve](h
 ## Goals
 
 - Ease learning, increase onboarding success and user retention
-- Improve organisation of knowledge
+- Improve organisation of Nix knowledge
 - Lead, guide, and support related community efforts
 
 ## Motivation
