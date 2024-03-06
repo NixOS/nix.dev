@@ -1,13 +1,11 @@
 name: "Build and Deploy"
 on:
-  workflow_run:
-    workflows: [Test]
-    types: [completed]
+  push: {}
+  pull_request: {}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - uses: actions/checkout@v4
       with:
