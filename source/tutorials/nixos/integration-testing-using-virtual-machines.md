@@ -24,9 +24,9 @@ They can be written and launched outside of NixOS, on any Linux machine[^darwin]
 
 Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a continuous integration (CI) pipeline.
 
-## The `nixosTest` function
+## The `testers.runNixOSTest` function
 
-NixOS VM tests are defined using the `nixosTest` function.
+NixOS VM tests are defined using the `testers.runNixOSTest` function.
 The pattern for NixOS VM tests looks like this:
 
 ```nix
@@ -35,7 +35,7 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.nixosTest {
+pkgs.testers.runNixOSTest {
   name = "test-name";
   nodes = {
     machine1 = { config, pkgs, ... }: {
@@ -51,7 +51,7 @@ pkgs.nixosTest {
 }
 ```
 
-The function `nixosTest` takes a [module](https://nixos.org/manual/nixos/stable/#sec-writing-modules) to specify the [test options](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
+The function `testers.runNixOSTest` takes a [module](https://nixos.org/manual/nixos/stable/#sec-writing-modules) to specify the [test options](https://nixos.org/manual/nixos/stable/index.html#sec-test-options-reference).
 Because this module only sets configuration values, one can use the abbreviated module notation.
 
 The following configuration values must be set:
@@ -82,7 +82,7 @@ We will build the example up from scratch.
      pkgs = import nixpkgs { config = {}; overlays = []; };
    in
 
-   pkgs.nixosTest {
+   pkgs.testers.runNixOSTest {
      # ...
    }
    ```
@@ -136,7 +136,7 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.nixosTest {
+pkgs.testers.runNixOSTest {
   name = "minimal-test";
 
   nodes.machine = { config, pkgs, ... }: {
@@ -269,7 +269,7 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.nixosTest {
+pkgs.testers.runNixOSTest {
   name = "client-server-test";
 
   nodes.server = { pkgs, ... }: {
