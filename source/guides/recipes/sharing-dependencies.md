@@ -13,7 +13,7 @@ Use the [`inputsFrom` attribute to `pkgs.mkShellNoCC`](https://nixos.org/manual/
 # default.nix
 let
   pkgs = import <nixpkgs> {};
-  build = pkgs.callpackage ./build.nix {};
+  build = pkgs.callPackage ./build.nix {};
 in
 {
   inherit build;
