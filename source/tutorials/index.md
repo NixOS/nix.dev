@@ -10,6 +10,7 @@ These sections contains series of lessons to get started.
 first-steps/index.md
 nix-language.md
 Packaging existing software <packaging-existing-software.md>
+Package parameters and overrides <callpackage.md>
 working-with-local-files.md
 nixos/index.md
 cross-compilation.md
