@@ -5,7 +5,7 @@ myst:
     "keywords": "Nix, packaging"
 ---
 
-(packaging-existing-software)=
+(packaging-tutorial)=
 # Packaging existing software with Nix
 
 One of Nix's primary use-cases is in addressing common difficulties encountered with packaging software, such as specifying and obtaining dependencies.
@@ -141,7 +141,7 @@ in
 This allows you to run `nix-build -A hello` to realize the derivation in `hello.nix`, similar to the current convention used in Nixpkgs.
 
 :::{note}
-[`callPackage`] automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attrset.
+`callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attribute set.
 
 In this case, `callPackage` will supply `lib`, `stdenv`, and `fetchzip` to the function defined in `hello.nix`.
 :::
@@ -643,6 +643,7 @@ Adjust your `installPhase` to call the appropriate hooks:
 # ...
 
 ```
+
 ## A successful build
 
 Running the `nix-build` command once more will finally do what you want, repeatably.
@@ -658,15 +659,13 @@ default.nix hello.nix icat.nix result
 ## References
 
 - [Nixpkgs Manual - Standard Environment](https://nixos.org/manual/nixpkgs/unstable/#part-stdenv)
-- [Nix Pills - `callPackage` Design Pattern][`callPackage`]
-
-[`callPackage`]: https://nixos.org/guides/nix-pills/callpackage-design-pattern.html
 
 ## Next steps
 
-- [Add your own new packages to Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md)
-  - [](../contributing/how-to-contribute.md)
-  - [](../contributing/how-to-get-help.md)
+- [](callpackage-tutorial)
 - [](sharing-dependencies)
 - [](automatic-direnv)
 - [](python-dev-environment)
+- [Add your own new packages to Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md)
+  - [](../contributing/how-to-contribute.md)
+  - [](../contributing/how-to-get-help.md)

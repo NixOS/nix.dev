@@ -1,7 +1,7 @@
 (sharing-dependencies)=
 # Dependencies in the development shell
 
-When [packaging software in `default.nix`](packaging-existing-software), you'll want a [development environment in `shell.nix`](declarative-reproducible-envs) to enter it conveniently with `nix-shell` or [automatically with `direnv`](./direnv).
+When [packaging software in `default.nix`](packaging-tutorial), you'll want a [development environment in `shell.nix`](declarative-reproducible-envs) to enter it conveniently with `nix-shell` or [automatically with `direnv`](./direnv).
 
 How to share the package's dependencies in `default.nix` with the development environment in `shell.nix`?
 
@@ -109,4 +109,4 @@ $ nix-shell --pure
 - [](pinning-nixpkgs)
 - [](./direnv)
 - [](python-dev-environment)
-- [](packaging-existing-software)
+- [](packaging-tutorial)

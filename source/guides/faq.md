@@ -45,11 +45,11 @@ See <https://github.com/nix-community/home-manager>
 
 ### What's the recommended process for building custom packages?
 
-Please read [](packaging-existing-software).
+Please read [](packaging-tutorial).
 
 ### How to use a clone of the Nixpkgs repository to update or write new packages?
 
-Please read [](packaging-existing-software) and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).
+Please read [](packaging-tutorial) and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).
 
 ## NixOS
 
@@ -69,7 +69,7 @@ There are a few ways to resolve this mismatch in environment expectations:
   - Build from source.
 
     Many open-source programs are highly flexible at compile time in terms of where their files go.
-    For an introduction to this, see [](../tutorials/packaging-existing-software).
+    For an introduction to this, see [](packaging-tutorial).
   - Modify the program's [ELF header](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) to include paths to libraries using [`autoPatchelfHook`](https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook).
 
     Do this if building from source isn't feasible.
