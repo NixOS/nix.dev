@@ -2037,7 +2037,7 @@ Explanation:
 ### Get things done
 
 - [](declarative-reproducible-envs) – create reproducible shell environments from a Nix file
-- [](./packaging-existing-software.md) – make more software available through Nix with one command
+- [](./packaging-existing-software.md) – make more software available through Nix
 
 
 If you want to take a longer break from learning Nix, you can remove unused build results from the Nix store with:
