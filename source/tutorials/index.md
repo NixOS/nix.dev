@@ -13,5 +13,6 @@ Packaging existing software <packaging-existing-software.md>
 working-with-local-files.md
 nixos/index.md
 cross-compilation.md
+thunks.md
 module-system/module-system.md
 ```
