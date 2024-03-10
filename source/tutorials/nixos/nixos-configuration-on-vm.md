@@ -98,11 +98,16 @@ To be able to log in, add the following lines to the returned attribute set:
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      cowsay
-      lolcat
-    ];
   };
+```
+
+We add two lightweight programms as an example:
+
+```nix
+  environment.systemPackages = with pkgs; [
+    cowsay
+    lolcat
+  ];
 ```
 
 :::{admonition} NixOS
@@ -141,12 +146,13 @@ The complete `configuration.nix` file looks like this:
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      cowsay
-      lolcat
-    ];
     initialPassword = "test";
   };
+
+  environment.systemPackages = with pkgs; [
+    cowsay
+    lolcat
+  ];
 
   system.stateVersion = "23.11";
 }
@@ -246,6 +252,104 @@ Delete this file when you change the configuration:
 ```shell-session
 rm nixos.qcow2
 ```
+
+## VM with Gnome
+
+The previous example was aimed to provide a lightweight example using the configuration provided by the minimal installation image.
+The Gnome installation image adds the following lines to the configuration so that we get a usable graphical user interface:
+
+```
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+```
+
+These three lines activate X11, the GDM display manager (to be able to login) and Gnome as desktop manager.
+
+The complete `configuration.nix` file looks like this:
+
+```nix
+{ config, pkgs, ... }:
+{
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.enable = true;
+
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    initialPassword = "test";
+  };
+
+  system.stateVersion = "23.11";
+}
+```
+
+In this case we like to get the graphical output so we simply run the virtual machine without options
+Run the virtual machine:
+
+```shell-session
+./result/bin/run-nixos-vm
+```
+
+## Wayland VM with Sway
+
+To run Sway in a virtual machine one needs to configure qemu to create a display compatible to wayland.
+To enable sway use its enable option:
+```nix
+  programs.sway.enable = true;
+```
+
+The complete `configuration.nix` file looks like this:
+
+```nix
+{ config, pkgs, ... }:
+{
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.enable = true;
+
+  services.xserver.displayManager.gdm.enable = true;
+  programs.sway.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    initialPassword = "test";
+  };
+
+  system.stateVersion = "23.11";
+}
+```
+
+To start the virtual machine so that sway doesn't fail one needs to start it with the following arguments:
+```shell-session
+./result/bin/run-nixos-vm -vga none -device virtio-vga-gl -display gtk,gl=on
+```
+
+As an alternative one can add these arguments to the configuration. 
+To do so one needs to import the virtualisation module.
+
+```nix
+  imports = [ <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix> ];
+  virtualisation.qemu.options = [
+    "-vga none"
+    "-device virtio-vga-gl"
+    "-display gtk,gl=on"
+  ];
+```
+
+The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative options.
+
 
 ## References
 
