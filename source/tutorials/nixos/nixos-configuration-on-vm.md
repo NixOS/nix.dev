@@ -336,7 +336,7 @@ To start the virtual machine so that sway doesn't fail one needs to start it wit
 ./result/bin/run-nixos-vm -vga none -device virtio-vga-gl -display gtk,gl=on
 ```
 
-As an alternative one can add these arguments to the configuration. 
+As an alternative one can add these arguments to the configuration.
 To do so one needs to import the virtualisation module.
 
 ```nix
