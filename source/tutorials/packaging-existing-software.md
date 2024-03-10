@@ -427,7 +427,7 @@ But the important bit for this tutorial is `fatal error: X11/Xlib.h: No such fil
 
 ## Finding packages
 
-Determining from where to source a dependency is currently a somewhat involved, because package names don't always correspond to library or program names.
+Determining from where to source a dependency is currently somewhat involved, because package names don't always correspond to library or program names.
 
 You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
 There are multiple ways to figure this out:
@@ -446,21 +446,28 @@ In case all else fails, it helps to become familiar with searching the [Nixpkgs 
 ### Git and `rg`
 
 To find name assignments in the source, search for `"<keyword> ="`.
-For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github .
+For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github.
 
-Or fetch a local clone of the repository and use `rg`.
-Nixpkgs is huge.
-Only clone the latest revision if you don't want to wait a long time:
+Or fetch a local clone of the repository and use `rg` (a nicer `grep` implementation, found in the `ripgrep` package).
 
+Since you might not have `git` or `rg` installed on your system, let's start a shell with these two tools:
 ```console
 $ nix-shell -p git ripgrep
-[nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
+[nix-shell:~]$ # git & rg are available in this shell!
 ```
 
-To narrow down results, specify which subdirectory you want to search:
+Since the Nixpkgs repository is huge, it can be faster to only clone the latest revision to avoid waiting a long time for a full clone:
 
 ```console
-[nix-shell:~]$ rg "x11 =" pkgs
+[nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
+...
+[nix-shell:~]$ cd nixpkgs/
+```
+
+To narrow down results, specify which subdirectory you want to search (`pkgs` folder in nixpkgs holds all packages):
+
+```console
+[nix-shell:~]$ rg "x11 =" pkgs/
 pkgs/tools/X11/primus/default.nix
 21:  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
 22:  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
@@ -480,7 +487,7 @@ Since `rg` is case sensitive by default,
 Add `-i` to make sure you don't miss anything:
 
 ```
-[nix-shell:~]$ rg -i "libx11 =" pkgs
+[nix-shell:~]$ rg -i "libx11 =" pkgs/
 pkgs/applications/version-management/monotone-viz/graphviz-2.0.nix
 55:    ++ lib.optional (libX11 == null) "--without-x";
 
@@ -496,7 +503,7 @@ pkgs/servers/x11/xorg/overrides.nix
 
 ### `nix-locate`
 
-Consider using `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index) tool to find derivations that provide what you need.
+Another option is to use `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index) tool to find derivations that provide what you need.
 
 ### Adding package sets as dependencies
 
@@ -561,7 +568,7 @@ The missing dependency error is solved, but there is now another problem: `make:
 
 ### `installPhase`
 `stdenv` is automatically working with the `Makefile` that comes with `icat`.
-The console output showas that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
+The console output shows that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
 
 The failure occurs when the `stdenv` attempts to run `make install`.
 The `Makefile` included in the project happens to lack an `install` target.
