@@ -253,7 +253,7 @@ Delete this file when you change the configuration:
 rm nixos.qcow2
 ```
 
-## VM with Gnome
+## Running Gnome on a graphical VM
 
 The previous example was aimed to provide a lightweight example using the configuration provided by the minimal installation image.
 The Gnome installation image adds the following lines to the configuration so that we get a usable graphical user interface:
@@ -299,7 +299,7 @@ Run the virtual machine:
 ./result/bin/run-nixos-vm
 ```
 
-## Wayland VM with Sway
+## Running sway in wayland on a VM
 
 To run Sway in a virtual machine one needs to configure qemu to create a display compatible to wayland.
 To enable sway use its enable option:
