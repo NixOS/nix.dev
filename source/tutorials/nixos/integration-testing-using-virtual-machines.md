@@ -31,7 +31,7 @@ The pattern for NixOS VM tests looks like this:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
@@ -78,7 +78,7 @@ We will build the example up from scratch.
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
      pkgs = import nixpkgs { config = {}; overlays = []; };
    in
 
@@ -108,7 +108,7 @@ We will build the example up from scratch.
        ];
      };
 
-     system.stateVersion = "22.11";
+     system.stateVersion = "23.11";
    };
    ```
 
@@ -132,7 +132,7 @@ The complete `minimal-test.nix` file content looks like the following:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
@@ -150,7 +150,7 @@ pkgs.testers.runNixOSTest {
       ];
     };
 
-    system.stateVersion = "22.11";
+    system.stateVersion = "23.11";
   };
 
   testScript = ''
@@ -265,7 +265,7 @@ The complete `client-server-test.nix` file content looks like the following:
 
 ```{code-block}
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
