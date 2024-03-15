@@ -140,6 +140,7 @@ let
         python ${pkgs.writeText "live.py" script}
       '';
     };
+  update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
 in
 {
   # build with `nix-build -A build`
@@ -149,6 +150,7 @@ in
     inputsFrom = [ nix-dev ];
     packages = [
       devmode
+      update-nix-releases
       pkgs.niv
       pkgs.python310.pkgs.black
       pkgs.vale
