@@ -12,29 +12,36 @@ writeShellApplication {
   name = "update-nix-releases";
   runtimeInputs = [ git gnused niv nix ripgrep ];
   text = ''
+    # get release branches
+    git ls-remote https://github.com/nixos/nix "refs/heads/*" \
+      | rg '/\d(.*)-maintenance' | cut -d/ -f3 \
+      | sort --reverse --version-sort > releases.txt
+
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT
-
-    git clone https://github.com/nixos/nix "$tmp"
-
-    pushd "$tmp" > /dev/null
-    git branch -r | rg 'origin/\d\.\d*-maintenance' | sed 's|.*origin/\(.*\)|\1|' > releases.txt
+    git clone https://github.com/nixos/nix "$tmp" --depth 1 --quiet
 
     while IFS= read -r branch; do
-      git checkout "$branch"
-      # very old versions don't have a `default.nix`
-      if [ ! -f default.nix ]; then continue; fi
-      doc=$(nix-store --query "$(nix-instantiate -A default 2> /dev/null)" | rg doc)
+      pushd "$tmp" > /dev/null
+      git fetch origin "$branch" --depth 1 --quiet
+      git checkout -b "$branch" FETCH_HEAD
+      rev=$(git rev-parse HEAD)
+
       # only use cached builds, to avoid building Nix locally
-      if nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1; then
+      if default=$(nix-instantiate -A default 2> /dev/null) \
+         && doc=$(nix-store --query "$default" | rg doc) \
+         && nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1
+      then
         version="''${branch%-maintenance}"
         version="''${version//./-}"
         popd > /dev/null
-        if niv show "nix_$version" > /dev/null 2>&1; then
+        if pinned=$(niv show "nix_$version" | rg 'rev:' | cut -d' ' -f4); then
+          if [ "$pinned" == "$rev" ]; then
+            continue
+          fi
           niv drop "nix_$version"
         fi
         niv add nixos/nix -n "nix_$version" -b "$branch"
-        pushd "$tmp" > /dev/null
       fi
     done < releases.txt
   '';
