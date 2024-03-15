@@ -14,35 +14,35 @@ writeShellApplication {
   text = ''
     # get release branches
     git ls-remote https://github.com/nixos/nix "refs/heads/*" \
-      | rg '/\d(.*)-maintenance' | cut -d/ -f3 \
-      | sort --reverse --version-sort > releases.txt
+      | rg '/\d(.*)-maintenance' | awk '{sub(/\s*refs\/heads\//, "", $2); print $2, $1}' \
+      | sort --reverse --version-sort > releases
+
+    niv show | awk '/branch:/ {branch = $2} /rev:/ {print branch, $2}' > pinned
 
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT
     git clone https://github.com/nixos/nix "$tmp" --depth 1 --quiet
 
-    while IFS= read -r branch; do
+    # only update releases where pins don't match the latest revision
+    rg --invert-match --file pinned releases | cut -d' ' -f1 | while read -r branch; do
+      version="''${branch%-maintenance}"
+      version="''${version//./-}"
+
       pushd "$tmp" > /dev/null
       git fetch origin "$branch" --depth 1 --quiet
       git checkout -b "$branch" FETCH_HEAD
-      rev=$(git rev-parse HEAD)
 
       # only use cached builds, to avoid building Nix locally
       if default=$(nix-instantiate -A default 2> /dev/null) \
          && doc=$(nix-store --query "$default" | rg doc) \
          && nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1
       then
-        version="''${branch%-maintenance}"
-        version="''${version//./-}"
         popd > /dev/null
-        if pinned=$(niv show "nix_$version" | rg 'rev:' | cut -d' ' -f4); then
-          if [ "$pinned" == "$rev" ]; then
-            continue
-          fi
-          niv drop "nix_$version"
-        fi
+        niv drop "nix_$version"
         niv add nixos/nix -n "nix_$version" -b "$branch"
+      else
+        popd > /dev/null
       fi
-    done < releases.txt
+    done
   '';
 }
