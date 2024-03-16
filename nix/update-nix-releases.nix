@@ -39,28 +39,36 @@ writeShellApplication {
     # https://github.com/NixOS/nix/commit/b13fc7101fb06a65935d145081319145f7fef6f9
     # this means that all Hydra builds prior to 2.18 are based on deep clones.
     # evaluating a shallow clone will produce different derivation hashes.
-    git clone https://github.com/nixos/nix "$nix" --quiet
+    git clone https://github.com/nixos/nix "$nix"
 
     # only update releases where pins don't match the latest revision
-    rg --invert-match --file <(awk '{print $1, $2}' "$tmp"/pinned) "$tmp"/releases | cut -d' ' -f1 | while read -r branch; do
+    rg --invert-match --file <(awk '{print $1, $2}' "$tmp"/pinned) "$tmp"/releases | while read -r branch rev; do
       pushd "$nix" > /dev/null
       git checkout -b "$branch" origin/"$branch" --quiet
 
-      # only use versions recent enough to have the same structure
-      if ! default=$(nix-instantiate -A default 2> /dev/null); then
-        continue
-      fi
-      if ! doc=$(nix-store --query "$default" | rg doc); then
-        continue
-      fi
-
       # only use cached builds, to avoid building Nix locally
+      cached=false
       while true; do
-        if nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1; then
+        # only try versions recent enough to have the same structure
+        if ! default=$(nix-instantiate -A default 2> /dev/null); then
           break
         fi
-        git checkout HEAD~ --quiet
+        if ! doc=$(nix-store --query "$default" | rg doc); then
+          break
+        fi
+        if nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1; then
+          cached=true
+          break
+        fi
+        if ! git checkout HEAD~ --quiet; then
+          break
+        fi
+        rev=$(git rev-parse HEAD)
       done
+
+      if [ "$cached" = false ]; then
+        continue
+      fi
 
       popd > /dev/null
       version="''${branch%-maintenance}"
@@ -68,9 +76,10 @@ writeShellApplication {
       pin=nix_"$version"
 
       if rg -q "$pin" "$tmp"/pinned; then
-        niv drop "$pin"
+        niv update "$pin" -r "$rev"
+      else
+        niv add nixos/nix -n "$pin" -b "$branch" -r "$rev"
       fi
-      niv add nixos/nix -n "$pin" -b "$branch"
     done
   '';
 }
