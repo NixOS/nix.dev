@@ -21,7 +21,17 @@ writeShellApplication {
       | rg '/\d(.*)-maintenance' | awk '{sub(/\s*refs\/heads\//, "", $2); print $2, $1}' \
       | sort --reverse --version-sort > "$tmp"/releases
 
-    niv show | awk '!/^[[:space:]]/ {pin = $1} /branch:/ {branch = $2} /rev:/ {print branch, $2, pin}' > "$tmp"/pinned
+    niv show | awk '
+      !/^[[:space:]]/ {
+        pin = $1
+      }
+      /branch:/ {
+         branch = $2
+      }
+      /rev:/ {
+         print branch, $2, pin
+      }
+    ' > "$tmp"/pinned
 
     # we *must* download the entire history.
     # prior to 2.17 the source files for the build were obtained with `cleanSourceWith`.
