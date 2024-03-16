@@ -148,6 +148,7 @@ let
       '';
     };
   update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
+  update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
 {
   # build with `nix-build -A build`
@@ -159,6 +160,7 @@ in
     packages = [
       devmode
       update-nix-releases
+      update-nixpkgs-releases
       pkgs.niv
       pkgs.python310.pkgs.black
       pkgs.vale
