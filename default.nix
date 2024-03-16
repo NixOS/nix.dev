@@ -10,6 +10,12 @@ let
   };
   lib = pkgs.lib;
 
+  nix-releases = with lib.attrsets;
+    mapAttrs (_: input: (import input).default)
+      (filterAttrs
+        (name: _: lib.strings.match "^nix_([0-9]+)-([0-9]+)$" name != null)
+        inputs);
+
   nix-dev =
     let
       # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed.
@@ -18,10 +24,11 @@ let
         nixpkgs-rolling = import inputs.nixpkgs-rolling { } // { inherit (nixpkgs-rolling.lib) version; };
         nixpkgs-stable = import inputs.nixpkgs-stable { } // { inherit (nixpkgs-stable.lib) version; };
         nixpkgs-prev-stable = import inputs.nixpkgs-prev-stable { } // { inherit (nixpkgs-prev-stable.lib) version; };
-        nix-latest = (import inputs.nix-latest).default;
+        #nix-latest = with lib; nix-releases.${last (lists.naturalSort (attrNames nix-releases))};
         # TODO: to further simplify this and get Nix from Nixpkgs with all required files present,
         # make a patch release of Nix after https://github.com/NixOS/nix/pull/9949 lands,
         # and bump the respective version in the respective Nixpkgs `release-*` branch.
+        nix-latest = (import inputs.nix-rolling).default;
         nix-rolling = (import inputs.nix-rolling).default;
         nix-stable = (import inputs.nix-stable).default;
         nix-prev-stable = (import inputs.nix-prev-stable).default;
@@ -146,6 +153,7 @@ in
   # build with `nix-build -A build`
   build = nix-dev;
 
+  inherit lib nix-releases inputs;
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
     packages = [
