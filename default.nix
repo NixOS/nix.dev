@@ -3,37 +3,19 @@
 ,
 }:
 let
-  pkgs = import inputs.nixpkgs-prev-stable {
+  pkgs = import inputs.nixpkgs_23-05 {
     config = { };
-    overlays = [ (import ./overlay.nix) ];
+    overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
   };
-  lib = pkgs.lib;
 
-  nix-releases = with lib.attrsets;
-    mapAttrs (_: input: (import input).default)
-      (filterAttrs
-        (name: _: lib.strings.match "^nix_([0-9]+)-([0-9]+)$" name != null)
-        inputs);
+  lib = pkgs.lib;
+  releases = import ./nix/releases.nix { inherit lib inputs system; };
 
   nix-dev =
     let
       # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed.
       # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
-      releases = rec {
-        nixpkgs-rolling = import inputs.nixpkgs-rolling { } // { inherit (nixpkgs-rolling.lib) version; };
-        nixpkgs-stable = import inputs.nixpkgs-stable { } // { inherit (nixpkgs-stable.lib) version; };
-        nixpkgs-prev-stable = import inputs.nixpkgs-prev-stable { } // { inherit (nixpkgs-prev-stable.lib) version; };
-        #nix-latest = with lib; nix-releases.${last (lists.naturalSort (attrNames nix-releases))};
-        # TODO: to further simplify this and get Nix from Nixpkgs with all required files present,
-        # make a patch release of Nix after https://github.com/NixOS/nix/pull/9949 lands,
-        # and bump the respective version in the respective Nixpkgs `release-*` branch.
-        nix-latest = (import inputs.nix-rolling).default;
-        nix-rolling = (import inputs.nix-rolling).default;
-        nix-stable = (import inputs.nix-stable).default;
-        nix-prev-stable = (import inputs.nix-prev-stable).default;
-      };
-      version = package: lib.versions.majorMinor package.version;
     in
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
@@ -47,15 +29,19 @@ let
         sphinx-design
         sphinx-notfound-page
         sphinx-sitemap
+        pkgs.perl
       ];
       buildPhase =
         let
           nix-manual-index =
-            with lib.attrsets;
-            with lib.strings;
+            let
+              inherit (lib.strings) replaceStrings;
+              inherit (lib.attrsets) mapAttrsToList;
+              inherit (releases) version supported-releases;
+            in
             replaceStrings
-              (mapAttrsToList (release: _: "@${release}@") releases)
-              (mapAttrsToList (_: package: version package) releases)
+              (mapAttrsToList (release: _: "@${release}@") supported-releases)
+              (mapAttrsToList (_: package: version package) supported-releases)
               (builtins.readFile ./source/reference/nix-manual.md);
         in
         ''
@@ -63,45 +49,37 @@ let
           make html
         '';
       installPhase =
-        with lib.attrsets;
-        with lib.strings;
         let
-          nix-releases =
-            let
-              package = name: elemAt (splitString "-" name) 0;
-              release = name: elemAt (splitString "-" name) 1;
-              filtered = filterAttrs (name: value: (package name) == "nix") releases;
-            in
-            mapAttrs' (name: value: { name = release name; inherit value; }) filtered;
-          # the same Nix version could appear in multiple Nixpkgs releases,
-          # but we want to copy each exactly once.
-          unique-version =
-            let
-              version-exists = p: ps: elem (version p) (map (x: version x) ps);
-            in
-            lib.lists.foldl' (acc: elem: if version-exists elem acc then acc else acc ++ [ elem ]) [ ];
+          inherit (releases) version;
           copy = nix: ''
             cp -Rf ${nix.doc}/share/doc/nix/manual/* $out/manual/nix/${version nix}
           '';
+          # provide a single-page view from mdBook's print feature
+          single-page = nix:
+            ''
+              sed -z 's|\s*window\.addEventListener(\x27load\x27, function() {\s*window\.setTimeout(window.print, 100);\s*});||g' ${nix.doc}/share/doc/nix/manual/print.html > $out/manual/nix/${version nix}/nix-${version nix}.html
+            '';
           # add upstream page redirects of the form `<from> <to> <status>`, excluding comments and empty lines
-          # TODO: once https://github.com/NixOS/nix/pull/9949 lands, bump the source and use:
-          #       ${nix.doc}/share/doc/nix/manual/_redirects
-          # also remove the then unnecessary file from the root directory of the manual:
-          #        rm $out/manual/nix/${version nix}/_redirects
-          redirects = nix: ''
-            sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version nix}\1 /manual/nix/${version nix}\2 #g' ${nix.src}/doc/manual/_redirects >> $out/_redirects
-          '';
+          redirects = nix:
+            # not all releases have that though
+            lib.optionalString (lib.pathExists "${nix.doc}/share/doc/nix/manual/_redirects") ''
+              sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version nix}\1 /manual/nix/${version nix}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
+            '';
           shortlink = release: nix: ''
-            echo /nix/manual/${release}/* /nix/manual/${nix.version}/:splat 302 >> $out/_redirects
+            echo /nix/manual/${release}/* /nix/manual/${version nix}/:splat 302 >> $out/_redirects
           '';
+          inherit (releases) unique-versions nix-releases;
+          inherit (lib.attrsets) mapAttrsToList attrValues;
+          inherit (lib.strings) concatStringsSep;
         in
         ''
           mkdir -p $out
           cp -R build/html/* $out/
           # NOTE: the comma in the shell expansion makes it also work for singleton lists
           mkdir -p $out/manual/nix/{${concatStringsSep "," (mapAttrsToList (_: nix: version nix) nix-releases)},}
-          ${concatStringsSep "\n" (map copy (unique-version (attrValues nix-releases)))}
-          ${concatStringsSep "\n" (map redirects (unique-version (attrValues nix-releases)))}
+          ${concatStringsSep "\n" (map copy (unique-versions (attrValues nix-releases)))}
+          ${concatStringsSep "\n" (map single-page (unique-versions (attrValues nix-releases)))}
+          ${concatStringsSep "\n" (map redirects (unique-versions (attrValues nix-releases)))}
           ${concatStringsSep "\n" (mapAttrsToList shortlink nix-releases)}
         '';
     };
@@ -153,8 +131,6 @@ in
 {
   # build with `nix-build -A build`
   build = nix-dev;
-
-  inherit lib nix-releases inputs;
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
     packages = [
@@ -166,4 +142,7 @@ in
       pkgs.vale
     ];
   };
+  nix_2-15 = (import inputs.nix_2-15).default;
+  nix_2-16 = (import inputs.nix_2-16).default;
+  nix_2-14 = (import inputs.nix_2-14).default;
 }

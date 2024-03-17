@@ -1,3 +1,10 @@
+---
+myst:
+  html_meta:
+    "description lang=en": "Nix reference manual version overview"
+    "keywords": "Nix, reference, manual, documentation"
+---
+
 (nix-manual)=
 # Nix reference manual
 
@@ -17,25 +24,27 @@ Nix @nix-stable@ (in Nixpkgs @nixpkgs-stable@) <https://nix.dev/manual/nix/stabl
 Nix @nix-prev-stable@ (in Nixpkgs @nixpkgs-prev-stable@) <https://nix.dev/manual/nix/prev-stable/>
 ```
 
+The Nix reference manual is available for multiple versions:
+
 - [Nix pre-release](https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download)
 
-  Latest build from the `master` branch of the [Nix repository](https://github.com/NixOS/nix)
+  Development build from the `master` branch of the [Nix repository](https://github.com/NixOS/nix)
 
-- [Nix @nix-latest@](https://nix.dev/manual/nix/latest/)
+- [Nix @nix-latest@](https://nix.dev/manual/nix/latest/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-latest@.html))
 
   Latest Nix release
 
-- [Nix @nix-rolling@](https://nix.dev/manual/nix/rolling/)
+- [Nix @nix-rolling@](https://nix.dev/manual/nix/rolling/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-rolling@.html))
 
-  Shipped with the {term}`Nixpkgs` and {term}`NixOS` rolling release
+  Shipped with the rolling release of {term}`Nixpkgs` and {term}`NixOS`
 
-- [Nix @nix-stable@](https://nix.dev/manual/nix/stable/)
+- [Nix @nix-stable@](https://nix.dev/manual/nix/stable/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-stable@.html))
 
-  Shipped with the current {term}`Nixpkgs` and {term}`NixOS` @nixpkgs-stable@ stable release
+  Shipped with the current stable release of {term}`Nixpkgs` and {term}`NixOS`: @nixpkgs-stable@
 
-- [Nix @nix-prev-stable@](https://nix.dev/manual/nix/prev-stable/)
+- [Nix @nix-prev-stable@](https://nix.dev/manual/nix/prev-stable/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-prev-stable@.html))
 
-  Shipped with the previous {term}`Nixpkgs` and {term}`NixOS` @nixpkgs-prev-stable@ stable release
+  Shipped with the previous stable release of {term}`Nixpkgs` and {term}`NixOS`: @nixpkgs-prev-stable@
 
 :::{tip}
 More information on Nixpkgs and NixOS releases: [](channel-branches)

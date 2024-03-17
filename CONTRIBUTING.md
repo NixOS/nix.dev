@@ -27,31 +27,10 @@ Adapted from the [Contributor Covenant] and [The Carpentries Code of Conduct]:
 With the current setup, the Nix manual hosted on nix.dev does not get updated automatically with new releases.
 The following manual steps are required:
 
-- Regularly update the inputs to use the latest versions of the Nix release branches with `nix shell --run "niv update"`
-
-  To avoid long build times, make sure Nix can be fetched from the cache.
-  If it doesn't, find the latest commit that is [built by Hydra](https://hydra.nixos.org/project/nix). For example, to update the latest Nix release to 2.20:
-
-  ```bash
-  niv update nix-stable -b 2.20-maintenance -r 7599d4bbed3c188c72b547fc08c7b022e7d1c54f
-  ```
-
-- On each new Nix release, update the `nix-latest` to the corresponding release branch:
-
-  ```bash
-  niv update nix-latest -b 2.20-maintenance
-  ```
-
-- On each new Nixpkgs release, update `nixpkgs-stable` and `nixpkgs-prev-stable` and the corresponding Nix versions:
-
-  ```bash
-  niv update nixpkgs-stable -b nixos-24.05
-  niv update nix-stable -b 2.19-maintenance
-  niv update nixpkgs-prev-stable -b nixos-23.11
-  niv update nix-prev-stable -b 2.18-maintenance
-  ```
-
-It would be nice to have *efficient* automatic updates.
+```shell-session
+nix-shell --run update-nixpkgs-releases
+nix-shell --run update-nix-releases
+```
 
 ## Contributor guides
 

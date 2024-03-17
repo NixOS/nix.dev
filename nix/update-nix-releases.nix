@@ -21,6 +21,7 @@ writeShellApplication {
       | rg '/\d(.*)-maintenance' | awk '{sub(/\s*refs\/heads\//, "", $2); print $2, $1}' \
       | sort --reverse --version-sort > "$tmp"/releases
 
+    # get all pins
     niv show | awk '
       !/^[[:space:]]/ {
         pin = $1
