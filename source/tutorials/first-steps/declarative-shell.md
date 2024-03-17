@@ -71,7 +71,7 @@ We use a version of [Nixpkgs pinned to a release branch](<ref-pinning-nixpkgs>),
 
 `nix-shell` was originally conceived as a way to construct a shell environment containing the [tools needed to debug package builds](https://nixos.org/manual/nixpkgs/stable/#sec-tools-of-stdenv), such as Make or GCC.
 Only later it became widely used as a general way to make temporary environments for other purposes.
-`mkShellNoCC` is a function that produces a such an environment, but without a compiler toolchain.
+`mkShellNoCC` is a function that produces such an environment, but without a compiler toolchain.
 
 `mkShellNoCC` takes as argument an attribute set.
 Here we give it an attribute `packages` with a list containing one item from the `pkgs` attribute set.
