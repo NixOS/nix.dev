@@ -9,7 +9,7 @@ You may find that an official installation image lacks some hardware support.
 
 The solution is to create `myimage.nix` to point to the latest kernel using the minimal installation ISO:
 
-```nix
+```nix skip
 { pkgs, modulesPath, lib, ... }: {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"

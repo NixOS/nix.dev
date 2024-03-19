@@ -128,6 +128,10 @@ exclude_patterns = [
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
 
+from nix_repl_workaround import NixReplLexer
+from sphinx.highlighting import lexers
+lexers['nix-repl'] = NixReplLexer()
+
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
 

@@ -158,7 +158,7 @@ On NixOS, `$NIX_PATH` can be set permanently with the [`nix.nixPath`](https://se
 
 To quickly obtain packages for demonstration, we use the following concise pattern:
 
-```nix
+```nix skip
 import <nixpkgs> {}
 ```
 
@@ -174,7 +174,7 @@ It is a well-known problem that can't be resolved without breaking existing setu
 Explicitly set [`config`](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig) and [`overlays`](https://nixos.org/manual/nixpkgs/stable/#chap-overlays) when importing Nixpkgs:
 
 
-```nix
+```nix skip
 import <nixpkgs> { config = {}; overlays = []; }
 ```
 :::

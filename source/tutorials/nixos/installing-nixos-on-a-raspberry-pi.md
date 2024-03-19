@@ -98,7 +98,7 @@ Now we'll install NixOS with our own configuration, here creating a `guest` user
 
 In the `let` binding below, change the value of the `SSID` and `SSIDpassword` variables to the `SSID` and `passphrase` values you used previously:
 
-```nix
+```nix skip
 { config, pkgs, lib, ... }:
 
 let
@@ -192,7 +192,7 @@ $ sudo -i
 - Once you have a working OS, try upgrading it with `nixos-rebuild switch --upgrade` to install more recent package versions, and reboot to the old configuration if something broke.
 - To enable hardware acceleration for a nice graphical desktop experience, add the [`nixos-hardware`](https://github.com/nixos/nixos-hardware) module to your configuration:
 
-  ```nix
+  ```nix skip
   imports = [
     "${fetchTarball "https://github.com/NixOS/nixos-hardware/tarball/master"}/raspberry-pi/4"
   ];

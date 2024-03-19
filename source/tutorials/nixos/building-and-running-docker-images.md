@@ -23,7 +23,7 @@ However, you can also use the native Docker installation of your OS, if you are 
 
 [Nixpkgs](https://github.com/NixOS/nixpkgs) provides `dockerTools` to create Docker images:
 
-```nix
+```nix skip
 { pkgs ? import <nixpkgs> { }
 , pkgsLinux ? import <nixpkgs> { system = "x86_64-linux"; }
 }:

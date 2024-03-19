@@ -109,14 +109,13 @@ The following example is a Nix expression adding two numbers:
 
 #### Interactive evaluation
 
-Use [`nix repl`] to evaluate Nix expressions interactively (by typing them on the command line):
+Use the Nix REPL to evaluate Nix expressions interactively (by typing them on the command line).
+Execute it as `$ nix repl`, and you have a repl:
 
-```shell-session
-$ nix repl
-Welcome to Nix 2.13.3. Type :? for help.
-
+```nix-repl
 nix-repl> 1 + 2
 3
+
 ```
 
 :::{note}
@@ -127,12 +126,13 @@ If your output does not match the example, try prepending `:p` to the input expr
 
 Example:
 
-```shell-session
+```nix-repl
 nix-repl> { a.b.c = 1; }
 { a = { ... }; }
 
 nix-repl> :p { a.b.c = 1; }
 { a = { b = { c = 1; }; }; }
+
 ```
 
 Type `:q` to exit [`nix repl`].
@@ -270,7 +270,7 @@ Nix language data types *without functions* work just like their counterparts in
 ::::{grid} 2
 
 :::{grid-item} **Nix**
-```nix
+```nix skip
 {
   string = "hello";
   integer = 1;

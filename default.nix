@@ -104,8 +104,25 @@ let
         python ${pkgs.writeText "live.py" script}
       '';
     };
-in
-{
+
+  contentPath = "source";
+
+  test-examples = pkgs.writeShellScriptBin "doctester" ''
+    ${pkgs.lib.getExe (import inputs.eelco).default} ${pkgs.nix}/bin/nix '${contentPath}/**/*.md'
+  '';
+
+  test-examples-watch = pkgs.writeShellScriptBin "doctests-watcher" ''
+    ${pkgs.watchexec}/bin/watchexec \
+      --watch=${contentPath}\
+      --restart\
+      --shell=none\
+      --emit-events-to=none\
+      --no-meta\
+      '${pkgs.lib.getExe test-examples}'
+  '';
+in {
+  inherit test-examples;
+
   # build with `nix-build -A build`
   build = nix-dev;
 
@@ -113,6 +130,8 @@ in
     inputsFrom = [ nix-dev ];
     packages = [
       devmode
+      test-examples-watch
+      test-examples
       pkgs.niv
       pkgs.python310.pkgs.black
       pkgs.vale

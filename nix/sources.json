@@ -1,4 +1,16 @@
 {
+    "eelco": {
+        "branch": "main",
+        "description": "Nix doctests CLI",
+        "homepage": "",
+        "owner": "mobusoperandi",
+        "repo": "eelco",
+        "rev": "3d9bb73e4eca7cca72491d0e8754c3b18b5e36e3",
+        "sha256": "1fwh89gw81wix57l3wn7j9xkxlyig5wim91ki3z2nhz1f2rz30p0",
+        "type": "tarball",
+        "url": "https://github.com/mobusoperandi/eelco/archive/3d9bb73e4eca7cca72491d0e8754c3b18b5e36e3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix_2-13": {
         "branch": "2.13-maintenance",
         "description": "Nix, the purely functional package manager",

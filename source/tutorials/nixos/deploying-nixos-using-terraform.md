@@ -127,7 +127,7 @@ Once the AWS instance is running a NixOS image via Terraform, we can teach Terra
 
 1. Create `configuration.nix` with the following contents:
 
-```nix
+```nix skip
 { config, lib, pkgs, ... }: {
   imports = [ <nixpkgs/nixos/modules/virtualisation/amazon-image.nix> ];
 

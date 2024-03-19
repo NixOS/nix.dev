@@ -6,7 +6,7 @@
 
 Using NixOS (≥ 22.05):
 
-```nix
+```nix skip
 nix.settings = {
   trusted-substituters = [ "https://cache.nixos.org" ];
   substituters = [ "https://cache.nixos.org" ];
@@ -15,7 +15,7 @@ nix.settings = {
 
 Using NixOS (≤ 21.11):
 
-```nix
+```nix skip
 nix = {
   trustedBinaryCaches = [ "https://cache.nixos.org" ];
   binaryCaches = [ "https://cache.nixos.org" ];
@@ -80,7 +80,7 @@ There are a few ways to resolve this mismatch in environment expectations:
 - Create a library path that only applies to unpackaged programs by using [`nix-ld`](https://github.com/Mic92/nix-ld).
   Add this to your `configuration.nix`:
 
-  ```nix
+  ```nix skip
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [
       # Add any missing dynamic libraries for unpackaged programs
