@@ -561,7 +561,7 @@ The missing dependency error is solved, but there is now another problem: `make:
 
 ### `installPhase`
 `stdenv` is automatically working with the `Makefile` that comes with `icat`.
-The console output showas that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
+The console output shows that `configure` and `make` are executed without issue, so the `icat` binary is compiling successfully.
 
 The failure occurs when the `stdenv` attempts to run `make install`.
 The `Makefile` included in the project happens to lack an `install` target.
