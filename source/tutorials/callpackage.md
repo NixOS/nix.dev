@@ -230,7 +230,7 @@ Use `lib.callPackageWith` to create your own `callPackage` based on an attribute
 :caption: default.nix
 let
   pkgs = import <nixpkgs> { };
-  callPackage = lib.callPackageWith (pkgs // packages);
+  callPackage = pkgs.lib.callPackageWith (pkgs // packages);
   packages = {
     a = callPackage ./a.nix { };
     b = callPackage ./b.nix { };
