@@ -226,7 +226,7 @@ This can become quite tedious quickly, especially for larger package sets.
 
 Use `lib.callPackageWith` to create your own `callPackage` based on an attribute set.
 
-```
+```{code-block} nix
 :caption: default.nix
 let
   pkgs = import <nixpkgs> { };
