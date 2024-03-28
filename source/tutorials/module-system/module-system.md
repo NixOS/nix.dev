@@ -555,7 +555,7 @@ Reference this new file in `default.nix` using the `imports` attribute:
 We want to set multiple markers on the map.
 A marker is a complex type with multiple fields.
 
-This is wher one of the most useful types included in the module system's type system comes into play: `submodule`.
+This is where one of the most useful types included in the module system's type system comes into play: `submodule`.
 This type allows you to define nested modules with their own options.
 
 Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.
