@@ -39,3 +39,4 @@ $ sync
 ## Next steps
 
 - Take a look at this [list of formats that generators support](https://github.com/nix-community/nixos-generators#user-content-supported-formats) to find your cloud provider or virtualization technology.
+- Take a look at the [alternative guide to create a NixOS live CD](https://nixos.wiki/wiki/Creating_a_NixOS_live_CD)
