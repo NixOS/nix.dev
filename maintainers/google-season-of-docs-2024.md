@@ -11,7 +11,7 @@ One of the superpowers enabled by the Nix ecosystem is creating outputs for mult
 Unfortunately, the process for building anything but native binaries is barely documented, and the existing guides are out of date.
 
 The recent spike in CPU architecture diversity in common settings created a higher demand for cross compilation support. And OCI images became the de facto standard to share software between platforms.
-Nix tooling excels at cross compilation, and arguably Nix is a better container builder then Docker. Google Analytics show that the most sought-after topics on our official resources are instructions to build a Docker container from a Nix package.
+Nix tooling excels at cross compilation, and arguably Nix is a better container builder then Docker. The Google Search Console shows that the most sought-after topics on our official resources are instructions to build a Docker container from a Nix package.
 
 Given the current state of Nix documentation and known user demand, we came to the conclusion that improving documentation for cross compilation and building container images would be highly beneficial for Nix beginners and help foster Nix adoption.
 
