@@ -174,7 +174,7 @@ You can help by sharing in the [Links category] on Discourse what you have found
 
 ### Wiki
 
-[NixOS Wiki](https://nixos.wiki/) is a collection of interlinked guides to solve common problems which are otherwise not well-documented.
+[NixOS Wiki](https://wiki.nixos.org/) is a collection of interlinked guides to solve common problems which are otherwise not well-documented.
 
 It is collectively edited by the community, covers a broad range of topics.
 It is only loosely organized, and does not impose quality standards.
@@ -198,7 +198,7 @@ Where to migrate what:
 - Package, service, or hardware configuration: [NixOS manual]
 - Overviews, tutorials, guides, best practices: [nix.dev]
 
-[NixOS Wiki]: https://nixos.wiki/
+[NixOS Wiki]: https://wiki.nixos.org/
 [NixCon 2015: Make Nix friendlier for Beginners]: https://media.ccc.de/v/nixcon2015-3-MakeNixfriendlierforBeginners#video
 
 ### Nix Pills
