@@ -66,7 +66,7 @@ We would consider the docker documentation successful if
 
 | Budget item | Amount [USD] | Running Total [USD] | Notes/justifications |
 | ------------------ | ------ | ------------- | --------------------------------------------------------------------------------------------------- |
-| Technical Writer | 10000.00 | 10000.00 | 2 People x 4000 each, one person for the docker task, and one person for the cross compilation task |
+| Technical Writer | 10000.00 | 10000.00 | 2 People x 5000 each, one person for the docker task, and one person for the cross compilation task |
 | Volunteer stipends | 500.00 | 10500.00 | organisation, evaluation, hiring technical writers, reporting |
 | Total | | 10500.00 | |
 
