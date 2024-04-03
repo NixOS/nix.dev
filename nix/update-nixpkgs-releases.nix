@@ -1,51 +1,31 @@
 { writeShellApplication
 , git
-, gnused
 , niv
 , nix
 , ripgrep
 , coreutils
+, jq
 }:
-# add or update Nixpkgs releases using `niv` in the current directory.
+# add or update Nixpkgs releases using `niv`
 writeShellApplication {
   name = "update-nixpkgs-releases";
-  runtimeInputs = [ git gnused niv nix ripgrep ];
+  runtimeInputs = [ git niv nix ripgrep jq coreutils ];
   text = ''
-    tmp=$(mktemp -d)
-    nixpkgs=$(mktemp -d)
-    trap 'rm -rf $"tmp" "$nixpkgs"' EXIT
+    echo >&2 "Updating rolling"
+    niv update nixpkgs-rolling
+    echo >&2 "Updating stable releases"
+    niv -s nix/nixpkgs-versions.json update
 
+    echo >&2 "Adding any new releases"
     # get release branches
     git ls-remote https://github.com/nixos/nixpkgs "refs/heads/*" \
-      | rg '/nixos-\d\d\.\d\d$' | awk '{sub(/\s*refs\/heads\//, "", $2); print $2, $1}' \
-      | sort --reverse --version-sort > "$tmp"/releases
+      | rg '^([0-9a-f]+)\trefs/heads/nixos-(\d\d\.\d\d)$' -or '$2' \
+      | sort --reverse --version-sort \
+      | while read -r version; do
 
-    niv show | awk '
-      !/^[[:space:]]/ && $1 ~ /^nixpkgs_/ {
-        pin = $1
-      }
-      /branch:/ {
-        branch = $2
-      }
-      /rev:/ {
-        print branch, $2, pin
-      }
-    ' > "$tmp"/pinned
-
-    # nixpkgs-unstable moves fast enough to always need updates
-    niv update nixpkgs-rolling -b nixpkgs-unstable
-
-    # only update releases where pins don't match the latest revision
-    rg --invert-match --file <(awk '{print $1, $2}' "$tmp"/pinned) "$tmp"/releases | cut -d' ' -f1 | while read -r branch; do
-      version="''${branch/nixos-/}"
-      version="''${version//./-}"
-      pin=nixpkgs_"$version"
-
-      if rg -q "$pin" "$tmp"/pinned; then
-        niv update "$pin"
-      else
-        niv add nixos/nixpkgs -n "$pin" -b "$branch"
-      fi
-    done
+        if ! jq -e --arg version "$version" 'has($ARGS.named.version)' nix/nixpkgs-versions.json >/dev/null; then
+          niv -s nix/nixpkgs-versions.json add nixos/nixpkgs -n "$version" -b "nixos-$version"
+        fi
+      done
   '';
 }

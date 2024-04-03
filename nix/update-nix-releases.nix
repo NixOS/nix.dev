@@ -1,86 +1,86 @@
 { writeShellApplication
 , git
-, gnused
-, niv
 , nix
 , ripgrep
 , coreutils
+, jq
 }:
-# add or update Nix releases using `niv` in the current directory.
-# this will clone the entire Git repository of Nix.
+# Custom update mechanism for Nix releases in ./nix-versions.json
 writeShellApplication {
   name = "update-nix-releases";
-  runtimeInputs = [ git gnused niv nix ripgrep ];
+  runtimeInputs = [ git nix ripgrep coreutils jq ];
   text = ''
     tmp=$(mktemp -d)
-    nix=$(mktemp -d)
-    trap 'rm -rf $"tmp" "$nix"' EXIT
+    trap 'rm -rf "$tmp"' EXIT
 
-    # get release branches
-    git ls-remote https://github.com/nixos/nix "refs/heads/*" \
-      | rg '/\d(.*)-maintenance' | awk '{sub(/\s*refs\/heads\//, "", $2); print $2, $1}' \
-      | sort --reverse --version-sort > "$tmp"/releases
+    echo >&2 "Fetching the Nix git history"
+    # We only need the Git history of the repo, the contents we download directly into the Nix store.
+    # --filter=tree:0 prevents downloading any contents and --bare prevents creating a working tree
+    git clone --quiet --filter=tree:0 --bare https://github.com/nixos/nix "$tmp/nix"
 
-    # get all pins
-    niv show | awk '
-      !/^[[:space:]]/ {
-        pin = $1
-      }
-      /branch:/ {
-         branch = $2
-      }
-      /rev:/ {
-         print branch, $2, pin
-      }
-    ' > "$tmp"/pinned
+    echo >&2 "Going through all *-maintenance branches"
+    git -C "$tmp/nix" branch --list '*-maintenance' --format '%(refname)' \
+      | rg 'refs/heads/(.*)-maintenance' -or '$1' \
+      | sort --reverse --version-sort \
+      | while read -r version; do
 
-    # we *must* download the entire history.
-    # prior to 2.17 the source files for the build were obtained with `cleanSourceWith`.
-    # it is based on `builtins.filterSource` that incorporates the `.git` directory:
-    # https://github.com/NixOS/nix/commit/b13fc7101fb06a65935d145081319145f7fef6f9
-    # this means that all Hydra builds prior to 2.18 are based on deep clones.
-    # evaluating a shallow clone will produce different derivation hashes.
-    git clone https://github.com/nixos/nix "$nix"
+      rev=$(git -C "$tmp/nix" rev-parse "$version-maintenance")
+      echo >&2 "Version $version on branch $version-maintenance is at $rev"
 
-    # only update releases where pins don't match the latest revision
-    rg --invert-match --file <(awk '{print $1, $2}' "$tmp"/pinned) "$tmp"/releases | while read -r branch rev; do
-      pushd "$nix" > /dev/null
-      git checkout -b "$branch" origin/"$branch" --quiet
-
-      # only use cached builds, to avoid building Nix locally
+      # Try to find a cached build by iterating back through the Git history
+      # This is necessary because the maintenance branches are pushed to directly and Hydra will take a while to build it
       cached=false
+      steps=0
       while true; do
-        # only try versions recent enough to have the same structure
-        if ! default=$(nix-instantiate -A default 2> /dev/null); then
+        # We fetch Nix the same as `fetchTarball { name = "source"; ... }`, such that we should definitely get the same hashes and co.
+        # Though older versions of Nix didn't pin flake-compat, but this doesn't appear to be a problem in this case
+        # See https://github.com/NixOS/nix.dev/pull/830#issuecomment-1922672937
+        url=https://github.com/nixos/nix/tarball/"$rev"
+        readarray -t sha256Source < <(nix-prefetch-url --unpack --name source --print-path "$url")
+        sha256=''${sha256Source[0]}
+        source=''${sha256Source[1]}
+
+        if [[ ! -f "$source"/.version ]]; then
+          # Not having a .version indicates that we're not in the release anymore
           break
         fi
-        if ! doc=$(nix-store --query "$default" | rg doc); then
+        fullVersion="$(<"$source"/.version)"
+
+        # Only try versions recent enough to have the same structure, this filter out versions before 2.4
+        if ! drvPath=$(nix-instantiate "$source" --argstr system "x86_64-linux" -A default 2> /dev/null); then
+          echo >&2 "No default.nix supporting -A default"
           break
         fi
-        if nix-store --query --size "$doc" --store https://cache.nixos.org > /dev/null 2>&1; then
+        # We need a doc output, this is always the case for >= 2.4
+        if ! docOutput=$(nix-store --query --binding doc "$drvPath"); then
+          echo >&2 "No doc output"
+          break
+        fi
+        # Check if the path is cached, --size is only needed because without it, no query to the cache would be made
+        if nix-store --query --size "$docOutput" --store https://cache.nixos.org > /dev/null 2>&1; then
           cached=true
           break
         fi
-        if ! git checkout HEAD~ --quiet; then
-          break
-        fi
-        rev=$(git rev-parse HEAD)
+        # If it's not cached, try the parent commit, usually only a couple steps are required at most
+        rev=$(git -C "$tmp/nix" rev-parse "$rev~")
+        steps=$(( steps + 1 ))
       done
 
       if [ "$cached" = false ]; then
+        echo >&2 "Could not find a cached version for release $version"
         continue
       fi
 
-      popd > /dev/null
-      version="''${branch%-maintenance}"
-      version="''${version//./-}"
-      pin=nix_"$version"
+      echo >&2 "Found a cached version, $steps steps away from the latest commit"
 
-      if rg -q "$pin" "$tmp"/pinned; then
-        niv update "$pin" -r "$rev"
-      else
-        niv add nixos/nix -n "$pin" -b "$branch" -r "$rev"
-      fi
-    done
+      jq -n \
+        --arg key "$version" \
+        --arg url "$url" \
+        --arg version "$fullVersion" \
+        --arg sha256 "$sha256" \
+        '$ARGS.named'
+    done \
+      | jq -s 'map({ key: .key, value: del(.key) }) | from_entries' \
+      > nix/nix-versions.json
   '';
 }

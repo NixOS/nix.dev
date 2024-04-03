@@ -1,9 +1,9 @@
-{ inputs ? import ./nix/sources.nix
+{ inputs ? import ./nix/inputs.nix
 , system ? builtins.currentSystem
 ,
 }:
 let
-  pkgs = import inputs.nixpkgs_23-05 {
+  pkgs = import inputs.nixpkgs."23.05" {
     config = { };
     overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
@@ -13,10 +13,6 @@ let
   releases = import ./nix/releases.nix { inherit lib inputs system; };
 
   nix-dev =
-    let
-      # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed.
-      # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
-    in
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
       src = ./.;
@@ -33,54 +29,42 @@ let
       ];
       buildPhase =
         let
-          nix-manual-index =
-            let
-              inherit (lib.strings) replaceStrings;
-              inherit (lib.attrsets) mapAttrsToList;
-              inherit (releases) version supported-releases;
-            in
-            replaceStrings
-              (mapAttrsToList (release: _: "@${release}@") supported-releases)
-              (mapAttrsToList (_: package: version package) supported-releases)
-              (builtins.readFile ./source/reference/nix-manual.md);
+          substitutedNixManualReference = pkgs.substitute {
+            src = ./source/reference/nix-manual.md;
+            replacements = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
+          };
         in
         ''
-          cp -f ${builtins.toFile "nix-manual.md" nix-manual-index} $TMP/nix.dev/source/reference/nix-manual.md
+          cp -f ${substitutedNixManualReference} source/reference/nix-manual.md
           make html
         '';
       installPhase =
         let
-          inherit (releases) version;
-          copy = nix: ''
-            cp -Rf ${nix.doc}/share/doc/nix/manual/* $out/manual/nix/${version nix}
-          '';
-          # provide a single-page view from mdBook's print feature
-          single-page = nix:
-            ''
-              sed -z 's|\s*window\.addEventListener(\x27load\x27, function() {\s*window\.setTimeout(window.print, 100);\s*});||g' ${nix.doc}/share/doc/nix/manual/print.html > $out/manual/nix/${version nix}/nix-${version nix}.html
-            '';
-          # add upstream page redirects of the form `<from> <to> <status>`, excluding comments and empty lines
-          redirects = nix:
+          # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed.
+          # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
+          release = version: nix: ''
+            cp -R --no-preserve=mode ${nix.doc}/share/doc/nix/manual $out/manual/nix/${version}
+
+            # add upstream page redirects of the form `<from> <to> <status>`, excluding comments and empty lines
             # not all releases have that though
-            lib.optionalString (lib.pathExists "${nix.doc}/share/doc/nix/manual/_redirects") ''
-              sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version nix}\1 /manual/nix/${version nix}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
-            '';
-          shortlink = release: nix: ''
-            echo /nix/manual/${release}/* /nix/manual/${version nix}/:splat 302 >> $out/_redirects
+            if [[ -f ${nix.doc}/share/doc/nix/manual/_redirects ]]; then
+              sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
+            fi
           '';
-          inherit (releases) unique-versions nix-releases;
-          inherit (lib.attrsets) mapAttrsToList attrValues;
-          inherit (lib.strings) concatStringsSep;
+          # TODO: This needs to be looked into more carefully before enabling:
+          # This is a hacky way to get a single-page manual from mdBook's print feature:
+          # sed -z 's|\s*window\.addEventListener(\x27load\x27, function() {\s*window\.setTimeout(window.print, 100);\s*});||g' ${nix.doc}/share/doc/nix/manual/print.html > $out/manual/nix/${version}/sp.html
+
+          # Redirects from mutable URLs like /manual/nix/latest/... to /manual/nix/2.21/...
+          mutableRedirect = mutable: immutable: ''
+            echo "/manual/nix/${mutable}/* /manual/nix/${immutable}/:splat 302" >> $out/_redirects
+          '';
         in
         ''
-          mkdir -p $out
+          mkdir -p $out/manual/nix
           cp -R build/html/* $out/
-          # NOTE: the comma in the shell expansion makes it also work for singleton lists
-          mkdir -p $out/manual/nix/{${concatStringsSep "," (mapAttrsToList (_: nix: version nix) nix-releases)},}
-          ${concatStringsSep "\n" (map copy (unique-versions (attrValues nix-releases)))}
-          ${concatStringsSep "\n" (map single-page (unique-versions (attrValues nix-releases)))}
-          ${concatStringsSep "\n" (map redirects (unique-versions (attrValues nix-releases)))}
-          ${concatStringsSep "\n" (mapAttrsToList shortlink nix-releases)}
+          ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
+          ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
         '';
     };
 
@@ -131,6 +115,7 @@ in
 {
   # build with `nix-build -A build`
   build = nix-dev;
+
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
     packages = [
@@ -142,7 +127,4 @@ in
       pkgs.vale
     ];
   };
-  nix_2-15 = (import inputs.nix_2-15).default;
-  nix_2-16 = (import inputs.nix_2-16).default;
-  nix_2-14 = (import inputs.nix_2-14).default;
 }

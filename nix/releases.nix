@@ -1,61 +1,91 @@
 { lib, inputs, system }:
 let
-  # encode a convention for naming versioned inputs
-  inputName = package: "${package.pname}_" + lib.strings.replaceStrings [ "." ] [ "-" ] (version package);
+  # Import Nixpkgs, get the pkgs set back
+  pkgsFor = source:
+    import source {
+      inherit system;
+      config = { };
+      overlays = [ ];
+    };
 
-  version = package: lib.versions.majorMinor package.version;
+  # The pkgs for nixpkgs rolling release
+  pkgsRolling = pkgsFor inputs.main.nixpkgs-rolling;
 
-  # filter for unique package versions
-  unique-versions = packages:
-    let
-      version-exists = with lib; p: ps: elem (version p) (map (x: version x) ps);
-    in
-    lib.lists.foldl' (acc: elem: if version-exists elem acc then acc else acc ++ [ elem ]) [ ] packages;
+  # The pkgs for each release:
+  # {
+  #   "23.11" = pkgs..;
+  #   "23.05" = pkgs..;
+  # }
+  pkgsReleases = lib.mapAttrs (release: source:
+    pkgsFor source
+  ) inputs.nixpkgs;
 
-  # get the Nix shipped with a given release of Nixpkgs
-  nix-from = inputs: pkgs: (import inputs.${inputName pkgs.nix}).default;
 
-  nixpkgs-with-manual = nixpkgs:
-    let
-      pkgs = import nixpkgs { inherit system; config = { }; overlays = [ ]; };
-      doc = import "${nixpkgs}/doc" {
-        inherit pkgs;
-        nixpkgs = { inherit (nixpkgs) rev; };
-      };
-      version = { inherit (pkgs.lib) version; };
-    in
-    pkgs // doc // version;
-
-  version-sort = releases:
-    with lib;
-    reverseList (lists.naturalSort (attrNames releases));
-in
-rec {
-  inherit version unique-versions;
-
-  nix-releases =
-    with lib.attrsets;
-    mapAttrs (_: input: (import input).default)
-      (filterAttrs
-        (name: _: lib.strings.match "^nix_([0-9]+)-([0-9]+)$" name != null)
-        inputs);
-
-  nixpkgs-releases =
-    with lib.attrsets;
-    mapAttrs
-      (_: input: nixpkgs-with-manual input)
-      (filterAttrs
-        (name: _: lib.strings.match "^nixpkgs_([0-9]+)-([0-9]+)$" name != null)
-        inputs);
-
-  supported-releases = rec {
-    nixpkgs-rolling = nixpkgs-with-manual inputs.nixpkgs-rolling;
-    nixpkgs-stable = with lib; nixpkgs-releases.${head (version-sort nixpkgs-releases)};
-    nixpkgs-prev-stable = with lib; nixpkgs-releases.${head (tail (version-sort nixpkgs-releases))};
-
-    nix-rolling = nix-from inputs nixpkgs-rolling;
-    nix-latest = with lib; nix-releases.${last (lists.naturalSort (attrNames nix-releases))};
-    nix-stable = nix-from inputs nixpkgs-stable;
-    nix-prev-stable = nix-from inputs nixpkgs-prev-stable;
+  # Information on Nixpkgs versions
+  # TODO: Use https://github.com/NixOS/infra/blob/master/channels.nix in the future
+  nixpkgsVersions = rec {
+    # List of sorted version strings, e.g. [ "22.11" "23.05" "23.11" ]
+    sorted = lib.sort lib.versionOlder (lib.attrNames pkgsReleases);
+    # Number of versions, e.g. 3
+    count = lib.length sorted;
+    # String for the latest version, e.g. "23.11"
+    latest = lib.elemAt sorted (count - 1);
+    # String for the version before the latest one, e.g. "23.05"
+    prevLatest = lib.elemAt sorted (count - 2);
   };
+
+  # The Nix version string for a pkgs, e.g. "2.18"
+  nixVersionForPkgs = pkgs:
+    # FIXME: We ignore the patch version here, which means that we could end up showing a different version than what's actually in Nixpkgs
+    lib.versions.majorMinor pkgs.nix.version;
+
+  # The build for each Nix version:
+  # {
+  #   "2.18" = { outPath = ...; ... };
+  #   "2.19" = { outPath = ...; ... };
+  #   ...
+  # }
+  nixReleases = lib.mapAttrs (release: source:
+    # TODO: Unfortunately, the use of flake-compat prevents passing system with stable Nix..
+    (import source).default
+  ) inputs.nix;
+
+  # Information on Nix versions
+  nixVersions = rec {
+    # List of sorted version strings, e.g. [ "2.18" "2.19" "2.20" ]
+    sorted = lib.sort lib.versionOlder (lib.attrNames nixReleases);
+    # Number of versions, e.g. 3
+    count = lib.length sorted;
+    # String for the latest version, e.g. "2.20"
+    latest = lib.elemAt sorted (count - 1);
+  };
+
+  # Mutable link redirects to set up for the Nix manual
+  # E.g. /manual/nix/latest redirects to /manual/nix/2.20, which is encoded as:
+  # {
+  #   "latest" = "2.20";
+  #   ...
+  # }
+  mutableNixManualRedirects = {
+    latest = nixVersions.latest;
+    rolling = nixVersionForPkgs pkgsRolling;
+    stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.latest};
+    prev-stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.prevLatest};
+  };
+
+  # Substitutions to perform on ../source/reference/nix-manual.md
+  # E.g. @nix-latest@ gets replaced with 2.20, which is encoded as:
+  # {
+  #   "nix-latest" = "2.20";
+  #   ...
+  # }
+  substitutions = {
+    nixpkgs-stable = nixpkgsVersions.latest;
+    nixpkgs-prev-stable = nixpkgsVersions.prevLatest;
+  } // lib.mapAttrs' (name: value:
+    lib.nameValuePair "nix-${name}" value
+  ) mutableNixManualRedirects;
+in
+{
+  inherit nixReleases mutableNixManualRedirects substitutions;
 }
