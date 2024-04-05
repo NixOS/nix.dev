@@ -13,16 +13,14 @@ let
 
   # The pkgs for each release:
   # {
-  #   "23.11" = pkgs..;
-  #   "23.05" = pkgs..;
+  #   "23.11" = pkgs...;
+  #   "23.05" = pkgs...;
   # }
   pkgsReleases = lib.mapAttrs (release: source:
     pkgsFor source
   ) inputs.nixpkgs;
 
-
   # Information on Nixpkgs versions
-  # TODO: Use https://github.com/NixOS/infra/blob/master/channels.nix in the future
   nixpkgsVersions = rec {
     # List of sorted version strings, e.g. [ "22.11" "23.05" "23.11" ]
     sorted = lib.sort lib.versionOlder (lib.attrNames pkgsReleases);
@@ -36,7 +34,8 @@ let
 
   # The Nix version string for a pkgs, e.g. "2.18"
   nixVersionForPkgs = pkgs:
-    # FIXME: We ignore the patch version here, which means that we could end up showing a different version than what's actually in Nixpkgs
+    # XXX: We ignore the patch version here, which means that we may show a different (slightly more up-to-date) version than what's actually in Nixpkgs.
+    # This is not a big issue, and simplifies the setup a lot.
     lib.versions.majorMinor pkgs.nix.version;
 
   # The build for each Nix version:
@@ -46,7 +45,7 @@ let
   #   ...
   # }
   nixReleases = lib.mapAttrs (release: source:
-    # TODO: Unfortunately, the use of flake-compat prevents passing system with stable Nix..
+    # XXX: Unfortunately, the use of flake-compat prevents passing `system` with stable Nix...
     (import source).default
   ) inputs.nix;
 

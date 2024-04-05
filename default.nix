@@ -51,10 +51,6 @@ let
               sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
             fi
           '';
-          # TODO: This needs to be looked into more carefully before enabling:
-          # This is a hacky way to get a single-page manual from mdBook's print feature:
-          # sed -z 's|\s*window\.addEventListener(\x27load\x27, function() {\s*window\.setTimeout(window.print, 100);\s*});||g' ${nix.doc}/share/doc/nix/manual/print.html > $out/manual/nix/${version}/sp.html
-
           # Redirects from mutable URLs like /manual/nix/latest/... to /manual/nix/2.21/...
           mutableRedirect = mutable: immutable: ''
             echo "/manual/nix/${mutable}/* /manual/nix/${immutable}/:splat 302" >> $out/_redirects

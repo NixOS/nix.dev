@@ -56,7 +56,7 @@ writeShellApplication {
           echo >&2 "No doc output"
           break
         fi
-        # Check if the path is cached, --size is only needed because without it, no query to the cache would be made
+        # Check if the path is cached; `--size` is needed because without it, no query to the cache would be made
         if nix-store --query --size "$docOutput" --store https://cache.nixos.org > /dev/null 2>&1; then
           cached=true
           break
