@@ -1,67 +1,68 @@
-{ inputs ? import ./nix/sources.nix
+{ inputs ? import ./nix/inputs.nix
 , system ? builtins.currentSystem
 ,
 }:
 let
-  pkgs = import inputs.nixpkgs {
+  pkgs = import inputs.nixpkgs."23.05" {
     config = { };
-    overlays = [ (import ./overlay.nix) ];
+    overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
   };
 
-  nix-dev = pkgs.stdenv.mkDerivation {
-    name = "nix-dev";
-    src = ./.;
-    nativeBuildInputs = with pkgs.python310.pkgs; [
-      linkify-it-py
-      myst-parser
-      sphinx
-      sphinx-book-theme
-      sphinx-copybutton
-      sphinx-design
-      sphinx-notfound-page
-      sphinx-sitemap
-    ];
-    buildPhase = ''
-      make html
-    '';
-    installPhase =
-      let
-        # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed
-        # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
-        releases = {
-          latest = "2.19";
-          rolling = "2.18";
-          stable = "2.18";
-          prev-stable = "2.13";
-        };
-        inputName = version: pkgs.lib.strings.replaceStrings [ "." ] [ "-" ] version;
-        src = version: inputs."nix_${inputName version}";
-        manual = version: (import (src version)).default.doc;
-        copy = version: ''
-          cp -Rf ${manual version}/share/doc/nix/manual/* $out/manual/nix/${version}
+  lib = pkgs.lib;
+  releases = import ./nix/releases.nix { inherit lib inputs system; };
+
+  nix-dev =
+    pkgs.stdenv.mkDerivation {
+      name = "nix-dev";
+      src = ./.;
+      nativeBuildInputs = with pkgs.python310.pkgs; [
+        linkify-it-py
+        myst-parser
+        sphinx
+        sphinx-book-theme
+        sphinx-copybutton
+        sphinx-design
+        sphinx-notfound-page
+        sphinx-sitemap
+        pkgs.perl
+      ];
+      buildPhase =
+        let
+          substitutedNixManualReference = pkgs.substitute {
+            src = ./source/reference/nix-manual.md;
+            replacements = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
+          };
+        in
+        ''
+          cp -f ${substitutedNixManualReference} source/reference/nix-manual.md
+          make html
         '';
-        # add upstream page redirects of the form `<from> <to> <status>`, excluding comment lines and empty
-        redirects = version: ''
-          sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${src version}/doc/manual/_redirects >> $out/_redirects
+      installPhase =
+        let
+          # Various versions of the Nix manuals, grep for (nix-manual)= to find where they are displayed.
+          # FIXME: This requires human interaction to update! See ./CONTRIBUTING.md for details.
+          release = version: nix: ''
+            cp -R --no-preserve=mode ${nix.doc}/share/doc/nix/manual $out/manual/nix/${version}
+
+            # add upstream page redirects of the form `<from> <to> <status>`, excluding comments and empty lines
+            # not all releases have that though
+            if [[ -f ${nix.doc}/share/doc/nix/manual/_redirects ]]; then
+              sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
+            fi
+          '';
+          # Redirects from mutable URLs like /manual/nix/latest/... to /manual/nix/2.21/...
+          mutableRedirect = mutable: immutable: ''
+            echo "/manual/nix/${mutable}/* /manual/nix/${immutable}/:splat 302" >> $out/_redirects
+          '';
+        in
+        ''
+          mkdir -p $out/manual/nix
+          cp -R build/html/* $out/
+          ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
+          ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
         '';
-        shortlink = release: version: ''
-          echo /manual/nix/${release} /manual/nix/${version}/ 302 >> $out/_redirects
-        '';
-        versions = with pkgs.lib; lists.unique (attrsets.attrValues releases);
-      in
-      with pkgs.lib.attrsets;
-      with pkgs.lib.strings;
-      ''
-        mkdir -p $out
-        cp -R build/html/* $out/
-        # NOTE: the comma in the shell expansion makes it also work for singleton lists
-        mkdir -p $out/manual/nix/{${concatStringsSep "," versions},}
-        ${concatStringsSep "\n" (map copy versions)}
-        ${concatStringsSep "\n" (map redirects versions)}
-        ${concatStringsSep "\n" (mapAttrsToList shortlink releases)}
-      '';
-  };
+    };
 
   devmode =
     let
@@ -104,6 +105,8 @@ let
         python ${pkgs.writeText "live.py" script}
       '';
     };
+  update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
+  update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
 {
   # build with `nix-build -A build`
@@ -113,6 +116,8 @@ in
     inputsFrom = [ nix-dev ];
     packages = [
       devmode
+      update-nix-releases
+      update-nixpkgs-releases
       pkgs.niv
       pkgs.python310.pkgs.black
       pkgs.vale

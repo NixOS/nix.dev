@@ -27,33 +27,10 @@ Adapted from the [Contributor Covenant] and [The Carpentries Code of Conduct]:
 With the current setup, the Nix manual hosted on nix.dev does not get updated automatically with new releases.
 The following manual steps are required:
 
-- Regularly update the inputs to use the latest versions of the Nix release branches with `nix shell --run "niv update"`
-
-  To avoid long build times, make sure Nix can be fetched from the cache.
-  If it doesn't, find the latest commit that is [built by Hydra](https://hydra.nixos.org/project/nix). For example, to pin Nix 2.18:
-
-  ```bash
-  niv update nix_2-18 -r f5f4de6a550327b4b1a06123c2e450f1b92c73b6
-  ```
-
-- On each new Nix release:
-
-  1. Add the latest version in [`default.nix`](./default.nix).
-     For example, to add Nix 2.19:
-
-     ```bash
-     niv add nixos/nix -n nix_2-19 -b 2.19-maintenance
-     ```
-
-  2. Reference the latest version in [`source/reference/nix-manual.md`](./source/reference/nix-manual.md).
-
-- If an unstable or stable release of Nixpkgs adopt a new version of Nix, update the corresponding references here.
-
-  Also update URLs to the the Nix manual to the version used by Nixpkgs unstable.
-  For example, if one wants to move from 2.18 to 2.19:
-  ```bash
-  sed -i 's#https://nix.dev/manual/nix/2.18/#https://nix.dev/manual/nix/2.19/#g' $(ls **/*.md)
-  ```
+```shell-session
+nix-shell --run update-nixpkgs-releases
+nix-shell --run update-nix-releases
+```
 
 ## Contributor guides
 
