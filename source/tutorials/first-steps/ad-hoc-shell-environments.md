@@ -37,7 +37,7 @@ these 3 derivations will be built:
 
 Within the Nix shell, you can use the programs provided by these packages:
 
-```
+```console
 [nix-shell:~]$ cowsay Hello, Nix! | lolcat
 ```
 
