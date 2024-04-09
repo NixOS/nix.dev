@@ -49,7 +49,7 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ $(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 -A gnu-config)/config.guess
+$ $(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 -A gnu-config)/config.guess
 aarch64-unknown-linux-gnu
 ```
 
@@ -86,8 +86,8 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 It is possible to explore them in `nix repl`:
 
 ```shell-session
-$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-22.11
-Welcome to Nix version 2.3.12. Type :? for help.
+$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-23.11
+Welcome to Nix 2.18.1. Type :? for help.
 
 Loading '<nixpkgs>'...
 Added 14200 variables.
@@ -153,18 +153,18 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
-     pkgs = import <nixpkgs> {};
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+     pkgs = import nixpkgs {};
    in
    pkgs.pkgsCross.aarch64-multiplatform.hello
    ```
 
-2. Pass the host platform to `crossSystem` when importing `<nixpkgs>`:
+2. Pass the host platform to `crossSystem` when importing `nixpkgs`.
+   This configures `nixpkgs` such that all its packages are build for the host platform:
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
-     # configure `nixpkgs` such that all its packages are build for the host platform
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
      pkgs = import nixpkgs { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
    in
    pkgs.hello
@@ -173,7 +173,9 @@ There are multiple equivalent ways to access packages targeted to the host platf
    Equivalently, you can pass the host platform as an argument to `nix-build`:
 
    ```sh
-   $ nix-build '<nixpkgs>' -A hello --arg crossSystem '{ config = "aarch64-unknown-linux-gnu"; }'
+   $ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 \
+     --arg crossSystem '{ config = "aarch64-unknown-linux-gnu"; }' \
+     -A hello
    ```
 
 ## Cross compiling for the first time
@@ -181,11 +183,15 @@ There are multiple equivalent ways to access packages targeted to the host platf
 To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
-$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
+$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 \
   -A pkgsCross.aarch64-multiplatform.hello
 ...
-/nix/store/nqy5dlzzkbq6bvz5wknjpb8d64jl7g9x-hello-aarch64-unknown-linux-gnu-2.12.1
+/nix/store/1dx87l5rav8679lqigf9xxkb7wvh2m4k-hello-aarch64-unknown-linux-gnu-2.12.1
 ```
+
+:::{note}
+The hash of the package in the store path changes with the updates to the channel.
+:::
 
 [Search for a package](https://search.nixos.org/packages) attribute name to find the one you're interested in building.
 
@@ -193,10 +199,12 @@ $ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-22.11 \
 
 To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
+Given we have a `cross-compile.nix`:
+
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
-  pkgs = import <nixpkgs> {};
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+  pkgs = import nixpkgs {};
 
   # Create a C program that prints Hello World
   helloWorld = pkgs.writeText "hello.c" ''
@@ -251,7 +259,7 @@ Given we have a `shell.nix`:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarballs/release-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
   pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
 in
 
@@ -279,13 +287,13 @@ int main (void)
 We can cross compile it:
 
 ```shell-session
-$ nix-shell --run '$CC hello.c -o hello' cross-compile-shell.nix
+$ nix-shell --run '$CC hello.c -o hello' shell.nix
 ```
 
 And confirm it's aarch64:
 
 ```shell-session
-$ nix-shell --run 'file hello' cross-compile-shell.nix
+$ nix-shell --run 'file hello' shell.nix
 hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with debug_info, not stripped
 ```
 
