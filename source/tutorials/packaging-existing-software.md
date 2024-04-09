@@ -443,20 +443,21 @@ On the left side bar there is a list package sets, and [selecting `xorg`](https:
 
 In case all else fails, it helps to become familiar with searching the [Nixpkgs source code](https://github.com/nixos/nixpkgs) for keywords.
 
-### Git and `rg`
+### Local code search
 
 To find name assignments in the source, search for `"<keyword> ="`.
 For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github.
 
-Or fetch a local clone of the repository and use `rg` (a nicer `grep` implementation, found in the `ripgrep` package).
+Or fetch a clone of the repository and search the code locally.
 
-Since you might not have `git` or `rg` installed on your system, let's start a shell with these two tools:
+Start a shell that makes the required tools available – `git` for version control, and `rg` for code search (provided by the [`ripgrep` package](https://search.nixos.org/packages?show=ripgrep)):
 ```console
 $ nix-shell -p git ripgrep
-[nix-shell:~]$ # git & rg are available in this shell!
+[nix-shell:~]$
 ```
 
-Since the Nixpkgs repository is huge, it can be faster to only clone the latest revision to avoid waiting a long time for a full clone:
+The Nixpkgs repository is huge.
+Only clone the latest revision to avoid waiting a long time for a full clone:
 
 ```console
 [nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
@@ -464,10 +465,10 @@ Since the Nixpkgs repository is huge, it can be faster to only clone the latest 
 [nix-shell:~]$ cd nixpkgs/
 ```
 
-To narrow down results, specify which subdirectory you want to search (`pkgs` folder in nixpkgs holds all packages):
+To narrow down results, only search the `pkgs` subdirectory, which holds all the package recipes:
 
 ```console
-[nix-shell:~]$ rg "x11 =" pkgs/
+[nix-shell:~]$ rg "x11 =" pkgs
 pkgs/tools/X11/primus/default.nix
 21:  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
 22:  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
@@ -487,7 +488,7 @@ Since `rg` is case sensitive by default,
 Add `-i` to make sure you don't miss anything:
 
 ```
-[nix-shell:~]$ rg -i "libx11 =" pkgs/
+[nix-shell:~]$ rg -i "libx11 =" pkgs
 pkgs/applications/version-management/monotone-viz/graphviz-2.0.nix
 55:    ++ lib.optional (libX11 == null) "--without-x";
 
@@ -503,7 +504,7 @@ pkgs/servers/x11/xorg/overrides.nix
 
 ### `nix-locate`
 
-Another option is to use `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index) tool to find derivations that provide what you need.
+To search derivations on the command line, use `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index).
 
 ### Adding package sets as dependencies
 
