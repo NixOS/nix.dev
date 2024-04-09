@@ -256,7 +256,7 @@ rm nixos.qcow2
 ## Running Gnome on a graphical VM
 
 The previous example was aimed to provide a lightweight example using the configuration provided by the minimal installation image.
-The Gnome installation image adds the following lines to the configuration so that we get a usable graphical user interface:
+If you would have used installation-cd-graphical-gnome.nix for generating the configuration file it would include the following additional lines:
 
 ```
   # Enable the X11 windowing system.
@@ -284,7 +284,7 @@ The complete `configuration.nix` file looks like this:
 
   users.users.alice = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     initialPassword = "test";
   };
 
@@ -292,8 +292,7 @@ The complete `configuration.nix` file looks like this:
 }
 ```
 
-In this case we like to get the graphical output so we simply run the virtual machine without options
-Run the virtual machine:
+In this case we like to get the graphical output so we run the virtual machine without special options:
 
 ```shell-session
 ./result/bin/run-nixos-vm
@@ -301,13 +300,7 @@ Run the virtual machine:
 
 ## Running sway in wayland on a VM
 
-To run Sway in a virtual machine one needs to configure qemu to create a display compatible to wayland.
-To enable sway use its enable option:
-```nix
-  programs.sway.enable = true;
-```
-
-The complete `configuration.nix` file looks like this:
+The following `configuration.nix` replaces `gnome` with `sway` as window manager:
 
 ```nix
 { config, pkgs, ... }:
@@ -319,11 +312,10 @@ The complete `configuration.nix` file looks like this:
 
   services.xserver.displayManager.gdm.enable = true;
   programs.sway.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
 
   users.users.alice = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     initialPassword = "test";
   };
 
@@ -331,24 +323,26 @@ The complete `configuration.nix` file looks like this:
 }
 ```
 
-To start the virtual machine so that sway doesn't fail one needs to start it with the following arguments:
+Run the virtual machine:
+
 ```shell-session
-./result/bin/run-nixos-vm -vga none -device virtio-vga-gl -display gtk,gl=on
+./result/bin/run-nixos-vm -device virtio-vga
 ```
 
-As an alternative one can add these arguments to the configuration.
-To do so one needs to import the virtualisation module.
+The device argument helps with problems Wayland can have with different display device drivers.
+On different systems different arguments might be needed.
+See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
+
+As an alternative to the cli arguments to qemu can be added to the configuration:
 
 ```nix
   imports = [ <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix> ];
   virtualisation.qemu.options = [
-    "-vga none"
-    "-device virtio-vga-gl"
-    "-display gtk,gl=on"
+    "-device virtio-vga"
   ];
 ```
 
-The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative options.
+The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative window manager.
 
 
 ## References
