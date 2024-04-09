@@ -502,7 +502,7 @@ pkgs/servers/x11/xorg/overrides.nix
 147:  libX11 = super.libX11.overrideAttrs (attrs: {
 ```
 
-### `nix-locate`
+### Local derivation search
 
 To search derivations on the command line, use `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index).
 
