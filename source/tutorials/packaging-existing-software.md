@@ -427,7 +427,7 @@ But the important bit for this tutorial is `fatal error: X11/Xlib.h: No such fil
 
 ## Finding packages
 
-Determining from where to source a dependency is currently a somewhat involved, because package names don't always correspond to library or program names.
+Determining from where to source a dependency is currently somewhat involved, because package names don't always correspond to library or program names.
 
 You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
 There are multiple ways to figure this out:
@@ -443,21 +443,29 @@ On the left side bar there is a list package sets, and [selecting `xorg`](https:
 
 In case all else fails, it helps to become familiar with searching the [Nixpkgs source code](https://github.com/nixos/nixpkgs) for keywords.
 
-### Git and `rg`
+### Local code search
 
 To find name assignments in the source, search for `"<keyword> ="`.
-For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github .
+For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github.
 
-Or fetch a local clone of the repository and use `rg`.
-Nixpkgs is huge.
-Only clone the latest revision if you don't want to wait a long time:
+Or fetch a clone of the repository and search the code locally.
 
+Start a shell that makes the required tools available – `git` for version control, and `rg` for code search (provided by the [`ripgrep` package](https://search.nixos.org/packages?show=ripgrep)):
 ```console
 $ nix-shell -p git ripgrep
-[nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
+[nix-shell:~]$
 ```
 
-To narrow down results, specify which subdirectory you want to search:
+The Nixpkgs repository is huge.
+Only clone the latest revision to avoid waiting a long time for a full clone:
+
+```console
+[nix-shell:~]$ git clone https://github.com/NixOS/nixpkgs --depth 1
+...
+[nix-shell:~]$ cd nixpkgs/
+```
+
+To narrow down results, only search the `pkgs` subdirectory, which holds all the package recipes:
 
 ```console
 [nix-shell:~]$ rg "x11 =" pkgs
@@ -494,9 +502,9 @@ pkgs/servers/x11/xorg/overrides.nix
 147:  libX11 = super.libX11.overrideAttrs (attrs: {
 ```
 
-### `nix-locate`
+### Local derivation search
 
-Consider using `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index) tool to find derivations that provide what you need.
+To search derivations on the command line, use `nix-locate` from the [`nix-index`](https://github.com/nix-community/nix-index).
 
 ### Adding package sets as dependencies
 
@@ -598,7 +606,7 @@ stdenv.mkDerivation {
     sha256 = "0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka";
   };
 
-  buildInputs = [ imlib2 xorg.libX11.dev ];
+  buildInputs = [ imlib2 xorg.libX11 ];
 
   installPhase = ''
     mkdir -p $out/bin
