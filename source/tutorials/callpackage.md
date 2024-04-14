@@ -20,7 +20,7 @@ One of the most prominent patterns in Nixpkgs is parametrisation of package reci
 
 ## Overview
 
-Nixpkgs is sizeable software project on it's own, with coding conventions and idioms that have emerged over the years.
+Nixpkgs is sizeable software project on its own, with coding conventions and idioms that have emerged over the years.
 It has [established a convention](https://github.com/nixos/nixpkgs/commit/d17f0f9cbca38fabb71624f069cd4c0d6feace92) of composing parameterised packages with automatic settings through a function named [`callPackage`](https://github.com/NixOS/nixpkgs/commit/fd268b4852d39c18e604c584dd49a611dc795a9b).
 This tutorial shows how to use it and why it's beneficial.
 
