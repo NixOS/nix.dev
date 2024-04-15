@@ -224,7 +224,7 @@ First, make available a `pkgs` argument in your module evaluation by adding a mo
  pkgs.lib.evalModules {
    modules = [
 +    ({ config, ... }: { config._module.args = { inherit pkgs; }; })
-     ./test.nix
+     ./default.nix
    ];
  }
 ```
