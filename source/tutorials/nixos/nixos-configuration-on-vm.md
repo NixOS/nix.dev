@@ -271,6 +271,8 @@ These three lines activate X11, the GDM display manager (to be able to login) an
 
 The complete `configuration.nix` file looks like this:
 
+<details><summary>The complete `configuration.nix` file looks like this</summary>
+
 ```nix
 { config, pkgs, ... }:
 {
@@ -292,15 +294,33 @@ The complete `configuration.nix` file looks like this:
 }
 ```
 
+</details>
+
 In this case we like to get the graphical output so we run the virtual machine without special options:
 
 ```shell-session
 ./result/bin/run-nixos-vm
 ```
 
-## Running sway in wayland on a VM
+## Running sway as wayland compositor on a VM
 
-The following `configuration.nix` replaces `gnome` with `sway` as window manager:
+To change to a wayland compositor you can replace the `gnome.enable` with a `sway.enable` option.
+
+```diff
+-  services.xserver.displayManager.gdm.enable = true;
++  programs.sway.enable = true;
+
+```
+
+But Running wayland compositors in a virtual machine might lead to complications with the display drivers used by qemu.
+You need to choose from the available drivers one that is compatible with sway. See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
+One possibility is the virtio-vga driver:
+
+```shell-session
+./result/bin/run-nixos-vm -device virtio-vga
+```
+
+<details><summary>As an alternative to the cli arguments to qemu can be added to the configuration</summary>
 
 ```nix
 { config, pkgs, ... }:
@@ -313,6 +333,11 @@ The following `configuration.nix` replaces `gnome` with `sway` as window manager
   services.xserver.displayManager.gdm.enable = true;
   programs.sway.enable = true;
 
+  imports = [ <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix> ];
+  virtualisation.qemu.options = [
+    "-device virtio-vga"
+  ];
+
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -323,24 +348,7 @@ The following `configuration.nix` replaces `gnome` with `sway` as window manager
 }
 ```
 
-Run the virtual machine:
-
-```shell-session
-./result/bin/run-nixos-vm -device virtio-vga
-```
-
-The device argument helps with problems Wayland can have with different display device drivers.
-On different systems different arguments might be needed.
-See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
-
-As an alternative to the cli arguments to qemu can be added to the configuration:
-
-```nix
-  imports = [ <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix> ];
-  virtualisation.qemu.options = [
-    "-device virtio-vga"
-  ];
-```
+</details>
 
 The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative window manager.
 
