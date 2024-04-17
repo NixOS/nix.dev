@@ -78,8 +78,8 @@ Check the installation by opening **a new terminal** and typing:
 
 ```shell-session
 $ nix --version
-nix (Nix) 2.11.0
+nix (Nix) 2.21.1
 ```
 
-[multi-user installation]: https://nix.dev/manual/nix/2.18/installation/multi-user.html
-[single-user installation]: https://nix.dev/manual/nix/2.18/installation/single-user.html
+[multi-user installation]: https://nix.dev/manual/nix/2.21/installation/multi-user.html
+[single-user installation]: https://nix.dev/manual/nix/2.21/installation/single-user.html
