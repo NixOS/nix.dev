@@ -320,7 +320,7 @@ $ nix-build client-server-test.nix
 
   A good inspiration is [Matrix bridging with an IRC](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/matrix/appservice-irc.nix).
 
-<!-- TODO: move examples from https://nixos.wiki/wiki/NixOS_Testing_library to the NixOS manual and troubleshooting tips to nix.dev -->
+<!-- TODO: move examples from https://wiki.nixos.org/wiki/NixOS_Testing_library to the NixOS manual and troubleshooting tips to nix.dev -->
 
 ## Next steps
 
