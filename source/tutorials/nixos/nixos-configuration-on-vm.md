@@ -34,22 +34,14 @@ Beware that the result of this command depends on your current NixOS configurati
 The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
 Here we provide a configuration that is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
 
+
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p 'let pkgs = import <nixpkgs> { config = {}; overlays = []; }; iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix; nixos = pkgs.nixos iso-config; in nixos.config.system.build.nixos-generate-config'
-```
-
-:::{dropdown} Detailed explanation
-
-The above shell command is a one-liner so it's easier to copy and paste.
-This is the readable long form using a [heredoc](https://en.wikipedia.org/wiki/Here_document):
-
-```{code-block} bash
 nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
-let
-  pkgs = import <nixpkgs> { config = {}; overlays = []; };
-  iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix;
-  nixos = pkgs.nixos iso-config;
-in nixos.config.system.build.nixos-generate-config
+  let
+    pkgs = import <nixpkgs> { config = {}; overlays = []; };
+    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix;
+    nixos = pkgs.nixos iso-config;
+  in nixos.config.system.build.nixos-generate-config
 EOF
 )"
 ```
@@ -60,14 +52,12 @@ It does the following:
 - Evaluate that NixOS configuration with `pkgs.nixos`
 - Return the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
 
-:::
-
 By default, the generated configuration file is written to `/etc/nixos/configuration.nix`.
 To avoid overwriting this file you have to specify the output directory.
 Create a NixOS configuration in your working directory:
 
 ```shell-session
-nixos-generate-config --dir ./
+$ nixos-generate-config --dir ./
 ```
 
 In the working directory you will then find two files:
@@ -163,9 +153,7 @@ The complete `configuration.nix` file looks like this:
 A NixOS virtual machine is created with the `nix-build` command:
 
 ```shell-session
-nix-build '<nixpkgs/nixos>' -A vm \
--I nixpkgs=channel:nixos-23.11 \
--I nixos-config=./configuration.nix
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
 ```
 
 This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
@@ -186,14 +174,6 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 
   Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
 
-:::{admonition} NixOS
-On NixOS the `$NIX_PATH` environment variable is usually set up automatically, and there is also [a convenience command for building virtual machines](https://nixos.org/manual/nixos/stable/#sec-changing-config).
-You can use the current version of `nixpkgs` to build the virtual machine like this:
-```shell-session
-nixos-rebuild build-vm -I nixos-config=./configuration.nix
-```
-:::
-
 </details>
 
 ## Running the virtual machine
@@ -202,21 +182,18 @@ The previous command created a link with the name `result` in the working direct
 It links to the directory that contains the virtual machine.
 
 ```shell-session
-ls -R ./result
-```
+$ ls -R ./result
+result:
+bin  system
 
-```console
-    result:
-    bin  system
-
-    result/bin:
-    run-nixos-vm
+result/bin:
+run-nixos-vm
 ```
 
 Run the virtual machine:
 
 ```shell-session
-QEMU_KERNEL_PARAMS=console=ttyS0 ./result/bin/run-nixos-vm -nographic; reset
+$ QEMU_KERNEL_PARAMS=console=ttyS0 ./result/bin/run-nixos-vm -nographic; reset
 ```
 
 This command will run QEMU in the current terminal due to `-nographic`.
@@ -226,20 +203,20 @@ Log in as `alice` with the password `test`.
 Check that the programs are indeed available as specified:
 
 ```shell-session
-cowsay hello | lolcat
+$ cowsay hello | lolcat
 ```
 
 Exit the virtual machine by shutting it down:
 
 ```shell-session
-sudo poweroff
+$ sudo poweroff
 ```
 
 :::{note}
 If you forgot to add the user to `wheel` or didn't set a password, stop the virtual machine from a different terminal:
 
 ```shell-session
-sudo pkill qemu
+$ sudo pkill qemu
 ```
 :::
 
@@ -250,15 +227,28 @@ It can interfere with debugging as it keeps the state of previous runs, for exam
 Delete this file when you change the configuration:
 
 ```shell-session
-rm nixos.qcow2
+$ rm nixos.qcow2
 ```
 
 ## Running Gnome on a graphical VM
 
 The previous example was aimed to provide a lightweight example using the configuration provided by the minimal installation image.
-If you would have used installation-cd-graphical-gnome.nix for generating the configuration file it would include the following additional lines:
+You could have also used `installation-cd-graphical-gnome.nix` to generate the configuration file, using the following command:
 
+```shell-session
+nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
+  let
+    pkgs = import <nixpkgs> { config = {}; overlays = []; };
+    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
+    nixos = pkgs.nixos iso-config;
+  in nixos.config.system.build.nixos-generate-config
+EOF
+)"
 ```
+
+This would then include the following additional lines:
+
+```nix
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -299,28 +289,30 @@ The complete `configuration.nix` file looks like this:
 In this case we like to get the graphical output so we run the virtual machine without special options:
 
 ```shell-session
-./result/bin/run-nixos-vm
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+$ ./result/bin/run-nixos-vm
 ```
 
 ## Running sway as wayland compositor on a VM
 
 To change to a wayland compositor you can replace the `gnome.enable` with a `sway.enable` option.
 
-```diff
--  services.xserver.displayManager.gdm.enable = true;
+```{code-block} diff
+:caption: configuration.nix
+-  services.xserver.desktopManager.gnome.enable = true;
 +  programs.sway.enable = true;
-
 ```
 
-But Running wayland compositors in a virtual machine might lead to complications with the display drivers used by qemu.
+:::{note}
+Running wayland compositors in a virtual machine might lead to complications with the display drivers used by qemu.
 You need to choose from the available drivers one that is compatible with sway. See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
 One possibility is the virtio-vga driver:
 
 ```shell-session
-./result/bin/run-nixos-vm -device virtio-vga
+$ ./result/bin/run-nixos-vm -device virtio-vga
 ```
 
-<details><summary>As an alternative to the cli arguments to qemu can be added to the configuration</summary>
+<details><summary>As an alternative to the CLI, arguments to qemu can be added to the configuration file</summary>
 
 ```nix
 { config, pkgs, ... }:
@@ -350,7 +342,9 @@ One possibility is the virtio-vga driver:
 
 </details>
 
-The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative window manager.
+:::
+
+The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative window managers.
 
 
 ## References
