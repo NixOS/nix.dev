@@ -176,7 +176,7 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 
 </details>
 
-[^nixosrebuildbuildvm]: NixOS introduces a convenience command to build virtual machines via nixos-rebuild, documentented in the manual in the section on [nixos-rebuild](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+[^nixosrebuildbuildvm]: NixOS introduces a convenience command to build virtual machines, documentented in the manual in the section on [nixos-rebuild](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 
 ## Running the virtual machine
 
