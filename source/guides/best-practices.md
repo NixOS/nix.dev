@@ -54,6 +54,20 @@ in {
 ```
 :::
 
+:::{tip}
+Self-reference can be achieved by explicitly naming the attribute set:
+
+```{code-block} nix
+:class: expression
+let
+  argset = {
+    a = 1;
+    b = argset.a + 2;
+  };
+in
+  argset
+```
+:::
 
 ## `with` scopes
 
