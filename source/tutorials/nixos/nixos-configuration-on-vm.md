@@ -172,9 +172,11 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 
 - The [`-I` option](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-I) prepends entries to the search path.
 
-  Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
+  Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.[^nixosrebuildbuildvm]
 
 </details>
+
+[^nixosrebuildbuildvm]: NixOS introduces a convenience command to build virtual machines via nixos-rebuild, documentented in the manual in the section on [nixos-rebuild](https://nixos.org/manual/nixos/stable/#sec-changing-config).
 
 ## Running the virtual machine
 
