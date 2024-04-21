@@ -114,13 +114,19 @@ html[data-theme="dark"] .highlight .gd {
 }
 
 html[data-theme="dark"] details {
-  background-color: #202736;
-  border: 1px solid #202736;
-  color: inherit !important;
+  background-color: #323c537d;
+  border: 1px solid #323c537d;
 }
 
 html[data-theme="light"] details {
-  background-color: #6097c1;
-  border: 1px solid #6097c1;
-  color: inherit !important;
+  background-color: #abc8debf;
+  border: 1px solid #abc8debf;
+}
+
+tml[data-theme="dark"] details a {
+  color: #6097c1;
+}
+
+html[data-theme="light"] details a {
+  color: #0042aa;
 }
