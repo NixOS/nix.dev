@@ -220,7 +220,7 @@ uname -a
     Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 
 
-<details><summary>Re-running successful tests</summary>
+::::{dropdown} Re-running successful tests
 
 <!-- FIXME: this should be a separate recipe that can be linked to, as it's a bit of knowledge one will need now and again. -->
 
@@ -250,7 +250,7 @@ This can be also done with one command:
 ```shell-session
 result=$(readlink -f ./result) rm ./result && nix-store --delete $result
 ```
-</details>
+::::
 
 ## Tests with multiple virtual machines
 
