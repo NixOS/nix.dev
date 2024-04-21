@@ -164,7 +164,7 @@ nix-build '<nixpkgs/nixos>' -A vm \
 
 This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
 
-<details><summary> Detailed explanation </summary>
+::::{dropdown} Detailed explanation
 
 - The positional argument to [`nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html) is a path to the derivation to be built.
   That path can be obtained from [a Nix expression that evaluates to a derivation](derivations).
@@ -187,8 +187,7 @@ You can use the current version of `nixpkgs` to build the virtual machine like t
 nixos-rebuild build-vm -I nixos-config=./configuration.nix
 ```
 :::
-
-</details>
+::::
 
 ## Running the virtual machine
 
