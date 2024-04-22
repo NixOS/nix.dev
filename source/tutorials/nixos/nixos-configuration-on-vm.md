@@ -31,9 +31,8 @@ You can also skip this section and copy the [sample configuration](sample-nixos-
 On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
 
 Beware that the result of this command depends on your current NixOS configuration.
-The output of 'nixos-generate-config' can be made reproducible in a `nix-shell` environment.
+The output of `nixos-generate-config` can be made reproducible in a `nix-shell` environment.
 Here we provide a configuration that is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
-
 
 ```shell-session
 nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
@@ -232,23 +231,9 @@ Delete this file when you change the configuration:
 $ rm nixos.qcow2
 ```
 
-## Running Gnome on a graphical VM
+## Running GNOME on a graphical VM
 
-The previous example was aimed to provide a lightweight example using the configuration provided by the minimal installation image.
-You could have also used `installation-cd-graphical-gnome.nix` to generate the configuration file, using the following command:
-
-```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
-  let
-    pkgs = import <nixpkgs> { config = {}; overlays = []; };
-    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
-    nixos = pkgs.nixos iso-config;
-  in nixos.config.system.build.nixos-generate-config
-EOF
-)"
-```
-
-This would then include the following additional lines:
+To create a virtual machine with a graphical user interface, add the following lines to the configuration:
 
 ```nix
   # Enable the X11 windowing system.
@@ -261,9 +246,28 @@ This would then include the following additional lines:
 
 These three lines activate X11, the GDM display manager (to be able to login) and Gnome as desktop manager.
 
-The complete `configuration.nix` file looks like this:
+::::{admonition} NixOS
 
-<details><summary>The complete `configuration.nix` file looks like this</summary>
+On NixOS, use `installation-cd-graphical-gnome.nix` to generate the configuration file:
+
+```shell-session
+nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
+  let
+    pkgs = import <nixpkgs> { config = {}; overlays = []; };
+    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
+    nixos = pkgs.nixos iso-config;
+  in nixos.config.system.build.nixos-generate-config
+EOF
+)"
+```
+
+```shell-session
+$ nixos-generate-config --dir ./
+```
+
+::::
+
+The complete `configuration.nix` file looks like this:
 
 ```nix
 { config, pkgs, ... }:
@@ -286,18 +290,16 @@ The complete `configuration.nix` file looks like this:
 }
 ```
 
-</details>
-
-In this case we like to get the graphical output so we run the virtual machine without special options:
+To get graphical output, run the virtual machine without special options:
 
 ```shell-session
 $ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
 $ ./result/bin/run-nixos-vm
 ```
 
-## Running sway as wayland compositor on a VM
+## Running Sway as Wayland compositor on a VM
 
-To change to a wayland compositor you can replace the `gnome.enable` with a `sway.enable` option.
+To change to a Wayland compositor, disable `services.xserver.desktopManager.gnome` and enable `programs.sway`:
 
 ```{code-block} diff
 :caption: configuration.nix
@@ -306,15 +308,16 @@ To change to a wayland compositor you can replace the `gnome.enable` with a `swa
 ```
 
 :::{note}
-Running wayland compositors in a virtual machine might lead to complications with the display drivers used by qemu.
-You need to choose from the available drivers one that is compatible with sway. See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
-One possibility is the virtio-vga driver:
+Running Wayland compositors in a virtual machine might lead to complications with the display drivers used by QEMU.
+You need to choose from the available drivers one that is compatible with Sway.
+See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for options.
+One possibility is the `virtio-vga` driver:
 
 ```shell-session
 $ ./result/bin/run-nixos-vm -device virtio-vga
 ```
 
-<details><summary>As an alternative to the CLI, arguments to qemu can be added to the configuration file</summary>
+Arguments to QEMU can also be added to the configuration file:
 
 ```nix
 { config, pkgs, ... }:
@@ -342,12 +345,9 @@ $ ./result/bin/run-nixos-vm -device virtio-vga
 }
 ```
 
-</details>
-
 :::
 
-The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) to find alternative window managers.
-
+The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#sec-x11) and [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland) listing alternative window managers.
 
 ## References
 
