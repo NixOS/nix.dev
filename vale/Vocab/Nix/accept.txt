@@ -19,3 +19,5 @@ URL(s)?
 nix.dev
 nixos.org
 NixOS Wiki
+Wayland
+Sway
