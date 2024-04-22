@@ -123,7 +123,7 @@ To better navigate the material and judge its relevance, every entry should prov
 ### Nix
 
 - https://nix.dev/tutorials/ad-hoc-developer-environments#what-is-a-shell-environment
-- https://nixos.wiki/wiki/Nix_Cookbook#Managing_storage
+- https://wiki.nixos.org/wiki/Nix_Cookbook#Managing_storage
 
 ### Nix language
 
@@ -131,7 +131,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
 ### Nixpkgs
 
-- https://nixos.wiki/wiki/FAQ
+- https://wiki.nixos.org/wiki/FAQ
 - https://www.youtube.com/watch?v=D_IZ2EfW_8U
 - https://www.youtube.com/watch?v=5K_2RSjbdXc
 - https://www.youtube.com/watch?v=dGAL3gMXvug

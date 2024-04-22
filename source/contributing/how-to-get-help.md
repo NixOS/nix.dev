@@ -49,11 +49,14 @@ Once you've found the people you're looking for, you can contact them on one of 
 
   Use email addresses found with `git log`.
 
+- Meetings and events
+
+  Check the [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589) for real-time or in-person events.
+  Some community teams hold regular meetings and publish their meeting notes.
+
 ## Other venues
 
-If you haven't found any specific users or groups that could help you with your
-contribution, you can resort to asking the community at large, using one of the following official
-communication channels:
+If you haven't found any specific users or groups that could help you with your contribution, you can resort to asking the community at large, using one of the following official communication channels:
 
 - A room related to your question in the [NixOS Matrix space][matrix].
 - The [*Help* category](https://discourse.nixos.org/c/learn/9) on Discourse.

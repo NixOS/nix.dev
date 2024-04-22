@@ -18,3 +18,4 @@ Tweag
 URL(s)?
 nix.dev
 nixos.org
+NixOS Wiki

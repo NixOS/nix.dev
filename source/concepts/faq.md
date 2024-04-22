@@ -20,10 +20,13 @@ Nixpkgs and NixOS have both stable and rolling releases.
 
 ### Stable
 
+Stable releases receive conservative updates to fix bugs or security vulnerabilities; otherwise package versions are not changed.
+A new stable release is made every six months.
+
 - On Linux (including NixOS and WSL), use [`nixos-*`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-).
 
   These branches point to commits where most Linux packages got pre-built and can be fetched from the binary cache.
-  Furthermore, these commits passed the basic NixOS test suite.
+  Furthermore, these commits passed the full NixOS test suite.
 
 - On macOS/Darwin, use [`nixpkgs-*-darwin`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-)
 
@@ -41,14 +44,16 @@ All of these "channel branches" follow the corresponding [`release-*`](https://g
 
 ### Rolling
 
+Rolling releases follow [`master`](https://github.com/NixOS/nixpkgs/branches/all?query=master), the main development branch.
+
 - On Linux (including NixOS and WSL), use [`nixos-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixos-unstable).
 - On any other platform, use [`nixpkgs-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-unstable).
 
-These branches follow `master`, the main development branch.
+[`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch, but offer fewer stability guarantees.
 
-[`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch but offer fewer stability guarantees.
-
+:::{tip}
 Consult the [`nix-channel`](https://nixos.org/manual/nix/unstable/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
+:::
 
 ## Are there any impurities left in sandboxed builds?
 

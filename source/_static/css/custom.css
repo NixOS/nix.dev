@@ -112,3 +112,21 @@ html[data-theme="dark"] .highlight .gd {
 .navbar-nav li.toctree-l1 > ul {
   padding: 0;
 }
+
+html[data-theme="dark"] details {
+  background-color: #323c537d;
+  border: 1px solid #323c537d;
+}
+
+html[data-theme="light"] details {
+  background-color: #abc8debf;
+  border: 1px solid #abc8debf;
+}
+
+tml[data-theme="dark"] details a {
+  color: #6097c1;
+}
+
+html[data-theme="light"] details a {
+  color: #0042aa;
+}

@@ -1,50 +1,14 @@
 {
-    "nix_2-13": {
-        "branch": "2.13-maintenance",
-        "description": "Nix, the purely functional package manager",
-        "homepage": "https://nixos.org/",
-        "owner": "nixos",
-        "repo": "nix",
-        "rev": "25f2dfc6e41d8c30e7abc443a7b262e34e49253b",
-        "sha256": "0lbp6yq92wpzi7kihbbma8d1c6q33msw95y0kmirfiikd8yvpvs7",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nix/archive/25f2dfc6e41d8c30e7abc443a7b262e34e49253b.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix_2-18": {
-        "branch": "2.18-maintenance",
-        "description": "Nix, the purely functional package manager",
-        "homepage": "https://nixos.org/",
-        "owner": "nixos",
-        "repo": "nix",
-        "rev": "60eb80593f3a18aebc7672ad7007cb23c14db061",
-        "sha256": "0nyssab6skn9qd7mz4v0y3ycnhck7is6agm0i26l1anrgs90x37l",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nix/archive/60eb80593f3a18aebc7672ad7007cb23c14db061.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix_2-19": {
-        "branch": "2.19-maintenance",
-        "description": "Nix, the purely functional package manager",
-        "homepage": "https://nixos.org/",
-        "owner": "nixos",
-        "repo": "nix",
-        "rev": "dc09e6193bffcab37d3d43107eae9464395ab51d",
-        "sha256": "0n117h0jz3aih41mg0kns8v6rjhmrg7r6p8azl55p32zrj02zyvm",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nix/archive/dc09e6193bffcab37d3d43107eae9464395ab51d.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nixpkgs": {
-        "branch": "nixos-23.05",
+    "nixpkgs-rolling": {
+        "branch": "nixpkgs-unstable",
         "description": "Nix Packages collection & NixOS",
         "homepage": "",
-        "owner": "NixOS",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "898cb2064b6e98b8c5499f37e81adbdf2925f7c5",
-        "sha256": "0ha53gbglrcnpzfc4lwzgyvlsagvm1m2q9z5i5b4nfahplnqpsbj",
+        "rev": "e976fa8f49c35cf28496301a1ef2aa23ad576b56",
+        "sha256": "1kq9wkwaf4kfv2p29jdqwfkbadmx1isbkaryqcrrjah4wskwa1rw",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/898cb2064b6e98b8c5499f37e81adbdf2925f7c5.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/e976fa8f49c35cf28496301a1ef2aa23ad576b56.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "poetry2nix": {

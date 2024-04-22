@@ -157,7 +157,7 @@ $ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-conf
 
 This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
 
-<details><summary> Detailed explanation </summary>
+::::{dropdown} Detailed explanation
 
 - The positional argument to [`nix-build`](https://nix.dev/manual/nix/2.18/command-ref/nix-build.html) is a path to the derivation to be built.
   That path can be obtained from [a Nix expression that evaluates to a derivation](derivations).
@@ -171,11 +171,17 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 
 - The [`-I` option](https://nix.dev/manual/nix/2.18/command-ref/opt-common.html#opt-I) prepends entries to the search path.
 
-  Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.[^nixosrebuildbuildvm]
+  Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
 
-</details>
+:::{admonition} NixOS
+On NixOS the `$NIX_PATH` environment variable is usually set up automatically, and there is also [a convenience command for building virtual machines](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+To use the current version of `nixpkgs` to build the virtual machine:
 
-[^nixosrebuildbuildvm]: NixOS introduces a convenience command to build virtual machines, documentented in the manual in the section on [nixos-rebuild](https://nixos.org/manual/nixos/stable/#sec-changing-config).
+```shell-session
+nixos-rebuild build-vm -I nixos-config=./configuration.nix
+```
+:::
+::::
 
 ## Running the virtual machine
 
