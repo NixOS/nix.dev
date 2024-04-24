@@ -52,7 +52,7 @@ To start, consider this skeleton derivation:
 ```nix
 { stdenv }:
 
-stdenv.mkDerivation {	};
+stdenv.mkDerivation {	}
 ```
 
 This is a function which takes an attribute set containing `stdenv`, and produces a derivation (which currently does nothing).
