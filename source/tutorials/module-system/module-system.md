@@ -428,7 +428,7 @@ Make the following additions to the `requestParams` list in the `config` block:
    };
 ```
 
-This will will only add a `zoom` parameter to the script invocation if the value of `config.map.zoom` is not `null`.
+This will only add a `zoom` parameter to the script invocation if the value of `config.map.zoom` is not `null`.
 
 ## Default values
 
@@ -939,11 +939,11 @@ Finally, add another `lib.optional` call to the `attributes` string, making use 
 
 ## The `pathType` submodule
 
-So far, you've created an option for declaring a *destination* marker, as well as several options for configuring the marker's visual representation.
+So far, you've created an option for declaring a *departure* marker, as well as several options for configuring the marker's visual representation.
 
 Now we want to compute and display a route from the user's location to some destination.
 
-The new option defined in the next section will allow you to set an *arrival* marker, which together with a destination allows you to draw *paths* on the map using the new module defined below.
+The new option defined in the next section will allow you to set an *arrival* marker, which together with a departure allows you to draw *paths* on the map using the new module defined below.
 
 To start, create a new `path.nix` file with the following contents:
 
@@ -1044,7 +1044,7 @@ Finally, update the return list in the function passed to `concatMap` in `map.ma
      map.center = lib.mkIf
 ```
 
-Now you have the basesis to define paths on the map, connecting pairs of departure and arrival points.
+Now you have the basis to define paths on the map, connecting pairs of departure and arrival points.
 
 In the path module, define a path connecting every user's departure and arrival locations:
 
@@ -1143,7 +1143,7 @@ Introduce a new `pathStyle` option for each user.
 
 The module system allows you to declare values for an option multiple times, and if the types permit doing so, takes care of merging each declaration's values together.
 
-This makes it possible to have a definition for the `user` option in the `marker.nix` module, as well as a `user` definition in `path.nix`:
+This makes it possible to have a definition for the `users` option in the `marker.nix` module, as well as a `users` definition in `path.nix`:
 
 ```{code-block} diff
 :caption: path.nix
