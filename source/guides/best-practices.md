@@ -258,7 +258,7 @@ pkgs.stdenv.mkDerivation {
 If the Nix file containing this expression is in `/home/myuser/myproject`, then the store path of `src` will be `/nix/store/<hash>-myproject`.
 
 The problem is that now your build is no longer reproducible, as it depends on the parent directory name.
-That cannot declared in the source code, and results in an impurity.
+That cannot be declared in the source code, and results in an impurity.
 
 If someone builds the project in a directory with a different name, they will get a different store path for `src` and everything that depends on it.
 This can be the cause of needless rebuilds.
