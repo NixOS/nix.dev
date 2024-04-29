@@ -14,5 +14,6 @@ Package parameters and overrides <callpackage.md>
 working-with-local-files.md
 nixos/index.md
 cross-compilation.md
+thunks.md
 module-system/module-system.md
 ```
