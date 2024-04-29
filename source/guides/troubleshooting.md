@@ -9,7 +9,7 @@ Pass [`--option substitute false`](https://nix.dev/manual/nix/2.18/command-ref/c
 ## How to force Nix to re-check if something exists in the binary cache?
 
 Nix keeps track of what's available in binary caches so it doesn't have to query them on every command.
-This includes negative answers, that is, if a given store path cannot substituted.
+This includes negative answers, that is, if a given store path cannot be substituted.
 
 Pass the [`--narinfo-cache-negative-ttl`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-narinfo-cache-negative-ttl) option to set the cache timeout in seconds.
 
