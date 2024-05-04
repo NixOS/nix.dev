@@ -1920,7 +1920,7 @@ This allows constructing arbitrarily complex compositions of derivations with th
 
 ## Worked examples
 
-So far we have seen artifical examples illustrating the various constructs in the Nix language.
+So far we have seen artificial examples illustrating the various constructs in the Nix language.
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following practical examples.
 
