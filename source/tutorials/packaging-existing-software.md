@@ -173,7 +173,6 @@ In `hello.nix`, replace `lib.fakeSha256` with the correct hash:
 ```nix
 # hello.nix
 {
-  lib,
   stdenv,
   fetchzip,
 }:
