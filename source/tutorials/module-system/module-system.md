@@ -985,7 +985,7 @@ in
 The `path.nix` module declares an option for defining a list of paths on our `map`, where each path is a list of strings for geographic locations.
 
 
-In the `config` attribute we augment the API call by setting the `requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request paremeters set elsewhere.
+In the `config` attribute we augment the API call by setting the `requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request parameters set elsewhere.
 
 Now import this new `path.nix` module from your `marker.nix` module:
 
