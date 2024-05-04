@@ -182,7 +182,7 @@ A technical background is a strong plus.
 | Phase         | Estimated effort |
 |---------------|------------------|
 | Planning      | 20h/w            |
-| Implemenation | 20h/w            |
+| Implementation | 20h/w            |
 | Evaluation    | 20h/w            |
 
 Total estimated effort: 240h
@@ -196,7 +196,7 @@ We can expect issues to emerge in the process, and the Nix expert will be respon
 | Phase         | Estimated effort |
 |---------------|------------------|
 | Planning      | 10h/w            |
-| Implemenation | 15h/w            |
+| Implementation | 15h/w            |
 | Evaluation    | 5h/w             |
 
 Total estimated effort: 120h
@@ -211,7 +211,7 @@ Proficiency in written communication in English, and basic experience with Markd
 | Phase         | Estimated effort |
 |---------------|------------------|
 | Planning      | 5h/w             |
-| Implemenation | 10h/w            |
+| Implementation | 10h/w            |
 | Evaluation    | 5h/w             |
 
 Total estimated effort: 80h
