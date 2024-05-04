@@ -855,7 +855,7 @@ In the `let` block, add the following `colorType` option, which can hold strings
        location = lib.mkOption {
 ```
 
-This allows either strings that matche a 24-bit hexadecimal number or are equal to one of the specified color names.
+This allows either strings that match a 24-bit hexadecimal number or are equal to one of the specified color names.
 
 At the bottom of the `let` block, add the `style.color` option and specify a default value:
 
