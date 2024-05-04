@@ -18,7 +18,7 @@ With enough budget, it would be possible to pay for ongoing maintenance and deve
 Start with asking informed questions, after reading reference documentation and the code relevant to what you care about.
 
 [Join our community communication platforms](https://nixos.org/community) to get in contact with other users and developers.
-Check out and consider particpating in our [community teams](https://nixos.org/community/#governance-teams) if you're interested in a particular topic.
+Check out and consider participating in our [community teams](https://nixos.org/community/#governance-teams) if you're interested in a particular topic.
 
 All the source code and documentation is on [GitHub](https://github.com/NixOS), and you need a GitHub account to propose changes.
 Technical discussions happen in issue and pull request comments.
