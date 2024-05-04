@@ -179,11 +179,11 @@ The role's focus is to facilitate or carry out all activities necessary to reach
 Expected are a qualification or a track record in didactics, strong written and verbal communication skills in English, as well as experience in project management.
 A technical background is a strong plus.
 
-| Phase         | Estimated effort |
-|---------------|------------------|
-| Planning      | 20h/w            |
-| Implemenation | 20h/w            |
-| Evaluation    | 20h/w            |
+| Phase          | Estimated effort |
+|----------------|------------------|
+| Planning       | 20h/w            |
+| Implementation | 20h/w            |
+| Evaluation     | 20h/w            |
 
 Total estimated effort: 240h
 
@@ -193,11 +193,11 @@ An expert Nix contributor will be available for answering technical questions co
 The main concern is guiding the curriculum design, and introducing participants to the Nix ecosystem's particularities.
 We can expect issues to emerge in the process, and the Nix expert will be responsible for addressing them within the project's timeline as far as possible.
 
-| Phase         | Estimated effort |
-|---------------|------------------|
-| Planning      | 10h/w            |
-| Implemenation | 15h/w            |
-| Evaluation    | 5h/w             |
+| Phase          | Estimated effort |
+|----------------|------------------|
+| Planning       | 10h/w            |
+| Implementation | 15h/w            |
+| Evaluation     | 5h/w             |
 
 Total estimated effort: 120h
 
@@ -208,11 +208,11 @@ They are assisted by the domain experts to reach a high standard of quality with
 
 Proficiency in written communication in English, and basic experience with Markdown as well as Git version control is required.
 
-| Phase         | Estimated effort |
-|---------------|------------------|
-| Planning      | 5h/w             |
-| Implemenation | 10h/w            |
-| Evaluation    | 5h/w             |
+| Phase          | Estimated effort |
+|----------------|------------------|
+| Planning       | 5h/w             |
+| Implementation | 10h/w            |
+| Evaluation     | 5h/w             |
 
 Total estimated effort: 80h
 
