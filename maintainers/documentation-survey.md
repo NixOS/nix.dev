@@ -180,7 +180,7 @@ To better navigate the material and judge its relevance, every entry should prov
 
     2.4: Store derivations: Definition, `.drv` files in Nix store. `nix-instantiate`, `nix-store --realise`. Allows various deployment policies, including source and binary.
 
-    2.5. Deployment models. Mechanisms `nix-instantiate` and `nix-store`. Models: Manual download; vesion management system; channels; one-click installation
+    2.5. Deployment models. Mechanisms `nix-instantiate` and `nix-store`. Models: Manual download; version management system; channels; one-click installation
 
     2.6: Transparent source/binary deployment: `nix-push` and `nix-pull`. Pre-built substitutes.
 
