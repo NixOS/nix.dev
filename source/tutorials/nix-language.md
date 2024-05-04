@@ -50,7 +50,7 @@ This tutorial only covers the most important language features, briefly discusse
 This tutorial should enable you to read typical Nix language code and understand its structure.
 Its goal is to highlight where the Nix language may differ from languages you are used to.
 
-It therefore shows the most common and distingushing patterns in the Nix language:
+It therefore shows the most common and distinguishing patterns in the Nix language:
 
 - [Assigning names and accessing values](names-values)
 - Declaring and calling [functions](functions)
