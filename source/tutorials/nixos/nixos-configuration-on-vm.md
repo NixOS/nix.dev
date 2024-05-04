@@ -90,7 +90,7 @@ To be able to log in, add the following lines to the returned attribute set:
   };
 ```
 
-We add two lightweight programms as an example:
+We add two lightweight programs as an example:
 
 ```nix
   environment.systemPackages = with pkgs; [
