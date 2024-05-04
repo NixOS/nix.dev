@@ -1922,7 +1922,7 @@ This allows constructing arbitrarily complex compositions of derivations with th
 
 So far we have seen artificial examples illustrating the various constructs in the Nix language.
 
-You should now be able to read Nix language code for simple packages and configurations, and come up with similiar explanations of the following practical examples.
+You should now be able to read Nix language code for simple packages and configurations, and come up with similar explanations of the following practical examples.
 
 ::: {note}
 The goal of the following exercises is not to understand what the code means or how it works, but how it is structured in terms of functions, attribute sets, and other Nix language data types.
