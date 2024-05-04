@@ -149,7 +149,7 @@ This phase involves review of the materials prepared by the documentation team, 
 
 The refined project plan is to be comprised of
 
-- Task breakdowns and assigments
+- Task breakdowns and assignments
 - Timeline with weekly granularity
 - Weekly schedules
 - An evaluation strategy
