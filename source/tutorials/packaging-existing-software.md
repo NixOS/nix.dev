@@ -306,7 +306,7 @@ Navigate to the project's [Tags page](https://github.com/atextor/icat/tags) to f
 In this case, the latest release tag is `v0.5`.
 
 As in the `hello` example, a hash must also be supplied.
-This time, instead of using an empty string and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command.
+This time, instead of using the empty string and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command.
 
 You need the SHA256 hash of the *contents* of the tarball (as opposed to the hash of the tarball file itself).
 Therefore pass the `--unpack` and `--type sha256` arguments:
