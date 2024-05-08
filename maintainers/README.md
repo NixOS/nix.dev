@@ -78,14 +78,13 @@ The team lead supports team members who want to take on [maintainer responsibili
 [GitHub project board]: https://github.com/orgs/NixOS/projects/15
 [NixOS calendar]: https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com
 
-## Team meetings
+## Office hours
 
-The team holds weekly meetings on Mondays 16:00-17:00 and Thursdays 16:00-17:00 (Europe/Berlin):
-- [NixOS calendar]
-- [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589)
+The team currently holds [office hours every work day](https://discourse.nixos.org/t/documentation-office-hours-onboarding-for-new-maintainers/45015).
+Check the [NixOS calendar] for details.
 
 These meetings are free for everyone to join.
-Contact [@fricklerhandwerk] to get a calendar invitation.
+Contact [@fricklerhandwerk] to get a calendar invitation for reminders and updates.
 
 ### Meeting links
 
@@ -98,20 +97,21 @@ Contact [@fricklerhandwerk] to get a calendar invitation.
 ### Meeting protocol
 
 The purpose of the meetings is to
-- make strategic decisions
+- work on documentation together
 - coordinate efforts
 - share knowledge
+- make strategic decisions
 
 As the Nix community is distributed globally, available time for synchronous communication is highly limited and therefore very valuable.
 Writing is still the primary medium of communication.
 
 To keep discussions highly focused and make their results discoverable and accessible, we will:
 
-- Prepare meeting agendas in the [collaborative scratchpad]
+- Prepare a meeting agenda in the [collaborative scratchpad]
   - Estimate and follow estimated discussion time for each agenda item
   - Pull requests have priority
   - Invite authors to the meetings if possible
-- Take notes in a [collaborative scratchpad]
+- Take notes in the [collaborative scratchpad]
 - Add notes to existing issues or pull requests as a comment and link them back to the meeting notes
 - Merge pull requests made on the last session
 - Submit new pull requests or issues
