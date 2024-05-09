@@ -80,12 +80,11 @@ Next, you will declare a dependency on the latest version of `hello`, and instru
 
 The hash cannot be known until after the archive has been downloaded and unpacked.
 Nix will complain if the hash supplied to `fetchzip` is incorrect.
-It is common practice to supply a fake one with `lib.fakeSha256` and change the derivation definition after Nix reports the correct hash:
+Set the `hash` attribute to an empty string and then use the resulting error message to determine the correct hash:
 
 ```nix
 # hello.nix
 {
-  lib,
   stdenv,
   fetchzip,
 }:
@@ -96,7 +95,7 @@ stdenv.mkDerivation {
 
   src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = lib.fakeSha256;
+    sha256 = "";
   };
 }
 ```
@@ -105,25 +104,25 @@ Save this file to `hello.nix` and run `nix-build` to observe your first build fa
 
 ```console
 $ nix-build hello.nix
-error: cannot evaluate a function that has an argument without a value ('lib')
+error: cannot evaluate a function that has an argument without a value ('stdenv')
        Nix attempted to evaluate a function as a top level expression; in
        this case it must have its arguments supplied either by default
        values, or passed explicitly with '--arg' or '--argstr'. See
-       https://nix.dev/manual/nix/2.18/language/constructs.html#functions.
+       https://nixos.org/manual/nix/stable/language/constructs.html#functions.
 
-       at /home/nix-user/hello.nix:2:3:
+       at /home/nix-user/hello.nix:3:3:
 
-            1| # hello.nix
-            2| { lib
+            2| {
+            3|   stdenv,
              |   ^
-            3| , stdenv
+            4|   fetchzip,
 ```
 
 Problem: the expression in `hello.nix` is a *function*, which only produces its intended output if it is passed the correct *arguments*.
 
 ### Building with `nix-build`
 
-`lib` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression in order to pass it as an argument to this derivation.
+`stdenv` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression in order to pass it as an argument to this derivation.
 
 The recommended way to do this is to create a `default.nix` file in the same directory as `hello.nix`, with the following contents:
 
@@ -143,7 +142,7 @@ This allows you to run `nix-build -A hello` to realize the derivation in `hello.
 :::{note}
 `callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attribute set.
 
-In this case, `callPackage` will supply `lib`, `stdenv`, and `fetchzip` to the function defined in `hello.nix`.
+In this case, `callPackage` will supply `stdenv`, and `fetchzip` to the function defined in `hello.nix`.
 :::
 
 Now run the `nix-build` command with the new argument:
@@ -164,16 +163,16 @@ error:
        error: hash mismatch in file downloaded from 'https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz':
          specified: sha256:0000000000000000000000000000000000000000000000000000
          got:       sha256:0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn
+       error: 1 dependencies of derivation '/nix/store/8l961ay0q0ydfsgby0ngz6nmkchjqd50-hello-2.12.1.drv' failed to build
 ```
 
 ### Finding the file hash
 As expected, the incorrect file hash caused an error, and Nix helpfully provided the correct one.
-In `hello.nix`, replace `lib.fakeSha256` with the correct hash:
+In `hello.nix`, replace the empty string with the correct hash:
 
 ```nix
 # hello.nix
 {
-  lib,
   stdenv,
   fetchzip,
 }:
@@ -252,7 +251,6 @@ Copy `hello.nix` to a new file `icat.nix`, and update the `pname` and `version` 
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchzip,
 }:
@@ -274,7 +272,6 @@ This time you will use [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stab
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchFromGitHub,
 }:
@@ -309,7 +306,7 @@ Navigate to the project's [Tags page](https://github.com/atextor/icat/tags) to f
 In this case, the latest release tag is `v0.5`.
 
 As in the `hello` example, a hash must also be supplied.
-This time, instead of using `lib.fakeSha256` and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command.
+This time, instead of using the empty string and letting `nix-build` report the correct one in an error, you can fetch the correct hash in the first place with the `nix-prefetch-url` command.
 
 You need the SHA256 hash of the *contents* of the tarball (as opposed to the hash of the tarball file itself).
 Therefore pass the `--unpack` and `--type sha256` arguments:
@@ -325,7 +322,6 @@ Set the correct hash for `fetchFromGitHub`:
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchFromGitHub,
 }:
@@ -379,7 +375,6 @@ Then add the argument's value `imlib2` to the list of `buildInputs` in `stdenv.m
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchFromGitHub,
   imlib2,
@@ -513,7 +508,6 @@ Add this to your derivation's input attribute set and to `buildInputs`:
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchFromGitHub,
   imlib2,
@@ -588,7 +582,6 @@ Create a `bin` directory within the `$out` directory and copy the `icat` binary 
 ```nix
 # icat.nix
 {
-  lib,
   stdenv,
   fetchFromGitHub,
   imlib2,
