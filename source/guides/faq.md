@@ -2,33 +2,6 @@
 
 ## Nix
 
-### How do I add a new binary cache?
-
-Using NixOS (≥ 22.05):
-
-```nix
-nix.settings = {
-  trusted-substituters = [ "https://cache.nixos.org" ];
-  substituters = [ "https://cache.nixos.org" ];
-};
-```
-
-Using NixOS (≤ 21.11):
-
-```nix
-nix = {
-  trustedBinaryCaches = [ "https://cache.nixos.org" ];
-  binaryCaches = [ "https://cache.nixos.org" ];
-};
-```
-
-Using `Nix`:
-
-```shell-session
-$ echo "trusted-binary-caches = https://cache.nixos.org" >> /etc/nix/nix.conf
-$ nix-build helpers/bench.nix --option extra-binary-caches https://cache.nixos.org
-```
-
 ### How to operate between Nix paths and strings?
 
 See the [Nix reference manual](nix-manual) on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
