@@ -22,7 +22,7 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 ## Members
 
-Current members are listed on the GitHub team [`@NixOS/documentation-team`](https://github.com/orgs/NixOS/teams/documentation-team).
+Current members are listed on [the website](https://nixos.org/community/teams/documentation/), and can be pinged using the GitHub team [`@NixOS/documentation-team`](https://github.com/orgs/NixOS/teams/documentation-team).
 
 ## Responsibilities
 
