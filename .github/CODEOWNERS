@@ -11,7 +11,7 @@
 # This also holds true for GitHub teams. Since almost none of our teams have write
 # permissions, you need to list all members of the team with commit access individually.
 
-* @NixOS/documentation-reviewers
+* @NixOS/documentation-team
 
 /.github/workflows/ @asymmetric
 
