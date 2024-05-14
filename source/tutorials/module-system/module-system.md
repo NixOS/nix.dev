@@ -34,7 +34,7 @@ During the tutorial, you will first write some *incorrect* configurations, creat
 - Intermediate proficiency in reading and writing the Nix language
 
 You will use two helper scripts for this exercise.
-Download {download}`map <files/map>` and {download}`geocode <files/geocode>` to your working directory.
+Download {download}`map.sh <files/map.sh>` and {download}`geocode.sh <files/geocode.sh>` to your working directory.
 
 :::{warning}
 To run the examples in this tutorial, you will need a [Google API key](https://developers.google.com/maps/documentation/maps-static/start#before-you-begin) in `$XDG_DATA_HOME/google-api/key`.
@@ -196,7 +196,7 @@ The definition `scripts.output = 42;` caused a type error: integers are not stri
 
 To make this module pass the type checks and successfully evaluate the `scripts.output` option, you will now assign a string to `scripts.output`.
 
-In this case, you will assign a shell command that runs the {download}`map <files/map>` script in the current directory.
+In this case, you will assign a shell command that runs the {download}`map <files/map.sh>` script in the current directory.
 That in turn calls the Google Maps Static API to generate a world map.
 The output is passed on to display it with [`feh`](https://feh.finalrewind.org/), a minimalistic image viewer.
 
@@ -207,7 +207,7 @@ Update `default.nix` by changing the value of `scripts.output` to the following 
    config = {
 -    scripts.output = 42;
 +    scripts.output = ''
-+      ./map size=640x640 scale=2 | feh -
++      ./map.sh size=640x640 scale=2 | feh -
 +    '';
    };
 ```
@@ -215,7 +215,7 @@ Update `default.nix` by changing the value of `scripts.output` to the following 
 ## Interlude: reproducible scripts
 
 That simple command will likely not work as intended on your system, as it may lack the required dependencies (curl and feh).
-We can solve this by packaging the raw {download}`map <files/map>` script with `pkgs.writeShellApplication`.
+We can solve this by packaging the raw {download}`map <files/map.sh>` script with `pkgs.writeShellApplication`.
 
 First, make available a `pkgs` argument in your module evaluation by adding a module that sets `config._module.args`:
 
@@ -250,7 +250,7 @@ Then change `default.nix` to have the following contents:
       name = "map";
       runtimeInputs = with pkgs; [ curl feh ];
       text = ''
-        ${./map} size=640x640 scale=2 | feh -
+        ${./map.sh} size=640x640 scale=2 | feh -
       '';
     };
   };
@@ -321,7 +321,7 @@ Make the following additions to your `default.nix` file:
       name = "map";
       runtimeInputs = with pkgs; [ curl feh ];
       text = ''
-        ${./map} size=640x640 scale=2 | feh -
+        ${./map.sh} size=640x640 scale=2 | feh -
       '';
     };
 +
@@ -396,7 +396,7 @@ The result of this represents the list of command line arguments to pass to the 
 ## Conditional definitions
 Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case.
 
-You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This means that when the option isn't defined, the value of such an option is `null`, a value that can be checked against in a conditional.
+You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This _does not_ automatically mean that when the option isn't defined, the value of such an option is `null` -- we still need to define a default value.
 
 Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
 
@@ -409,6 +409,7 @@ Add the `map` attribute set with the `zoom` option into the top-level `options` 
 +    map = {
 +      zoom = lib.mkOption {
 +        type = lib.types.nullOr lib.types.int;
++        default = null;
 +      };
 +    };
    };
@@ -432,7 +433,7 @@ This will only add a `zoom` parameter to the script invocation if the value of `
 
 ## Default values
 
-Let's say that in our application we want to have a different default behavior that sets the zoom level to `2`, such that automatic zooming has to be enabled explicitly.
+Let's say that in our application we want to have a different default behavior that sets the zoom level to `10`, such that automatic zooming has to be enabled explicitly.
 
 This can be done with the `default` argument to [`mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix).
 Its value will be used if the value of the option declaring it is not specified otherwise.
@@ -444,7 +445,7 @@ Add the corresponding line:
      map = {
        zoom = lib.mkOption {
          type = lib.types.nullOr lib.types.int;
-+        default = 2;
++        default = 10;
        };
      };
    };
@@ -459,7 +460,7 @@ Add the `center` option now, possibly with your own location as default value:
 ```{code-block} diff
 :caption: default.nix
          type = lib.types.nullOr lib.types.int;
-         default = 2;
+         default = 10;
        };
 +
 +      center = lib.mkOption {
@@ -470,7 +471,7 @@ Add the `center` option now, possibly with your own location as default value:
    };
 ```
 
-To implement this behavior, you will use the {download}`geocode <files/geocode>` utility, which turns location names into coordinates.
+To implement this behavior, you will use the {download}`geocode <files/geocode.sh>` utility, which turns location names into coordinates.
 There are multiple ways of making a new package accessible, but as an exercise, you will add it as an option in the module system.
 
 First, add a new option to accommodate the package:
@@ -496,7 +497,7 @@ Then define the value for that option where you make the raw script reproducible
 +    scripts.geocode = pkgs.writeShellApplication {
 +      name = "geocode";
 +      runtimeInputs = with pkgs; [ curl jq ];
-+      text = ''exec ${./geocode} "$@"'';
++      text = ''exec ${./geocode.sh} "$@"'';
 +    };
 +
      scripts.output = pkgs.writeShellApplication {
@@ -542,7 +543,7 @@ Reference this new file in `default.nix` using the `imports` attribute:
 
 ```{code-block} diff
 :caption: default.nix
- { pkgs, lib, config ... }: {
+ { pkgs, lib, config, ... }: {
 
 +  imports = [
 +    ./marker.nix
