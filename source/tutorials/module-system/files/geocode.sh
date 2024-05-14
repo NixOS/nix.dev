@@ -1,53 +1,50 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cachedir=~/.cache/google-api/geocode
-mkdir -p "$cachedir"
-hash=$(echo "$1" | sha256sum - | cut -d' ' -f1)
-cachefile="$cachedir/$hash"
+rational_regex='-?[[:digit:]]+(\.[[:digit:]]+)?'
+result_regex="$rational_regex,$rational_regex"
 
-if [[ ! -f "$cachefile" ]]; then
+keyFile=${XDG_DATA_HOME:-~/.local/share}/google-api/key
 
-  keyFile=${XDG_DATA_HOME:-~/.local/share}/google-api/key
-
-  if [[ ! -f "$keyFile" ]]; then
+if [[ ! -f "$keyFile" ]]; then
     mkdir -p "$(basename "$keyFile")"
     echo "No Google API key found in $keyFile" >&2
     echo "For getting one, see https://developers.google.com/maps/documentation/geocoding/overview#before-you-begin" >&2
     exit 1
-  fi
+fi
 
-  key=$(cat "$keyFile")
+key=$(cat "$keyFile")
 
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' exit
 
-  tmp=$(mktemp -d)
-  trap 'rm -rf "$tmp"' exit
+output=$tmp/output
 
-  output=$tmp/output
-
-  curlArgs=(
+curlArgs=(
     https://maps.googleapis.com/maps/api/geocode/json
     --silent --show-error --get --output "$output" --write-out '%{http_code}'
     --data-urlencode address="$1"
-  )
+)
 
-  #echo curl ''${curlArgs[@]@Q} >&2
+#echo curl ''${curlArgs[@]@Q} >&2
 
-  curlArgs+=(--data-urlencode key="$key")
+curlArgs+=(--data-urlencode key="$key")
 
-  if status=$(curl "${curlArgs[@]}"); then
+if status=$(curl "${curlArgs[@]}"); then
     if [[ "$status" == 200 ]]; then
-      jq -r '.results[0].geometry.location as $loc | "\($loc | .lat),\($loc | .lng)"' "$output" > "$cachefile"
+        result=$(jq -r '.results[0].geometry.location as $loc | "\($loc | .lat),\($loc | .lng)"' "$output")
+        if ! [[ $result =~ $result_regex ]]; then
+            echo "Got a bad result of: '$result'" >&2
+            exit 1
+        else
+            echo "$result"
+        fi
     else
-      echo "API returned non-200 HTTP status code $status, output is" >&2
-      cat "$output" >&2
-      exit 1
+        echo "API returned non-200 HTTP status code $status, output is" >&2
+        cat "$output" >&2
+        exit 1
     fi
-  else
-    code=$?
-    echo "curl exited with code $code" >&2
+else
+    echo "curl exited with code $?" >&2
     exit 1
-  fi
 fi
-
-cat "$cachefile"
