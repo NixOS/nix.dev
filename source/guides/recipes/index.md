@@ -4,6 +4,7 @@
 ```{toctree}
 :maxdepth: 1
 
+add-binary-cache.md
 Automatic environments <direnv>
 sharing-dependencies.md
 dependency-management.md
