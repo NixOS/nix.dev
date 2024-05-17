@@ -1,0 +1,6 @@
+{ ... }:
+{
+  config = {
+    name = "Boaty McBoatface";
+  };
+}
