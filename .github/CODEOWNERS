@@ -21,9 +21,4 @@ source/guides/recipes/python-environment.md @alejandrosame
 source/tutorials/module-system @infinisil @asymmetric @proofconstruction
 source/tutorials/packaging-existing-software.md @proofconstruction
 
-/source/tutorials/nixos/integration-testing-using-virtual-machines.md @olafklingt
-/source/tutorials/nixos/nixos-configuration-on-vm.md @olafklingt
-/vale/ @olafklingt
-
-
 /maintainers/documentation-survey.md @henrik-ch
