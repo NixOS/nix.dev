@@ -30,5 +30,6 @@
 /tutorials/learning-journey/sharing-dependencies /guides/recipes/sharing-dependencies 301
 /tutorials/learning-journey/packaging-existing-software /tutorials/packaging-existing-software 301
 /tutorials/file-sets /tutorials/working-with-local-files 301
+/tutorials/module-system/module-system /tutorials/module-system/deep-dive 301
 
 /permalink/stub-ld /guides/faq#how-to-run-non-nix-executables 301
