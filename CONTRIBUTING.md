@@ -18,7 +18,7 @@ Enter the development environment with `nix-shell`, or [set up direnv](https://n
 
 and open a browser at <http://localhost:5500>.
 
-As you make changes, your browser should auto-reload within a few seconds.
+As you make changes, your browser should auto-reload.
 
 To manually test [redirects](./_redirects):
 
