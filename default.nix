@@ -121,6 +121,7 @@ in
       pkgs.niv
       pkgs.python310.pkgs.black
       pkgs.vale
+      pkgs.netlify-cli
     ];
   };
 }
