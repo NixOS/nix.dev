@@ -24,8 +24,7 @@ To manually test [redirects](./_redirects):
 
 ```shell-session
 [nix-shell:nix.dev]$ nix-build -A build
-[nix-shell:nix.dev]$ cd result
-[nix-shell:nix.dev]$ netlify dev
+[nix-shell:nix.dev]$ netlify dev -d result
 ```
 
 ## Updating reference manuals
