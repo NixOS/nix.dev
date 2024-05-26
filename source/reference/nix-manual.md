@@ -17,7 +17,7 @@ This page is pre-processed before rendering with Sphinx. For details:
 ```{toctree}
 :hidden:
 
-Nix pre-release (development) <https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download>
+Nix pre-release (development) <https://nix.dev/manual/nix/development/>
 Nix @nix-latest@ (latest) <https://nix.dev/manual/nix/latest/>
 Nix @nix-rolling@ (in Nixpkgs rolling) <https://nix.dev/manual/nix/rolling/>
 Nix @nix-stable@ (in Nixpkgs @nixpkgs-stable@) <https://nix.dev/manual/nix/stable/>
@@ -26,7 +26,7 @@ Nix @nix-prev-stable@ (in Nixpkgs @nixpkgs-prev-stable@) <https://nix.dev/manual
 
 The Nix reference manual is available for multiple versions:
 
-- [Nix pre-release](https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download)
+- [Nix pre-release](https://nix.dev/manual/nix/development/)
 
   Development build from the `master` branch of the [Nix repository](https://github.com/NixOS/nix)
 
