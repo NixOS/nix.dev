@@ -2,7 +2,7 @@
 
 This guide shows how to use the Nix [`post-build-hook`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-post-build-hook) configuration option to automatically upload build results to an S3-compatible binary cache.
 
-## Implementation Caveats
+## Implementation caveats
 
 This is a simple and working example, but it is not suitable for all use cases.
 
@@ -17,7 +17,7 @@ A more advanced implementation might pass the store paths to a user-supplied dae
 <!-- TODO: this information will move: https://github.com/NixOS/nix/issues/7769 -->
 This tutorial assumes you have [configured an S3-compatible binary cache](https://nixos.org/manual/nix/stable/package-management/s3-substituter.html), and that the `root` user's default AWS profile can upload to the bucket.
 
-# Set up a Signing Key
+# Set up a signing key
 
 Use [`nix-store --generate-binary-cache-key`](https://nixos.org/manual/nix/stable/command-ref/nix-store/generate-binary-cache-key.html) to create a pair of cryptographic keys.
 You will sign paths with the private key, and distribute the public key for verifying the authenticity of the paths.
@@ -68,7 +68,7 @@ Then make sure the hook program is executable by the `root` user:
 # chmod +x /etc/nix/upload-to-cache.sh
 ```
 
-# Updating Nix Configuration
+# Updating nix configuration
 
 Edit `/etc/nix/nix.conf` to run our hook, by adding the following
 configuration snippet at the end:
