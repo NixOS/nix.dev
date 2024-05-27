@@ -35,3 +35,6 @@
 /permalink/stub-ld /guides/faq#how-to-run-non-nix-executables 301
 /manual/nix/unstable https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download 200
 /manual/nix/development https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download 200
+
+# Fix Nix manual links from search results
+/manual/nix/*/stable/* /manual/nix/:splat 301
