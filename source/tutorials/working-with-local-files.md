@@ -85,13 +85,12 @@ In addition to the included file, this also prints its [file type](https://nixos
 ## Example project
 
 To further experiment with the library, make a sample project.
-Create a new directory, enter it,
-and set up `niv` to pin the Nixpkgs dependency:
+Create a new directory, enter it, and set up `npins` to pin the Nixpkgs dependency:
 
 ```shell-session
 $ mkdir fileset
 $ cd fileset
-$ nix-shell -p niv --run "niv init --nixpkgs nixos/nixpkgs --nixpkgs-branch nixos-23.11"
+$ nix-shell -p npins --run "npins init --bare; npins add github nixos nixpkgs --branch nixos-23.11"
 ```
 
 Then create a `default.nix` file with the following contents:

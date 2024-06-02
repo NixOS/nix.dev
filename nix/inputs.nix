@@ -1,13 +1,11 @@
 # An abstraction over the different source pins in this directory
 {
 
-  # The main niv pins, these are without any standard names:
+  # The main npins sources, these are without any standard names:
   # {
   #   <name> = <source>;
   # }
-  main = import ./sources.nix {
-    sourcesFile = ./sources.json;
-  };
+  main = import ../npins { };
 
   # Sources for Nix releases, the attribute name is the release version.
   # These are done specially because updating these is non-trivial.
@@ -26,11 +24,10 @@
     ) (builtins.fromJSON (builtins.readFile ./nix-versions.json));
 
   # Sources for Nixpkgs releases, the attribute name is the release name.
-  # These can be updated with the standard niv tooling, but are tracked separately to avoid having to filter them out during processing.
+  # These can be updated with the standard npins tooling, but are tracked separately to avoid having to filter them out during processing.
   # See ./update-nixpkgs-releases.nix
-  nixpkgs =
-    import ./sources.nix {
-      sourcesFile = ./nixpkgs-versions.json;
-    };
+  nixpkgs = import ../npins {
+    json = ./sources.json;
+  };
 
 }

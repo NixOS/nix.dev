@@ -7,6 +7,6 @@
 add-binary-cache.md
 Automatic environments <direnv>
 sharing-dependencies.md
-dependency-management.md
+Managing remote sources <./dependency-management.md>
 Python development environment <./python-environment.md>
 ```
