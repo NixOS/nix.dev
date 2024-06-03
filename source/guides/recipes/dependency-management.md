@@ -44,7 +44,7 @@ Add `npins` to the development environment for your project to have it readily a
 +  shell = pkgs.mkShellNoCC {
 +    inputsFrom = [ package ];
 +    packages = with pkgs; [
-+      niv
++      npins
 +    ];
 +  };
  }
