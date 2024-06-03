@@ -5,8 +5,7 @@
 In various Nix examples, you'll often see references to [\<nixpkgs>](https://github.com/NixOS/nixpkgs), as follows.
 
 ```nix
-{ pkgs ? import <nixpkgs> {}
-}:
+{ pkgs ? import <nixpkgs> {} }:
 
 ...
 ```
@@ -39,4 +38,4 @@ When choosing a commit, it is recommended to follow either
 ## Next steps
 
 - For more examples and details of the different ways to pin `nixpkgs`, see {ref}`ref-pinning-nixpkgs`.
-- [](dependency-management-niv)
+- [](dependency-management-npins)

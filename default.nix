@@ -1,14 +1,13 @@
-{ inputs ? import ./nix/inputs.nix
-, system ? builtins.currentSystem
-,
-}:
-let
-  pkgs = import inputs.nixpkgs."23.05" {
+{
+  inputs ? import ./nix/inputs.nix,
+  system ? builtins.currentSystem,
+  pkgs ? import inputs.nixpkgs."23.05" {
     config = { };
     overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
-  };
-
+  },
+}:
+let
   lib = pkgs.lib;
   releases = import ./nix/releases.nix { inherit lib inputs system; };
 
@@ -118,7 +117,7 @@ in
       devmode
       update-nix-releases
       update-nixpkgs-releases
-      pkgs.niv
+      pkgs.npins
       pkgs.python310.pkgs.black
       pkgs.vale
       pkgs.netlify-cli

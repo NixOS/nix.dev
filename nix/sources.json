@@ -1,26 +1,150 @@
 {
-    "nixpkgs-rolling": {
-        "branch": "nixpkgs-unstable",
-        "description": "Nix Packages collection & NixOS",
-        "homepage": "",
+  "pins": {
+    "18.09": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
         "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e976fa8f49c35cf28496301a1ef2aa23ad576b56",
-        "sha256": "1kq9wkwaf4kfv2p29jdqwfkbadmx1isbkaryqcrrjah4wskwa1rw",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/e976fa8f49c35cf28496301a1ef2aa23ad576b56.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-18.09",
+      "revision": "a7e559a5504572008567383c3dc8e142fa7a8633",
+      "url": "https://github.com/nixos/nixpkgs/archive/a7e559a5504572008567383c3dc8e142fa7a8633.tar.gz",
+      "hash": "16j95q58kkc69lfgpjkj76gw5sx8rcxwi3civm0mlfaxxyw9gzp6"
     },
-    "poetry2nix": {
-        "branch": "master",
-        "description": "Convert poetry projects to nix automagically [maintainer=@adisbladis] ",
-        "homepage": "",
-        "owner": "nix-community",
-        "repo": "poetry2nix",
-        "rev": "fe0dcb4c9b44162a385f1170895fe6a392ed71b5",
-        "sha256": "0cxccm7hzcmizhbg79rdqimjndin98waibw824cmgzwwqkyzl9lv",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/poetry2nix/archive/fe0dcb4c9b44162a385f1170895fe6a392ed71b5.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    "19.03": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-19.03",
+      "revision": "34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59",
+      "url": "https://github.com/nixos/nixpkgs/archive/34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59.tar.gz",
+      "hash": "11z6ajj108fy2q5g8y4higlcaqncrbjm3dnv17pvif6avagw4mcb"
+    },
+    "19.09": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-19.09",
+      "revision": "75f4ba05c63be3f147bcc2f7bd4ba1f029cedcb1",
+      "url": "https://github.com/nixos/nixpkgs/archive/75f4ba05c63be3f147bcc2f7bd4ba1f029cedcb1.tar.gz",
+      "hash": "157c64220lf825ll4c0cxsdwg7cxqdx4z559fdp7kpz0g6p8fhhr"
+    },
+    "20.03": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-20.03",
+      "revision": "1db42b7fe3878f3f5f7a4f2dc210772fd080e205",
+      "url": "https://github.com/nixos/nixpkgs/archive/1db42b7fe3878f3f5f7a4f2dc210772fd080e205.tar.gz",
+      "hash": "05k9y9ki6jhaqdhycnidnk5zrdzsdammbk5lsmsbz249hjhhgcgh"
+    },
+    "20.09": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-20.09",
+      "revision": "1c1f5649bb9c1b0d98637c8c365228f57126f361",
+      "url": "https://github.com/nixos/nixpkgs/archive/1c1f5649bb9c1b0d98637c8c365228f57126f361.tar.gz",
+      "hash": "0f2nvdijyxfgl5kwyb4465pppd5vkhqxddx6v40k2s0z9jfhj0xl"
+    },
+    "21.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-21.05",
+      "revision": "022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf",
+      "url": "https://github.com/nixos/nixpkgs/archive/022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf.tar.gz",
+      "hash": "12q00nbd7fb812zchbcnmdg3pw45qhxm74hgpjmshc2dfmgkjh4n"
+    },
+    "21.11": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-21.11",
+      "revision": "eabc38219184cc3e04a974fe31857d8e0eac098d",
+      "url": "https://github.com/nixos/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
+      "hash": "04ffwp2gzq0hhz7siskw6qh9ys8ragp7285vi1zh8xjksxn1msc5"
+    },
+    "22.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-22.05",
+      "revision": "380be19fbd2d9079f677978361792cb25e8a3635",
+      "url": "https://github.com/nixos/nixpkgs/archive/380be19fbd2d9079f677978361792cb25e8a3635.tar.gz",
+      "hash": "154x9swf494mqwi4z8nbq2f0sp8pwp4fvx51lqzindjfbb9yxxv5"
+    },
+    "22.11": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-22.11",
+      "revision": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
+      "url": "https://github.com/nixos/nixpkgs/archive/ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b.tar.gz",
+      "hash": "1xi53rlslcprybsvrmipm69ypd3g3hr7wkxvzc73ag8296yclyll"
+    },
+    "23.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-23.05",
+      "revision": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
+      "url": "https://github.com/nixos/nixpkgs/archive/70bdadeb94ffc8806c0570eb5c2695ad29f0e421.tar.gz",
+      "hash": "05cbl1k193c9la9xhlz4y6y8ijpb2mkaqrab30zij6z4kqgclsrd"
+    },
+    "23.11": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-23.11",
+      "revision": "a62e6edd6d5e1fa0329b8653c801147986f8d446",
+      "url": "https://github.com/nixos/nixpkgs/archive/a62e6edd6d5e1fa0329b8653c801147986f8d446.tar.gz",
+      "hash": "1v2yywgvd1npixjn571rrs6ijqpnzm4svf3yr2xc9n7bswla5ad1"
+    },
+    "24.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-24.05",
+      "revision": "805a384895c696f802a9bf5bf4720f37385df547",
+      "url": "https://github.com/nixos/nixpkgs/archive/805a384895c696f802a9bf5bf4720f37385df547.tar.gz",
+      "hash": "1q7y5ygr805l5axcjhn0rn3wj8zrwbrr0c6a8xd981zh8iccmx0p"
     }
+  },
+  "version": 3
 }
+

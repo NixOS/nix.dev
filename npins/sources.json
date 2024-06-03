@@ -1,0 +1,30 @@
+{
+  "pins": {
+    "nixpkgs-rolling": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixpkgs-unstable",
+      "revision": "6132b0f6e344ce2fe34fc051b72fb46e34f668e0",
+      "url": "https://github.com/nixos/nixpkgs/archive/6132b0f6e344ce2fe34fc051b72fb46e34f668e0.tar.gz",
+      "hash": "0xh6fmkn2p8ivwqymb9gymfz07lw16fycyipgiydhxzgx6y9j7gd"
+    },
+    "poetry2nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "poetry2nix"
+      },
+      "branch": "master",
+      "revision": "fe0dcb4c9b44162a385f1170895fe6a392ed71b5",
+      "url": "https://github.com/nix-community/poetry2nix/archive/fe0dcb4c9b44162a385f1170895fe6a392ed71b5.tar.gz",
+      "hash": "0cxccm7hzcmizhbg79rdqimjndin98waibw824cmgzwwqkyzl9lv"
+    }
+  },
+  "version": 3
+}
+
