@@ -28,14 +28,14 @@ $ cat /etc/nix/key.public
 example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
 ```
 
-Then update [`nix.conf`](../command-ref/conf-file.md) on any machine that will access the cache.
-Add the cache URL to [`substituters`](../command-ref/conf-file.md#conf-substituters) and the public key to [`trusted-public-keys`](../command-ref/conf-file.md#conf-trusted-public-keys):
+Then update [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html) on any machine that will access the cache.
+Add the cache URL to [`substituters`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-substituters) and the public key to [`trusted-public-keys`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-trusted-public-keys):
 
     substituters = https://cache.nixos.org/ s3://example-nix-cache
     trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
 
 Machines that build for the cache must sign derivations using the private key.
-On those machines, add the path to the key file to the [`secret-key-files`](../command-ref/conf-file.md#conf-secret-key-files) field in their [`nix.conf`](../command-ref/conf-file.md):
+On those machines, add the path to the key file to the [`secret-key-files`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-secret-key-files) field in their [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html):
 
     secret-key-files = /etc/nix/key.private
 
