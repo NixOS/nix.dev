@@ -35,11 +35,11 @@ Add the cache URL to [`substituters`](https://nixos.org/manual/nix/stable/comman
     trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
 
 Machines that build for the cache must sign derivations using the private key.
-On those machines, add the path to the key file to the [`secret-key-files`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-secret-key-files) field in their [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html):
+The path to the file containing the private key you just generated must be added to the [`secret-key-files`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-secret-key-files) field in the [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html) of those machines:
 
     secret-key-files = /etc/nix/key.private
 
-We will restart the Nix daemon in a later step.
+You will restart the Nix daemon in a later step.
 
 # Implementing the build hook
 
