@@ -33,5 +33,5 @@
 /tutorials/module-system/module-system /tutorials/module-system/deep-dive 301
 
 /permalink/stub-ld /guides/faq#how-to-run-non-nix-executables 301
-/manual/nix/unstable https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download 200
-/manual/nix/development https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download 200
+/manual/nix/unstable/* https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download/1/manual/:splat 200
+/manual/nix/development/* https://hydra.nixos.org/job/nix/master/build.x86_64-linux/latest/download/1/manual/:splat 200

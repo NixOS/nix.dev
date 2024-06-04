@@ -52,7 +52,7 @@ Rolling releases follow [`master`](https://github.com/NixOS/nixpkgs/branches/all
 [`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch, but offer fewer stability guarantees.
 
 :::{tip}
-Consult the [`nix-channel`](https://nixos.org/manual/nix/unstable/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
+Consult the [`nix-channel`](https://nix.dev/manual/nix/2.22/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
 :::
 
 ## Are there any impurities left in sandboxed builds?
