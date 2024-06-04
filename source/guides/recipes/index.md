@@ -9,4 +9,5 @@ Automatic environments <direnv>
 sharing-dependencies.md
 Managing remote sources <./dependency-management.md>
 Python development environment <./python-environment.md>
+post-build-hook.md
 ```
