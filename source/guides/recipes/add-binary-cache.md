@@ -1,3 +1,4 @@
+(custom-binary-cache)=
 # Configure Nix to use a custom binary cache
 
 Nix can be configured to use a binary cache with the [`substituters`](https://nix.dev/manual/nix/2.21/command-ref/conf-file.html#conf-substituters) and [`trusted-public-keys`](https://nix.dev/manual/nix/2.21/command-ref/conf-file.html#conf-trusted-public-keys) settings, either exclusively or in addition to cache.nixos.org.
