@@ -953,7 +953,7 @@ Example:
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs
 ```
 
-The value of a [lookup path](https://nixos.org/manual/nix/unstable/language/constructs/lookup-path) is a file system path that depends on the value of [`builtins.nixPath`](https://nixos.org/manual/nix/stable/language/builtin-constants#builtins-nixPath).
+The value of a [lookup path](https://nix.dev/manual/nix/2.22/language/constructs/lookup-path) is a file system path that depends on the value of [`builtins.nixPath`](https://nix.dev/manual/nix/2.22/language/builtin-constants#builtins-nixPath).
 
 In practice, `<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`.
 
