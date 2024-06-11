@@ -43,8 +43,7 @@ pkgs.mkShellNoCC {
 ```
 
 This describes a shell environment with an instance of `python3` that includes the `flask` package using [`python3.withPackages`](https://nixos.org/manual/nixpkgs/stable/#python.withpackages-function).
-It also contains [`curl`], a utility to perform web
-requests, and [`jq`], a tool to parse and format JSON documents.
+It also contains [`curl`], a utility to perform web requests, and [`jq`], a tool to parse and format JSON documents.
 
 [`curl`]: https://search.nixos.org/packages?show=curl
 [`jq`]: https://search.nixos.org/packages?show=jq
