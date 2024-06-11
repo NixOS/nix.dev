@@ -49,6 +49,10 @@ let
             if [[ -f ${nix.doc}/share/doc/nix/manual/_redirects ]]; then
               sed '/^#/d;/^$/d;s#^\(.*\) \(.*\) #/manual/nix/${version}\1 /manual/nix/${version}\2 #g' ${nix.doc}/share/doc/nix/manual/_redirects >> $out/_redirects
             fi
+
+            # provide a single-page view from mdBook's print feature.
+            # this is hacky but cheap and does work.
+            sed -z 's|\s*window\.addEventListener(\x27load\x27, function() {\s*window\.setTimeout(window.print, 100);\s*});||g' ${nix.doc}/share/doc/nix/manual/print.html > $out/manual/nix/${version}/nix-${version}.html
           '';
           # Redirects from mutable URLs like /manual/nix/latest/... to /manual/nix/2.21/...
           mutableRedirect = mutable: immutable: ''
