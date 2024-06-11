@@ -73,15 +73,15 @@ The output of `evalModules` contains information about all evaluated modules, an
 
 Here's a helper script to parse and evaluate our `default.nix` file with [`nix-instantiate --eval`](https://nixos.org/manual/nix/stable/command-ref/nix-instantiate) and print the output as JSON:
 
-```{literalinclude} eval.sh
+```{literalinclude} eval.bash
 :language: bash
-:caption: eval.sh
+:caption: eval.bash
 ```
 
 As long as every definition has a corresponding declaration, evaluation will be successful.
 If there is an option definition that has not been declared, or the defined value has the wrong type, the module system will throw an error.
 
-Running the script (`./eval.sh`) should show an output that matches what we have configured:
+Running the script (`./eval.bash`) should show an output that matches what we have configured:
 
 ```{code-block}
 {
