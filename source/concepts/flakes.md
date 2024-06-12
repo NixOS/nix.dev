@@ -68,7 +68,7 @@ In particular:
 This led to a situation where the stable interface was only sparsely maintained for multiple years, and repeatedly suffered breakages due to ongoing development.
 Meanwhile, the new interface was adopted widely enough for evolving its design without negatively affecting users to become very challenging.
 
-As of the [2023](https://discourse.nixos.org/t/nix-community-survey-2023-results/33124) survey, 84% respondents, rely on experimental features.
+As of the [2023](https://discourse.nixos.org/t/nix-community-survey-2023-results/33124) survey, 84% of the respondents rely on experimental features.
 {term}`Nixpkgs` as a contrasting example, while featuring a `flake.nix` for compatibility, does not depend on Nix experimental features in its code base.
 
 ## Should I use flakes in my project?
