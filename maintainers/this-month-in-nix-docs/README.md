@@ -1,15 +1,17 @@
-# This month in Nix docs
-This is a script and template for compiling "This Month in Nix Docs". The process is semi-automated. The script queries a collection of Nix repositories, looking for merged PRs with documentation-related labels, RFCs (you have to look through these manually), and tracking issues in this repository.
+# This month in Nix documentation
 
-A new post is created via:
-```
-$ ./make-post.sh <from YYYY-MM-DD> <to YYYY-MM-DD> > new-post.md
-```
+This is a script and template for compiling "This month in Nix documentation".
+The process is semi-automated:
+The script queries a collection of Nix repositories, looking for merged PRs with documentation-related labels, RFCs (you have to look through these manually), and tracking issues in this repository.
 
-After this invocation a template post (`new-post.md`) will be filled out with the GitHub query results formatted as markdown at the end of the file.
+Create a new report with:
+
+```
+$ ./make-post.sh <from YYYY-MM-DD> <to YYYY-MM-DD> > report.md
+```
 
 There is some post-processing required:
-- Fill in the number and year/month at the top of the post.
+- Fill in the issue number and year/month at the top of the post.
 - Manually check the RFCs for relevance
-- Remove the "Tracking Issues" section, it's there for your convenience while writing.
+- Remove the "Tracking issues" section, it's there for your convenience while writing.
 
