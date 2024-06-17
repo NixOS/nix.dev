@@ -99,7 +99,7 @@ Then create a `default.nix` file with the following contents:
 :caption: default.nix
 {
   system ? builtins.currentSystem,
-  sources ? import ./nix/sources.nix,
+  sources ? import ./npins/default.nix,
 }:
 let
   pkgs = import sources.nixpkgs {
