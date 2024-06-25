@@ -7,4 +7,4 @@ let
     ];
   };
 in
-  result.config
+result.config
