@@ -1,6 +1,6 @@
-# Upload build results to S3
+# Setting up post-build hooks
 
-This guide shows how to use the Nix [`post-build-hook`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-post-build-hook) configuration option to automatically upload build results to an S3-compatible binary cache.
+This guide shows how to use the Nix [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-post-build-hook) configuration option to automatically upload build results to an [S3-compatible binary cache](https://nix.dev/manual/nix/2.22/store/types/s3-binary-cache-store).
 
 ## Implementation caveats
 
@@ -14,12 +14,11 @@ A more advanced implementation might pass the store paths to a user-supplied dae
 
 # Prerequisites
 
-<!-- TODO: this information will move: https://github.com/NixOS/nix/issues/7769 -->
-This tutorial assumes you have [configured an S3-compatible binary cache](https://nixos.org/manual/nix/stable/package-management/s3-substituter.html), and that the `root` user's default AWS profile can upload to the bucket.
+This tutorial assumes you have [configured an S3-compatible binary cache](https://nix.dev/manual/nix/2.22/store/types/s3-binary-cache-store#authenticated-writes-to-your-s3-compatible-binary-cache), and that the `root` user's default AWS profile can upload to the bucket.
 
 # Set up a signing key
 
-Use [`nix-store --generate-binary-cache-key`](https://nixos.org/manual/nix/stable/command-ref/nix-store/generate-binary-cache-key.html) to create a pair of cryptographic keys.
+Use [`nix-store --generate-binary-cache-key`](https://nix.dev/manual/nix/2.22/command-ref/nix-store/generate-binary-cache-key) to create a pair of cryptographic keys.
 You will sign paths with the private key, and distribute the public key for verifying the authenticity of the paths.
 
 ```console
@@ -28,18 +27,20 @@ $ cat /etc/nix/key.public
 example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
 ```
 
-Then update [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html) on any machine that will access the cache.
-Add the cache URL to [`substituters`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-substituters) and the public key to [`trusted-public-keys`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-trusted-public-keys):
+[](custom-binary-cache) on any machine that will access the bucket.
+For example, add the cache URL to [`substituters`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-substituters) and the public key to [`trusted-public-keys`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-trusted-public-keys) in `nix.conf`:
 
-    substituters = https://cache.nixos.org/ s3://example-nix-cache
-    trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
+```
+substituters = https://cache.nixos.org/ s3://example-nix-cache
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= example-nix-cache-1:1/cKDz3QCCOmwcztD2eV6Coggp6rqc9DGjWv7C0G+rM=
+```
 
 Machines that build for the cache must sign derivations using the private key.
-The path to the file containing the private key you just generated must be added to the [`secret-key-files`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-secret-key-files) field in the [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html) of those machines:
+The path to the file containing the private key you just generated must be added to the [`secret-key-files`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-secret-key-files) setting for those machines:
 
-    secret-key-files = /etc/nix/key.private
-
-You will restart the Nix daemon in a later step.
+```
+secret-key-files = /etc/nix/key.private
+```
 
 # Implementing the build hook
 
@@ -54,15 +55,12 @@ echo "Uploading paths" $OUT_PATHS
 exec nix copy --to "s3://example-nix-cache" $OUT_PATHS
 ```
 
-> **Note**
->
-> The `$OUT_PATHS` variable is a space-separated list of Nix store
-> paths. In this case, we expect and want the shell to perform word
-> splitting to make each output path its own argument to `nix
-> store sign`. Nix guarantees the paths will not contain any spaces,
-> however a store path might contain glob characters. The `set -f`
-> disables globbing in the shell.
-Then make sure the hook program is executable by the `root` user:
+The `$OUT_PATHS` variable is a space-separated list of Nix store paths.
+In this case, we expect and want the shell to perform word splitting to make each output path its own argument to `nix store sign`.
+Nix guarantees the paths will not contain any spaces, however a store path might contain glob characters.
+The `set -f` disables globbing in the shell.
+
+Make sure the hook program is executable by the `root` user:
 
 ```console
 # chmod +x /etc/nix/upload-to-cache.sh
@@ -70,12 +68,17 @@ Then make sure the hook program is executable by the `root` user:
 
 # Updating nix configuration
 
-Edit `/etc/nix/nix.conf` to run our hook, by adding the following
-configuration snippet at the end:
+Set the [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-post-build-hook) configuration option on the local machine to run the hook:
 
-    post-build-hook = /etc/nix/upload-to-cache.sh
+```
+post-build-hook = /etc/nix/upload-to-cache.sh
+```
 
-Then, restart the `nix-daemon`.
+Then restart the `nix-daemon` an all involved machines, e.g. with
+
+```
+pkill nix-daemon
+```
 
 # Testing
 
@@ -92,17 +95,11 @@ post-build-hook: Uploading paths /nix/store/ibcyipq5gf91838ldx40mjsp0b8w9n18-exa
 /nix/store/ibcyipq5gf91838ldx40mjsp0b8w9n18-example
 ```
 
-Then delete the path from the store, and try substituting it from the
-binary cache:
+To check that the hook took effect, delete the path from the store, and try substituting it from the binary cache:
 
 ```console
 $ rm ./result
 $ nix-store --delete /nix/store/ibcyipq5gf91838ldx40mjsp0b8w9n18-example
-```
-
-Now, copy the path back from the cache:
-
-```console
 $ nix-store --realise /nix/store/ibcyipq5gf91838ldx40mjsp0b8w9n18-example
 copying path '/nix/store/m8bmqwrch6l3h8s0k3d673xpmipcdpsa-example from 's3://example-nix-cache'...
 warning: you did not specify '--add-root'; the result might be removed by the garbage collector
@@ -111,8 +108,6 @@ warning: you did not specify '--add-root'; the result might be removed by the ga
 
 # Conclusion
 
-We now have a Nix installation configured to automatically sign and
-upload every local build to a remote binary cache.
+You have configured Nix to automatically sign and upload every local build to a remote S3-compatible binary cache.
 
-Before deploying this to production, be sure to consider the
-[implementation caveats](#implementation-caveats).
+Before deploying this to production, be sure to consider the [implementation caveats](#implementation-caveats).
