@@ -63,7 +63,7 @@ See [](./sharing-dependencies) for details, and note that here you have to pass 
 
 As an example, we will use the previously created expression with an older version of Nixpkgs.
 
-Enter the development environment, create a new directory, and set up niv with a different version of Nixpkgs:
+Enter the development environment, create a new directory, and set up npins with a different version of Nixpkgs:
 
 ```shell-session
 $ nix-shell
