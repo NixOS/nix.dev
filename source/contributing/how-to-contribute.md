@@ -40,7 +40,7 @@ And it will lead to better code and documentation in the long run.
 
 We can only fix issues that we know of, so please report any issue you encounter.
 
-- Report issues with {term}`Nix` (including the [Nix reference manual](https://nixos.org/manual/nix/stable)) at <https://github.com/NixOS/nix/issues>.
+- Report issues with {term}`Nix` (including the [Nix reference manual](https://nix.dev/manual/nix/stable)) at <https://github.com/NixOS/nix/issues>.
 
 - Report issues with {term}`Nixpkgs` or {term}`NixOS` (including packages, configuration modules, the [Nixpkgs manual](https://nixos.org/manual/nixpkgs/stable), and the [NixOS manual](https://nixos.org/manual/nixos/stable)) at <https://github.com/NixOS/nixpkgs/issues>.
 

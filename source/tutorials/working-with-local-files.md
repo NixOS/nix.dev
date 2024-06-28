@@ -1,8 +1,8 @@
 (file-sets-tutorial)=
 # Working with local files
 
-To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nixos.org/manual/nix/stable/language/derivations#attr-builder).
-Since by default, the `builder` runs in an [isolated environment](https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
+To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nix.dev/manual/nix/stable/language/derivations#attr-builder).
+Since by default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
 
@@ -11,7 +11,7 @@ Using these features directly can be tricky however:
   Furthermore, it always adds the entire directory to the store, including unneeded files,
   which causes unnecessary new builds when they change.
 
-- The [`builtins.path`](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-path) function
+- The [`builtins.path`](https://nix.dev/manual/nix/stable/language/builtins.html#builtins-path) function
   (and equivalently [`lib.sources.cleanSourceWith`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith))
   can address these problems.
   However, it's often hard to express the desired path selection using the `filter` function interface.
@@ -24,7 +24,7 @@ It abstracts over built-in functionality and offers a safer and more convenient 
 A _file set_ is a data type representing a collection of local files.
 File sets can be created, composed, and manipulated with the various functions of the library.
 
-You can explore and learn about the library with [`nix repl`](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-repl):
+You can explore and learn about the library with [`nix repl`](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-repl):
 
 ```shell-session
 $ nix repl -f channel:nixos-23.11
@@ -40,7 +40,7 @@ trace: /home/user (all files in directory)
 null
 ```
 
-All functions that expect a file set for an argument can also accept a [path](https://nixos.org/manual/nix/stable/language/values#type-path).
+All functions that expect a file set for an argument can also accept a [path](https://nix.dev/manual/nix/stable/language/values#type-path).
 Such path arguments are then [implicitly turned into sets](https://nixos.org/manual/nixpkgs/stable/#sec-fileset-path-coercion) that contain _all_ files under the given path.
 In the previous trace this is indicated by `(all files in directory)`.
 
@@ -63,7 +63,7 @@ This is in contrast to coercion of paths to strings such as in `"${./.}"`,
 which copies the whole directory to the Nix store on evaluation!
 
 :::{warning}
-When using the [`flakes` and `nix-command` experimental features](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
+When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
 a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository!
 :::
 
@@ -79,7 +79,7 @@ trace: /home/user
 trace: - some-file (regular)
 ```
 
-In addition to the included file, this also prints its [file type](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-readFileType).
+In addition to the included file, this also prints its [file type](https://nix.dev/manual/nix/stable/language/builtins.html#builtins-readFileType).
 
 
 ## Example project
@@ -553,7 +553,7 @@ this derivation will be built:
 This includes too much though, as not all of these files are needed to build the derivation as originally intended.
 
 :::{note}
-When using the [`flakes` and `nix-command` experimental features](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
+When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
 this function isn't needed, because `nix build` by default only allows access to files tracked by Git.
 However, in order to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
 :::

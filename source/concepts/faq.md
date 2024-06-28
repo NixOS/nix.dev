@@ -61,7 +61,7 @@ Yes. There is:
 
 - CPU architecture—great effort being made to avoid compilation of native instructions in favour of hardcoded supported ones.
 - System's current time/date.
-- The filesystem used for building (see also [`TMPDIR`](https://nix.dev/manual/nix/2.18/command-ref/env-common.html#env-TMPDIR)).
+- The filesystem used for building (see also [`TMPDIR`](https://nix.dev/manual/nix/stable/command-ref/env-common.html#env-TMPDIR)).
 - Linux kernel parameters, such as:
   - [IPv6 capabilities](https://github.com/NixOS/nix/issues/5615).
   - binfmt interpreters, e.g., those configured with [`boot.binfmt.emulatedSystems`](https://search.nixos.org/options?show=boot.binfmt.emulatedSystems).

@@ -71,7 +71,7 @@ The output of `evalModules` contains information about all evaluated modules, an
 :caption: default.nix
 ```
 
-Here's a helper script to parse and evaluate our `default.nix` file with [`nix-instantiate --eval`](https://nixos.org/manual/nix/stable/command-ref/nix-instantiate) and print the output as JSON:
+Here's a helper script to parse and evaluate our `default.nix` file with [`nix-instantiate --eval`](https://nix.dev/manual/nix/stable/command-ref/nix-instantiate) and print the output as JSON:
 
 ```{literalinclude} eval.bash
 :language: bash
