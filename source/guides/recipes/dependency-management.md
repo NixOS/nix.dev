@@ -95,8 +95,9 @@ nix-build .. -A build --arg sources 'import ./npins'
 
 ## Migrating from `niv`
 
-A previous version of this guide recommended using [`niv`](https://github.com/nmattia/niv/), which is not maintained anymore.
-If you have a project using `niv`, import remote source definitions into `npins`:
+A previous version of this guide recommended using [`niv`](https://github.com/nmattia/niv/), a similar pin manager written in Haskell.
+
+If you have a project using `niv`, you can import remote source definitions into `npins`:
 
 ```shell-session
 npins import-niv
