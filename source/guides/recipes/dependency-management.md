@@ -27,7 +27,7 @@ Import the generated `npins/default.nix` as the default value for the argument t
 }
 ```
 
-`nix-build` will call the top-level function with the empty attribute set `{}`, or with the attributes passed via [`--arg`](https://nixos.org/manual/nix/stable/command-ref/nix-build#opt-arg) or [`--argstr`](https://nixos.org/manual/nix/stable/command-ref/nix-build#opt-argstr).
+`nix-build` will call the top-level function with the empty attribute set `{}`, or with the attributes passed via [`--arg`](https://nix.dev/manual/nix/stable/command-ref/nix-build#opt-arg) or [`--argstr`](https://nix.dev/manual/nix/stable/command-ref/nix-build#opt-argstr).
 This pattern allows [overriding remote sources](overriding-sources-npins) programmatically.
 
 Add `npins` to the development environment for your project to have it readily available:

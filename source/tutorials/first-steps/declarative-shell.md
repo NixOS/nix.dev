@@ -168,7 +168,7 @@ Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with
 
 - [`mkShell` documentation](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell)
 - Nixpkgs [shell functions and utilities](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-functions) documentation
-- [`nix-shell` documentation](https://nix.dev/manual/nix/2.18/command-ref/nix-shell)
+- [`nix-shell` documentation](https://nix.dev/manual/nix/stable/command-ref/nix-shell)
 
 ## Next steps
 

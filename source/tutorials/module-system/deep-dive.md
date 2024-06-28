@@ -102,9 +102,9 @@ nix-instantiate --eval eval.nix -A config.scripts.output
 ```
 
 :::{dropdown} Detailed explanation
-[`nix-instantiate --eval`](https://nixos.org/manual/nix/stable/command-ref/nix-instantiate) parses and evaluates the Nix file at the specified path, and prints the result.
+[`nix-instantiate --eval`](https://nix.dev/manual/nix/stable/command-ref/nix-instantiate) parses and evaluates the Nix file at the specified path, and prints the result.
 `evalModules` produces an attribute set where the final configuration values appear in the `config` attribute.
-Therefore we evaluate the Nix expression in `eval.nix` at the [attribute path](https://nixos.org/manual/nix/stable/language/operators#attribute-selection) `config.scripts.output`.
+Therefore we evaluate the Nix expression in `eval.nix` at the [attribute path](https://nix.dev/manual/nix/stable/language/operators#attribute-selection) `config.scripts.output`.
 :::
 
 The error message indicates that the `scripts.output` option is used but not defined: a value must be set for the option before accessing it.
