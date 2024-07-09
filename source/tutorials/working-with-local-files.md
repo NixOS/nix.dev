@@ -375,7 +375,7 @@ Create a file set containing a union of the files to exclude (`fs.unions [ ... ]
         (fs.maybeMissing ./result)
         ./default.nix
         ./build.nix
-        ./nix
+        ./npins
       ]);
 ```
 
@@ -518,7 +518,7 @@ Create a local Git repository and add all files except `src/select.o` and `./res
 $ git init
 Initialized empty Git repository in /home/user/fileset/.git/
 $ git add -A
-$ git reset src/select.o result
+$ git reset src/select.c result
 ```
 
 Re-use this selection of files with `gitTracked`:
