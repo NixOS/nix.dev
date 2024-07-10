@@ -116,6 +116,8 @@ Set `GREETING` so it can be used in the shell environment:
 +  GREETING = "Hello, Nix!";
  }
 ```
+:::{warning}
+The + is not part of the actual code, its just in here to highlight the addition of this line. Further down we use the + again for the same reason, please keep that in mind and dont copy it into your code.
 
 Any attribute name passed to `mkShellNoCC` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
 
