@@ -3,7 +3,6 @@
 # - https://docs.netlify.com/routing/redirects/redirect-options/
 
 /tutorials/install-nix /install-nix 301
-/anti-patterns/language /recipes/best-practices 301
 /faq /recipes/faq 301
 /tutorials/contributing /contributing 301
 /tutorials/first-steps/nix-language /tutorials/nix-language 301
@@ -22,6 +21,7 @@
 /contributing/style-guide /contributing/documentation/style-guide 301
 /tutorials/nixos/build-and-deploy/* /tutorials/nixos/:splat 301
 /tutorials/first-steps/declarative-and-reproducible-developer-environments /tutorials/first-steps/declarative-shell 301
+/anti-patterns/language /guides/best-practices 301
 /recipes/best-practices /guides/best-practices 301
 /recipes/troubleshooting /guides/troubleshooting 301
 /recipes/faq /guides/faq 301
