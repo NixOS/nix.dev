@@ -434,7 +434,7 @@ The easiest way to find what you need is on search.nixos.org/packages.
 :::
 
 Unfortunately in this case, [searching for `x11`](https://search.nixos.org/packages?query=x11) produces too many irrelevant results because X11 is ubiquitous.
-On the left side bar there is a list package sets, and [selecting `xorg`](https://search.nixos.org/packages?channel=23.11&buckets={%22package_attr_set%22%3A[%22xorg%22]%2C%22package_license_set%22%3A[]%2C%22package_maintainers_set%22%3A[]%2C%22package_platforms%22%3A[]}&query=x11) shows something promising.
+On the left side bar there is a list package sets, and [selecting `xorg`](https://search.nixos.org/packages?buckets={%22package_attr_set%22%3A[%22xorg%22]%2C%22package_license_set%22%3A[]%2C%22package_maintainers_set%22%3A[]%2C%22package_platforms%22%3A[]}&query=x11) shows something promising.
 
 In case all else fails, it helps to become familiar with searching the [Nixpkgs source code](https://github.com/nixos/nixpkgs) for keywords.
 
