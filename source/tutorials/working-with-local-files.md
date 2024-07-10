@@ -99,7 +99,7 @@ Then create a `default.nix` file with the following contents:
 :caption: default.nix
 {
   system ? builtins.currentSystem,
-  sources ? import ./npins/default.nix,
+  sources ? import ./npins,
 }:
 let
   pkgs = import sources.nixpkgs {
@@ -264,7 +264,7 @@ trace: /home/user/fileset
 trace: - build.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
-trace: - nix (all files in directory)
+trace: - npins (all files in directory)
 trace: - world.txt (regular)
 this derivation will be built:
   /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
@@ -283,7 +283,7 @@ trace: /home/user/fileset
 trace: - build.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
-trace: - nix (all files in directory)
+trace: - npins (all files in directory)
 trace: - world.txt (regular)
 /nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
 ```
@@ -331,7 +331,7 @@ trace: /home/user/fileset
 trace: - build.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
-trace: - nix (all files in directory)
+trace: - npins (all files in directory)
 trace: - world.txt (regular)
 /nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
 ```
@@ -353,7 +353,7 @@ Again, Nix will start from scratch:
 $ nix-build
 trace: /home/user/fileset
 trace: - default.nix (regular)
-trace: - nix (all files in directory)
+trace: - npins (all files in directory)
 trace: - build.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
@@ -518,7 +518,7 @@ Create a local Git repository and add all files except `src/select.o` and `./res
 $ git init
 Initialized empty Git repository in /home/user/fileset/.git/
 $ git add -A
-$ git reset src/select.c result
+$ git reset src/select.o result
 ```
 
 Re-use this selection of files with `gitTracked`:
@@ -539,7 +539,7 @@ trace: - build.nix (regular)
 trace: - build.sh (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
-trace: - nix (all files in directory)
+trace: - npins (all files in directory)
 trace: - src
 trace:   - select.c (regular)
 trace:   - select.h (regular)
