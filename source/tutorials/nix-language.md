@@ -1936,7 +1936,7 @@ let
   message = "hello world";
 in
 pkgs.mkShellNoCC {
-  buildInputs = with pkgs; [ cowsay ];
+  packages = with pkgs; [ cowsay ];
   shellHook = ''
     cowsay ${message}
   '';
@@ -1953,7 +1953,7 @@ Explanation:
 - The name `message` is bound to the string value `"hello world"`.
 - The attribute `mkShellNoCC` of the `pkgs` set is a function that is passed an attribute set as argument.
   Its return value is also the result of the outer function.
-- The attribute set passed to `mkShellNoCC` has the attributes `buildInputs` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
+- The attribute set passed to `mkShellNoCC` has the attributes `packages` (set to a list with one element: the `cowsay` attribute from `pkgs`) and `shellHook` (set to an indented string).
 - The indented string contains an interpolated expression, which will expand the value of `message` to yield `"hello world"`.
 
 
