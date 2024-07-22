@@ -108,6 +108,7 @@ let
         python ${pkgs.writeText "live.py" script}
       '';
     };
+  metrics = with lib; collect isDerivation (pkgs.callPackage ./maintainers/metrics { });
   update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
   update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
@@ -119,6 +120,7 @@ in
     inputsFrom = [ nix-dev ];
     packages = [
       devmode
+      metrics
       update-nix-releases
       update-nixpkgs-releases
       pkgs.npins
