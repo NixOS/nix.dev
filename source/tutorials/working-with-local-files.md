@@ -366,17 +366,31 @@ One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/stable
 
 Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
 
-```{code-block} nix
+```{code-block} diff
 :caption: build.nix
-  sourceFiles =
-    fs.difference
-      ./.
-      (fs.unions [
-        (fs.maybeMissing ./result)
-        ./default.nix
-        ./build.nix
-        ./npins
-      ]);
+-  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
++  sourceFiles =
++    fs.difference
++      ./.
++      (fs.unions [
++        (fs.maybeMissing ./result)
++        ./default.nix
++        ./build.nix
++        ./npins
++      ]);
+```
+
+This will work as expected.
+
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+this derivation will be built:
+  /nix/store/gr2hw3gdjc28fmv0as1ikpj7lya4r51f-fileset.drv
+...
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
 ```
 
 Changing any of the excluded files now doesn't necessarily cause a new build anymore:
