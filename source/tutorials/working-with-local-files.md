@@ -366,18 +366,17 @@ One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/stable
 
 Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
 
-```{code-block} diff
+```{code-block} nix
 :caption: build.nix
--  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
-+  sourceFiles =
-+    fs.difference
-+      ./.
-+      (fs.unions [
-+        (fs.maybeMissing ./result)
-+        ./default.nix
-+        ./build.nix
-+        ./npins
-+      ]);
+  sourceFiles =
+    fs.difference
+      ./.
+      (fs.unions [
+        (fs.maybeMissing ./result)
+        ./default.nix
+        ./build.nix
+        ./npins
+      ]);
 ```
 
 This will work as expected:
