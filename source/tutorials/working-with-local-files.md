@@ -380,7 +380,7 @@ Create a file set containing a union of the files to exclude (`fs.unions [ ... ]
 +      ]);
 ```
 
-This will work as expected.
+This will work as expected:
 
 ```
 $ nix-build
