@@ -379,6 +379,19 @@ Create a file set containing a union of the files to exclude (`fs.unions [ ... ]
       ]);
 ```
 
+This will work as expected:
+
+```
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+this derivation will be built:
+  /nix/store/gr2hw3gdjc28fmv0as1ikpj7lya4r51f-fileset.drv
+...
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
+```
+
 Changing any of the excluded files now doesn't necessarily cause a new build anymore:
 
 ```
