@@ -1,3 +1,4 @@
+(post-build-hook)=
 # Setting up post-build hooks
 
 This guide shows how to use the Nix [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-post-build-hook) configuration option to automatically upload build results to an [S3-compatible binary cache](https://nix.dev/manual/nix/2.22/store/types/s3-binary-cache-store).
