@@ -15,4 +15,5 @@ working-with-local-files.md
 nixos/index.md
 cross-compilation.md
 module-system/index.md
+binary-cache-setup.md
 ```
