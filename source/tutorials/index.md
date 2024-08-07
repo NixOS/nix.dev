@@ -16,4 +16,5 @@ nixos/index.md
 cross-compilation.md
 module-system/index.md
 binary-cache-setup.md
+distributed-builds-setup.md
 ```
