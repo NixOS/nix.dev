@@ -14,7 +14,7 @@ let
   nix-dev =
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
-      src = ./.;
+      src = lib.cleanSource ./.;
       nativeBuildInputs = with pkgs.python310.pkgs; [
         linkify-it-py
         myst-parser
