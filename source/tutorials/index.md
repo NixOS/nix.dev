@@ -17,4 +17,5 @@ cross-compilation.md
 module-system/index.md
 binary-cache-setup.md
 distributed-builds-setup.md
+provisioning-remote-machines.md
 ```
