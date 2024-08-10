@@ -74,7 +74,7 @@ Only later it became widely used as a general way to make temporary environments
 `mkShellNoCC` is a function that produces such an environment, but without a compiler toolchain.
 
 `mkShellNoCC` takes as argument an attribute set.
-Here we give it an attribute `packages` with a list containing one item from the `pkgs` attribute set.
+Here we give it an attribute `packages` with a list containing two items from the `pkgs` attribute set.
 
 :::{Dropdown} Side note on `packages` and `buildInputs`
 You may encounter examples of `mkShell` or `mkShellNoCC` that add packages to the `buildInputs` or `nativeBuildInputs` attributes instead.
