@@ -848,6 +848,55 @@ in
 
 <!-- TODO: link to escaping rules -->
 
+(indented-strings)=
+### Indented strings
+
+Also known as “multi-line strings”.
+
+The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
+
+Indented strings are denoted by *double single quotes* (`'' ''`).
+
+Example:
+
+```{code-block} nix
+:class: expression
+''
+multi
+line
+string
+''
+```
+
+```{code-block}
+:class: value
+"multi\nline\nstring\n"
+```
+
+Equal amounts of prepended white space are trimmed from the result.
+
+Example:
+
+```{code-block} nix
+:class: expression
+''
+  one
+   two
+    three
+''
+```
+
+```{code-block}
+:class: value
+"one\n two\n  three\n"
+```
+
+:::{note}
+Indented strings also support [string interpolation](string-interpolation). See the section on Nix's [`string`](https://nix.dev/manual/nix/stable/language/values#type-string) type in the [Nix manual](https://nix.dev/manual/nix/stable/).
+:::
+
+<!-- TODO: See [escaping rules](). -->
+
 (file-system-paths)=
 ### File system paths
 
@@ -974,51 +1023,6 @@ While you will encounter many such examples, we recommend to [avoid lookup paths
 [NIX_PATH]: https://nix.dev/manual/nix/stable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [manual-primitives]: https://nix.dev/manual/nix/stable/language/values.html#primitives
-
-(indented-strings)=
-### Indented strings
-
-Also known as “multi-line strings”.
-
-The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.
-
-Indented strings are denoted by *double single quotes* (`'' ''`).
-
-Example:
-
-```{code-block} nix
-:class: expression
-''
-multi
-line
-string
-''
-```
-
-```{code-block}
-:class: value
-"multi\nline\nstring\n"
-```
-
-Equal amounts of prepended white space are trimmed from the result.
-
-Example:
-
-```{code-block} nix
-:class: expression
-''
-  one
-   two
-    three
-''
-```
-
-```{code-block}
-:class: value
-"one\n two\n  three\n"
-```
-
-<!-- TODO: See [escaping rules](). -->
 
 (functions)=
 ## Functions
