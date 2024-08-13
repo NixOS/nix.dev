@@ -11,7 +11,8 @@ In various Nix examples, you'll often see the following:
 ```
 
 :::{note}
-`<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`. See [lookup paths](../nix-language.md#lookup-paths) in the next chapter, [](../nix-language.md).
+`<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`.
+Find more information on [lookup paths](../nix-language.md#lookup-paths) in [](../nix-language.md).
 :::
 
 This is a **convenient** way to quickly demonstrate a Nix expression and get it working by importing Nix packages.
