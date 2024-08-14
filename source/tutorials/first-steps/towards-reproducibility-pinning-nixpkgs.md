@@ -2,13 +2,18 @@
 
 # Towards reproducibility: pinning Nixpkgs
 
-In various Nix examples, you'll often see references to [\<nixpkgs>](https://github.com/NixOS/nixpkgs), as follows.
+In various Nix examples, you'll often see the following:
 
 ```nix
 { pkgs ? import <nixpkgs> {} }:
 
 ...
 ```
+
+:::{note}
+`<nixpkgs>` points to the file system path of some revision of {term}`Nixpkgs`.
+Find more information on [lookup paths](lookup-path-tutorial) in [](reading-nix-language).
+:::
 
 This is a **convenient** way to quickly demonstrate a Nix expression and get it working by importing Nix packages.
 
