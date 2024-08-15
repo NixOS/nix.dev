@@ -179,7 +179,7 @@ git version 2.33.1
 
 There are three things going on here:
 
-1. `--run` executes the given [Bash](https://www.gnu.org/software/bash/) command within the Nix shell and exits when it's done.
+1. `--run` executes the given [Bash command](https://www.gnu.org/software/bash/manual/bash.html#Shell-Commands) within the environment created by Nix, and exits when it's done.
 
    You can use this with `nix-shell` whenever you want to quickly run a program you don't have installed on your machine.
 
