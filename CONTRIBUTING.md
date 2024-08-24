@@ -27,6 +27,16 @@ To manually test [redirects](./_redirects):
 [nix-shell:nix.dev]$ netlify dev -d result
 ```
 
+## Building the reference manuals
+
+By default nix.dev builds without the various versions of the Nix reference manual, as that takes quite a while due to how it's currently implemented.
+To enable building the manuals:
+
+```shell-session
+[nix-shell:nix.dev]$ nix-build -A build --arg withManuals true
+[nix-shell:nix.dev]$ devmode --arg withManuals true
+```
+
 ## Updating reference manuals
 
 With the current setup, the [Nix manual hosted on nix.dev](https://nix.dev/reference/nix-manual) does not get updated automatically with new releases.

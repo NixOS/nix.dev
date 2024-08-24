@@ -6,6 +6,7 @@
     overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
   },
+  withManuals ? false, # building the manuals is expensive
 }:
 let
   lib = pkgs.lib;
@@ -34,7 +35,7 @@ let
           };
         in
         ''
-          cp -f ${substitutedNixManualReference} source/reference/nix-manual.md
+          ${lib.optionalString withManuals "cp -f ${substitutedNixManualReference} source/reference/nix-manual.md"}
           make html
         '';
       installPhase =
@@ -62,6 +63,7 @@ let
         ''
           mkdir -p $out/manual/nix
           cp -R build/html/* $out/
+        '' + lib.optionalString withManuals ''
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
         '';
@@ -76,12 +78,13 @@ let
         from livereload import Server
         from subprocess import Popen, PIPE
         import shlex
+        import sys
 
         server = Server()
 
         def nix_build():
           p = Popen(
-            shlex.split("nix-build -A build"),
+            shlex.split("nix-build -A build") + sys.argv[1:],
             # capture output as text
             stdout=PIPE,
             stderr=PIPE,
