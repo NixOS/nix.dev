@@ -116,7 +116,6 @@ in
   build = nix-dev;
 
   shell = pkgs.mkShell {
-    inputsFrom = [ nix-dev ];
     packages = [
       devmode
       update-nix-releases
