@@ -141,7 +141,7 @@ print("Hello, World!")
 
 Reserve the largest header (`#`) for the title.
 
-Use Markdown headers `##` through `####` to divide up content in the body of the document, but prefer to stay in the `##`-`###` range.
+Use Markdown headers `##` through `###` to divide up content in the body of the document.
 Finer grained headings are not necessarily better.
 
 ### One line per sentence
