@@ -61,7 +61,13 @@ Describe the subject factually and use the imperative voice in direct instructio
 
 Do not assume a personal relationship with readers, prefer clarity and brevity to emotional appeal.
 
-Use second person ("you") to refer to the reader and only use "we" to refer to the Nix Community.
+Use "you" to refer to the reader and only use "we" to refer to the authors.
+Both should be rarely needed.
+
+For example:
+
+> You will have to deploy secrets to the remote machine.
+> We chose to show the explicit, manual process using `scp` here, but there are various tools to automate that.
 
 ### Be correct, cite sources
 
