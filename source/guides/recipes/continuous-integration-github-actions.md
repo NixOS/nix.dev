@@ -9,7 +9,7 @@ myst:
 
 # Continuous integration with GitHub Actions
 
-In this tutorial, we'll show you **a few short steps** to get started using [GitHub Actions](https://github.com/features/actions) as your continuous integration (CI) workflow for commits and pull requests.
+In this guide, we'll show you **a few short steps** to get started using [GitHub Actions](https://github.com/features/actions) as your continuous integration (CI) workflow for commits and pull requests.
 
 One benefit of Nix is that **CI can build and cache developer environments for every project** on every branch using binary caches.
 
@@ -109,4 +109,3 @@ jobs:
 
 [magic-nix-cache]: https://github.com/DeterminateSystems/magic-nix-cache-action/
 [github-actions-caching-limits]: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
-

@@ -12,7 +12,7 @@ nix-language.md
 Packaging existing software <packaging-existing-software.md>
 Package parameters and overrides <callpackage.md>
 working-with-local-files.md
-nixos/index.md
 cross-compilation.md
 module-system/index.md
+nixos/index.md
 ```
