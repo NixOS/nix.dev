@@ -15,8 +15,8 @@ Learn how to configure, test, and install or deploy NixOS.
 ## Deploying NixOS
 
 - [](provisioning-remote-machines)
-- [](deploying-nixos-using-terraform)
 - [](installing-nixos-on-a-raspberry-pi)
+- [](deploying-nixos-using-terraform)
 
 
 ```{toctree}
@@ -26,7 +26,7 @@ nixos-configuration-on-vm.md
 building-bootable-iso-image.md
 building-and-running-docker-images.md
 integration-testing-using-virtual-machines.md
+provisioning-remote-machines.md
 installing-nixos-on-a-raspberry-pi.md
 deploying-nixos-using-terraform.md
-provisioning-remote-machines.md
 ```
