@@ -81,7 +81,50 @@ It is explicitly encouraged to update or restructure the manuals where appropria
 ## Markup and source
 
 ### Code samples
-At the bare minimum code samples that are _intended_ to work should work.
+
+Always motivate code before showing it, describing in words what it is for or what it will do.
+
+::::{admonition} Counter-example
+:class: error
+
+````markdown
+Run this command:
+
+```bash
+:(){ :|:& };:
+```
+````
+::::
+
+Non-trivial examples may need additional explanation, especially if they use concepts from outside the given context.
+Use a collapsed content box for explanation that would distract from the reading flow.
+
+::::{admonition} Example
+:class: tip
+
+````markdown
+Set off a [fork bomb](https://en.wikipedia.org/wiki/Fork_bomb):
+
+```bash
+:(){ :|:& };:
+```
+
+:::{dropdown} Detailed explanation
+This Bash command defines and executes a function `:` that recursively spawns copies of itself, quickly consuming system resources
+:::
+````
+::::
+
+Always explain code in the text itself.
+Use comments in code samples very sparingly, for instance to highlight a particular aspect.
+
+Readers tend to glance over large amounts of code when scanning for information, even if most of it is comments.
+Especially beginners will likely find reading more complex-looking code strenuous and may therefore avoid it altogether.
+
+If a code sample appears to require a lot of inline explanation, consider replacing it with a simpler one.
+If that's not possible, break the example down into multiple parts, explain them separately, and then show the combined result at the end.
+
+Code samples that are _intended_ to work should work.
 
 If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain so beforehand.
 Many readers will get stuck trying to make example code work without reading ahead to find out that the code isn't intended to work.
