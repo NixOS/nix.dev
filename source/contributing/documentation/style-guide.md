@@ -17,7 +17,7 @@ The same holds for communication directed to contributors and maintainers:
 This is a public project, and many people will read what you write.
 Use this leverage with care.
 
-- Follow the evidence-based [plain language guidelines].
+- Follow the evidence-based [plain language guidelines](https://www.plainlanguage.gov/guidelines/).
 
   - Don't use jargon. Readers may not be familiar with particular technical terms.
   - Don't use long, complicated words if there are shorter, simpler words that convey the same meaning.
@@ -31,8 +31,6 @@ Use this leverage with care.
   For example, don't write:
 
   > Going forward, let's now add the `python310` package to `buildInputs` as we have seen in the previous tutorial.
-
-[plain language guidelines]: https://www.plainlanguage.gov/guidelines/
 
 ### Use inclusive language
 
@@ -91,41 +89,42 @@ print("Hello, World!")
 ````
 
 ### Headers
+
 Reserve the largest header (`#`) for the title.
 
 Use Markdown headers `##` through `####` to divide up content in the body of the document, but prefer to stay in the `##`-`###` range.
 Finer grained headings are not necessarily better.
 
 ### One line per sentence
+
 Write one sentence per line.
-This makes review easier since the git diffs are line-oriented and the smallest level of granularity in the GitHub review interface is a line of text.
+
+This makes long sentences immediately visible.
+It also makes it easier to review changes and provide direct suggestions, since the GitHub review interface is line-oriented.
 
 ### Links
 
-Unless explicitly required to point to the latest version of an external resource, all references should be [permanent links].
+Use [reference links](https://github.github.com/gfm/#reference-link) – sparingly – to ease source readability.
+Put definitions close to their first use.
+
+:::{admonition} Example
+:class: tip
+
+```markdown
+We follow the [Diátaxis](https://diataxis.fr/) approach to structure documentation.
+This framework distinguishes between [tutorials], [guides], [reference], and [explanation].
+
+[tutorials]: https://diataxis.fr/tutorials/
+[guides]: https://diataxis.fr/how-to-guides/
+[reference]: https://diataxis.fr/reference/
+[explanation]: https://diataxis.fr/explanation/
+```
+:::
+
+Unless explicitly required to point to the latest version of an external resource, all references should be [permanent links](https://en.wikipedia.org/wiki/Permalink).
 
 Many web services offer permalinks, such as:
 
-- [GitHub URLs to specific commits]
-- [Wikipedia URLs to specific page versions]
-- [Internet Archive "Save Page Now" for persisting web pages]
-
-Use [reference links][ref_links] to keep the source legible.
-All links in a section should be grouped together at the end.
-For instance:
-
-```
-## This is a section
-Lorem ipsum dolor sit amet, [consectetur][adipiscing] elit. Suspendisse rutrum ligula porta, condimentum dui dignissim, imperdiet mi. Sed interdum lacus nec varius posuere. Duis auctor varius purus, ut ornare purus tempus eu. Aliquam erat volutpat. Etiam eget nunc malesuada, elementum neque eget, mollis metus. Nulla suscipit felis nec accumsan fermentum.
-
-Integer volutpat erat sem, non varius turpis facilisis eu. Nam eu [ullamcorper][magna]. Morbi iaculis vel urna in condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec tellus sit amet tellus venenatis porta in et ex. Nunc sodales nisl magna, at dictum diam sollicitudin id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec facilisis, sapien eu faucibus iaculis, nibh nibh condimentum enim, nec egestas turpis erat nec libero. Curabitur ut tincidunt odio. Praesent sed tincidunt tortor.
-
-[adipiscing]: example.com
-[magna]: example.com
-```
-
-[ref_links]: https://github.github.com/gfm/#reference-link
-[permanent links]: https://en.wikipedia.org/wiki/Permalink
-[GitHub URLs to specific commits]: https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files
-[Wikipedia URLs to specific page versions]: https://en.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages
-[Internet Archive "Save Page Now" for persisting web pages]: https://web.archive.org/save
+- [GitHub URLs to specific commits](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)
+- [Wikipedia URLs to specific page versions](https://en.wikipedia.org/wiki/Wikipedia:Linking_to_Wikipedia#Permanent_links_to_old_versions_of_pages)
+- [Internet Archive "Save Page Now" for persisting web pages](https://web.archive.org/save)
