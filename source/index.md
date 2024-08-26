@@ -57,7 +57,7 @@ The following list illustrates some of what can be achieved with the Nix ecosyst
 - {ref}`Reproducible development environments <ad-hoc-envs>`.
 - Easy installation of software over URLs.
 - Easy transfer of software environments between computers.
-- {ref}`Declarative specification of Linux machines <deploying-nixos-using-terraform>`.
+- {ref}`Declarative specification of Linux machines <deploy-nixos-using-terraform>`.
 - {ref}`Reproducible integration testing using virtual machines <integration-testing-vms>`.
 - Avoidance of version conflicts with already installed software.
 - Installing software from source code.
