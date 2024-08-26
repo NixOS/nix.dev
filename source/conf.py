@@ -52,6 +52,7 @@ myst_enable_extensions = [
     "colon_fence",
     "linkify",
     "tasklist",
+    "attrs_block",
 ]
 
 # GitHub-style automatic anchors for headings
