@@ -250,7 +250,7 @@ Check that the disk layout is valid:
 nix-build -E "((import <nixpkgs> {}).nixos [ ./configuration.nix ]).installTest"
 ```
 
-This commands runs the complete installation in a virtual machine by building a derivation in the `installTest` attribute provided by the `disko` module.
+This command runs the complete installation in a virtual machine by building a derivation in the `installTest` attribute provided by the `disko` module.
 
 ## Deploy the system
 
@@ -289,4 +289,4 @@ nixos-rebuild switch --no-flake --target-host root@target-host
 
 - [`nixos-anywhere` project page][`nixos-anywhere`]
 - [`disko` project repository][`disko`]
-- [Colletion of disk layout examples](https://github.com/nix-community/disko/tree/master/example)
+- [Collection of disk layout examples](https://github.com/nix-community/disko/tree/master/example)
