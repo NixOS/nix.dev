@@ -285,6 +285,12 @@ nixos-rebuild switch --no-flake --target-host root@target-host
 
 `nixos-anywhere` is not needed any more, unless you want to change the disk layout.
 
+
+# Next steps
+
+- [](binary-cache-setup)
+- [](post-build-hooks)
+
 ## References
 
 - [`nixos-anywhere` project page][`nixos-anywhere`]
