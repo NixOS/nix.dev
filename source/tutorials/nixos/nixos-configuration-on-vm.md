@@ -13,7 +13,9 @@ Virtual machines are a practical tool for experimenting with or debugging NixOS 
 
 ## What do you need?
 
-- A working [Nix installation](https://nix.dev/manual/nix/stable/installation/installation.html) on Linux, or [NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-installation), with a graphical environment
+- A Linux system with virtualisation support
+- (optional) A graphical environment for running a graphical virtual machine
+- A working [Nix installation](https://nix.dev/manual/nix/stable/installation/installation.html)
 - Basic knowledge of the [Nix language](reading-nix-language)
 
 :::{important}
@@ -23,19 +25,15 @@ For a thorough treatment of the module system, check the [](module-system-deep-d
 
 ## Starting from a default NixOS configuration
 
-In this tutorial you will use a default configuration that is shipped with NixOS.
+:::{note}
 You can also skip this section and copy the [sample configuration](sample-nixos-config) for this tutorial into a file `configuration.nix` in the current directory.
+:::
 
-::::{admonition} NixOS
-
-On NixOS, use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
-
-Beware that the result of this command depends on your current NixOS configuration.
-The output of `nixos-generate-config` can be made reproducible in a `nix-shell` environment.
-Here we provide a configuration that is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
+Use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
+The configuration produced from the following setup also is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
+nix-shell -I nixpkgs=channel:nixos-24.05 -p "$(cat <<EOF
   let
     pkgs = import <nixpkgs> { config = {}; overlays = []; };
     iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix;
@@ -45,27 +43,34 @@ EOF
 )"
 ```
 
-It does the following:
-- Provide Nixpkgs from a [channel](ref-pinning-nixpkgs)
-- Take the configuration file for the minimal ISO image from the obtained version of the Nixpkgs repository
-- Evaluate that NixOS configuration with `pkgs.nixos`
-- Return the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
+::::{dropdown} Detailed explanation
 
-By default, the generated configuration file is written to `/etc/nixos/configuration.nix`.
-To avoid overwriting this file you have to specify the output directory.
+This `nix-shell` invocation creates an environment based on Nixpkgs obtained from a [channel](ref-pinning-nixpkgs) and adds to it a derivation that is described by the Nix expression passed as a string to the `-p` option.
+
+That Nix expression:
+- Takes the configuration file for the minimal ISO image from the obtained version of Nixpkgs found in the lookup path `<nixpkgs>`
+- Evaluates that NixOS configuration with `pkgs.nixos`
+- Returns the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
+
+:::
+
 Create a NixOS configuration in your working directory:
 
 ```shell-session
-$ nixos-generate-config --dir ./
+[nix-shell:~]$ nixos-generate-config --dir ./
 ```
+
+:::{note}
+By default, when no `--dir` is specified, the generated configuration file is written to `/etc/nixos/configuration.nix`, which typically requires `sudo` permissions.
+:::
 
 In the working directory you will then find two files:
 
 1. `hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
+
    You can ignore that file for this tutorial because it has no effect inside a virtual machine.
 
 2. `configuration.nix` contains various suggestions and comments for the initial setup of a desktop computer.
-::::
 
 The default NixOS configuration without comments is:
 
@@ -77,7 +82,7 @@ The default NixOS configuration without comments is:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 ```
 
@@ -90,6 +95,17 @@ To be able to log in, add the following lines to the returned attribute set:
   };
 ```
 
+:::{note}
+A configuration generated with `nixos-generate-config` contains this user configuration commented out.
+:::
+
+Additionally, you need to specify a password for this user.
+For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
+
+```nix
+   initialPassword = "test";
+```
+
 We add two lightweight programs as an example:
 
 ```nix
@@ -97,17 +113,6 @@ We add two lightweight programs as an example:
     cowsay
     lolcat
   ];
-```
-
-:::{admonition} NixOS
-On NixOS your configuration generated with `nixos-generate-config` contains this user configuration commented out.
-:::
-
-Additionally, you need to specify a password for this user.
-For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
-
-```nix
-initialPassword = "test";
 ```
 
 :::{warning}
@@ -143,7 +148,7 @@ The complete `configuration.nix` file looks like this:
     lolcat
   ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 ```
 
@@ -152,10 +157,10 @@ The complete `configuration.nix` file looks like this:
 A NixOS virtual machine is created with the `nix-build` command:
 
 ```shell-session
-$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 -I nixos-config=./configuration.nix
 ```
 
-This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
+This command builds the attribute `vm` from the `nixos-24.05` release of NixOS, using the NixOS configuration as specified in the relative path.
 
 ::::{dropdown} Detailed explanation
 
@@ -172,16 +177,6 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 - The [`-I` option](https://nix.dev/manual/nix/stable/command-ref/opt-common.html#opt-I) prepends entries to the search path.
 
   Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
-
-:::{admonition} NixOS
-On NixOS the `$NIX_PATH` environment variable is usually set up automatically, and there is also [a convenience command for building virtual machines](https://nixos.org/manual/nixos/stable/#sec-changing-config).
-To use the current version of `nixpkgs` to build the virtual machine:
-
-```shell-session
-nixos-rebuild build-vm -I nixos-config=./configuration.nix
-```
-:::
-::::
 
 ## Running the virtual machine
 
@@ -252,12 +247,12 @@ To create a virtual machine with a graphical user interface, add the following l
 
 These three lines activate X11, the GDM display manager (to be able to login) and Gnome as desktop manager.
 
-::::{admonition} NixOS
+:::{tip}
 
-On NixOS, use `installation-cd-graphical-gnome.nix` to generate the configuration file:
+You can also use the `installation-cd-graphical-gnome.nix` module to generate the configuration file from scratch:
 
 ```shell-session
-nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
+nix-shell -I nixpkgs=channel:nixos-24.05 -p "$(cat <<EOF
   let
     pkgs = import <nixpkgs> { config = {}; overlays = []; };
     iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
@@ -292,14 +287,14 @@ The complete `configuration.nix` file looks like this:
     initialPassword = "test";
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 ```
 
 To get graphical output, run the virtual machine without special options:
 
 ```shell-session
-$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 -I nixos-config=./configuration.nix
 $ ./result/bin/run-nixos-vm
 ```
 
@@ -347,7 +342,7 @@ Arguments to QEMU can also be added to the configuration file:
     initialPassword = "test";
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 ```
 
@@ -365,7 +360,6 @@ The NixOS manual has chapters on [X11](https://nixos.org/manual/nixos/stable/#se
 - [NixOS source code: `vm` attribute in `default.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/default.nix).
 - [Nix manual: `nix-build`](https://nix.dev/manual/nix/stable/command-ref/nix-build.html).
 - [Nix manual: common command-line options](https://nix.dev/manual/nix/stable/command-ref/opt-common.html).
-- [Nix manual: `NIX_PATH` environment variable](https://nix.dev/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH).
 - [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html) for more runtime options
 - [NixOS option search: `virtualisation.qemu`](https://search.nixos.org/options?query=virtualisation.qemu) for declarative virtual machine configuration
 
