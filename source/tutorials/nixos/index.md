@@ -18,6 +18,7 @@ Learn how to configure, test, and install or deploy NixOS.
 ## Scaling up
 
 - [](binary-cache-setup)
+- [](distributed-builds-setup-tutorial)
 
 ```{toctree}
 :maxdepth: 1
@@ -30,4 +31,5 @@ provisioning-remote-machines.md
 installing-nixos-on-a-raspberry-pi.md
 deploying-nixos-using-terraform.md
 binary-cache-setup.md
+distributed-builds-setup.md
 ```
