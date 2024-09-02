@@ -38,6 +38,12 @@ And it will lead to better code and documentation in the long run.
 
 ## Report an issue
 
+:::{note}
+For asking general questions about the code or how to do things, please use our [community communication platforms](https://nixos.org/community)
+
+To state techincal problems and propose solutions, open GitHub issues and close them when the problem is resolved or invalidated.
+:::
+
 We can only fix issues that we know of, so please report any issue you encounter.
 
 - Report issues with {term}`Nix` (including the [Nix reference manual](https://nix.dev/manual/nix/stable)) at <https://github.com/NixOS/nix/issues>.
@@ -54,7 +60,7 @@ This makes it much more likely for the issue to be resolved eventually, and is i
 - A reproducible sample is concise and unambiguous.
 
   This helps with triaging issues, understanding the problem, finding the root cause, and developing a solution.
-  Preliminary research further helps with analysis.
+  Your preliminary research further helps maintainers with analysis.
 
 - It allows anyone to determine if the issue is still relevant.
 
@@ -64,16 +70,15 @@ This makes it much more likely for the issue to be resolved eventually, and is i
 
 - The sample can be used for a regression test when solving the problem.
 
+:::{tip}
 Ideally you would also propose or sketch a solution.
 The perfect issue is, in fact, a pull request that solves the problem directly and ensures with tests that it cannot occur again.
-
-:::{note}
-Please use our [community communication platforms](https://nixos.org/community) for asking questions about the code or how to do things.
-Open GitHub issues to state problems and propose solutions, and close them when the problem is resolved or invalidated.
 :::
 
+:::{important}
 Please open issues to request new features (such as packages, modules, commands, ...) only if your are willing and able to implement them yourself.
 Then the issue can be used to gauge user interest, to determine if the feature fits into the project, and to discuss implementation strategies.
+:::
 
 ## Contribute to Nix
 
