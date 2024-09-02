@@ -57,7 +57,7 @@ Check the [Nix documentation team page](https://nixos.org/community/teams/docume
 
 ## How you can help
 
-If you like what we're doing, consider [joining the documentation team](https://nixos.org/community/teams/documentation) or [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/documentation-project) to fund ongoing maintenance and development of learning materials and other documentation.
+If you like what we're doing, consider [joining the documentation team](https://nixos.org/community/teams/documentation) or [donating to the NixOS Foundation's documentation project on Open Collective](https://opencollective.com/nixos/projects/nix-documentation) to fund ongoing maintenance and development of learning materials and other documentation.
 
 ## Recent changes
 
