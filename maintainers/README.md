@@ -24,11 +24,11 @@ The team’s reason to exist is to make that principle discoverable and reproduc
 
 Current members are listed on [the website](https://nixos.org/community/teams/documentation/), and can be pinged using the GitHub team [`@NixOS/documentation-team`](https://github.com/orgs/NixOS/teams/documentation-team).
 
-## Responsibilities
+## Roles
 
-### Team
+### Team member
 
-Ordered by priority:
+In order of priority, team members collaborate to:
 
 1. Establish and maintain guidelines for contributing to documentation in the Nix ecosystem
 1. Extend and curate [nix.dev] as the central learning resource
@@ -49,7 +49,7 @@ Ordered by priority:
 [*Nix\* Documentation* Matrix room]: https://app.element.io/#/room/#docs:nixos.org
 [changes to the NixOS Wiki]: https://matrix.to/#/#nixos-wiki:utzutzutz.net
 
-In addition, the team has to perform administrative tasks which it distributes across team members:
+In addition, the team performs administrative tasks which it distributes across team members:
 
 - Triage issues and pull requests
 - Curate the [GitHub project board]
@@ -62,7 +62,11 @@ In addition, the team has to perform administrative tasks which it distributes a
 Team members are encouraged to become maintainers and take ownership of some piece of documentation they care about.
 The team lead supports team members who want to take on [maintainer responsibilities](./responsibilities.md).
 
+Team members will have priority access to project funding from our donation budget to support their initiatives.
+
 ### Team lead
+
+In addition to the team members' responsibilities, a team lead is expected to:
 
 - Set a direction and agendas
 - Represent the team
@@ -71,6 +75,7 @@ The team lead supports team members who want to take on [maintainer responsibili
   - Manage permissions for the [GitHub team] and the [GitHub project board]
   - Update [NixOS calendar] events
   - Merge pull requests approved by team members
+  - Manage [the team's Open Collective page][documentation team on Open Collective]
 
 [GitHub team]: https://github.com/orgs/NixOS/teams/documentation-team
 [GitHub project board]: https://github.com/orgs/NixOS/projects/15
@@ -78,19 +83,13 @@ The team lead supports team members who want to take on [maintainer responsibili
 
 ## Office hours
 
-The team currently holds [office hours every work day](https://discourse.nixos.org/t/documentation-office-hours-onboarding-for-new-maintainers/45015).
-Check the [NixOS calendar] for details.
-
-These meetings are free for everyone to join.
-Contact [@fricklerhandwerk] to get a calendar invitation for reminders and updates.
-
-### Meeting links
+The documentation team currently does not hold regular meetings.
+Feel free to revive this tradition!
 
 - [Jitsi conference](https://jitsi.lassul.us/nix-documentation)
 - [Meeting notes scratchpad][collaborative scratchpad]
-- [GitHub project board]
 
-[Previous meeting notes](https://discourse.nixos.org/search?q=documentation%20team%20meeting%20notes%20%23%20%23dev%3Adocumentation%20in%3Atitle%20order%3Alatest_topic)
+A history of events, discussions, decisions, and work done is recorded in [team meeting notes](https://discourse.nixos.org/search?q=documentation%20team%20meeting%20notes%20%23%20%23dev%3Adocumentation%20in%3Atitle%20order%3Alatest_topic) and [update announcements](https://discourse.nixos.org/search?q=This%20Month%20in%20Nix%20Docs%20in%3Atitle%20order%3Alatest_topic).
 
 ### Meeting protocol
 
@@ -127,26 +126,36 @@ Meeting notes should contain:
 
 If you want to help immediately, please see [How to contribute to documentation](https://nix.dev/contributing/documentation).
 
+If you don't have time, consider donating to [documentation team on Open Collective].
+
 ## Sponsoring
 
 - [@fricklerhandwerk] serves as the team lead since 2023-02, sponsored by [Antithesis](https://antithesis.com)
 - [@zmitchell] led the Learning Journey Working Group from 2023-03 to 2023-08, sponsored by [flox](https://floxdev.com)
-- [@infinisil](https://github.com/infinisil) works on the team since 2022-11, sponsored by [Tweag]
+- [@infinisil] worked on the team between 2022-11 and 2024-05, sponsored by [Tweag]
 - [@lucperkins](https://github.com/lucperkins) served as the team lead from 2022-11 to 2023-01, sponsored by [Determinate Systems](https://determinate.systems)
 - [@fricklerhandwerk] served as the team lead from 2022-05 to 2022-10, sponsored by [Tweag]
 
 [@fricklerhandwerk]: https://github.com/fricklerhandwerk
 [@zmitchell]: https://github.com/zmitchell
 [Tweag]: https://tweag.io
+[@infinisil]: https://github.com/infinisil
 
 ## History
 
 Many thanks to past members, who helped make Nix documentation what it is today:
 
+- [@infinisil] helped lead the team between 2022-11 and 2024-05.
+  During that time he provided diligent technical reviews of countless contributions, reworked the [contribution guides for Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), and rewrote his [module system tutorial](https://nix.dev/tutorials/module-system/deep-dive) for publication.
+
+- [@olafklingt](https://github.com/olafklingt) volunteered on the team from 2022-10 to 2024-05, and was a formal member between 2022-10 and 2024-05.
+  He added an [introduction to NixOS virtual machines](https://nix.dev/tutorials/nixos/nixos-configuration-on-vm) and greatly simplified the [tutorial on NixOS VM tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines), and kept them up to date.
+  Both articles enjoy great popularity and are central elements of our tutorial series.
+
 - [@brianmcgee](https://github.com/brianmcgee) was part of the team from 2023-03 to 2023-10 and contributed to the Learning Journey Working Group effort.
 
 - [@zmitchell] led the [Learning Journey Working Group](https://discourse.nixos.org/search?q=learning%20journey%20working%20group%20-%20meeting%20notes%20in%3Atitle%20order%3Alatest_topic) from 2023-03 to 2023-08 that added a number of tutorials.
-  He published [regular updates on developments in documentation](https://discourse.nixos.org/search?q=This%20Month%20in%20Nix%20Docs%20in%3Atitle%20order%3Alatest_topic) in that period.
+  He published [regular updates on developments in documentation](https://discourse.nixos.org/search?q=This%20Month%20in%20Nix%20Docs%20in%3Atitle%20before%3A2023-10-30%20order%3Alatest_topic) in that period.
 
 - [@Mic92](https://github.com/Mic92) was a founding member and part of the team from 2022-05 to 2023-01.
   Jörg had written a great deal of documentation on the NixOS Wiki, and shared his experience to set a direction for the documentation team.
