@@ -27,7 +27,6 @@ Technical discussions happen in issue and pull request comments.
 If you are new to Nix, consider [contributing documentation](./documentation/index.md) first.
 
 This is where we need the most help and where it is the easiest to begin.
-:::
 
 Documentation and contribution guides are often incomplete or outdated, much as we would like them to be otherwise.
 We're working on it.
@@ -35,6 +34,7 @@ You can help and improve the situation for everyone by immediately solving probl
 This may slow you down with addressing your original concern.
 But it will make it a lot easier for anyone to make meaningful contributions in the future.
 And it will lead to better code and documentation in the long run.
+:::
 
 ## Report an issue
 
