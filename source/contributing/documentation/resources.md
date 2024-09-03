@@ -43,7 +43,7 @@ How to help:
 
 ## nix.dev
 
-The purpose of [nix.dev] ([source](https://github.com/nixos/nix.dev)) is to orient beginners in the Nix ecosystem.
+The purpose of [nix.dev](https://nix.dev) ([source](https://github.com/nixos/nix.dev)) is to orient beginners in the Nix ecosystem.
 
 The documentation team maintains nix.dev as editors.
 
