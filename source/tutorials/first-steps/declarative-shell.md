@@ -87,6 +87,10 @@ The `packages` attribute argument to `mkShellNoCC` is simply an alias for `nativ
 
 Enter the environment by running `nix-shell` in the same directory as `shell.nix`:
 
+:::{note}
+The first invocation of `nix-shell` on this file may take a while to download all dependencies.
+:::
+
 ```console
 $ nix-shell
 [nix-shell]$ cowsay hello | lolcat
