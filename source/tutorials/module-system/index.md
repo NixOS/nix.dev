@@ -1,3 +1,4 @@
+(module-system-tutorial)=
 # Module system
 
 Much of the power in Nixpkgs and NixOS comes from the module system.

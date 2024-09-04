@@ -28,7 +28,7 @@ You'll learn how to:
 
 - SSH access to a NixOS machine to use as a cache
 
-  If you're new to NixOS, learn about the [module system](module-system-deep-dive) and configure your first system with [](nixos-vms).
+  If you're new to NixOS, learn about the [module system](module-system-tutorial) and configure your first system with [](nixos-vms).
 
 - (optional) A public IP and DNS domain
 
