@@ -23,7 +23,10 @@ The program ‘lolcat’ is currently not installed.
 ```
 
 Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `cowsay` and `lolcat` packages.
-The first invocation of `nix-shell` may take a while to download all dependencies.
+
+:::{note}
+The first invocation of `nix-shell` for these packages may take a while to download all dependencies.
+:::
 
 ```shell-session
 $ nix-shell -p cowsay lolcat
