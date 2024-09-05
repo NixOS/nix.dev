@@ -52,6 +52,7 @@ A better solution is to create our shell environment from a `shell.nix` file.
 
 Create a file called `shell.nix` with these contents:
 
+{lineno-start=1}
 ```nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-24.05";
@@ -67,19 +68,29 @@ pkgs.mkShellNoCC {
 ```
 
 ::::{dropdown} Detailed explanation
-We use a version of [Nixpkgs pinned to a release branch](<ref-pinning-nixpkgs>), and explicitly set configuration options and overlays to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig).
+We use a version of [Nixpkgs pinned to a release branch](<ref-pinning-nixpkgs>).
+If you followed the [](ad-hoc-envs) tutorial and don't want to to download all dependencies again, specify the exact same revision as in the section [](towards-reproducibility):
 
-`nix-shell` was originally conceived as a way to construct a shell environment containing the [tools needed to debug package builds](https://nixos.org/manual/nixpkgs/stable/#sec-tools-of-stdenv), such as Make or GCC.
+{lineno-start=1 emphasize-lines="2"}
+```nix
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/2a601aafdc5605a5133a2ca506a34a3a73377247";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
+in
+```
+
+We explicitly set `config` and `overlays` to avoid them being inadvertently overridden by [global configuration](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig).
+
+`mkShellNoCC` is a function that takes as argument an attribute set.
+Here we give it an attribute `packages` with a list containing two items from the `pkgs` attribute set.
+
+:::{Dropdown} Side note on `mkShell`
+
+`nix-shell` and `mkShell` were originally conceived as a way to construct a shell environment containing the [tools needed to debug package builds](https://nixos.org/manual/nixpkgs/stable/#sec-tools-of-stdenv), such as Make or GCC.
 Only later it became widely used as a general way to make temporary environments for other purposes.
 `mkShellNoCC` is a function that produces such an environment, but without a compiler toolchain.
 
-`mkShellNoCC` takes as argument an attribute set.
-Here we give it an attribute `packages` with a list containing two items from the `pkgs` attribute set.
-
-:::{Dropdown} Side note on `packages` and `buildInputs`
 You may encounter examples of `mkShell` or `mkShellNoCC` that add packages to the `buildInputs` or `nativeBuildInputs` attributes instead.
-
-
 `mkShellNoCC` is a [wrapper around `mkDerivation`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell), so it takes the same arguments as `mkDerivation`, such as `buildInputs` or `nativeBuildInputs`.
 The `packages` attribute argument to `mkShellNoCC` is simply an alias for `nativeBuildInputs`.
 :::
