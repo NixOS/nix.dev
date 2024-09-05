@@ -22,7 +22,7 @@ $ echo no chance | lolcat
 The program ‘lolcat’ is currently not installed.
 ```
 
-Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `cowsay` and `lolcat` packages.
+Use `nix-shell` with the `-p` (`--packages`) option to specify that we need the `cowsay` and `lolcat` packages:
 
 :::{note}
 The first invocation of `nix-shell` for these packages may take a while to download all dependencies.
@@ -162,6 +162,7 @@ Python 3.10.11
 
 Exit the shell as usual to return to the previous environment.
 
+(towards-reproducibility)=
 ## Towards reproducibility
 
 These shell environments are very convenient, but the examples so far are not reproducible yet.
@@ -175,7 +176,7 @@ The following example creates a fully reproducible environment.
 You can run it anywhere, anytime to obtain the exact same version of the `git`.
 
 ```shell-session
-$ nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
+$ nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/2a601aafdc5605a5133a2ca506a34a3a73377247
 ...
 git version 2.33.1
 ```
