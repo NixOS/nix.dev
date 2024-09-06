@@ -212,6 +212,7 @@ If your binary cache is already a [remote build machine](https://nix.dev/manual/
 
 - [](custom-binary-cache) using the binary cache's hostname and the generated public key
 - [](post-build-hooks) to upload store objects to the binary cache
+- [](distributed-build-setup-tutorial)
 
 To save storage space, please refer to the following NixOS configuration attributes:
 

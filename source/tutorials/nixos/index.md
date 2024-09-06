@@ -18,7 +18,7 @@ Learn how to configure, test, and install or deploy NixOS.
 ## Scaling up
 
 - [](binary-cache-setup)
-- [](distributed-builds-setup-tutorial)
+- [](distributed-build-setup-tutorial)
 
 ```{toctree}
 :maxdepth: 1
