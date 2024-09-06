@@ -5,6 +5,7 @@ myst:
     "keywords": "Nix, deployment, remote, provisioning, nixos-anywhere, disko, partitioning, installation"
 ---
 
+(provisioning-remote-machines-tutorial)=
 # Provisioning remote machines via SSH
 
 It is possible to replace any Linux installation with a NixOS configuration on running systems using [`nixos-anywhere`] and [`disko`].

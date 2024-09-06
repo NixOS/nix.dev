@@ -8,20 +8,16 @@ Learn how to configure, test, and install or deploy NixOS.
 - [](building-bootable-iso-image)
 - [](building-and-running-docker-images)
 
-## Nix related services
-
-- [](binary-cache-setup)
-
-## Integration testing
+## Testing and deploying NixOS configurations
 
 - [](integration-testing-using-virtual-machines)
-
-## Deploying NixOS
-
-- [](provisioning-remote-machines)
+- [](provisioning-remote-machines-tutorial)
 - [](installing-nixos-on-a-raspberry-pi)
 - [](deploying-nixos-using-terraform)
 
+## Scaling up
+
+- [](binary-cache-setup)
 
 ```{toctree}
 :maxdepth: 1
