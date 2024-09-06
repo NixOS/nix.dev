@@ -13,7 +13,21 @@ It is possible to replace any Linux installation with a NixOS configuration on r
 [`nixos-anywhere`]: https://nix-community.github.io/nixos-anywhere/
 [`disko`]: https://github.com/nix-community/disko
 
-## Requirements
+## Introduction
+
+In this tutorial, you will deploy a NixOS configuration to a running computer.
+
+### What will you learn?
+
+You'll learn how to
+- Specify a minimal NixOS configuration with a declarative disk layout and SSH access
+- Check that a configuration is valid
+- Deploy and update a NixOS configuration on a remote machine
+
+### What do you need?
+
+- Familiarity with the [Nix language](reading-nix-language)
+- Familiarity with the [](module-system-tutorial)
 
 For a successful unattended installation, ensure for the *target machine* that:
 
@@ -96,7 +110,7 @@ Create a new file `single-disk-layout.nix` with the disk layout specification:
 
 {lineno-start=1}
 ```nix
-{ lib, ... }:
+{ ... }:
 
 {
   disko.devices.disk.main = {
