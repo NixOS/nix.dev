@@ -1,6 +1,6 @@
 ---
 name: Tutorial request
-about: Suggest a topic for a new tutorial and propose where to put it in the [planned outline](https://github.com/NixOS/nix.dev/issues/572).
+about: Suggest a topic for a new tutorial
 labels: tutorial
 ---
 
@@ -10,6 +10,7 @@ labels: tutorial
 
 **Prerequisites**
 <!-- What do you already know how to do? -->
+<!-- Think about where the new article would fit the tutorial series: https://github.com/NixOS/nix.dev/issues/572 -->
 
 
 **Outline**
@@ -22,7 +23,7 @@ labels: tutorial
 
 **Willing to help?**
 <!-- Are you willing to help write the tutorial? -->
-<!--  Check our guide on writing new tutorials: https://nix.dev/contributing/documentation/writing-a-tutorial -->
+<!-- Check our guide on writing new tutorials: https://nix.dev/contributing/documentation/writing-a-tutorial -->
 
 
 **Priorities**
