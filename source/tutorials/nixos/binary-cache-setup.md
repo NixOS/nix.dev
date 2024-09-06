@@ -33,7 +33,7 @@ You'll learn how to:
 - (optional) A public IP and DNS domain
 
   If you don't host yourself, check [NixOS friendly hosters](https://wiki.nixos.org/wiki/NixOS_friendly_hosters) on the NixOS Wiki.
-  Follow the tutorial on [](provisioning-remote-machines) to deploy your NixOS configuration.
+  Follow the tutorial on [](provisioning-remote-machines-tutorial) to deploy your NixOS configuration.
 
 For a cache on a local network, we assume:
 - The hostname is `cache` (replace it with yours, or an IP address)
