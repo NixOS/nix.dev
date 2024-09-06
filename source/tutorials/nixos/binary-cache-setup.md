@@ -9,7 +9,7 @@ myst:
 # Setting up an HTTP binary cache
 
 A binary cache stores pre-built [Nix store objects](https://nix.dev/manual/nix/latest/store/store-object) and provides them to other machines over the network.
-Any machine with a Nix store can be an binary cache for other machines.
+Any machine with a Nix store can be a binary cache for other machines.
 
 ## Introduction
 
