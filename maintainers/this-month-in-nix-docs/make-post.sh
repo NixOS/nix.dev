@@ -47,6 +47,8 @@ list_new_tracking_issues() {
 cat << EOF
 # This month in Nix documentation - #ISSUE - MONTH YEAR
 
+[All issues of "This month in Nix documentation"](https://discourse.nixos.org/search?q=This%20Month%20in%20Nix%20Docs%20in%3Atitle%20order%3Alatest_topic)
+
 ## News
 
 <!-- write down some highlights here -->
