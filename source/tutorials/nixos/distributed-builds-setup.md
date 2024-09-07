@@ -249,7 +249,7 @@ copying path '/nix/store/hvj5vyg4723nly1qh5a8daifbi1yisb3-test' from 'ssh://remo
 /nix/store/hvj5vyg4723nly1qh5a8daifbi1yisb3-test
 ```
 
-The derivation to build changes on every invocation because it depends on the current system time, and thus can never be in the local cache.
+The resulting derivation changes on every invocation because it depends on the current system time, and thus can never be in the local cache.
 The [`--max-jobs 0` command line argument](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-max-jobs) forces Nix to build it on the remote builder.
 
 The last output line contains the output path and indicates that build distribution works as expected.
