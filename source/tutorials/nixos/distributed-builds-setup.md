@@ -110,7 +110,7 @@ Could not chdir to home directory /home/remotebuild: No such file or directory
 hello
 ```
 
-If the hello" message is visible, the authentication works.
+If the `hello` message is visible, the authentication works.
 The `Could not chdir to ...` message confirms that the remote user has no home directory.
 
 This test login also adds the host key of the remote builder to the `/root/.ssh/known_hosts` file of the local machine.
@@ -172,7 +172,7 @@ On macOS, run as `root`:
 
 
 (distributed-builds-config-nixos)=
-::::{admonition} NixOS
+:::::{admonition} NixOS
 
 If your *local machine* runs NixOS, in its configuration directory create the file `distributed-builds.nix`:
 
@@ -229,6 +229,7 @@ Activate the new configuration as `root`:
 ```shell-session
 # nixos-rebuild switch
 ```
+:::::
 
 ## Test distributed builds
 
