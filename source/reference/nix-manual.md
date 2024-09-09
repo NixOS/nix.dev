@@ -34,15 +34,15 @@ The Nix reference manual is available for multiple versions:
 
   Latest Nix release
 
-- [Nix @nix-rolling@](https://nix.dev/manual/nix/rolling/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-rolling@.html))
+- [Nix @nix-rolling@](https://nix.dev/manual/nix/rolling/) ([single page](https://nix.dev/manual/nix/rolling/nix-@nix-rolling@.html))
 
   Shipped with the rolling release of {term}`Nixpkgs` and {term}`NixOS`
 
-- [Nix @nix-stable@](https://nix.dev/manual/nix/stable/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-stable@.html))
+- [Nix @nix-stable@](https://nix.dev/manual/nix/stable/) ([single page](https://nix.dev/manual/nix/stable/nix-@nix-stable@.html))
 
   Shipped with the current stable release of {term}`Nixpkgs` and {term}`NixOS`: @nixpkgs-stable@
 
-- [Nix @nix-prev-stable@](https://nix.dev/manual/nix/prev-stable/) ([single page](https://nix.dev/manual/nix/latest/nix-@nix-prev-stable@.html))
+- [Nix @nix-prev-stable@](https://nix.dev/manual/nix/prev-stable/) ([single page](https://nix.dev/manual/nix/prev-stable/nix-@nix-prev-stable@.html))
 
   Shipped with the previous stable release of {term}`Nixpkgs` and {term}`NixOS`: @nixpkgs-prev-stable@
 
