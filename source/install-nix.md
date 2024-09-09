@@ -9,7 +9,7 @@
 Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl -L https://releases.nixos.org/nix/nix-2.18.5/install | sh -s -- --daemon
 ```
 
 On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
@@ -21,7 +21,7 @@ On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki
 Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh
+$ curl -L https://releases.nixos.org/nix/nix-2.18.5/install | sh
 ```
 
 ::::
@@ -31,13 +31,13 @@ $ curl -L https://nixos.org/nix/install | sh
 Install Nix via the recommended [single-user installation]:
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl -L https://releases.nixos.org/nix/nix-2.18.5/install | sh -s -- --no-daemon
 ```
 
 However, if you have [systemd support] enabled, install Nix via the recommended [multi-user installation]:
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl -L https://releases.nixos.org/nix/nix-2.18.5/install | sh -s -- --daemon
 ```
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
