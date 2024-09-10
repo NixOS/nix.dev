@@ -134,7 +134,7 @@ builders-use-substitutes = true
 ::::{dropdown} Detailed explanation
 The first line registers the remote machine as a remote builder by specifying
 - The protocol, user, and hostname
-- The *local machine*'s [system type](https://nix.dev/manual/nix/2.24/command-ref/conf-file#conf-system)
+- The *local machine*'s [system type](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system)
 
   This will delegate jobs for that system type to the *remote machine*.
 
@@ -143,7 +143,7 @@ The first line registers the remote machine as a remote builder by specifying
 
   This particular list must be specified in order to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
 
-See the [reference documentation on the  `builders` setting](https://nix.dev/manual/nix/2.24/command-ref/conf-file#conf-builders) for details.
+See the [reference documentation on the  `builders` setting](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-builders) for details.
 
 The second line instructs all remote builders to obtain dependencies from its own binary caches instead of from the *local machine*.
 This assumes that the remote builders' internet connection is at least as fast as the local machine's internet connection.
@@ -198,7 +198,7 @@ If your *local machine* runs NixOS, in its configuration directory create the fi
 This configuration module enables distributed builds and adds the remote builder, specifying:
 - The SSH hostname and username
 - The location of the SSH key
-- Which  *local machine*'s [system type](https://nix.dev/manual/nix/2.24/command-ref/conf-file#conf-system)
+- Which  *local machine*'s [system type](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system)
 
   This will delegate jobs for that system type to the *remote machine*.
 
@@ -293,7 +293,7 @@ To maximise parallelism, enable automatic garbage collection, and prevent Nix bu
 ```
 
 :::{tip}
-Refer to the [Nix reference manual](https://nix.dev/manual/nix/2.24/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
+Refer to the [Nix reference manual](https://nix.dev/manual/nix/2.23/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
 :::
 
 Remote builders can have different performance characteristics.

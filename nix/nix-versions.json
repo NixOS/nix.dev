@@ -1,9 +1,4 @@
 {
-  "2.24": {
-    "url": "https://github.com/nixos/nix/tarball/450252c92c3b5d0e7e71398fdc9f7630cf197326",
-    "version": "2.24.3",
-    "sha256": "0mzx2wpj1c9qjf50d5dbkhfx31p6mc5cmrjg99jmjk9izqq6hh8d"
-  },
   "2.23": {
     "url": "https://github.com/nixos/nix/tarball/9297d927c98313bd0434e0861f5718af28b8e042",
     "version": "2.23.4",
