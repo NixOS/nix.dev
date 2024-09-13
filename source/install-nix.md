@@ -18,6 +18,14 @@ On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki
 
 ::::{tab-item} macOS
 
+> **Updating to macOS 15 Sequoia**
+>
+> If you recently updated to macOS 15 Sequoia and are getting
+> ```console
+> error: the user '_nixbld1' in the group 'nixbld' does not exist
+> ```
+> when running Nix commands, refer to GitHub issue [NixOS/nix#10892](https://github.com/NixOS/nix/issues/10892) for instructions to fix your installation without reinstalling.
+
 Install Nix via the recommended [multi-user installation]:
 
 ```shell-session
