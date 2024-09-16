@@ -1,38 +1,38 @@
 {
   "2.24": {
-    "url": "https://github.com/nixos/nix/tarball/eb11c1499876cd4c9c188cbda5b1003b36ce2e59",
-    "version": "2.24.6",
-    "sha256": "130zr8wp0iqmdwgf1awb0w7jil45l2l0pyb0rjdsvir5x83vf2lj"
+    "url": "https://github.com/nixos/nix/tarball/1b076b4f84a74a47d4f4eeb14c7d1e485a754c87",
+    "version": "2.24.7",
+    "sha256": "0r2n0mq992lva4jn03a0rx6jsn2k87xqji67ph810dq8f56g7hsk"
   },
   "2.23": {
-    "url": "https://github.com/nixos/nix/tarball/3de8fbaa4b5fa5ba8c85ae9407c612b6a8f58c72",
+    "url": "https://github.com/nixos/nix/tarball/e873d00bda0162c54bdd5009e7a4d8025cfb17b9",
     "version": "2.23.4",
-    "sha256": "0395qdbvfkzwqma35ikig9kv2ac6qic0vy36x5n0zip43gjvaqjs"
+    "sha256": "1zrpmw19nl1phw043xbq8myn67ci338xxvvdnwpf2d8azvhm8v5n"
   },
   "2.22": {
-    "url": "https://github.com/nixos/nix/tarball/87e0c222dda4b4bc0608d96ec52ebe97a317d5fa",
+    "url": "https://github.com/nixos/nix/tarball/e67d6b6447b062d53ad646c665dfe053720bc58b",
     "version": "2.22.4",
-    "sha256": "1s4d9hmdkmckvpp8jd1yilj64ydpmyffpyxfr8c5ilh4d1xf7j8x"
+    "sha256": "0r4lg9jn83lhddi4r5504rj3hsdj6s2ylij5ii3wa10zs1qdbdn0"
   },
   "2.21": {
-    "url": "https://github.com/nixos/nix/tarball/c887e1a1024f439ca1f33540af4dd73c82f400bd",
+    "url": "https://github.com/nixos/nix/tarball/16591ff737dea5af56fa01d0efdc0cc0cb36fa4e",
     "version": "2.21.5",
-    "sha256": "114v1dghicvysvsfg3wgpqzvyqx1vsr6d65yvg0g8958l62aqmlf"
+    "sha256": "05vswykvvgli2rwy05hc6rx7lmm39n5xnb3caxg9rn8jd9h7r6nd"
   },
   "2.20": {
-    "url": "https://github.com/nixos/nix/tarball/09a192989ddf9c9f0310897f8c711e62deac0695",
+    "url": "https://github.com/nixos/nix/tarball/1da3fd549e33a2f1cb1539efc71ea4abd17eb02b",
     "version": "2.20.9",
-    "sha256": "0972g8qc24496n1kyk9dc4ra40psjbipvg4qihmxl9yxgyss5l0f"
+    "sha256": "092sla5mxr13nzzdnd6v9hyw82vkfq2g27b19sr5vbnmjlp4q7my"
   },
   "2.19": {
-    "url": "https://github.com/nixos/nix/tarball/25aea813311d25593c80a813a7748d65d183eec0",
+    "url": "https://github.com/nixos/nix/tarball/0446f7be8c3a2bcbbc90546472befd22ea600383",
     "version": "2.19.7",
-    "sha256": "1qdjnmmn2lclr67pd5ndyl39dm0i05sqa5v5mvgd5yywy9z0gn0p"
+    "sha256": "15qy56xhwkijp2ha52f9dayd5swq3mcw2rg9nz3dqgrx7wxihwbc"
   },
   "2.18": {
-    "url": "https://github.com/nixos/nix/tarball/e0fdea89c3b62021e110dba330bc1cccb36ecf0c",
+    "url": "https://github.com/nixos/nix/tarball/a8196707ada639e5b3d70d21d104b95611c004f6",
     "version": "2.18.6",
-    "sha256": "1xg968a6fb6m90pbcvqwhqg4i2xm26f6c1pswwf3bl5dnl0cmv7z"
+    "sha256": "1gk2v0rss8w50p04is3g34x3y5c8b6cbxcvzpwb95h84sb3c141r"
   },
   "2.17": {
     "url": "https://github.com/nixos/nix/tarball/800f9c6dbac71594e2c250ff2b5f900268c4e522",
@@ -105,3 +105,4 @@
     "sha256": "0kzn3ggmir8iv1nk4yds6676x8y4q72xv06ks5p2nrvazhdarl8y"
   }
 }
+
