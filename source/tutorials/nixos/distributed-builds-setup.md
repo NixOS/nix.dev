@@ -318,6 +318,7 @@ Add all new remote builders to the `nix.buildMachines` attribute shown in the []
 
 - [nixbuild.net](https://nixbuild.net) - Nix remote builders as a service
 - [Hercules CI](https://hercules-ci.com/) - Continuous integration with automatic build distribution
+- [garnix](https://garnix.io/) - Hosted continuous integration with build distribution
 
 ## References
 
