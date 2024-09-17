@@ -101,6 +101,12 @@ $ docker load < $(nix-build hello-docker.nix)
 Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
 ```
 
+If you use Nix Flakes and have defined a package `helloDocker`, the equivalent would be:
+```shell-session
+$ docker load < $(nix build .#helloDocker --print-out-paths)
+Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+```
+
 Now that you have loaded the image into Docker, you can run it:
 
 ```shell-session
