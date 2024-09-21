@@ -422,7 +422,7 @@ Use it to select all files with a name ending in `.nix`:
 -        ./default.nix
 -        ./build.nix
 +        (fs.fileFilter (file: file.hasExt "nix") ./.)
-         ./nix
+         ./npins
        ]);
 ```
 
