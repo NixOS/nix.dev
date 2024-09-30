@@ -41,7 +41,7 @@ Write the following into a file called `default.nix`:
 
 ## Declaring options
 
-We will need some helper functions, which will come from the [Nixpkgs library](Nixpkgs library ), which is passed by the module system as `lib`:
+We will need some helper functions, which will come from the [Nixpkgs library](https://github.com/NixOS/nixpkgs/tree/master/lib), which is passed by the module system as `lib`:
 
 ```{code-block} diff
 :caption: default.nix
