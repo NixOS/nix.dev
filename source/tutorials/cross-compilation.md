@@ -85,6 +85,13 @@ It's only possible to cross compile between `aarch64-darwin` and `x86_64-darwin`
 
 It is possible to explore them in `nix repl`:
 
+:::{note}
+[Starting with Nix 2.19](https://nix.dev/manual/nix/latest/release-notes/rl-2.19), `nix repl` requires the `-f` / `--file` flag:
+```shell-session
+$ nix repl -f '<nixpkgs>' -I nixpkgs=channel:nixos-23.11
+```
+:::
+
 ```shell-session
 $ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-23.11
 Welcome to Nix 2.18.1. Type :? for help.
