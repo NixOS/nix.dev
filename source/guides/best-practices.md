@@ -85,7 +85,7 @@ This brings all attributes of the imported expression into scope of the current 
 There are a number of problems with that approach:
 
 - Static analysis can't reason about the code, because it would have to actually evaluate this file to see which names are in scope.
-- When more than one `with` used, it's not clear anymore where the names are coming from.
+- When more than one `with` is used, it's not clear anymore where the names are coming from.
 - Scoping rules for `with` are not intuitive, see this [Nix issue for details](https://github.com/NixOS/nix/issues/490).
 
 :::{tip}
