@@ -10,7 +10,7 @@ Please read our [contributor guide](https://nix.dev/contributing/documentation) 
 
 ## Local preview
 
-Enter the development environment with `nix-shell`, or [set up direnv](https://nix.dev/guides/recipes/direnv.html)` and run `direnv allow`, and then:
+Enter the development environment with `nix-shell`, or [set up direnv](https://nix.dev/guides/recipes/direnv.html) and run `direnv allow`, and then:
 
 ```shell-session
 [nix-shell:nix.dev]$ devmode
