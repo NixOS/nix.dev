@@ -803,7 +803,8 @@ error: cannot coerce an integer to a string
             5|
 ```
 
-Interpolated expressions can be arbitrarily nested. Note that the `+` sign in the following example is the concatenation operator which is taking a string as its second argument.
+Interpolated expressions can be arbitrarily nested.
+
 (This can become hard to read, and we recommend to avoid it in practice.)
 
 Example:
