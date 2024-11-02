@@ -822,6 +822,26 @@ in
 "no no no"
 ```
 
+:::{dropdown} Detailed explanation
+The `+` sign in the above expression is the concatenation operator. It is one of the many [built-in operators][operators] (`+`, `==`, `&&`, etc.) These operators can be used within `${ }`.
+
+Example:
+```{code-block} nix
+:class: expression
+let
+  a = "one";
+  b = "two";
+in
+"${a + b}"
+```
+
+```{code-block}
+:class: value
+"onetwo"
+```
+
+Built-in functions are discussed in a [later section](libraries).
+:::
 
 :::{warning}
 You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
