@@ -1740,7 +1740,7 @@ For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-In practice, describing derivations requires observing the outside world. 
+In practice, describing derivations requires observing the outside world.
 We discuss [](derivations), how contents of existing files are used to derive new files, further in the tuturial.
 
 There is only one impurity in the Nix language that is relevant here:
