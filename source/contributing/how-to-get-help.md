@@ -13,7 +13,7 @@ For better efficiency and higher chance of success, you should try contacting in
 - Check if any teams are responsible for the relevant subsystem:
   - On the [NixOS website](https://nixos.org/community/#governance-teams).
   - In the [list of Nixpkgs maintainer teams](https://github.com/NixOS/nixpkgs/blob/master/maintainers/team-list.nix).
-  - In the `CODEOWNERS` files for [Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/.github/CODEOWNERS) or
+  - In the `CODEOWNERS` files for [Nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/ci/OWNERS) or
     [Nix](https://github.com/NixOS/nix/blob/master/.github/CODEOWNERS).
 - Check the output of [`git blame`](https://git-scm.com/docs/git-blame) or [`git log`](https://www.git-scm.com/docs/git-log) for the files you need help with.
   Take note of the email addresses of people who committed relevant code.
