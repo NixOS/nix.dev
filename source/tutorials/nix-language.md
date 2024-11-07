@@ -822,6 +822,33 @@ in
 "no no no"
 ```
 
+:::{dropdown} Detailed explanation
+Any Nix expression where the value can be represented as a string can be used within `${ }`.
+
+The `+` sign in the above expression is the [string concatenation operator](https://nix.dev/manual/nix/latest/language/operators#string-concatenation), which takes two strings and produces a new string.
+
+The expression in the example is deliberately confusing in order to demonstrate that arbitrarily nested string interpolations are possible, but tend to be hard to read.
+
+It denotes a string that contains the interpolation of concatenating the value of `a` with a string that starts with a space and is followed by another interpolated string.
+That second interpolated string is again the result of concatenating the value of `a` and yet another string that starts with a space and is followed by an interpolation of `a`.
+
+Example:
+```{code-block} nix
+:class: expression
+let
+  a = "one";
+  b = "two";
+in
+"${a + b}"
+```
+
+```{code-block}
+:class: value
+"onetwo"
+```
+
+Built-in functions are discussed in a [later section](libraries).
+:::
 
 :::{warning}
 You may encounter strings that use the dollar sign (`$`) before an assigned name, but no braces (`{ }`):
