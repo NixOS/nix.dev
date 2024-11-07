@@ -11,6 +11,11 @@
 let
   lib = pkgs.lib;
   releases = import ./nix/releases.nix { inherit lib inputs system; };
+  pkgs-unstable = import inputs.main.nixpkgs-rolling {
+    config = { };
+    overlays = [ ];
+    inherit system;
+  };
 
   nix-dev =
     pkgs.stdenv.mkDerivation {
@@ -111,8 +116,8 @@ let
         python ${pkgs.writeText "live.py" script}
       '';
     };
-  update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
-  update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
+  update-nix-releases = pkgs-unstable.callPackage ./nix/update-nix-releases.nix { };
+  update-nixpkgs-releases = pkgs-unstable.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
 {
   # build with `nix-build -A build`
