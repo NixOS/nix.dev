@@ -19,7 +19,7 @@ writeShellApplication {
     git clone --quiet --filter=tree:0 --bare https://github.com/nixos/nix "$tmp/nix"
 
     echo >&2 "Going through all *-maintenance branches"
-    git -C "$tmp/nix" branch --list '*-maintenance' --format '%(refname)' \
+    git -C "$tmp/nix" branch --list '[0-9]*.[0-9]*-maintenance' --format '%(refname)' \
       | rg 'refs/heads/(.*)-maintenance' -or '$1' \
       | sort --reverse --version-sort \
       | while read -r version; do
