@@ -221,6 +221,8 @@ To save storage space, please refer to the following NixOS configuration attribu
 
 ## Alternatives
 
+- [`nix-serve-ng`](https://github.com/aristanetworks/nix-serve-ng): A drop-in replacement for `nix-serve`, written in Haskell
+
 - The [SSH Store](https://nix.dev/manual/nix/latest/store/types/ssh-store), [Experimental SSH Store](https://nix.dev/manual/nix/latest/store/types/experimental-ssh-store), and the [S3 Binary Cache Store](https://nix.dev/manual/nix/latest/store/types/s3-binary-cache-store) can also be used to serve a cache.
   There are many commercial providers for S3-compatible storage, for example:
   - Amazon S3
