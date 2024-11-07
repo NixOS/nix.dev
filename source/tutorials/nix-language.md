@@ -1767,8 +1767,8 @@ For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-In practice, describing derivations requires observing the outside world. Recall that derivations are
-precise descriptions of how contents of existing files are used to derive new files.  We discuss [](derivations)futher in the tuturial.
+In practice, describing derivations – the Nix language's defining feature, which enables functional programming with the file system – requires observing the outside world.
+We will discuss [derivations](derivations) later in the tutorial.
 
 There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*.
