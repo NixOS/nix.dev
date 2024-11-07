@@ -1767,10 +1767,11 @@ For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`
 So far we have only covered what we call *pure expressions*:
 declaring data and transforming it with functions.
 
-In practice, describing derivations requires observing the outside world.
+In practice, describing derivations requires observing the outside world. Recall that derivations are
+precise descriptions of how contents of existing files are used to derive new files.  We discuss [](derivations)futher in the tuturial.
 
 There is only one impurity in the Nix language that is relevant here:
-reading files from the file system as *build inputs*
+reading files from the file system as *build inputs*.
 
 Build inputs are files that derivations refer to in order to describe how to derive new files.
 When run, a derivation will only have access to explicitly declared build inputs.
@@ -1778,7 +1779,7 @@ When run, a derivation will only have access to explicitly declared build inputs
 The only way to specify build inputs in the Nix language is explicitly with:
 
 - File system paths
-- Dedicated functions.
+- Dedicated functions
 
 Nix and the Nix language refer to files by their content hash. If file contents are not known in advance, it's unavoidable to read files during expression evaluation.
 
