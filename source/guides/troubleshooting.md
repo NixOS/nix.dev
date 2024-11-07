@@ -51,9 +51,13 @@ This may mean you are trying to import a too large file or directory into the [N
 
 Try to reduce the size of the directory to import, or run [garbage collection](https://nix.dev/manual/nix/stable/command-ref/nix-collect-garbage).
 
-## Darwin update breaks Nix installation
+## macOS update breaks Nix installation
 
-This is a known [issue](https://github.com/NixOS/nix/issues/3616). Add the following code snippet to the end of the configuration file `/etc/zshrc` and restart the shell:
+This is a [known issue](https://github.com/NixOS/nix/issues/3616).
+The [Nix installer](https://nix.dev/manual/nix/latest/installation/installing-binary) modifies `/etc/zshrc`.
+When macOS is updated, it will typically overwrite `/etc/zshrc` again.
+
+As a workaround, add the following code snippet to the end of `/etc/zshrc` and restart the shell:
 
 ```bash
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
