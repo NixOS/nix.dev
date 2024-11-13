@@ -77,3 +77,17 @@ Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be d
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz") {};
   in pkgs.stdenv.mkDerivation { ... }
   ```
+
+## Finding specific commits and releases
+
+[status.nixos.org](https://status.nixos.org/) provides:
+
+- Latest tested commits for each release - use when pinning to specific commits
+- List of active release channels - use when tracking latest channel versions
+
+The complete list of channels is available at [nixos.org/channels](https://nixos.org/channels).
+
+:::{tip}
+More information on Nixpkgs and NixOS releases: [](channel-branches)
+:::
+

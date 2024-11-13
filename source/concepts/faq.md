@@ -18,6 +18,13 @@ See [](flakes-definition).
 
 Nixpkgs and NixOS have both stable and rolling releases.
 
+These releases are distributed in variants called "channel branches":
+Git branches used for releases, which are also converted to Nix channels.
+
+:::{tip}
+Consult the [`nix-channel`](https://nix.dev/manual/nix/2.22/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
+:::
+
 ### Stable
 
 Stable releases receive conservative updates to fix bugs or security vulnerabilities; otherwise package versions are not changed.
@@ -50,10 +57,6 @@ Rolling releases follow [`master`](https://github.com/NixOS/nixpkgs/branches/all
 - On any other platform, use [`nixpkgs-unstable`](https://github.com/NixOS/nixpkgs/branches/all?query=nixpkgs-unstable).
 
 [`*-small`](https://github.com/NixOS/nixpkgs/branches/all?query=-small) channel branches have passed a smaller test suite, which means they are more up-to-date with respect to their base branch, but offer fewer stability guarantees.
-
-:::{tip}
-Consult the [`nix-channel`](https://nix.dev/manual/nix/2.22/command-ref/nix-channel) entry in the Nix Reference Manual for more information on channels, and the [Nixpkgs contributing guide](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) on the Nixpkgs branching strategy.
-:::
 
 ## Are there any impurities left in sandboxed builds?
 
