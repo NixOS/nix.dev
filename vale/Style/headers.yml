@@ -7,3 +7,5 @@ match: $sentence
 indicators:
   # For headers like `1. Foo`
   - "."
+exceptions:
+  - macOS
