@@ -60,6 +60,7 @@ It therefore shows the most common and distinguishing patterns in the Nix langua
 
 :::{important}
 This tutorial *does not* explain all Nix language features in detail and *does not* go into specifics of syntactical rules.
+For instance, we skip over commonplace constructs such as `if ... then ... else ...`.
 
 See the [Nix manual][manual-language] for a full language reference.
 :::
