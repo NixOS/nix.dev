@@ -444,7 +444,7 @@ In case all else fails, it helps to become familiar with searching the [Nixpkgs 
 To find name assignments in the source, search for `"<keyword> ="`.
 For example, these are the search results for [`"x11 = "`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22x11+%3D%22&type=code) or [`"libx11 ="`](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs+%22libx11+%3D%22&type=code) on Github.
 
-Or fetch a clone of the repository and search the code locally.
+Or fetch a clone of the [Nixpkgs repository](https://github.com/nixos/nixpkgs) and search the code locally.
 
 Start a shell that makes the required tools available – `git` for version control, and `rg` for code search (provided by the [`ripgrep` package](https://search.nixos.org/packages?show=ripgrep)):
 ```console
