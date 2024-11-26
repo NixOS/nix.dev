@@ -186,7 +186,7 @@ $ ./result/bin/hello
 Hello, folks!
 ```
 
-A real-world example is the [`neovim`](https://search.nixos.org/packages?show=neovim) package recipe, which has has overridable arguments such as `extraLuaPackages`, `extraPythonPackages`, or `withRuby`.
+A real-world example is the [`neovim`](https://search.nixos.org/packages?show=neovim) package recipe, which has overridable arguments such as `extraLuaPackages`, `extraPythonPackages`, or `withRuby`.
 Currently these parameters are only discoverable by reading the source code, which can be found by following the link to 📦 Source on [search.nixos.org/packages](https://search.nixos.org/packages).
 
 ## Interdependent package sets
