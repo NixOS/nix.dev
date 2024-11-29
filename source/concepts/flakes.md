@@ -101,7 +101,7 @@ Finally, there are downsides to relying on [experimental features][experimental 
 
 - Interfaces and behavior of experimental features could still be changed by Nix developers.
   This may require you to adapt your code at some point in the future, which will be more effort when it has grown in complexity.
-  [Currently there is no concrete timeline for stabilising flakes.](https://discourse.nixos.org/t/stabilising-the-new-nix-command-line-interface/35531#how-does-this-relate-to-flakes-3)
+  [Currently there is no concrete timeline for stabilising flakes.](https://discourse.nixos.org/t/stabilising-the-new-nix-command-line-interface/35531#p-123372-how-does-this-relate-to-flakes-3)
   In contrast, stable features in Nix can be considered stable indefinitely.
 - The [Nix maintainer team](https://nixos.org/community/teams/nix.html) focuses on fixing bugs and regressions in stable interfaces, supporting well-understood use cases, as well as improving the internal design and overall contributor experience in order to ease future development.
   Improvements to experimental features have low priority.
