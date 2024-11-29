@@ -43,7 +43,7 @@ EOF
 )"
 ```
 
-::::{dropdown} Detailed explanation
+:::{dropdown} Detailed explanation
 
 This `nix-shell` invocation creates an environment based on Nixpkgs obtained from a [channel](ref-pinning-nixpkgs) and adds to it a derivation that is described by the Nix expression passed as a string to the `-p` option.
 
