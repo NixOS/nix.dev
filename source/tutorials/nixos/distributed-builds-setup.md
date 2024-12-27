@@ -156,7 +156,7 @@ To activate this configuration, restart the Nix daemon:
 On Linux with `systemd`, run as `root`:
 
 ```shell-session
-# systemctl cat nix-daemon.service
+# systemctl restart nix-daemon.service
 ```
 ::::
 
