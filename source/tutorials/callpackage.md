@@ -171,7 +171,7 @@ Add a third attribute `hello-folks` to `default.nix` and set it to `hello.overri
 
 :::{note}
 The resulting attribute set is now recursive (by the keyword `rec`).
-That is, attribute values can refer to names from within the same attribute.
+That is, attribute values can refer to names from within the same attribute set.
 :::
 
 `override` passes `audience` to the original function in `hello.nix` - it *overrides* whatever arguments have been passed in the original `callPackage` that produced the derivation `hello`.
