@@ -892,10 +892,9 @@ Example:
 ```
 
 :::{note}
-Indented strings also support [string interpolation](string-interpolation). See the section on Nix's [`string`](https://nix.dev/manual/nix/stable/language/values#type-string) type in the [Nix manual](https://nix.dev/manual/nix/stable/).
+Indented strings also support [string interpolation](string-interpolation).
+For details check the [documentation on string literals in the Nix language](https://nix.dev/manual/nix/2.24/language/syntax#string-literal).
 :::
-
-<!-- TODO: See [escaping rules](). -->
 
 (file-system-paths)=
 ### File system paths
