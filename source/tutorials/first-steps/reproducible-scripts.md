@@ -64,22 +64,24 @@ curl https://github.com/NixOS/nixpkgs/releases.atom | xml2json | jq .
 ```
 
 The first line is a standard shebang.
-The additional shebang lines are a Nix-specific construct.
+The additional shebang lines are a Nix-specific construct:
 
-We specify `bash` as the interpreter for the rest of the file with the `-i` option.
+- With the `-i` option, `bash` is specified as the interpreter for the rest of the file.
 
-We enable the `--pure` option to prevent the script from implicitly using programs that may already exist on the system that will run the script.
+- In this case, the `--pure` option is enabled to prevent the script from implicitly using programs that may already exist on the system on which the script is run.
 
-With the `-p` option we specify the packages required for the script to run.
-The command `xml2json` is provided by the package `python3Packages.xmljson`, while `bash`, `jq`, and `curl` are provided by packages of the same name.
+- The `-p` option lists the packages required for the script to run.
+
+  The command `xml2json` is provided by the package `python3Packages.xmljson`, while `bash`, `jq`, and `curl` are provided by packages of the same name.
 `cacert` must be present for SSL authentication to work.
 
-:::{tip}
-Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
-:::
+  :::{tip}
+  Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
+  :::
 
-The parameter of `-I` refers to a specific Git commit of the Nixpkgs repository.
-This ensures that the script will always run with the exact same packages versions, everywhere.
+- The parameter of `-I` refers to a specific Git commit of the Nixpkgs repository.
+
+  This ensures that the script will always run with the exact same packages versions, everywhere.
 
 Make the script executable:
 
