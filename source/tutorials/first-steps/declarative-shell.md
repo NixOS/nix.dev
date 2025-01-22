@@ -69,7 +69,7 @@ pkgs.mkShellNoCC {
 
 ::::{dropdown} Detailed explanation
 We use a version of [Nixpkgs pinned to a release branch](<ref-pinning-nixpkgs>).
-If you followed the [](ad-hoc-envs) tutorial and don't want to to download all dependencies again, specify the exact same revision as in the section [](towards-reproducibility):
+If you followed the [](ad-hoc-envs) tutorial and don't want to download all dependencies again, specify the exact same revision as in the section [](towards-reproducibility):
 
 {lineno-start=1 emphasize-lines="2"}
 ```nix
