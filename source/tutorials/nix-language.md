@@ -315,8 +315,8 @@ Nix language data types *without functions* work just like their counterparts in
 - List elements are separated by white space.[^list-whitespace]
 :::
 
-[^attrnames]: Details: [Nix manual - attribute set](https://nix.dev/manual/nix/stable/language/values.html#attribute-set)
-[^list-whitespace]: Details: [Nix manual - list](https://nix.dev/manual/nix/stable/language/values.html#list)
+[^attrnames]: Details: [Nix manual - attribute set](https://nix.dev/manual/nix/2.24/language/syntax#attrs-literal)
+[^list-whitespace]: Details: [Nix manual - list](https://nix.dev/manual/nix/2.24/language/syntax#list-literal)
 
 (rec-attrset)=
 #### Recursive attribute set `rec { ... }`
