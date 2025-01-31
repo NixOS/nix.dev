@@ -1149,7 +1149,7 @@ Add a new `colorType` block to `path.nix`, specifying the allowed color names an
 
 +  # Either a color name, `0xRRGGBB` or `0xRRGGBBAA`
 +  colorType = lib.types.either
-+    (lib.types.strMatching "0x[0-9A-F]{6}[0-9A-F]{2}?")
++    (lib.types.strMatching "0x[0-9A-F]{6}([0-9A-F]{2})?")
 +    (lib.types.enum [
 +      "black" "brown" "green" "purple" "yellow"
 +      "blue" "gray" "orange" "red" "white"
