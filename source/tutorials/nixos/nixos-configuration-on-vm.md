@@ -177,6 +177,7 @@ This command builds the attribute `vm` from the `nixos-24.05` release of NixOS, 
 - The [`-I` option](https://nix.dev/manual/nix/stable/command-ref/opt-common.html#opt-I) prepends entries to the search path.
 
   Here we set `nixpkgs` to refer to a [specific version of Nixpkgs](ref-pinning-nixpkgs) and set `nix-config` to the `configuration.nix` file in the current directory.
+::::
 
 ## Running the virtual machine
 
