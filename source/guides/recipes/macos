@@ -21,7 +21,7 @@ Installing and maintaining a NixOS VM might sound tedious, but fear not! `nix-da
 
 Once you have [`nix-darwin`](./#controlling-your-macos-settings-with-nix) installed, add the following to your `darwin-configuration.nix` to get the Linux Builder:
 
-```nix
+```
     nix.linux-builder.enable = true;
 ```
 
@@ -49,7 +49,7 @@ Here are a few things you can try if you get errors starting or running the test
 
 * Upgrade to the latest `nixpkgs`. Sadly, macOS support is not a first-class priority for the nixpkgs maintainers and is sometimes broken for a few days until fixes are pushed. 
 * Add `nix.linux-builder.ephemeral.enable = true` to your `darwin-configuration.nix`. This will aggressively purge the Linux Builder VMs between nix builds, making sure you have a clean slate.
-* Sometimes, after reinstalling `nix-darwin`, you need to `sudo su -` and then `ssh linux-builder` to manually accept the SSH host key, so nix can actually SSH to the Linux Builder VM.
+* Sometimes, after reinstalling `nix-darwin`, you need to `sudo su -` and then `ssh linux-builder` to manually accept the SSH host key, so Nix can actually SSH to the Linux Builder VM.
 
 
 # NixOS in a Virtual Machine
