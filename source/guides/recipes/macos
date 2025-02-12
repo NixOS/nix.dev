@@ -2,26 +2,58 @@
 
 Over the recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development. 
 
-# Nix on macOS
+# Nix natively on macOS
 
 First, you need to install Nix on your macOS. Using the [Official Installer](https://nixos.org/download) is a good start. If you need help, follow https://nixcademy.com/posts/nix-on-macos/.
 
-# Controlling your macOS settings with Nix
+## Controlling your macOS settings with Nix
 
-Imagine having a `configuration.nix` file for your macOS configuration. This is actually entirely possible, using https://github.com/lnL7/nix-darwin/. Follow the README or this nice writeup: https://nixcademy.com/posts/nix-on-macos/#-step-2-going-declarative-with-nix-darwin.
+Imagine having a `configuration.nix` file for your macOS configuration, including shell environment, tooling, git config, even Dock and Finder settings.
+
+This is actually entirely possible, using [`nix-darwin`](https://github.com/lnL7/nix-darwin/). To install, follow the [README](https://github.com/LnL7/nix-darwin?tab=readme-ov-file#getting-started) or this exhaustive writeup: https://nixcademy.com/posts/nix-on-macos/#-step-2-going-declarative-with-nix-darwin.
+Here's an example of how a real Mac configuration looks like: https://github.com/zupo/dotfiles/blob/094017a954e915717373c6f3ce26545e118e58ed/flake.nix#L341
+
+## Linux Builder 
+
+Since macOS is a different architecture (`darwin`) than NixOS, we cannot build NixOS derivations directly on macOS. Luckily, Nix knows how to offload building of Linux packages to a Linux machine. We could set up a remote NixOS server and tell Nix to use that, but there is an even better way: run a local NixOS VM.
+
+Installing and maintaining a NixOS VM might sound tedious, but fear not! `nix-darwin` actually ships with one, called [Linux Builder](https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable), you just need to enable it!
+
+Once you have [`nix-darwin`](./#controlling-your-macos-settings-with-nix) installed, add the following to your `darwin-configuration.nix` to get the Linux Builder:
+
+```nix
+    nix.linux-builder.enable = true;
+```
+
+Rebuild with `darwin-rebuild switch` and verify that the Linux Builder VM is actually running with `$ sudo launchctl list org.nixos.linux-builder`.
+
+Additional features and optimizations are nicely described in this blog post: https://nixcademy.com/posts/macos-linux-builder/
+
+## NixOS tests on macOS
+
+A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Since macOS is a different architecture (`darwin`) than NixOS, we cannot run NixOS Tests directly on macOS. We need the [Linux Builder](./#linux-builder) provided by `nix-darwin`. 
+
+Assuming the Linux Builder is installed and running, let's run an example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example` and you should see `test script finished in ...s` in your output after a few minutes. 
+
+But what happens when tests fail? Well, you can run them in Interactive Mode to see what's going on! First, run `$ nix -L build github:tfc/nixos-integration-test-example#default.driverInteractive` to build the test driver with interactive mode then run it with `$ /result/bin/nixos-test-driver`.
+
+At this point you are dropped into the Python shell of the NixOS test driver. Usually, you would type in `start_all()` to start all VMs. And now, since the test example we are using defines SSH for testing VMs, we can actually SSH into the VM and debug them: `ssh root@localhost -p 2222`. 
+
+A lot more details and further explanations on https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/. 
+
+## Troubleshooting
+
+Here are a few things you can try if you get errors starting or running the tests:
+
+* Upgrade to the latest `nixpkgs`. Sadly, macOS support is not a first-class priority for the nixpkgs maintainers and is sometimes broken for a few days until fixes are pushed. 
+* Add `nix.linux-builder.enable = true` to your `darwin-configuration.nix`. This will aggressively purge the Linux Builder VMs between nix builds, making sure you have a clean slate.
+* Sometimes, after reinstalling `nix-darwin`, you need to `sudo su -` and then `ssh linux-builder` to manually accept the SSH host key, so nix can actually SSH to the Linux Builder VM.
+
 
 # NixOS in a Virtual Machine
 
-Use UTM.
-TODO: install docs.
-
-# NixOS tests on macOS
-
-A big part of developing for Nix(OS) are the NixOS Integration Tests. There are two ways to run them on your Mac.
-
-TODO: interactive mode
-TODO: remote builder
-
-## Natively via Linux Builder
 
 ## Nested Virtualization
+
+Use UTM.
+TODO: install docs.
