@@ -19,6 +19,9 @@ TODO: install docs.
 
 A big part of developing for Nix(OS) are the NixOS Integration Tests. There are two ways to run them on your Mac.
 
+TODO: interactive mode
+TODO: remote builder
+
 ## Natively via Linux Builder
 
 ## Nested Virtualization
