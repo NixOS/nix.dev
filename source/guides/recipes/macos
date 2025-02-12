@@ -1,0 +1,24 @@
+# Nix(OS) development on macOS
+
+Over the recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development. 
+
+# Nix on macOS
+
+First, you need to install Nix on your macOS. Using the [Official Installer](https://nixos.org/download) is a good start. If you need help, follow https://nixcademy.com/posts/nix-on-macos/.
+
+# Controlling your macOS settings with Nix
+
+Imagine having a `configuration.nix` file for your macOS configuration. This is actually entirely possible, using https://github.com/lnL7/nix-darwin/. Follow the README or this nice writeup: https://nixcademy.com/posts/nix-on-macos/#-step-2-going-declarative-with-nix-darwin.
+
+# NixOS in a Virtual Machine
+
+Use UTM.
+TODO: install docs.
+
+# NixOS tests on macOS
+
+A big part of developing for Nix(OS) are the NixOS Integration Tests. There are two ways to run them on your Mac.
+
+## Natively via Linux Builder
+
+## Nested Virtualization
