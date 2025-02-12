@@ -31,7 +31,7 @@ Additional features and optimizations are nicely described in this blog post: ht
 
 ## NixOS tests on macOS
 
-A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Since macOS is a different architecture (`darwin`) than NixOS, we cannot run NixOS Tests directly on macOS. We need the [Linux Builder](./#linux-builder) provided by `nix-darwin`. 
+A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Although macOS is a different architecture (`darwin`) than NixOS, we can run the NixOS Tests directly on macOS because macOS can run `qemu` natively. We do however still need the [Linux Builder](./#linux-builder) provided by `nix-darwin` to *build* the Linux systems under test first. 
 
 Assuming the Linux Builder is installed and running, let's run an example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example` and you should see `test script finished in ...s` in your output after a few minutes. 
 
