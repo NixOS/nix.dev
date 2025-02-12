@@ -4,7 +4,7 @@ Over the recent years, the Nix(OS) community have made great strides in adding s
 
 # Nix natively on macOS
 
-First, you need to install Nix on your macOS. Using the [Official Installer](https://nixos.org/download) is a good start. If you need help, follow https://nixcademy.com/posts/nix-on-macos/.
+First, you need to install Nix on your macOS. Using the [Official Installer](https://nixos.org/download) works fine, but there is no uninstall support. Instead, The [Nix installer from Determinate Systems](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) is the recommended installer for Nix on macOS, especially if you plan on using flakes. If you need help, follow https://nixcademy.com/posts/nix-on-macos/.
 
 ## Controlling your macOS settings with Nix
 
