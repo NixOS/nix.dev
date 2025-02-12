@@ -1,6 +1,6 @@
 # Nix(OS) development on macOS
 
-Over the recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development. 
+Over recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development. 
 
 # Nix natively on macOS
 
@@ -31,13 +31,15 @@ Additional features and optimizations are nicely described in this blog post: ht
 
 ## NixOS tests on macOS
 
-A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Although macOS is a different architecture (`darwin`) than NixOS, we can run the NixOS Tests directly on macOS because macOS can run `qemu` natively. We do however still need the [Linux Builder](./#linux-builder) provided by `nix-darwin` to *build* the Linux systems under test first. 
+A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Although macOS is a different architecture (called `darwin`) than NixOS, we can run the NixOS Tests directly on macOS because the [Linux Builder](./#linux-builder) provided by `nix-darwin` is used to build the Linux VMs that the tests run against. 
 
 Assuming the Linux Builder is installed and running, let's run an example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example` and you should see `test script finished in ...s` in your output after a few minutes. 
 
-But what happens when tests fail? Well, you can run them in Interactive Mode to see what's going on! First, run `$ nix -L build github:tfc/nixos-integration-test-example#default.driverInteractive` to build the test driver with interactive mode then run it with `$ /result/bin/nixos-test-driver`.
+But what happens when tests fail? Well, you can run them in Interactive Mode to see what's going on! First, run `$ nix -L build github:tfc/nixos-integration-test-example#default.driverInteractive` to build the test driver with interactive mode then run it with `$ /result/bin/nixos-test-driver --keep-vm-state`.
 
-At this point you are dropped into the Python shell of the NixOS test driver. Usually, you would type in `start_all()` to start all VMs. And now, since the test example we are using defines SSH for testing VMs, we can actually SSH into the VM and debug them: `ssh root@localhost -p 2222`. 
+At this point you are dropped into the Python shell of the NixOS test driver. Usually, you would type `start_all()` to start all VMs that your tests define. And now, since the test example we are using defines SSH access for testing VMs, we can actually SSH into the VM and debug them: `ssh root@localhost -p 2222`.
+
+We use the `--keep-vm-state` flag to retain the SSH host keys between runs, to save us accepting them every time we SSH into the testing VM. Run `--help` for more options.
 
 A lot more details and further explanations on https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/. 
 
