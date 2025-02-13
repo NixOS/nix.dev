@@ -60,9 +60,37 @@ Sometimes, you want an actual full-fledged NixOS to work on something. You could
 
 First, install UTM and download the `64-bit ARM` `Minimal ISO image` from https://nixos.org/download/#nix-install-linux. 
 
-Start up UTM and `Create a New Virtual Machine`. Choose `Virtualize` and `Other`. Select the downloaded image as `CD Image`.
+Start up UTM and `Create a New Virtual Machine`. Choose `Virtualize` and `Linux`. Select the downloaded image as `Boot ISO Image` and keep pressing `Continue` to create the VM.
+
+When the VM is up, you should be dropped into a shell. Login as root with `sudo su -` and then follow the [UEFI Partitioning part of the NixOS Manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual-partitioning-UEFI). Use `/dev/vda` instead of `/dev/sda`. When done, follow the [Formatting](https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-formatting) and [Installing](https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing) sections (incuding the `UEFI systems` chapter for both).
+
+Finish it off by clearing out the `CD/DVD` in the VM settings and rebooting into a your fresh NixOS install!
 
 More details on https://krisztianfekete.org/nixos-on-apple-silicon-with-utm/ and https://adrianhesketh.com/2024/04/20/setting-up-nixos-remote-builder-m1-mac/. 
+
+## Convenience
+
+You probably don't want to type all commands manually into the VM window. A better way is to configure the VM for SSH access and then use macOS native Terminal app to connect and run commands in the VM.
+
+Add `services.openssh.enable = true;` and `services.openssh.permitRootLogin = "yes";` to your `/etc/nixos/configuration.nix`, then run `$ nixos-rebuild switch`. 
+
+The last step is to run `ifconfig` inside your VM to get its IP address, and now you are ready to SSH into it from the Terminal app:
+
+```
+$ ssh root@192.168.64.7
+(root@192.168.64.7) Password: 
+Last login: Thu Feb 13 06:11:33 2025
+
+[root@nixos:~]# 
+```
+
+Yay!
+
+## NixOS tests
+
+Before we can run NixOS Tests we need to enable some Nix features. Add `nix.settings.experimental-features = [ "nix-command" "flakes" ];` to your to your `/etc/nixos/configuration.nix`  and run `$ nixos-rebuild switch`.
+
+You can now run the example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example`.
 
 ## Nested Virtualization
 
