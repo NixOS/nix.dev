@@ -1,0 +1,109 @@
+# Nix(OS) development on macOS
+
+Over recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development and there is a helpful community in the [`#macos:nixos.org`](https://matrix.to/#/#macos:nixos.org) Matrix channel.
+
+# Nix natively on macOS
+
+First, you need to install Nix on your macOS. Using the [Official Installer](https://nixos.org/download) works fine, but there is no uninstall support. Instead, The [Nix installer from Determinate Systems](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) is the recommended installer for Nix on macOS, especially if you plan on using flakes. If you need help, follow https://nixcademy.com/posts/nix-on-macos/.
+
+## Controlling your macOS settings with Nix
+
+Imagine having a `configuration.nix` file for your macOS configuration, including shell environment, tooling, git config, even Dock and Finder settings.
+
+This is actually entirely possible, using [`nix-darwin`](https://github.com/lnL7/nix-darwin/). To install, follow the [README](https://github.com/LnL7/nix-darwin?tab=readme-ov-file#getting-started) or this exhaustive writeup: https://nixcademy.com/posts/nix-on-macos/#-step-2-going-declarative-with-nix-darwin.
+Here's an example of how a real Mac configuration looks like: https://github.com/zupo/dotfiles/blob/094017a954e915717373c6f3ce26545e118e58ed/flake.nix#L341
+
+## Linux Builder 
+
+Since macOS is a different architecture (`darwin`) than NixOS, we cannot build NixOS derivations directly on macOS. Luckily, Nix knows how to offload building of Linux packages to a Linux machine. We could set up a remote NixOS server and tell Nix to use that, but there is an even better way: run a local NixOS VM.
+
+Installing and maintaining a NixOS VM might sound tedious, but fear not! `nix-darwin` actually ships with one, called [Linux Builder](https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable), you just need to enable it!
+
+Once you have [`nix-darwin`](./#controlling-your-macos-settings-with-nix) installed, add the following to your `darwin-configuration.nix` to get the Linux Builder:
+
+```
+    nix.linux-builder.enable = true;
+```
+
+Rebuild with `darwin-rebuild switch` and verify that the Linux Builder VM is actually running with `$ sudo launchctl list org.nixos.linux-builder`.
+
+Additional features and optimizations are nicely described in this blog post: https://nixcademy.com/posts/macos-linux-builder/
+
+## NixOS tests on macOS
+
+A big part of developing for NixOS are the [NixOS Integration Tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html). Although macOS is a different architecture (called `darwin`) than NixOS, we can run the NixOS Tests directly on macOS because the [Linux Builder](./#linux-builder) provided by `nix-darwin` is used to build the Linux VMs that the tests run against. 
+
+Assuming the Linux Builder is installed and running, let's run an example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example` and you should see `test script finished in ...s` in your output after a few minutes. 
+
+> [!NOTE]
+> When you run `$ nix -L build github:tfc/nixos-integration-test-example multiple` the second time, nothing happens. Huh? Well, NixOS Tests are just a Nix derivation, and Nix sees that nothing has changed, the sourcecode is the same, and hence nothing needs to be built, just exit. To force Nix otherwise, use the `--rebuild` flag.
+
+But what happens when tests fail? Well, you can run them in Interactive Mode to see what's going on! First, run `$ nix -L build github:tfc/nixos-integration-test-example#default.driverInteractive` to build the test driver with interactive mode then run it with `$ ./result/bin/nixos-test-driver --keep-vm-state`.
+
+At this point you are dropped into the Python shell of the NixOS test driver. Usually, you would type `start_all()` to start all VMs that your tests define. And now, since the test example we are using defines SSH access for testing VMs, we can actually SSH into the VM and debug them: `ssh root@localhost -p 2222`.
+
+We use the `--keep-vm-state` flag to retain the SSH host keys between runs, to save us accepting them every time we SSH into the testing VM. Run `--help` for more options.
+
+A lot more details and further explanations on https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/. 
+
+## Troubleshooting
+
+Here are a few things you can try if you get errors starting or running the tests:
+
+* Upgrade to the latest `nixpkgs`. Sadly, macOS support is not a first-class priority for the nixpkgs maintainers and is sometimes broken for a few days until fixes are pushed. 
+* Add `nix.linux-builder.ephemeral.enable = true` to your `darwin-configuration.nix`. This will aggressively purge the Linux Builder VMs between nix builds, making sure you have a clean slate.
+* Sometimes, after reinstalling `nix-darwin`, you need to `sudo su -` and then `ssh linux-builder` to manually accept the SSH host key, so Nix can actually SSH to the Linux Builder VM.
+
+
+# NixOS in a Virtual Machine
+
+Sometimes, you want an actual full-fledged NixOS to work on something. You could set up a NixOS server and SSH into it, but a better way is to run it locally, with [UTM](https://mac.getutm.app/), a light-weight GUI layer around the [QEMU machine virtualizer](https://www.qemu.org/).
+
+## Getting started
+
+First, install UTM and download the `64-bit ARM` `Minimal ISO image` from https://nixos.org/download/#nix-install-linux. 
+
+Start up UTM and `Create a New Virtual Machine`. Choose `Virtualize` and `Linux`. Select the downloaded image as `Boot ISO Image` and keep pressing `Continue` to create the VM.
+
+When the VM is up, you should be dropped into a shell. Login as root with `sudo su -` and then follow the [UEFI Partitioning part of the NixOS Manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual-partitioning-UEFI). Use `/dev/vda` instead of `/dev/sda`. When done, follow the [Formatting](https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-formatting) and [Installing](https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing) sections (incuding the `UEFI systems` chapter for both).
+
+Finish it off by clearing out the `CD/DVD` in the VM settings and rebooting into a your fresh NixOS install!
+
+More details on https://krisztianfekete.org/nixos-on-apple-silicon-with-utm/ and https://adrianhesketh.com/2024/04/20/setting-up-nixos-remote-builder-m1-mac/. 
+
+## Convenience
+
+You probably don't want to type all commands manually into the VM window. A better way is to configure the VM for SSH access and then use macOS native Terminal app to connect and run commands in the VM.
+
+Add `services.openssh.enable = true;` and `services.openssh.permitRootLogin = "yes";` to your `/etc/nixos/configuration.nix`, then run `$ nixos-rebuild switch`. 
+
+The last step is to run `ifconfig` inside your VM to get its IP address, and now you are ready to SSH into it from the Terminal app:
+
+```
+$ ssh root@192.168.64.7
+(root@192.168.64.7) Password: 
+Last login: Thu Feb 13 06:11:33 2025
+
+[root@nixos:~]# 
+```
+
+Yay!
+
+## NixOS tests
+
+Before we can run NixOS Tests we need to enable some Nix features. Add `nix.settings.experimental-features = [ "nix-command" "flakes" ];` to your to your `/etc/nixos/configuration.nix`  and run `$ nixos-rebuild switch`.
+
+You can now run the example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example`.
+
+## Nested Virtualization
+
+If you have followed this guide from the start, you might have noticed that NixOS tests [running in UTM](#nixos-in-a-virtual-machine) are slower than those [running natively on macOS](#linux-builder). Why is that?
+
+The reason is that NixOS Tests build and start a QEMU VM, then run a python test script against this VM. And UTM is also a QEMU VM! VM inside a VM! Obviously, it would be slower!
+
+Luckily, there is a workaround, called "nested virtualization" which allows the guest VM to passthrough CPU commands through the host VM up to the hardware host (your Mac). It's fairly easy to enable, but you do need a Mac with the M3 CPU or newer.
+
+Follow the same process as above, but when creating the UTM image, tick the `Use Apple Virtualization` checkbox. You will have to recreate the image, but the steps are the same.
+
+
+TODO: how to rerun example test
