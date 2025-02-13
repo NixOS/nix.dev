@@ -1,6 +1,6 @@
 # Nix(OS) development on macOS
 
-Over recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development. 
+Over recent years, the Nix(OS) community have made great strides in adding support for macOS. Today, it is possible to use Macs for comfortable Nix(OS) development and there is a helpful community in the [`#macos:nixos.org`](https://matrix.to/#/#macos:nixos.org) Matrix channel.
 
 # Nix natively on macOS
 
@@ -54,6 +54,15 @@ Here are a few things you can try if you get errors starting or running the test
 
 # NixOS in a Virtual Machine
 
+Sometimes, you want an actual full-fledged NixOS to work on something. You could set up a NixOS server and SSH into it, but a better way is to run it locally, with [UTM](https://mac.getutm.app/), a light-weight GUI layer around the [QEMU machine virtualizer](https://www.qemu.org/).
+
+## Getting started
+
+First, install UTM and download the `64-bit ARM` `Minimal ISO image` from https://nixos.org/download/#nix-install-linux. 
+
+Start up UTM and `Create a New Virtual Machine`. Choose `Virtualize` and `Other`. Select the downloaded image as `CD Image`.
+
+More details on https://krisztianfekete.org/nixos-on-apple-silicon-with-utm/ and https://adrianhesketh.com/2024/04/20/setting-up-nixos-remote-builder-m1-mac/. 
 
 ## Nested Virtualization
 
