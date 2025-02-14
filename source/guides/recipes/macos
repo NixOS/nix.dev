@@ -117,7 +117,7 @@ error: some outputs of '/nix/store/...-vm-test-run-An-awesome-test..drv' are not
 
 The UTM VM you created above is based on the ARM architecture and as such can't run VMs for Intel. However, we are in luck again, Apple has provided us with another trick, called Rosetta, which enables us to run x86-based VMs!
 
-Shut down the VM and enter its settings. Under `Virtualization`, tick the `Enable Rosetta on Linux` checkbox. 
+Shut down the VM and enter its settings. Under `Virtualization`, tick the `Enable Rosetta on Linux` checkbox. This assumes that you have created the VM using [Apple Virtualization](#nested-virtualization) (even if on M1 or M2 Mac). 
 
 Boot the VM back up, add `virtualisation.rosetta.enable = true;` to your `configuration.nix` and run `nixos-rebuild switch`. Now, you can run NixOS tests for x86_64 too!
 
