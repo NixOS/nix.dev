@@ -106,4 +106,25 @@ Luckily, there is a workaround, called "nested virtualization" which allows the 
 Follow the same process as above, but when creating the UTM image, tick the `Use Apple Virtualization` checkbox. You will have to recreate the image, but the steps are the same.
 
 
-TODO: how to rerun example test
+## x86 Virtualization
+
+But what if you have to run NixOS tests for a specific CPU architecture? For example, let's say you need to test that your Nix code runs well on an Intel CPU. You run the following command:
+
+```
+$ nix -L build --system x86_64-linux github:tfc/nixos-integration-test-example --rebuild
+error: some outputs of '/nix/store/...-vm-test-run-An-awesome-test..drv' are not valid, so checking is not possible
+```
+
+The UTM VM you created above is based on the ARM architecture and as such can't run VMs for Intel. However, we are in luck again, Apple has provided us with another trick, called Rosetta, which enables us to run x86-based VMs!
+
+Shut down the VM and enter its settings. Under `Virtualization`, tick the `Enable Rosetta on Linux` checkbox. 
+
+Boot the VM back up, add `virtualisation.rosetta.enable = true;` to your `configuration.nix` and run `nixos-rebuild switch`. Now, you can run NixOS tests for x86_64 too!
+
+```
+$ nix -L build --system x86_64-linux github:tfc/nixos-integration-test-example
+```
+
+
+
+
