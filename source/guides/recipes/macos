@@ -36,7 +36,7 @@ A big part of developing for NixOS are the [NixOS Integration Tests](https://nix
 Assuming the Linux Builder is installed and running, let's run an example NixOS test with `$ nix -L build github:tfc/nixos-integration-test-example` and you should see `test script finished in ...s` in your output after a few minutes. 
 
 > [!NOTE]
-> When you run `$ nix -L build github:tfc/nixos-integration-test-example multiple` the second time, nothing happens. Huh? Well, NixOS Tests are just a Nix derivation, and Nix sees that nothing has changed, the sourcecode is the same, and hence nothing needs to be built, just exit. To force Nix otherwise, use the `--rebuild` flag.
+> When you run `$ nix -L build github:tfc/nixos-integration-test-example` the second time, nothing happens. Huh? Well, NixOS Tests are just a Nix derivation, and Nix sees that nothing has changed, the sourcecode is the same, and hence nothing needs to be built, just exit. To force Nix otherwise, use the `--rebuild` flag.
 
 But what happens when tests fail? Well, you can run them in Interactive Mode to see what's going on! First, run `$ nix -L build github:tfc/nixos-integration-test-example#default.driverInteractive` to build the test driver with interactive mode then run it with `$ ./result/bin/nixos-test-driver --keep-vm-state`.
 
