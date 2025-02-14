@@ -125,6 +125,11 @@ Boot the VM back up, add `virtualisation.rosetta.enable = true;` to your `config
 $ nix -L build --system x86_64-linux github:tfc/nixos-integration-test-example
 ```
 
+## Editor integration
 
+OK, you are using the familiar macOS Terminal to run commands in your NixOS VM. You can also use VS Code that runs in macOS to edit files inside the VM!
 
+Add `(fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")` to the imports section of your `configuration.nix` and then add `services.vscode-server.enable = true;`, then run `nixos-rebuild switch` to apply the changes.
+
+Finally, install the `Remote - SSH` VS Code extension, and use the `Remote SSH: Connect to Host...` command in VS Code to connect to `root@192.168.64.8`. 
 
