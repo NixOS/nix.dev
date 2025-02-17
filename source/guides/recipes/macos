@@ -133,3 +133,7 @@ Add `(fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball
 
 Finally, install the `Remote - SSH` VS Code extension, and use the `Remote SSH: Connect to Host...` command in VS Code to connect to `root@192.168.64.8`. 
 
+> [!NOTE]
+> If you get the `Could not start dynamically linked executable: ...` error in VS Code, try adding `services.vscode-server.enableFHS = true;`, rebuilding and rebooting. 
+
+
