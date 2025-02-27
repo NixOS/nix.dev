@@ -8,9 +8,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "31d66ae40417bb13765b0ad75dd200400e98de84",
-      "url": "https://github.com/nixos/nixpkgs/archive/31d66ae40417bb13765b0ad75dd200400e98de84.tar.gz",
-      "hash": "0fwsqd05bnk635niqnx9vqkdbinjq0ffdrbk66xllfyrnx4fvmpc"
+      "revision": "3a05eebede89661660945da1f151959900903b6a",
+      "url": "https://github.com/nixos/nixpkgs/archive/3a05eebede89661660945da1f151959900903b6a.tar.gz",
+      "hash": "0n56l6v5k3lmrr4vjnp6xk1s46shkwdkvai05dzcbcabpl29yb9g"
     },
     "poetry2nix": {
       "type": "Git",
