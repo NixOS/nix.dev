@@ -46,13 +46,9 @@ writeShellApplication {
         fi
         fullVersion="$(<"$source"/.version)"
 
-        # Only try versions recent enough to have the same structure, this filter out versions before 2.4
-        if ! drvPath=$(nix-instantiate "$source" --argstr system "x86_64-linux" -A default 2> /dev/null); then
-          echo >&2 "No default.nix supporting -A default"
-          break
-        fi
-        # We need a doc output, this is always the case for >= 2.4
-        if ! docOutput=$(nix-store --query --binding doc "$drvPath"); then
+        # Only try versions recent enough to have the same structure, in particular a `doc` output
+        # This is always the case for >= 2.4
+        if ! docOutput=$(nix-instantiate --eval -E "(import $source).default.doc.outPath" | tr -d \"); then
           echo >&2 "No doc output"
           break
         fi
