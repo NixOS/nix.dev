@@ -74,6 +74,8 @@ you should see status checks appearing on commits and PRs.
 
 ## Caching builds using GitHub Actions Cache
 
+> GitHub will shut down the API that Magic Nix Cache uses on February 1st. Their new SDK makes it clear they don't want other languages or libraries, like Magic Nix Cache, to interact with their cache. For more details: [https://dtr.mn/magic-nix-cache-eol](https://dtr.mn/magic-nix-cache-eol)
+
 A quick and easy way to speed up CI on any GitHub repository is to use the [Magic Nix Cache][magic-nix-cache].
 The Magic Nix Cache doesn't require any configuration, secrets, or credentials.
 This means the caching benefits automatically work for anyone who forks the repository.
