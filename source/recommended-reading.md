@@ -36,8 +36,6 @@
 
   A tutorial for getting started with Home Manager.
 
-- [Manage your dot files with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix) (Mattia Gheda, 2021)
-
 - [Nix Shorts](https://github.com/justinwoo/nix-shorts)
 
   A series of posts on basics of how packaging with Nix works.
