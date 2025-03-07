@@ -6,7 +6,7 @@ Keeping it working and up to date – and improving it continuously – would no
 
 This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term}`NixOS`.
 It assumes that you're already somewhat proficient with basic concepts and workflows, which are outlined in the [beginner tutorial series](tutorials).
-The most important aspects are [the Nix language](reading-nix-language), the various {term}`Nixpkgs` mechanisms for [constructing derivations to build software](packaging-tutorial)</a>, [the module system](module-system-tutorial), and [NixOS integration tests](integration-testing-vms).
+The most important aspects are [the Nix language](reading-nix-language), the various Nixpkgs mechanisms for [constructing derivations to build software](packaging-tutorial)</a>, [the module system](module-system-tutorial), and [NixOS integration tests](integration-testing-vms).
 
 :::{important}
 If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
