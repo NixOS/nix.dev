@@ -65,17 +65,6 @@ This is what you can do with software from Nixpkgs:
 - Use **libraries or tools** to build software with Nixpkgs
 - Deploy **services** to machines running NixOS
 
-In order to do that:
-- [Install Nix on Linux or WSL](https://nix.dev/install-nix)
-
-It will help you to go more quickly if you learn to:
-- [Read the Nix language](https://nix.dev/tutorials/nix-language)
-- [Package existing software with Nixpkgs](https://nix.dev/tutorials/packaging-existing-software)
-- [Work with NixOS modules](https://nix.dev/tutorials/module-system/)
-- [Run NixOS in virtual machines](https://nix.dev/tutorials/nixos/nixos-configuration-on-vm)
-- [Provision remote NixOS machines via SSH](https://nix.dev/tutorials/nixos/provisioning-remote-machines)
-- [Set up your own cache for sharing binaries](https://nix.dev/tutorials/nixos/binary-cache-setup)
-
 ## What else can you do with Nix?
 
 The following list illustrates some examples of what can be achieved with the Nix ecosystem:
