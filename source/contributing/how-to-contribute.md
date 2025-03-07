@@ -2,20 +2,22 @@
 # How to contribute
 
 The Nix ecosystem is developed by many volunteers and a few paid developers, maintaining one of the largest open source software distributions in the world.
-Keeping it working and up to date – and improving it continuously – would not be possible without your support.
+Keeping it working and up to date – and improving it continuously – would not be possible without your support!
 
 This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term}`NixOS`.
+It assumes that you're already somewhat proficient with basic concepts and workflows, which are outlined in the [beginner tutorial series](tutorials).
+The most important aspects are [the Nix language](reading-nix-language), the various Nixpkgs mechanisms for [constructing derivations to build software](packaging-tutorial)</a>, [the module system](module-system-tutorial), and [NixOS integration tests](integration-testing-vms).
 
 :::{important}
 If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
 
-Currently the focus is on funding in-person events to share knowledge and grow the community of developers proficient with Nix.
+Currently the focus is on [funding in-person events](https://github.com/NixOS/foundation/issues?q=is%3Aissue%20label%3Afunding-request%20) to share knowledge and grow the community of developers proficient with Nix.
 With enough budget, it would be possible to pay for ongoing maintenance and development of critical infrastructure and code – demanding work that we cannot expect to be done by volunteers indefinitely.
 :::
 
 ## Getting started
 
-Start with asking informed questions, after reading reference documentation and the code relevant to what you care about.
+Start with asking informed questions, after reading [reference documentation](reference) and the code relevant to what you care about.
 
 [Join our community communication platforms](https://nixos.org/community) to get in contact with other users and developers.
 Check out and consider participating in our [community teams](https://nixos.org/community/#governance-teams) if you're interested in a particular topic.
