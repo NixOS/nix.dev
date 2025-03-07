@@ -39,7 +39,7 @@ pkgs.dockerTools.buildImage {
 :::{note}
 If you're running **macOS** or any platform other than `x86_64-linux`, you'll need to either:
 
-- [Set up a remote builder](https://github.com/nix-dot-dev/nix.dev/issues/157) to build on Linux
+- [Set up a remote builder](distributed-build-setup-tutorial) to build on Linux
 - {ref}`Cross compile to Linux <cross-compilation>` by replacing `pkgsLinux.hello` with `pkgs.pkgsCross.musl64.hello`
 :::
 

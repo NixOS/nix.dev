@@ -50,24 +50,36 @@ Explanations of history and ideas in the Nix ecosystem
 :::
 ::::
 
-## What can you do with Nix?
+## What is Nix?
 
-The following list illustrates some of what can be achieved with the Nix ecosystem:
+[Nix](https://github.com/NixOS/nix) allows treating Unix processes and file system operations as pure functions.
 
-- {ref}`Reproducible development environments <ad-hoc-envs>`.
-- Easy installation of software over URLs.
-- Easy transfer of software environments between computers.
-- {ref}`Declarative specification of Linux machines <deploy-nixos-using-terraform>`.
-- {ref}`Reproducible integration testing using virtual machines <integration-testing-vms>`.
-- Avoidance of version conflicts with already installed software.
-- Installing software from source code.
-- {ref}`Transparent build caching using binary caches <github-actions>`.
-- Strong support for software auditability.
-- {ref}`First-class cross compilation support <cross-compilation>`.
-- Remote builds.
-- Remote deployments.
-- Atomic upgrades and rollbacks.
+It is the basis of a growing ecosystem of tools that facilitate repeatable results in software development:
+- [Nixpkgs](https://github.com/nixos/nixpkgs) is [the largest, most up-to-date software repository in the world](https://repology.org/repositories/graphs).
+- [NixOS](https://github.com/NixOS/nixpkgs/tree/master/nixos) is a Linux distribution that can be configured fully declaratively.
 
+## How to use software from Nixpkgs
+
+This is what you can do with software from Nixpkgs:
+- Run **standalone programs** locally with Nix
+- Use **libraries or tools** to build software with Nixpkgs
+- Deploy **services** to machines running NixOS
+
+## What else can you do with Nix?
+
+The following list illustrates some examples of what can be achieved with the Nix ecosystem:
+- {ref}`Reproducible development environments <ad-hoc-envs>`
+- Easy installation of software over URLs and from source code
+- Easy transfer of software environments between computers
+- {ref}`Declarative specification of Linux machines <deploy-nixos-using-terraform>`
+- {ref}`Reproducible integration testing using virtual machines <integration-testing-vms>`
+- Avoidance of version conflicts with already installed software
+- {ref}`Transparent build caching using binary caches <github-actions>`
+- Strong support for software auditability
+- {ref}`First-class cross compilation support <cross-compilation>`
+- Remote builds
+- Remote deployments
+- Atomic upgrades and rollbacks
 
 ## Who is Nix for?
 
