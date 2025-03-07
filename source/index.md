@@ -52,7 +52,8 @@ Explanations of history and ideas in the Nix ecosystem
 
 ## What is Nix?
 
-[Nix](https://github.com/NixOS/nix) is an open source build system, configuration management system, and mechanism for deploying software, focused on reproducibility.
+[Nix](https://github.com/NixOS/nix) allows treating Unix processes and file system operations as pure functions.
+
 It is the basis of an ecosystem of exceptionally powerful tools.
 [Nixpkgs](https://github.com/nixos/nixpkgs) is [the largest, most up-to-date software repository in the world](https://repology.org/repositories/graphs).
 [NixOS](https://github.com/NixOS/nixpkgs/tree/master/nixos) is a Linux distribution that can be configured fully declaratively, with unmatched flexibility.
