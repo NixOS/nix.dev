@@ -99,5 +99,5 @@ guides/index.md
 reference/index.md
 concepts/index.md
 contributing/index.md
-acknowledgments/index.md
+acknowledgements/index.md
 ```
