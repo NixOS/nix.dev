@@ -1,5 +1,4 @@
-<img alt="CI"
-     src="https://github.com/nix-dot-dev/nix.dev/workflows/CI/badge.svg">
+[![](https://github.com/NixOS/nix.dev/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/NixOS/nix.dev/actions)
 
 # [nix.dev](https://nix.dev)
 
