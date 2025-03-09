@@ -91,6 +91,10 @@ If you want to help with development, check the [contributing guide in the Nix r
 (contribute-nixpkgs)=
 ## Contribute to Nixpkgs
 
+:::{tip}
+For a verbal introduction, watch the NixCon 2024 talk [Becoming a Nixpkgs Contributor](https://www.youtube.com/watch?v=eijTOBBbCv4).
+:::
+
 {term}`Nixpkgs` is a large software project with various areas of development.
 You can find inspiration for things to improve in the [Nixpkgs issue tracker][nixpkgs issues].
 
@@ -113,3 +117,6 @@ If you know your way around, working on [popular issues][nixos issues] will be h
 
 [nixos issues]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%226.topic%3A+nixos%22+sort%3Areactions-%2B1-desc
 
+# How to get help
+
+If you prepared a pull request and need help moving forward, check [](contributing-how-to-get-help) for

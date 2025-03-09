@@ -1,3 +1,4 @@
+(contributing-how-to-get-help)=
 # How to get help
 
 If you need assistance with one of your contributions, there are a few places you
@@ -20,9 +21,9 @@ For better efficiency and higher chance of success, you should try contacting in
 
 ## Which communication channels to use
 
-Once you've found the people you're looking for, you can contact them on one of the following platforms:
+Once you've found the people you're looking for, you can contact them on one of the [community communication platforms](https://nixos.org/community):
 
-- GitHub
+- [GitHub](https://github.com/nixos)
 
   All the source code is maintained on GitHub.
   This is the right place to discuss implementation details.
@@ -51,7 +52,7 @@ Once you've found the people you're looking for, you can contact them on one of 
 
 - Meetings and events
 
-  Check the [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589) for real-time or in-person events.
+  Check the [official NixOS Calendar](https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com) and the [Discourse community calendar](https://discourse.nixos.org/t/community-calendar/18589) for real-time or in-person events.
   Some community teams hold regular meetings and publish their meeting notes.
 
 ## Other venues
