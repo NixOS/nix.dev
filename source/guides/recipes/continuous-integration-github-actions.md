@@ -72,40 +72,10 @@ jobs:
 Once you commit and push to your GitHub repository,
 you should see status checks appearing on commits and PRs.
 
-## Caching builds using GitHub Actions Cache
-
-A quick and easy way to speed up CI on any GitHub repository is to use the [Magic Nix Cache][magic-nix-cache].
-The Magic Nix Cache doesn't require any configuration, secrets, or credentials.
-This means the caching benefits automatically work for anyone who forks the repository.
-
-One downside to the Magic Nix Cache is it only works inside GitHub Actions.
-For more details, check out [the readme][magic-nix-cache] and the [limits of GitHub Actions caching][github-actions-caching-limits].
-
-Create `.github/workflows/test.yml` with:
-
-```yaml
-name: "Test"
-on:
-  pull_request:
-  push:
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v25
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - uses: DeterminateSystems/magic-nix-cache-action@v2
-    - run: nix-build
-    - run: nix-shell --run "echo OK"
-```
-
 ## Next steps
 
 - See [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
 - To quickly setup a Nix project read through
   [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
 
-[magic-nix-cache]: https://github.com/DeterminateSystems/magic-nix-cache-action/
 [github-actions-caching-limits]: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
