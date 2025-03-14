@@ -1111,7 +1111,7 @@ Each of them is explained in the following, and here is an overview:
   { a, b, ... }@args: a + b + args.c
   ```
 
-Functions have no names.
+Functions in the Nix language have no names.
 We say they are anonymous, and call such a function a *lambda*.[^lambda]
 
 [^lambda]: The term *lambda* is a shorthand for [lambda abstraction](https://en.wikipedia.org/wiki/Lambda_calculus#lambdaAbstr) in the [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
