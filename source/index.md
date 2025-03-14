@@ -52,18 +52,17 @@ Explanations of history and ideas in the Nix ecosystem
 
 ## What is Nix?
 
-[Nix](https://github.com/NixOS/nix) allows treating Unix processes and file system operations as pure functions.
+[Nix](https://github.com/NixOS/nix) allows treating Unix processes as pure functions over file systems.
 
 It is the basis of a growing ecosystem of tools that facilitate repeatable results in software development:
 - [Nixpkgs](https://github.com/nixos/nixpkgs) is [the largest, most up-to-date software repository in the world](https://repology.org/repositories/graphs).
 - [NixOS](https://github.com/NixOS/nixpkgs/tree/master/nixos) is a Linux distribution that can be configured fully declaratively.
 
-## How to use software from Nixpkgs
+## What can you do with the Nix ecosystem?
 
-This is what you can do with software from Nixpkgs:
-- Run **standalone programs** locally with Nix
-- Use **libraries or tools** to build software with Nixpkgs
-- Deploy **services** to machines running NixOS
+- Build **executables** with Nix
+- Develop software using **libraries or tools** from Nixpkgs 
+- Configure **services** and deploy them to machines running NixOS
 
 ## What else can you do with Nix?
 
