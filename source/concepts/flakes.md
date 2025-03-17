@@ -5,7 +5,7 @@ What is usually referred to as "flakes" is:
 - A policy for managing dependencies between {term}`Nix expressions<Nix expression>`.
 - An [experimental feature] in Nix, implementing that policy and supporting functionality.
 
-[experimental feature]: https://nix.dev/manual/nix/stable/contributing/experimental-features.html
+[experimental feature]: https://nix.dev/manual/nix/stable/contributing/experimental-features
 
 ## What are flakes?
 
