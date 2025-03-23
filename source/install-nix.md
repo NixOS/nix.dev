@@ -1,6 +1,8 @@
 (install-nix)=
 
 # Install Nix
+Requirements:
+ - Prior to installation, you might need to first install `xz-utils` or similar for uncompressing the Nix binary tarball (`.tar.xz`) that will be downloaded via the scripts below.
 
 :::::{tab-set}
 
