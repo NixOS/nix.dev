@@ -15,7 +15,7 @@ One benefit of Nix is that **CI can build and cache developer environments for e
 
 An important aspect of CI is the feedback loop of, **how many minutes does the build take to finish?**
 
-There are a several good options, but Cachix (below) and integrating with GitHub's built-in cache (at the end) are the most straightforward.
+There are a several good options, but Cachix (below) is the most straightforward.
 
 ## Caching builds using Cachix
 
