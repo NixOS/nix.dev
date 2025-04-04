@@ -13,11 +13,11 @@ The build loop exits if the hook program fails.
 Concretely, this implementation will make Nix slow or unusable when the network connection is slow or unreliable.
 A more advanced implementation might pass the store paths to a user-supplied daemon or queue for processing the store paths outside of the build loop.
 
-# Prerequisites
+## Prerequisites
 
 This tutorial assumes you have [configured an S3-compatible binary cache](https://nix.dev/manual/nix/2.22/store/types/s3-binary-cache-store#authenticated-writes-to-your-s3-compatible-binary-cache), and that the `root` user's default AWS profile can upload to the bucket.
 
-# Set up a signing key
+## Set up a signing key
 
 Use [`nix-store --generate-binary-cache-key`](https://nix.dev/manual/nix/2.22/command-ref/nix-store/generate-binary-cache-key) to create a pair of cryptographic keys.
 You will sign paths with the private key, and distribute the public key for verifying the authenticity of the paths.
@@ -43,7 +43,7 @@ The path to the file containing the private key you just generated must be added
 secret-key-files = /etc/nix/key.private
 ```
 
-# Implementing the build hook
+## Implementing the build hook
 
 Write the following script to `/etc/nix/upload-to-cache.sh`:
 
@@ -67,7 +67,7 @@ Make sure the hook program is executable by the `root` user:
 # chmod +x /etc/nix/upload-to-cache.sh
 ```
 
-# Updating nix configuration
+## Updating nix configuration
 
 Set the [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-post-build-hook) configuration option on the local machine to run the hook:
 
@@ -81,7 +81,7 @@ Then restart the `nix-daemon` an all involved machines, e.g. with
 pkill nix-daemon
 ```
 
-# Testing
+## Testing
 
 Build any derivation, for example:
 
@@ -107,7 +107,7 @@ warning: you did not specify '--add-root'; the result might be removed by the ga
 /nix/store/m8bmqwrch6l3h8s0k3d673xpmipcdpsa-example
 ```
 
-# Conclusion
+## Conclusion
 
 You have configured Nix to automatically sign and upload every local build to a remote S3-compatible binary cache.
 
