@@ -504,7 +504,7 @@ To search derivations on the command line, use `nix-locate` from the [`nix-index
 
 ### Adding package sets as dependencies
 
-Add this to your derivation's input attribute set and to `buildInputs`:
+Add `xorg` to your derivation's input attribute set and use `xorg.libX11` in `buildInputs`:
 
 ```nix
 # icat.nix
@@ -531,9 +531,7 @@ stdenv.mkDerivation {
 ```
 
 :::{note}
-Only add the top-level `xorg` derivation to the input attrset, rather than the full `xorg.libX11`, as the latter would cause a syntax error.
-
-Because Nix is lazily-evaluated, using `xorg.libX11` means that we only include the `libX11` attribute and the derivation doesn't actually include all of `xorg` into the build context.
+Because the Nix language is lazily evaluated, accessing only `xorg.libX11` means that the remaining contents of the `xorg` attribute set are never processed.
 :::
 
 ## Fixing build failures
