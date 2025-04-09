@@ -74,48 +74,10 @@ let
         '';
     };
 
-  devmode =
-    let
-      pythonEnvironment = pkgs.python310.withPackages (ps: with ps; [
-        livereload
-      ]);
-      script = ''
-        from livereload import Server
-        from subprocess import Popen, PIPE
-        import shlex
-        import sys
-
-        server = Server()
-
-        def nix_build():
-          p = Popen(
-            shlex.split("nix-build -A build") + sys.argv[1:],
-            # capture output as text
-            stdout=PIPE,
-            stderr=PIPE,
-            text=True,
-          )
-          # we only care about failures
-          stdout, stderr = p.communicate()
-          if p.returncode:
-            print(stderr)
-          return p
-
-        # (re-)build once before serving
-        nix_build().wait()
-
-        server.watch("source/*", nix_build)
-        server.watch("source/**/*", nix_build)
-        server.serve(root="result")
-      '';
-    in
-    pkgs.writeShellApplication {
-      name = "devmode";
-      runtimeInputs = [ pythonEnvironment ];
-      text = ''
-        python ${pkgs.writeText "live.py" script}
-      '';
-    };
+  devmode = pkgs-unstable.devmode.override {
+    buildArgs = ''-A build --show-trace'';
+    open = "/index.html";
+  };
   update-nix-releases = pkgs-unstable.callPackage ./nix/update-nix-releases.nix { };
   update-nixpkgs-releases = pkgs-unstable.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
