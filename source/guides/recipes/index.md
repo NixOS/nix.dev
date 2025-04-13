@@ -11,4 +11,5 @@ Managing remote sources <./dependency-management.md>
 Python development environment <./python-environment.md>
 post-build-hook.md
 continuous-integration-github-actions.md
+autoformatting.md
 ```
