@@ -2,6 +2,13 @@
 
 ## Nix
 
+### How to format Nix language code automatically?
+
+[`nixfmt`](https://github.com/NixOS/nixfmt) is the official formatter for {term}`Nix language` code.
+Please refer to its source repository for installation instructions.
+
+`nixfmt` is [used to format all code](https://github.com/NixOS/nixpkgs/blob/master/ci/default.nix) in {term}`Nixpkgs`.
+
 ### How to convert between paths and strings in the Nix language?
 
 See the Nix reference manual on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
