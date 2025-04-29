@@ -2,9 +2,9 @@
 
 ## Nix
 
-### How to operate between Nix paths and strings?
+### How to convert between paths and strings in the Nix language?
 
-See the [Nix reference manual](nix-manual) on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
+See the Nix reference manual on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
 
 ### How to build reverse dependencies of a package?
 
