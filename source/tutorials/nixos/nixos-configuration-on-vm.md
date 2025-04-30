@@ -15,7 +15,7 @@ Virtual machines are a practical tool for experimenting with or debugging NixOS 
 
 - A Linux system with virtualisation support
 - (optional) A graphical environment for running a graphical virtual machine
-- A working [Nix installation](https://nix.dev/manual/nix/stable/installation/installation.html)
+- A working [Nix installation](https://nix.dev/install-nix)
 - Basic knowledge of the [Nix language](reading-nix-language)
 
 :::{important}
