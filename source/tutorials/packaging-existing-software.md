@@ -150,21 +150,10 @@ Now run the `nix-build` command with the new argument:
 
 ```console
 $ nix-build -A hello
-error:
-...
-       … while evaluating attribute 'src' of derivation 'hello'
-
-         at /home/nix-user/hello.nix:9:3:
-
-            8|
-            9|   src = fetchzip {
-             |   ^
-           10|     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-
-       error: hash mismatch in file downloaded from 'https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz':
-         specified: sha256:0000000000000000000000000000000000000000000000000000
-         got:       sha256:0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn
-       error: 1 dependencies of derivation '/nix/store/8l961ay0q0ydfsgby0ngz6nmkchjqd50-hello-2.12.1.drv' failed to build
+error: hash mismatch in fixed-output derivation '/nix/store/pd2kiyfa0c06giparlhd1k31bvllypbb-source.drv':
+         specified: sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+            got:    sha256-1kJjhtlsAkpNB7f6tZEs+dbKd8z7KoNHyDHEJ0tmhnc=
+error: 1 dependencies of derivation '/nix/store/b4mjwlv73nmiqgkdabsdjc4zq9gnma1l-hello-2.12.1.drv' failed to build
 ```
 
 ### Finding the file hash
@@ -184,7 +173,7 @@ stdenv.mkDerivation {
 
   src = fetchzip {
     url = "https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz";
-    sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
+    sha256 = "sha256-1kJjhtlsAkpNB7f6tZEs+dbKd8z7KoNHyDHEJ0tmhnc=";
   };
 }
 ```
