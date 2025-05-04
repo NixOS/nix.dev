@@ -16,7 +16,7 @@ Enter the development environment with `nix-shell`, or [set up direnv](https://n
 [nix-shell:nix.dev]$ devmode
 ```
 
-and open a browser at <http://localhost:5500>.
+and open a browser at <http://localhost:8080>.
 
 As you make changes, your browser should auto-reload.
 
