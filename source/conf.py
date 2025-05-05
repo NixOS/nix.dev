@@ -256,11 +256,11 @@ html_sidebars = {
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
-    #'papersize': 'letterpaper',
+    'papersize': 'a4paper',
     # The font size ('10pt', '11pt' or '12pt').
     #'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
-    #'preamble': '',
+    'preamble': '\setcounter{tocdepth}{3}',
     # Latex figure (float) alignment
     #'figure_align': 'htbp',
 }
@@ -278,6 +278,7 @@ latex_documents = [
     ),
 ]
 
+latex_engine = "xelatex"
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
 # latex_logo = None
@@ -285,6 +286,8 @@ latex_documents = [
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
 # latex_use_parts = False
+
+latex_use_xindy = False
 
 # If true, show page references after internal links.
 # latex_show_pagerefs = False
