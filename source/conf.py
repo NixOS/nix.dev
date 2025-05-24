@@ -201,6 +201,7 @@ html_sidebars = {
         "about.html",
         "search-field.html",
         "sbt-sidebar-nav.html",
+        "download-links.html",
     ],
 }
 
@@ -260,9 +261,11 @@ latex_elements = {
     # The font size ('10pt', '11pt' or '12pt').
     #'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
-    'preamble': '\setcounter{tocdepth}{3}',
+    'preamble': r'\setcounter{tocdepth}{2}',
+    'sphinxsetup': r'TitleColor={RGB}{87, 154, 202}',
     # Latex figure (float) alignment
     #'figure_align': 'htbp',
+
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -271,17 +274,18 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "nixpkgs-cookbook.tex",
-        "nixpkgs-cookbook Documentation",
+        "nix-dev.tex",
+        "nix.dev",
         "nix.dev contributors",
         "manual",
+        True, # toctree only
     ),
 ]
 
 latex_engine = "xelatex"
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-# latex_logo = None
+latex_logo = "_static/_img/nix.pdf"
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
@@ -290,10 +294,10 @@ latex_engine = "xelatex"
 latex_use_xindy = False
 
 # If true, show page references after internal links.
-# latex_show_pagerefs = False
+latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
-# latex_show_urls = False
+latex_show_urls = 'footnote'
 
 # Documents to append as an appendix to all manuals.
 # latex_appendices = []
