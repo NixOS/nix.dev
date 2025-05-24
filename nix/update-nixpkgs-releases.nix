@@ -22,8 +22,16 @@ writeShellApplication {
       | rg '^([0-9a-f]+)\trefs/heads/nixos-(\d\d\.\d\d)$' -or '$2' \
       | sort --reverse --version-sort \
       | while read -r version; do
+          major_version=$(echo "$version" | cut -d. -f1)
+          # filter out very old nixpkgs versions
+          if [ "$major_version" -lt 23 ]; then
+            if npins -d nix show | grep -q "$version"; then
+              npins -d nix remove "$version"
+            fi
+            continue
+          fi
 
-        if ! jq -e --arg version "$version" 'has($ARGS.named.version)' nix/sources.json >/dev/null; then
+        if ! npins -d nix show | grep -q "$version"; then
           npins -d nix add  --name "$version" github nixos nixpkgs --branch "nixos-$version"
         fi
       done
