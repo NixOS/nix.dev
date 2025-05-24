@@ -21,7 +21,7 @@ let
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
       src = ./.;
-      nativeBuildInputs = with pkgs.python310.pkgs; [
+      nativeBuildInputs = with pkgs.python3.pkgs; [
         linkify-it-py
         myst-parser
         sphinx
@@ -92,7 +92,7 @@ in
       update-nix-releases
       update-nixpkgs-releases
       pkgs.npins
-      pkgs.python310.pkgs.black
+      pkgs.python3.pkgs.black
       pkgs.vale
       pkgs.netlify-cli
     ];
