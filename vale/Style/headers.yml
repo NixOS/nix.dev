@@ -1,5 +1,5 @@
 extends: capitalization
-message: "'%s' should be in sentence case"
+message: "Should be in sentence case: '%s'"
 level: error
 scope: heading
 # $title, $sentence, $lower, $upper, or a pattern.
@@ -9,3 +9,6 @@ indicators:
   - "."
 exceptions:
   - macOS
+  - Nix
+  - I
+  - GNOME

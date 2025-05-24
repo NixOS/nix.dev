@@ -5,7 +5,7 @@
   # {
   #   <name> = <source>;
   # }
-  main = import ../npins { };
+  main = import ../npins;
 
   # Sources for Nix releases, the attribute name is the release version.
   # These are done specially because updating these is non-trivial.
@@ -26,8 +26,14 @@
   # Sources for Nixpkgs releases, the attribute name is the release name.
   # These can be updated with the standard npins tooling, but are tracked separately to avoid having to filter them out during processing.
   # See ./update-nixpkgs-releases.nix
-  nixpkgs = import ../npins {
-    json = ./sources.json;
-  };
+  nixpkgs =
+    builtins.mapAttrs (name: value:
+      # This matches the nix-prefetch-url --unpack --name source call in ./update-nix-releases.nix
+      fetchTarball {
+        name = "source";
+        url = value.url;
+        sha256 = value.hash;
+      }
+    ) (builtins.fromJSON (builtins.readFile ./sources.json)).pins;
 
 }

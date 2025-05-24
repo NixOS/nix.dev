@@ -1,4 +1,4 @@
-# Google Season of Docs 2024: write Nix docker and cross compilation guides
+# Google season of docs 2024: write Nix docker and cross compilation guides
 
 ## About Nix
 

@@ -1,7 +1,7 @@
 {
   inputs ? import ./nix/inputs.nix,
   system ? builtins.currentSystem,
-  pkgs ? import inputs.nixpkgs."23.05" {
+  pkgs ? import inputs.nixpkgs."25.05" {
     config = { };
     overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
@@ -21,7 +21,7 @@ let
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
       src = ./.;
-      nativeBuildInputs = with pkgs.python310.pkgs; [
+      nativeBuildInputs = with pkgs.python3.pkgs; [
         linkify-it-py
         myst-parser
         sphinx
@@ -36,7 +36,7 @@ let
         let
           substitutedNixManualReference = pkgs.substitute {
             src = ./source/reference/nix-manual.md;
-            replacements = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
+            substitutions = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
           };
         in
         ''
@@ -92,7 +92,7 @@ in
       update-nix-releases
       update-nixpkgs-releases
       pkgs.npins
-      pkgs.python310.pkgs.black
+      pkgs.python3.pkgs.black
       pkgs.vale
       pkgs.netlify-cli
     ];
