@@ -67,7 +67,7 @@ Make sure the hook program is executable by the `root` user:
 # chmod +x /etc/nix/upload-to-cache.sh
 ```
 
-## Updating nix configuration
+## Updating Nix configuration
 
 Set the [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-file#conf-post-build-hook) configuration option on the local machine to run the hook:
 
