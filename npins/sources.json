@@ -8,6 +8,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
+      "submodules": false,
       "revision": "fe51d34885f7b5e3e7b59572796e1bcb427eccb1",
       "url": "https://github.com/nixos/nixpkgs/archive/fe51d34885f7b5e3e7b59572796e1bcb427eccb1.tar.gz",
       "hash": "0pg3ibyagan1y57l1q1rwyrygrwg02p59p0fbgl23hf1nw58asda"
@@ -20,10 +21,11 @@
         "repo": "poetry2nix"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "ce2369db77f45688172384bbeb962bc6c2ea6f94",
       "url": "https://github.com/nix-community/poetry2nix/archive/ce2369db77f45688172384bbeb962bc6c2ea6f94.tar.gz",
       "hash": "0xq52gq2920xnv7n8rchy3myxbijfpap8z0sd572ifla9dnpqzvi"
     }
   },
-  "version": 3
+  "version": 5
 }
