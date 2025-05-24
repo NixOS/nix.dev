@@ -1,7 +1,7 @@
 {
   inputs ? import ./nix/inputs.nix,
   system ? builtins.currentSystem,
-  pkgs ? import inputs.nixpkgs."23.05" {
+  pkgs ? import inputs.nixpkgs."25.05" {
     config = { };
     overlays = [ (import ./nix/overlay.nix) ];
     inherit system;
