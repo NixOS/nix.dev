@@ -1,0 +1,19 @@
+name: "Update nix releases"
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "31 2 * * *"
+jobs:
+  update-nix-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Update nix releases
+        run: nix-shell --run update-nix-releases
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update nix versions
+          labels: dependencies
