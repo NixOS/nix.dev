@@ -36,7 +36,7 @@ let
         let
           substitutedNixManualReference = pkgs.substitute {
             src = ./source/reference/nix-manual.md;
-            replacements = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
+            substitutions = lib.concatLists (lib.mapAttrsToList (from: to: [ "--subst-var-by" from to ]) releases.substitutions);
           };
         in
         ''
