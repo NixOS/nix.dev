@@ -8,6 +8,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-18.09",
+      "submodules": false,
       "revision": "a7e559a5504572008567383c3dc8e142fa7a8633",
       "url": "https://github.com/nixos/nixpkgs/archive/a7e559a5504572008567383c3dc8e142fa7a8633.tar.gz",
       "hash": "16j95q58kkc69lfgpjkj76gw5sx8rcxwi3civm0mlfaxxyw9gzp6"
@@ -20,6 +21,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-19.03",
+      "submodules": false,
       "revision": "34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59",
       "url": "https://github.com/nixos/nixpkgs/archive/34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59.tar.gz",
       "hash": "11z6ajj108fy2q5g8y4higlcaqncrbjm3dnv17pvif6avagw4mcb"
@@ -32,6 +34,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-19.09",
+      "submodules": false,
       "revision": "75f4ba05c63be3f147bcc2f7bd4ba1f029cedcb1",
       "url": "https://github.com/nixos/nixpkgs/archive/75f4ba05c63be3f147bcc2f7bd4ba1f029cedcb1.tar.gz",
       "hash": "157c64220lf825ll4c0cxsdwg7cxqdx4z559fdp7kpz0g6p8fhhr"
@@ -44,6 +47,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-20.03",
+      "submodules": false,
       "revision": "1db42b7fe3878f3f5f7a4f2dc210772fd080e205",
       "url": "https://github.com/nixos/nixpkgs/archive/1db42b7fe3878f3f5f7a4f2dc210772fd080e205.tar.gz",
       "hash": "05k9y9ki6jhaqdhycnidnk5zrdzsdammbk5lsmsbz249hjhhgcgh"
@@ -56,6 +60,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-20.09",
+      "submodules": false,
       "revision": "1c1f5649bb9c1b0d98637c8c365228f57126f361",
       "url": "https://github.com/nixos/nixpkgs/archive/1c1f5649bb9c1b0d98637c8c365228f57126f361.tar.gz",
       "hash": "0f2nvdijyxfgl5kwyb4465pppd5vkhqxddx6v40k2s0z9jfhj0xl"
@@ -68,6 +73,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-21.05",
+      "submodules": false,
       "revision": "022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf",
       "url": "https://github.com/nixos/nixpkgs/archive/022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf.tar.gz",
       "hash": "12q00nbd7fb812zchbcnmdg3pw45qhxm74hgpjmshc2dfmgkjh4n"
@@ -80,6 +86,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-21.11",
+      "submodules": false,
       "revision": "eabc38219184cc3e04a974fe31857d8e0eac098d",
       "url": "https://github.com/nixos/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
       "hash": "04ffwp2gzq0hhz7siskw6qh9ys8ragp7285vi1zh8xjksxn1msc5"
@@ -92,6 +99,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-22.05",
+      "submodules": false,
       "revision": "380be19fbd2d9079f677978361792cb25e8a3635",
       "url": "https://github.com/nixos/nixpkgs/archive/380be19fbd2d9079f677978361792cb25e8a3635.tar.gz",
       "hash": "154x9swf494mqwi4z8nbq2f0sp8pwp4fvx51lqzindjfbb9yxxv5"
@@ -104,6 +112,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-22.11",
+      "submodules": false,
       "revision": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
       "url": "https://github.com/nixos/nixpkgs/archive/ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b.tar.gz",
       "hash": "1xi53rlslcprybsvrmipm69ypd3g3hr7wkxvzc73ag8296yclyll"
@@ -116,6 +125,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-23.05",
+      "submodules": false,
       "revision": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
       "url": "https://github.com/nixos/nixpkgs/archive/70bdadeb94ffc8806c0570eb5c2695ad29f0e421.tar.gz",
       "hash": "05cbl1k193c9la9xhlz4y6y8ijpb2mkaqrab30zij6z4kqgclsrd"
@@ -128,6 +138,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-23.11",
+      "submodules": false,
       "revision": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
       "url": "https://github.com/nixos/nixpkgs/archive/205fd4226592cc83fd4c0885a3e4c9c400efabb5.tar.gz",
       "hash": "1f5d2g1p6nfwycpmrnnmc2xmcszp804adp16knjvdkj8nz36y1fg"
@@ -140,6 +151,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-24.05",
+      "submodules": false,
       "revision": "b134951a4c9f3c995fd7be05f3243f8ecd65d798",
       "url": "https://github.com/nixos/nixpkgs/archive/b134951a4c9f3c995fd7be05f3243f8ecd65d798.tar.gz",
       "hash": "0zydsqiaz8qi4zd63zsb2gij2p614cgkcaisnk11wjy3nmiq0x1s"
@@ -152,11 +164,24 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-24.11",
-      "revision": "62c435d93bf046a5396f3016472e8f7c8e2aed65",
-      "url": "https://github.com/nixos/nixpkgs/archive/62c435d93bf046a5396f3016472e8f7c8e2aed65.tar.gz",
-      "hash": "0zpvadqbs19jblnd0j2rfs9m7j0n5spx0vilq8907g2gqrx63fqp"
+      "submodules": false,
+      "revision": "2baa12ff69913392faf0ace833bc54bba297ea95",
+      "url": "https://github.com/nixos/nixpkgs/archive/2baa12ff69913392faf0ace833bc54bba297ea95.tar.gz",
+      "hash": "0b98zjp4klps935sch2n0mysfr3l9sz13d2r74dsgnsnklsxm0ak"
+    },
+    "25.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-25.05",
+      "submodules": false,
+      "revision": "55d1f923c480dadce40f5231feb472e81b0bab48",
+      "url": "https://github.com/nixos/nixpkgs/archive/55d1f923c480dadce40f5231feb472e81b0bab48.tar.gz",
+      "hash": "0i0ayb1p7ypbjnjf837qlfn6n3i3468cvalha54yakjdi6a6srnb"
     }
   },
-  "version": 3
+  "version": 5
 }
-
