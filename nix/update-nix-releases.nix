@@ -24,6 +24,14 @@ writeShellApplication {
       | sort --reverse --version-sort \
       | while read -r version; do
 
+      # ignore everything below 2.18 for speed, this might need to be adjusted in the future
+      majorVersion=$(echo "$version" | cut -d. -f1)
+      minorVersion=$(echo "$version" | cut -d. -f2)
+      if [ "$majorVersion" -lt 2 ] || { [ "$majorVersion" -eq 2 ] && [ "$minorVersion" -lt 18 ]; }; then
+        echo >&2 "Skipping $version"
+        continue
+      fi
+
       rev=$(git -C "$tmp/nix" rev-parse "$version-maintenance")
       echo >&2 "Version $version on branch $version-maintenance is at $rev"
 
