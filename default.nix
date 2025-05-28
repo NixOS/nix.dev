@@ -27,13 +27,19 @@ let
     sphinx-sitemap
     pkgs.perl
   ];
+  # generated with nix run github:rgri/tex2nix -- *.tex *.sty
+  nix-dev-latex = [ (pkgs.callPackage ./nix/tex-env.nix {
+    extraTexPackages = {
+      inherit (pkgs.texlive) latexmk gnu-freefont;
+    };
+  }) ];
   nix-dev =
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
       src = ./.;
       nativeBuildInputs = [
         nix-dev-python-pkgs
-        pkgs.texlive.combined.scheme-full
+        nix-dev-latex
       ];
       buildPhase =
         let
