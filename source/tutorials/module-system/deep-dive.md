@@ -523,8 +523,8 @@ Make the following changes to `marker.nix`:
 
 ```{code-block} diff
 :caption: marker.nix
--{ pkgs, lib, config, ... }: {
-+{ pkgs, lib, config, ... }:
+-{ lib, config, ... }: {
++{ lib, config, ... }:
 +let
 +  markerType = lib.types.submodule {
 +    options = {
