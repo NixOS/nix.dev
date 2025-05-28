@@ -701,6 +701,10 @@ In the `paramForMarker` function:
 ```{code-block} diff
 :caption: marker.nix
      requestParams = let
+-      paramForMarker =
+-        builtins.map (marker: "$(${config.scripts.geocode}/bin/geocode ${
+-         lib.escapeShellArg marker.location})") config.map.markers;
+-    in [ "markers=\"${lib.concatStringsSep "|" paramForMarker}\"" ];
 +      paramForMarker = marker:
 +        let
 +          attributes =
