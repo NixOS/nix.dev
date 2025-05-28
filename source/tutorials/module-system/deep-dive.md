@@ -333,8 +333,8 @@ Now make the following changes to `default.nix`:
        name = "map";
        runtimeInputs = with pkgs; [ curl feh ];
        text = ''
--        ${./map} size=640x640 scale=2 | feh -
-+        ${./map} ${lib.concatStringsSep " "
+-        ${./map.sh} size=640x640 scale=2 | feh -
++        ${./map.sh} ${lib.concatStringsSep " "
 +          config.requestParams} | feh -
        '';
 ```
