@@ -16,21 +16,30 @@ let
     overlays = [ ];
     inherit system;
   };
-
+  nix-dev-python-pkgs = with pkgs.python3.pkgs; [
+    linkify-it-py
+    myst-parser
+    sphinx
+    sphinx-book-theme
+    sphinx-copybutton
+    sphinx-design
+    sphinx-notfound-page
+    sphinx-sitemap
+    pkgs.perl
+  ];
+  # generated with nix run github:rgri/tex2nix -- *.tex *.sty
+  nix-dev-latex = [ (pkgs.callPackage ./nix/tex-env.nix {
+    extraTexPackages = {
+      inherit (pkgs.texlive) latexmk gnu-freefont;
+    };
+  }) ];
   nix-dev =
     pkgs.stdenv.mkDerivation {
       name = "nix-dev";
       src = ./.;
-      nativeBuildInputs = with pkgs.python3.pkgs; [
-        linkify-it-py
-        myst-parser
-        sphinx
-        sphinx-book-theme
-        sphinx-copybutton
-        sphinx-design
-        sphinx-notfound-page
-        sphinx-sitemap
-        pkgs.perl
+      nativeBuildInputs = [
+        nix-dev-python-pkgs
+        nix-dev-latex
       ];
       buildPhase =
         let
@@ -42,6 +51,7 @@ let
         ''
           ${lib.optionalString withManuals "cp -f ${substitutedNixManualReference} source/reference/nix-manual.md"}
           make html
+          make latexpdf
         '';
       installPhase =
         let
@@ -68,6 +78,7 @@ let
         ''
           mkdir -p $out/manual/nix
           cp -R build/html/* $out/
+          cp build/latex/nix-dev.pdf $out/
         '' + lib.optionalString withManuals ''
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
