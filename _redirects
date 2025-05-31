@@ -37,5 +37,7 @@
 
 /permalink/stub-ld /guides/faq#how-to-run-non-nix-executables 301
 /manual/nix /reference/nix-manual 200
+/manual/nix/unstable/* https://hydra.nixos.org/job/nix/master/manual/latest/download/1/manual/:splat 200
+/manual/nix/development/* https://hydra.nixos.org/job/nix/master/manual/latest/download/1/manual/:splat 200
 /tutorials/nixos/continuous-integration-github-actions /guides/recipes/continuous-integration-github-actions 301
 /guides/recipes/autoformatting /guides/faq#how-to-format-nix-language-code-automatically 301
