@@ -79,6 +79,7 @@ let
           mkdir -p $out/manual/nix
           cp -R build/html/* $out/
           cp build/latex/nix-dev.pdf $out/
+          cp netlify.toml $out/
         '' + lib.optionalString withManuals ''
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
