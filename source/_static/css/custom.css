@@ -3,8 +3,8 @@
 }
 
 div.highlight-shell-session + div.highlight-none pre {
-  background-color: var(--pst-color-preformatted-text), 1 !important;
-  color: var(--pst-color-preformatted-background), 1 !important;
+  background-color: var(--pst-color-preformatted-text),1 !important;
+  color: var(--pst-color-preformatted-background),1 !important;
 }
 
 div.expression > div.highlight > pre::before {
@@ -35,9 +35,7 @@ div.highlight > pre::before {
   color: #fff;
   font-size: 0.8em;
   border-radius: 0 0.4em 0 0.4em;
-  transition:
-    opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1),
-    transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
 
 div.highlight:hover > pre::before {
