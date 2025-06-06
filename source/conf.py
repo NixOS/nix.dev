@@ -151,8 +151,6 @@ html_theme_options = {
     "repository_branch": "master",
     "path_to_docs": "source",
     "use_repository_button": True,
-    "use_issues_button": True,
-    "use_edit_page_button": True,
     "show_navbar_depth": 2,
 }
 
