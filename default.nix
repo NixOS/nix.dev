@@ -11,6 +11,13 @@
 let
   lib = pkgs.lib;
   releases = import ./nix/releases.nix { inherit lib inputs system; };
+
+  # Fetch the development manual from GitHub releases
+  developmentManualInfo = lib.importJSON ./nix/development-manual.json;
+  developmentManual = pkgs.fetchurl {
+    url = developmentManualInfo.url;
+    sha256 = developmentManualInfo.sha256;
+  };
   pkgs-unstable = import inputs.main.nixpkgs-rolling {
     config = { };
     overlays = [ ];
@@ -83,6 +90,11 @@ let
         '' + lib.optionalString withManuals ''
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList release releases.nixReleases)}
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList mutableRedirect releases.mutableNixManualRedirects)}
+
+          # Extract and install development manual
+          echo "Installing development manual..."
+          mkdir -p $out/manual/nix/development
+          tar -xf ${developmentManual} -C $out/manual/nix/development --strip-components=1
         '';
     };
 
@@ -92,6 +104,7 @@ let
   };
   update-nix-releases = pkgs-unstable.callPackage ./nix/update-nix-releases.nix { };
   update-nixpkgs-releases = pkgs-unstable.callPackage ./nix/update-nixpkgs-releases.nix { };
+  update-development-manual = pkgs-unstable.callPackage ./nix/update-development-manual.nix { };
 in
 {
   # build with `nix-build -A build`
@@ -103,6 +116,7 @@ in
       devmode
       update-nix-releases
       update-nixpkgs-releases
+      update-development-manual
       pkgs.npins
       pkgs.python3.pkgs.black
       pkgs.vale
