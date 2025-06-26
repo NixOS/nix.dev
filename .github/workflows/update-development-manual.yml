@@ -1,0 +1,25 @@
+name: "Update development manual"
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    # Run weekly on Mondays at 3:31 AM UTC
+    - cron: "31 3 * * 1"
+
+jobs:
+  update-development-manual:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create releases and push changes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Update development manual
+        run: nix-shell --run update-development-manual
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update development manual
+          labels: dependencies
