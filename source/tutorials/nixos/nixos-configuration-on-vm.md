@@ -26,7 +26,8 @@ For a thorough treatment of the module system, check the [](module-system-deep-d
 ## Starting from a default NixOS configuration
 
 :::{note}
-This tutorial starts with building up your `configuration.nix` from first principles, explaining each step. If you prefer, you can skip ahead to the [sample configuration](sample-nixos-config) section.
+This tutorial starts with building up your `configuration.nix` from first principles, explaining each step.
+If you prefer, you can skip ahead to the [sample configuration](sample-nixos-config) section.
 :::
 
 We start with a minimal `configuration.nix`:
