@@ -52,11 +52,10 @@ To be able to log in, add the following lines to the returned attribute set:
   };
 ```
 
-Additionally, you need to specify a password for this user.
-For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
+Additionally, you need to specify a password for this user. You can generate a hashed password with `mkpasswd` and then add it as:
 
 ```nix
-   initialPassword = "test";
+    initialHashedPassword = "$y$j9T$1Cxi0roo3nE7GNTBz0NKs.$uGc0FJbwMhU2PgscNZlEmpMml1vShvbC6JSxdyM0is8";
 ```
 
 We add two lightweight programs as an example:
@@ -68,8 +67,8 @@ We add two lightweight programs as an example:
   ];
 ```
 
-:::{warning}
-Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.initialHashedPassword) or [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for more secure alternatives.
+:::{note}
+you can also use [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for passwordless login.
 :::
 
 (sample-nixos-config)=
@@ -86,7 +85,7 @@ The complete `configuration.nix` file looks like this:
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    initialPassword = "test";
+    initialHashedPassword = "$y$j9T$1Cxi0roo3nE7GNTBz0NKs.$uGc0FJbwMhU2PgscNZlEmpMml1vShvbC6JSxdyM0is8";
   };
 
   environment.systemPackages = with pkgs; [
@@ -231,7 +230,7 @@ The complete `configuration.nix` file looks like this:
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "test";
+    initialHashedPassword = "$y$j9T$1Cxi0roo3nE7GNTBz0NKs.$uGc0FJbwMhU2PgscNZlEmpMml1vShvbC6JSxdyM0is8";
   };
 
   system.stateVersion = "24.05";
@@ -286,7 +285,7 @@ Arguments to QEMU can also be added to the configuration file:
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "test";
+    initialHashedPassword = "$y$j9T$1Cxi0roo3nE7GNTBz0NKs.$uGc0FJbwMhU2PgscNZlEmpMml1vShvbC6JSxdyM0is8";
   };
 
   system.stateVersion = "24.05";
