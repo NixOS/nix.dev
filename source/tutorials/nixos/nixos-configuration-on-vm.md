@@ -26,59 +26,16 @@ For a thorough treatment of the module system, check the [](module-system-deep-d
 ## Starting from a default NixOS configuration
 
 :::{note}
-You can also skip this section and copy the [sample configuration](sample-nixos-config) for this tutorial into a file `configuration.nix` in the current directory.
+This tutorial starts with building up your `configuration.nix` from first principles, explaining each step.
+If you prefer, you can skip ahead to the [sample configuration](sample-nixos-config) section.
 :::
 
-Use the `nixos-generate-config` command to create a configuration file that contains some useful defaults and configuration suggestions.
-The configuration produced from the following setup also is used for the [NixOS minimal ISO image](https://nixos.org/download#nixos-iso):
-
-```shell-session
-nix-shell -I nixpkgs=channel:nixos-24.05 -p "$(cat <<EOF
-  let
-    pkgs = import <nixpkgs> { config = {}; overlays = []; };
-    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-minimal.nix;
-    nixos = pkgs.nixos iso-config;
-  in nixos.config.system.build.nixos-generate-config
-EOF
-)"
-```
-
-:::{dropdown} Detailed explanation
-
-This `nix-shell` invocation creates an environment based on Nixpkgs obtained from a [channel](ref-pinning-nixpkgs) and adds to it a derivation that is described by the Nix expression passed as a string to the `-p` option.
-
-That Nix expression:
-- Takes the configuration file for the minimal ISO image from the obtained version of Nixpkgs found in the lookup path `<nixpkgs>`
-- Evaluates that NixOS configuration with `pkgs.nixos`
-- Returns the derivation which produces the `nixos-generate-config` executable from the evaluated configuration
-
-:::
-
-Create a NixOS configuration in your working directory:
-
-```shell-session
-[nix-shell:~]$ nixos-generate-config --dir ./
-```
-
-:::{note}
-By default, when no `--dir` is specified, the generated configuration file is written to `/etc/nixos/configuration.nix`, which typically requires `sudo` permissions.
-:::
-
-In the working directory you will then find two files:
-
-1. `hardware-configuration.nix` is specific to the hardware `nix-generate-config` is being run on.
-
-   You can ignore that file for this tutorial because it has no effect inside a virtual machine.
-
-2. `configuration.nix` contains various suggestions and comments for the initial setup of a desktop computer.
-
-The default NixOS configuration without comments is:
+We start with a minimal `configuration.nix`:
 
 ```nix
 { config, pkgs, ... }:
-{
-  imports =  [ ./hardware-configuration.nix ];
 
+{
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -94,10 +51,6 @@ To be able to log in, add the following lines to the returned attribute set:
     extraGroups = [ "wheel" ];
   };
 ```
-
-:::{note}
-A configuration generated with `nixos-generate-config` contains this user configuration commented out.
-:::
 
 Additionally, you need to specify a password for this user.
 For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
@@ -118,13 +71,6 @@ We add two lightweight programs as an example:
 :::{warning}
 Do not use plain text passwords outside of this example unless you know what you are doing. See [`initialHashedPassword`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.initialHashedPassword) or [`ssh.authorizedKeys`](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.openssh.authorizedKeys.keys) for more secure alternatives.
 :::
-
-This tutorial focuses on testing NixOS configurations on a virtual machine.
-Therefore you will remove the reference to `hardware-configuration.nix`:
-
-```diff
--  imports =  [ ./hardware-configuration.nix ];
-```
 
 (sample-nixos-config)=
 ### Sample configuration
