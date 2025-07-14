@@ -1,9 +1,9 @@
 {
   inputs ? import ./nix/inputs.nix,
   system ? builtins.currentSystem,
-  pkgs ? import inputs.nixpkgs."25.05" {
+  pkgs ? import inputs.main.nixpkgs-rolling {
     config = { };
-    overlays = [ (import ./nix/overlay.nix) ];
+    overlays = [ ];
     inherit system;
   },
   withManuals ? false, # building the manuals is expensive
@@ -11,12 +11,12 @@
 let
   lib = pkgs.lib;
   releases = import ./nix/releases.nix { inherit lib inputs system; };
-  pkgs-unstable = import inputs.main.nixpkgs-rolling {
+  # Sphinx skin got very ugly in 24.05, let's not bump it without fixing that
+  pkgs-pinned = import inputs.nixpkgs."23.11" {
     config = { };
-    overlays = [ ];
     inherit system;
   };
-  nix-dev-python-pkgs = with pkgs.python3.pkgs; [
+  nix-dev-python-pkgs = with pkgs-pinned.python3.pkgs; [
     linkify-it-py
     myst-parser
     sphinx
@@ -86,12 +86,12 @@ let
         '';
     };
 
-  devmode = pkgs-unstable.devmode.override {
+  devmode = pkgs.devmode.override {
     buildArgs = ''-A build --show-trace'';
     open = "/index.html";
   };
-  update-nix-releases = pkgs-unstable.callPackage ./nix/update-nix-releases.nix { };
-  update-nixpkgs-releases = pkgs-unstable.callPackage ./nix/update-nixpkgs-releases.nix { };
+  update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
+  update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
 {
   # build with `nix-build -A build`
