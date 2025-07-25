@@ -14,7 +14,10 @@ Install Nix via the recommended [multi-user installation]:
 $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
-On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
+On most distributions you can also install it with the package manager:
+* On Arch Linux the different types of installation are documented [on the Arch Linux wiki](https://wiki.archlinux.org/title/Nix#Installation).
+* On Debian and Ubuntu (and distributions based on these like Mint, MX, ...) you can use `apt install nix`
+* On Alpine you can use `apk add nix`
 
 ::::
 
