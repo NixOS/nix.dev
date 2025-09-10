@@ -9,7 +9,7 @@ In this tutorial you will follow an extensive demonstration of how to wrap an ex
 
 This tutorial follows [@infinisil](https://github.com/infinisil)'s [presentation on modules](https://infinisil.com/modules.mp4)  ([source](https://github.com/tweag/summer-of-nix-modules)) for  participants of [Summer of Nix](https://github.com/ngi-nix/summer-of-nix) 2021.
 
-It may help playing it alongside this tutorial to better keep track of changes to the code you will work on.
+It may help to play it alongside this tutorial to better keep track of changes to the code you will work on.
 
 ### What will you learn?
 
@@ -245,8 +245,8 @@ This command does the following:
 
 ## Declaring more options
 
-Rather than setting all script parameters directly, we will to do that through the module system.
-This will not just add some safety through type checking, but also allow to build abstractions to manage growing complexity and changing requirements.
+Rather than setting all script parameters directly, we will do that through the module system.
+This will not just add some safety through type checking, but also allow building abstractions to manage growing complexity and changing requirements.
 
 Let's begin by introducing another option, `requestParams`, which will represent the parameters of the request made to the Google Maps API.
 
@@ -350,7 +350,7 @@ Lazy evaluation in the Nix language allows the module system to make a value ava
 The result of this represents the list of command line arguments to pass to the `./map` script.
 
 ## Conditional definitions
-Sometimes, you will want option values to be, well, optional. This can be useful when defining a value for an option is not required, as in the following case.
+Sometimes, you will want option values to be optional. This can be useful when defining a value for an option is not required, as in the following case.
 
 You will define a new option, `map.zoom`, to control the zoom level of the map. The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`. This _does not_ automatically mean that when the option isn't defined, the value of such an option is `null` -- we still need to define a default value.
 
@@ -796,7 +796,7 @@ Here you will use two new type-functions for this:
 - `either <this> <that>`, which takes two types as arguments, and allows either of them
 - `enum [ <allowed values> ]`, which takes a list of allowed values, and allows any of them
 
-In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value add the new compound type:
+In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value, add the new compound type:
 
 ```{code-block} diff
 :caption: marker.nix
@@ -1038,7 +1038,7 @@ Your users have spoken, and they demand the ability to customize the styles of t
 
 As before, you'll now declare a new submodule for the path style.
 
-While you could also directly declare the `style.weight` option, in this case you should use the submodule to be able reuse the path style type later.
+While you could also directly declare the `style.weight` option, in this case you should use the submodule to be able to reuse the path style type later.
 
 Add the `pathStyleType` submodule option to the `let` block in `path.nix`:
 ```{code-block} diff
@@ -1099,7 +1099,7 @@ Finally, update the `attributes` list in `paramForPath`:
 
 ## The `pathStyle` submodule
 
-Users still can't actually customize the path style yet.
+Users still cannot actually customize the path style yet.
 Introduce a new `pathStyle` option for each user.
 
 The module system allows you to declare values for an option multiple times, and if the types permit doing so, takes care of merging each declaration's values together.

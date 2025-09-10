@@ -11,7 +11,7 @@ Please refer to its source repository for installation instructions.
 
 ### How to convert between paths and strings in the Nix language?
 
-See the Nix reference manual on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation)
+See the Nix reference manual on [string interpolation](https://nix.dev/manual/nix/2.19/language/string-interpolation) and [operators on paths and strings](https://nix.dev/manual/nix/2.19/language/operators#string-concatenation).
 
 ### How to build reverse dependencies of a package?
 
@@ -87,7 +87,7 @@ See <http://nixos.org/nixos/manual/index.html#sec-building-image>
 
 ### How do I connect to any of the machines in NixOS tests?
 
-Apply following patch:
+Apply the following patch:
 
 ```diff
 diff --git a/nixos/lib/test-driver/test-driver.pl b/nixos/lib/test-driver/test-driver.pl

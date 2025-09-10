@@ -1,7 +1,7 @@
 (tutorials)=
 # Tutorials
 
-These sections contains series of lessons to get started.
+These sections contain a series of lessons to get started.
 
 ```{toctree}
 :glob:

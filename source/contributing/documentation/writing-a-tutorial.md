@@ -24,20 +24,20 @@ Most of that time is typically spent collaboratively:
 - Ensuring that the instructions are neither too sparse nor too dense for learners
 - Finding ever-more succinct and clear ways to convey ideas
 
-Follow these steps to avoid re-doing work
+Follow these steps to avoid redoing work
 
 ### Pick a topic
 
 There is a [tracking issue](https://github.com/NixOS/nix.dev/issues/572) for tutorials that the documentation team has decided should exist as part of the tutorial series.
 Pick an issue that covers a topic that you're either knowledgeable about or have a particular interest in.
 
-Check referenced issues and pull request to make sure you won't duplicate work that someone else has already started!
+Check referenced issues and pull requests to make sure you won't duplicate work that someone else has already started!
 
 There are more [tutorial requests](https://github.com/NixOS/nix.dev/issues?q=is%3Aopen+is%3Aissue+label%3Atutorial) than captured in the outline.
 [Open a new issue](https://github.com/NixOS/nix.dev/issues/new?&template=tutorial.md) if what you wanted to work on isn't tracked anywhere.
 This is an opportunity for you to clarify your goals, and an opportunity for everyone else to find out that there's interest in that subject.
 
-### Submit an pull request with an outline
+### Submit a pull request with an outline
 
 Submit a pull request with an outline of the tutorial following [our recommended structure](#structure).
 The outline should contain bullet points on each section's content.
@@ -57,7 +57,7 @@ Revise your tutorial based on the detailed feedback.
 We recommend testing your tutorial with friends or coworkers.
 This will both help with revealing implicit prerequisites as well as provide a realistic estimate of the reading time.
 
-In a final review will check that everything is technically correct.
+A final review will check that everything is technically correct.
 
 ## Structure
 
@@ -74,7 +74,7 @@ The learning goal of a tutorial is always acquiring a skill, which is distinguis
 ### What do you need?
 
 State the prerequisite knowledge and skills.
-The tutorial should always be written such that the stated prerequisites are sufficient to achieve learning goals.
+The tutorial should always be written such that the stated prerequisites are sufficient to achieve the learning goals.
 
 Examples:
 
@@ -111,7 +111,7 @@ Depending on how well a use case is explored, point the reader to
 - guides or other tutorials
 - links to known-good external resources, with summaries
 - overview of available support tools, and their state of maturity and maintenance
-- overview of ideas, and state of community discussion.
+- overview of ideas, and the state of community discussion.
 
 We recommend making an explicit separation of practical from theoretical learning resources, as then readers will be able to quickly decide to either get things done or learn more.
 

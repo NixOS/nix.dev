@@ -95,7 +95,7 @@ We will build the example up from scratch.
 
 1. Because this example only uses one virtual machine, the node we specify is simply called `machine`.
    This name is arbitrary and can be chosen freely.
-   As configuration you use the relevant parts of the default configuration, [that we used in a previous tutorial](<nixos-vms>):
+   As configuration you use the relevant parts of the default configuration, [which we used in a previous tutorial](<nixos-vms>):
 
    ```nix
    nodes.machine = { config, pkgs, ... }: {
@@ -205,7 +205,7 @@ or
 ```
 for all nodes.
 
-You can enter a interactive shell on the virtual machine using:
+You can enter an interactive shell on the virtual machine using:
 
 ```shell-session
 >>> machine.shell_interact()

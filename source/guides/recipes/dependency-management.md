@@ -73,7 +73,7 @@ $ nix-shell
 [nix-shell]$ npins add github nixos nixpkgs --branch nixos-21.11
 ```
 
-Create a file `default.nix` in the new directory, and import the original one with the `sources` just created.
+Create a file `default.nix` in the new directory to import the original one with the `sources` you just created.
 
 ```nix
 import ../default.nix { sources = import ./npins; }

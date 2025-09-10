@@ -75,7 +75,7 @@ Set the [`post-build-hook`](https://nix.dev/manual/nix/2.22/command-ref/conf-fil
 post-build-hook = /etc/nix/upload-to-cache.sh
 ```
 
-Then restart the `nix-daemon` an all involved machines, e.g. with
+Then restart the `nix-daemon` on all involved machines, e.g. with
 
 ```
 pkill nix-daemon

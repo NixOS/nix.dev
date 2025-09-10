@@ -21,13 +21,13 @@ pkgs.mkShellNoCC {
 }
 ```
 
-From the top-level directory of your project run:
+From the top-level directory of your project, run:
 
 ```shell-session
 $ echo "use nix" > .envrc && direnv allow
 ```
 
-The next time you launch your terminal and enter the top-level directory of your project, `direnv` will automatically launch the shell defined in `shell.nix`
+The next time you launch your terminal and enter the top-level directory of your project, `direnv` will automatically launch the shell defined in `shell.nix`.
 
 ```shell-session
 $ cd myproject

@@ -1,7 +1,7 @@
 (guides)=
 # Guides
 
-These sections contains guides to getting things done.
+These sections contain guides to getting things done.
 
 ```{toctree}
 :glob:

@@ -29,7 +29,7 @@ To manually test [redirects](./_redirects):
 
 ## Building the reference manuals
 
-By default nix.dev builds without the various versions of the Nix reference manual, as that takes quite a while due to how it's currently implemented.
+By default, nix.dev builds without the various versions of the Nix reference manual, as that takes quite a while due to how it's currently implemented.
 To enable building the manuals:
 
 ```shell-session

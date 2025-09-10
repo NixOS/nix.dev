@@ -32,7 +32,7 @@ You'll learn how to:
 
 - (optional) A public IP and DNS domain
 
-  If you don't host yourself, check [NixOS friendly hosters](https://wiki.nixos.org/wiki/NixOS_friendly_hosters) on the NixOS Wiki.
+  If you don't host yourself, check [NixOS-friendly hosters](https://wiki.nixos.org/wiki/NixOS_friendly_hosters) on the NixOS Wiki.
   Follow the tutorial on [](provisioning-remote-machines-tutorial) to deploy your NixOS configuration.
 
 For a cache on a local network, we assume:
@@ -107,7 +107,7 @@ nixos-rebuild switch --no-flake --target-host root@cache
 ```
 
 :::{note}
-The binary cache daemon will report errors because there is no secret key file, yet.
+The binary cache daemon will report errors because there is no secret key file yet.
 :::
 
 ## Generate a signing key pair

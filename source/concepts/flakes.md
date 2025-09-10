@@ -42,7 +42,7 @@ Nix handles flakes differently than regular {term}`Nix files <Nix file>` in the 
 
 - No external variables, parameters, or impure language values are allowed.
 
-  It means full reproducibility of a Nix expression, and, by extension, the resulting build instructions by default, but also prohibits parameterisation of results by consumers.
+  It means full reproducibility of a Nix expression, and, by extension, the resulting build instructions by default, but also prohibits parametrisation of results by consumers.
 
 (flakes-controversy)=
 ## Why are flakes controversial?
@@ -50,13 +50,13 @@ Nix handles flakes differently than regular {term}`Nix files <Nix file>` in the 
 [Flakes](flakes-definition) were inspired by [Shea Levy's NixCon 2018 talk](https://www.youtube.com/watch?v=DHOLjsyXPtM), formally proposed in [RFC 49](https://github.com/NixOS/rfcs/pull/49), and have been in development since 2019.
 Nix introduced the implementation as its first [experimental feature] in 2021.
 
-The subject is considered controversial among Nix users and developers in terms of design, implementation quality, and decision making process.
+The subject is considered controversial among Nix users and developers in terms of design, implementation quality, and decision-making process.
 In particular:
 - The RFC was closed without conclusion, and some fundamental issues are not yet resolved.
   For example:
   - The notion of a [global flake registry](https://github.com/NixOS/flake-registry) saw [substantial criticism](https://github.com/NixOS/rfcs/pull/49#issuecomment-635635333) that was never addressed.
     While the source references of [registry entries can be pinned](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-registry-pin), local registry names in Nix expressions [introduce mutable system state](https://github.com/NixOS/nix/issues/7422) and are thus, in that regard, no improvement over channels as managed by [`nix-channel`](https://nix.dev/manual/nix/stable/command-ref/nix-channel).
-  - It is [impossible to parameterise flakes](https://github.com/NixOS/nix/issues/2861).
+  - It is [impossible to parametrise flakes](https://github.com/NixOS/nix/issues/2861).
     This means that [flakes downgrade ease of use of the `system` parameter](https://github.com/NixOS/nix/issues/3843) of derivations, for producers and consumers.
   - the flakes proposal was criticised for [trying to solve too many problems at once](https://github.com/nixos/rfcs/pull/49#issuecomment-521998933) and [at the wrong abstraction layer](https://discourse.nixos.org/t/nixpkgs-cli-working-group-member-search/30517).
     Part of this is that [the new command line interface and flakes are closely tied to each other](https://discourse.nixos.org/t/2023-03-06-nix-team-meeting-minutes-38/26056#cli-stabilisation-announcement-draft-4).
@@ -89,13 +89,13 @@ Flakes and the `nix` command suite bring multiple improvements that are relevant
 At the same time, flakes have [fundamental architectural issues](flakes-controversy) and a number of [problems with the implementation](https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc), and there is no coordinated effort to resolve them systematically.
 There are also still many [open design questions around the `nix` command line interface](https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc), some of which are currently being worked on.
 
-While flakes reduce complexity in some regards, they also introduce some with additional mechanisms.
+While flakes reduce complexity in some regards, they also introduce some complexity with additional mechanisms.
 You will have to learn more about the system to fully understand how it works.
 
 Other than that, and below the surface of the flake schema, Nix and the Nix language work exactly the same in both cases.
 In principle, the same level of reproducibility can be achieved with or without flakes.
 In particular, the process of adding software to {term}`Nixpkgs` or maintaining {term}`NixOS` modules and configurations is not affected by flakes at all.
-There is also no evidence that flakes could help solving the scalability challenges of either.
+There is also no evidence that flakes could help solve the scalability challenges of either.
 
 Finally, there are downsides to relying on [experimental features][experimental feature] in general:
 

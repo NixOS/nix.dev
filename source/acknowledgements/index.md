@@ -38,4 +38,4 @@ Many thanks to past contributors, who helped make Nix documentation what it is t
 - [@domenkozar](https://github.com/domenkozar) was a founding member and part of the team from 2022-05 to 2023-01.
   Domen originally started nix.dev, wrote many basic tutorials, and funded editorial work through [Cachix](https://www.cachix.org/).
   He helped bootstrap the documentation team, handed out permissions, and advised us on many aspects.
-  Domen donated nix.dev to the NixOS Foundation 2023-07.
+  Domen donated nix.dev to the NixOS Foundation in 2023-07.

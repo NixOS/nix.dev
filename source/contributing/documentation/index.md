@@ -1,6 +1,6 @@
 # Contributing documentation
 
-Thank you for your interest to help improve documentation in the Nix ecosystem!
+Thank you for your interest in helping improve documentation in the Nix ecosystem!
 This project would not be possible without your support.
 
 ## Getting started
@@ -40,7 +40,7 @@ Please share your experience to help us improve upstream documentation and begin
 If you are proficient in applying Nix to a domain-specific problem, and want to share your expertise on best practices, please check the existing content.
 - Does existing material on your subject meet your standards?
 - How could we improve it?
-- Is there a popular application of Nix' capabilities not yet covered?
+- Is there a popular application of Nix's capabilities not yet covered?
 - We would be glad to incorporate your insights.
 
 ## Licensing and attribution

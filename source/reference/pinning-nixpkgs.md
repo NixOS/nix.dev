@@ -5,7 +5,7 @@
 Specifying remote Nix expressions, such as the one provided by Nixpkgs, can be done in several ways:
 
 - [`$NIX_PATH` environment variable](https://nix.dev/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH)
-- [`-I` option](https://nix.dev/manual/nix/stable/command-ref/opt-common.html#opt-I) to most of commands like `nix-build`, `nix-shell`, etc.
+- [`-I` option](https://nix.dev/manual/nix/stable/command-ref/opt-common.html#opt-I) to most commands like `nix-build`, `nix-shell`, etc.
 - [`fetchurl`](https://nix.dev/manual/nix/stable/language/builtins.html#builtins-fetchurl), [`fetchTarball`](https://nix.dev/manual/nix/stable/language/builtins.html#builtins-fetchTarball), [`fetchGit`](https://nix.dev/manual/nix/stable/language/builtins.html#builtins-fetchGit) or [Nixpkgs fetchers](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers) in Nix expressions
 
 ## Possible URL values

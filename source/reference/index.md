@@ -1,7 +1,7 @@
 (reference)=
 # Reference
 
-These sections contains collections of detailed technical descriptions.
+These sections contain collections of detailed technical descriptions.
 
 ```{toctree}
 :glob:

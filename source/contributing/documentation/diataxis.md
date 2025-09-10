@@ -5,9 +5,9 @@ We aim to build our documentation according to the [Diátaxis framework for tech
 - [Tutorials](#tutorials)
 - [Guides](#guides)
 - [Reference](#reference)
-- [Concept](#concepts)
+- [Concepts](#concepts)
 
-We've found that contributors struggle to understand the differences between these categories, and while we _strongly_ recommend reading up on the Diataxis framework, we can summarize them as follows:
+We've found that contributors struggle to understand the differences between these categories, and while we _strongly_ recommend reading up on the Diátaxis framework, we can summarize them as follows:
 
 ## Reference
 
@@ -62,7 +62,7 @@ The pilot-in-training needs practice knowing when to deploy the landing gear, wh
 Actually landing the plane during the flight simulation is less important than learning the individual skills that make up a successful landing.
 This is the context for a tutorial.
 
-Finally, one last way of thinking about the difference between How-to Guide and Tutorial is like this:
+Finally, one last way of thinking about the difference between a how-to guide and a tutorial is like this:
 - Guide: "step 1: do this, step 2: do that, etc"
 - Tutorial: "take my hand as I show you how to do this"
 
