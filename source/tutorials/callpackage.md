@@ -265,10 +265,10 @@ But this benefit really pays off for large constructions, where it is the amount
 
 ## Summary
 
-Using `callPackage` does not only follow Nixpkgs conventions, which makes your code easier to follow for experienced Nix users, but it also gives you some benefits for free:
+Using `callPackage` not only follows Nixpkgs conventions, which makes your code easier to follow for experienced Nix users, but it also gives you some benefits for free:
 
 1. Parametrized builds
-2. Overrideable builds
+2. Overridable builds
 3. Concise implementation of interdependent package sets
 
 ## References

@@ -38,7 +38,7 @@
 
 - [Nix Shorts](https://github.com/justinwoo/nix-shorts)
 
-  A series of posts on basics of how packaging with Nix works.
+  A series of posts on the basics of how packaging with Nix works.
 
 - [NixOS and Flakes - An unofficial book for beginners](https://nixos-and-flakes.thiscute.world) (2023)
 

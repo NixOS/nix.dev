@@ -2,7 +2,7 @@
 # Setting up a Python development environment
 
 In this example you will build a Python web application using the [Flask](https://flask.palletsprojects.com) web framework as an exercise.
-To make best use of it you should be familiar with [defining declarative shell environments](declarative-reproducible-envs).
+To make the best use of it, you should be familiar with [defining declarative shell environments](declarative-reproducible-envs).
 
 Create a new file called `myapp.py` and add the following code:
 

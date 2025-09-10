@@ -2,7 +2,7 @@
 
 # Install Nix
 Requirements:
- - Prior to installation, you might need to first install `xz-utils` or similar for uncompressing the Nix binary tarball (`.tar.xz`) that will be downloaded via the scripts below.
+ - Prior to installation, you might first need to install `xz-utils` or similar for decompressing the Nix binary tarball (`.tar.xz`) that will be downloaded via the scripts below.
 
 :::::{tab-set}
 
@@ -29,7 +29,7 @@ $ curl -L https://nixos.org/nix/install | sh
 :::{important}
 **Updating to macOS 15 Sequoia**
 
-If you recently updated to macOS 15 Sequoia and are getting
+If you recently updated to macOS 15 Sequoia and are getting the error
 ```console
 error: the user '_nixbld1' in the group 'nixbld' does not exist
 ```
@@ -71,7 +71,7 @@ $ mkdir workdir
 $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
 ```
 
-The `workdir` example from above can be also used to start hacking on Nixpkgs:
+The `workdir` example from above can also be used to start hacking on Nixpkgs:
 
 ```shell-session
 $ git clone git@github.com:NixOS/nixpkgs

@@ -6,7 +6,7 @@ can go for help.
 
 ## How to find maintainers
 
-For better efficiency and higher chance of success, you should try contacting individuals or groups with more specific knowledge first:
+For better efficiency and a higher chance of success, you should try contacting individuals or groups with more specific knowledge first:
 
 - If your contribution is for a package in Nixpkgs, look for its maintainers in the
   [`maintainers`](https://nixos.org/manual/nixpkgs/stable/#var-meta-maintainers)
@@ -28,7 +28,7 @@ Once you've found the people you're looking for, you can contact them on one of 
   All the source code is maintained on GitHub.
   This is the right place to discuss implementation details.
 
-  In issue comments or pull request descriptions, [mention the GitHub username](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#mentioning-people-and-teams) found in the [`maintainers-list.nix` file][maintainers-list].
+  In issue comments or pull request descriptions, [mention the GitHub username](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#mentioning-people-and-teams) found in the [`maintainers-list.nix` file](https://github.com/NixOS/nixpkgs/blob/master/maintainers/maintainer-list.nix).
 
 - [Discourse](https://discourse.nixos.org)
 

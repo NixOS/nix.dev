@@ -109,7 +109,7 @@ module "nixos_image" {
 
 :::{note}
 The `aws_image_nixos` module will return a NixOS AMI given a [NixOS release number](https://status.nixos.org)
-so that the `aws_instance` resource can reference the AMI in [instance_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#instance_type) argument.
+so that the `aws_instance` resource can reference the AMI in the [instance_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#instance_type) argument.
 :::
 
 5. Make sure to [configure AWS credentials](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication).

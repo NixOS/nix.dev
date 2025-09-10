@@ -26,7 +26,7 @@ You may quickly encounter Nix language expressions that look very complicated.
 As with any programming language, the required amount of Nix language code closely matches the complexity of the problem it is supposed to solve, and reflects how well the problem – and its solution – is understood.
 Building software is a complex undertaking, and Nix both *exposes* and *allows managing* this complexity with the Nix language.
 
-Yet, the Nix language itself has only few basic concepts that will be introduced in this tutorial, and which can be combined arbitrarily.
+Yet, the Nix language itself has only a few basic concepts that will be introduced in this tutorial, and which can be combined arbitrarily.
 What may look complicated comes not from the language, but from how it is used.
 
 ## Overview
@@ -211,7 +211,7 @@ It is otherwise insignificant.
 
 [lexical tokens]: https://en.wikipedia.org/wiki/Lexical_analysis#Lexical_token_and_lexical_tokenization
 
-Line breaks, indentation, and additional spaces are for readers' convenience.
+Line breaks, indentation, and additional spaces are for the reader's convenience.
 
 The following are equivalent:
 
@@ -1329,7 +1329,7 @@ f 1 2
 
 ### Attribute set argument
 
-Also known as “keyword arguments” or “destructuring” .
+Also known as “keyword arguments” or “destructuring”.
 
 Nix functions can be declared to require an attribute set with specific structure as argument.
 
@@ -1979,7 +1979,7 @@ This example declares a shell environment (which runs the `shellHook` on initial
 
 Explanation:
 
-- This expression is a function that takes an attribute set as an argument.
+- This expression is a function that takes an attribute set as its argument.
 - If the argument has the attribute `pkgs`, it will be used in the function body.
   Otherwise, by default, import the Nix expression in the file found on the lookup path `<nixpkgs>` (which is a function in this case), call the function with an empty attribute set, and use the resulting value.
 - The name `message` is bound to the string value `"hello world"`.

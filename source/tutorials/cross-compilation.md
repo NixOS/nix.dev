@@ -167,7 +167,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
    ```
 
 2. Pass the host platform to `crossSystem` when importing `nixpkgs`.
-   This configures `nixpkgs` such that all its packages are build for the host platform:
+   This configures `nixpkgs` such that all its packages are built for the host platform:
 
    ```nix
    let
@@ -312,6 +312,6 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically link
 
   Additionally, supporting cross compilation is not trivial work and due to many possible combinations of what would need to be tested, some packages might not build.
 
-  [A detailed explanation how of cross compilation is implemented in Nix](https://nixos.org/manual/nixpkgs/stable/#chap-cross) can help with fixing those issues.
+  [A detailed explanation of how cross compilation is implemented in Nix](https://nixos.org/manual/nixpkgs/stable/#chap-cross) can help with fixing those issues.
 
 - The Nix community has a [dedicated Matrix room](https://matrix.to/#/#cross-compiling:nixos.org) for help with cross compiling.

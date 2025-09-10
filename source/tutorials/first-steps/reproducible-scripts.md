@@ -81,7 +81,7 @@ The additional shebang lines are a Nix-specific construct:
 
 - The parameter of `-I` refers to a specific Git commit of the Nixpkgs repository.
 
-  This ensures that the script will always run with the exact same packages versions, everywhere.
+  This ensures that the script will always run with the exact same package versions, everywhere.
 
 Make the script executable:
 

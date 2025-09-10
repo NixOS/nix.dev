@@ -8,7 +8,7 @@ NixOS configurations can be used to test and use NixOS using a virtual machine, 
 
 ## What will you learn?
 
-This tutorial serves as an introduction creating NixOS virtual machines.
+This tutorial serves as an introduction to creating NixOS virtual machines.
 Virtual machines are a practical tool for experimenting with or debugging NixOS configurations.
 
 ## What do you need?

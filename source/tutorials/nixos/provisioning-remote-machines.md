@@ -40,7 +40,7 @@ For a successful unattended installation, ensure for the *target machine* that:
 
 - The IP address is configured automatically with DHCP
 - You can login via SSH
-  - With public key authentication (prefered), or password
+  - With public key authentication (preferred), or password
   - As user `root` or another user with `sudo` permissions
 
 The *local machine* only needs a working [Nix installation](install-nix).

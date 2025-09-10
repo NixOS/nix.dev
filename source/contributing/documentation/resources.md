@@ -1,6 +1,6 @@
 # Documentation resources
 
-This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions how you can help to improve them.
+This is an overview of documentation resources for Nix, Nixpkgs, and NixOS, with suggestions for how you can help to improve them.
 
 ## Reference manuals
 

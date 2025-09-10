@@ -5,7 +5,7 @@
 The Nix language syntax supports bare URLs, so one could write `https://example.com` instead of `"https://example.com"`
 
 [RFC 45](https://github.com/NixOS/rfcs/pull/45) was accepted to deprecate unquoted URLs and provides
-a number of arguments how this feature does more harm than good.
+a number of arguments for how this feature does more harm than good.
 
 :::{tip}
 Always quote URLs.
@@ -31,7 +31,7 @@ rec {
 { a = 1; b = 3; }
 ```
 
-A common pitfall is to introduce a hard to debug error `infinite recursion` when shadowing a name.
+A common pitfall is to introduce a hard-to-debug error `infinite recursion` when shadowing a name.
 The simplest example for this is:
 
 ```{code-block} nix
@@ -135,7 +135,7 @@ You will often encounter Nix language code samples that refer to `<nixpkgs>`.
 [introduced in 2011]: https://github.com/NixOS/nix/commit/1ecc97b6bdb27e56d832ca48cdafd3dbb5185a04
 [`$NIX_PATH`]: https://nix.dev/manual/nix/stable/command-ref/env-common.html#env-NIX_PATH
 
-This means, the value of a lookup path depends on external system state.
+This means the value of a lookup path depends on external system state.
 When using lookup paths, the same Nix expression can produce different results.
 
 In most cases, `$NIX_PATH` is set to the latest channel when Nix is installed, and is therefore likely to differ from machine to machine.
@@ -177,12 +177,12 @@ import <nixpkgs> {}
 ```
 
 However, even when `<nixpkgs>` is replaced as shown in [](pinning-nixpkgs), the result may still not be fully reproducible.
-This is because, for historical reasons, the [Nixpkgs top-level expression] by default impurely reads from the file system to obtain configuration parameters.
+This is because for historical reasons the [Nixpkgs top-level expression] by default impurely reads from the file system to obtain configuration parameters.
 Systems that have the appropriate files populated may end up with different results.
 
 [Nixpkgs top-level expression]: https://github.com/NixOS/nixpkgs/blob/master/default.nix
 
-It is a well-known problem that can't be resolved without breaking existing setups.
+It is a well-known problem that cannot be resolved without breaking existing setups.
 
 :::{tip}
 Explicitly set [`config`](https://nixos.org/manual/nixpkgs/stable/#chap-packageconfig) and [`overlays`](https://nixos.org/manual/nixpkgs/stable/#chap-overlays) when importing Nixpkgs:

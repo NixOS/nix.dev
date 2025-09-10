@@ -233,7 +233,7 @@ Activate the new configuration as `root`:
 
 ## Test distributed builds
 
-Try building an new derivation on the *local machine*:
+Try building a new derivation on the *local machine*:
 
 ```shell-session
 $ nix-build --max-jobs 0 -E << EOF

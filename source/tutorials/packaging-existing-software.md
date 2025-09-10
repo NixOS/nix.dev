@@ -62,7 +62,7 @@ This is a function which takes an attribute set containing `stdenv`, and produce
 GNU Hello is an implementation of the "hello world" program, with source code accessible [from the GNU Project's FTP server](https://ftp.gnu.org/gnu/hello/).
 
 To begin, add a `pname` attribute to the set passed to `mkDerivation`.
-Every package needs a name and a version, and Nix will throw `error: derivation name missing` without.
+Every package needs a name and a version, and Nix will throw `error: derivation name missing` without one.
 
 ```diff
 
@@ -141,7 +141,7 @@ This allows you to run `nix-build -A hello` to realize the derivation in `hello.
 
 :::{note}
 `callPackage` automatically passes attributes from `pkgs` to the given function, if they match attributes required by that function's argument attribute set.
-In this case, `callPackage` will supply `stdenv`, and `fetchzip` to the function defined in `hello.nix`.
+In this case, `callPackage` will supply `stdenv` and `fetchzip` to the function defined in `hello.nix`.
 
 The tutorial [](./callpackage.md) goes into detail on how this works.
 :::

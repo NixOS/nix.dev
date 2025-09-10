@@ -10,8 +10,8 @@ This document outlines the guidelines we use when writing documentation.
 >
 > — [Blaise Pascal](https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes)
 
-Readers' time and attention is limited.
-Take the time to be extraordinarily respectful with their cognitive resources.
+Readers' time and attention are limited.
+Take the time to be extraordinarily respectful of their cognitive resources.
 
 The same holds for communication directed to contributors and maintainers:
 This is a public project, and many people will read what you write.
@@ -27,7 +27,7 @@ Use this leverage with care.
 
   > Add the `python310` package to `buildInputs`.
 
-  Don't use a conversational tone, as it distracts from the contents.
+  Don't use a conversational tone, as it distracts from the content.
   For example, don't write:
 
   > Going forward, let's now add the `python310` package to `buildInputs` as we have seen in the previous tutorial.
@@ -110,7 +110,7 @@ Set off a [fork bomb](https://en.wikipedia.org/wiki/Fork_bomb):
 ```
 
 :::{dropdown} Detailed explanation
-This Bash command defines and executes a function `:` that recursively spawns copies of itself, quickly consuming system resources
+This Bash command defines and executes a function `:` that recursively spawns copies of itself, quickly consuming system resources.
 :::
 ````
 ::::
@@ -126,10 +126,10 @@ If that's not possible, break the example down into multiple parts, explain them
 
 Code samples that are _intended_ to work should work.
 
-If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain so beforehand.
+If you are going to present an example that does not work (e.g. you're illustrating a common mistake) explain this beforehand.
 Many readers will get stuck trying to make example code work without reading ahead to find out that the code isn't intended to work.
 
-Code samples should all include a programming language when applicable for syntax highlighting when rendered e.g.
+Code samples should all include a programming language when applicable for syntax highlighting when rendered, e.g.:
 
 ````
 ```python
@@ -142,7 +142,7 @@ print("Hello, World!")
 Reserve the largest header (`#`) for the title.
 
 Use Markdown headers `##` through `###` to divide up content in the body of the document.
-Finer grained headings are not necessarily better.
+Finer-grained headings are not necessarily better.
 
 ### One line per sentence
 

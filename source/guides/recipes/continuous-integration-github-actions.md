@@ -15,7 +15,7 @@ One benefit of Nix is that **CI can build and cache developer environments for e
 
 An important aspect of CI is the feedback loop of, **how many minutes does the build take to finish?**
 
-There are a several good options, but Cachix (below) is the most straightforward.
+There are several good options, but Cachix (below) is the most straightforward.
 
 ## Caching builds using Cachix
 
@@ -27,7 +27,7 @@ Before each job, derivations to be built are first substituted (if they exist) f
 
 ### 1. Creating your first binary cache
 
-It's recommended to have different binary caches per team, depending who will have write/read access to it.
+It's recommended to have different binary caches per team, depending on who will have write/read access to it.
 
 Fill out the form on the [create binary cache](https://app.cachix.org/cache) page.
 
@@ -75,7 +75,7 @@ you should see status checks appearing on commits and PRs.
 ## Next steps
 
 - See [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
-- To quickly setup a Nix project read through
+- To quickly set up a Nix project read through
   [Getting started Nix template](https://github.com/nix-dot-dev/getting-started-nix-template).
 
 [github-actions-caching-limits]: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows

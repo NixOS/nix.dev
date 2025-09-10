@@ -123,7 +123,7 @@ these 151 paths will be fetched (186.43 MiB download, 1018.20 MiB unpacked):
 (check-package-version)=
 ### Check package versions
 
-Check that you have indeed the specific version of these programs provided by Nix, even if you had any of them already installed on your machine.
+Check that you have the specific version of these programs provided by Nix, even if you had any of them already installed on your machine.
 
 ```shell-session
 [nix-shell:~]$ which git

@@ -5,7 +5,7 @@ Much of the power in Nixpkgs and NixOS comes from the module system.
 
 The module system is a Nix language library that enables you to
 - Declare one attribute set using many separate Nix expressions.
-- Impose type constraints on values in that attribute set.
+- Imposes type constraints on values in that attribute set.
 - Define values for the same attribute in different Nix expressions and merge these values automatically according to their type.
 
 These Nix expressions are called modules and must have a particular structure.

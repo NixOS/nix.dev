@@ -6,7 +6,7 @@ Keeping it working and up to date – and improving it continuously – would no
 
 This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term}`NixOS`.
 It assumes that you're already somewhat proficient with basic concepts and workflows, which are outlined in the [beginner tutorial series](tutorials).
-The most important aspects are [the Nix language](reading-nix-language), the various Nixpkgs mechanisms for [constructing derivations to build software](packaging-tutorial)</a>, [the module system](module-system-tutorial), and [NixOS integration tests](integration-testing-vms).
+The most important aspects are [the Nix language](reading-nix-language), the various Nixpkgs mechanisms for [constructing derivations to build software](packaging-tutorial), [the module system](module-system-tutorial), and [NixOS integration tests](integration-testing-vms).
 
 :::{important}
 If you cannot contribute time, consider [donating to the NixOS Foundation on Open Collective](https://opencollective.com/nixos).
@@ -17,7 +17,7 @@ With enough budget, it would be possible to pay for ongoing maintenance and deve
 
 ## Getting started
 
-Start with asking informed questions, after reading [reference documentation](reference) and the code relevant to what you care about.
+Start by asking informed questions, after reading [reference documentation](reference) and the code relevant to what you care about.
 
 [Join our community communication platforms](https://nixos.org/community) to get in contact with other users and developers.
 Check out and consider participating in our [community teams](https://nixos.org/community/#governance-teams) if you're interested in a particular topic.
@@ -43,7 +43,7 @@ And it will lead to better code and documentation in the long run.
 :::{note}
 For asking general questions about the code or how to do things, please use our [community communication platforms](https://nixos.org/community)
 
-To state techincal problems and propose solutions, open GitHub issues and close them when the problem is resolved or invalidated.
+To state technical problems and propose solutions, open GitHub issues and close them when the problem is resolved or invalidated.
 :::
 
 We can only fix issues that we know of, so please report any issue you encounter.
@@ -78,7 +78,7 @@ The perfect issue is, in fact, a pull request that solves the problem directly a
 :::
 
 :::{important}
-Please open issues to request new features (such as packages, modules, commands, ...) only if your are willing and able to implement them yourself.
+Please open issues to request new features (such as packages, modules, commands, ...) only if you are willing and able to implement them yourself.
 Then the issue can be used to gauge user interest, to determine if the feature fits into the project, and to discuss implementation strategies.
 :::
 
@@ -119,4 +119,4 @@ If you know your way around, working on [popular issues][nixos issues] will be h
 
 # How to get help
 
-If you prepared a pull request and need help moving forward, check [](contributing-how-to-get-help) for
+If you prepared a pull request and need help moving forward, check [contributing-how-to-get-help](https://nix.dev/contributing/how-to-get-help#contributing-how-to-get-help) for more information.
