@@ -1,18 +1,23 @@
 {
+  "2.31": {
+    "url": "https://github.com/nixos/nix/tarball/8e7d86d4cf8b1004f4d1d6ebba8aa5b52e00bf16",
+    "version": "2.31.3",
+    "sha256": "02rn4gr05lv4p7ylma9snrpisl5s6ln7n05p1kdgy0hj93zxkxa5"
+  },
   "2.30": {
-    "url": "https://github.com/nixos/nix/tarball/01b37cfb76452abdcb849d0c70983191086d1995",
-    "version": "2.30.3",
-    "sha256": "12pxnwvx5ifp0s276cq00gad9gpah4pp51pa0lv59h2j9473lycq"
+    "url": "https://github.com/nixos/nix/tarball/c6c88d33853b7b4bff36f6612c52040aae92ebeb",
+    "version": "2.30.4",
+    "sha256": "1gprprlwi824g07351rrhzfzhhkpks3mxj74ffl2wy1pkwxpl0jk"
   },
   "2.29": {
-    "url": "https://github.com/nixos/nix/tarball/c1f54da0188f7d04d63621090a9b1101f99a021a",
-    "version": "2.29.2",
-    "sha256": "1maim3ngh4ykjdbcnrfwljjhl9498q2pzprly3hgs2zxksf72iq3"
+    "url": "https://github.com/nixos/nix/tarball/c9380d973670e07d15d12171c68aebbe58c2a14f",
+    "version": "2.29.3",
+    "sha256": "1wjhbyh4xsql5lg1b9gqddajm0rzflx5gv1qmly8djlgc3r931cx"
   },
   "2.28": {
-    "url": "https://github.com/nixos/nix/tarball/6c0cc04ce45e6166aadba346d3fd18f34c6f2cb2",
-    "version": "2.28.5",
-    "sha256": "1j2v85hhjh27ifch1md1c17r2bb09bjigvwvajw11nf9yig4rl5z"
+    "url": "https://github.com/nixos/nix/tarball/6ac93c92c278cdecc19f0697a05731d2ab2415f2",
+    "version": "2.28.6",
+    "sha256": "1p33ihz5nm9cwwfsa552hn5q6sbwnb1y1ilmfmfd0g9ng9g0alhn"
   },
   "2.27": {
     "url": "https://github.com/nixos/nix/tarball/c73c503d5f41aef0a5a0493ccc4d435eda229e65",
@@ -30,9 +35,9 @@
     "sha256": "1gw012bszrqifs84r9m2gypxhmr3y7959ysy0zfxmw0k8lpb5yhc"
   },
   "2.24": {
-    "url": "https://github.com/nixos/nix/tarball/c2914c0d586d73635d78fab5881ef8e05315a01c",
+    "url": "https://github.com/nixos/nix/tarball/c55a7e14238443b19e3ce4033742aecac1a2dae9",
     "version": "2.24.16",
-    "sha256": "1pj4mhp2d0d5mx9gbxvbs89vwlzrxpq8nhm9ms0g1vkz3jd45iim"
+    "sha256": "0x2sjmaq1j242hb28kh0vbvscj1dcqy178ifj4rh4cysx2md8bgx"
   },
   "2.23": {
     "url": "https://github.com/nixos/nix/tarball/f50d7186917b441c3165fe85fc5d703c04ad41a4",
