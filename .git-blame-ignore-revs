@@ -1,0 +1,5 @@
+# This file contains a list of commits that are not likely what you
+# are looking for in a blame, such as mass reformatting or renaming.
+#
+# treewide: nixfmt
+475ec1b3eb17b29c7254ad20aec9ee9cb81d18b8
