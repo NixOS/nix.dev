@@ -1,7 +1,12 @@
-{ lib, inputs, system }:
+{
+  lib,
+  inputs,
+  system,
+}:
 let
   # Import Nixpkgs, get the pkgs set back
-  pkgsFor = source:
+  pkgsFor =
+    source:
     import source {
       inherit system;
       config = { };
@@ -16,9 +21,7 @@ let
   #   "23.11" = pkgs...;
   #   "23.05" = pkgs...;
   # }
-  pkgsReleases = lib.mapAttrs (release: source:
-    pkgsFor source
-  ) inputs.nixpkgs;
+  pkgsReleases = lib.mapAttrs (release: source: pkgsFor source) inputs.nixpkgs;
 
   # Information on Nixpkgs versions
   nixpkgsVersions = rec {
@@ -33,7 +36,8 @@ let
   };
 
   # The Nix version string for a pkgs, e.g. "2.18"
-  nixVersionForPkgs = pkgs:
+  nixVersionForPkgs =
+    pkgs:
     # XXX: We ignore the patch version here, which means that we may show a different (slightly more up-to-date) version than what's actually in Nixpkgs.
     # This is not a big issue, and simplifies the setup a lot.
     lib.versions.majorMinor pkgs.nix.version;
@@ -44,7 +48,8 @@ let
   #   "2.19" = { outPath = ...; ... };
   #   ...
   # }
-  nixReleases = lib.mapAttrs (release: source:
+  nixReleases = lib.mapAttrs (
+    release: source:
     # XXX: Unfortunately, the use of flake-compat prevents passing `system` with stable Nix...
     (import source).default
   ) inputs.nix;
@@ -81,9 +86,8 @@ let
   substitutions = {
     nixpkgs-stable = nixpkgsVersions.latest;
     nixpkgs-prev-stable = nixpkgsVersions.prevLatest;
-  } // lib.mapAttrs' (name: value:
-    lib.nameValuePair "nix-${name}" value
-  ) mutableNixManualRedirects;
+  }
+  // lib.mapAttrs' (name: value: lib.nameValuePair "nix-${name}" value) mutableNixManualRedirects;
 in
 {
   inherit nixReleases mutableNixManualRedirects substitutions;

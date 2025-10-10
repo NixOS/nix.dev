@@ -1,6 +1,10 @@
 # Generated with tex2nix 0.0.0
-{ texlive, extraTexPackages ? {} }:
-(texlive.combine ({
+{
+  texlive,
+  extraTexPackages ? { },
+}:
+(texlive.combine (
+  {
     inherit (texlive) scheme-small;
     "amsmath" = texlive."amsmath";
     "atbegshi" = texlive."atbegshi";
@@ -49,4 +53,6 @@
     "wrapfig" = texlive."wrapfig";
     "xcolor" = texlive."xcolor";
 
-} // extraTexPackages))
+  }
+  // extraTexPackages
+))

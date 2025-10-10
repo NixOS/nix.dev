@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   result = pkgs.lib.evalModules {
     modules = [
       ./options.nix
