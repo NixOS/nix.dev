@@ -1,14 +1,21 @@
-{ writeShellApplication
-, git
-, nix
-, ripgrep
-, coreutils
-, jq
+{
+  writeShellApplication,
+  git,
+  nix,
+  ripgrep,
+  coreutils,
+  jq,
 }:
 # Custom update mechanism for Nix releases in ./nix-versions.json
 writeShellApplication {
   name = "update-nix-releases";
-  runtimeInputs = [ git nix ripgrep coreutils jq ];
+  runtimeInputs = [
+    git
+    nix
+    ripgrep
+    coreutils
+    jq
+  ];
   text = ''
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT

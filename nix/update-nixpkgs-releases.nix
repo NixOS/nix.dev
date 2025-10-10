@@ -1,15 +1,23 @@
-{ writeShellApplication
-, git
-, npins
-, nix
-, ripgrep
-, coreutils
-, jq
+{
+  writeShellApplication,
+  git,
+  npins,
+  nix,
+  ripgrep,
+  coreutils,
+  jq,
 }:
 # add or update Nixpkgs releases using `npins`
 writeShellApplication {
   name = "update-nixpkgs-releases";
-  runtimeInputs = [ git npins nix ripgrep jq coreutils ];
+  runtimeInputs = [
+    git
+    npins
+    nix
+    ripgrep
+    jq
+    coreutils
+  ];
   text = ''
     echo >&2 "Updating rolling"
     npins update nixpkgs-rolling

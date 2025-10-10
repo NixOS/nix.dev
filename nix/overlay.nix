@@ -1,14 +1,17 @@
-final: prev: let
-  python-module-sphinx-sitemap = {
-    lib,
-    buildPythonPackage,
-    fetchPypi,
-    sphinx,
-    pytest,
-  }: let
-    pname = "sphinx-sitemap";
-    version = "2.5.1";
-  in
+final: prev:
+let
+  python-module-sphinx-sitemap =
+    {
+      lib,
+      buildPythonPackage,
+      fetchPypi,
+      sphinx,
+      pytest,
+    }:
+    let
+      pname = "sphinx-sitemap";
+      version = "2.5.1";
+    in
     buildPythonPackage {
       inherit pname version;
 
@@ -37,7 +40,8 @@ final: prev: let
         license = licenses.mit;
       };
     };
-in {
+in
+{
   python310 = prev.python310.override {
     packageOverrides = python-final: python-prev: {
       sphinx-sitemap = python-module-sphinx-sitemap {
