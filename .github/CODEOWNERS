@@ -13,12 +13,10 @@
 
 * @NixOS/documentation-team
 
-/.github/workflows/ @asymmetric
+# CI lives here
+/.github @philiptaron @Mic92
 
 /source/tutorials/file-sets.md @infinisil
-source/guides/recipes/dependency-management.md @infinisil
-source/guides/recipes/python-environment.md @alejandrosame
-source/tutorials/module-system @infinisil @asymmetric @proofconstruction
-source/tutorials/packaging-existing-software.md @proofconstruction
-
-/maintainers/documentation-survey.md @henrik-ch
+/source/guides/recipes/dependency-management.md @infinisil
+/source/guides/recipes/python-environment.md @alejandrosame
+/source/tutorials/module-system @infinisil
