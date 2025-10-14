@@ -63,9 +63,9 @@ In the NixOS configuration directory of the *remote machine*, create the file `r
 ```{code-block} nix
 {
   users.users.remotebuild = {
-    isNormalUser = true;
-    createHome = false;
+    isSystemUser = true;
     group = "remotebuild";
+    useDefaultShell = true;
 
     openssh.authorizedKeys.keyFiles = [ ./remotebuild.pub ];
   };
@@ -106,12 +106,10 @@ On the *local machine*, run as `root`:
 
 ```shell-session
 # ssh remotebuild@remotemachine -i /root/.ssh/remotebuild "echo hello"
-Could not chdir to home directory /home/remotebuild: No such file or directory
 hello
 ```
 
 If the `hello` message is visible, the authentication works.
-The `Could not chdir to ...` message confirms that the remote user has no home directory.
 
 This test login also adds the host key of the remote builder to the `/root/.ssh/known_hosts` file of the local machine.
 Future logins will not be interrupted by host key checks.
@@ -236,13 +234,13 @@ Activate the new configuration as `root`:
 Try building a new derivation on the *local machine*:
 
 ```shell-session
-$ nix-build --max-jobs 0 -E << EOF
+$ nix-build --max-jobs 0 -E "$(cat << EOF
 (import <nixpkgs> {}).writeText "test" "$(date)"
 EOF
+)"
 this derivation will be built:
   /nix/store/9csjdxv6ir8ccnjl6ijs36izswjgchn0-test.drv
 building '/nix/store/9csjdxv6ir8ccnjl6ijs36izswjgchn0-test.drv' on 'ssh://remotebuilder'...
-Could not chdir to home directory /home/remotebuild: No such file or directory
 copying 0 paths...
 copying 1 paths...
 copying path '/nix/store/hvj5vyg4723nly1qh5a8daifbi1yisb3-test' from 'ssh://remotebuilder'...
