@@ -1,7 +1,10 @@
 name: Prose lint checks
 on:
-  pull_request:
   push:
+    branches:
+      - master
+  merge_group:
+  pull_request:
 
 jobs:
   vale:

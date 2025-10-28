@@ -1,8 +1,11 @@
 name: "Test"
 
 on:
-  push: {}
-  pull_request: {}
+  push:
+    branches:
+      - master
+  merge_group:
+  pull_request:
 
 jobs:
   # The linkchecker runs into rate limits 100% of the time in CI for a very long time
