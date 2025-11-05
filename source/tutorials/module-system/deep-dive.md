@@ -394,13 +394,14 @@ Let's say that in our application we want to have a different default behavior t
 This can be done with the `default` argument to [`mkOption`](https://github.com/NixOS/nixpkgs/blob/master/lib/options.nix).
 Its value will be used if the value of the option declaring it is not specified otherwise.
 
-Add the corresponding line:
+Modify the corresponding line:
 
 ```{code-block} diff
 :caption: default.nix
      map = {
        zoom = lib.mkOption {
          type = lib.types.nullOr lib.types.int;
+-        default = null;
 +        default = 10;
        };
      };
