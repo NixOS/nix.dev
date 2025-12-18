@@ -1878,7 +1878,9 @@ builtins.fetchTarball "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc6343
 ```
 
 :::{note}
-The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] lists numerous additional library functions to fetch files over the network.
+Nixpkgs provides its own fetcher functions to achieve a more optimized evaluation. The Nixpkgs fetchers differ in some aspects and are therefore not directly interchangeable with builtin fetchers.
+
+The Nixpkgs manual on [Fetchers][nixpkgs-fetchers] contains details on the differences between builtin fetchers and Nixpkgs fetchers. Nixpkgs also provides additional fetcher functions beyond the builtin ones. You can find the full list of fetchers provided by Nixpkgs in [Fetchers][nixpkgs-fetchers].
 :::
 
 It is an error if the network request fails.
