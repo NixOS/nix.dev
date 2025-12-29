@@ -22,6 +22,8 @@
 
   Introduction to writing derivations.
 
+- [What You Need to Know About Lazy Evaluation in Nix, Nixcademy](https://nixcademy.com/posts/what-you-need-to-know-about-laziness/) (Jacek Galowicz, 2024)
+
 ## Other articles
 
 - [Nix Pills](https://nixos.org/nixos/nix-pills/index.html)
