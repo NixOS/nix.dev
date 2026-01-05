@@ -15,6 +15,17 @@ let
   pkgs-pinned = import inputs.nixpkgs."23.11" {
     config = { };
     inherit system;
+    # Several packages have tests that timeout on aarch64-darwin, disable them
+    overlays = [
+      (final: prev: {
+        graphite2 = prev.graphite2.overrideAttrs (old: {
+          doCheck = false;
+        });
+        p11-kit = prev.p11-kit.overrideAttrs (old: {
+          doCheck = false;
+        });
+      })
+    ];
   };
   nix-dev-python-pkgs = with pkgs-pinned.python3.pkgs; [
     linkify-it-py
