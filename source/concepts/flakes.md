@@ -83,7 +83,7 @@ Flakes and the `nix` command suite bring multiple improvements that are relevant
 
 - The new command-line interface, together with flakes, makes dealing with existing packages significantly more convenient in many cases.
 - The constraints imposed on flakes strengthen reproducibility by default, and enable some performance improvements when interacting with a large Nix package repository like {term}`Nixpkgs`.
-- Flake references allow for easier handling of version upgrades for existing packages or project dependencies.
+- Flakes' `inputs` can help manage dependencies to use versions used upstream, that is, by default implicitly handling versions of recursive dependencies.
 - The [flake schema][schema] helps with composing Nix projects from multiple sources in an orderly fashion.
 
 At the same time, flakes have [fundamental architectural issues](flakes-controversy) and a number of [problems with the implementation](https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc), and there is no coordinated effort to resolve them systematically.
