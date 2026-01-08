@@ -1,10 +1,15 @@
-:root {
-  --sd-color-card-border-hover: var(--pst-color-primary) !important;
+html[data-theme="light"] {
+  /* NixOS branding's Argentinian Blue L55 */
+  --pst-color-primary: #2579ab !important;
+  /* NixOS branding's Afghani Blue L55 */
+  --pst-color-secondary: #506fb2 !important;
 }
 
-div.highlight-shell-session + div.highlight-none pre {
-  background-color: var(--pst-color-preformatted-text),1 !important;
-  color: var(--pst-color-preformatted-background),1 !important;
+html[data-theme="dark"] {
+  /* NixOS branding's Argentinian Blue L65 */
+  --pst-color-primary: #3d98d1 !important;
+  /* NixOS branding's Afghani Blue L65 */
+  --pst-color-secondary: #698dd8 !important;
 }
 
 div.expression > div.highlight > pre::before {
@@ -64,10 +69,6 @@ html[data-theme="dark"] .highlight .gd {
   color: inherit !important;
 }
 
-.topic {
-  padding: 30px;
-}
-
 .bd-links {
   padding-bottom: 0 !important;
 }
@@ -96,7 +97,7 @@ html[data-theme="dark"] .highlight .gd {
   margin-bottom: 0.5rem;
 }
 
-.navbar-nav li.toctree-l1 > .toctree-toggle {
+.navbar-nav li.toctree-l1 > details > summary > .toctree-toggle {
   display: none;
 }
 
@@ -104,24 +105,6 @@ html[data-theme="dark"] .highlight .gd {
   font-weight: 600;
 }
 
-.navbar-nav li.toctree-l1 > ul {
+.navbar-nav li.toctree-l1 > details > ul {
   padding: 0;
-}
-
-html[data-theme="dark"] details {
-  background-color: #323c537d;
-  border: 1px solid #323c537d;
-}
-
-html[data-theme="light"] details {
-  background-color: #abc8debf;
-  border: 1px solid #abc8debf;
-}
-
-tml[data-theme="dark"] details a {
-  color: #6097c1;
-}
-
-html[data-theme="light"] details a {
-  color: #0042aa;
 }

@@ -11,12 +11,7 @@
 let
   lib = pkgs.lib;
   releases = import ./nix/releases.nix { inherit lib inputs system; };
-  # Sphinx skin got very ugly in 24.05, let's not bump it without fixing that
-  pkgs-pinned = import inputs.nixpkgs."23.11" {
-    config = { };
-    inherit system;
-  };
-  nix-dev-python-pkgs = with pkgs-pinned.python3.pkgs; [
+  nix-dev-python-pkgs = with pkgs.python3.pkgs; [
     linkify-it-py
     myst-parser
     sphinx
