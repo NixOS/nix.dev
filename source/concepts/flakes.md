@@ -204,15 +204,17 @@ Alternatives:
   - Flakes have been [primarily] [evangelized] [by] and received [proprietary] [tooling]
     from a company [alleged to use an 'embrace, extend, and extinguish' strategy to subsume Nix],
     which has raised community concern about [community self-determination].
+  - [Semantic versioning] having been left out of the design, only to later be added in a [proprietary] platform.
 
 [various problems]: https://wiki.lix.systems/books/lix-contributors/page/flakes-feature-freeze#bkmrk-design-issues-of-fla
 [open design questions around the `nix` command line interface]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
+[Semantic versioning]: https://discourse.nixos.org/t/introducing-flakehub/32044/31
 [problems with the implementation]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
 [primarily]: https://grahamc.com/blog/flakes-are-an-obviously-good-thing/
 [evangelized]: https://determinate.systems/blog/experimental-does-not-mean-unstable/
 [by]: https://determinate.systems/blog/nix-flakes-explained/
-[proprietary]: https://determinate.systems/nix/
-[tooling]: https://flakehub.com/
+[proprietary]: https://flakehub.com/
+[tooling]: https://determinate.systems/nix/
 [alleged to use an 'embrace, extend, and extinguish' strategy to subsume Nix]: https://discourse.nixos.org/t/we-should-urgently-ban-and-denounce-determinate-systems/61356
 [community self-determination]: https://discourse.nixos.org/t/determinate-nix-3-0/61202/47
 
