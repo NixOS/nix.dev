@@ -190,7 +190,8 @@ Alternatives:
 
 - Design
   - The flakes proposal was criticised for trying to solve too many problems at once and at the wrong abstraction layer.
-  - There are still many [open design questions around the `nix` command line interface].
+  - The design still has [various problems] including around versioning, composability, cross-compilation, and tight coupling with nixpkgs.
+  - There are also still many [open design questions around the `nix` command line interface].
 - Implementation
   - A number of [problems with the implementation] remain.
 - Process
@@ -204,6 +205,7 @@ Alternatives:
     from a company [alleged to use an 'embrace, extend, and extinguish' strategy to subsume Nix],
     which has raised community concern about [community self-determination].
 
+[various problems]: https://wiki.lix.systems/books/lix-contributors/page/flakes-feature-freeze#bkmrk-design-issues-of-fla
 [open design questions around the `nix` command line interface]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
 [problems with the implementation]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
 [primarily]: https://grahamc.com/blog/flakes-are-an-obviously-good-thing/
