@@ -69,12 +69,11 @@ Pros:
 
 Cons:
 
-- Flakes cannot yet be [parameterized] without [proprietary alternatives].
+- Flakes are not [parameterized].
   This means that flakes [downgrade] ease of use of the `system` parameter of derivations, for producers and consumers.
 - As an experimental feature, flakes could still be changed by Nix developers.
 
 [parameterized]: https://github.com/NixOS/nix/issues/2861
-[proprietary alternatives]: https://socallinuxexpo.org/scale/22x/presentations/configurable-flakes/
 [downgrade]: https://github.com/NixOS/nix/issues/3843
 
 Alternatives:
