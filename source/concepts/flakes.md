@@ -95,8 +95,10 @@ Pros:
 - Flakes default to running in [pure mode], promoting a style of writing programs more likely to make them reproducible[^reproducible].
 
 [pure mode]: https://nix.dev/manual/nix/stable/tutorials/nix-language.html#impurities
-[not actually guaranteed]: https://discourse.nixos.org/t/nix-flakes-explained-what-they-solve-why-they-matter-and-the-future/72302/7
+
 [^reproducible]: Even in pure mode, reproducibility is [not actually guaranteed].
+
+[not actually guaranteed]: https://discourse.nixos.org/t/nix-flakes-explained-what-they-solve-why-they-matter-and-the-future/72302/7
 
 Cons:
 
