@@ -79,7 +79,7 @@ Cons:
 Alternatives:
 
 - At the technical level, creating a `flake.nix` file as an additional entrypoint to facilitate others consuming your Nix code through the flake schema does not in itself require one to use the `flakes` experimental feature.
-  More practically though, one may define a `flake.nix` as a transparent wrapper of a `default.nix` file exposing fields similar to the flake schema's, like `{ outputs = { ... }: import ./default.nix { }; }`.
+  More practically though, making sure the `flake.nix` simply wraps functionality already exposed in traditional Nix files ensures compatibility to consumers of either.
 
 ### Running commands
 
