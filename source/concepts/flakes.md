@@ -80,6 +80,7 @@ Alternatives:
 
 - At the technical level, creating a `flake.nix` file as an additional entrypoint to facilitate others consuming your Nix code through the flake schema does not in itself require one to use the `flakes` experimental feature.
   More practically though, making sure the `flake.nix` simply wraps functionality already exposed in traditional Nix files ensures compatibility to consumers of either.
+- Settle for exposing traditional Nix modules, and let flake users import the project with `flake = false;`.
 
 ### Running commands
 
