@@ -203,22 +203,16 @@ Alternatives:
   - The RFC was closed with no timeline to conclude the experiment.
   - Flakes had become depended on by many projects, making it harder to iterate on their design without breaking many people's code.
 - Community
-  - Flakes have been [primarily] [evangelized] [by] and received [proprietary] [tooling]
-    from a company [alleged to use an 'embrace, extend, and extinguish' strategy to subsume Nix],
-    which has raised community concern about [community self-determination].
-  - [Semantic versioning] having been left out of the design, only to later be added in a [proprietary] platform.
+  - The design had not been accepted by all parts of the community, with e.g. {term}`Nixpkgs` not using it in its internal tooling.
+    As a result of this, branching approaches to flakes have been made,
+    with e.g. company Determinate Systems (which offers proprietary features around flakes) unilaterally declaring the feature stable,
+    while community-driven Nix fork Lix [consolidated the featureset] to a de-facto 'v1'.
+    Such branching could potentially end up breaking the promise of a unified interface that propelled the flakes experiment in the first place.
 
 [various problems]: https://wiki.lix.systems/books/lix-contributors/page/flakes-feature-freeze#bkmrk-design-issues-of-fla
 [open design questions around the `nix` command line interface]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
-[Semantic versioning]: https://discourse.nixos.org/t/introducing-flakehub/32044/31
 [problems with the implementation]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
-[primarily]: https://grahamc.com/blog/flakes-are-an-obviously-good-thing/
-[evangelized]: https://determinate.systems/blog/experimental-does-not-mean-unstable/
-[by]: https://determinate.systems/blog/nix-flakes-explained/
-[proprietary]: https://flakehub.com/
-[tooling]: https://determinate.systems/nix/
-[alleged to use an 'embrace, extend, and extinguish' strategy to subsume Nix]: https://discourse.nixos.org/t/we-should-urgently-ban-and-denounce-determinate-systems/61356
-[community self-determination]: https://discourse.nixos.org/t/determinate-nix-3-0/61202/47
+[consolidated the featureset]: https://wiki.lix.systems/books/lix-contributors/page/flake-stabilisation-proposal
 
 ## Further reading
 
