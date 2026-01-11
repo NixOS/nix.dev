@@ -70,11 +70,13 @@ Pros:
 Cons:
 
 - Flakes are not [parameterized].
-  This means that flakes [downgrade] ease of use of the `system` parameter of derivations, for producers and consumers.
+  This means that flakes [downgrade] ease of use of the `system` parameter of derivations, for producers and consumers,
+  leading to related [utility functions].
 - As an experimental feature, flakes could still be changed by Nix developers.
 
 [parameterized]: https://github.com/NixOS/nix/issues/2861
 [downgrade]: https://github.com/NixOS/nix/issues/3843
+[utility functions]: https://github.com/numtide/flake-utils
 
 Alternatives:
 
