@@ -143,11 +143,9 @@ Cons:
 - As flakes by default follow versions declared in dependencies' flakes, if one does not actively override these using `follows` statements, one may end up with:
   - duplicate versions of the same (recursive) dependency.
   - outdated recursive dependencies if such versions are not actively updated throughout the chain.
-- Dependencies are fetched eagerly, making for additional overhead (unless using a [proprietary Nix competitor])
+- Dependencies are fetched eagerly, making for additional overhead
   in case (recursively) declared dependencies (not overridden to `null`) end up not used.
 - There has not been a good way to facilitate overriding inputs for both flake-based and non-flake consumers without using flake inputs to manage dependencies.
-
-[proprietary Nix competitor]: https://determinate.systems/blog/changelog-determinate-nix-352/
 
 Alternatives:
 
