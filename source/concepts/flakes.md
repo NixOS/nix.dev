@@ -80,7 +80,7 @@ Cons:
 
 Alternatives:
 
-- Ensure compatibility by using [`import`] to have the `flake.nix` simply wrap functionality already exposed in traditional Nix files.
+- Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
 - Settle for exposing traditional Nix modules, and let flake users import the project with `flake = false;`.
 
 [`import`]: https://nix.dev/tutorials/nix-language#import
