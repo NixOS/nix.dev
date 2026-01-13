@@ -153,7 +153,7 @@ Alternatives:
 - Handle dependencies [using `npins`], which makes the user explictly specify any used dependencies.
   This makes the user responsible for versions used, solving drawbacks of flakes' implicit model.
   - If dependencies have only flake entrypoints, if needed load their flakes using library [`flake-inputs`].
-  - Allow others to change your dependencies by having them in Nix module inputs _and_ outputs:
+  - Allow others to change your dependencies by having them in Nix entrypoints' module parameters _and_ exports:
 
   ```nix
   {
