@@ -116,7 +116,7 @@ To instead use a `nixpkgs` version managed by `npins`, one can manually override
 sudo NIX_PATH="nixos-config=configuration.nix:nixpkgs=$(nix-instantiate --raw --eval npins -A nixpkgs.outPath)" nixos-rebuild switch
 ```
 
-To make such pinned dependencies available as [look-up paths](../tutorials/nix-language.html#lookup-paths) (like `<nixpkgs>`) while using the NixOS configuration, one may use:
+To make such pinned dependencies available as [look-up paths](https://nix.dev/tutorials/nix-language.html#lookup-paths) (like `<nixpkgs>`) while using the NixOS configuration, one may use:
 
 ```nix
 # configuration.nix
