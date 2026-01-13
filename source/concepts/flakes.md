@@ -187,7 +187,7 @@ Alternatives:
 - Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
 - Use library [`flake-compat`] to expose a flake's default package or shell to non-flake users.
 
-[`flake-compat`]: https://git.lix.systems/lix-project/flake-compat/
+[`flake-compat`]: https://github.com/NixOS/flake-compat
 
 ### General considerations
 
