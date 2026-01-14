@@ -10,6 +10,7 @@ Learn how to configure, test, and install or deploy NixOS.
 
 ## Testing and deploying NixOS configurations
 
+- [](testing-calamares)
 - [](integration-testing-using-virtual-machines)
 - [](provisioning-remote-machines-tutorial)
 - [](installing-nixos-on-a-raspberry-pi)
@@ -26,6 +27,7 @@ Learn how to configure, test, and install or deploy NixOS.
 nixos-configuration-on-vm.md
 building-bootable-iso-image.md
 building-and-running-docker-images.md
+testing-calamares-installer.md
 integration-testing-using-virtual-machines.md
 provisioning-remote-machines.md
 installing-nixos-on-a-raspberry-pi.md
