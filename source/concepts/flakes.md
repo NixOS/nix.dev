@@ -117,18 +117,24 @@ Cons:
 
 Alternatives:
 
-- The [v2 command line interface] (e.g. [nix-build], [nix-shell]) is used to interfaces with traditional Nix files.
+- The [v2 command line interface] (e.g. [`nix-build`], [`nix-shell`]) is used to interfaces with traditional Nix files.
 - The [`--file` flag] allows the v3 commands to operate on traditional Nix files.
 - In {term}`NixOS`, to use the v3 commands with a package set `pkgs` rather than
   with a flake NixOS configuration's {term}`Nixpkgs` instantiation,
   one may use [`nixpkgs.flake.source = pkgs.path;`].
+- Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], the [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
 
 [Git]: https://git-scm.com/
 [v2 command line interface]: https://nix.dev/manual/nix/stable/command-ref/main-commands
 [`--file` flag]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-build.html#options-that-change-the-interpretation-of-installables
-[nix-build]: https://nix.dev/manual/nix/stable/command-ref/nix-build.html
-[nix-shell]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
+[`nix-build`]: https://nix.dev/manual/nix/stable/command-ref/nix-build.html
+[`nix-shell`]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
 [`nixpkgs.flake.source = pkgs.path;`]: https://search.nixos.org/options?channel=unstable&show=nixpkgs.flake.source&query=nixpkgs.flake.source
+[`builtins.fetchTree`]: https://noogle.dev/f/builtins/fetchTree
+[`fetch-tree`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-fetch-tree
+[`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
+
+[^emulated]: `nix run github:NixOS/nixpkgs#hello` for non-flake projects may look like `nix-shell -p '(import (builtins.fetchTree "github:NixOS/nixpkgs").outPath { }).hello' --run 'hello'`. A drop-in command `nix-run` using the `nix run` syntax could be defined using a Bash alias like `alias nix-run='run() { $(nix-instantiate --raw --impure --eval --expr "(import <nixpkgs> {}).lib.getExe (import (builtins.fetchTree \"$(cut -d "#" -f 1 <<< "$1")\").outPath { }).$([[ "$1" == *"#"* ]] && echo "$(cut -d "#" -f 2 <<< "$1")" || echo "default")"); }; run'`.
 
 ### Dependency management
 
