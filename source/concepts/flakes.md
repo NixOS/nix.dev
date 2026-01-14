@@ -122,6 +122,8 @@ Alternatives:
 - In {term}`NixOS`, to use the v3 commands with a package set `pkgs` rather than
   with a flake NixOS configuration's {term}`Nixpkgs` instantiation,
   one may use [`nixpkgs.flake.source = pkgs.path;`].
+- One may also expose to v3 commands any dependencies pinned in NixOS, e.g. [using `npins`].
+with the experimental feature enabled, #1202 handles nix run nixpkgs#hello
 - Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], the [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
 
 [Git]: https://git-scm.com/
@@ -130,6 +132,7 @@ Alternatives:
 [`nix-build`]: https://nix.dev/manual/nix/stable/command-ref/nix-build.html
 [`nix-shell`]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
 [`nixpkgs.flake.source = pkgs.path;`]: https://search.nixos.org/options?channel=unstable&show=nixpkgs.flake.source&query=nixpkgs.flake.source
+[using `npins`]: https://nix.dev/guides/recipes/dependency-management#managing-nixos-configurations
 [`builtins.fetchTree`]: https://noogle.dev/f/builtins/fetchTree
 [`fetch-tree`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-fetch-tree
 [`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
