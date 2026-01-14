@@ -121,12 +121,39 @@ To make such pinned dependencies available as [look-up paths](https://nix.dev/tu
 ```nix
 # configuration.nix
 { lib, ... }:
+let
+  sources = import ./npins;
+in
 {
   # ...
   nix.channel.enable = false;
-  nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") (import ./npins);
+  nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") sources;
 }
 ```
+
+To use the [v3 command line] and run programs from dependencies
+exposing packages through a [flake], like `nix run nixpkgs#hello`,
+you can enable flakes and add the pins to the flake registry like:
+
+```nix
+# configuration.nix
+{ lib, ... }:
+let
+  sources = import ./npins;
+in
+{
+  # ...
+  experimental-features = "nix-command flakes";
+  nix.registry = lib.mapAttrs (_: path: {
+    to = {
+      type = "path";
+      inherit path;
+    };
+  }) sources;
+```
+
+[v3 command line]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
+[flake]: https://nix.dev/concepts/flakes
 
 ## Next steps
 
