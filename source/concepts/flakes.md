@@ -48,15 +48,15 @@ The `outputs` field's function parameter must be specified: it does not support 
 
 ## Should I use flakes in my project?
 
-You have to judge for yourself based on your needs.
+Flakes are an experimental extension format that still has outstanding issues, while its functionality may generally be achieved without them as well.
 
-While flakes reduce complexity in some regards, they also introduce some complexity with additional mechanisms.
-You will have to learn more about the system to fully understand how it works.
+In case you need to run existing software that already used flakes, or would like to contribute to their development, feel free to use them.
+If you want to write Nix code yourself and would like to manage dependencies, consider instead our guide on [dependency management].[^flake-inputs]
+If you do find flakes offer functionality suiting your needs, the following overview may help get out of them what you need while preserving compatibility:
 
-Both paradigms have their own set of unique concepts and support tooling that have to be learned, with varying ease of use, implementation quality, and support status.
-At the moment, neither the stable nor the experimental interface is clearly superior to the other in all aspects.
+[dependency management]: https://nix.dev/guides/recipes/dependency-management.html
 
-There are different levels of buy-in in the use of flakes, with each stage introducing their own trade-offs:
+[^flake-inputs]: Nix repositories offering only flake entrypoints may be import using [`flake-inputs`].
 
 ### Discoverability
 
