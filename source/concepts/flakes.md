@@ -159,7 +159,7 @@ Cons:
 
 Alternatives:
 
-- Handle dependencies [using `npins`], which makes the user explictly specify any used dependencies.
+- Handle dependencies with [`npins`], which makes the user explictly specify any used dependencies.
   This makes the user responsible for versions used, solving drawbacks of flakes' implicit model.
   - If dependencies have only flake entrypoints, if needed load their flakes using library [`flake-inputs`].
   - Allow others to change your dependencies by having them in Nix entrypoints' module parameters _and_ exports:
@@ -175,7 +175,7 @@ Alternatives:
   ```
 
 [`flake-inputs`]: https://github.com/fricklerhandwerk/flake-inputs
-[using `npins`]: https://nix.dev/guides/recipes/dependency-management.html
+[`npins`]: https://nix.dev/guides/recipes/dependency-management.html
 
 ### Flake-only Nix
 
