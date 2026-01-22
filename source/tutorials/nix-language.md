@@ -1880,15 +1880,15 @@ builtins.fetchTarball "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc6343
 :::{note}
 Nixpkgs provides its own fetcher functions to reduce the time needed for evaluating Nixpkgs. The Nixpkgs fetchers are not directly interchangeable with builtin fetchers; for example, the Nixpkgs fetchers require a hash argument.
 
-:::{note}
+::::{note}
 Nixpkgs provides its own fetcher functions with important differences from the builtin fetchers:
 
-- Nixpkgs fetchers require a hash argument for better reproducibility
+- Nixpkgs fetchers always require a hash argument
 - They support more protocols and source types (Git forges, SVN, CVS, etc.)
 - They are not directly interchangeable with builtin fetchers
 
 See the Nixpkgs manual on [Fetchers][nixpkgs-fetchers] for the complete list and detailed usage information.
-:::
+::::
 :::
 
 It is an error if the network request fails.
