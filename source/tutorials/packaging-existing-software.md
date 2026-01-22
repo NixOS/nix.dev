@@ -635,7 +635,7 @@ Adjust your `installPhase` to call the appropriate hooks:
 
 ## A successful build
 
-Running the `nix-build -A nicat` command once more will finally do what you want, repeatably.
+Running the `nix-build -A icat` command once more will finally do what you want, repeatably.
 Call `ls` in the local directory to find a `result` symlink to a location in the Nix store:
 
 ```console
@@ -646,7 +646,7 @@ default.nix hello.nix icat.nix result
 `result/bin/icat` is the executable built previously. Success!
 
 Running `nix-build` (without specifying an attribute) would build all of our attributes at once.
-The first (`hello`) will be under `result/bin/`, while the second (`nicat`) will be under `result-2/bin/`.
+The first (`hello`) will be under `result/bin/`, while the second (`icat`) will be under `result-2/bin/`.
 If we were to add more attributes we would get even more `result-n` symlinks.
 
 ## References
