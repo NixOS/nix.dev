@@ -107,6 +107,27 @@ npins import-niv
 All the imported entries will be updated, so they won't necessarily point to the same commits as before!
 :::
 
+## Managing NixOS configurations
+
+NixOS relies on the `NIX_PATH` environment variable to locate `nixpkgs`, which defaults to using channels.
+To instead use a `nixpkgs` version managed by `npins`, one can manually override this environment variable on system rebuilds:
+
+```bash
+sudo NIX_PATH="nixos-config=configuration.nix:nixpkgs=$(nix-instantiate --raw --eval npins -A nixpkgs.outPath)" nixos-rebuild switch
+```
+
+To make such pinned dependencies available as [look-up paths](https://nix.dev/tutorials/nix-language.html#lookup-paths) (like `<nixpkgs>`) while using the NixOS configuration, one may use:
+
+```nix
+# configuration.nix
+{ lib, ... }:
+{
+  # ...
+  nix.channel.enable = false;
+  nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") (import ./npins);
+}
+```
+
 ## Next steps
 
 - Check the built-in help for more information:
