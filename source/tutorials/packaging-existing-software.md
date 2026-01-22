@@ -220,7 +220,7 @@ Next, you'll package another piece of software with external-to-`stdenv` depende
 
 ## A package with dependencies
 
-Now you will package a somewhat more complicated program, [`icat`](https://github.com/atextor/icat), which allows you to render images in your terminal.
+Now you will add a second, somewhat more complicated, program: [`icat`](https://github.com/atextor/icat) (which allows you to render images in your terminal).
 
 Change the `default.nix` from the previous section by adding a new attribute for `icat`:
 
@@ -331,7 +331,7 @@ stdenv.mkDerivation {
 
 ### Missing dependencies
 
-Running `nix-build` with the new `icat` attribute, an entirely new issue is reported:
+Running `nix-build` on only the new `icat` attribute, an entirely new issue is reported:
 
 ```console
 $ nix-build -A icat
@@ -635,7 +635,7 @@ Adjust your `installPhase` to call the appropriate hooks:
 
 ## A successful build
 
-Running the `nix-build` command once more will finally do what you want, repeatably.
+Running the `nix-build -A nicat` command once more will finally do what you want, repeatably.
 Call `ls` in the local directory to find a `result` symlink to a location in the Nix store:
 
 ```console
@@ -644,6 +644,10 @@ default.nix hello.nix icat.nix result
 ```
 
 `result/bin/icat` is the executable built previously. Success!
+
+Running `nix-build` (without specifying an attribute) would build all of our attributes at once.
+The first (`hello`) will be under `result/bin/`, while the second (`nicat`) will be under `result-2/bin/`.
+If we were to add more attributes we would get even more `result-n` symlinks.
 
 ## References
 
