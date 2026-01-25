@@ -97,6 +97,7 @@ Pros:
 - Flakes cache evaluations of builds to save time on subsequent identical builds, which can save time when say running unchanged builds in Continuous Integration.
 - The v3 command-line interface, together with flakes, promotes making programs easy to run (using `nix run` to run executables in `outputs.apps`), including from remote repositories.
 - Flakes default to running in [pure mode], promoting a style of writing programs more likely to make them reproducible[^reproducible].
+- Prevents pointless rebuilds by only including tracked files in builds, for projects using [Git].
 
 [pure mode]: https://nix.dev/manual/nix/stable/tutorials/nix-language.html#impurities
 
@@ -109,7 +110,7 @@ Cons:
 - The entire flake directory is copied to Nix store before evaluation.
   This is used in evaluation caching, but also adds a [performance penalty], especially for large repositories such as {term}`Nixpkgs`.
 - There are still various outstanding issues with the implementations of [flakes] and the [v3 `nix` command line interface].
-- In projects using [Git] version control, files must be staged for flakes to see them.
+- Files must be staged for flakes to see them.
 
 [performance penalty]: https://github.com/NixOS/nix/issues/3121
 [flakes]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
