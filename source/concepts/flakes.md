@@ -3,35 +3,40 @@
 
 ## What are flakes?
 
-Flakes are an [experimental feature] in Nix, proposed in [RFC 49],
-introduced in a [blog post], then added in [Nix 2.4].
+`flake.nix` is a file that declares inputs and outputs with a [standard structure].
 
-Flakes are aimed at sharing Nix code in a way that makes it easy to build them with those same versions.
-They do this by defining a [module structure] specifying outputs and (if needed) inputs.
+> Note: [Experimental], requires [Nix 2.4].
 
-Enabling the features flag `flakes` (with [`nix-command`]) adds a [`nix`] command line interface.
-Its commands operate on [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories called flakes.
+Flakes are aimed at sharing Nix code.
+They make it easy to build with those same versions.
+
+Flake commands operate on [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
 
 Such directories contain a `flake.nix` entrypoint using this structure in a subset[^subset] of Nix.
 [`outputs`] include various [built-in types], but can be [extended].
 
-[`inputs`] let you set dependencies. On build, these are then tracked in a JSON file [`flake.lock`].
+[`inputs`] let you declare dependencies.
+
+Nix creates a [`flake.lock`] to pin dependencies.
 If these have inputs of their own, Nix will check _their_ lock files to find the versions to use.
 Using the same versions helps make sure programs work as intended, but inputs' `follows` field can override these.
+
+Flakes were proposed in [RFC 49], and introduced in a [blog post].
 
 Aliases to flakes can be stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
 
-[^subset]: Pure mode is enforced, preventing evaluation of [impurities].
-Its `inputs` and metadata fields cannot be arbitrary Nix expressions.
+[^subset]: Flakes default to pure mode, isolating builds from the host environment.
+This is also called hermetic evaluation, and prevents evaluating (non-network) [impure] functions.
+Flake `inputs` and metadata fields cannot be arbitrary Nix expressions.
 This is to prevent complex, possibly non-terminating computations.
 The `outputs` field's function parameter must be specified: it does not support [eta-reduction].
 
-[experimental feature]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-flakes
+[Experimental]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-flakes
 [RFC 49]: https://github.com/NixOS/rfcs/pull/49
 [blog post]: https://tweag.io/blog/2020-05-25-flakes/
 [Nix 2.4]: https://nix.dev/manual/nix/stable/release-notes/rl-2.4.html#highlights
-[module structure]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-format
+[standard structure]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-format
 [`nix-command`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-nix-command
 [`nix`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
 [references]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
@@ -170,7 +175,6 @@ Alternatives:
     sources ? import ./npins,
   }:
   {
-    # ...
     inherit sources;
   }
   ```
@@ -233,4 +237,3 @@ Alternatives:
 - [Nix Flakes is an experiment that did too much at once...](https://samuel.dionne-riel.com/blog/2023/09/06/flakes-is-an-experiment-that-did-too-much-at-once.html) ([comments](https://discourse.nixos.org/t/nix-flakes-is-an-experiment-that-did-too-much-at-once/32707)) (Samuel Dionne-Riel, September 2023)
 - [Experimental does not mean unstable](https://determinate.systems/posts/experimental-does-not-mean-unstable) ([comments](https://discourse.nixos.org/t/experimental-does-not-mean-unstable-detsyss-perspective-on-nix-flakes/32703)) (Graham Christensen, September 2023)
 - [The Nix Hour: comparing flakes to traditional Nix](https://www.youtube.com/watch?v=atmoYyBAhF4) (Silvan Mosberger, November 2022)
-
