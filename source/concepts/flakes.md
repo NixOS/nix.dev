@@ -31,7 +31,6 @@ They make it easy to build programs with the same version.
 
 Flake commands access flakes using [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
 
-Such directories contain a `flake.nix` entrypoint using this structure in a subset[^subset] of Nix.
 [`outputs`] include various [built-in types], but can be [extended].
 You can find an overview of these on the [wiki].
 
@@ -39,11 +38,11 @@ You can find an overview of these on the [wiki].
 
 Nix creates a [`flake.lock`] to pin dependencies.
 If these have inputs of their own, Nix will check _their_ lock files to find the versions to use.
-Using the same versions helps make sure programs work as intended, but inputs' `follows` field can override these.
+Using the same versions helps make sure programs work as intended, but you can override these.
 
 Flakes were proposed in [RFC 49], and introduced in a [blog post].
 
-Aliases to flakes can be stored in a [registry].
+Aliases to flakes are stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
 
 [^subset]: Flakes default to pure mode, isolating builds from the host environment.
@@ -115,7 +114,7 @@ Alternatives:
 
 ### Running commands
 
-Flakes are used from Nix's [v3 `nix` command line interface] (experimental feature [`nix-command`]).
+Flakes are used from Nix's [v3 `nix` command line interface].
 It can build or run programs by a reference like `.` or `github:NixOS/nixpkgs`.
 
 You can enable this for one command by adding:
@@ -190,7 +189,7 @@ Alternatives:
 - Plain Nix files can be used with the [v2 commands] (like [`nix-build`], [`nix-shell`]), or with v3 commands' [`--file` flag] or `-f`.
 - In {term}`NixOS`, you can make v3 commands' `nixpkgs` to a package set `pkgs` by setting [`nixpkgs.flake.source = pkgs.path;`] in your NixOS configuration.
   You can also expose other dependencies pinned in NixOS, see [using `npins`].
-- Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], the [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
+- Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
 
 [Git]: https://git-scm.com/
 [v2 CLI]: https://nix.dev/manual/nix/stable/command-ref/main-commands
@@ -265,7 +264,7 @@ Alternatives:
 
 ### Flake-only Nix
 
-As flakes (largely) use Nix as an internal language, you could even place all Nix code in flake files.
+As flakes (largely[^subset]) use Nix as an internal language, you could even place all Nix code in flake files.
 This pattern is gets easier with library [`flake-parts`](https://github.com/hercules-ci/flake-parts)
 which lets you spread code over different flake-like files.
 
