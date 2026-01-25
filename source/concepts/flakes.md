@@ -195,7 +195,7 @@ Alternatives:
 
 - Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
 - Use library [`flake-compat`] to expose a flake's default package or shell to non-flake users.
-- Propagate needed parameters across modules using NixOS's [`specialArgs`].
+- Propagate needed parameters across modules either explicitly or using NixOS's [`specialArgs`].
 
 [`flake-compat`]: https://github.com/NixOS/flake-compat
 [`specialArgs`]: https://nixos.org/manual/nixos/unstable/options#opt-_module.args
