@@ -7,13 +7,33 @@
 
 > Note: [Experimental], requires [Nix 2.4].
 
-Flakes are aimed at sharing Nix code.
-They make it easy to build with those same versions.
+This file can look like:
 
-Flake commands operate on [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
+```nix
+{
+  description = "My example flake";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+  };
+
+  outputs = { self, nixpkgs }: {
+    packages.x86_64-linux = {
+      default = self.packages.x86_64-linux.hello;
+      hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+    };
+  };
+}
+```
+
+Flakes are aimed at sharing Nix code.
+They make it easy to build programs with the same version.
+
+Flake commands access flakes using [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
 
 Such directories contain a `flake.nix` entrypoint using this structure in a subset[^subset] of Nix.
 [`outputs`] include various [built-in types], but can be [extended].
+You can find an overview of these on the [wiki].
 
 [`inputs`] let you declare dependencies.
 
@@ -43,6 +63,7 @@ The `outputs` field's function parameter must be specified: it does not support 
 [`outputs`]: https://wiki.nixos.org/wiki/Flakes#Output_schema
 [built-in types]: https://github.com/NixOS/nix/blob/38c755f168b7c38cd4687aacf5d7e59f049658d3/src/nix/flake.cc#L594-L769
 [extended]: https://github.com/NixOS/nix/blob/38c755f168b7c38cd4687aacf5d7e59f049658d3/src/nix/flake.cc#L772-L776
+[wiki]: https://wiki.nixos.org/wiki/Flakes#Output_schema
 [`inputs`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-inputs
 [`flake.lock`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#lock-files
 [impurities]: https://nix.dev/manual/nix/stable/tutorials/nix-language.html#impurities
@@ -53,11 +74,12 @@ The `outputs` field's function parameter must be specified: it does not support 
 
 ## Should I use flakes in my project?
 
-Flakes are an experimental extension format that still has outstanding issues, while its functionality may generally be achieved without them as well.
+Flakes are an experimental extension format with outstanding issues.
+Its functionality can generally be achieved without them as well.
 
-In case you need to run existing software that already used flakes, or would like to contribute to their development, feel free to use them.
-If you want to write Nix code yourself and would like to manage dependencies, consider instead our guide on [dependency management].[^flake-inputs]
-If you do find flakes offer functionality suiting your needs, the following overview may help get out of them what you need while preserving compatibility:
+If you need to run existing software that already used flakes, or want to contribute to their development, feel free to use them.
+If you want to write Nix code yourself, consider also our guide on [dependency management].[^flake-inputs]
+This overview can help get what you need from flakes while preserving compatibility.
 
 [dependency management]: https://nix.dev/guides/recipes/dependency-management.html
 
@@ -65,44 +87,86 @@ If you do find flakes offer functionality suiting your needs, the following over
 
 ### Discoverability
 
-A first level of use of flakes consists of including a `flake.nix` file specifying `outputs`.
+A first step in use of flakes is to add a `flake.nix` file specifying `outputs`.
 
 Pros:
 
-- Allows use of the code through the flake, including the v3 command line interface, downstream flake projects, as well as flake registries.
-- The `flake.nix` file is checked for schema validity.
+- Use the code from other flake projects.
+- Nix checks `flake.nix`'s structure is valid.
 
 Cons:
 
-- Flakes are not [parameterized].
-  This means that flakes [downgrade] ease of use of the `system` parameter of derivations, for producers and consumers,
-  leading to related [utility functions].
-- As an experimental feature, flakes could still be changed by Nix developers.
+- Flakes have no [parameters].
+  This means `flake.nix` and its end-user must be explicit about the used [`system`].
+  This is made easier by say [`flake-utils`].
+- As an experimental feature, flakes can still change.
 
-[parameterized]: https://github.com/NixOS/nix/issues/2861
-[downgrade]: https://github.com/NixOS/nix/issues/3843
-[utility functions]: https://github.com/numtide/flake-utils
+[parameters]: https://github.com/NixOS/nix/issues/2861
+[`system`]: https://github.com/NixOS/nix/issues/3843
+[`flake-utils`]: https://github.com/numtide/flake-utils
 
 Alternatives:
 
-- Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
-- Settle for exposing traditional Nix modules, and let flake users import the project with `flake = false;`.
+- Use flakes as thin wrappers over existing Nix code.
+  This way, code can be used in both ways.
+- Use Nix modules: flake users can import these with `flake = false;`.
 
 [`import`]: https://nix.dev/tutorials/nix-language#import
 
 ### Running commands
 
-Given the above, one may further access the created flake by Nix's [v3 command line interface], enabled by separate experimental feature [nix-command], which can build or run programs given a flake references.
+Flakes are used from Nix's [v3 `nix` command line interface] (experimental feature [`nix-command`]).
+It can build or run programs by a reference like `.` or `github:NixOS/nixpkgs`.
 
-[v3 command line interface]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
-[nix-command]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-nix-command
+You can enable this for one command by adding:
+
+```
+ --experimental-features 'nix-command flakes'
+````
+
+Or permanently in NixOS or Home Manager configurations using:
+
+```
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
+
+To build the derivation in your `flake.nix`'s `packages.x86_64-linux.default`, run:
+
+```bash
+nix build .#packages.x86_64-linux.default
+```
+
+You can shorten this to `nix build .#default`, or just `nix build`.
+
+`nix run` runs programs in `outputs.apps`.
+`nix run .#default` runs `outputs.apps.default`.
+Just `nix run` also runs that.
+
+For example, to run the `hello` package from {term}`Nixpkgs`:
+
+```bash
+nix run nixpkgs#hello -- --greeting "hello from flakes"
+```
+
+This uses the version set by your registry's alias `nixpkgs`.
+
+To run the `hello` package from {term}`Nixpkgs`' `nixpkgs-unstable` branch:
+
+```bash
+nix run github:NixOS/nixpkgs/nixpkgs-unstable#hello
+```
+
+[v3 `nix` command line interface]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
 
 Pros:
 
-- Flakes cache evaluations of builds to save time on subsequent identical builds, which can save time when say running unchanged builds in Continuous Integration.
-- The v3 command-line interface, together with flakes, promotes making programs easy to run (using `nix run` to run executables in `outputs.apps`), including from remote repositories.
-- Flakes default to running in [pure mode], promoting a style of writing programs more likely to make them reproducible[^reproducible].
-- Prevents pointless rebuilds by only including tracked files in builds, for projects using [Git].
+- Flakes cache builds to save time on later identical builds.
+  This can save time if you run unchanged builds in Continuous Integration, for example.
+- Flakes promote making programs easy to run, also from remote repositories.
+- Flakes default to running in [pure mode].
+  This promotes a style of writing programs more likely to make them reproducible[^reproducible].
+- Flakes build only tracked files, for projects using [Git].
+  This helps prevent rebuilds.
 
 [pure mode]: https://nix.dev/manual/nix/stable/tutorials/nix-language.html#impurities
 
@@ -112,28 +176,24 @@ Pros:
 
 Cons:
 
-- The entire flake directory is copied to Nix store before evaluation.
-  This is used in evaluation caching, but also adds a [performance penalty], especially for large repositories such as {term}`Nixpkgs`.
-- There are still various outstanding issues with the implementations of [flakes] and the [v3 `nix` command line interface].
+- Builds copy the whole flake directory to the Nix store.
+  This caches them, but can be [slower] for large repositories like {term}`Nixpkgs`.
+- The implementation still has issues for both [flakes] and the [v3 CLI].
 - Files must be staged for flakes to see them.
 
-[performance penalty]: https://github.com/NixOS/nix/issues/3121
+[slower]: https://github.com/NixOS/nix/issues/3121
 [flakes]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
-[v3 `nix` command line interface]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
+[v3 CLI]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
 
 Alternatives:
 
-- The [v2 command line interface] (e.g. [`nix-build`], [`nix-shell`]) is used to interfaces with traditional Nix files.
-- The [`--file` flag] allows the v3 commands to operate on traditional Nix files.
-- In {term}`NixOS`, to use the v3 commands with a package set `pkgs` rather than
-  with a flake NixOS configuration's {term}`Nixpkgs` instantiation,
-  one may use [`nixpkgs.flake.source = pkgs.path;`].
-- One may also expose to v3 commands any dependencies pinned in NixOS, e.g. [using `npins`].
-with the experimental feature enabled, #1202 handles nix run nixpkgs#hello
+- Plain Nix files can be used with the [v2 commands] (like [`nix-build`], [`nix-shell`]), or with v3 commands' [`--file` flag] or `-f`.
+- In {term}`NixOS`, you can make v3 commands' `nixpkgs` to a package set `pkgs` by setting [`nixpkgs.flake.source = pkgs.path;`] in your NixOS configuration.
+  You can also expose other dependencies pinned in NixOS, see [using `npins`].
 - Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], the [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
 
 [Git]: https://git-scm.com/
-[v2 command line interface]: https://nix.dev/manual/nix/stable/command-ref/main-commands
+[v2 CLI]: https://nix.dev/manual/nix/stable/command-ref/main-commands
 [`--file` flag]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-build.html#options-that-change-the-interpretation-of-installables
 [`nix-build`]: https://nix.dev/manual/nix/stable/command-ref/nix-build.html
 [`nix-shell`]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
@@ -143,31 +203,52 @@ with the experimental feature enabled, #1202 handles nix run nixpkgs#hello
 [`fetch-tree`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-fetch-tree
 [`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
 
-[^emulated]: `nix run github:NixOS/nixpkgs#hello` for non-flake projects may look like `nix-shell -p '(import (builtins.fetchTree "github:NixOS/nixpkgs").outPath { }).hello' --run 'hello'`. A drop-in command `nix-run` using the `nix run` syntax could be defined using a Bash alias like `alias nix-run='run() { $(nix-instantiate --raw --impure --eval --expr "(import <nixpkgs> {}).lib.getExe (import (builtins.fetchTree \"$(cut -d "#" -f 1 <<< "$1")\").outPath { }).$(cut -d "#" -f 2 <<< "$1")"); }; run'`.
+[^emulated]: `nix run github:NixOS/nixpkgs#hello` for non-flake projects may look like `nix-shell -p '(import (builtins.fetchTree "github:NixOS/nixpkgs").outPath { }).hello' --run 'hello'`.
+A drop-in command `nix-run` using the `nix run` syntax could be defined using a Bash alias like `alias nix-run='run() { $(nix-instantiate --raw --impure --eval --expr "(import <nixpkgs> {}).lib.getExe (import (builtins.fetchTree \"$(cut -d "#" -f 1 <<< "$1")\").outPath { }).$(cut -d "#" -f 2 <<< "$1")"); }; run'`.
 
 ### Dependency management
 
-Flakes' `inputs` attribute may be used to manage dependencies. This approach by default handles recursive dependencies implicitly, allowing to explicitly override dependencies if desired.
+Flakes' `inputs` attribute can manage dependencies.
+By default this handles recursive dependencies implicitly.
+In case a library is used multiple times, this can give different versions of the same library.
+You can override these if you want using `follows` statements:
+
+```
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+}
+```
+
+This way, Home Manager's inputs reuse your chosen `nixpkgs`.
+
+If you don't want to load a dependency, you can also disable it.
+In the above example, that could look like `inputs.home-manager.inputs.nixpkgs = null;`.
 
 Pros:
 
 - Make it easy to reproduce published software, following the versions they used.
-- Offers a way to override recursive inputs using `follows` statements.
+- You can override recursive inputs.
 
 Cons:
 
-- As flakes by default follow versions declared in dependencies' flakes, if one does not actively override these using `follows` statements, one may end up with:
-  - duplicate versions of the same (recursive) dependency.
-  - outdated recursive dependencies if such versions are not actively updated throughout the chain.
-- Dependencies are fetched eagerly, making for additional overhead
-  in case (recursively) declared dependencies (not overridden to `null`) end up not used.
-- There has not been a good way to facilitate overriding inputs for both flake-based and non-flake consumers without using flake inputs to manage dependencies.
+- Flakes by default follow versions from dependencies' `flake.lock`, so if you don't override these with `follows`, you may get:
+  - multiple versions of the same dependency.
+  - outdated dependencies, if their versions are not actively updated.
+- Dependencies are fetched eagerly, loading dependencies you may not use.
+- Dependencies managed by flake inputs are hard to override if you don't also use flakes.
 
 Alternatives:
 
-- Handle dependencies with [`npins`], which makes the user explictly specify any used dependencies.
-  This makes the user responsible for versions used, solving drawbacks of flakes' implicit model.
-  - If dependencies have only flake entrypoints, if needed load their flakes using library [`flake-inputs`].
+- Handle dependencies with [`npins`].
+  This makes the user explictly specify any used dependencies.
+  This way, the user is responsible for versions used, solving drawbacks of flakes' implicit model.
+  - If dependencies have only flake entrypoints, you can import from these using library [`flake-inputs`] if needed.
   - Allow others to change your dependencies by having them in Nix entrypoints' module parameters _and_ exports:
 
   ```nix
@@ -184,9 +265,9 @@ Alternatives:
 
 ### Flake-only Nix
 
-Given flakes (largely) use Nix as an internal language, one could even place all of their Nix code in flake files.
-This pattern is further facilitated by library [`flake-parts`](https://github.com/hercules-ci/flake-parts)
-to help achieve something like this while spreading code across different files.
+As flakes (largely) use Nix as an internal language, you could even place all Nix code in flake files.
+This pattern is gets easier with library [`flake-parts`](https://github.com/hercules-ci/flake-parts)
+which lets you spread code over different flake-like files.
 
 Pros:
 
@@ -194,13 +275,13 @@ Pros:
 
 Cons:
 
-- Makes it harder to access such code without using flakes.
+- Makes it harder to access this code without using flakes.
 
 Alternatives:
 
 - Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
 - Use library [`flake-compat`] to expose a flake's default package or shell to non-flake users.
-- Propagate needed parameters across modules either explicitly or using NixOS's [`specialArgs`].
+- Propagate needed parameters across modules explicitly or with NixOS's [`specialArgs`].
 
 [`flake-compat`]: https://github.com/NixOS/flake-compat
 [`specialArgs`]: https://nixos.org/manual/nixos/unstable/options#opt-_module.args
@@ -210,9 +291,9 @@ Alternatives:
 - Design
   - The flakes proposal was criticised for trying to solve too many problems at once and at the wrong abstraction layer.
   - The design still has [various problems] including around versioning, composability, cross-compilation, and tight coupling with nixpkgs.
-  - There are also still many [open design questions around the `nix` command line interface].
+  - There are also still many [open design questions] around the `nix` CLI.
 - Implementation
-  - A number of [problems with the implementation] remain.
+  - There are still [problems with the implementation].
 - Process
   - While there were still outstanding concerns about the design,
     the implementation was merged without the RFC having been accepted (and in fact being withdrawn on merge),
@@ -227,7 +308,7 @@ Alternatives:
     Such branching could potentially end up breaking the promise of a unified interface that propelled the flakes experiment in the first place.
 
 [various problems]: https://wiki.lix.systems/books/lix-contributors/page/flakes-feature-freeze#bkmrk-design-issues-of-fla
-[open design questions around the `nix` command line interface]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
+[open design questions]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
 [problems with the implementation]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
 [consolidated the featureset]: https://wiki.lix.systems/books/lix-contributors/page/flake-stabilisation-proposal
 
