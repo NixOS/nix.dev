@@ -265,7 +265,8 @@ Alternatives:
 ### Flake-only Nix
 
 As flakes (largely[^subset]) use Nix as an internal language, you could even place all Nix code in flake files.
-This pattern is gets easier with library [`flake-parts`](https://github.com/hercules-ci/flake-parts)
+In the community, such a coding style is called dendritic pattern.
+Using flakes, this pattern gets easier with library [`flake-parts`](https://github.com/hercules-ci/flake-parts),
 which lets you spread code over different flake-like files.
 
 Pros:
