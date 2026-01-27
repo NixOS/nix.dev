@@ -188,7 +188,7 @@ Alternatives:
 
 - Plain Nix files can be used with the [v2 commands] (like [`nix-build`], [`nix-shell`]), or with v3 commands' [`--file` flag] or `-f`.
 - In {term}`NixOS`, you can make v3 commands' `nixpkgs` to a package set `pkgs` by setting [`nixpkgs.flake.source = pkgs.path;`] in your NixOS configuration.
-  You can also expose other dependencies pinned in NixOS, see [using `npins`].
+  Also see [managing dependencies].
 - Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
 
 [Git]: https://git-scm.com/
@@ -197,7 +197,7 @@ Alternatives:
 [`nix-build`]: https://nix.dev/manual/nix/stable/command-ref/nix-build.html
 [`nix-shell`]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
 [`nixpkgs.flake.source = pkgs.path;`]: https://search.nixos.org/options?channel=unstable&show=nixpkgs.flake.source&query=nixpkgs.flake.source
-[using `npins`]: https://nix.dev/guides/recipes/dependency-management#managing-nixos-configurations
+[managing dependencies]: https://nix.dev/guides/recipes/dependency-management#managing-nixos-configurations
 [`builtins.fetchTree`]: https://noogle.dev/f/builtins/fetchTree
 [`fetch-tree`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-fetch-tree
 [`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
