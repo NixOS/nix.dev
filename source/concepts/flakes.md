@@ -40,8 +40,6 @@ Nix creates a [`flake.lock`] to pin dependencies.
 If these have inputs of their own, Nix will check _their_ lock files to find the versions to use.
 Using the same versions helps make sure programs work as intended, but you can override these.
 
-Flakes were proposed in [RFC 49], and introduced in a [blog post].
-
 Aliases to flakes are stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
 
@@ -52,8 +50,6 @@ This is to prevent complex, possibly non-terminating computations.
 The `outputs` field's function parameter must be specified: it does not support [eta-reduction].
 
 [Experimental]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-flakes
-[RFC 49]: https://github.com/NixOS/rfcs/pull/49
-[blog post]: https://tweag.io/blog/2020-05-25-flakes/
 [Nix 2.4]: https://nix.dev/manual/nix/stable/release-notes/rl-2.4.html#highlights
 [standard structure]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-format
 [`nix-command`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-nix-command
@@ -286,8 +282,10 @@ Alternatives:
 [`flake-compat`]: https://github.com/NixOS/flake-compat
 [`specialArgs`]: https://nixos.org/manual/nixos/unstable/options#opt-_module.args
 
-### General considerations
+### History
 
+- Conception
+  - Flakes were proposed in [RFC 49], and introduced in a [blog post].
 - Design
   - The flakes proposal was criticised for trying to solve too many problems at once and at the wrong abstraction layer.
   - The design still has [various problems] including around versioning, composability, cross-compilation, and tight coupling with nixpkgs.
@@ -307,6 +305,8 @@ Alternatives:
     while community-driven Nix fork Lix [consolidated the featureset] to a de-facto 'v1'.
     Such branching could potentially end up breaking the promise of a unified interface that propelled the flakes experiment in the first place.
 
+[RFC 49]: https://github.com/NixOS/rfcs/pull/49
+[blog post]: https://tweag.io/blog/2020-05-25-flakes/
 [various problems]: https://wiki.lix.systems/books/lix-contributors/page/flakes-feature-freeze#bkmrk-design-issues-of-fla
 [open design questions]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Anew-cli+sort%3Areactions-%2B1-desc
 [problems with the implementation]: https://github.com/NixOS/nix/issues?q=is%3Aissue+is%3Aopen+label%3Aflakes+sort%3Areactions-%2B1-desc
