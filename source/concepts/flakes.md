@@ -315,6 +315,7 @@ Alternatives:
 
 ## Further reading
 
+- [wiki article](https://wiki.nixos.org/wiki/Flakes)
 - [Flakes aren't real and cannot hurt you: a guide to using Nix flakes the non-flake way](https://jade.fyi/blog/flakes-arent-real/) (Jade Lovelace, January 2024)
 - [Nix Flakes is an experiment that did too much at once...](https://samuel.dionne-riel.com/blog/2023/09/06/flakes-is-an-experiment-that-did-too-much-at-once.html) ([comments](https://discourse.nixos.org/t/nix-flakes-is-an-experiment-that-did-too-much-at-once/32707)) (Samuel Dionne-Riel, September 2023)
 - [Experimental does not mean unstable](https://determinate.systems/posts/experimental-does-not-mean-unstable) ([comments](https://discourse.nixos.org/t/experimental-does-not-mean-unstable-detsyss-perspective-on-nix-flakes/32703)) (Graham Christensen, September 2023)
