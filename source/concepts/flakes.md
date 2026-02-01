@@ -88,7 +88,7 @@ This overview can help get what you need from flakes while preserving compatibil
 
 [dependency management]: https://nix.dev/guides/recipes/dependency-management.html
 
-[^flake-inputs]: Nix repositories offering only flake entrypoints may be import using [`flake-inputs`].
+[^flake-inputs]: Nix repositories offering only flake entrypoints may be imported using [`flake-inputs`].
 
 ### Discoverability
 
