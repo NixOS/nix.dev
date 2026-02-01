@@ -34,19 +34,19 @@ You can find an overview of these on the [wiki].
 
 [`inputs`] let you declare dependencies.
 
-Nix creates a [`flake.lock`] to pin dependencies once you run a [`nix-command`].
+Nix creates a [`flake.lock`] to pin dependencies once you run a [`nix` command].
 
 If these dependencies have `inputs` of their own, Nix will check _their_ lock files to find the versions to use.
 Using the same versions helps make sure programs work as intended, but you can override these.
 
-[`nix-command`] natively integrate with flakes by default.
+[`nix` command]s natively integrate with flakes by default.
 
- ```bash
+```bash
 nix build github:NixOS/nixpkgs#hello
- ```
+```
 
 You may pass [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
-For further details see the reference on [`nix-command`].
+For further details see the reference on [`nix` command]s.
 
 Aliases to flakes are stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
@@ -62,8 +62,7 @@ The NixOS manual further explains [flake-based installs].
 [Experimental]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-flakes
 [Nix 2.4]: https://nix.dev/manual/nix/stable/release-notes/rl-2.4.html#highlights
 [standard structure]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake.html#flake-format
-[`nix-command`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-nix-command
-[`nix`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
+[`nix` command]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix.html
 [references]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
 [`outputs`]: https://wiki.nixos.org/wiki/Flakes#Output_schema
 [built-in types]: https://github.com/NixOS/nix/blob/38c755f168b7c38cd4687aacf5d7e59f049658d3/src/nix/flake.cc#L594-L769
