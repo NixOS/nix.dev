@@ -3,6 +3,9 @@
 
 ## What are flakes?
 
+Flakes offer an entrypoint file `flake.nix` aimed at sharing Nix code.
+They make it easy to build programs with the same version.
+
 `flake.nix` is a file that declares inputs and outputs with a [standard structure].
 
 > Note: [Experimental], requires [Nix 2.4].
@@ -26,19 +29,17 @@ This file can look like:
 }
 ```
 
-Flakes are aimed at sharing Nix code.
-They make it easy to build programs with the same version.
-
-Flake commands access flakes using [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
-
 [`outputs`] include various [built-in types], but can be [extended].
 You can find an overview of these on the [wiki].
 
 [`inputs`] let you declare dependencies.
 
-Nix creates a [`flake.lock`] to pin dependencies.
-If these have inputs of their own, Nix will check _their_ lock files to find the versions to use.
+Nix creates a [`flake.lock`] to pin dependencies once you run a [`nix-command`].
+
+If these dependencies have `inputs` of their own, Nix will check _their_ lock files to find the versions to use.
 Using the same versions helps make sure programs work as intended, but you can override these.
+
+Flake commands access flakes using [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
 
 Aliases to flakes are stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
@@ -48,6 +49,8 @@ This is also called hermetic evaluation, and prevents evaluating (non-network) [
 Flake `inputs` and metadata fields cannot be arbitrary Nix expressions.
 This is to prevent complex, possibly non-terminating computations.
 The `outputs` field's function parameter must be specified: it does not support [eta-reduction].
+
+The NixOS manual further explains [flake-based installs].
 
 [Experimental]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-flakes
 [Nix 2.4]: https://nix.dev/manual/nix/stable/release-notes/rl-2.4.html#highlights
@@ -66,6 +69,7 @@ The `outputs` field's function parameter must be specified: it does not support 
 [command-line]: https://nix.dev/manual/nix/2.28/command-ref/new-cli/nix3-registry.html
 [`nix.registry`]: https://search.nixos.org/options?channel=unstable&show=nix.registry&query=registry
 [eta-reduction]: https://wiki.haskell.org/Eta_conversion
+[flake-based installs]: https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing
 
 ## Should I use flakes in my project?
 
@@ -237,24 +241,15 @@ Cons:
   - outdated dependencies, if their versions are not actively updated.
 - Dependencies are fetched eagerly, loading dependencies you may not use.
 - Dependencies managed by flake inputs are hard to override if you don't also use flakes.
+- If your flake is used as a library, you need to add `follows` statements for all recursive inputs.
+  Otherwise downstream consumers cannot add their `follows` on your indirect inputs.
 
 Alternatives:
 
 - Handle dependencies with [`npins`].
-  This makes the user explictly specify any used dependencies.
-  This way, the user is responsible for versions used, solving drawbacks of flakes' implicit model.
-  - If dependencies have only flake entrypoints, you can import from these using library [`flake-inputs`] if needed.
-  - Allow others to change your dependencies by having them in Nix entrypoints' module parameters _and_ exports:
+- Handle dependencies inline using functions such as the [fetchers] or [`builtins.fetchTree`].
 
-  ```nix
-  {
-    sources ? import ./npins,
-  }:
-  {
-    inherit sources;
-  }
-  ```
-
+[fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 [`flake-inputs`]: https://github.com/fricklerhandwerk/flake-inputs
 [`npins`]: https://nix.dev/guides/recipes/dependency-management.html
 
