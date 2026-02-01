@@ -39,7 +39,14 @@ Nix creates a [`flake.lock`] to pin dependencies once you run a [`nix-command`].
 If these dependencies have `inputs` of their own, Nix will check _their_ lock files to find the versions to use.
 Using the same versions helps make sure programs work as intended, but you can override these.
 
-Flake commands access flakes using [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
+[`nix-command`] natively integrate with flakes by default.
+
+ ```bash
+nix build github:NixOS/nixpkgs#hello
+ ```
+
+You may pass [references] to local (e.g. `.`) or remote (e.g. `github:NixOS/nixpkgs`) project directories.
+For further details see the reference on [`nix-command`].
 
 Aliases to flakes are stored in a [registry].
 This can be extended by [command-line] or by {term}`NixOS` option [`nix.registry`].
