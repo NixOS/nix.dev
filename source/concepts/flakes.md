@@ -195,7 +195,9 @@ Alternatives:
 - Plain Nix files can be used with the [v2 commands] (like [`nix-build`], [`nix-shell`]), or with v3 commands' [`--file` flag] or `-f`.
 - In {term}`NixOS`, you can make v3 commands' `nixpkgs` to a package set `pkgs` by setting [`nixpkgs.flake.source = pkgs.path;`] in your NixOS configuration.
   Also see [managing dependencies].
-- Using [`builtins.fetchTree`] from experimental feature [`fetch-tree`], [`nix run`] may be emulated[^emulated] for non-flake entrypoints.
+- [`nix run`] alternatives for non-flake entrypoints:
+    - package [`nix-run`]
+    - emulating[^emulated] using [`builtins.fetchTree`] (from experimental feature [`fetch-tree`])
 
 [Git]: https://git-scm.com/
 [v2 CLI]: https://nix.dev/manual/nix/stable/command-ref/main-commands
@@ -204,9 +206,10 @@ Alternatives:
 [`nix-shell`]: https://nix.dev/manual/nix/stable/command-ref/nix-shell.html
 [`nixpkgs.flake.source = pkgs.path;`]: https://search.nixos.org/options?channel=unstable&show=nixpkgs.flake.source&query=nixpkgs.flake.source
 [managing dependencies]: https://nix.dev/guides/recipes/dependency-management#managing-nixos-configurations
+[`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
+[`nix-run`]: https://search.nixos.org/packages?channel=unstable&query=nix-run&show=nix-run
 [`builtins.fetchTree`]: https://noogle.dev/f/builtins/fetchTree
 [`fetch-tree`]: https://nix.dev/manual/nix/stable/development/experimental-features#xp-feature-fetch-tree
-[`nix run`]: https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-run.html
 
 [^emulated]: `nix run github:NixOS/nixpkgs#hello` for non-flake projects may look like `nix-shell -p '(import (builtins.fetchTree "github:NixOS/nixpkgs").outPath { }).hello' --run 'hello'`.
 A drop-in command `nix-run` using the `nix run` syntax could be defined using a Bash alias like `alias nix-run='run() { $(nix-instantiate --raw --impure --eval --expr "(import <nixpkgs> {}).lib.getExe (import (builtins.fetchTree \"$(cut -d "#" -f 1 <<< "$1")\").outPath { }).$(cut -d "#" -f 2 <<< "$1")"); }; run'`.
