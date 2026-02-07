@@ -72,13 +72,27 @@ Run `sudo -i` to get a root shell for the rest of the tutorial.
 
 At this point you'll need an internet connection. If you can use an ethernet cable, plug it in and skip to the next section.
 
-If you're connecting to wifi, run `iwconfig` to find the name of your wireless network interface. If it's `wlan0`, replace `SSID` and `passphrase` with your data and run:
-
+If you're connecting to wifi, run `ip link` to find the name of your wireless network interface. Look for an interface starting with `wl` (commonly `wlan0`). Replace `SSID` and `passphrase` with your data and run:
 ```shell-session
 # wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
 ```
+Once `wpa_supplicant` reports that the connection is established, obtain an IP address:
+```shell-session
+# dhcpcd wlan0
+```
 
-Once you see in your terminal that connection is established, run `host nixos.org` to check that the DNS resolves correctly.
+If `dhcpcd` is not available, load it with:
+```shell-session
+# nix-shell -p dhcpcd
+# dhcpcd wlan0
+```
+
+After a few seconds, verify the connection works by running `host nixos.org` to check that DNS resolves correctly.
+
+If DNS resolution fails, you may need to manually add a nameserver:
+```shell-session
+# echo "nameserver 8.8.8.8" > /etc/resolv.conf
+```
 
 In case you've made a typo, run `pkill wpa_supplicant` and start over.
 
