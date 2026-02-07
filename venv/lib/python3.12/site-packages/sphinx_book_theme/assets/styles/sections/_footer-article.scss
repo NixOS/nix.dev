@@ -1,0 +1,9 @@
+@use "../abstracts/variables";
+
+.bd-footer-article {
+  padding: 0rem 1rem;
+  @media (max-width: variables.$breakpoint-md) {
+    // More room for text on mobile
+    padding: 0rem 0.5rem;
+  }
+}

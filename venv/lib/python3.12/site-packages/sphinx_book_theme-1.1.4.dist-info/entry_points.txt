@@ -1,0 +1,2 @@
+[sphinx.html_themes]
+sphinx_book_theme = sphinx_book_theme

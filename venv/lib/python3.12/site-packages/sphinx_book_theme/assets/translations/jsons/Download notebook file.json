@@ -1,0 +1,164 @@
+[
+  { "language": "English", "symbol": "en", "text": "Download notebook file" },
+  { "language": "Arabic", "symbol": "ar", "text": "تنزيل ملف دفتر الملاحظات" },
+  {
+    "language": "Bulgarian",
+    "symbol": "bg",
+    "text": "Изтеглете файла на бележника"
+  },
+  {
+    "language": "Chinese Simplified",
+    "symbol": "zh_CN",
+    "text": "下载笔记本文件"
+  },
+  {
+    "language": "Chinese Traditional",
+    "symbol": "zh-tw",
+    "text": "下載 Notebook 檔案"
+  },
+  {
+    "language": "Croatian",
+    "symbol": "hr",
+    "text": "Preuzmi datoteku bilježnice"
+  },
+  {
+    "language": "Czech",
+    "symbol": "cs",
+    "text": "Stáhnout soubor poznámkového bloku"
+  },
+  { "language": "Danish", "symbol": "da", "text": "Download notesbog-fil" },
+  { "language": "Dutch", "symbol": "nl", "text": "Download notebookbestand" },
+  {
+    "language": "Esperanto",
+    "symbol": "eo",
+    "text": "Elŝutu kajeran dosieron"
+  },
+  {
+    "language": "Estonian",
+    "symbol": "et",
+    "text": "Laadige sülearvuti fail alla"
+  },
+  {
+    "language": "Finnish",
+    "symbol": "fi",
+    "text": "Lataa muistikirjatiedosto"
+  },
+  {
+    "language": "French",
+    "symbol": "fr",
+    "text": "Télécharger le fichier notebook"
+  },
+  {
+    "language": "German",
+    "symbol": "de",
+    "text": "Notebook-Datei herunterladen"
+  },
+  {
+    "language": "Greek",
+    "symbol": "el",
+    "text": "Λήψη αρχείου σημειωματάριου"
+  },
+  { "language": "Hebrew", "symbol": "iw", "text": "הורד קובץ מחברת" },
+  { "language": "Indonesian", "symbol": "id", "text": "Unduh file notebook" },
+  {
+    "language": "Italian",
+    "symbol": "it",
+    "text": "Scarica il file del taccuino"
+  },
+  {
+    "language": "Japanese",
+    "symbol": "ja",
+    "text": "ノートブックファイルをダウンロード"
+  },
+  { "language": "Korean", "symbol": "ko", "text": "노트북 파일 다운로드" },
+  {
+    "language": "Latvian",
+    "symbol": "lv",
+    "text": "Lejupielādēt piezīmju grāmatiņu"
+  },
+  {
+    "language": "Lithuanian",
+    "symbol": "lt",
+    "text": "Atsisiųsti nešiojamojo kompiuterio failą"
+  },
+  { "language": "Norwegian", "symbol": "no", "text": "Last ned notatbokfilen" },
+  { "language": "Polish", "symbol": "pl", "text": "Pobierz plik notatnika" },
+  {
+    "language": "Portuguese",
+    "symbol": "pt",
+    "text": "Baixar arquivo de notebook"
+  },
+  {
+    "language": "Romanian",
+    "symbol": "ro",
+    "text": "Descărcați fișierul notebook"
+  },
+  {
+    "language": "Russian",
+    "symbol": "ru",
+    "text": "Скачать файл записной книжки"
+  },
+  {
+    "language": "Serbian",
+    "symbol": "sr",
+    "text": "Преузмите датотеку бележнице"
+  },
+  { "language": "Slovak", "symbol": "sk", "text": "Stiahnite si zošit" },
+  {
+    "language": "Slovenian",
+    "symbol": "sl",
+    "text": "Prenesite datoteko zvezka"
+  },
+  {
+    "language": "Spanish",
+    "symbol": "es",
+    "text": "Descargar archivo de cuaderno"
+  },
+  {
+    "language": "Swedish",
+    "symbol": "sv",
+    "text": "Ladda ner notebook-fil"
+  },
+  {
+    "language": "Tajik",
+    "symbol": "tg",
+    "text": "Файли дафтарро зеркашӣ кунед"
+  },
+  { "language": "Thai", "symbol": "th", "text": "ดาวน์โหลดไฟล์สมุดบันทึก" },
+  { "language": "Turkish", "symbol": "tr", "text": "Defter dosyasını indirin" },
+  {
+    "language": "Ukrainian",
+    "symbol": "uk",
+    "text": "Завантажте файл блокнота"
+  },
+  { "language": "Vietnamese", "symbol": "vi", "text": "Tải xuống tệp sổ tay" },
+  { "language": "Bengali", "symbol": "bn", "text": "নোটবুক ফাইল ডাউনলোড করুন" },
+  {
+    "language": "Catalan",
+    "symbol": "ca",
+    "text": "Descarregar fitxer de quadern"
+  },
+  {
+    "language": "Filipino",
+    "symbol": "tl",
+    "text": "Mag-download ng file ng notebook"
+  },
+  {
+    "language": "Malayalam",
+    "symbol": "ml",
+    "text": "നോട്ട്ബുക്ക് ഫയൽ ഡൺലോഡ് ചെയ്യുക"
+  },
+  { "language": "Malay", "symbol": "ms", "text": "Muat turun fail buku nota" },
+  { "language": "Marathi", "symbol": "mr", "text": "नोटबुक फाईल डाउनलोड करा" },
+  {
+    "language": "Tamil",
+    "symbol": "ta",
+    "text": "நோட்புக் கோப்பைப் பதிவிறக்கவும்"
+  },
+  {
+    "language": "Telugu",
+    "symbol": "te",
+    "text": "నోట్బుక్ ఫైల్ను డౌన్లోడ్ చేయండి"
+  },
+  { "language": "Urdu", "symbol": "ur", "text": "نوٹ بک فائل ڈاؤن لوڈ کریں" }
+]

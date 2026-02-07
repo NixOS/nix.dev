@@ -1,0 +1,47 @@
+@use "../abstracts/variables";
+
+/**
+ * General structural things
+ */
+html {
+  // The PyData theme value for this is based on `header-height` variable.
+  // We set the variable to 0 and have our own $article-header-height SCSS variable.
+  // So here we follow the same pattern but now using our variable.
+  scroll-padding-top: variables.$header-article-height + 1rem;
+}
+
+/**
+* Utility classes used in a few places
+*/
+// For the helper pixel that we can watch to decide whether we've scrolled
+.sbt-scroll-pixel-helper {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 0;
+  left: 0;
+}
+
+// We define our own display-none class since bootstrap uses !important and we want to be able to over-ride
+.d-n {
+  display: none;
+}
+
+/**
+ * Printing behavior
+ */
+// Only display upon printing
+.onlyprint {
+  display: none;
+
+  @media print {
+    display: block !important;
+  }
+}
+
+// Prevent an item from being printed
+.noprint {
+  @media print {
+    display: none !important;
+  }
+}

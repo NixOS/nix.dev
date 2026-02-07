@@ -1,0 +1,30 @@
+@use "../abstracts/variables";
+
+.bd-main .bd-content .bd-article-container {
+  // Re-adjust padding defaults to be flush on the top and right
+  padding: 0rem;
+  // Unset overflow x so that sticky: top works for the article header
+  overflow-x: unset;
+  // prevent from overflowing the flex container
+  min-width: 0;
+
+  @media (min-width: variables.$breakpoint-xl) {
+    // keep article at reasonable width in absence of sidebar
+    max-width: calc(100% - var(--pst-sidebar-secondary));
+  }
+
+  .bd-article {
+    padding-right: 2rem;
+    padding-left: 2rem;
+    @media (max-width: variables.$breakpoint-md) {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+  details.above-input,
+  details.below-input {
+    summary {
+      border-left: 3px solid var(--pst-color-primary);
+    }
+  }
+}

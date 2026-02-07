@@ -1,0 +1,56 @@
+@use "../abstracts/variables";
+
+// Clean up the search page so that it has less unnecessary text
+.bd-search-container {
+  margin: 2em;
+
+  #search-results {
+    h2:first-child {
+      display: none;
+    }
+  }
+}
+
+// Sidebar search button field
+.search-button-field {
+  width: 100%;
+  font-size: 0.9rem;
+  // Hide by default and we'll add a rule to show it on wide sreen below
+  display: none;
+
+  .search-button__kbd-shortcut {
+    margin-left: auto;
+  }
+}
+
+// Rules to switch off visibility of the field button and the header button
+@media (min-width: variables.$breakpoint-lg) {
+  .search-button {
+    display: none !important;
+  }
+
+  .search-button-field {
+    display: flex;
+  }
+}
+
+// The "clear search results" button
+// Make it line up with our content better
+div#searchbox {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  @media (max-width: variables.$breakpoint-md) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  p.highlight-link {
+    // Remove the extra margin that is added
+    @media (min-width: variables.$breakpoint-md) {
+      margin-left: 0;
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+}

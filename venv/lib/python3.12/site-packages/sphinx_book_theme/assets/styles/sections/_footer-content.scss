@@ -1,0 +1,21 @@
+@use "../abstracts/variables";
+
+/*********************************************
+* Footer - content *
+*********************************************/
+footer {
+  font-size: var(--sbt-font-size-small-1);
+  &.bd-footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    font-size: variables.$sbt-font-size-small-1;
+    .bd-footer-content__inner {
+      padding-left: 0px;
+      p {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

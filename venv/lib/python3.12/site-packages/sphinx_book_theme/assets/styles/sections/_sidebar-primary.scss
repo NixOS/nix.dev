@@ -1,0 +1,48 @@
+@use "../abstracts/variables";
+
+/*********************************************
+* Left Nav Bar *
+*********************************************/
+
+.bd-sidebar-primary {
+  // So that it sticks to the top of the page instead of the header height
+  top: 0;
+  max-height: 100vh;
+
+  // Tighter padding so the spacing is more equal
+  padding: 1rem;
+
+  // Draw open/close animation
+  transition:
+    margin-left variables.$animation-time ease 0s,
+    opacity variables.$animation-time ease 0s,
+    visibility variables.$animation-time ease 0s;
+
+  @media (max-width: variables.$breakpoint-md) {
+    // So that tooltips don't overlap
+    z-index: variables.$zindex-tooltip + 1;
+  }
+
+  // Remove the top border since there's often no header items above
+  .sidebar-primary-items__start {
+    border-top: none;
+  }
+
+  // On wide screens we have a smaller sidebar width than PST
+  @media (min-width: variables.$breakpoint-lg) {
+    flex-basis: variables.$sidebar-primary-width-widescreen;
+  }
+}
+
+// Default visibility for left sidebar is the reverse of what it is on mobile.
+// It is shown by default, and hidden with a click.
+// Mobile behavior is defined in the pydata sphinx theme
+@media (min-width: variables.$breakpoint-lg) {
+  input#pst-primary-sidebar-checkbox:checked
+    ~ .bd-container
+    .bd-sidebar-primary {
+    margin-left: -(variables.$sidebar-primary-width-widescreen);
+    visibility: hidden;
+    opacity: 0;
+  }
+}

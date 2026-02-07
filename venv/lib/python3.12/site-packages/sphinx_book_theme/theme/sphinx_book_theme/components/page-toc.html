@@ -1,0 +1,15 @@
+{#
+  This is a copy-paste of the PyData theme so that the title is configurable.
+  We over-write that component here just to monkey patch it.
+  We can delete it if the title is configurable in the pydata theme
+  Here's the ref: https://github.com/pydata/pydata-sphinx-theme/blob/main/src/pydata_sphinx_theme/theme/pydata_sphinx_theme/components/page-toc.html
+-#}
+{% set page_toc = generate_toc_html() %}
+{%- if page_toc | length >= 1 %}
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> {{ translate(theme_toc_title) }}
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    {{ page_toc }}
+  </nav>
+{%- endif %}

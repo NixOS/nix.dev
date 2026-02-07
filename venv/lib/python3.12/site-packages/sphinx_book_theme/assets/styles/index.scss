@@ -1,0 +1,45 @@
+/*! sphinx-book-theme CSS
+ * BSD 3-Clause License
+ * Copyright (c) 2020, EBP
+ * All rights reserved.
+ *
+ * This follows the 7-1 pattern described here:
+ * https://sass-guidelin.es/#architecture
+ */
+// Variables and re-usable SCSS functions
+@use "abstracts/mixins";
+@use "abstracts/variables";
+
+// Basic styling applied throughout site
+@use "base/base";
+@use "base/typography";
+@use "base/print";
+
+// Major theme layout, skeleton, and whitespace
+@use "sections/announcement";
+@use "sections/article";
+@use "sections/article-container";
+@use "sections/header-article";
+@use "sections/header-primary";
+@use "sections/sidebar-primary";
+@use "sections/sidebar-secondary";
+@use "sections/footer-content";
+@use "sections/footer-article";
+
+// Re-usable components across the theme
+@use "components/back-to-top";
+@use "components/icon-links";
+@use "components/logo";
+@use "components/search";
+
+// Content blocks in standard Sphinx
+@use "content/images";
+@use "content/margin";
+@use "content/quotes";
+@use "content/code";
+@use "content/notebooks";
+
+// Content blocks from Sphinx extensions
+
+@use "extensions/comments";
+@use "extensions/thebe";

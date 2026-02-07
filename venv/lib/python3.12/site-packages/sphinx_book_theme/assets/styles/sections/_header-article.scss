@@ -1,0 +1,207 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+/*********************************************
+* Top Bar *
+*********************************************/
+/**
+ * Mixin:
+ * Header behavior on mobile
+ */
+@mixin header-height-mobile {
+  @media (max-width: variables.$breakpoint-md) {
+    height: variables.$header-article-height + 0.5rem;
+  }
+}
+
+/**
+ * Sidebar toggle over-rides for PST
+ */
+// Primary toggle is always visible
+button.sidebar-toggle.primary-toggle {
+  @media (min-width: variables.$breakpoint-md) {
+    display: inline-block;
+  }
+  @media (max-width: variables.$breakpoint-md) {
+    margin-bottom: 0px;
+  }
+}
+
+// Secondary toggle mimics behavior of "persistent header" div of PST
+button.sidebar-toggle.secondary-toggle {
+  @media (min-width: variables.$breakpoint-xl) {
+    display: none;
+  }
+  @media (max-width: variables.$breakpoint-md) {
+    margin-bottom: 0px;
+  }
+}
+
+// Wrapper container
+.bd-header-article {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--pst-color-background);
+  transition: left 0.2s;
+  font-size: 0.9em;
+  padding: 0 1rem;
+  z-index: variables.$zindex-sticky;
+
+  @include header-height-mobile;
+
+  @media (max-width: variables.$breakpoint-md) {
+    // Give mobile view a bit more space for text
+    padding: 0 0.5rem;
+  }
+
+  // The box shadow that shows up when you've scrolled past the top
+  .scrolled & {
+    box-shadow: 0 6px 6px -6px var(--pst-color-shadow);
+  }
+
+  // Remove inner padding so that spacing of buttons is a bit tighter
+  .header-article__inner {
+    padding: 0;
+  }
+
+  // Inner container with items in it
+  .header-article-items {
+    display: flex;
+    align-items: center;
+    height: variables.$header-article-height;
+    width: 100%;
+  }
+
+  // Contains the individual item components so we want it centered
+  .header-article-item {
+    display: flex;
+    align-items: center;
+  }
+
+  /**
+  * Buttons in the header
+  */
+  // A series of buttons we special-case in the theme
+  .article-header-buttons {
+    display: flex;
+  }
+
+  // Generic button styles
+  .btn {
+    // Basic button size
+    font-size: 1.3rem;
+    color: var(--pst-color-text-muted);
+    border: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    // Make sure anything inside is aligned vertically
+    display: flex;
+    align-items: center;
+
+    // Fix width of buttons so they're all the same
+    svg {
+      width: 1.3rem;
+    }
+
+    // Hover / active behavior
+    &.show,
+    &:hover {
+      color: var(--pst-color-text-base);
+      border: none;
+      & + .dropdown-menu {
+        display: block;
+      }
+    }
+    &:focus {
+      box-shadow: none;
+    }
+
+    &.dropdown-toggle {
+      // Hide the bootstrap caret
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  // Vertically align dropdown buttons
+  div.dropdown {
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-switch-button {
+    // Removing some special-casing that was needed in PST
+    margin: 0;
+
+    // Remove extra padding since it is already there between sidebar items
+    span,
+    i,
+    button {
+      padding: 0;
+    }
+
+    // No background on hover. Need important to over-ride the PST which uses it too.
+    span,
+    i {
+      transition: color variables.$animation-time ease-out;
+    }
+    &:active,
+    &:hover {
+      background-color: unset !important;
+      span,
+      i {
+        color: var(--pst-color-text-base);
+      }
+    }
+  }
+
+  // The menu that is normally hidden until you hover
+  .dropdown-menu {
+    // Hidden unless we are hovering
+    &:hover {
+      display: block;
+    }
+
+    // Positioning and layout of dropdown items to be standardized
+    top: 2rem;
+    transform: translateX(-75%);
+    @include mixins.pst-box-shadow;
+
+    // Color and shadowing
+    border-color: var(--pst-color-border);
+    background-color: var(--pst-color-background);
+    color: var(--pst-color-text-muted);
+
+    .dropdown-item {
+      display: inline-flex;
+      align-items: center;
+      padding-left: 0.5em;
+
+      // To prevent link underline from showing up
+      &:hover {
+        text-decoration: none;
+        background-color: initial;
+        color: var(--pst-color-text-base);
+      }
+
+      // Slightly smaller font for everything
+      font-size: 1em;
+
+      // Image icons should be the same height as <i> icons
+      span img {
+        height: 1em;
+      }
+
+      span.btn__icon-container {
+        width: 1.7em;
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+      }
+    }
+  }
+}

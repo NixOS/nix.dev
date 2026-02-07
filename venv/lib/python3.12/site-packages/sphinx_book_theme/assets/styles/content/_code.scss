@@ -1,0 +1,5 @@
+// Over-ride Sphinx default so that content fills whitespace w/ margin content
+pre,
+div[class*="highlight-"] {
+  clear: none;
+}

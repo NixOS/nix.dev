@@ -1,0 +1,97 @@
+@use "../abstracts/variables";
+
+/*********************************************
+* Table of Contents (right nav bar)          *
+*********************************************/
+
+.bd-sidebar-secondary {
+  // So that it sticks to the top of the page instead of the header height
+  top: 0;
+
+  @media (max-width: variables.$breakpoint-xl) {
+    // So that tooltips don't overlap
+    z-index: variables.$zindex-tooltip + 1;
+  }
+
+  // So that we can center the TOC button with the article header buttons
+  .sidebar-secondary-items {
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+
+    // Remove the manual padding since we'll use `gap`
+    .sidebar-secondary-item {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  // The 'on this page' title div should take up the full header
+  .onthispage {
+    height: variables.$header-article-height;
+    min-height: variables.$header-article-height;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0;
+    color: var(--pst-color-muted);
+  }
+
+  // Wide screen behavior
+  @media (min-width: variables.$breakpoint-xl) {
+    background: var(--pst-color-background);
+    height: fit-content;
+    transition: max-height 0.4s ease;
+
+    // To make sure it shows above the page content
+    z-index: variables.$zindex-middle;
+
+    // Remove padding so that it's flush on the top and left
+    padding: 0;
+
+    // This is the container div for the secondary sidebar nav
+    .toc-item {
+      // Border is a bit less prominent
+      border-left-color: var(--pst-color-surface);
+      // Flush with the top so that we can fix the height of the toc header div
+      padding-top: 0;
+
+      // The table of contents <ul> after the title div
+      nav.page-toc {
+        // Remove extra margin the PST adds for other sidebar items
+        margin-bottom: 0;
+
+        // Items after "on this page' should fade in and out
+        transition: opacity 0.4s ease;
+      }
+    }
+
+    // Rules for when sidebar is hidden
+    // the `not:hover` means that hovering over the sidebar will show it again.
+    &.hide:not(:hover) {
+      // Cap the height, and remove the scrollbar
+      max-height: variables.$header-article-height;
+      overflow-y: hidden;
+
+      // Shadow matches what we have in the article header
+      .scrolled & {
+        box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.3);
+      }
+
+      // Show a down carot
+      .onthispage:after {
+        opacity: 1;
+        content: "\f107";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        padding-left: 0.5em;
+        transition: opacity 0.3s ease;
+      }
+
+      // The page-toc list is hidden
+      nav.page-toc {
+        opacity: 0;
+      }
+    }
+  }
+}

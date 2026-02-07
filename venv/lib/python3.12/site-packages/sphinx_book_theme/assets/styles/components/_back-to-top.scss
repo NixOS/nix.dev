@@ -1,0 +1,13 @@
+@use "../abstracts/variables";
+
+#pst-back-to-top {
+  // Reduce size to be slightly less intrusive on the page
+  font-size: 0.8rem;
+
+  // We should only display the back-to-top button when the TOC is not available.
+  // AKA, on narrow-ish screens.
+  // This over-rides a PST default
+  @media (min-width: variables.$breakpoint-xl) {
+    display: none !important;
+  }
+}

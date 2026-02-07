@@ -1,0 +1,209 @@
+@use "../abstracts/variables";
+
+/**
+ * Margin content
+ * This is the area to the right of the main content
+ * normally covered by the in-page table of contents
+ * but if `.margin` classes are present, it shows up to the right in the margin
+ * and the in-page TOC is hidden.
+ * On narrow screens, margin content behaves like a sidebar
+ */
+
+/**
+ * Variables for calculating margin widths
+ */
+// We want our margin content to be 1/3 the width of the main page content
+// after factoring in a small margin
+$margin-width-relative-to-content: 36%;
+$margin-gutter: 3%;
+$margin-width-width-gutter: $margin-width-relative-to-content - $margin-gutter;
+
+// re-subtract the gutter width because we want it to leave a white-space
+// This is how much to offset the margin content.
+$margin-offset: -$margin-width-relative-to-content;
+
+/**
+ * This mixin will cause something to "pop out" to the margin on wide screens
+ */
+@mixin margin-content() {
+  // On narrow screens this is the width of margin content
+  width: 40%;
+  float: right;
+  background-color: unset;
+  font-size: 0.9em;
+  margin-left: 0.5rem;
+
+  // Wide screens and printing should force margin behavior
+  @media (min-width: variables.$breakpoint-lg), print {
+    width: $margin-width-width-gutter;
+    margin: 0 $margin-offset 0 0;
+
+    // Prevent sequential margin content from overlapping
+    clear: right;
+
+    p.sidebar-title {
+      margin-bottom: -1rem;
+      border-bottom: none;
+      padding-left: 0px;
+
+      // Content of admonitions has fewer horizontal white space to save space
+      ~ * {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+  }
+}
+
+/**
+ * Sidenotes and marginnotes
+ * over-rides the "footnote" behavior to pop out to the margin instead.
+ */
+label.margin-toggle {
+  margin-bottom: 0em;
+  &.marginnote-label {
+    display: none;
+  }
+  sup {
+    user-select: none;
+  }
+  @media (max-width: variables.$breakpoint-lg) {
+    cursor: pointer;
+    color: rgb(0, 113, 188);
+    &.marginnote-label {
+      display: inline;
+      &:after {
+        content: "\2295";
+      }
+    }
+  }
+}
+
+input.margin-toggle {
+  display: none;
+  @media (max-width: variables.$breakpoint-lg) {
+    &:checked + .sidenote,
+    &:checked + .marginnote {
+      display: block;
+      float: left;
+      left: 1rem;
+      clear: both;
+      width: 95%;
+      margin: 1rem 2.5%;
+      position: relative;
+    }
+  }
+}
+
+span.sidenote,
+span.marginnote {
+  z-index: variables.$zindex-middle;
+  position: relative;
+  border-left: none;
+  @include margin-content();
+  sup {
+    user-select: none;
+  }
+  @media (max-width: variables.$breakpoint-lg) {
+    display: none;
+  }
+}
+
+aside.sidebar {
+  .note {
+    // styling for notes inside sidebars
+    margin: 1rem;
+    padding: 0rem 0rem 1rem 0rem;
+  }
+  // The titles sticking
+  .admonition-title {
+    margin: 0rem -1rem 0rem 0rem;
+  }
+}
+
+/**
+ * Sidebar content in the margin.
+ * This will be added by the `margin` directive or the `sidebar` directive
+ */
+aside.sidebar.margin {
+  // Margin content can have an empty title so this prevents an empty title block
+  // from showing up on mobile
+  .sidebar-title:empty {
+    display: none;
+  }
+
+  // On narrow screens padding is added to all sidebar content
+  // This replaces padding w/ margin for admonitions because padding is used
+  // for the title background color
+  .admonition {
+    margin: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+
+    // Remove the title margin so it
+    .admonition-title {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (min-width: variables.$breakpoint-lg) {
+    // No border for margin sidebars on wide screen
+    border: none;
+
+    // Admonitions don't need the extra whitespace in the margin
+    .admonition {
+      margin: 1rem 0rem;
+      padding: 0rem 0rem 1rem 0rem;
+    }
+  }
+}
+
+div.margin,
+figure.margin,
+aside.margin,
+.margin.docutils.container,
+.cell.tag_popout,
+.cell.tag_margin {
+  z-index: variables.$zindex-middle;
+  position: relative;
+  @include margin-content();
+
+  // Make cell outputs take up more space if they're in the margin
+  div.cell.tag_margin .cell_output {
+    padding-left: 0;
+  }
+}
+
+// A few permutations because docutils 0.18 switched to semantic tags
+div.figure.margin-caption p.caption,
+div.figure.margin-caption figcaption,
+figure.margin-caption figcaption {
+  z-index: variables.$zindex-middle;
+  position: relative;
+  @include margin-content();
+}
+
+// Margin captions
+.margin-caption figcaption {
+  text-align: left;
+}
+
+/**
+ * Full width content
+ */
+
+// Grow 100% by the ratio of the margin to the content width.
+$content-fullwidth-width: 100% + $margin-width-relative-to-content;
+
+div.cell.tag_full-width,
+div.cell.tag_full_width,
+div.full_width,
+div.full-width {
+  z-index: variables.$zindex-middle;
+  position: relative;
+  @media (min-width: variables.$breakpoint-lg) {
+    max-width: $content-fullwidth-width;
+    width: $content-fullwidth-width;
+  }
+}

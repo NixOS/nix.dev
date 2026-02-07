@@ -1,0 +1,9 @@
+{#- This is essentially sections/footer.html but in the content footer #}
+{# because we don't have a full-width footer in this theme-#}
+<div class="bd-footer-content__inner container">
+  {% for footer_item in theme_footer_content_items %}
+  <div class="footer-item">
+    {% include footer_item %}
+  </div>
+  {% endfor %}
+</div>

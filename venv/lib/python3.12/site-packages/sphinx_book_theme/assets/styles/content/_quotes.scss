@@ -1,0 +1,21 @@
+/**
+ * Epigraphs and other "special" quote blocks
+ */
+
+blockquote {
+  &.pull-quote,
+  &.epigraph,
+  &.highlights {
+    font-size: 1.25em;
+    border-left: none;
+    background-color: var(--pst-color-background);
+  }
+
+  div > p + p.attribution {
+    font-style: normal;
+    font-size: 0.9em;
+    text-align: right;
+    color: #6c757d;
+    padding-right: 2em;
+  }
+}

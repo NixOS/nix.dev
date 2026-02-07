@@ -1,0 +1,21 @@
+/*********************************************
+* Thebe *
+* ref: https://github.com/executablebooks/thebe
+*********************************************/
+.thebelab-cell {
+  border: none !important;
+  margin-right: 0.5em !important;
+}
+
+.thebelab-cell .thebelab-input {
+  padding-left: 10px !important;
+}
+
+.cell.docutils.container {
+  padding-right: 0px !important;
+}
+
+button.thebe-launch-button {
+  height: 2.5em;
+  font-size: 1em;
+}

@@ -1,0 +1,76 @@
+[
+  { "language": "English", "symbol": "en", "text": "Edit this page" },
+  { "language": "Arabic", "symbol": "ar", "text": "قم بتحرير هذه الصفحة" },
+  {
+    "language": "Bulgarian",
+    "symbol": "bg",
+    "text": "Редактирайте тази страница"
+  },
+  {
+    "language": "Chinese Simplified",
+    "symbol": "zh_CN",
+    "text": "编辑此页面"
+  },
+  {
+    "language": "Chinese Traditional",
+    "symbol": "zh-tw",
+    "text": "編輯此頁面"
+  },
+  { "language": "Croatian", "symbol": "hr", "text": "Uredite ovu stranicu" },
+  { "language": "Czech", "symbol": "cs", "text": "Upravit tuto stránku" },
+  { "language": "Danish", "symbol": "da", "text": "Rediger denne side" },
+  { "language": "Dutch", "symbol": "nl", "text": "bewerk deze pagina" },
+  { "language": "Esperanto", "symbol": "eo", "text": "Redaktu ĉi tiun paĝon" },
+  { "language": "Estonian", "symbol": "et", "text": "Muutke seda lehte" },
+  { "language": "Finnish", "symbol": "fi", "text": "Muokkaa tätä sivua" },
+  { "language": "French", "symbol": "fr", "text": "Modifier cette page" },
+  { "language": "German", "symbol": "de", "text": "Bearbeite diese Seite" },
+  {
+    "language": "Greek",
+    "symbol": "el",
+    "text": "Επεξεργαστείτε αυτήν τη σελίδα"
+  },
+  { "language": "Hebrew", "symbol": "iw", "text": "ערוך דף זה" },
+  { "language": "Indonesian", "symbol": "id", "text": "Edit halaman ini" },
+  { "language": "Italian", "symbol": "it", "text": "Modifica questa pagina" },
+  { "language": "Japanese", "symbol": "ja", "text": "このページを編集" },
+  { "language": "Korean", "symbol": "ko", "text": "이 페이지 편집" },
+  { "language": "Latvian", "symbol": "lv", "text": "Rediģēt šo lapu" },
+  { "language": "Lithuanian", "symbol": "lt", "text": "Redaguoti šį puslapį" },
+  { "language": "Norwegian", "symbol": "no", "text": "Rediger denne siden" },
+  { "language": "Polish", "symbol": "pl", "text": "Edytuj tę strone" },
+  { "language": "Portuguese", "symbol": "pt", "text": "Edite essa página" },
+  { "language": "Romanian", "symbol": "ro", "text": "Editați această pagină" },
+  {
+    "language": "Russian",
+    "symbol": "ru",
+    "text": "Редактировать эту страницу"
+  },
+  { "language": "Serbian", "symbol": "sr", "text": "Уредите ову страницу" },
+  { "language": "Slovak", "symbol": "sk", "text": "Upraviť túto stránku" },
+  { "language": "Slovenian", "symbol": "sl", "text": "Uredite to stran" },
+  { "language": "Spanish", "symbol": "es", "text": "Edita esta página" },
+  { "language": "Swedish", "symbol": "sv", "text": "Redigera den här sidan" },
+  { "language": "Tajik", "symbol": "tg", "text": "Ин саҳифаро таҳрир кунед" },
+  { "language": "Thai", "symbol": "th", "text": "แก้ไขหน้านี้" },
+  { "language": "Turkish", "symbol": "tr", "text": "Bu sayfayı düzenle" },
+  { "language": "Ukrainian", "symbol": "uk", "text": "Редагувати цю сторінку" },
+  { "language": "Vietnamese", "symbol": "vi", "text": "chỉnh sửa trang này" },
+  {
+    "language": "Bengali",
+    "symbol": "bn",
+    "text": "এই পৃষ্ঠাটি সম্পাদনা করুন"
+  },
+  { "language": "Filipino", "symbol": "tl", "text": "I-edit ang pahinang ito" },
+  { "language": "Marathi", "symbol": "mr", "text": "हे पृष्ठ संपादित करा" },
+  { "language": "Malay", "symbol": "ms", "text": "Edit halaman ini" },
+  { "language": "Malayalam", "symbol": "ml", "text": "ഈ പേജ് എഡിറ്റുചെയ്യുക" },
+  { "language": "Urdu", "symbol": "ur", "text": "اس صفحے میں ترمیم کریں" },
+  { "language": "Telugu", "symbol": "te", "text": "ఈ పేజీని సవరించండి" },
+  {
+    "language": "Tamil",
+    "symbol": "ta",
+    "text": "இந்தப் பக்கத்தைத் திருத்தவும்"
+  },
+  { "language": "Catalan", "symbol": "ca", "text": "Editeu aquesta pàgina" }
+]

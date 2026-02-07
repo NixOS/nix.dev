@@ -1,0 +1,23 @@
+.navbar-brand {
+  height: unset;
+  max-height: unset;
+
+  // Auto-center the image and title and make items vertical
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+
+  // To prevent site text from having underlines
+  &:hover {
+    text-decoration: none;
+  }
+  .logo__title {
+    font-size: 1.25rem;
+    white-space: normal;
+    text-align: center;
+  }
+  // Prevent images from stretching vertically
+  .logo__image {
+    height: unset;
+  }
+}

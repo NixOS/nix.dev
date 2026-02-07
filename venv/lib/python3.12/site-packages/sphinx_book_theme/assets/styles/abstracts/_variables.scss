@@ -1,0 +1,69 @@
+/*********************************************
+* Variables *
+*********************************************/
+// Breakpoints from Bootstrap: https://getbootstrap.com/docs/5.0/layout/breakpoints/
+$breakpoint-xxl: 1200px;
+$breakpoint-xl: 1200px;
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
+
+// A few semantic z-indices
+$zindex-bottom: 1;
+$zindex-middle: 2;
+$zindex-top: 3;
+
+// Semantic Z-index from bootstrap. Copied here so we can re-use if needed.
+// ref: https://getbootstrap.com/docs/5.0/layout/z-index/
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-offcanvas: 1050;
+$zindex-modal: 1060;
+$zindex-popover: 1070;
+$zindex-tooltip: 1080;
+
+// Spacing
+$header-article-height: 3rem;
+$sidebar-primary-width-widescreen: 20%;
+$toc-width-mobile: 75%;
+
+// Consistent styling for page elements
+$box-border-radius: 0.4em;
+
+$animation-time: 0.25s;
+
+// Font sizes
+$sbt-font-size-small-1: 87.5%;
+
+/**
+ * Variables that aren't impacted by light/dark
+ */
+html[data-theme="light"],
+html[data-theme="dark"] {
+  // Over-ride the pydata theme so that readers can use their system base
+  --pst-font-size-base: none;
+  // Default secondary color (has enough contrast on both light/dark so
+  // no need to special case.
+  --pst-color-secondary: #e89217;
+}
+
+// Overrides for pydata sphinx theme.
+// See https://github.com/pydata/pydata-sphinx-theme/blob/master/pydata_sphinx_theme/static/css/theme.css
+html[data-theme="light"] {
+  // Announcement
+  --sbt-color-announcement: rgb(97, 97, 97);
+  // Default primary color (need to adjust on dark theme due to bad contrast)
+  --pst-color-primary: #176de8;
+}
+
+html[data-theme="dark"] {
+  // Slightly lighten these colors to make them stand out more on dark
+  --pst-color-primary: #528fe4;
+
+  // Over-ride the purple announcement color
+  --sbt-color-announcement: rgb(97, 97, 97);
+  // Desaturate the background
+  --pst-color-background: #121212;
+}
