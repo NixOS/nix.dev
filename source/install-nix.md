@@ -16,7 +16,10 @@ $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 
 On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
 
+On Fedora, you can [install Nix via `dnf`](https://src.fedoraproject.org/rpms/nix).
+
 ::::
+
 
 ::::{tab-item} macOS
 
