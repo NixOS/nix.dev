@@ -20,7 +20,6 @@ On Fedora, you can [install Nix via `dnf`](https://src.fedoraproject.org/rpms/ni
 
 ::::
 
-
 ::::{tab-item} macOS
 
 Install Nix via the recommended [multi-user installation]:
