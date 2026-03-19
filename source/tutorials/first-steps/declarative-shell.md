@@ -151,7 +151,7 @@ If you need to override these protected environment variables, use the `shellHoo
 
 ## Startup commands
 
-You may want to run some commands before entering the shell environment.
+You may want to run some shell commands before entering the interactive shell environment.
 These commands can be placed in the `shellHook` attribute provided to `mkShellNoCC`.
 
 Set `shellHook` to output a colorful greeting:
