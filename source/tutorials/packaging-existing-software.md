@@ -15,7 +15,8 @@ But when *first* packaging existing software with Nix, it's common to encounter 
 
 ## Introduction
 
-In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/stable/language/derivations) to package C/C++ software, taking advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
+In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/stable/language/derivations) to package C/C++ software.
+You'll take advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
 
 ### What will you learn?
 

@@ -10,7 +10,8 @@ myst:
 
 [Docker](https://www.docker.com/) is a set of tools and services used to build, manage and deploy containers.
 
-As many cloud platforms offer Docker-based container hosting services, creating Docker containers for a given service is a common task when building reproducible software.
+Many cloud platforms offer Docker-based container hosting.
+Creating Docker containers is a common task when building reproducible software.
 In this tutorial, you learn how to build Docker containers using Nix.
 
 ## Prerequisites

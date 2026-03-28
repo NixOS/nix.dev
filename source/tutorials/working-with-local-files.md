@@ -2,7 +2,8 @@
 # Working with local files
 
 To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nix.dev/manual/nix/stable/language/derivations#attr-builder).
-Since by default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
+By default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store.
+The Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
 

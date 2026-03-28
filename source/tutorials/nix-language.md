@@ -1591,7 +1591,8 @@ After reading `file.nix` the Nix expression is equivalent to the file contents:
 
 Since a Nix file can contain any Nix expression, `import`ed functions can be applied to arguments immediately.
 
-That is, whenever you find additional tokens after a call to `import`, the value it returns should be a function, and anything that follows are arguments to that function.
+Whenever you find additional tokens after a call to `import`, the returned value is a function.
+Anything that follows are arguments to that function.
 
 Example:
 
