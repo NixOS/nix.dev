@@ -60,11 +60,11 @@ Therefore you don't have to worry as much about accidentally copying secrets int
 
 In this example, although we pretty-printed the home directory, no files were copied.
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
-which copies the whole directory to the Nix store on evaluation!
+which copies the whole directory to the Nix store on evaluation.
 
 :::{warning}
 When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
-a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository!
+a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository.
 :::
 
 This implicit coercion also works for files:

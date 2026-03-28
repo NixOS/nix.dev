@@ -62,7 +62,7 @@ Copy NixOS to your SD card by replacing `sdX` with the name of your device in th
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
 
-You should be greeted with a fresh shell!
+You should be greeted with a fresh shell.
 
 In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) and booting the image again.
 
@@ -177,7 +177,7 @@ If your system doesn't boot, select the oldest configuration in the bootloader m
 
 ## Making changes
 
-It booted, congratulations!
+It booted, congratulations.
 
 To make further changes to the configuration, [search through NixOS options](https://search.nixos.org/options),
 edit `/etc/nixos/configuration.nix`, and update your system:

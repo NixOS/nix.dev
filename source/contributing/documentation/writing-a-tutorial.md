@@ -31,7 +31,7 @@ Follow these steps to avoid redoing work
 There is a [tracking issue](https://github.com/NixOS/nix.dev/issues/572) for tutorials that the documentation team has decided should exist as part of the tutorial series.
 Pick an issue that covers a topic that you're either knowledgeable about or have a particular interest in.
 
-Check referenced issues and pull requests to make sure you won't duplicate work that someone else has already started!
+Check referenced issues and pull requests to make sure you won't duplicate work that someone else has already started.
 
 There are more [tutorial requests](https://github.com/NixOS/nix.dev/issues?q=is%3Aopen+is%3Aissue+label%3Atutorial) than captured in the outline.
 [Open a new issue](https://github.com/NixOS/nix.dev/issues/new?&template=tutorial.md) if what you wanted to work on isn't tracked anywhere.

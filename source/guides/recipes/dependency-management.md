@@ -104,7 +104,7 @@ npins import-niv
 ```
 
 :::{warning}
-All the imported entries will be updated, so they won't necessarily point to the same commits as before!
+All the imported entries will be updated, so they won't necessarily point to the same commits as before.
 :::
 
 ## Managing NixOS configurations

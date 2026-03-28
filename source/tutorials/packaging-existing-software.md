@@ -194,7 +194,7 @@ config.status: creating Makefile
 building
 ... <many more lines omitted>
 ```
-Great news: the derivation built successfully!
+The derivation built successfully.
 
 The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project.
 It wasn't necessary to write any build instructions in this case because the `stdenv` build system is based on [GNU Autoconf](https://www.gnu.org/software/autoconf/), which automatically detected the structure of the project directory.
@@ -354,7 +354,7 @@ error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed
        For full logs, run 'nix log /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'.
 ```
 
-A compiler error!
+A compiler error.
 The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header.
 
 If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?query=imlib2), you'll find that `imlib2` is already in Nixpkgs.

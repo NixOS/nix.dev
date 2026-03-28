@@ -1,6 +1,6 @@
 # Contributing documentation
 
-Thank you for your interest in helping improve documentation in the Nix ecosystem!
+Thank you for your interest in helping improve documentation in the Nix ecosystem.
 This project would not be possible without your support.
 
 ## Getting started
@@ -57,7 +57,7 @@ Using free licenses other than CC-BY-SA 4.0 is possible for individual documents
 By contributing changes to those documents you agree to license your work accordingly.
 
 :::{note}
-If you have written a tutorial or guide related to Nix, please consider licensing it under CC-BY-SA 4.0!
+If you have written a tutorial or guide related to Nix, please consider licensing it under CC-BY-SA 4.0.
 This will allow us to feature your work as official documentation if it complements or improves upon existing materials.
 :::
 
