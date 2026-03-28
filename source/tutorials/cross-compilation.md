@@ -10,7 +10,7 @@ myst:
 
 # Cross compilation
 
-Nixpkgs offers powerful tools to cross-compile software for various system types.
+Nixpkgs provides tools to cross-compile software for different system types.
 
 ## What do you need?
 
@@ -27,7 +27,7 @@ When compiling code, we can distinguish between the **build platform**, where th
 
 Cross compilation is needed when the host platform has limited resources (such as CPU) or when it's not easily accessible for development.
 
-The `nixpkgs` package collection has world-class support for cross compilation, after many years of hard work by the Nix community.
+Nixpkgs has well-tested cross compilation support.
 
 [^id3]: Terminology for cross compilation platforms differs between build systems.
     We have chosen to follow
@@ -204,7 +204,7 @@ The hash of the package in the store path changes with the updates to the channe
 
 ## Real-world cross compiling of a Hello World example
 
-To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
+The following example cross compiles a Hello World program as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms, and runs the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
 Given we have a `cross-compile.nix`:
 

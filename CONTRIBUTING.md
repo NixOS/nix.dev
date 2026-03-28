@@ -1,6 +1,6 @@
 # Contributing to nix.dev
 
-nix.dev is a community effort to collect, create, and maintain world-class learning resources for Nix.
+nix.dev is a community effort to collect, create, and maintain learning resources for Nix.
 
 We strongly encourage everyone interested to participate:
 - Make a [pull request](https://github.com/NixOS/nix.dev/pulls) if you want to introduce an incremental change.
