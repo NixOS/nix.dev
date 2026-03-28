@@ -568,7 +568,7 @@ This includes too much though, as not all of these files are needed to build the
 :::{note}
 When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
 this function isn't needed, because `nix build` by default only allows access to files tracked by Git.
-However, in order to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
+However, to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
 :::
 
 ## Intersection

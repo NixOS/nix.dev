@@ -139,7 +139,7 @@ The first line registers the remote machine as a remote builder by specifying
 - The location of the SSH key
 - A list of [supported system features](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system-features)
 
-  This particular list must be specified in order to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
+  This particular list must be specified to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
 
 See the [reference documentation on the  `builders` setting](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-builders) for details.
 
@@ -202,7 +202,7 @@ This configuration module enables distributed builds and adds the remote builder
 
 - A list of [supported system features](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system-features)
 
-  This particular list must be specified in order to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
+  This particular list must be specified to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
 
 See the [NixOS option documentation on `nix.buildMachines`](https://search.nixos.org/options?query=nix.buildMachines) for details.
 

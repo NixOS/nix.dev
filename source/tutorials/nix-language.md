@@ -828,7 +828,7 @@ Any Nix expression where the value can be represented as a string can be used wi
 
 The `+` sign in the above expression is the [string concatenation operator](https://nix.dev/manual/nix/latest/language/operators#string-concatenation), which takes two strings and produces a new string.
 
-The expression in the example is deliberately confusing in order to demonstrate that arbitrarily nested string interpolations are possible, but tend to be hard to read.
+The expression in the example is deliberately confusing to demonstrate that arbitrarily nested string interpolations are possible, but tend to be hard to read.
 
 It denotes a string that contains the interpolation of concatenating the value of `a` with a string that starts with a space and is followed by another interpolated string.
 That second interpolated string is again the result of concatenating the value of `a` and yet another string that starts with a space and is followed by an interpolation of `a`.
@@ -1777,7 +1777,7 @@ We will discuss [derivations](derivations) later in the tutorial.
 There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*.
 
-Build inputs are files that derivations refer to in order to describe how to derive new files.
+Derivations refer to build inputs to describe how to derive new files.
 When run, a derivation will only have access to explicitly declared build inputs.
 
 The only way to specify build inputs in the Nix language is explicitly with:

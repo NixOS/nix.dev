@@ -86,7 +86,7 @@ $ docker load < result
 Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
 ```
 
-You can also use the store path to load the image in order to avoid depending on the presence of `result`:
+You can also use the store path to load the image to avoid depending on the presence of `result`:
 
 ```shell-session
 $ docker load < /nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz

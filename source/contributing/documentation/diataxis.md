@@ -46,7 +46,7 @@ We find that contributors primarily struggle with the difference between a Guide
 Here are several explanations to help you understand the difference.
 
 - A guide is used in a "working" context where the reader just wants a sequence of instructions to achieve an outcome.
-  - In this context the reader may already know or may not care how or why these instructions work, they just want to know what to do in order to achieve the desired result.
+  - In this context the reader may already know or may not care how or why these instructions work, they just want to know what to do to achieve the desired result.
 - A tutorial is used in a "learning" context where the reader is following a sequence of instructions to gain practice performing a certain task.
   - Some small bits of motivation or explanation are helpful in this context to help a reader connect the dots with other things they may have already learned, but the focus is on the activity, not on _how_ or _why_.
 

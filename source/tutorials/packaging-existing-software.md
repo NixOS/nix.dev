@@ -122,7 +122,7 @@ Problem: the expression in `hello.nix` is a *function*, which only produces its 
 
 ### Building with `nix-build`
 
-`stdenv` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression in order to pass it as an argument to this derivation.
+`stdenv` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression to pass it as an argument to this derivation.
 
 The recommended way to do this is to create a `default.nix` file in the same directory as `hello.nix`, with the following contents:
 

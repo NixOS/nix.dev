@@ -101,7 +101,7 @@ This can help with understanding while keeping distractions minimal.
 
 Provide exercises or worked examples, and other means of self-assessment.
 
-This is also a good place to offer the readers ways to give feedback or ask the authors questions in order to continue improving the tutorial.
+This is also a good place to offer the readers ways to give feedback or ask the authors questions to continue improving the tutorial.
 
 ### Next steps
 
