@@ -20,7 +20,7 @@ Nixpkgs provides tools to cross-compile software for different system types.
 
 ## Platforms
 
-When compiling code, we can distinguish between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
+When compiling code, there is a distinction between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
 
 **Native compilation** is the special case where those two platforms are the same.
 **Cross compilation** is the general case where those two platforms are not.
@@ -35,12 +35,12 @@ Nixpkgs has well-tested cross compilation support.
 
 ## What's a target platform?
 
-There is a third concept for a platform we call a **target platform**.
+There is a third concept for a platform called the **target platform**.
 
 The target platform is relevant to cases where you want to build a compiler binary.
 In such cases, you would build a compiler on the *build platform*, run it to compile code on the *host platform*, and run the final executable on the *target platform*.
 
-Since this is rarely needed, we will assume that the target is identical to the host.
+Since this is rarely needed, this tutorial assumes that the target is identical to the host.
 
 ## Determining the host platform config
 

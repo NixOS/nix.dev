@@ -58,7 +58,7 @@ trace: /home/user (all files in directory)
 Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
 Therefore you don't have to worry as much about accidentally copying secrets into the world-readable store.
 
-In this example, although we pretty-printed the home directory, no files were copied.
+In this example, although you pretty-printed the home directory, no files were copied.
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
 which copies the whole directory to the Nix store on evaluation.
 

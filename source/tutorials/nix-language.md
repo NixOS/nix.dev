@@ -60,7 +60,7 @@ It therefore shows the most common and distinguishing patterns in the Nix langua
 
 :::{important}
 This tutorial *does not* explain all Nix language features in detail and *does not* go into specifics of syntactical rules.
-For instance, we skip over commonplace constructs such as `if ... then ... else ...`.
+For instance, this tutorial skips over commonplace constructs such as `if ... then ... else ...`.
 
 See the [Nix manual][manual-language] for a full language reference.
 :::
@@ -79,7 +79,7 @@ See the [Nix manual][manual-language] for a full language reference.
 - Familiar with functional programming: 1 hour
 - Proficient with functional programming: 30 minutes
 
-We recommend to run all examples.
+Run all examples.
 Play with them to validate your assumptions and test what you have learned.
 Read detailed explanations if you want to make sure you fully understand the examples.
 
@@ -166,7 +166,7 @@ The second command runs `nix-instantiate` with the `--eval` option on `file.nix`
 The resulting value is printed as output.
 
 `--eval` is required to evaluate the file and do nothing else.
-If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *derivation*, which we will come back to at the end of this tutorial in [](derivations).
+If `--eval` is omitted, `nix-instantiate` expects the expression in the given file to evaluate to a special value called a *derivation*, covered at the end of this tutorial in [](derivations).
 
 :::
 
@@ -243,9 +243,9 @@ let x=1;y=2;in x+y
 
 Values in the Nix language can be primitive data types, lists, attribute sets, and functions.
 
-We show examples of primitive data types and lists in the context of [attribute sets](attrset).
-Later in this section we cover special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
-We deal with [functions](functions) separately.
+Examples of primitive data types and lists appear in the context of [attribute sets](attrset).
+Later in this section, you will encounter special features of character strings: [string interpolation](string-interpolation), [file system paths](file-system-paths), and [indented strings](indented-strings).
+[Functions](functions) are covered separately.
 
 [Attribute sets](attrset) and [`let` expressions](let) are used to assign names to values.
 Assignments are denoted by a single equal sign (`=`).
@@ -515,7 +515,7 @@ in [ a b c ]
 :::::
 
 Only expressions within the `let` expression itself can access the newly declared names.
-We say: the bindings have local scope.
+The bindings have local scope.
 
 Counter-example:
 
@@ -806,7 +806,7 @@ error: cannot coerce an integer to a string
 
 Interpolated expressions can be arbitrarily nested.
 
-(This can become hard to read, and we recommend to avoid it in practice.)
+(This can become hard to read. Avoid it in practice.)
 
 Example:
 
@@ -1009,7 +1009,7 @@ Example:
 /current
 ```
 :::{note}
-Paths can be used in interpolated expressions – an [impure operation](impurities) we will cover in detail in a [later section](path-impurities).
+Paths can be used in interpolated expressions – an [impure operation](impurities) covered in detail in a [later section](path-impurities).
 :::
 
 (lookup-path-tutorial)=
@@ -1045,7 +1045,7 @@ For example, `<nixpkgs/lib>` points to the subdirectory `lib` of that file syste
 /nix/var/nix/profiles/per-user/root/channels/nixpkgs/lib
 ```
 
-While you will encounter many such examples, we recommend to [avoid lookup paths](search-path) in production code, as they are [impurities](impurities) which are not reproducible.
+While you will encounter many such examples, [avoid lookup paths](search-path) in production code, as they are [impurities](impurities) which are not reproducible.
 
 [NIX_PATH]: https://nix.dev/manual/nix/stable/command-ref/env-common.html?highlight=nix_path#env-NIX_PATH
 [nixpkgs]: https://github.com/NixOS/nixpkgs
@@ -1112,7 +1112,7 @@ Each of them is explained in the following, and here is an overview:
   ```
 
 Functions in the Nix language have no names.
-We say they are anonymous, and call such a function a *lambda*.[^lambda]
+They are anonymous, and such a function is called a *lambda*.[^lambda]
 
 [^lambda]: The term *lambda* is a shorthand for [lambda abstraction](https://en.wikipedia.org/wiki/Lambda_calculus#lambdaAbstr) in the [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
 
@@ -1509,7 +1509,7 @@ You need to know about both to understand and navigate Nix language code.
 
 <!-- TODO: find a place for operators -->
 
-We recommend to at least skim them to familiarise yourself with what is available.
+Skim them to familiarise yourself with what is available.
 
 [operators]: https://nix.dev/manual/nix/stable/language/operators.html
 
@@ -1768,11 +1768,11 @@ For historical reasons, some of the functions in `pkgs.lib` are equivalent to [`
 (impurities)=
 ## Impurities
 
-So far we have only covered what we call *pure expressions*:
+So far this tutorial has only covered *pure expressions*:
 declaring data and transforming it with functions.
 
 In practice, describing derivations – the Nix language's defining feature, which enables functional programming with the file system – requires observing the outside world.
-We will discuss [derivations](derivations) later in the tutorial.
+[Derivations](derivations) are discussed later in the tutorial.
 
 There is only one impurity in the Nix language that is relevant here:
 reading files from the file system as *build inputs*.
@@ -1789,7 +1789,7 @@ Nix and the Nix language refer to files by their content hash. If file contents 
 
 :::{note}
 Nix supports other types of impure expressions, such as [lookup paths](search-path) or the constant [`builtins.currentSystem`](https://nix.dev/manual/nix/stable/language/builtin-constants.html#builtins-currentSystem).
-We do not cover those here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
+These are not covered here in more detail, as they do not matter for how the Nix language works in principle, and because they are discouraged for the very reason of breaking reproducibility.
 :::
 
 (path-impurities)=
@@ -1929,7 +1929,7 @@ It may produce a different hash or even a different package version.
 
 A derivation's output path is fully determined by its inputs, which in this case come from *some* version of Nixpkgs.
 
-This is why we recommend to [avoid lookup paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
+This is why [avoid lookup paths](search-path) to ensure predictable outcomes, except in examples intended for illustration only.
 :::
 
 :::{dropdown} Detailed explanation
@@ -1952,7 +1952,7 @@ This allows constructing arbitrarily complex compositions of derivations with th
 
 ## Worked examples
 
-So far we have seen artificial examples illustrating the various constructs in the Nix language.
+So far the examples have been artificial illustrations of the Nix language constructs.
 
 You should now be able to read Nix language code for simple packages and configurations, and come up with similar explanations of the following practical examples.
 
@@ -2093,7 +2093,7 @@ Example:
 { x, y, z }: (x y) z.a
 ```
 
-How do we know...
+How do you know...
 - that `x` will be a function that, given an argument, returns a function?
 - that, given `x` is a function, `y` will be an appropriate argument to `x`?
 - that, given `(x y)` is a function, `z.a` will be an appropriate argument to `(x y)`?
