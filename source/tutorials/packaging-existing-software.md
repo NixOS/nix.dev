@@ -613,7 +613,7 @@ Hooks do things like set variables, source files, create directories, and so on.
 These are specific to each phase, and run both before and after that phase's execution.
 They modify the build environment for common operations during the build.
 
-It's good practice when packaging software with Nix to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them.
+Include calls to these hooks in the derivation phases you define, even when you don't make direct use of them.
 This facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later.
 And it keeps the code tidy and makes it easier to read.
 

@@ -11,7 +11,7 @@ This document outlines the guidelines we use when writing documentation.
 > — [Blaise Pascal](https://en.m.wikiquote.org/w/index.php?title=Blaise_Pascal&oldid=2978584#Quotes)
 
 Readers' time and attention are limited.
-Take the time to be extraordinarily respectful of their cognitive resources.
+Respect them.
 
 The same holds for communication directed to contributors and maintainers:
 This is a public project, and many people will read what you write.

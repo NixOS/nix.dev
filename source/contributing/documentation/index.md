@@ -1,7 +1,6 @@
 # Contributing documentation
 
 Thank you for your interest in helping improve documentation in the Nix ecosystem.
-This project would not be possible without your support.
 
 ## Getting started
 
