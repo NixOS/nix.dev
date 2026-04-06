@@ -82,13 +82,13 @@ A small set of high-value workflows for newcomers:
 
 These guides are concise, opinionated where appropriate, and link directly into reference documentation.
 
-## Documentation vs wiki
+## docs.nixos.org vs wiki
 
-Documentation is curated, reviewed, and authoritative. It covers common and important workflows, stays maintained over time, and does not need to cover every edge case.
+docs.nixos.org is curated, reviewed, and authoritative. It covers common and important workflows, stays maintained over time, and does not need to cover every edge case.
 
 The wiki is community-driven and fast-moving. It covers niche topics, experiments, early ideas, and rapidly evolving information. It acts as a documentation incubator.
 
-When a wiki topic becomes widely useful and commonly referenced, it moves into documentation. When it's niche or experimental, it stays in the wiki.
+When a wiki topic becomes widely useful and commonly referenced, it can move into docs.nixos.org. When it's niche or experimental, it stays in the wiki.
 
 ## Ownership and governance
 
