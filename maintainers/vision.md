@@ -2,7 +2,7 @@
 
 High-quality documentation is a prerequisite for growth, adoption, and contributor sustainability in the Nix ecosystem. This vision aligns contributors around a shared direction, lowers the barrier to contribution, and ensures documentation serves both newcomers and experienced users.
 
-The core idea: if others understand where we're going, they can contribute in small or large steps toward it.
+The core idea: if others understand where the documentation team is going, they can contribute in small or large steps toward it.
 
 ## Learning from other projects
 
@@ -88,11 +88,11 @@ docs.nixos.org is curated, reviewed, and authoritative. It covers common and imp
 
 The wiki is community-driven and fast-moving. It covers niche topics, experiments, early ideas, and rapidly evolving information. It acts as a documentation incubator.
 
-When a wiki topic becomes widely useful and commonly referenced, it can move into docs.nixos.org. When it's niche or experimental, it stays in the wiki.
+When a wiki topic becomes widely useful and commonly referenced, it can move into docs.nixos.org. When it's niche or experimental, it can stay in the wiki.
 
 ## Ownership and governance
 
-Each component has designated maintainers responsible for keeping reference documentation accurate. The documentation team coordinates cross-cutting efforts, maintains shared infrastructure, and reviews contributions.
+Maintainers of components are responsible for keeping reference documentation of their components accurate. The documentation team coordinates cross-cutting efforts, maintains shared infrastructure, and reviews contributions.
 
 ## Maintenance and sustainability
 
