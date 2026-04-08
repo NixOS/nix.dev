@@ -291,7 +291,7 @@ To maximise parallelism, enable automatic garbage collection, and prevent Nix bu
 ```
 
 :::{tip}
-Refer to the [Nix reference manual](https://nix.dev/manual/nix/2.23/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
+Refer to the [Nix reference manual](https://nix.dev/manual/nix/latest/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
 :::
 
 Remote builders can have different performance characteristics.
@@ -311,6 +311,10 @@ Set the `nix.buildMachines.*.publicHostKey` field to each remote builder's publi
 
 To set up multiple builders, repeat the instructions in the [](set-up-remote-builder) section for each remote builder.
 Add all new remote builders to the `nix.buildMachines` attribute shown in the [](set-up-distributed-builds) section.
+
+:::{tip}
+Configure remote build machines to [host a binary cache](setup-http-binary-cache) and use them as [preferred binary caches](custom-binary-cache) to reduce your external traffic.
+:::
 
 ## Alternatives
 
