@@ -8,7 +8,8 @@ myst:
 (deploy-nixos-using-terraform)=
 # Deploying NixOS using Terraform
 
-Assuming you're [familiar with the basics of Terraform](https://www.terraform.io/intro/index.html), by the end of this tutorial you will have provisioned an Amazon Web Services (AWS) instance with Terraform, and will be able to use Nix to deploy incremental changes to NixOS running on the instance.
+This tutorial assumes you're [familiar with the basics of Terraform](https://www.terraform.io/intro/index.html).
+By the end, you will have provisioned an Amazon Web Services (AWS) instance with Terraform and used Nix to deploy incremental changes to NixOS running on the instance.
 
 We'll look at how to boot a NixOS machine and how to deploy the incremental changes.
 

@@ -10,7 +10,7 @@ myst:
 
 # Cross compilation
 
-Nixpkgs offers powerful tools to cross-compile software for various system types.
+Nixpkgs provides tools to cross-compile software for different system types.
 
 ## What do you need?
 
@@ -20,14 +20,14 @@ Nixpkgs offers powerful tools to cross-compile software for various system types
 
 ## Platforms
 
-When compiling code, we can distinguish between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
+When compiling code, there is a distinction between the **build platform**, where the executable is *built*, and the **host platform**, where the compiled executable *runs*. [^id3]
 
 **Native compilation** is the special case where those two platforms are the same.
 **Cross compilation** is the general case where those two platforms are not.
 
 Cross compilation is needed when the host platform has limited resources (such as CPU) or when it's not easily accessible for development.
 
-The `nixpkgs` package collection has world-class support for cross compilation, after many years of hard work by the Nix community.
+Nixpkgs has well-tested cross compilation support.
 
 [^id3]: Terminology for cross compilation platforms differs between build systems.
     We have chosen to follow
@@ -35,12 +35,12 @@ The `nixpkgs` package collection has world-class support for cross compilation, 
 
 ## What's a target platform?
 
-There is a third concept for a platform we call a **target platform**.
+There is a third concept for a platform called the **target platform**.
 
 The target platform is relevant to cases where you want to build a compiler binary.
 In such cases, you would build a compiler on the *build platform*, run it to compile code on the *host platform*, and run the final executable on the *target platform*.
 
-Since this is rarely needed, we will assume that the target is identical to the host.
+Since this is rarely needed, this tutorial assumes that the target is identical to the host.
 
 ## Determining the host platform config
 
@@ -204,7 +204,7 @@ The hash of the package in the store path changes with the updates to the channe
 
 ## Real-world cross compiling of a Hello World example
 
-To show off the power of cross compilation in Nix, let's build our own Hello World program by cross compiling it as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms and run the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
+The following example cross compiles a Hello World program as static executables to `armv6l-unknown-linux-gnueabihf` and `x86_64-w64-mingw32` (Windows) platforms, and runs the resulting executable with [an emulator](https://en.wikipedia.org/wiki/Emulator).
 
 Given we have a `cross-compile.nix`:
 

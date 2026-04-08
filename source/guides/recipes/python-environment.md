@@ -80,7 +80,7 @@ Press CTRL+C to quit
 ```
 
 You now have a running Python web application.
-Try it out!
+Try it out.
 
 Open a new terminal to start another session of the shell environment and follow the commands below:
 

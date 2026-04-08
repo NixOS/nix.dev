@@ -10,17 +10,18 @@ myst:
 
 One of Nix's primary use-cases is in addressing common difficulties encountered with packaging software, such as specifying and obtaining dependencies.
 
-In the long term, Nix helps tremendously with alleviating such problems.
+In the long term, Nix alleviates such problems.
 But when *first* packaging existing software with Nix, it's common to encounter errors that seem inscrutable.
 
 ## Introduction
 
-In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/stable/language/derivations) to package C/C++ software, taking advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
+In this tutorial, you'll create your first [Nix derivations](https://nix.dev/manual/nix/stable/language/derivations) to package C/C++ software.
+You'll take advantage of the [Nixpkgs Standard Environment](https://nixos.org/manual/nixpkgs/stable/#part-stdenv) (`stdenv`), which automates much of the work involved.
 
 ### What will you learn?
 
 The tutorial begins with `hello`, an implementation of "hello world" which only requires dependencies already provided by `stdenv`.
-Next, you will build more complex packages with their own dependencies, leading you to use additional derivation features.
+Next, you build more complex packages with their own dependencies, which leads to using additional derivation features.
 
 You'll encounter and address Nix error messages, build failures, and a host of other issues, developing your iterative debugging techniques along the way.
 
@@ -72,7 +73,7 @@ stdenv.mkDerivation {
 
 ```
 
-Next, you will declare a dependency on the latest version of `hello`, and instruct Nix to use `fetchzip` to download the [source code archive](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz).
+Next, declare a dependency on the latest version of `hello`, and instruct Nix to use `fetchzip` to download the [source code archive](https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz).
 
 :::{note}
 `fetchzip` can fetch [more archives](https://nixos.org/manual/nixpkgs/stable/#fetchurl) than just zip files!
@@ -122,7 +123,7 @@ Problem: the expression in `hello.nix` is a *function*, which only produces its 
 
 ### Building with `nix-build`
 
-`stdenv` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression in order to pass it as an argument to this derivation.
+`stdenv` is available from [`nixpkgs`](https://github.com/NixOS/nixpkgs/), which must be imported with another Nix expression to pass it as an argument to this derivation.
 
 The recommended way to do this is to create a `default.nix` file in the same directory as `hello.nix`, with the following contents:
 
@@ -194,7 +195,7 @@ config.status: creating Makefile
 building
 ... <many more lines omitted>
 ```
-Great news: the derivation built successfully!
+The derivation built successfully.
 
 The console output shows that `configure` was called, which produced a `Makefile` that was then used to build the project.
 It wasn't necessary to write any build instructions in this case because the `stdenv` build system is based on [GNU Autoconf](https://www.gnu.org/software/autoconf/), which automatically detected the structure of the project directory.
@@ -220,7 +221,7 @@ Next, you'll package another piece of software with external-to-`stdenv` depende
 
 ## A package with dependencies
 
-Now you will add a second, somewhat more complicated, program: [`icat`](https://github.com/atextor/icat) (which allows you to render images in your terminal).
+Now add a second, somewhat more complicated, program: [`icat`](https://github.com/atextor/icat) (which renders images in your terminal).
 
 Change the `default.nix` from the previous section by adding a new attribute for `icat`:
 
@@ -257,7 +258,7 @@ stdenv.mkDerivation {
 
 Now to download the source code.
 `icat`'s upstream repository is hosted on [GitHub](https://github.com/atextor/icat), so you should replace the previous [source fetcher](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers).
-This time you will use [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub) instead of `fetchzip`, by updating the argument attribute set to the function accordingly:
+This time, use [`fetchFromGitHub`](https://nixos.org/manual/nixpkgs/stable/#fetchfromgithub) instead of `fetchzip`, by updating the argument attribute set to the function accordingly:
 
 ```nix
 # icat.nix
@@ -354,7 +355,7 @@ error: builder for '/nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv' failed
        For full logs, run 'nix log /nix/store/l5wz9inkvkf0qhl8kpl39vpg2xfm2qpy-icat.drv'.
 ```
 
-A compiler error!
+A compiler error.
 The `icat` source was pulled from GitHub, and Nix tried to build what it found, but compilation failed due to a missing dependency: the `imlib2` header.
 
 If you [search for `imlib2` on search.nixos.org](https://search.nixos.org/packages?query=imlib2), you'll find that `imlib2` is already in Nixpkgs.
@@ -414,7 +415,8 @@ But the important bit for this tutorial is `fatal error: X11/Xlib.h: No such fil
 
 Determining from where to source a dependency is currently somewhat involved, because package names don't always correspond to library or program names.
 
-You will need the `Xlib.h` headers from the `X11` C package, the Nixpkgs derivation for which is `libX11`, available in the `xorg` package set.
+You need the `Xlib.h` headers from the `X11` C package.
+The Nixpkgs derivation for this is `libX11`, available in the `xorg` package set.
 There are multiple ways to figure this out:
 
 ### `search.nixos.org`
@@ -611,7 +613,7 @@ Hooks do things like set variables, source files, create directories, and so on.
 These are specific to each phase, and run both before and after that phase's execution.
 They modify the build environment for common operations during the build.
 
-It's good practice when packaging software with Nix to include calls to these hooks in the derivation phases you define, even when you don't make direct use of them.
+Include calls to these hooks in the derivation phases you define, even when you don't make direct use of them.
 This facilitates easy [overriding](https://nixos.org/manual/nixpkgs/stable/#chap-overrides) of specific parts of the derivation later.
 And it keeps the code tidy and makes it easier to read.
 
@@ -645,9 +647,9 @@ default.nix hello.nix icat.nix result
 
 `result/bin/icat` is the executable built previously. Success!
 
-Running `nix-build` (without specifying an attribute) would build all of our attributes at once.
-The first (`hello`) will be under `result/bin/`, while the second (`icat`) will be under `result-2/bin/`.
-If we were to add more attributes we would get even more `result-n` symlinks.
+Running `nix-build` (without specifying an attribute) builds all attributes at once.
+The first (`hello`) appears under `result/bin/`, while the second (`icat`) appears under `result-2/bin/`.
+Adding more attributes produces additional `result-n` symlinks.
 
 ## References
 

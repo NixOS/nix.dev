@@ -2,7 +2,8 @@
 # Working with local files
 
 To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nix.dev/manual/nix/stable/language/derivations#attr-builder).
-Since by default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store, the Nix language has built-in features to copy local files to the store and expose the resulting store paths.
+By default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store.
+The Nix language has built-in features to copy local files to the store and expose the resulting store paths.
 
 Using these features directly can be tricky however:
 
@@ -58,13 +59,13 @@ trace: /home/user (all files in directory)
 Even though file sets conceptually contain local files, these files are *never* added to the Nix store unless explicitly requested.
 Therefore you don't have to worry as much about accidentally copying secrets into the world-readable store.
 
-In this example, although we pretty-printed the home directory, no files were copied.
+In this example, although you pretty-printed the home directory, no files were copied.
 This is in contrast to coercion of paths to strings such as in `"${./.}"`,
-which copies the whole directory to the Nix store on evaluation!
+which copies the whole directory to the Nix store on evaluation.
 
 :::{warning}
 When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
-a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository!
+a local directory within a Flake is always copied into the Nix store *completely* unless it is a Git repository.
 :::
 
 This implicit coercion also works for files:
@@ -568,7 +569,7 @@ This includes too much though, as not all of these files are needed to build the
 :::{note}
 When using the [`flakes` and `nix-command` experimental features](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-flake),
 this function isn't needed, because `nix build` by default only allows access to files tracked by Git.
-However, in order to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
+However, to provide the same developer experience for stable Nix, use of this function is nevertheless recommended.
 :::
 
 ## Intersection

@@ -52,7 +52,7 @@ Explanations of history and ideas in the Nix ecosystem
 
 ## What can you do with Nix?
 
-The following list illustrates some of what can be achieved with the Nix ecosystem:
+With the Nix ecosystem, you can:
 
 - {ref}`Reproducible development environments <ad-hoc-envs>`.
 - Easy installation of software over URLs.

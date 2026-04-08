@@ -13,7 +13,7 @@ Any machine with a Nix store can be a binary cache for other machines.
 
 ## Introduction
 
-In this tutorial you will set up a Nix binary cache that will serve store objects from a NixOS machine over HTTP or HTTPS.
+In this tutorial you set up a Nix binary cache that serves store objects from a NixOS machine over HTTP or HTTPS.
 
 ### What will you learn?
 
@@ -112,7 +112,7 @@ The binary cache daemon will report errors because there is no secret key file y
 
 ## Generate a signing key pair
 
-A pair of private and public keys is required to ensure that the store objects in the cache are authentic.
+You need a pair of private and public keys to ensure that the store objects in the cache are authentic.
 
 <!-- TODO: link to the remote builds tutorial for the case where store objects are signed after building them -->
 

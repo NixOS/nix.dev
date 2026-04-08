@@ -10,8 +10,9 @@ myst:
 
 [Docker](https://www.docker.com/) is a set of tools and services used to build, manage and deploy containers.
 
-As many cloud platforms offer Docker-based container hosting services, creating Docker containers for a given service is a common task when building reproducible software.
-In this tutorial, you will learn how to build Docker containers using Nix.
+Many cloud platforms offer Docker-based container hosting.
+Creating Docker containers is a common task when building reproducible software.
+In this tutorial, you learn how to build Docker containers using Nix.
 
 ## Prerequisites
 
@@ -86,7 +87,7 @@ $ docker load < result
 Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
 ```
 
-You can also use the store path to load the image in order to avoid depending on the presence of `result`:
+You can also use the store path to load the image to avoid depending on the presence of `result`:
 
 ```shell-session
 $ docker load < /nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz
