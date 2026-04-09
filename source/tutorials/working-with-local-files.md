@@ -449,7 +449,7 @@ Create some additional files:
 
 ```shell-session
 $ mkdir src
-$ touch build.sh src/select.{c,h}
+$ touch build.sh src/select.{c,h,o}
 ```
 
 Then create a file set from only the files to be included explicitly:
