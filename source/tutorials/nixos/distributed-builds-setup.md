@@ -139,7 +139,7 @@ The first line registers the remote machine as a remote builder by specifying
 - The location of the SSH key
 - A list of [supported system features](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system-features)
 
-  This particular list must be specified in order to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
+  This particular list must be specified to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
 
 See the [reference documentation on the  `builders` setting](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-builders) for details.
 
@@ -202,7 +202,7 @@ This configuration module enables distributed builds and adds the remote builder
 
 - A list of [supported system features](https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-system-features)
 
-  This particular list must be specified in order to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
+  This particular list must be specified to delegate building compilers and running [NixOS VM tests](integration-testing-vms) to remote machines.
 
 See the [NixOS option documentation on `nix.buildMachines`](https://search.nixos.org/options?query=nix.buildMachines) for details.
 
@@ -291,7 +291,7 @@ To maximise parallelism, enable automatic garbage collection, and prevent Nix bu
 ```
 
 :::{tip}
-Refer to the [Nix reference manual](https://nix.dev/manual/nix/2.23/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
+Refer to the [Nix reference manual](https://nix.dev/manual/nix/latest/command-ref/conf-file) for details on the options available in [`nix.settings`](https://search.nixos.org/options?show=nix.settings).
 :::
 
 Remote builders can have different performance characteristics.
@@ -311,6 +311,10 @@ Set the `nix.buildMachines.*.publicHostKey` field to each remote builder's publi
 
 To set up multiple builders, repeat the instructions in the [](set-up-remote-builder) section for each remote builder.
 Add all new remote builders to the `nix.buildMachines` attribute shown in the [](set-up-distributed-builds) section.
+
+:::{tip}
+Configure remote build machines to [host a binary cache](setup-http-binary-cache) and use them as [preferred binary caches](custom-binary-cache) to reduce your external traffic.
+:::
 
 ## Alternatives
 

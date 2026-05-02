@@ -15,7 +15,7 @@ It is possible to replace any Linux installation with a NixOS configuration on r
 
 ## Introduction
 
-In this tutorial, you will deploy a NixOS configuration to a running computer.
+In this tutorial, you deploy a NixOS configuration to a running computer.
 
 ### What will you learn?
 

@@ -134,7 +134,7 @@ Set `GREETING` so it can be used in the shell environment:
 
 Any attribute name passed to `mkShellNoCC` that is not reserved otherwise and has a value which can be coerced to a string will end up as an environment variable.
 
-Try it out!
+Try it out.
 Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell`.
 
 ```console
@@ -151,7 +151,7 @@ If you need to override these protected environment variables, use the `shellHoo
 
 ## Startup commands
 
-You may want to run some commands before entering the shell environment.
+You may want to run some shell commands before entering the interactive shell environment.
 These commands can be placed in the `shellHook` attribute provided to `mkShellNoCC`.
 
 Set `shellHook` to output a colorful greeting:
@@ -176,7 +176,7 @@ Set `shellHook` to output a colorful greeting:
  }
 ```
 
-Try it again!
+Try it again.
 Exit the shell by typing `exit` or pressing `Ctrl`+`D`, then start it again with `nix-shell` to observe the effect.
 
 ## References

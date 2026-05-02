@@ -254,6 +254,7 @@ Alternatives:
 
 - Handle dependencies with [`npins`].
 - Handle dependencies inline using functions such as the [fetchers] or [`builtins.fetchTree`].
+- Use `inputs.<name>.flake = false;`
 
 [fetchers]: https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers
 [`flake-inputs`]: https://github.com/fricklerhandwerk/flake-inputs

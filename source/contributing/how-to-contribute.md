@@ -2,7 +2,7 @@
 # How to contribute
 
 The Nix ecosystem is developed by many volunteers and a few paid developers, maintaining one of the largest open source software distributions in the world.
-Keeping it working and up to date – and improving it continuously – would not be possible without your support!
+Keeping it working and up to date – and improving it continuously – would not be possible without your support.
 
 This guide shows how you can contribute to {term}`Nix`, {term}`Nixpkgs` or {term}`NixOS`.
 It assumes that you're already somewhat proficient with basic concepts and workflows, which are outlined in the [beginner tutorial series](tutorials).

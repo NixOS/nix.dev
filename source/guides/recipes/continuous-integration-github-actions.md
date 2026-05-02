@@ -9,13 +9,11 @@ myst:
 
 # Continuous integration with GitHub Actions
 
-In this guide, we'll show you **a few short steps** to get started using [GitHub Actions](https://github.com/features/actions) as your continuous integration (CI) workflow for commits and pull requests.
+Set up [GitHub Actions](https://github.com/features/actions) as your continuous integration (CI) workflow for commits and pull requests.
 
-One benefit of Nix is that **CI can build and cache developer environments for every project** on every branch using binary caches.
+Nix lets CI build and cache developer environments for every project on every branch using binary caches.
 
-An important aspect of CI is the feedback loop of, **how many minutes does the build take to finish?**
-
-There are several good options, but Cachix (below) is the most straightforward.
+Build time is a key CI metric. Cachix (below) is the most straightforward caching option.
 
 ## Caching builds using Cachix
 

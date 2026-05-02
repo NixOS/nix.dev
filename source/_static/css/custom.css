@@ -108,3 +108,7 @@ html[data-theme="dark"] .highlight .gd {
 .navbar-nav li.toctree-l1 > details > ul {
   padding: 0;
 }
+
+html[data-theme="dark"] iframe[title="GitHub"] {
+  filter: invert(0.93) hue-rotate(100deg);
+}

@@ -1,7 +1,7 @@
 (dependency-management-npins)=
 # Automatically managing remote sources with `npins`
 
-The Nix language can be used to describe dependencies between files managed by Nix.
+The Nix language describes dependencies between files that Nix manages.
 Nix expressions themselves can depend on remote sources, and there are multiple ways to specify their origin, as shown in [](pinning-nixpkgs).
 
 For more automation around handling remote sources, set up [`npins`](https://github.com/andir/npins/) in your project:
@@ -104,7 +104,7 @@ npins import-niv
 ```
 
 :::{warning}
-All the imported entries will be updated, so they won't necessarily point to the same commits as before!
+All the imported entries will be updated, so they won't necessarily point to the same commits as before.
 :::
 
 ## Managing NixOS configurations

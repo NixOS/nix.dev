@@ -62,7 +62,7 @@ Copy NixOS to your SD card by replacing `sdX` with the name of your device in th
 
 Once that command exits, **move the SD card into your Raspberry Pi and power it on**.
 
-You should be greeted with a fresh shell!
+You should be greeted with a fresh shell.
 
 In case the image doesn't boot, it's worth [updating the firmware](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#bootloader_update_stable) and booting the image again.
 
@@ -72,13 +72,31 @@ Run `sudo -i` to get a root shell for the rest of the tutorial.
 
 At this point you'll need an internet connection. If you can use an ethernet cable, plug it in and skip to the next section.
 
-If you're connecting to wifi, run `iwconfig` to find the name of your wireless network interface. If it's `wlan0`, replace `SSID` and `passphrase` with your data and run:
+If you're connecting to wifi, run `ip link` to find the name of your wireless network interface. Look for an interface starting with `wl` (commonly `wlan0`).
 
+Replace `SSID` and `passphrase` with your wifi credentials and run:
 ```shell-session
 # wpa_supplicant -B -i wlan0 -c <(wpa_passphrase 'SSID' 'passphrase') &
 ```
 
-Once you see in your terminal that connection is established, run `host nixos.org` to check that the DNS resolves correctly.
+Wait for `wpa_supplicant` to establish the connection. Then assign a static IP address to enable internet access. Replace `192.168.1.X` with an available IP address on your network and `192.168.1.1` with your router's gateway address:
+```shell-session
+# ip addr add 192.168.1.X/24 dev wlan0
+# ip route add default via 192.168.1.1
+```
+
+Now you can download and run `dhcpcd` to obtain a proper IP address:
+```shell-session
+# nix-shell -p dhcpcd
+# dhcpcd wlan0
+```
+
+After a few seconds, verify the connection by running:
+```shell-session
+# host nixos.org
+```
+
+If DNS resolution succeeds, you have internet connectivity and can proceed to the next section.
 
 In case you've made a typo, run `pkill wpa_supplicant` and start over.
 
@@ -177,7 +195,7 @@ If your system doesn't boot, select the oldest configuration in the bootloader m
 
 ## Making changes
 
-It booted, congratulations!
+It booted, congratulations.
 
 To make further changes to the configuration, [search through NixOS options](https://search.nixos.org/options),
 edit `/etc/nixos/configuration.nix`, and update your system:
@@ -201,3 +219,4 @@ $ sudo -i
   We recommend pinning the reference to `nixos-hardware`: [](ref-pinning-nixpkgs)
 
 - To tweak bootloader options affecting hardware, [see `config.txt` options](https://www.raspberrypi.org/documentation/configuration/config-txt/). You can change these options by running `mount /dev/disk/by-label/FIRMWARE /mnt` and opening `/mnt/config.txt`.
+

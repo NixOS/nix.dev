@@ -82,7 +82,7 @@ with (import <nixpkgs> {});
 
 This brings all attributes of the imported expression into scope of the current expression.
 
-There are a number of problems with that approach:
+This approach has problems:
 
 - Static analysis can't reason about the code, because it would have to actually evaluate this file to see which names are in scope.
 - When more than one `with` is used, it's not clear anymore where the names are coming from.

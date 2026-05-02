@@ -22,7 +22,7 @@ They can be written and launched outside of NixOS, on any Linux machine[^darwin]
 
 [^darwin]: Support for [running NixOS VM tests on macOS](https://github.com/NixOS/nixpkgs/issues/108984) is also implemented but [currently undocumented](https://github.com/NixOS/nixpkgs/issues/254552).
 
-Integration tests are reproducible due to the design properties of Nix, making them a valuable part of a continuous integration (CI) pipeline.
+Nix's design properties make integration tests reproducible, which makes them valuable in a continuous integration (CI) pipeline.
 
 ## The `testers.runNixOSTest` function
 
@@ -65,7 +65,7 @@ The following configuration values must be set:
   This Python test script can access the virtual machines via the names used for the `nodes`.
   It has super user rights in the virtual machines.
   In the Python script each virtual machine is accessible via the `machine` object.
-  NixOS provides [various methods](https://nixos.org/manual/nixos/stable/index.html#ssec-machine-objects) to run tests on these configurations.
+  NixOS provides [methods](https://nixos.org/manual/nixos/stable/index.html#ssec-machine-objects) to run tests on these configurations.
 
 The test framework automatically starts the virtual machines and runs the Python script.
 
