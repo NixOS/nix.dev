@@ -10,29 +10,29 @@
     "sha256": "0mnldyqrbq4hcmghkprl22z5c7367shgxidixs5a01zd8094bm9y"
   },
   "2.32": {
-    "url": "https://github.com/nixos/nix/tarball/c3ed9db6c4d5182373a80162152526a1017d18df",
+    "url": "https://github.com/nixos/nix/tarball/9e20ed0d68f5018fc687fdc47386f12ca10c87f1",
     "version": "2.32.8",
-    "sha256": "0ag5px9w0861gs8hjnkja4s4mjdr67br47yqxhzgz6k26g2yfgi8"
+    "sha256": "03dd3vix5hd3f9w81bd6gjch1ypsqvz5n36v89ynnhj0yha3x37v"
   },
   "2.31": {
-    "url": "https://github.com/nixos/nix/tarball/4cd775864b0eaaa738521739a1ccd35fcd4ff616",
+    "url": "https://github.com/nixos/nix/tarball/4e77583c3bd54f37c1734ad57269b7cd4849be85",
     "version": "2.31.5",
-    "sha256": "0bfkcmwpgj50vsaqcg21pgi81bvvrbdkk5v22pbjllwmnmcyyfi4"
+    "sha256": "0s4ga55g2n0dn45fz7ij8bn7a968v8k7m3sxlnnkc7jsx06w4vzm"
   },
   "2.30": {
-    "url": "https://github.com/nixos/nix/tarball/70ed8b1dc43ee7565a980e2ce128fc0d936c23e8",
+    "url": "https://github.com/nixos/nix/tarball/e973dbce396e25b2f766a91e592650cde7254025",
     "version": "2.30.5",
-    "sha256": "0gb13k1sy29r9wlzyqvnwzflh7a1syhjbfjn16lafjzhl3djyf1g"
+    "sha256": "0025qz2iamva016f05lxnci9qnpick41w47ra5nk1v38crcq4iym"
   },
   "2.29": {
-    "url": "https://github.com/nixos/nix/tarball/0d66499a821671649a3bc826bf67d07c76ae259f",
+    "url": "https://github.com/nixos/nix/tarball/2fab5906d5a8e6152bfa14a82937fb1e48d45448",
     "version": "2.29.4",
-    "sha256": "1rcvxq5yx4ggziady6n1s36gfnxcfj2i29q8brxx7an9szdfbl5y"
+    "sha256": "1rng3zi33lmms37hhz1fj24pvhpicks930fb1w8rh2y1850b862v"
   },
   "2.28": {
-    "url": "https://github.com/nixos/nix/tarball/bca8fcc7ca479085eb26c6469a3901a4c5360c5e",
+    "url": "https://github.com/nixos/nix/tarball/702adbeba297fd1cbf52ac948ee3d553527cb7c4",
     "version": "2.28.7",
-    "sha256": "174sjws1bi3j0hflxn0jsvbnl5z8limkfzs67bwq1gf6dhqcbfjp"
+    "sha256": "1aj0gh8mllbaks48z1y9qshxx8ki17pwbqjb680kg15712qa1xhq"
   },
   "2.27": {
     "url": "https://github.com/nixos/nix/tarball/c73c503d5f41aef0a5a0493ccc4d435eda229e65",
