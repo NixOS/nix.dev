@@ -115,8 +115,10 @@ Alternatives:
 - Use flakes as thin wrappers over existing Nix code.
   This way, code can be used in both ways.
 - Use Nix modules: flake users can import these with `flake = false;`.
+- Since NixOS 26.05, one or more NixOS configurations can be loaded from a single [`system.nix` entrypoint].
 
 [`import`]: https://nix.dev/tutorials/nix-language#import
+[`system.nix` entrypoint]: https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-26.05-highlights
 
 ### Running commands
 
