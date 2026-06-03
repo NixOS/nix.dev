@@ -110,7 +110,7 @@ All the imported entries will be updated, so they won't necessarily point to the
 ## Managing NixOS configurations
 
 NixOS defaults to using channels to locate `nixpkgs`.
-You can instead pin a version using `npins` from the `system.nix` entrypoint:
+You can instead pin a version using `npins` from the `system.nix` entrypoint (available since 26.05):
 
 ```nix
 let
@@ -121,7 +121,13 @@ import "${sources.nixpkgs}/nixos" {
 }
 ```
 
-You can then disable channels in your configuration:
+Before NixOS 26.05's `system.nix` use:
+
+```bash
+sudo NIX_PATH="nixos-config=configuration.nix:nixpkgs=$(nix-instantiate --raw --eval npins -A nixpkgs.outPath)" nixos-rebuild switch
+```
+
+If you use npins with `system.nix`, disable channels in your configuration:
 
 ```nix
 # configuration.nix
