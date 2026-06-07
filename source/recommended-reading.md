@@ -14,11 +14,11 @@
 
   Overview of language features.
 
-- [Video: Reading the Nix language](https://youtu.be/hbJkMl631FE?t=1533) (Jonas Chevalier, 2019)
+- [Video: Reading the Nix language](https://youtu.be/61MuMY9XFNo) (Jonas Chevalier, 2019)
 
   Introduction to reading Nix language code.
 
-- [Video: How and Why it Works](https://youtu.be/hbJkMl631FE?t=4806) (Graham Christensen, 2019)
+- [Video: How and Why it Works](https://youtu.be/lxtHH838yko) (Graham Christensen, 2019)
 
   Introduction to writing derivations.
 
