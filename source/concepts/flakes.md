@@ -234,9 +234,6 @@ You can override these if you want using `follows` statements:
 
 This way, Home Manager's inputs reuse your chosen `nixpkgs`.
 
-If you don't want to load a dependency, you can also disable it.
-In the above example, that could look like `inputs.home-manager.inputs.nixpkgs = null;`.
-
 Pros:
 
 - Make it easy to reproduce published software, following the versions they used.
