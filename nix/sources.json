@@ -48,9 +48,9 @@
       },
       "branch": "nixos-24.11",
       "submodules": false,
-      "revision": "2baa12ff69913392faf0ace833bc54bba297ea95",
-      "url": "https://github.com/nixos/nixpkgs/archive/2baa12ff69913392faf0ace833bc54bba297ea95.tar.gz",
-      "hash": "0b98zjp4klps935sch2n0mysfr3l9sz13d2r74dsgnsnklsxm0ak"
+      "revision": "50ab793786d9de88ee30ec4e4c24fb4236fc2674",
+      "url": "https://github.com/nixos/nixpkgs/archive/50ab793786d9de88ee30ec4e4c24fb4236fc2674.tar.gz",
+      "hash": "1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx"
     },
     "25.05": {
       "type": "Git",
@@ -61,9 +61,35 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "55d1f923c480dadce40f5231feb472e81b0bab48",
-      "url": "https://github.com/nixos/nixpkgs/archive/55d1f923c480dadce40f5231feb472e81b0bab48.tar.gz",
-      "hash": "0i0ayb1p7ypbjnjf837qlfn6n3i3468cvalha54yakjdi6a6srnb"
+      "revision": "ac62194c3917d5f474c1a844b6fd6da2db95077d",
+      "url": "https://github.com/nixos/nixpkgs/archive/ac62194c3917d5f474c1a844b6fd6da2db95077d.tar.gz",
+      "hash": "0v6bd1xk8a2aal83karlvc853x44dg1n4nk08jg3dajqyy0s98np"
+    },
+    "25.11": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-25.11",
+      "submodules": false,
+      "revision": "3cac626ec5e3703e835f227687e88aa9e2f25701",
+      "url": "https://github.com/nixos/nixpkgs/archive/3cac626ec5e3703e835f227687e88aa9e2f25701.tar.gz",
+      "hash": "1127bwk2zj67dc5fi5s1wmc9zskc5midy9vzdwv4z26p4k5zgxgk"
+    },
+    "26.05": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-26.05",
+      "submodules": false,
+      "revision": "714a5f8c4ead6b31148d829288440ed033ccc041",
+      "url": "https://github.com/nixos/nixpkgs/archive/714a5f8c4ead6b31148d829288440ed033ccc041.tar.gz",
+      "hash": "0v06aa1pwq9l69531mv8ll2zp2kg22ayai93vmfwism7ijxp3r35"
     }
   },
   "version": 5
