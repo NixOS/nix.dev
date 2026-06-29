@@ -152,6 +152,7 @@ html_theme_options = {
     "path_to_docs": "source",
     "use_repository_button": True,
     "show_navbar_depth": 2,
+    "back_to_top_button": False,
 }
 
 
