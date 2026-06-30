@@ -31,8 +31,9 @@ flowchart
   external[external sources] --> |link| Discourse
   Discourse --> |draft| RFCs --> |implementation| code
   RFCs --> |explanation| docs
-  code --> |reference| manuals --> |guide| docs[nix.dev]
-  Discourse --> |tutorial| docs
+  code --> |reference, guide| manuals
+  manuals --> |reference| docs[nix.dev]
+  Discourse --> |tutorial, guide| docs
   subgraph stream
     Matrix
     events
@@ -46,6 +47,8 @@ flowchart
     docs
   end
 ```
+
+Guides appear in two places by scope: component-specific guides live in that component's manual (for example the Nixpkgs manual), while cross-component and ecosystem guides live on nix.dev.
 
 Arrows point roughly towards
 
