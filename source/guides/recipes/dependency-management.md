@@ -109,11 +109,32 @@ All the imported entries will be updated, so they won't necessarily point to the
 
 ## Managing NixOS configurations
 
-NixOS relies on the `NIX_PATH` environment variable to locate `nixpkgs`, which defaults to using channels.
-To instead use a `nixpkgs` version managed by `npins`, one can manually override this environment variable on system rebuilds:
+NixOS defaults to using channels to locate `nixpkgs`.
+You can instead pin a version using `npins` from the `system.nix` entrypoint (available since 26.05):
+
+```nix
+let
+  sources = import ./npins;
+in
+import "${sources.nixpkgs}/nixos" {
+  configuration = ./configuration.nix;
+}
+```
+
+Before NixOS 26.05's `system.nix` use:
 
 ```bash
 sudo NIX_PATH="nixos-config=configuration.nix:nixpkgs=$(nix-instantiate --raw --eval npins -A nixpkgs.outPath)" nixos-rebuild switch
+```
+
+If you use npins with `system.nix`, disable channels in your configuration:
+
+```nix
+# configuration.nix
+{
+  # ...
+  nix.channel.enable = false;
+}
 ```
 
 To make such pinned dependencies available as [look-up paths](https://nix.dev/tutorials/nix-language.html#lookup-paths) (like `<nixpkgs>`) while using the NixOS configuration, one may use:
@@ -126,7 +147,6 @@ let
 in
 {
   # ...
-  nix.channel.enable = false;
   nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") sources;
 }
 ```
