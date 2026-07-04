@@ -31,6 +31,9 @@ Astro.response.headers.set(
 // wait. `reference` purges the whole family; `reference:<slug>` purges one page.
 Astro.response.headers.set("Netlify-Cache-Tag", `reference,reference:${slug}`);
 
+// Server rendered needs
+Astro.response.headers.set("X-Robots-Tag", "noindex");
+
 const renderedAt = new Date().toISOString();
 ---
 
@@ -41,8 +44,9 @@ const renderedAt = new Date().toISOString();
   <p>{reference.summary}</p>
 
   <Aside type="note">
-    Cached copy generated at <strong>{renderedAt}</strong> for slug <code>{slug}</code>.
-    On Netlify this stays stable across reloads — served from the durable CDN
+    Cached copy generated at <strong>{renderedAt}</strong> for slug <code
+      >{slug}</code
+    >. On Netlify this stays stable across reloads — served from the durable CDN
     cache — and only changes after the page is purged or revalidated. (In
     <code>astro dev</code> there is no CDN, so it re-renders every request.)
   </Aside>
