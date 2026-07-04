@@ -1,0 +1,14 @@
+[build]
+command = "astro build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "22"
+
+# Keep the POC out of search indexes.
+# Attention: Server rendered /reference/* needs a seperate X-Robots-Tag itself
+# because netlify.toml headers are not applied to function responses.
+[[headers]]
+for = "/*"
+[headers.values]
+X-Robots-Tag = "noindex"

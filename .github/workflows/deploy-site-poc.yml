@@ -1,0 +1,42 @@
+name: "Deploy site POC"
+
+# MANUAL DISPATCH
+on:
+  workflow_dispatch:
+    inputs:
+      production:
+        description: "Production deploy"
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-site-poc
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # TOOD: make this a nix-build
+      - name: Build and deploy to Netlify
+        run: npx netlify deploy --build ${{ inputs.production && '--prod' || '' }} --message "workflow_dispatch by ${{ github.actor }} @ ${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.PERSONAL_POC_ACCESS_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_POC_SITE_ID }}

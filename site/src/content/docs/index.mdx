@@ -1,0 +1,39 @@
+---
+title: NixOS documentation
+description: The documentation for the NixOS project — Nix, NixOS, and Nixpkgs — with guides and references in one place.
+banner:
+  content: |
+    <strong>Prototype</strong> — evaluation build. Reference pages are synthetic and non-authoritative.
+template: splash
+hero:
+  tagline: Guides and references for Nix, NixOS, and Nixpkgs.
+  actions:
+    - text: Nix
+      link: /nix/
+      icon: right-arrow
+    - text: NixOS
+      link: /nixos/
+      icon: right-arrow
+      variant: minimal
+    - text: Nixpkgs
+      link: /nixpkgs/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Nix" icon="nix">
+    The Nix language, CLI, store, and package management. [Open Nix
+    docs](/nix/).
+  </Card>
+  <Card title="NixOS" icon="laptop">
+    The Linux distribution built on Nix: configuration and administration. [Open
+    NixOS docs](/nixos/).
+  </Card>
+  <Card title="Nixpkgs" icon="puzzle">
+    The package collection: lib functions, build helpers, hooks, and language
+    frameworks. [Open Nixpkgs docs](/nixpkgs/).
+  </Card>
+</CardGrid>

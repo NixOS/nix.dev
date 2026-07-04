@@ -1,0 +1,56 @@
+---
+export const prerender = false;
+
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { Aside, Code } from "@astrojs/starlight/components";
+import { getReference } from "../../lib/reference";
+
+const slug = Astro.params.slug ?? "";
+const reference = await getReference(slug);
+
+if (!reference) {
+  return new Response("Not found", { status: 404 });
+}
+
+// Reference content is immutable between requests, so cache aggressively at the
+// CDN and render each page at most once per data change.
+//
+// `durable`: persist the rendered response in Netlify's globally-shared durable
+//   cache. The function runs ONCE for a given URL across the whole network;
+//   every other edge node — and every request after a deploy — reuses the
+//   stored response instead of re-invoking the function. Serverless-function
+//   only; NOT honored if this route is switched to a Netlify Edge Function.
+// `stale-while-revalidate`: always serve instantly from cache and refresh in
+//   the background. With `durable`, only a single revalidation render happens.
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, durable, max-age=86400, stale-while-revalidate=604800",
+);
+// Tag the response so a data update can purge exactly the affected page(s) via
+// `purgeCache({ cacheTags: [...] })` (@netlify/functions) — no redeploy, no TTL
+// wait. `reference` purges the whole family; `reference:<slug>` purges one page.
+Astro.response.headers.set("Netlify-Cache-Tag", `reference,reference:${slug}`);
+
+// Server rendered needs
+Astro.response.headers.set("X-Robots-Tag", "noindex");
+
+const renderedAt = new Date().toISOString();
+---
+
+<StarlightPage
+  frontmatter={{ title: reference.title, description: reference.description }}
+  headings={reference.headings}
+>
+  <p>{reference.summary}</p>
+
+  <Aside type="note">
+    Cached copy generated at <strong>{renderedAt}</strong> for slug <code
+      >{slug}</code
+    >. On Netlify this stays stable across reloads — served from the durable CDN
+    cache — and only changes after the page is purged or revalidated. (In
+    <code>astro dev</code> there is no CDN, so it re-renders every request.)
+  </Aside>
+
+  <h2 id="attributes">Attributes</h2>
+  <Code code={reference.example} lang="nix" title={`${reference.title}.nix`} />
+</StarlightPage>
