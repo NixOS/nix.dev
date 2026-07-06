@@ -1,8 +1,8 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-
 import netlify from "@astrojs/netlify";
+import starlightSidebarTopics from "starlight-sidebar-topics";
 
 export default defineConfig({
   integrations: [
@@ -21,22 +21,31 @@ export default defineConfig({
           href: "https://github.com/nixos/nixpkgs",
         },
       ],
-      sidebar: [
-        {
-          label: "Guides",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
-          ],
-        },
-        {
-          label: "Reference (on-demand)",
-          items: [
-            { label: "packages/hello", link: "/reference/packages/hello" },
-            { label: "packages/git", link: "/reference/packages/git" },
-            { label: "lib/mkOption", link: "/reference/lib/mkOption" },
-          ],
-        },
+      components: {
+        Header: "./src/components/Header.astro",
+        Sidebar: "./src/components/Sidebar.astro",
+      },
+      plugins: [
+        starlightSidebarTopics([
+          {
+            label: "Nix",
+            link: "/nix/",
+            icon: "nix",
+            items: [{ autogenerate: { directory: "nix" } }],
+          },
+          {
+            label: "NixOS",
+            link: "/nixos/",
+            icon: "laptop",
+            items: [{ autogenerate: { directory: "nixos" } }],
+          },
+          {
+            label: "Nixpkgs",
+            link: "/nixpkgs/",
+            icon: "puzzle",
+            items: [{ autogenerate: { directory: "nixpkgs" } }],
+          },
+        ]),
       ],
     }),
   ],
