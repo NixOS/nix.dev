@@ -7,6 +7,7 @@
     inherit system;
   },
   withManuals ? false, # building the manuals is expensive
+  withPDF ? false, # building the PDF is expensive
 }:
 let
   lib = pkgs.lib;
@@ -53,7 +54,7 @@ let
       ''
         cp -f ${substitutedNixManualReference} source/reference/nix-manual.md
         make html
-        make latexpdf
+        ${lib.optionalString withPDF "make latexpdf"}
       '';
     installPhase =
       let
@@ -80,7 +81,7 @@ let
       ''
         mkdir -p $out/manual/nix
         cp -R build/html/* $out/
-        cp build/latex/nix-dev.pdf $out/
+        ${lib.optionalString withPDF "cp build/latex/nix-dev.pdf $out/"}
         cp netlify.toml $out/
       ''
       + lib.optionalString withManuals ''
@@ -95,7 +96,7 @@ let
     in
 
     pkgs.devmode.override {
-      buildArgs = "-A build --show-trace --arg withManuals ${boolean withManuals}";
+      buildArgs = "-A build --show-trace --arg withManuals ${boolean withManuals} --arg withPDF ${boolean withPDF}";
       open = "/index.html";
     };
   update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };

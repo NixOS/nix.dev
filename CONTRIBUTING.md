@@ -42,6 +42,21 @@ Or for interactive development:
 $ nix-shell --arg withManuals true --run devmode
 ```
 
+## Building the PDF
+
+By default, nix.dev is built without the PDF rendering, as that is takes too long for quick iteration on the contents.
+To enable building the PDF:
+
+```shell-session
+$ nix-build -A build --arg withPDF true
+```
+
+Or for interactive development:
+
+```shell-session
+$ nix-shell --arg withPDF true --run devmode
+```
+
 ## Updating reference manuals
 
 With the current setup, the [Nix manual hosted on nix.dev](https://nix.dev/reference/nix-manual) does not get updated automatically with new releases.
