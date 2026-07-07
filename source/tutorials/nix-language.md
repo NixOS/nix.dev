@@ -38,7 +38,7 @@ This is an introduction to **reading the Nix language**, for the purpose of foll
 - Language: syntax and semantics
 - Libraries: `builtins` and `pkgs.lib`
 - Developer tools: testing, debugging, linting, formatting, ...
-- Generic build mechanisms: `stdenv.mkDerivation`, trivial builders, ...
+- Generic build mechanisms: `stdenv.mkDerivation`, build helpers, ...
 - Composition and configuration mechanisms: `override`, `overrideAttrs`, overlays, `callPackage`, ...
 - Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, ...
 - NixOS module system: `config`, `option`, ...
@@ -2115,7 +2115,7 @@ Most names you will encounter in Nix language code come from Nixpkgs:
 Nixpkgs provides generic build mechanisms that are widely used:
 
 - [`stdenv`][stdenv] - most importantly `mkDerivation`
-- [Trivial Builders][trivial-builders] - to create files and shell scripts
+- [Build helpers][build-helpers] - for creating derivations, including shell scripts and single files
 
 Packages from Nixpkgs can be modified through multiple mechanisms:
 
@@ -2132,7 +2132,7 @@ The NixOS Linux distribution has a modular configuration system that imposes its
 
 [nix-pills]: https://nixos.org/guides/nix-pills/
 [stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
-[trivial-builders]: https://nixos.org/manual/nixpkgs/stable/#chap-trivial-builders
+[build-helpers]: https://nixos.org/manual/nixpkgs/stable/#part-builders
 [overlays]: https://nixos.org/manual/nixpkgs/stable/#chap-overlays
 [overrides]: https://nixos.org/manual/nixpkgs/stable/#chap-overrides
 [language-support]: https://nixos.org/manual/nixpkgs/stable/#chap-language-support
