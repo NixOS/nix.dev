@@ -693,7 +693,10 @@ is equivalent to
 x = x; y = y;
 ```
 
-It is also possible to `inherit` names from a specific attribute set with parentheses (`inherit (...) ...`).
+(inherit-from-attrset)=
+### `inherit (...) ...`
+
+It is also possible to `inherit` names from a specific attribute set by enclosing its name parentheses.
 
 Example:
 
