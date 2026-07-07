@@ -23,7 +23,7 @@ export default defineConfig({
       ],
       components: {
         Banner: "./src/components/Banner.astro",
-        Header: "./src/components/Header.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
         Sidebar: "./src/components/Sidebar.astro",
       },
       plugins: [
