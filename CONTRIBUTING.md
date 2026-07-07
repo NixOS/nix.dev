@@ -44,7 +44,7 @@ $ nix-shell --arg withManuals true --run devmode
 
 ## Building the PDF
 
-By default, nix.dev is built without the PDF rendering, as that is takes too long for quick iteration on the contents.
+By default, nix.dev is built without the PDF rendering, as that takes too long for quick iteration on the contents.
 To enable building the PDF:
 
 ```shell-session
