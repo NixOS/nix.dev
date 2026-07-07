@@ -1,6 +1,10 @@
 (file-sets-tutorial)=
 # Working with local files
 
+```{contributors}
+:authors: infinisil
+```
+
 To build a local project in a Nix derivation, source files must be accessible to its [`builder` executable](https://nix.dev/manual/nix/stable/language/derivations#attr-builder).
 By default, the `builder` runs in an [isolated environment](https://nix.dev/manual/nix/stable/command-ref/conf-file.html#conf-sandbox) that only allows reading from the Nix store.
 The Nix language has built-in features to copy local files to the store and expose the resulting store paths.

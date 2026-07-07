@@ -8,6 +8,11 @@ myst:
 (provisioning-remote-machines-tutorial)=
 # Provisioning remote machines via SSH
 
+```{contributors}
+:authors: tfc
+:editors: fricklerhandwerk
+```
+
 It is possible to replace any Linux installation with a NixOS configuration on running systems using [`nixos-anywhere`] and [`disko`].
 
 [`nixos-anywhere`]: https://nix-community.github.io/nixos-anywhere/

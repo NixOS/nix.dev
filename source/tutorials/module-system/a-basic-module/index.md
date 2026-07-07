@@ -1,5 +1,10 @@
 # A basic module
 
+```{contributors}
+:authors: djacu
+:editors: fricklerhandwerk
+```
+
 What is a module?
 
 * A module is a function that takes an attribute set and returns an attribute set.

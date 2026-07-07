@@ -2,6 +2,11 @@
 
 # Ad hoc shell environments
 
+```{contributors}
+:authors: domenkozar
+:editors: fricklerhandwerk
+```
+
 In a Nix shell environment, you can immediately use any program packaged with Nix, without installing it permanently.
 
 You can also share the command invoking such a shell with others, and it will work on all Linux distributions, WSL, and macOS[^1].

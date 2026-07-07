@@ -2,6 +2,11 @@
 
 # Reproducible interpreted scripts
 
+```{contributors}
+:authors: rapenne-s
+:editors: fricklerhandwerk
+```
+
 In this tutorial, you will learn how to use Nix to create and run reproducible interpreted scripts, also known as [shebang] scripts.
 
 ## Requirements

@@ -8,6 +8,11 @@ myst:
 (distributed-build-setup-tutorial)=
 # Setting up distributed builds
 
+```{contributors}
+:authors: tfc
+:editors: fricklerhandwerk
+```
+
 Nix can speed up builds by spreading the work across multiple computers at once.
 
 ## Introduction
