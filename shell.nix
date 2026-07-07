@@ -1,1 +1,1 @@
-(import ./. { }).shell
+args@{ ... }: (import ./. args).shell
