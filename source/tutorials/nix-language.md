@@ -311,12 +311,11 @@ Nix language data types *without functions* work just like their counterparts in
 ::::
 
 :::{note}
-- Attribute names usually do not need quotes.[^attrnames]
-- List elements are separated by white space.[^list-whitespace]
+- [Attribute set syntax](https://nix.dev/manual/nix/stable/language/syntax#attrs-literal): attribute names usually do not need quotes
+- [List syntax](https://nix.dev/manual/nix/stable/language/syntax#list-literal): list elements are separated by white space
 :::
 
-[^attrnames]: Details: [Nix manual - attribute set](https://nix.dev/manual/nix/stable/language/syntax#attrs-literal)
-[^list-whitespace]: Details: [Nix manual - list](https://nix.dev/manual/nix/stable/language/syntax#list-literal)
+
 
 (rec-attrset)=
 #### Recursive attribute set `rec { ... }`
