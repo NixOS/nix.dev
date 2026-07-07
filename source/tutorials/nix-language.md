@@ -1539,7 +1539,6 @@ builtins.toString
 <PRIMOP>
 ```
 
-[nix-operators]: https://nix.dev/manual/nix/stable/language/operators.html
 [nix-builtins]: https://nix.dev/manual/nix/stable/language/builtins.html
 
 (reading-nix-language-import)=
@@ -2058,6 +2057,7 @@ Explanation:
 
 - [Nix manual: Nix language][manual-language]
 - [Nix manual: String interpolation][manual-string-interpolation]
+- [Nix manual: Operators][operators]
 - [Nix manual: Built-in Functions][nix-builtins]
 - [Nix manual: `nix repl`][`nix repl`]
 - [Nixpkgs manual: Functions reference][nixpkgs-functions]
