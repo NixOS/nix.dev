@@ -1,0 +1,32 @@
+---
+const message = "Prototype. Expect breaking changes. Contribute on ";
+---
+
+<div class="sl-banner global-banner" data-pagefind-ignore>
+  <span aria-hidden="true">🚧</span>
+  <strong>{message}</strong><a
+    href="https://github.com/nixos/nix.dev"
+    target="_blank"
+    rel="noopener noreferrer">GitHub</a
+  >
+  <span aria-hidden="true"> 🚧</span>
+</div>
+
+<style>
+  @layer starlight.core {
+    .sl-banner.global-banner {
+      padding: 1rem var(--sl-nav-pad-x);
+      background-color: #d21c1c;
+      color: #fff;
+      font-size: var(--sl-text-lg);
+      font-weight: 700;
+      line-height: var(--sl-line-height-headings);
+      text-align: center;
+      text-wrap: balance;
+      box-shadow: var(--sl-shadow-sm);
+    }
+    .sl-banner.global-banner :global(a) {
+      color: #fff;
+    }
+  }
+</style>
