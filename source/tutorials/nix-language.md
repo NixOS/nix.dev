@@ -2126,9 +2126,7 @@ Different language ecosystems and frameworks have different requirements to acco
 
 - [Languages and frameworks][language-support] lists tools provided by Nixpkgs to build language- or framework-specific packages with Nix.
 
-The NixOS Linux distribution has a modular configuration system that imposes its own conventions:
-
-- [NixOS modules][nixos-modules] shows how NixOS configurations are organized.
+The NixOS Linux distribution uses a [modular configuration system](module-system-tutorial) that imposes its own conventions.
 
 [nix-pills]: https://nixos.org/guides/nix-pills/
 [stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
