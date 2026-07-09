@@ -125,10 +125,10 @@ Files in a given file set can be added to the Nix store with [`toSource`](https:
 The argument to this function requires a `root` attribute to determine which source directory to copy to the store.
 Only the files in the `fileset` attribute are included in the result.
 
-Define `build.nix` as follows:
+Define `package.nix` as follows:
 
 ```{code-block} nix
-:caption: build.nix
+:caption: package.nix
 { stdenv, lib }:
 let
   fs = lib.fileset;
@@ -177,7 +177,7 @@ But the real benefit of the file set library comes from its facilities for compo
 To be able to copy both files `hello.txt` and `world.txt` to the output, add the whole project directory as a source again:
 
 ```{code-block} diff
-:caption: build.nix
+:caption: package.nix
  { stdenv, lib }:
  let
    fs = lib.fileset;
@@ -248,7 +248,7 @@ The result is a new file set that contains all files from the first argument tha
 Use it to filter out `./result` by changing the `sourceFiles` definition:
 
 ```{code-block} diff
-:caption: build.nix
+:caption: package.nix
  { stdenv, lib }:
  let
    fs = lib.fileset;
@@ -262,7 +262,7 @@ Building this, the file set library will specify which files are taken from the 
 ```shell-session
 $ nix-build
 trace: /home/user/fileset
-trace: - build.nix (regular)
+trace: - package.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
 trace: - npins (all files in directory)
@@ -281,7 +281,7 @@ An attempt to repeat the build will re-use the existing store path:
 ```
 $ nix-build
 trace: /home/user/fileset
-trace: - build.nix (regular)
+trace: - package.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
 trace: - npins (all files in directory)
@@ -304,7 +304,7 @@ error: lib.fileset.difference: Second argument (negative set)
 Follow the instructions in the error message, and use [`maybeMissing`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.maybeMissing) to create a file set from a path that may not exist (in which case the file set will be empty):
 
 ```{code-block} diff
-:caption: build.nix
+:caption: package.nix
  { stdenv, lib }:
  let
    fs = lib.fileset;
@@ -329,7 +329,7 @@ Another build attempt will produce a different trace, but the same output path:
 ```
 $ nix-build
 trace: /home/user/fileset
-trace: - build.nix (regular)
+trace: - package.nix (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
 trace: - npins (all files in directory)
@@ -342,10 +342,10 @@ trace: - world.txt (regular)
 There is still a problem:
 Changing _any_ of the included files causes the derivation to be built again, even though it doesn't depend on those files.
 
-Append an empty line to `build.nix`:
+Append an empty line to `package.nix`:
 
 ```shell-session
-$ echo >> build.nix
+$ echo >> package.nix
 ```
 
 Again, Nix will start from scratch:
@@ -355,7 +355,7 @@ $ nix-build
 trace: /home/user/fileset
 trace: - default.nix (regular)
 trace: - npins (all files in directory)
-trace: - build.nix (regular)
+trace: - package.nix (regular)
 trace: - string.txt (regular)
 this derivation will be built:
   /nix/store/zmgpqlpfz2jq0w9rdacsnpx8ni4n77cn-filesets.drv
@@ -368,14 +368,14 @@ One way to fix this is to use [`unions`](https://nixos.org/manual/nixpkgs/stable
 Create a file set containing a union of the files to exclude (`fs.unions [ ... ]`), and subtract it (`difference`) from the complete directory (`./.`):
 
 ```{code-block} nix
-:caption: build.nix
+:caption: package.nix
   sourceFiles =
     fs.difference
       ./.
       (fs.unions [
         (fs.maybeMissing ./result)
         ./default.nix
-        ./build.nix
+        ./package.nix
         ./npins
       ]);
 ```
@@ -396,7 +396,7 @@ this derivation will be built:
 Changing any of the excluded files now doesn't necessarily cause a new build anymore:
 
 ```
-$ echo >> build.nix
+$ echo >> package.nix
 ```
 
 ```
@@ -414,14 +414,14 @@ The [`fileFilter`](https://nixos.org/manual/nixpkgs/stable/#function-library-lib
 Use it to select all files with a name ending in `.nix`:
 
 ```{code-block} diff
-:caption: build.nix
+:caption: package.nix
    sourceFiles =
      fs.difference
        ./.
        (fs.unions [
          (fs.maybeMissing ./result)
 -        ./default.nix
--        ./build.nix
+-        ./package.nix
 +        (fs.fileFilter (file: file.hasExt "nix") ./.)
          ./npins
        ]);
@@ -455,7 +455,7 @@ $ touch build.sh src/select.{c,h}
 Then create a file set from only the files to be included explicitly:
 
 ```{code-block} nix
-:caption: build.nix
+:caption: package.nix
 { stdenv, lib }:
 let
   fs = lib.fileset;
@@ -538,7 +538,7 @@ $ git reset src/select.o result
 Re-use this selection of files with `gitTracked`:
 
 ```{code-block} nix
-:caption: build.nix
+:caption: package.nix
   sourceFiles = fs.gitTracked ./.;
 ```
 
@@ -549,7 +549,7 @@ $ nix-build
 warning: Git tree '/home/user/fileset' is dirty
 trace: /home/vg/src/nix.dev/fileset
 trace: - README.md (regular)
-trace: - build.nix (regular)
+trace: - package.nix (regular)
 trace: - build.sh (regular)
 trace: - default.nix (regular)
 trace: - hello.txt (regular)
@@ -580,7 +580,7 @@ It allows creating a file set that consists only of files that are in _both_ of 
 Select all files that are both tracked by Git *and* relevant for the build:
 
 ```{code-block} nix
-:caption: build.nix
+:caption: package.nix
   sourceFiles =
     fs.intersection
       (fs.gitTracked ./.)
