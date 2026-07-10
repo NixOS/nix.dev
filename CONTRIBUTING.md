@@ -33,8 +33,13 @@ By default, nix.dev builds without the various versions of the Nix reference man
 To enable building the manuals:
 
 ```shell-session
-[nix-shell:nix.dev]$ nix-build -A build --arg withManuals true
-[nix-shell:nix.dev]$ devmode --arg withManuals true
+$ nix-build -A build --arg withManuals true
+```
+
+Or for interactive development:
+
+```shell-session
+$ nix-shell --arg withManuals true --run devmode
 ```
 
 ## Updating reference manuals

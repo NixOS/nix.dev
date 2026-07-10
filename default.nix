@@ -51,7 +51,7 @@ let
         };
       in
       ''
-        ${lib.optionalString withManuals "cp -f ${substitutedNixManualReference} source/reference/nix-manual.md"}
+        cp -f ${substitutedNixManualReference} source/reference/nix-manual.md
         make html
         make latexpdf
       '';
@@ -89,10 +89,15 @@ let
       '';
   };
 
-  devmode = pkgs.devmode.override {
-    buildArgs = ''-A build --show-trace'';
-    open = "/index.html";
-  };
+  devmode =
+    let
+      boolean = x: if x then "true" else "false";
+    in
+
+    pkgs.devmode.override {
+      buildArgs = "-A build --show-trace --arg withManuals ${boolean withManuals}";
+      open = "/index.html";
+    };
   update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
   update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
 in
