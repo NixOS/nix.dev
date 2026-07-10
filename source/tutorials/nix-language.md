@@ -692,7 +692,10 @@ is equivalent to
 x = x; y = y;
 ```
 
-It is also possible to `inherit` names from a specific attribute set with parentheses (`inherit (...) ...`).
+(inherit-from-attrset)=
+### `inherit (...) ...`
+
+It is also possible to `inherit` names from a specific attribute set by enclosing its name parentheses.
 
 Example:
 
@@ -730,7 +733,8 @@ Example:
 ```{code-block} nix
 :class: expression
 let
-  inherit ({ x = 1; y = 2; }) x y;
+  a = { x = 1; y = 2; };
+  inherit (a) x y;
 in [ x y ]
 ```
 
@@ -741,15 +745,15 @@ in [ x y ]
 
 :::{dropdown} Detailed explanation
 
-While this example is contrived, in more complex code you will regularly see nested `let` expressions that re-use names from their outer scope.
+While this example is contrived, in more complex code you will regularly see nested [`let` expressions](let) that re-use names from their outer scope.
 
-Here we use the attribute set `{ x = 1; y = 2; }` to have something non-trivial to inherit from.
-The `let` expression inherits `x` and `y` from that attribute set using `( )`, which is equivalent to writing:
+Here we use the attribute set `a = { x = 1; y = 2; }` to have something non-trivial to inherit from.
+The `let` expression inherits `x` and `y` from `a` using `( )`, which is equivalent to writing:
 
 ```{code-block} nix
 let
-  x = { x = 1; y = 2; }.x;
-  y = { x = 1; y = 2; }.y;
+  x = a.x;
+  y = a.y;
 in
 ```
 
