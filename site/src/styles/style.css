@@ -1,0 +1,39 @@
+/* Dark mode colors (default) */
+:root {
+  /* Nix brand colours */
+  --sl-color-accent-low: #28395f; /* L35 */
+  --sl-color-accent: #87adfa; /* L75 */
+  --sl-color-accent-high: #b7cefd; /* L85 */
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eeeeee; /* L95 */
+  --sl-color-gray-2: #cecece; /* L85 */
+  --sl-color-gray-3: #8f8f8f; /* L65 */
+  --sl-color-gray-4: #555555; /* L45 */
+  --sl-color-gray-5: #3a3a3a; /* L35 */
+  --sl-color-gray-6: #0b0b0b; /* L25 */
+  --sl-color-black: #0b0b0b; /* L15 */
+  --sl-hue-orange: 24;
+  --sl-hue-green: 138;
+  --sl-hue-blue: 220;
+  --sl-hue-purple: 246;
+  --sl-hue-red: 356;
+
+  /* Remove borders */
+  --sl-color-hairline: transparent;
+  --sl-color-hairline-shade: transparent;
+}
+/* Light mode colors */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #87adfa; /* L75 */
+  --sl-color-accent: #506fb2; /* L55 */
+  --sl-color-accent-high: #28395f; /* L35 */
+  --sl-color-white: #0b0b0b; /* L15 */
+  --sl-color-gray-1: #222222; /* L25 */
+  --sl-color-gray-2: #3a3a3a; /* L35 */
+  --sl-color-gray-3: #555555; /* L45 */
+  --sl-color-gray-4: #8f8f8f; /* L65 */
+  --sl-color-gray-5: #aeaeae; /* L75 */
+  --sl-color-gray-6: #cecece; /* L85 */
+  --sl-color-gray-7: #ffffff;
+  --sl-color-black: #ffffff;
+}

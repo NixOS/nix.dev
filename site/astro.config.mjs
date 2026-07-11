@@ -10,6 +10,7 @@ export default defineConfig({
       title: "Documentation",
       logo: { src: "./src/assets/nixos-logo.svg", alt: "NixOS" },
       favicon: "./src/assets/nixos-logo.svg",
+      customCss: [ "./src/styles/style.css" ],
       social: [
         {
           icon: "github",
