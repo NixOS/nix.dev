@@ -9,6 +9,7 @@ export default defineConfig({
     starlight({
       title: "Documentation",
       logo: { src: "./src/assets/nixos-logo.svg", alt: "NixOS" },
+      favicon: "./src/assets/nixos-logo.svg",
       social: [
         {
           icon: "github",
