@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { config } from "../site.config.ts";
 
 import logo from "../assets/nixos-logo.svg";
@@ -26,6 +27,11 @@ const pageTitle = title ? `${title} | ${config.siteTitle}` : config.siteTitle;
   <meta name="generator" content={Astro.generator} />
   <!-- Until the site is ready, we dont want to appear in search engines -->
   <meta name="robots" content="noindex" />
+
+  <!-- Fonts -->
+  <Font cssVariable="--font-route159" preload />
+  <Font cssVariable="--font-inter" preload />
+  <Font cssVariable="--font-fira-code" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
