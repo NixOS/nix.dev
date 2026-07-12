@@ -2,13 +2,8 @@
 import { defineConfig, fontProviders } from "astro/config";
 import { satteri } from "@astrojs/markdown-satteri";
 import netlify from "@astrojs/netlify";
-import expressiveCode, { ExpressiveCodeTheme } from "astro-expressive-code";
+import expressiveCode from "astro-expressive-code";
 import icon from "astro-iconset";
-
-import {
-  light as nixCodeLight,
-  dark as nixCodeDark,
-} from "./src/assets/nixCodeTheme.ts";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -22,16 +17,16 @@ export default defineConfig({
       // include: { mdi: [ "github", ] },
     }),
     expressiveCode({
-      themes: [
-        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
-        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
-      ],
+      themes: ["catppuccin-latte", "catppuccin-mocha"],
       defaultProps: {
         wrap: true,
       },
       styleOverrides: {
         codeFontFamily: "var(--font-fira-code), ui-monospace, monospace",
       },
+      useDarkModeMediaQuery: false,
+      themeCssSelector: (theme, { styleVariants }) =>
+        theme.name === styleVariants[1]?.theme.name ? ".dark" : false,
     }),
   ],
 
