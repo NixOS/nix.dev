@@ -2,5 +2,18 @@
 import { Icon } from "astro-iconset/components";
 ---
 
-<Icon name="mdi:menu" size="1.2rem" class:list={[Astro.props.class]} />
-{/* <Icon name="mdi:window-close" size="1.2rem" class="lg:hidden" /> */}
+<button
+  class:list={["cursor-pointer", Astro.props.class]}
+  x-data
+  @click="$store.nav.toggle()"
+  :aria-expanded="$store.nav.open"
+  aria-controls="mobile-menu"
+>
+  <Icon name="mdi:menu" size="1.5rem" x-show="!$store.nav.open" />
+  <Icon
+    name="mdi:window-close"
+    size="1.5rem"
+    x-show="$store.nav.open"
+    x-cloak
+  />
+</button>

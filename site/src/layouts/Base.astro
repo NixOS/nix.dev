@@ -18,8 +18,20 @@ const { title, description } = Astro.props;
       class="px-4 mt-16 flex-grow gap-x-4
         grid md:grid-cols-[2fr_5fr] lg:grid-cols-[1fr_3fr_1fr]"
     >
-      <section class="hidden md:block">
-        <Sidebar class="sticky top-16" />
+      <section
+        class:list={[
+          "absolute md:static",
+          "bg-grey-05 dark:bg-steel-90 md:bg-inherit md:dark:bg-inherit",
+          "left-0",
+          "px-4 md:px-0",
+          "w-full",
+          "z-2",
+          "hidden md:block",
+        ]}
+        x-data
+        :class="$store.nav.open ? '!block' : ''"
+      >
+        <Sidebar class="md:sticky top-16 py-4" />
       </section>
       <slot />
     </div>
