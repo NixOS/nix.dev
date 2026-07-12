@@ -95,3 +95,8 @@
   --color-steel-95: oklch(0.21 0.008 274.5); /* #17181c; */
   --color-mainsail-10: oklch(0.9 0.007 229); /* #d9dfe2 */
 }
+
+/* Alpine utility to hide conditionally rendered components before init. */
+[x-cloak] {
+  display: none !important;
+}

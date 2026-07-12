@@ -7,6 +7,8 @@ import icon from "astro-iconset";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import alpinejs from "@astrojs/alpinejs";
+
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
@@ -28,6 +30,7 @@ export default defineConfig({
       themeCssSelector: (theme, { styleVariants }) =>
         theme.name === styleVariants[1]?.theme.name ? ".dark" : false,
     }),
+    alpinejs({ entrypoint: "./src/alpine.ts" }),
   ],
 
   markdown: {
