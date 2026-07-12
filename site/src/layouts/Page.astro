@@ -9,8 +9,8 @@ const { title, description, headings = [], toc = true } = Astro.props;
   <main id="main-content" class="max-w-[80ch] mx-auto">
     {
       title && (
-        <hgroup class="mb-4">
-          <h1 class="font-bold font-heading mt-4 text-5xl">{title}</h1>
+        <hgroup class="my-4">
+          <h1 class="font-bold font-heading text-5xl">{title}</h1>
         </hgroup>
       )
     }
@@ -19,7 +19,7 @@ const { title, description, headings = [], toc = true } = Astro.props;
     </article>
   </main>
   <section class:list={["hidden", toc ? "lg:block" : ""]}>
-    <TableOfContents headings={headings} class="sticky top-16" />
+    <TableOfContents headings={headings} class="sticky top-16 py-4" />
   </section>
 </Base>
 

@@ -11,9 +11,9 @@ import { config } from "../site.config.ts";
 <header
   class:list={[
     Astro.props.class,
-    "backdrop-blur-md bg-grey-02/60 dark:bg-grey-96/60",
+    "bg-grey-05 dark:bg-steel-90",
     "w-full",
-    "z-1",
+    "z-3",
   ]}
 >
   <div
@@ -23,12 +23,16 @@ import { config } from "../site.config.ts";
     ]}
   >
     <span id="header-left" class="grow">
-      <SiteTitle />
+      <SiteTitle class="h-full items-center" />
     </span>
 
     <span
       id="header-middle"
-      class="place-self-center md:w-full max-w-[80ch] flex justify-between gap-x-4"
+      class:list={[
+        "flex justify-between gap-x-4",
+        "place-self-center items-center",
+        "md:w-full max-w-[80ch]",
+      ]}
     >
       <Search class="w-full lg:w-fit" />
       <MobileMenuToggle class="lg:hidden" />
@@ -36,7 +40,7 @@ import { config } from "../site.config.ts";
 
     <span
       id="header-right"
-      class="hidden lg:flex flex-row gap-x-4 justify-between"
+      class="hidden lg:flex flex-row gap-x-4 justify-between items-center"
     >
       <SocialIcons items={config.headerLinks} />
       <ThemeSelector />
