@@ -1,0 +1,27 @@
+---
+import Head from "../components/Head.astro";
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <Head title={title} description={description} />
+  <body class="flex flex-col min-h-dvh gap-y-8
+    bg-grey-05 text-grey-95 dark:bg-grey-95 dark:text-grey-05"
+  >
+    <Header class="p-4 fixed" />
+    <div
+      class="px-4 mt-16 flex-grow gap-x-4
+        grid md:grid-cols-[2fr_5fr] lg:grid-cols-[1fr_3fr_1fr]"
+    >
+      <section class="hidden md:block">
+        <Sidebar class="sticky top-16" />
+      </section>
+      <slot />
+    </div>
+    <Footer class="p-4" />
+  </body>
+</html>

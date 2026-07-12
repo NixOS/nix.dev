@@ -1,0 +1,19 @@
+---
+import { config } from "../site.config.ts";
+
+const today = new Date();
+---
+
+<footer
+  class:list={[Astro.props.class, "flex gap-x-4"]}
+>
+  <span>
+    { `Copyright © ${today.getFullYear()} ${config.copyright.author}, ` }
+    <a href={config.copyright.license.href}>{config.copyright.license.text}</a>
+  </span>
+
+  { config.footerLinks.map(({text, href}) =>
+      <a href={href}>{text}</a>
+    )
+  }
+</footer>

@@ -1,0 +1,237 @@
+---
+import Base from "../layouts/Base.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+
+const {
+  title,
+  description,
+  headings = [],
+  toc = true,
+} = Astro.props;
+---
+
+<Base
+  title={title}
+  description={description}
+>
+  <main id="main-content" class="max-w-[80ch] mx-auto">
+    { title &&
+        <hgroup class="mb-4">
+          <h1 class="font-bold mt-4 text-5xl">{title}</h1>
+        </hgroup>
+    }
+    <article class:list={[Astro.props.class, "prose"]}>
+      <slot />
+    </article>
+  </main>
+  <section class:list={["hidden", toc ? "lg:block" : ""]}>
+    <TableOfContents
+      headings={headings}
+      class="sticky top-16"
+    />
+  </section>
+</Base>
+
+<style>
+@reference "../styles/global.css";
+
+.prose {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+    font-weight: bold;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+
+  h3 {
+    font-size: 1.7rem;
+    margin-top: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  a {
+    @apply text-blue-30 dark:text-blue-60;
+  }
+
+  ol {
+    /* marker outside, shifted back inside, shifted more for two-digit marker */
+    list-style-type: decimal;
+    list-style-position: outside;
+    margin-block: 1.25rem;
+    margin-left: 1.5rem;
+
+    li {
+      padding-left: 0.25rem;
+    }
+
+    &:has(li:nth-last-child(n+10)) {
+      margin-left: 3.75rem;
+    }
+  }
+
+  ul {
+    /* marker outside but shifted back inside (so li aligns) */
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-block: 0.75rem;
+    margin-left: 1rem;
+  }
+
+  li {
+    display: list-item;
+    margin-block: 0rem;
+
+    &::marker {
+      font-variant-numeric: lining-nums;
+    }
+
+    /* spacing for nested lists */
+    & ol,
+    & ul {
+      margin-left: 1rem;
+      margin-block: 0rem;
+    }
+
+    & p {
+      display: inline;
+    }
+  }
+
+  .footnotes ol {
+    margin-top: 0rem;
+    margin-left: 1rem;
+  }
+
+  blockquote {
+    margin-block: 1rem;
+    padding-left: 1rem;
+    border-inline-start-width: 2px;
+    @apply border-grey-10 dark:border-grey-90;
+  }
+
+  .expressive-code {
+    @apply my-4;
+  }
+
+  code:not(pre code),
+  kbd {
+    padding: 0.15rem 0.25rem;
+    border-radius: 0.25rem;
+    @apply bg-grey-10 dark:bg-grey-90;
+  }
+
+  kbd {
+    @apply border-1 border-grey-40 dark:border-grey-60;
+  }
+
+  section.footnotes {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top-width: 2px;
+    @apply border-grey-10 dark:border-grey-90;
+
+    * {
+      font-size: 0.8rem;
+    }
+  }
+
+  table {
+    table-layout: auto;
+    width: 100%;
+
+    th {
+      padding-inline: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-weight: bold;
+      vertical-align: bottom;
+
+      &:first-child {
+        padding-left: 0rem;
+      }
+
+      &:last-child {
+        padding-right: 0rem;
+      }
+    }
+
+    tbody td,
+    tfoot td {
+      padding-block: 0.25rem 0.5rem;
+      vertical-align: top;
+
+      &:first-child {
+        padding-left: 0rem;
+      }
+
+      &:last-child {
+        padding-right: 0rem;
+      }
+    }
+
+    caption {
+      caption-side: bottom;
+    }
+  }
+
+  mark {
+    padding: 0.1rem;
+    @apply bg-blue-60 dark:bg-blue-30 dark:text-grey-95;
+  }
+
+  abbr {
+    cursor: help;
+  }
+
+  /* Headings followed directly by headings of lower rank should not be
+   * separated by extra space. Need to use `:global()` because Astro makes
+   * sibling combinators too specific.
+   */
+  :global(h1 + :is(h2, h3, h4, h5, h6)),
+  :global(h2 + :is(h3, h4, h5, h6)),
+  :global(h3 + :is(h4, h5, h6)),
+  :global(h4 + :is(h5, h6)),
+  :global(h5 + h6) {
+    margin-top: 0rem;
+  }
+}
+</style>

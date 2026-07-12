@@ -1,0 +1,49 @@
+---
+import Page from "../layouts/Page.astro";
+import { Icon } from "astro-iconset/components";
+import Logo from "../assets/nixos-logo.svg";
+---
+
+<Page toc={false}>
+  <div class="border-2 border-mahogany-40 dark:border-mahogany-50 bg-mahogany-50/20 p-3 my-6">
+    <div class="mb-2">
+      <Icon name="mdi:flash-triangle-outline" class="mr-2 inline" />
+      <strong>Attention</strong>
+    </div>
+    <span>This website is a work-in-progress. </span>
+    <a
+      href="https://github.com/nixos/nix.dev"
+      target="_blank"
+      rel="noopener noreferrer">Contributions are welcome.</a
+    >
+  </div>
+  <Logo height="200" class="my-16 mx-auto" />
+  <div class="grid md:grid-cols-3 gap-4">
+    <a href="https://nix.dev" class="border-2 border-blue-40 dark:border-blue-50 bg-blue-40/20 p-3 hover:opacity-80" style="color: unset">
+      <div class="mb-2 flex gap-x-2 items-center">
+        <Icon name="mdi:nix" />
+        <strong class="grow">Nix</strong>
+        <Icon name="mdi:arrow-right" />
+      </div>
+      <div>The Nix language, CLI, store, and package management.</div>
+    </a>
+
+    <a href="https://nixos.org/manual/nixos/unstable" class="border-2 border-avocado-40 dark:border-avocado-50 bg-avocado-40/20 p-3 hover:opacity-80" style="color: unset">
+      <div class="mb-2 flex gap-x-2 items-center">
+        <Icon name="mdi:laptop" />
+        <strong class="grow">NixOS</strong>
+        <Icon name="mdi:arrow-right" />
+      </div>
+      <div>The Linux distribution built on Nix: configuration and administration.</div>
+    </a>
+
+    <a href="https://nixos.org/manual/nixpkgs/unstable" class="border-2 border-purple-40 dark:border-purple-50 bg-purple-40/20 p-3 hover:opacity-80" style="color: unset">
+      <div class="mb-2 flex gap-x-2 items-center">
+        <Icon name="mdi:package-variant-closed" />
+        <strong class="grow">Nixpkgs</strong>
+        <Icon name="mdi:arrow-right" />
+      </div>
+      <div>The package collection: lib functions, build helpers, hooks, and language frameworks.</div>
+    </a>
+  </div>
+</Page>

@@ -1,55 +1,45 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import starlight from "@astrojs/starlight";
+import { satteri } from '@astrojs/markdown-satteri';
 import netlify from "@astrojs/netlify";
-import starlightSidebarTopics from "starlight-sidebar-topics";
+import expressiveCode, { ExpressiveCodeTheme } from "astro-expressive-code";
+import icon from "astro-iconset";
+
+import { light as nixCodeLight, dark as nixCodeDark } from "./src/assets/nixCodeTheme.ts";
+
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  site: "https://docs.nixos.org/",
+
   integrations: [
-    starlight({
-      title: "Documentation",
-      logo: { src: "./src/assets/nixos-logo.svg", alt: "NixOS" },
-      favicon: "./src/assets/nixos-logo.svg",
-      customCss: [ "./src/styles/style.css" ],
-      social: [
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/nixos/nix",
-        },
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/nixos/nixpkgs",
-        },
-      ],
-      components: {
-        Banner: "./src/components/Banner.astro",
-      },
-      plugins: [
-        starlightSidebarTopics([
-          {
-            label: "Nix",
-            link: "/nix/",
-            icon: "nix",
-            items: [{ autogenerate: { directory: "nix" } }],
-          },
-          {
-            label: "NixOS",
-            link: "/nixos/",
-            icon: "laptop",
-            items: [{ autogenerate: { directory: "nixos" } }],
-          },
-          {
-            label: "Nixpkgs",
-            link: "/nixpkgs/",
-            icon: "puzzle",
-            items: [{ autogenerate: { directory: "nixpkgs" } }],
-          },
-        ]),
-      ],
+    icon({
+      // server-rendered routes cause entire iconset to be bundled if required
+      // icons are not explicitly listed here:
+      // include: { mdi: [ "github", ] },
     }),
+    expressiveCode({
+      themes: [
+        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
+        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
+      ],
+      defaultProps: {
+        wrap: true,
+      },
+    })
   ],
 
+  markdown: {
+    processor: satteri({
+      features: {
+        directive: true,
+      },
+    }),
+  },
+
   adapter: netlify(),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
