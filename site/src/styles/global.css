@@ -91,6 +91,7 @@
   --color-grey-96: oklch(0.17 0 0); /* #0f0f0f */
 
   /* More colors for dark mode */
+  --color-steel-90: oklch(0.25 0.02 274.5);
   --color-steel-95: oklch(0.21 0.008 274.5); /* #17181c; */
   --color-mainsail-10: oklch(0.9 0.007 229); /* #d9dfe2 */
 }
