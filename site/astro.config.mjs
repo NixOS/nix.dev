@@ -9,6 +9,8 @@ export default defineConfig({
     starlight({
       title: "Documentation",
       logo: { src: "./src/assets/nixos-logo.svg", alt: "NixOS" },
+      favicon: "./src/assets/nixos-logo.svg",
+      customCss: [ "./src/styles/style.css" ],
       social: [
         {
           icon: "github",
@@ -23,8 +25,6 @@ export default defineConfig({
       ],
       components: {
         Banner: "./src/components/Banner.astro",
-        SocialIcons: "./src/components/SocialIcons.astro",
-        Sidebar: "./src/components/Sidebar.astro",
       },
       plugins: [
         starlightSidebarTopics([

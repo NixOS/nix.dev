@@ -3,7 +3,7 @@ const message = "Prototype. Expect breaking changes. Contribute on ";
 ---
 
 <div class="sl-banner global-banner" data-pagefind-ignore>
-  <span aria-hidden="true">🚧</span>
+  <span aria-hidden="true">🚧 </span>
   <strong>{message}</strong><a
     href="https://github.com/nixos/nix.dev"
     target="_blank"
@@ -16,7 +16,8 @@ const message = "Prototype. Expect breaking changes. Contribute on ";
   @layer starlight.core {
     .sl-banner.global-banner {
       padding: 1rem var(--sl-nav-pad-x);
-      background-color: #d21c1c;
+      margin: 1rem var(--sl-content-pad-x);
+      background-color: #b71205;
       color: #fff;
       font-size: var(--sl-text-lg);
       font-weight: 700;
@@ -24,6 +25,7 @@ const message = "Prototype. Expect breaking changes. Contribute on ";
       text-align: center;
       text-wrap: balance;
       box-shadow: var(--sl-shadow-sm);
+      border-radius: 999rem;
     }
     .sl-banner.global-banner :global(a) {
       color: #fff;
