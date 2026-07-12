@@ -1,5 +1,6 @@
 ---
-
+// import nav from "../nav.json";
+// import TableOfContentsItem from "./TableOfContentsItem.astro";
 ---
 
 <nav class:list={[Astro.props.class]}>
@@ -8,4 +9,19 @@
     <li><a href="https://nixos.org/manual/nixos/unstable">NixOS</a></li>
     <li><a href="https://nixos.org/manual/nixpkgs/unstable">Nixpkgs</a></li>
   </ol>
+  {
+    /*
+  <hr class="w-[80%] my-4 mx-auto opacity-50">
+  <ol id="pages-nav">
+    { nav.map(item =>
+        <TableOfContentsItem
+          item={item}
+          stackSlugs={true}
+          slugPrefix="/"
+        />
+      )
+    }
+  </ol>
+  */
+  }
 </nav>
