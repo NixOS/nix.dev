@@ -4,6 +4,8 @@ import SocialIcons from "../components/SocialIcons.astro";
 import Search from "../components/Search.astro";
 import ThemeSelector from "../components/ThemeSelector.astro";
 import MobileMenuToggle from "../components/MobileMenuToggle.astro";
+import MobileMenu from "../components/MobileMenu.astro";
+import Sidebar from "../components/Sidebar.astro";
 
 import { config } from "../site.config.ts";
 ---
@@ -42,4 +44,12 @@ import { config } from "../site.config.ts";
       <ThemeSelector />
     </span>
   </div>
+
+  <MobileMenu class="hidden my-4 flex flex-col gap-y-4">
+    <span class="flex flex-row gap-x-4 justify-between">
+      <SocialIcons items={config.headerLinks} />
+      <ThemeSelector />
+    </span>
+    <Sidebar />
+  </MobileMenu>
 </header>
