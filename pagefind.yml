@@ -1,0 +1,14 @@
+# Pagefind configuration for nix.dev search.
+# `--site build/html` is passed on the CLI (see Makefile / default.nix),
+# so this file only holds selectors and tuning.
+
+# Only index the main article content, not navigation/sidebars/footers.
+root_selector: "div.bd-article-container"
+
+# Keep search snippets clean by dropping non-content UI bits.
+exclude_selectors:
+  - "a.headerlink"
+  - "button.copybtn"        # sphinx_copybutton buttons
+  - ".prev-next-footer"
+
+force_language: "en"
