@@ -7,6 +7,14 @@ Nix can be configured to use a binary cache with the [`substituters`](https://ni
 Follow the tutorial to [set up an HTTP binary cache](setup-http-binary-cache) and create a key pair for signing store objects.
 :::
 
+:::{warning}
+Nix will accept any requested store object signed with private keys corresponding to the configured public keys.
+Access to those private keys thus allows substituting arbitrary files into your Nix store.
+This includes executables that may run with elevated privileges or automatically!
+
+Only add public keys you trust unconditionally.
+:::
+
 For example, given a binary cache at `https://example.org` with public key `My56...Q==%`, and some derivation in `default.nix`, make Nix exclusively use that cache once by passing [settings as command line flags](https://nix.dev/manual/nix/latest/command-ref/conf-file#command-line-flags):
 
 ```shell-session
