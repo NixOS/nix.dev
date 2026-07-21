@@ -3,10 +3,6 @@
 
 Nix can be configured to use a binary cache with the [`substituters`](https://nix.dev/manual/nix/latest/command-ref/conf-file.html#conf-substituters) and [`trusted-public-keys`](https://nix.dev/manual/nix/latest/command-ref/conf-file.html#conf-trusted-public-keys) settings, either exclusively or in addition to cache.nixos.org.
 
-:::{tip}
-Follow the tutorial to [set up an HTTP binary cache](setup-http-binary-cache) and create a key pair for signing store objects.
-:::
-
 For example, given a binary cache at `https://example.org` with public key `My56...Q==%`, and some derivation in `default.nix`, make Nix exclusively use that cache once by passing [settings as command line flags](https://nix.dev/manual/nix/latest/command-ref/conf-file#command-line-flags):
 
 ```shell-session
@@ -39,6 +35,10 @@ On NixOS, Nix is configured through the [`nix.settings`](https://search.nixos.or
 }
 ```
 ::::
+
+## Next steps
+
+- Follow the tutorial to [set up your own HTTP binary cache](setup-http-binary-cache)
 
 :::{tip}
 Use [remote build machines](distributed-build-setup-tutorial) as preferred binary caches to reduce your external traffic.
