@@ -1,0 +1,38 @@
+{# Replace Sphinx's built-in search page with a Pagefind-powered one. #}
+{# Overrides the theme's search.html (pydata_sphinx_theme), which itself #}
+{# overrides the `docs_body` block; see pydata_sphinx_theme/search.html.  #}
+{% extends "!search.html" %}
+
+{% block docs_body %}
+<div class="bd-search-container">
+  <h1>{{ _("Search") }}</h1>
+  <noscript>
+    <div class="admonition error">
+      <p class="admonition-title">{% trans %}Error{% endtrans %}</p>
+      <p>{% trans %}Please activate JavaScript to enable the search functionality.{% endtrans %}</p>
+    </div>
+  </noscript>
+  <link rel="stylesheet" href="{{ pathto('pagefind/pagefind-ui.css', 1) }}">
+  <div id="search" class="pagefind-search"></div>
+  <script src="{{ pathto('pagefind/pagefind-ui.js', 1) }}"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const search = new PagefindUI({ element: "#search", showSubResults: true, excerptLength: 30 });
+      // Pre-fill from `?q=` so the theme's sidebar search box (which submits to
+      // this page) carries the query through to the Pagefind results.
+      const q = new URLSearchParams(window.location.search).get("q");
+      if (q) {
+        search.triggerSearch(q);
+      }
+    });
+  </script>
+</div>
+{% endblock docs_body %}
+
+{# The theme's search.html pulls in Sphinx's searchtools.js / searchindex.js #}
+{# via the `scripts` block. We use Pagefind instead, so emit only the standard #}
+{# document scripts (Sphinx's base `scripts` block is just `script()`) and drop #}
+{# the now-unused Sphinx search index. #}
+{% block scripts %}
+  {{- script() }}
+{% endblock scripts %}

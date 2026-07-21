@@ -36,6 +36,7 @@ let
     nativeBuildInputs = [
       nix-dev-python-pkgs
       nix-dev-latex
+      pkgs.pagefind
     ];
     buildPhase =
       let

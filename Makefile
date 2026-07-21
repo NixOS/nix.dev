@@ -60,6 +60,11 @@ html:
 	# hack to make live-reload on css update work
 	@cp source/_static/css/custom.css build/html/_static/css/custom.css
 
+	# build the Pagefind search index over the rendered HTML (writes build/html/_pagefind/)
+	@command -v pagefind >/dev/null 2>&1 \
+		|| { echo "error: 'pagefind' not found on PATH; install it or run inside the Nix dev shell (nix-shell)"; exit 1; }
+	pagefind --site build/html
+
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
