@@ -1,5 +1,7 @@
 # Contributing to nix.dev
 
+See also [contributing to 'docs.nixos.org'](#contributing-to-docsnixosorg)
+
 nix.dev is a community effort to collect, create, and maintain learning resources for Nix.
 
 We strongly encourage everyone interested to participate:
@@ -51,3 +53,24 @@ The following manual steps are required:
 nix-shell --run update-nixpkgs-releases
 nix-shell --run update-nix-releases
 ```
+
+## Contributing to docs.nixos.org
+
+Use `nix-shell` or `direnv`
+
+To install dependencies, run this once.
+
+```shell
+cd ./site
+npm run install
+```
+
+Sometimes you need to delete the `node_modules` folder and re-run - especially if you didn't contribute for a long time.
+
+Start the dev server
+
+```shell
+npm run dev
+```
+
+You can edit files live
