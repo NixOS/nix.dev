@@ -2,6 +2,11 @@
 
 # Integration testing with NixOS virtual machines
 
+```{contributors}
+:authors: olafklingt, domenkozar
+:editors: fricklerhandwerk
+```
+
 ## What will you learn?
 
 This tutorial introduces Nixpkgs functionality for testing NixOS configurations.

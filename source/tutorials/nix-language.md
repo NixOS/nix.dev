@@ -1,6 +1,12 @@
 (reading-nix-language)=
 
+
 # Nix language basics
+
+```{contributors}
+:authors: fricklerhandwerk
+:editors: infinisil
+```
 
 The Nix language is designed for conveniently creating and composing *derivations* – precise descriptions of how contents of existing files are used to derive new files.
 It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.
