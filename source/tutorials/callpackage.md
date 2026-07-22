@@ -78,6 +78,7 @@ Hello, world!
 
 The argument `writeShellScriptBin` gets filled in automatically when the function in `hello.nix` is evaluated.
 For every attribute in the function's argument, `callPackage` passes an attribute from the `pkgs` attribute set if it exists.
+This sets it apart from the built-in keyword `import`.
 
 It may appear cumbersome to create the extra file `hello.nix` for the package in such a simple setup.
 We have done so because this is exactly how Nixpkgs is organised:
