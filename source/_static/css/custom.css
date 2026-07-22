@@ -112,3 +112,11 @@ html[data-theme="dark"] .highlight .gd {
 html[data-theme="dark"] iframe[title="GitHub"] {
   filter: invert(0.93) hue-rotate(100deg);
 }
+
+.contributors {
+  color: var(--pst-color-text-muted);
+  background: var(--pst-color-surface);
+  border-color: var(--pst-color-info);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}

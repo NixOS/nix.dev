@@ -7,6 +7,10 @@ myst:
 (declarative-reproducible-envs)=
 # Declarative shell environments with `shell.nix`
 
+```{contributors}
+:authors: domenkozar, zmitchell
+:editors: fricklerhandwerk
+```
 ## Overview
 
 Declarative shell environments allow you to:

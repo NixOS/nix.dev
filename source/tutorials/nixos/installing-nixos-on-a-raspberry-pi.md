@@ -8,6 +8,11 @@ myst:
 
 # Installing NixOS on a Raspberry Pi
 
+```{contributors}
+:authors: domenkozar
+:editors: proofconstruction
+```
+
 This tutorial assumes you have a [Raspberry Pi 4 Model B with 4GB RAM](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 
 Before starting this tutorial, make sure you have
