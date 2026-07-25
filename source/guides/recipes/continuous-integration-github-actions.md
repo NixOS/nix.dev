@@ -36,8 +36,9 @@ On your freshly created binary cache, follow the **Push binaries** tab instructi
 On your GitHub repository or organization (for use across all repositories):
 
 1. Click on `Settings`.
-2. Click on `Secrets`.
-3. Add your previously generated secrets (`CACHIX_SIGNING_KEY` and/or `CACHIX_AUTH_TOKEN`).
+2. Click on `Secrets and variables` and click on `Actions` in dropdown list
+3. Click on `New repository secret`.
+4. Add your previously generated secrets (`CACHIX_SIGNING_KEY` and/or `CACHIX_AUTH_TOKEN`).
 
 ### 3. Setting up GitHub Actions
 
