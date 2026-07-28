@@ -7,6 +7,7 @@
     inherit system;
   },
   withManuals ? false, # building the manuals is expensive
+  inNixShell ? false # Provided by direnv-nix; Ignored for now.
 }:
 let
   lib = pkgs.lib;
