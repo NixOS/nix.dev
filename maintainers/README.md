@@ -7,6 +7,7 @@ The Nix documentation team was formed to [flatten the infamous learning curve](h
 - Ease learning, increase onboarding success and user retention
 - Improve organisation of Nix knowledge
 - Lead, guide, and support related community efforts
+- Build and maintain shared documentation infrastructure
 
 ## Motivation
 
@@ -30,13 +31,12 @@ Current members are listed on [the website](https://nixos.org/community/teams/do
 
 In order of priority, team members collaborate to:
 
-1. Establish and maintain guidelines for contributing to documentation in the Nix ecosystem
-1. Extend and curate [nix.dev] as the central learning resource
-1. Review and merge [Nix pull requests], [Nixpkgs pull requests], and [NixOS pull requests] concerning documentation
-1. Keep track of [Nix issues], [Nixpkgs issues], and [NixOS issues] concerning documentation
-1. Maintain and develop documentation infrastructure
-1. Monitor the [*Documentation* Discourse category]
-1. Monitor the [*Nix\* Documentation* Matrix room]
+1. Maintain and develop [documentation infrastructure]
+2. Establish and maintain guidelines for contributing to documentation in the Nix ecosystem
+3. Review and merge [Nix pull requests], [Nixpkgs pull requests], and [NixOS pull requests] concerning documentation
+4. Keep track of [Nix issues], [Nixpkgs issues], and [NixOS issues] concerning documentation
+5. Monitor the [*Documentation* Discourse category]
+6. Monitor the [*Nix\* Documentation* Matrix room]
 
 [nix.dev]: https://nix.dev
 [Nix pull requests]: https://github.com/NixOS/nix/pulls?q=is%3Aopen+is%3Apr+label%3Adocumentation
@@ -48,6 +48,7 @@ In order of priority, team members collaborate to:
 [*Documentation* Discourse category]: https://discourse.nixos.org/c/dev/documentation/25
 [*Nix\* Documentation* Matrix room]: https://app.element.io/#/room/#docs:nixos.org
 [changes to the NixOS Wiki]: https://matrix.to/#/#nixos-wiki:utzutzutz.net
+[documentation infrastructure]: All documentation infrastructure facets of the ecosystem; nixdoc, nixos-redner-docs, lib.optionAttrsToDocList, etc.
 
 In addition, the team performs administrative tasks which it distributes across team members:
 
