@@ -116,6 +116,7 @@ in
       pkgs.python3.pkgs.black
       pkgs.vale
       pkgs.netlify-cli
+      pkgs.nodejs_26
     ];
   };
 }
