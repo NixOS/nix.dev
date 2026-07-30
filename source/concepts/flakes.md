@@ -83,12 +83,12 @@ Flakes are an experimental extension format with outstanding issues.
 Its functionality can generally be achieved without them as well.
 
 If you need to run existing software that already used flakes, or want to contribute to their development, feel free to use them.
-If you want to write Nix code yourself, consider also our guide on [dependency management].[^flake-inputs]
+If you want to write Nix code yourself, consider also our guide on [dependency management].[^import-flakes]
 This overview can help get what you need from flakes while preserving compatibility.
 
 [dependency management]: https://nix.dev/guides/recipes/dependency-management.html
 
-[^flake-inputs]: Nix repositories offering only flake entrypoints may be imported using [`flake-inputs`].
+[^import-flakes]: Nix repositories offering only flake entrypoints may be imported using [`flake-compat`] or [`flake-inputs`].
 
 ### Discoverability
 
@@ -277,7 +277,7 @@ Cons:
 Alternatives:
 
 - Use flakes as thin wrappers over existing Nix code, so code can be used in both ways.
-- Use library [`flake-compat`] to expose a flake's default package or shell to non-flake users.
+- Use library [`flake-compat`] or [`flake-inputs`] to consume flakes from any Nix code.
 - Propagate needed parameters across modules explicitly or with NixOS's [`specialArgs`].
 
 [`flake-compat`]: https://github.com/NixOS/flake-compat
