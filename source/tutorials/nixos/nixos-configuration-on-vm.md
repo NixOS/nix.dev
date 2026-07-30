@@ -2,6 +2,11 @@
 
 # NixOS virtual machines
 
+```{contributors}
+:authors: olafklingt, domenkozar
+:editors: fricklerhandwerk
+```
+
 One of the most important features of NixOS is the ability to configure the entire system declaratively, including packages to be installed, services to be run, as well as other settings and options.
 
 NixOS configurations can be used to test and use NixOS using a virtual machine, which is a lighter weight option compared to a full "bare metal" installation.

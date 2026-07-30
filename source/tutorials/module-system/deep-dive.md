@@ -3,6 +3,11 @@
 
 Or: *Wrapping the world in modules*
 
+```{contributors}
+:authors: infinisil
+:editors: fricklerhandwerk, proofconstruction
+```
+
 In this tutorial you will follow an extensive demonstration of how to wrap an existing API with Nix modules.
 
 ## Overview

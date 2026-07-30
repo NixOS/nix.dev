@@ -8,6 +8,10 @@ myst:
 (nixos-docker-images)=
 # Building and running Docker images
 
+```{contributors}
+:authors: domenkozar
+```
+
 [Docker](https://www.docker.com/) is a set of tools and services used to build, manage and deploy containers.
 
 Many cloud platforms offer Docker-based container hosting.
