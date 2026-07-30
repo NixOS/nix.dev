@@ -8,6 +8,11 @@ myst:
 (packaging-tutorial)=
 # Packaging existing software with Nix
 
+```{contributors}
+:authors: proofconstruction
+:editors: fricklerhandwerk
+```
+
 One of Nix's primary use-cases is in addressing common difficulties encountered with packaging software, such as specifying and obtaining dependencies.
 
 In the long term, Nix alleviates such problems.

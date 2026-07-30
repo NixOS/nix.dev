@@ -1,9 +1,5 @@
 ---
 date: 2022-09-08
-authors:
-  - Norbert Melzer
-  - Valentin Gagarin
-  - Matthias Meschede
 myst:
   html_meta:
     "keywords": "tutorial, callPackage, override, package, customise, parameters, nix, nixpkgs"
@@ -11,6 +7,11 @@ myst:
 
 (callpackage-tutorial)=
 # Package parameters and overrides with `callPackage`
+
+```{contributors}
+:authors: NobbZ
+:editors: mmesch, fricklerhandwerk
+```
 
 Nix ships with a special-purpose programming language for creating packages and configurations: the Nix language.
 It is used to build the Nix package collection, known as {term}`Nixpkgs`.

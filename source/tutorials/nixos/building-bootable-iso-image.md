@@ -1,6 +1,10 @@
 (bootable-iso-image)=
 # Building a bootable ISO image
 
+```{contributors}
+:authors: domenkozar
+```
+
 :::{note}
 If you need to build images for a different platform, see [Cross compiling](https://github.com/nix-community/nixos-generators#user-content-cross-compiling).
 :::

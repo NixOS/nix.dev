@@ -42,6 +42,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
     "extractable_code_block",
+    "contributors",
     "sphinx_sitemap",
     "notfound.extension",
 ]
