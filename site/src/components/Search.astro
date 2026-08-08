@@ -1,0 +1,14 @@
+---
+import { Icon } from "astro-iconset/components";
+---
+
+<Icon name="mdi:magnify" title="Search" size="1.2rem" class="sm:hidden" />
+<input
+  class:list={[
+    Astro.props.class,
+    "hidden sm:inline",
+    "bg-grey-95/10 dark:bg-grey-05/10 backdrop-blur-md",
+    "px-2 py-1 rounded-lg",
+  ]}
+  placeholder="Search …"
+/>

@@ -1,0 +1,58 @@
+---
+type Item = {
+  slug: string;
+  text?: string;
+  depth?: number;
+  children?: Item[];
+};
+
+interface Props {
+  item: Item;
+  maxDepth?: number;
+  slugPrefix?: string;
+  stackSlugs?: boolean;
+}
+
+const {
+  item,
+  maxDepth = 99,
+  slugPrefix = "",
+  stackSlugs = false,
+} = Astro.props;
+---
+
+<li>
+  <a
+    href={`${slugPrefix}${item.slug}`}
+  >
+    {item.text ?? item.slug}
+  </a>
+
+  { (item.depth ?? 0) < maxDepth
+    && item.children
+    && item.children.length !== 0
+    &&
+      <ol>
+        { item.children.map(child => {
+            const slug = stackSlugs ? `${item.slug}/${child.slug}` : child.slug;
+            return (
+              <Astro.self
+                item={{...child, slug}}
+                maxDepth={maxDepth}
+                slugPrefix={slugPrefix}
+                stackSlugs={stackSlugs}
+              />
+            )
+          })
+        }
+      </ol>
+  }
+</li>
+
+<style>
+@reference "../styles/global.css";
+
+ol {
+  @apply ml-4;
+}
+</style>

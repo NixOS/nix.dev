@@ -1,0 +1,12 @@
+---
+import { config } from "../site.config.ts";
+import Logo from "../assets/nixos-logo.svg";
+---
+
+<a
+  href="/"
+  class:list={[Astro.props.class, "flex gap-x-1.5 flex-row font-bold max-w-fit"]}
+>
+  <Logo height="1.5rem" />
+  <span>{config.siteTitle}</span>
+</a>

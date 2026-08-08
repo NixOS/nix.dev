@@ -1,0 +1,39 @@
+---
+import SiteTitle from "../components/SiteTitle.astro";
+import SocialIcons from "../components/SocialIcons.astro";
+import Search from "../components/Search.astro";
+import ThemeSelector from "../components/ThemeSelector.astro";
+import MobileMenuToggle from "../components/MobileMenuToggle.astro";
+
+import { config } from "../site.config.ts";
+---
+
+<header
+  class:list={[
+    Astro.props.class,
+    "backdrop-blur-md bg-grey-05/60 dark:bg-grey-95/60",
+    "w-full",
+    "z-1"
+  ]}
+>
+  <div
+    class:list={[
+      "gap-x-4 flex flex-row",
+      "md:grid md:grid-cols-[5fr_2fr] lg:grid-cols-[1fr_3fr_1fr]",
+    ]}
+  >
+    <span id="header-left" class="grow">
+      <SiteTitle />
+    </span>
+
+    <span id="header-middle" class="place-self-center md:w-full max-w-[80ch] flex justify-between gap-x-4">
+      <Search class="w-full lg:w-fit" />
+      <MobileMenuToggle class="lg:hidden" />
+    </span>
+
+    <span id="header-right" class="hidden lg:flex flex-row gap-x-4 justify-between">
+      <SocialIcons items={config.headerLinks} />
+      <ThemeSelector />
+    </span>
+  </div>
+</header>

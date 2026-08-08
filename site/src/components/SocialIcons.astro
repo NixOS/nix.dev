@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-iconset/components";
+
+type SocialIcon = {
+  text: string,
+  href: string,
+  icon: string,
+};
+
+interface Props {
+  items: SocialIcon[];
+  class?: string | string[];
+}
+
+const { items = [] } = Astro.props;
+---
+
+<span class:list={[Astro.props.class, "flex gap-x-4"]}>
+  {
+    items.map(({text, href, icon}) =>
+      <a class="flex gap-x-1.5 flex-row max-w-fit" href={href}>
+        { icon && <Icon size="1.2rem" title={text} name={icon} /> }
+      </a>
+    )
+  }
+</span>
