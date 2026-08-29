@@ -72,6 +72,7 @@
   --color-purple-50: oklch(var(--lc-50) var(--h-purple)); /* #bd7ded */
   --color-purple-60: oklch(var(--lc-60) var(--h-purple)); /* #d39bff * */
 
+  --color-grey-02: oklch(0.98 0 0); /* #eeeeee */
   --color-grey-05: oklch(0.95 0 0); /* #eeeeee */
   --color-grey-10: oklch(0.9 0 0); /* #dedede */
   --color-grey-20: oklch(0.83 0 0); /* #c7c7c7 */
@@ -80,4 +81,9 @@
   --color-grey-90: oklch(0.3 0 0); /* #2e2e2e */
   --color-grey-94: oklch(0.22 0 0); /* #1b1b1b */
   --color-grey-95: oklch(0.18 0 0); /* #121212 */
+  --color-grey-96: oklch(0.17 0 0); /* #0f0f0f */
+
+  /* More colors for dark mode */
+  --color-steel-95: oklch(0.21 0.008 274.5); /* #17181c; */
+  --color-mainsail-10: oklch(0.9 0.007 229); /* #d9dfe2 */
 }
