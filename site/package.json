@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
@@ -23,6 +25,8 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "astro-iconset": "^0.0.6"
+    "astro-iconset": "^0.0.6",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
