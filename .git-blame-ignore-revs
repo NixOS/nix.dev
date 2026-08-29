@@ -3,3 +3,6 @@
 #
 # treewide: nixfmt
 475ec1b3eb17b29c7254ad20aec9ee9cb81d18b8
+
+# site: format with prettier
+ea43182509a9c6591c04ace80418cbc8e9e94b96
