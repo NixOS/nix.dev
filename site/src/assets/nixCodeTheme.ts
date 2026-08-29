@@ -1,7 +1,7 @@
 /* Nix Code VS Code theme
  * Templated on gruvbox.
  * Colours are approximations in sRGB.
-*/
+ */
 
 const c = {
   transparent: "#0000",
@@ -147,11 +147,11 @@ export const light = {
     "editorWhitespace.foreground": `${c.grey[6]}20`,
     "editorWidget.background": c.grey[0],
     "editorWidget.border": c.grey[1],
-    "errorForeground": c.orange.d,
+    errorForeground: c.orange.d,
     "extensionButton.prominentBackground": `${c.green.d}80`,
     "extensionButton.prominentHoverBackground": `${c.green.d}30`,
-    "focusBorder": c.grey[1],
-    "foreground": c.grey[9],
+    focusBorder: c.grey[1],
+    foreground: c.grey[9],
     "gitDecoration.addedResourceForeground": c.grey[9],
     "gitDecoration.conflictingResourceForeground": c.magenta.m,
     "gitDecoration.deletedResourceForeground": c.orange.m,
@@ -164,12 +164,14 @@ export const light = {
     "gitlens.decorations.branchBehindForegroundColor": c.orange.m,
     "gitlens.decorations.branchDivergedForegroundColor": c.orange.m,
     "gitlens.decorations.branchMissingUpstreamForegroundColor": c.orange.m,
-    "gitlens.decorations.statusMergingOrRebasingConflictForegroundColor": c.orange.m,
+    "gitlens.decorations.statusMergingOrRebasingConflictForegroundColor":
+      c.orange.m,
     "gitlens.decorations.statusMergingOrRebasingForegroundColor": c.orange.m,
     "gitlens.decorations.workspaceCurrentForegroundColor": c.green.m,
     "gitlens.decorations.workspaceRepoMissingForegroundColor": c.grey[4],
     "gitlens.decorations.workspaceRepoOpenForegroundColor": c.green.m,
-    "gitlens.decorations.worktreeHasUncommittedChangesForegroundColor": c.grey[5],
+    "gitlens.decorations.worktreeHasUncommittedChangesForegroundColor":
+      c.grey[5],
     "gitlens.decorations.worktreeMissingForegroundColor": c.orange.m,
     "gitlens.graphChangesColumnAddedColor": c.green.m,
     "gitlens.graphChangesColumnDeletedColor": c.orange.m,
@@ -321,272 +323,256 @@ export const light = {
     "titleBar.activeForeground": c.grey[9],
     "titleBar.inactiveBackground": c.grey[0],
     "widget.border": c.grey[1],
-    "widget.shadow": c.grey[0]
+    "widget.shadow": c.grey[0],
   },
   displayName: "Nix Code Light",
   name: "nix-code-light",
   semanticHighlighting: true,
   semanticTokenColors: {
-    "component": c.orange.d,
+    component: c.orange.d,
     "constant.builtin": c.magenta.d,
-    "function": c.cyan.d,
+    function: c.cyan.d,
     "function.builtin": c.orange.d,
-    "method": c.cyan.d,
-    "parameter": c.blue.d,
-    "property": c.blue.d,
+    method: c.cyan.d,
+    parameter: c.blue.d,
+    property: c.blue.d,
     "property:python": c.grey[9],
-    "variable": c.grey[9]
+    variable: c.grey[9],
   },
   tokenColors: [
     {
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "emphasis",
       settings: {
-        fontStyle: "italic"
-      }
+        fontStyle: "italic",
+      },
     },
     {
       scope: "strong",
       settings: {
-        fontStyle: "bold"
-      }
+        fontStyle: "bold",
+      },
     },
     {
       scope: "header",
       settings: {
-        foreground: c.blue.m
-      }
+        foreground: c.blue.m,
+      },
     },
     {
-      scope: [
-        "comment",
-        "punctuation.definition.comment"
-      ],
+      scope: ["comment", "punctuation.definition.comment"],
       settings: {
         fontStyle: "italic",
-        foreground: c.grey[5]
-      }
+        foreground: c.grey[5],
+      },
     },
     {
-      scope: [
-        "constant",
-        "support.constant",
-        "variable.arguments"
-      ],
+      scope: ["constant", "support.constant", "variable.arguments"],
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
       scope: "constant.rgb-value",
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "entity.name.selector",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "entity.other.attribute-name",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "entity.name.tag",
-        "punctuation.tag"
-      ],
+      scope: ["entity.name.tag", "punctuation.tag"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
-      scope: [
-        "invalid",
-        "invalid.illegal"
-      ],
+      scope: ["invalid", "invalid.illegal"],
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "invalid.deprecated",
       settings: {
-        foreground: c.magenta.m
-      }
+        foreground: c.magenta.m,
+      },
     },
     {
       scope: "meta.selector",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "meta.preprocessor",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "meta.preprocessor.string",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "meta.preprocessor.numeric",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "meta.header.diff",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "storage",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "storage.type",
-        "storage.modifier"
-      ],
+      scope: ["storage.type", "storage.modifier"],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "string",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "string.tag",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "string.value",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "string.regexp",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "string.escape",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "string.quasi",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "string.entity",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "object",
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "module.node",
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "support.type.property-name",
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "keyword",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "keyword.control",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "keyword.control.module",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "keyword.control.less",
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "keyword.operator",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "keyword.operator.new",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "keyword.other.unit",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "metatag.php",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "support.function.git-rebase",
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "constant.sha.git-rebase",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: [
@@ -597,20 +583,17 @@ export const light = {
         "meta.type.annotation",
         "support.type",
         "storage.type.cs",
-        "variable.class"
+        "variable.class",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "variable.this",
-        "support.variable"
-      ],
+      scope: ["variable.this", "support.variable"],
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
       scope: [
@@ -619,48 +602,45 @@ export const light = {
         "entity.name.class.static.function",
         "entity.name.function",
         "entity.name.class",
-        "entity.name.type"
+        "entity.name.type",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "entity.function",
-        "entity.name.function.static"
-      ],
+      scope: ["entity.function", "entity.name.function.static"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "entity.name.function.function-call",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "support.function.builtin",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "entity.name.method",
         "entity.name.method.function-call",
-        "entity.name.static.function-call"
+        "entity.name.static.function-call",
       ],
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "brace",
       settings: {
-        foreground: c.grey[8]
-      }
+        foreground: c.grey[8],
+      },
     },
     {
       scope: [
@@ -669,572 +649,509 @@ export const light = {
         "variable.name",
         "variable.other",
         "variable",
-        "string.constant.other.placeholder"
+        "string.constant.other.placeholder",
       ],
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "prototype",
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
-      scope: [
-        "punctuation"
-      ],
+      scope: ["punctuation"],
       settings: {
-        foreground: c.grey[6]
-      }
+        foreground: c.grey[6],
+      },
     },
     {
       scope: "punctuation.quoted",
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "punctuation.quasi",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "*url*",
-        "*link*",
-        "*uri*"
-      ],
+      scope: ["*url*", "*link*", "*uri*"],
       settings: {
-        fontStyle: "underline"
-      }
+        fontStyle: "underline",
+      },
     },
     {
-      scope: [
-        "meta.function.python",
-        "entity.name.function.python"
-      ],
+      scope: ["meta.function.python", "entity.name.function.python"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: [
         "storage.type.function.python",
         "storage.modifier.declaration",
         "storage.type.class.python",
-        "storage.type.string.python"
+        "storage.type.string.python",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "storage.type.function.async.python"
-      ],
+      scope: ["storage.type.function.async.python"],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "meta.function-call.generic",
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "meta.function-call.arguments",
       settings: {
-        foreground: c.grey[8]
-      }
+        foreground: c.grey[8],
+      },
     },
     {
       scope: "entity.name.function.decorator",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "constant.other.caps",
       settings: {
-        fontStyle: "bold"
-      }
+        fontStyle: "bold",
+      },
     },
     {
       scope: "keyword.operator.logical",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "punctuation.definition.logical-expression",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "string.interpolated.dollar.shell",
-        "string.interpolated.backtick.shell"
+        "string.interpolated.backtick.shell",
       ],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "keyword.control.directive",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "support.function.C99",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "meta.function.cs",
         "entity.name.function.cs",
-        "entity.name.type.namespace.cs"
+        "entity.name.type.namespace.cs",
       ],
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: [
         "keyword.other.using.cs",
         "entity.name.variable.field.cs",
         "entity.name.variable.local.cs",
-        "variable.other.readwrite.cs"
+        "variable.other.readwrite.cs",
       ],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
-      scope: [
-        "keyword.other.this.cs",
-        "keyword.other.base.cs"
-      ],
+      scope: ["keyword.other.this.cs", "keyword.other.base.cs"],
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
       scope: "meta.scope.prerequisites",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "entity.name.function.target",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
-      scope: [
-        "storage.modifier.import.java",
-        "storage.modifier.package.java"
-      ],
+      scope: ["storage.modifier.import.java", "storage.modifier.package.java"],
       settings: {
-        foreground: c.grey[7]
-      }
+        foreground: c.grey[7],
+      },
     },
     {
-      scope: [
-        "keyword.other.import.java",
-        "keyword.other.package.java"
-      ],
+      scope: ["keyword.other.import.java", "keyword.other.package.java"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "storage.type.java",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "storage.type.annotation",
       settings: {
         fontStyle: "bold",
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "keyword.other.documentation.javadoc",
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "comment.block.javadoc variable.parameter.java",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: [
         "source.java variable.other.object",
-        "source.java variable.other.definition.java"
+        "source.java variable.other.definition.java",
       ],
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "meta.function-parameters.lisp",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "markup.underline",
       settings: {
-        fontStyle: "underline"
-      }
+        fontStyle: "underline",
+      },
     },
     {
       scope: "string.other.link.title.markdown",
       settings: {
         fontStyle: "underline",
-        foreground: c.grey[5]
-      }
+        foreground: c.grey[5],
+      },
     },
     {
       scope: "markup.underline.link",
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
       scope: "markup.bold",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "markup.heading",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "heading.1.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "heading.2.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "heading.3.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "heading.4.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "heading.5.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "heading.6.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
       scope: "markup.italic",
       settings: {
-        fontStyle: "italic"
-      }
+        fontStyle: "italic",
+      },
     },
     {
       scope: "markup.inserted",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: "markup.deleted",
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "markup.changed",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "markup.punctuation.quote.beginning",
       settings: {
-        foreground: c.green.m
-      }
+        foreground: c.green.m,
+      },
     },
     {
       scope: "markup.punctuation.list.beginning",
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
-      scope: [
-        "markup.inline.raw",
-        "markup.fenced_code.block"
-      ],
+      scope: ["markup.inline.raw", "markup.fenced_code.block"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
       scope: "string.quoted.double.json",
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: "entity.other.attribute-name.css",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "source.css meta.selector",
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
       scope: "support.type.property-name.css",
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: "entity.other.attribute-name.class",
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
       scope: [
         "source.css support.function.transform",
         "source.css support.function.timing-function",
-        "source.css support.function.misc"
+        "source.css support.function.misc",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "support.property-value",
         "constant.rgb-value",
         "support.property-value.scss",
-        "constant.rgb-value.scss"
+        "constant.rgb-value.scss",
       ],
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
-      scope: [
-        "entity.name.tag.css"
-      ],
+      scope: ["entity.name.tag.css"],
       settings: {
-        fontStyle: ""
-      }
+        fontStyle: "",
+      },
     },
     {
-      scope: [
-        "punctuation.definition.tag"
-      ],
+      scope: ["punctuation.definition.tag"],
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
-      scope: [
-        "text.html entity.name.tag",
-        "text.html punctuation.tag"
-      ],
+      scope: ["text.html entity.name.tag", "text.html punctuation.tag"],
       settings: {
         // fontStyle: "bold",
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
-      scope: [
-        "source.js variable.language"
-      ],
+      scope: ["source.js variable.language"],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "source.ts variable.language"
-      ],
+      scope: ["source.ts variable.language"],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "source.go storage.type"
-      ],
+      scope: ["source.go storage.type"],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
-      scope: [
-        "source.go entity.name.import"
-      ],
+      scope: ["source.go entity.name.import"],
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
-      scope: [
-        "source.go keyword.package",
-        "source.go keyword.import"
-      ],
+      scope: ["source.go keyword.package", "source.go keyword.import"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
-      scope: [
-        "source.go keyword.interface",
-        "source.go keyword.struct"
-      ],
+      scope: ["source.go keyword.interface", "source.go keyword.struct"],
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
-      scope: [
-        "source.go entity.name.type"
-      ],
+      scope: ["source.go entity.name.type"],
       settings: {
-        foreground: c.grey[9]
-      }
+        foreground: c.grey[9],
+      },
     },
     {
-      scope: [
-        "source.go entity.name.function"
-      ],
+      scope: ["source.go entity.name.function"],
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
-      scope: [
-        "keyword.control.cucumber.table"
-      ],
+      scope: ["keyword.control.cucumber.table"],
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
-      scope: [
-        "source.reason string.double",
-        "source.reason string.regexp"
-      ],
+      scope: ["source.reason string.double", "source.reason string.regexp"],
       settings: {
-        foreground: c.green.d
-      }
+        foreground: c.green.d,
+      },
     },
     {
-      scope: [
-        "source.reason keyword.control.less"
-      ],
+      scope: ["source.reason keyword.control.less"],
       settings: {
-        foreground: c.cyan.d
-      }
+        foreground: c.cyan.d,
+      },
     },
     {
-      scope: [
-        "source.reason entity.name.function"
-      ],
+      scope: ["source.reason entity.name.function"],
       settings: {
-        foreground: c.blue.d
-      }
+        foreground: c.blue.d,
+      },
     },
     {
       scope: [
         "source.reason support.property-value",
-        "source.reason entity.name.filename"
+        "source.reason entity.name.filename",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
+    },
+    {
+      scope: ["source.powershell variable.other.member.powershell"],
+      settings: {
+        foreground: c.orange.d,
+      },
+    },
+    {
+      scope: ["source.powershell support.function.powershell"],
+      settings: {
+        foreground: c.orange.d,
+      },
+    },
+    {
+      scope: ["source.powershell support.function.attribute.powershell"],
+      settings: {
+        foreground: c.grey[7],
+      },
     },
     {
       scope: [
-        "source.powershell variable.other.member.powershell"
+        "source.powershell meta.hashtable.assignment.powershell variable.other.readwrite.powershell",
       ],
       settings: {
-        foreground: c.orange.d
-      }
-    },
-    {
-      scope: [
-        "source.powershell support.function.powershell"
-      ],
-      settings: {
-        foreground: c.orange.d
-      }
-    },
-    {
-      scope: [
-        "source.powershell support.function.attribute.powershell"
-      ],
-      settings: {
-        foreground: c.grey[7]
-      }
-    },
-    {
-      scope: [
-        "source.powershell meta.hashtable.assignment.powershell variable.other.readwrite.powershell"
-      ],
-      settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
@@ -1245,40 +1162,38 @@ export const light = {
         "support.function.textit.latex",
         "support.function.texttt.latex",
         "support.function.emph.latex",
-        "support.function.url.latex"
+        "support.function.url.latex",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "support.class.math.block.tex",
-        "support.class.math.block.environment.latex"
+        "support.class.math.block.environment.latex",
       ],
       settings: {
-        foreground: c.orange.d
-      }
+        foreground: c.orange.d,
+      },
     },
     {
       scope: [
         "keyword.control.preamble.latex",
-        "keyword.control.include.latex"
+        "keyword.control.include.latex",
       ],
       settings: {
-        foreground: c.magenta.d
-      }
+        foreground: c.magenta.d,
+      },
     },
     {
-      scope: [
-        "support.class.latex"
-      ],
+      scope: ["support.class.latex"],
       settings: {
-        foreground: c.cyan.d
-      }
-    }
+        foreground: c.cyan.d,
+      },
+    },
   ],
-  type: "light"
+  type: "light",
 };
 
 export const dark = {
@@ -1366,11 +1281,11 @@ export const dark = {
     "editorWhitespace.foreground": `${c.grey[4]}20`,
     "editorWidget.background": c.grey[10],
     "editorWidget.border": c.grey[9],
-    "errorForeground": c.orange.l,
+    errorForeground: c.orange.l,
     "extensionButton.prominentBackground": `${c.green.l}80`,
     "extensionButton.prominentHoverBackground": `${c.green.l}30`,
-    "focusBorder": c.grey[9],
-    "foreground": c.grey[1],
+    focusBorder: c.grey[9],
+    foreground: c.grey[1],
     "gitDecoration.addedResourceForeground": c.grey[1],
     "gitDecoration.conflictingResourceForeground": c.magenta.m,
     "gitDecoration.deletedResourceForeground": c.orange.m,
@@ -1383,12 +1298,14 @@ export const dark = {
     "gitlens.decorations.branchBehindForegroundColor": c.orange.m,
     "gitlens.decorations.branchDivergedForegroundColor": c.orange.m,
     "gitlens.decorations.branchMissingUpstreamForegroundColor": c.orange.m,
-    "gitlens.decorations.statusMergingOrRebasingConflictForegroundColor": c.orange.m,
+    "gitlens.decorations.statusMergingOrRebasingConflictForegroundColor":
+      c.orange.m,
     "gitlens.decorations.statusMergingOrRebasingForegroundColor": c.orange.m,
     "gitlens.decorations.workspaceCurrentForegroundColor": c.green.m,
     "gitlens.decorations.workspaceRepoMissingForegroundColor": c.grey[6],
     "gitlens.decorations.workspaceRepoOpenForegroundColor": c.green.m,
-    "gitlens.decorations.worktreeHasUncommittedChangesForegroundColor": c.grey[5],
+    "gitlens.decorations.worktreeHasUncommittedChangesForegroundColor":
+      c.grey[5],
     "gitlens.decorations.worktreeMissingForegroundColor": c.orange.m,
     "gitlens.graphChangesColumnAddedColor": c.green.m,
     "gitlens.graphChangesColumnDeletedColor": c.orange.m,
@@ -1412,8 +1329,8 @@ export const dark = {
     "gitlens.graphMinimapMarkerUpstreamColor": c.cyan.m,
     "gitlens.graphScrollMarkerHeadColor": c.green.l,
     "gitlens.graphScrollMarkerHighlightsColor": c.orange.m,
-    "gitlens.graphScrollMarkerLocalBranchesColor": c.blue.l
-    , "gitlens.graphScrollMarkerPullRequestsColor": c.orange.l,
+    "gitlens.graphScrollMarkerLocalBranchesColor": c.blue.l,
+    "gitlens.graphScrollMarkerPullRequestsColor": c.orange.l,
     "gitlens.graphScrollMarkerRemoteBranchesColor": c.blue.m,
     "gitlens.graphScrollMarkerStashesColor": c.magenta.m,
     "gitlens.graphScrollMarkerTagsColor": c.grey[6],
@@ -1435,8 +1352,8 @@ export const dark = {
     "gitlens.trailingLineBackgroundColor": `${c.grey[10]}a0`,
     "gitlens.trailingLineForegroundColor": `${c.grey[5]}a0`,
     "gitlens.unpublishedChangesIconColor": c.green.m,
-    "gitlens.unpublishedCommitIconColor": c.green.m
-    , "gitlens.unpulledChangesIconColor": c.orange.l,
+    "gitlens.unpublishedCommitIconColor": c.green.m,
+    "gitlens.unpulledChangesIconColor": c.orange.l,
     "icon.foreground": c.grey[1],
     "input.background": c.grey[10],
     "input.border": c.grey[9],
@@ -1500,7 +1417,8 @@ export const dark = {
     "sideBarSectionHeader.foreground": c.grey[1],
     "sideBarTitle.foreground": c.grey[1],
     "statusBar.background": c.grey[10],
-    "statusBar.border": c.grey[9], "statusBar.debuggingBackground": c.orange.l,
+    "statusBar.border": c.grey[9],
+    "statusBar.debuggingBackground": c.orange.l,
 
     "statusBar.debuggingBorder": c.transparent,
     "statusBar.debuggingForeground": c.grey[10],
@@ -1540,279 +1458,258 @@ export const dark = {
     "titleBar.activeForeground": c.grey[1],
     "titleBar.inactiveBackground": c.grey[10],
     "widget.border": c.grey[9],
-    "widget.shadow": `${c.grey[10]}30`
+    "widget.shadow": `${c.grey[10]}30`,
   },
   displayName: "Nix Code Dark",
   name: "nix-code-dark",
   semanticHighlighting: true,
   semanticTokenColors: {
-    "component": c.orange.l,
+    component: c.orange.l,
 
     "constant.builtin": c.magenta.l,
-    "function": c.cyan.l, "function.builtin": c.orange.l,
+    function: c.cyan.l,
+    "function.builtin": c.orange.l,
 
-    "method": c.cyan.l,
-    "parameter": c.blue.l,
-    "property": c.blue.l,
+    method: c.cyan.l,
+    parameter: c.blue.l,
+    property: c.blue.l,
     "property:python": c.grey[1],
-    "variable": c.grey[1]
+    variable: c.grey[1],
   },
   tokenColors: [
     {
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "emphasis",
       settings: {
-        fontStyle: "italic"
-      }
+        fontStyle: "italic",
+      },
     },
     {
       scope: "strong",
       settings: {
-        fontStyle: "bold"
-      }
+        fontStyle: "bold",
+      },
     },
     {
       scope: "header",
       settings: {
-        foreground: c.blue.m
-      }
+        foreground: c.blue.m,
+      },
     },
     {
-      scope: [
-        "comment",
-        "punctuation.definition.comment"
-      ],
+      scope: ["comment", "punctuation.definition.comment"],
       settings: {
         fontStyle: "italic",
-        foreground: c.grey[5]
-      }
+        foreground: c.grey[5],
+      },
     },
     {
-      scope: [
-        "constant",
-        "support.constant",
-        "variable.arguments"
-      ],
+      scope: ["constant", "support.constant", "variable.arguments"],
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
       scope: "constant.rgb-value",
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "entity.name.selector",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "entity.other.attribute-name",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "entity.name.tag",
-        "punctuation.tag"
-      ],
+      scope: ["entity.name.tag", "punctuation.tag"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
-      scope: [
-        "invalid",
-        "invalid.illegal"
-      ],
+      scope: ["invalid", "invalid.illegal"],
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "invalid.deprecated",
       settings: {
-        foreground: c.magenta.m
-      }
+        foreground: c.magenta.m,
+      },
     },
     {
       scope: "meta.selector",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "meta.preprocessor",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "meta.preprocessor.string",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "meta.preprocessor.numeric",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "meta.header.diff",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "storage",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "storage.type",
-        "storage.modifier"
-      ],
+      scope: ["storage.type", "storage.modifier"],
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "string",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "string.tag",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "string.value",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "string.regexp",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "string.escape",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "string.quasi",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "string.entity",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "object",
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "module.node",
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "support.type.property-name",
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "keyword",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "keyword.control",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "keyword.control.module",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "keyword.control.less",
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "keyword.operator",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "keyword.operator.new",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "keyword.other.unit",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "metatag.php",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "support.function.git-rebase",
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "constant.sha.git-rebase",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: [
@@ -1823,20 +1720,17 @@ export const dark = {
         "meta.type.annotation",
         "support.type",
         "storage.type.cs",
-        "variable.class"
+        "variable.class",
       ],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "variable.this",
-        "support.variable"
-      ],
+      scope: ["variable.this", "support.variable"],
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
       scope: [
@@ -1845,49 +1739,45 @@ export const dark = {
         "entity.name.class.static.function",
         "entity.name.function",
         "entity.name.class",
-        "entity.name.type"
+        "entity.name.type",
       ],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "entity.function",
-        "entity.name.function.static"
-      ],
+      scope: ["entity.function", "entity.name.function.static"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "entity.name.function.function-call",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "support.function.builtin",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "entity.name.method",
         "entity.name.method.function-call",
-        "entity.name.static.function-call"
+        "entity.name.static.function-call",
       ],
       settings: {
-        foreground: c.cyan.m
-      }
+        foreground: c.cyan.m,
+      },
     },
     {
       scope: "brace",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
@@ -1896,581 +1786,509 @@ export const dark = {
         "variable.name",
         "variable.other",
         "variable",
-        "string.constant.other.placeholder"
+        "string.constant.other.placeholder",
       ],
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "prototype",
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
-      scope: [
-        "punctuation"
-      ],
+      scope: ["punctuation"],
       settings: {
-        foreground: c.grey[4]
-      }
+        foreground: c.grey[4],
+      },
     },
     {
       scope: "punctuation.quoted",
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "punctuation.quasi",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "*url*",
-        "*link*",
-        "*uri*"
-      ],
+      scope: ["*url*", "*link*", "*uri*"],
       settings: {
-        fontStyle: "underline"
-      }
+        fontStyle: "underline",
+      },
     },
     {
-      scope: [
-        "meta.function.python",
-        "entity.name.function.python"
-      ],
+      scope: ["meta.function.python", "entity.name.function.python"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: [
         "storage.type.function.python",
         "storage.modifier.declaration",
         "storage.type.class.python",
-        "storage.type.string.python"
+        "storage.type.string.python",
       ],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "storage.type.function.async.python"
-      ],
+      scope: ["storage.type.function.async.python"],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "meta.function-call.generic",
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "meta.function-call.arguments",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "entity.name.function.decorator",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "constant.other.caps",
       settings: {
-        fontStyle: "bold"
-      }
+        fontStyle: "bold",
+      },
     },
     {
       scope: "keyword.operator.logical",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "punctuation.definition.logical-expression",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "string.interpolated.dollar.shell",
-        "string.interpolated.backtick.shell"
+        "string.interpolated.backtick.shell",
       ],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "keyword.control.directive",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "support.function.C99",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "meta.function.cs",
         "entity.name.function.cs",
-        "entity.name.type.namespace.cs"
+        "entity.name.type.namespace.cs",
       ],
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: [
         "keyword.other.using.cs",
         "entity.name.variable.field.cs",
         "entity.name.variable.local.cs",
-        "variable.other.readwrite.cs"
+        "variable.other.readwrite.cs",
       ],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
-      scope: [
-        "keyword.other.this.cs",
-        "keyword.other.base.cs"
-      ],
+      scope: ["keyword.other.this.cs", "keyword.other.base.cs"],
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
       scope: "meta.scope.prerequisites",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "entity.name.function.target",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
-      scope: [
-        "storage.modifier.import.java",
-        "storage.modifier.package.java"
-      ],
+      scope: ["storage.modifier.import.java", "storage.modifier.package.java"],
       settings: {
-        foreground: c.grey[3]
-      }
+        foreground: c.grey[3],
+      },
     },
     {
-      scope: [
-        "keyword.other.import.java",
-        "keyword.other.package.java"
-      ],
+      scope: ["keyword.other.import.java", "keyword.other.package.java"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "storage.type.java",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "storage.type.annotation",
       settings: {
         fontStyle: "bold",
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "keyword.other.documentation.javadoc",
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "comment.block.javadoc variable.parameter.java",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: [
         "source.java variable.other.object",
-        "source.java variable.other.definition.java"
+        "source.java variable.other.definition.java",
       ],
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "meta.function-parameters.lisp",
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "markup.underline",
       settings: {
-        fontStyle: "underline"
-      }
+        fontStyle: "underline",
+      },
     },
     {
       scope: "string.other.link.title.markdown",
       settings: {
         fontStyle: "underline",
-        foreground: c.grey[5]
-      }
+        foreground: c.grey[5],
+      },
     },
     {
       scope: "markup.underline.link",
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
       scope: "markup.bold",
       settings: {
-        fontStyle: "bold", foreground: c.orange.l
-
-      }
+        fontStyle: "bold",
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "markup.heading",
       settings: {
-        fontStyle: "bold", foreground: c.orange.l
-
-      }
+        fontStyle: "bold",
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "heading.1.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "heading.2.markdown entity.name.section.markdown",
       settings: {
-        fontStyle: "bold", foreground: c.orange.l
-
-      }
+        fontStyle: "bold",
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "heading.3.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "heading.4.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "heading.5.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "heading.6.markdown entity.name.section.markdown",
       settings: {
         fontStyle: "bold",
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
       scope: "markup.italic",
       settings: {
-        fontStyle: "italic"
-      }
+        fontStyle: "italic",
+      },
     },
     {
       scope: "markup.inserted",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: "markup.deleted",
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
       scope: "markup.changed",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "markup.punctuation.quote.beginning",
       settings: {
-        foreground: c.green.m
-      }
+        foreground: c.green.m,
+      },
     },
     {
       scope: "markup.punctuation.list.beginning",
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
-      scope: [
-        "markup.inline.raw",
-        "markup.fenced_code.block"
-      ],
+      scope: ["markup.inline.raw", "markup.fenced_code.block"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
       scope: "string.quoted.double.json",
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: "entity.other.attribute-name.css",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "source.css meta.selector",
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
       scope: "support.type.property-name.css",
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: "entity.other.attribute-name.class",
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
       scope: [
         "source.css support.function.transform",
         "source.css support.function.timing-function",
-        "source.css support.function.misc"
+        "source.css support.function.misc",
       ],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "support.property-value",
         "constant.rgb-value",
         "support.property-value.scss",
-        "constant.rgb-value.scss"
+        "constant.rgb-value.scss",
       ],
       settings: {
-        foreground: c.orange.m
-      }
+        foreground: c.orange.m,
+      },
     },
     {
-      scope: [
-        "entity.name.tag.css"
-      ],
+      scope: ["entity.name.tag.css"],
       settings: {
-        fontStyle: ""
-      }
+        fontStyle: "",
+      },
     },
     {
-      scope: [
-        "punctuation.definition.tag"
-      ],
+      scope: ["punctuation.definition.tag"],
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
-      scope: [
-        "text.html entity.name.tag",
-        "text.html punctuation.tag"
-      ],
+      scope: ["text.html entity.name.tag", "text.html punctuation.tag"],
       settings: {
         // fontStyle: "bold",
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
-      scope: [
-        "source.js variable.language"
-      ],
+      scope: ["source.js variable.language"],
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "source.ts variable.language"
-      ],
+      scope: ["source.ts variable.language"],
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "source.go storage.type"
-      ],
+      scope: ["source.go storage.type"],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
-      scope: [
-        "source.go entity.name.import"
-      ],
+      scope: ["source.go entity.name.import"],
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
-      scope: [
-        "source.go keyword.package",
-        "source.go keyword.import"
-      ],
+      scope: ["source.go keyword.package", "source.go keyword.import"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
-      scope: [
-        "source.go keyword.interface",
-        "source.go keyword.struct"
-      ],
+      scope: ["source.go keyword.interface", "source.go keyword.struct"],
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
-      scope: [
-        "source.go entity.name.type"
-      ],
+      scope: ["source.go entity.name.type"],
       settings: {
-        foreground: c.grey[1]
-      }
+        foreground: c.grey[1],
+      },
     },
     {
-      scope: [
-        "source.go entity.name.function"
-      ],
+      scope: ["source.go entity.name.function"],
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
-      scope: [
-        "keyword.control.cucumber.table"
-      ],
+      scope: ["keyword.control.cucumber.table"],
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
-      scope: [
-        "source.reason string.double",
-        "source.reason string.regexp"
-      ],
+      scope: ["source.reason string.double", "source.reason string.regexp"],
       settings: {
-        foreground: c.green.l
-      }
+        foreground: c.green.l,
+      },
     },
     {
-      scope: [
-        "source.reason keyword.control.less"
-      ],
+      scope: ["source.reason keyword.control.less"],
       settings: {
-        foreground: c.cyan.l
-      }
+        foreground: c.cyan.l,
+      },
     },
     {
-      scope: [
-        "source.reason entity.name.function"
-      ],
+      scope: ["source.reason entity.name.function"],
       settings: {
-        foreground: c.blue.l
-      }
+        foreground: c.blue.l,
+      },
     },
     {
       scope: [
         "source.reason support.property-value",
-        "source.reason entity.name.filename"
+        "source.reason entity.name.filename",
       ],
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
+    },
+    {
+      scope: ["source.powershell variable.other.member.powershell"],
+      settings: {
+        foreground: c.orange.l,
+      },
+    },
+    {
+      scope: ["source.powershell support.function.powershell"],
+      settings: {
+        foreground: c.orange.l,
+      },
+    },
+    {
+      scope: ["source.powershell support.function.attribute.powershell"],
+      settings: {
+        foreground: c.grey[3],
+      },
     },
     {
       scope: [
-        "source.powershell variable.other.member.powershell"
+        "source.powershell meta.hashtable.assignment.powershell variable.other.readwrite.powershell",
       ],
       settings: {
-        foreground: c.orange.l
-
-      }
-    },
-    {
-      scope: [
-        "source.powershell support.function.powershell"
-      ],
-      settings: {
-        foreground: c.orange.l
-      }
-    },
-    {
-      scope: [
-        "source.powershell support.function.attribute.powershell"
-      ],
-      settings: {
-        foreground: c.grey[3]
-      }
-    },
-    {
-      scope: [
-        "source.powershell meta.hashtable.assignment.powershell variable.other.readwrite.powershell"
-      ],
-      settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
@@ -2481,39 +2299,36 @@ export const dark = {
         "support.function.textit.latex",
         "support.function.texttt.latex",
         "support.function.emph.latex",
-        "support.function.url.latex"
+        "support.function.url.latex",
       ],
       settings: {
-        foreground: c.orange.l
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "support.class.math.block.tex",
-        "support.class.math.block.environment.latex"
+        "support.class.math.block.environment.latex",
       ],
       settings: {
-        foreground: c.orange.l
-
-      }
+        foreground: c.orange.l,
+      },
     },
     {
       scope: [
         "keyword.control.preamble.latex",
-        "keyword.control.include.latex"
+        "keyword.control.include.latex",
       ],
       settings: {
-        foreground: c.magenta.l
-      }
+        foreground: c.magenta.l,
+      },
     },
     {
-      scope: [
-        "support.class.latex"
-      ],
+      scope: ["support.class.latex"],
       settings: {
-        foreground: c.cyan.l
-      }
-    }
+        foreground: c.cyan.l,
+      },
+    },
   ],
-  type: "dark"
+  type: "dark",
 };

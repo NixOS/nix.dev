@@ -1,6 +1,7 @@
 export const config = {
   siteTitle: "Nix Docs",
-  description: "The documentation for the NixOS project — Nix, NixOS, and Nixpkgs — with guides and references in one place",
+  description:
+    "The documentation for the NixOS project — Nix, NixOS, and Nixpkgs — with guides and references in one place",
   copyright: {
     author: "Nix contributors",
     license: {

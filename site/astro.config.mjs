@@ -1,11 +1,14 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import { satteri } from '@astrojs/markdown-satteri';
+import { satteri } from "@astrojs/markdown-satteri";
 import netlify from "@astrojs/netlify";
 import expressiveCode, { ExpressiveCodeTheme } from "astro-expressive-code";
 import icon from "astro-iconset";
 
-import { light as nixCodeLight, dark as nixCodeDark } from "./src/assets/nixCodeTheme.ts";
+import {
+  light as nixCodeLight,
+  dark as nixCodeDark,
+} from "./src/assets/nixCodeTheme.ts";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -26,7 +29,7 @@ export default defineConfig({
       defaultProps: {
         wrap: true,
       },
-    })
+    }),
   ],
 
   markdown: {

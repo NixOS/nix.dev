@@ -9,7 +9,7 @@ export const collections = {
       pattern: "**/*.md",
     }),
     schema: z.object({
-    	title: z.string(),
-    })
+      title: z.string(),
+    }),
   }),
 };

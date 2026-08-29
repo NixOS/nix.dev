@@ -22,37 +22,35 @@ const {
 ---
 
 <li>
-  <a
-    href={`${slugPrefix}${item.slug}`}
-  >
+  <a href={`${slugPrefix}${item.slug}`}>
     {item.text ?? item.slug}
   </a>
 
-  { (item.depth ?? 0) < maxDepth
-    && item.children
-    && item.children.length !== 0
-    &&
-      <ol>
-        { item.children.map(child => {
+  {
+    (item.depth ?? 0) < maxDepth &&
+      item.children &&
+      item.children.length !== 0 && (
+        <ol>
+          {item.children.map((child) => {
             const slug = stackSlugs ? `${item.slug}/${child.slug}` : child.slug;
             return (
               <Astro.self
-                item={{...child, slug}}
+                item={{ ...child, slug }}
                 maxDepth={maxDepth}
                 slugPrefix={slugPrefix}
                 stackSlugs={stackSlugs}
               />
-            )
-          })
-        }
-      </ol>
+            );
+          })}
+        </ol>
+      )
   }
 </li>
 
 <style>
-@reference "../styles/global.css";
+  @reference "../styles/global.css";
 
-ol {
-  @apply ml-4;
-}
+  ol {
+    @apply ml-4;
+  }
 </style>

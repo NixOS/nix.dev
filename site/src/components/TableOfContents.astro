@@ -5,36 +5,32 @@ interface Props {
   headings: {
     depth: number;
     slug: string;
-    text: string
-  }[],
+    text: string;
+  }[];
   maxDepth?: number;
   class?: string | string[];
-};
+}
 
-const {
-  headings,
-  maxDepth = 3
-} = Astro.props;
+const { headings, maxDepth = 3 } = Astro.props;
 
 type Node = {
-  depth: number,
-  children: Stack,
-  slug: string,
-  text: string,
+  depth: number;
+  children: Stack;
+  slug: string;
+  text: string;
 };
 
 type Stack = Node[];
 
 // Make a flat list recursive using the list items’ depth attributes.
 const nest = (items: Stack): Stack => {
-
   const f = (stack: Stack, node: Node): Stack => {
     // pop nodes off the stack until we find the parent of the current node
     while ((stack.at(-1) as Node).depth >= node.depth) stack.pop();
     // add the current node to the parent’s children
     (stack.at(-1) as Node).children.push(node);
     // and also add (another reference to) it to the stack as candidate parent
-    stack.push({...node, children: node.children = []});
+    stack.push({ ...node, children: (node.children = []) });
 
     return stack;
   };
@@ -44,19 +40,16 @@ const nest = (items: Stack): Stack => {
   return (items.reduce(f, acc)[0] as Node).children;
 };
 
-const outline = nest(headings.map(i => ({...i, children: []})));
+const outline = nest(headings.map((i) => ({ ...i, children: [] })));
 ---
 
 <nav class:list={[Astro.props.class]}>
   <ol>
     <li><a href="#main-content">Top</a></li>
-    { outline.map(item =>
-        <TableOfContentsItem
-          item={item}
-          maxDepth={maxDepth}
-          slugPrefix="#"
-        />
-      )
+    {
+      outline.map((item) => (
+        <TableOfContentsItem item={item} maxDepth={maxDepth} slugPrefix="#" />
+      ))
     }
   </ol>
 </nav>

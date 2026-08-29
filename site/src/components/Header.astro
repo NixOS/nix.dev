@@ -13,7 +13,7 @@ import { config } from "../site.config.ts";
     Astro.props.class,
     "backdrop-blur-md bg-grey-05/60 dark:bg-grey-95/60",
     "w-full",
-    "z-1"
+    "z-1",
   ]}
 >
   <div
@@ -26,12 +26,18 @@ import { config } from "../site.config.ts";
       <SiteTitle />
     </span>
 
-    <span id="header-middle" class="place-self-center md:w-full max-w-[80ch] flex justify-between gap-x-4">
+    <span
+      id="header-middle"
+      class="place-self-center md:w-full max-w-[80ch] flex justify-between gap-x-4"
+    >
       <Search class="w-full lg:w-fit" />
       <MobileMenuToggle class="lg:hidden" />
     </span>
 
-    <span id="header-right" class="hidden lg:flex flex-row gap-x-4 justify-between">
+    <span
+      id="header-right"
+      class="hidden lg:flex flex-row gap-x-4 justify-between"
+    >
       <SocialIcons items={config.headerLinks} />
       <ThemeSelector />
     </span>
