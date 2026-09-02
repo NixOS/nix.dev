@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import { satteri } from "@astrojs/markdown-satteri";
 import netlify from "@astrojs/netlify";
 import expressiveCode, { ExpressiveCodeTheme } from "astro-expressive-code";
@@ -42,6 +42,21 @@ export default defineConfig({
       },
     }),
   },
+
+  fonts: [
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: "InterVariable",
+      styles: ["normal", "italic"],
+      cssVariable: "--font-inter",
+      weights: ["100 900"],
+      featureSettings: "'dlig', 'ss01', 'ss07', 'ss08', 'zero'",
+      options: {
+        package: "inter-ui",
+        file: "inter-variable.css",
+      },
+    },
+  ],
 
   adapter: netlify(),
 
