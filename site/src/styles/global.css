@@ -2,6 +2,8 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/fira-code";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "Route159";
   font-weight: 400;

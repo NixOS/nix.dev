@@ -38,4 +38,16 @@ const pageTitle = title ? `${title} | ${config.siteTitle}` : config.siteTitle;
   <meta property="og:url" content={Astro.url} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
+
+  <!-- Theme initialization: blocking to prevent flash of wrong theme -->
+  <script is:inline>
+    const theme = localStorage.getItem("theme");
+    if (
+      theme === "dark" ||
+      (theme === null &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
 </head>
