@@ -29,6 +29,9 @@ export default defineConfig({
       defaultProps: {
         wrap: true,
       },
+      styleOverrides: {
+        codeFontFamily: '"Fira Code Variable", ui-monospace, monospace',
+      },
     }),
   ],
 

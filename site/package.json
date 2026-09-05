@@ -14,6 +14,8 @@
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/netlify": "^8.2.0",
+    "@fontsource-variable/fira-code": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.0",
     "astro-expressive-code": "^0.44.0",
