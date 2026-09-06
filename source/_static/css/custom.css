@@ -120,3 +120,13 @@ html[data-theme="dark"] iframe[title="GitHub"] {
   border-radius: 0.25rem;
   padding: 0.5rem;
 }
+
+/* Pagefind variables need to follow the main theme */
+.pagefind-search {
+  --pagefind-ui-font: var(--pst-font-family-base);
+  --pagefind-ui-primary: var(--pst-color-primary);
+  --pagefind-ui-text: var(--pst-color-text-base);
+  --pagefind-ui-background: var(--pst-color-background);
+  --pagefind-ui-border: var(--pst-color-border);
+  --pagefind-ui-tag: var(--pst-color-surface);
+}
