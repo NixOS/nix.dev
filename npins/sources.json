@@ -11,7 +11,7 @@
       "submodules": false,
       "revision": "3d46470bb3030020f7e1361f33514854f5bfa86d",
       "url": "https://github.com/nixos/nixpkgs/archive/3d46470bb3030020f7e1361f33514854f5bfa86d.tar.gz",
-      "hash": "0hn1wvpn79ma083nf53kp4wbs27bwzbzwfr5kipdnz38zsc4yh1y"
+      "hash": "sha256-PkBPmP5ofNtunCU7/tfn6wi9OLlzFGcHAqqmY+/mwUI="
     },
     "poetry2nix": {
       "type": "Git",
@@ -24,8 +24,8 @@
       "submodules": false,
       "revision": "ce2369db77f45688172384bbeb962bc6c2ea6f94",
       "url": "https://github.com/nix-community/poetry2nix/archive/ce2369db77f45688172384bbeb962bc6c2ea6f94.tar.gz",
-      "hash": "0xq52gq2920xnv7n8rchy3myxbijfpap8z0sd572ifla9dnpqzvi"
+      "hash": "sha256-cX98bUuKuihOaRp8dNV1Mq7u6/CQZWTPth2IJPATBXc="
     }
   },
-  "version": 5
+  "version": 8
 }
