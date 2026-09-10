@@ -49,7 +49,7 @@ The build platform is determined automatically by Nix during the configure phase
 The host platform is best determined by running this command on the host platform:
 
 ```shell-session
-$ $(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 -A gnu-config)/config.guess
+$ $(nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-26.05 -A gnu-config)/config.guess
 aarch64-unknown-linux-gnu
 ```
 
@@ -88,45 +88,63 @@ It is possible to explore them in `nix repl`:
 :::{note}
 [Starting with Nix 2.19](https://nix.dev/manual/nix/latest/release-notes/rl-2.19), `nix repl` requires the `-f` / `--file` flag:
 ```shell-session
-$ nix repl -f '<nixpkgs>' -I nixpkgs=channel:nixos-23.11
+$ nix repl -f '<nixpkgs>' -I nixpkgs=channel:nixos-26.05
 ```
 :::
 
 ```shell-session
-$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-23.11
-Welcome to Nix 2.18.1. Type :? for help.
-
-Loading '<nixpkgs>'...
-Added 14200 variables.
+$ nix repl '<nixpkgs>' -I nixpkgs=channel:nixos-26.05
+Nix 2.34.8
+Type :? for help.
+Loading installable ''...
+Added 27226 variables.
 
 nix-repl> pkgsCross.<TAB>
-pkgsCross.aarch64-android             pkgsCross.musl-power
-pkgsCross.aarch64-android-prebuilt    pkgsCross.musl32
-pkgsCross.aarch64-darwin              pkgsCross.musl64
-pkgsCross.aarch64-embedded            pkgsCross.muslpi
-pkgsCross.aarch64-multiplatform       pkgsCross.or1k
-pkgsCross.aarch64-multiplatform-musl  pkgsCross.pogoplug4
+pkgsCross.aarch64-android             pkgsCross.mipsel-linux-gnu
+pkgsCross.aarch64-android-prebuilt    pkgsCross.mmix
+pkgsCross.aarch64-darwin              pkgsCross.msp430
+pkgsCross.aarch64-embedded            pkgsCross.musl-power
+pkgsCross.aarch64-freebsd             pkgsCross.musl32
+pkgsCross.aarch64-multiplatform       pkgsCross.musl64
+pkgsCross.aarch64-multiplatform-musl  pkgsCross.muslpi
+pkgsCross.aarch64-unknown-uefi        pkgsCross.or1k
+pkgsCross.aarch64-windows             pkgsCross.pogoplug4
 pkgsCross.aarch64be-embedded          pkgsCross.powernv
-pkgsCross.amd64-netbsd                pkgsCross.ppc-embedded
-pkgsCross.arm-embedded                pkgsCross.ppc64
-pkgsCross.armhf-embedded              pkgsCross.ppc64-musl
-pkgsCross.armv7a-android-prebuilt     pkgsCross.ppcle-embedded
-pkgsCross.armv7l-hf-multiplatform     pkgsCross.raspberryPi
-pkgsCross.avr                         pkgsCross.remarkable1
-pkgsCross.ben-nanonote                pkgsCross.remarkable2
-pkgsCross.fuloongminipc               pkgsCross.riscv32
-pkgsCross.ghcjs                       pkgsCross.riscv32-embedded
-pkgsCross.gnu32                       pkgsCross.riscv64
-pkgsCross.gnu64                       pkgsCross.riscv64-embedded
-pkgsCross.i686-embedded               pkgsCross.scaleway-c1
-pkgsCross.iphone32                    pkgsCross.sheevaplug
-pkgsCross.iphone32-simulator          pkgsCross.vc4
-pkgsCross.iphone64                    pkgsCross.wasi32
-pkgsCross.iphone64-simulator          pkgsCross.x86_64-embedded
-pkgsCross.mingw32                     pkgsCross.x86_64-netbsd
-pkgsCross.mingwW64                    pkgsCross.x86_64-netbsd-llvm
-pkgsCross.mmix                        pkgsCross.x86_64-unknown-redox
-pkgsCross.msp430
+pkgsCross.arc                         pkgsCross.ppc-embedded
+pkgsCross.arm-embedded                pkgsCross.ppc32
+pkgsCross.arm-embedded-nano           pkgsCross.ppc64
+pkgsCross.armhf-embedded              pkgsCross.ppc64-elfv1
+pkgsCross.armv7a-android-prebuilt     pkgsCross.ppc64-elfv2
+pkgsCross.armv7l-hf-multiplatform     pkgsCross.ppc64-musl
+pkgsCross.avr                         pkgsCross.ppcle-embedded
+pkgsCross.ben-nanonote                pkgsCross.raspberryPi
+pkgsCross.bluefield2                  pkgsCross.remarkable1
+pkgsCross.fuloongminipc               pkgsCross.remarkable2
+pkgsCross.ghcjs                       pkgsCross.riscv32
+pkgsCross.gnu32                       pkgsCross.riscv32-embedded
+pkgsCross.gnu64                       pkgsCross.riscv64
+pkgsCross.gnu64_simplekernel          pkgsCross.riscv64-embedded
+pkgsCross.i686-embedded               pkgsCross.riscv64-musl
+pkgsCross.iphone64                    pkgsCross.rx-embedded
+pkgsCross.iphone64-simulator          pkgsCross.s390
+pkgsCross.loongarch64-linux           pkgsCross.s390x
+pkgsCross.loongarch64-linux-embedded  pkgsCross.sh4
+pkgsCross.m68k                        pkgsCross.sheevaplug
+pkgsCross.microblaze-embedded         pkgsCross.ucrt64
+pkgsCross.mingw-msvcrt-i686           pkgsCross.ucrtAarch64
+pkgsCross.mingw-msvcrt-x86_64         pkgsCross.vc4
+pkgsCross.mingw-ucrt-aarch64          pkgsCross.wasi32
+pkgsCross.mingw-ucrt-x86_64           pkgsCross.wasm32-unknown-none
+pkgsCross.mingw-ucrt-x86_64-llvm      pkgsCross.x86_64-cygwin
+pkgsCross.mingw32                     pkgsCross.x86_64-darwin
+pkgsCross.mingwW64                    pkgsCross.x86_64-embedded
+pkgsCross.mips-embedded               pkgsCross.x86_64-freebsd
+pkgsCross.mips-linux-gnu              pkgsCross.x86_64-netbsd
+pkgsCross.mips64-embedded             pkgsCross.x86_64-netbsd-llvm
+pkgsCross.mips64-linux-gnuabi64       pkgsCross.x86_64-openbsd
+pkgsCross.mips64-linux-gnuabin32      pkgsCross.x86_64-unknown-uefi
+pkgsCross.mips64el-linux-gnuabi64     pkgsCross.x86_64-windows
+pkgsCross.mips64el-linux-gnuabin32
 ```
 
 These attribute names for cross compilation packages have been chosen somewhat freely over the course of time.
@@ -160,7 +178,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-26.05";
      pkgs = import nixpkgs {};
    in
    pkgs.pkgsCross.aarch64-multiplatform.hello
@@ -171,7 +189,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
 
    ```nix
    let
-     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+     nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-26.05";
      pkgs = import nixpkgs { crossSystem = { config = "aarch64-unknown-linux-gnu"; }; };
    in
    pkgs.hello
@@ -180,7 +198,7 @@ There are multiple equivalent ways to access packages targeted to the host platf
    Equivalently, you can pass the host platform as an argument to `nix-build`:
 
    ```sh
-   $ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 \
+   $ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-26.05 \
      --arg crossSystem '{ config = "aarch64-unknown-linux-gnu"; }' \
      -A hello
    ```
@@ -190,10 +208,10 @@ There are multiple equivalent ways to access packages targeted to the host platf
 To cross compile a package like [hello](https://www.gnu.org/software/hello/), pick the platform attribute — `aarch64-multiplatform` in our case — and run:
 
 ```shell-session
-$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-23.11 \
+$ nix-build '<nixpkgs>' -I nixpkgs=channel:nixos-26.05 \
   -A pkgsCross.aarch64-multiplatform.hello
 ...
-/nix/store/1dx87l5rav8679lqigf9xxkb7wvh2m4k-hello-aarch64-unknown-linux-gnu-2.12.1
+/nix/store/lmgmr8b8czkxwfn3hpv0p5dv7jm4j4ks-hello-aarch64-unknown-linux-gnu-2.12.3
 ```
 
 :::{note}
@@ -210,7 +228,7 @@ Given we have a `cross-compile.nix`:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-26.05";
   pkgs = import nixpkgs {};
 
   # Create a C program that prints Hello World
@@ -266,7 +284,7 @@ Given we have a `shell.nix`:
 
 ```nix
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-26.05";
   pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
 in
 
@@ -301,7 +319,7 @@ And confirm it's aarch64:
 
 ```shell-session
 $ nix-shell --run 'file hello' shell.nix
-hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with debug_info, not stripped
+hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, not stripped
 ```
 
 ## Next steps
