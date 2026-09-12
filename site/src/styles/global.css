@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/fira-code";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
