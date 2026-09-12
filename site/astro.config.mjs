@@ -12,28 +12,27 @@ import {
 
 import tailwindcss from "@tailwindcss/vite";
 
+import alpinejs from "@astrojs/alpinejs";
+
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
-  integrations: [
-    icon({
-      // server-rendered routes cause entire iconset to be bundled if required
-      // icons are not explicitly listed here:
-      // include: { mdi: [ "github", ] },
-    }),
-    expressiveCode({
-      themes: [
-        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
-        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
-      ],
-      defaultProps: {
-        wrap: true,
-      },
-      styleOverrides: {
-        codeFontFamily: '"Fira Code Variable", ui-monospace, monospace',
-      },
-    }),
-  ],
+  integrations: [icon({
+    // server-rendered routes cause entire iconset to be bundled if required
+    // icons are not explicitly listed here:
+    // include: { mdi: [ "github", ] },
+  }), expressiveCode({
+    themes: [
+      ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
+      ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
+    ],
+    defaultProps: {
+      wrap: true,
+    },
+    styleOverrides: {
+      codeFontFamily: '"Fira Code Variable", ui-monospace, monospace',
+    },
+  }), alpinejs()],
 
   markdown: {
     processor: satteri({
