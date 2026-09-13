@@ -17,22 +17,26 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
-  integrations: [icon({
-    // server-rendered routes cause entire iconset to be bundled if required
-    // icons are not explicitly listed here:
-    // include: { mdi: [ "github", ] },
-  }), expressiveCode({
-    themes: [
-      ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
-      ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
-    ],
-    defaultProps: {
-      wrap: true,
-    },
-    styleOverrides: {
-      codeFontFamily: '"Fira Code Variable", ui-monospace, monospace',
-    },
-  }), alpinejs()],
+  integrations: [
+    icon({
+      // server-rendered routes cause entire iconset to be bundled if required
+      // icons are not explicitly listed here:
+      // include: { mdi: [ "github", ] },
+    }),
+    expressiveCode({
+      themes: [
+        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeLight)),
+        ExpressiveCodeTheme.fromJSONString(JSON.stringify(nixCodeDark)),
+      ],
+      defaultProps: {
+        wrap: true,
+      },
+      styleOverrides: {
+        codeFontFamily: 'var(--font-fira-code), ui-monospace, monospace',
+      },
+    }),
+    alpinejs(),
+  ],
 
   markdown: {
     processor: satteri({
@@ -44,15 +48,46 @@ export default defineConfig({
 
   fonts: [
     {
+      provider: fontProviders.local(),
+      name: "Route159",
+      cssVariable: "--font-route159",
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/route159/Route159-Regular.woff"],
+            weight: "normal",
+            style: "normal",
+          },
+          {
+            src: ["./src/assets/fonts/route159/Route159-Bold.woff"],
+            weight: "bold",
+            style: "normal",
+          },
+        ],
+      },
+    },
+    {
       provider: fontProviders.npm({ remote: false }),
       name: "InterVariable",
       styles: ["normal", "italic"],
       cssVariable: "--font-inter",
       weights: ["100 900"],
-      featureSettings: "'dlig', 'ss01', 'ss07', 'ss08', 'zero'",
+      featureSettings: "'dlig'",
       options: {
         package: "inter-ui",
         file: "inter-variable.css",
+      },
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: "Fira Code Variable",
+      styles: ["normal", "italic"],
+      cssVariable: "--font-fira-code",
+      weights: ["100 900"],
+      featureSettings: "'dlig'",
+      options: {
+        package: "@fontsource-variable/fira-code",
+        file: "index.css",
       },
     },
   ],
