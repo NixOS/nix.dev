@@ -13,7 +13,7 @@ import { config } from "../site.config.ts";
 <header
   class:list={[
     Astro.props.class,
-    "backdrop-blur-md bg-grey-02/60 dark:bg-grey-96/60",
+    "bg-grey-05 dark:bg-grey-95",
     "w-full",
     "z-2",
   ]}
@@ -25,7 +25,7 @@ import { config } from "../site.config.ts";
     ]}
   >
     <span id="header-left" class="grow">
-      <SiteTitle />
+      <SiteTitle class="h-full items-center" />
     </span>
 
     <span
@@ -38,7 +38,7 @@ import { config } from "../site.config.ts";
 
     <span
       id="header-right"
-      class="hidden lg:flex flex-row gap-x-4 justify-between"
+      class="hidden lg:flex flex-row gap-x-4 justify-between items-center"
     >
       <SocialIcons items={config.headerLinks} />
       <ThemeSelector />
