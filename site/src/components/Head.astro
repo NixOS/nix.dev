@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Font } from "astro:assets";
 import { config } from "../site.config.ts";
 
 import logo from "../assets/nixos-logo.svg";
@@ -23,7 +25,14 @@ const pageTitle = title ? `${title} | ${config.siteTitle}` : config.siteTitle;
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href={logo.src} />
   <link rel="icon" href="/favicon.ico" />
+  {/* <link rel="sitemap" href="/sitemap-index.xml" /> */}
   <meta name="generator" content={Astro.generator} />
+
+
+  <!-- Fonts -->
+  <Font cssVariable="--font-route159" preload />
+  <Font cssVariable="--font-inter" preload />
+  <Font cssVariable="--font-fira-code" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
@@ -38,6 +47,7 @@ const pageTitle = title ? `${title} | ${config.siteTitle}` : config.siteTitle;
   <meta property="og:url" content={Astro.url} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
+  {/* image && <meta property="og:image" content={new URL(image.src, Astro.url)} /> */}
 
   <!-- Theme initialization: blocking to prevent flash of wrong theme -->
   <script is:inline>

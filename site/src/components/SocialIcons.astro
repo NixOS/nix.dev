@@ -19,7 +19,7 @@ const { items = [] } = Astro.props;
   {
     items.map(({ text, href, icon }) => (
       <a class="flex gap-x-1.5 flex-row max-w-fit" href={href}>
-        {icon && <Icon size="1.2rem" title={text} name={icon} />}
+        {icon && <Icon size="1.5rem" title={text} name={icon} />}
       </a>
     ))
   }

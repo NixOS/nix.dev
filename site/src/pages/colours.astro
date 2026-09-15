@@ -1,0 +1,54 @@
+---
+import Page from "../layouts/Page.astro";
+---
+
+<Page title="Colour Test Page">
+  <div class="flex gap-2 mb-2">
+    { [30, 40, 50, 60, 30, 40, 50, 60].map(s =>
+        <span class={`p-1 w-20 text-grey-95 dark:text-grey-05`}>{s}</span>
+      )
+    }
+  </div>
+  {
+    [ "blue", "sky", "aquamarine", "avocado",
+      "amber", "mahogany", "mulberry", "purple"
+    ].map(hue => (
+      <div class="h-20 flex gap-2 mb-2">
+        { [ "30", "40", "50", "60" ].map(shade => (
+            <span class={`p-1 h-20 w-20 text-grey-95 bg-${hue}-${shade}`}>
+              Sphinx of black quartz
+            </span>
+          ))
+        }
+        { [ "30", "40", "50", "60" ].map(shade => (
+            <span class={`p-1 h-20 w-20 text-${hue}-${shade} border-1 border-${hue}-${shade}`}>
+              Sphinx of black quartz
+            </span>
+          ))
+        }
+      </div>
+    ))
+  }
+
+  {/* to make tailwind generate all classes */}
+  <span class="hidden
+    bg-blue-30 bg-blue-40 bg-blue-50 bg-blue-60
+    text-blue-30 text-blue-40 text-blue-50 text-blue-60
+    bg-sky-30 bg-sky-40 bg-sky-50 bg-sky-60
+    text-sky-30 text-sky-40 text-sky-50 text-sky-60
+    bg-aquamarine-30 bg-aquamarine-40 bg-aquamarine-50 bg-aquamarine-60
+    text-aquamarine-30 text-aquamarine-40 text-aquamarine-50 text-aquamarine-60
+    bg-avocado-30 bg-avocado-40 bg-avocado-50 bg-avocado-60
+    text-avocado-30 text-avocado-40 text-avocado-50 text-avocado-60
+    bg-amber-30 bg-amber-40 bg-amber-50 bg-amber-60
+    text-amber-30 text-amber-40 text-amber-50 text-amber-60
+    bg-mahogany-30 bg-mahogany-40 bg-mahogany-50 bg-mahogany-60
+    text-mahogany-30 text-mahogany-40 text-mahogany-50 text-mahogany-60
+    bg-mulberry-30 bg-mulberry-40 bg-mulberry-50 bg-mulberry-60
+    text-mulberry-30 text-mulberry-40 text-mulberry-50 text-mulberry-60
+    bg-purple-30 bg-purple-40 bg-purple-50 bg-purple-60
+    text-purple-30 text-purple-40 text-purple-50 text-purple-60
+    "
+  />
+
+</Page>

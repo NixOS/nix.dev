@@ -1,0 +1,125 @@
+[
+  {
+    "slug": "nixpkgs",
+    "children": [
+      { "slug": "introduction" },
+      { "slug": "using-nixpkgs",
+        "children": [
+          { "slug": "platform-support" },
+          { "slug": "configuration" },
+          { "slug": "overlays" },
+          { "slug": "overrides" }
+        ]
+      },
+      { "slug": "lib",
+        "children": [
+          { "slug": "functions",
+            "children": [
+              { "slug": "library" },
+              { "slug": "generators" },
+              { "slug": "debug" },
+              { "slug": "prefer-remote-fetch" },
+              { "slug": "nix-gitignore" }
+            ]
+          },
+          { "slug": "module-system" }
+        ]
+      },
+      { "slug": "stdenv",
+        "children": [
+          { "slug": "stdenv" },
+          { "slug": "meta" },
+          { "slug": "passthru" },
+          { "slug": "multiple-output" },
+          { "slug": "cross-compilation" },
+          { "slug": "platform-notes" }
+        ]
+      },
+      { "slug": "toolchains",
+        "children": [
+          { "slug": "llvm" }
+        ]
+      },
+      { "slug": "build-helpers",
+        "children": [
+          { "slug": "fixed-point-arguments" },
+          { "slug": "fetchers" },
+          { "slug": "trivial-build-helpers" },
+          { "slug": "testers" },
+          { "slug": "dev-shell-tools" },
+          { "slug": "special",
+            "children": [
+              { "slug": "buildenv" },
+              { "slug": "fakenss" },
+              { "slug": "fhs-environment" },
+              { "slug": "makesetuphook" },
+              { "slug": "mkshell" },
+              { "slug": "vm-tools" },
+              { "slug": "checkpoint-build" }
+            ]
+          },
+          {
+            "slug": "images",
+            "children": [
+              { "slug": "appimagetools" },
+              { "slug": "dockertools" },
+              { "slug": "ocitools" },
+              { "slug": "portableservice" },
+              { "slug": "make-disk-image" },
+              { "slug": "binarycache" }
+            ]
+          },
+          { "slug": "hooks" },
+          { "slug": "languages-frameworks",
+            "children": [
+              { "auto": true }
+            ]
+          },
+          { "slug": "packages",
+            "children": [
+              { "auto": true },
+              { "slug": "build-support" }
+            ]
+          }
+        ]
+      },
+      { "slug": "modules",
+        "children": [
+          { "slug": "generic" }
+        ]
+      },
+      { "slug": "development",
+        "children": [
+          { "slug": "opening-issues" }
+        ]
+      },
+      { "slug": "contributing",
+        "children": [
+          { "slug": "quick-start" },
+          { "slug": "coding-conventions" },
+          { "slug": "submitting-changes" },
+          { "slug": "vulnerability-roundup" },
+          { "slug": "reviewing-contributions" },
+          { "slug": "contributing-to-documentation" }
+        ]
+      },
+      { "slug": "interoperability",
+        "children": [
+          { "slug": "cyclonedx" }
+        ]
+      },
+      { "slug": "appendix",
+        "children": [
+          { "slug": "release-notes",
+            "children": [
+              { "slug": "rl-2611" },
+              { "slug": "rl-2605" },
+              { "slug": "rl-2511" },
+              { "slug": "rl-2505" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
