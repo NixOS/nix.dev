@@ -49,7 +49,7 @@ Core principles:
 
 - **Clear, accessible language.** Documentation is understandable without oversimplifying technical reality.
 - **Structured by component.** Each major part has complete reference documentation and curated guides for common workflows.
-- **Consolidation over duplication.** Move existing content into the right place, improve structure and cross-linking, and reduce scattered or redundant explanations.
+- **Content lives with its owner.** Documentation is written and maintained in the repository of the component it describes, next to the code, so the same maintainers keep it accurate. Move existing content to its owning repository instead of duplicating or co-maintaining it in nix.dev.
 - **Examples over explanation.** Concrete, working examples come first. Readers can adapt them to their needs.
 - **Reference docs derive from source.** Where source code carries structured annotations, reference documentation is generated from it. This keeps docs accurate as the source evolves.
 
