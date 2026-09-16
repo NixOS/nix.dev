@@ -24,6 +24,8 @@ const pageTitle = title ? `${title} | ${config.siteTitle}` : config.siteTitle;
   <link rel="icon" type="image/svg+xml" href={logo.src} />
   <link rel="icon" href="/favicon.ico" />
   <meta name="generator" content={Astro.generator} />
+  <!-- Until the site is ready, we dont want to appear in search engines -->
+  <meta name="robots" content="noindex" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
