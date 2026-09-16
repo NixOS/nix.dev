@@ -127,6 +127,12 @@ const { title, description, headings = [], toc = true } = Astro.props;
       & p {
         display: inline;
       }
+
+      & :global(p + p),
+      & :global(p + blockquote) {
+        display: block;
+        margin-top: 1rem;
+      }
     }
 
     .footnotes ol {
