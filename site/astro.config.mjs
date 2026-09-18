@@ -12,6 +12,9 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
+  // the manual has no index page yet. Redirect to the preface for now.
+  redirects: { "/nixpkgs": "/nixpkgs/preface" },
+
   integrations: [
     icon({
       // server-rendered routes cause entire iconset to be bundled if required
@@ -37,6 +40,9 @@ export default defineConfig({
     processor: satteri({
       features: {
         directive: true,
+        // nixpkgs docs anchor some headings: `## Title {#sec-title}`
+        // We might get rid of this in the future, when the migration is complete.
+        headingAttributes: true,
       },
     }),
   },
