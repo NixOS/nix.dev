@@ -82,7 +82,6 @@ export function headings(
 export function containers(text: string): { id: string; title: string }[] {
   const lines = text.split("\n");
   const { fenced } = scanFences(lines);
-
   const found: { id: string; title: string }[] = [];
   lines.forEach((line, i) => {
     if (fenced[i]) return;
