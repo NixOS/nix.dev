@@ -12,38 +12,33 @@ import { config } from "../site.config.ts";
   class:list={[
     Astro.props.class,
     "bg-grey-05 dark:bg-steel-90",
-    "w-full",
+    "w-full h-14",
     "z-3",
+    "gap-x-4 flex flex-row",
+    "lg:grid lg:grid-cols-[1fr_3fr_1fr]",
   ]}
 >
-  <div
+  <span id="header-left" class="grow">
+    <SiteTitle class="h-full items-center" />
+  </span>
+
+  <span
+    id="header-middle"
     class:list={[
-      "gap-x-4 flex flex-row",
-      "md:grid md:grid-cols-[5fr_2fr] lg:grid-cols-[1fr_3fr_1fr]",
+      "flex justify-between gap-x-4",
+      "place-self-center items-center",
+      "lg:w-full max-w-[80ch]",
     ]}
   >
-    <span id="header-left" class="grow">
-      <SiteTitle class="h-full items-center" />
-    </span>
+    <Search class="w-full lg:w-fit" />
+  </span>
 
-    <span
-      id="header-middle"
-      class:list={[
-        "flex justify-between gap-x-4",
-        "place-self-center items-center",
-        "md:w-full max-w-[80ch]",
-      ]}
-    >
-      <Search class="w-full lg:w-fit" />
-      <MobileMenuToggle class="md:hidden" />
-    </span>
-
-    <span
-      id="header-right"
-      class="hidden lg:flex flex-row gap-x-4 justify-between items-center"
-    >
-      <SocialIcons items={config.headerLinks} />
-      <ThemeSelector />
-    </span>
-  </div>
+  <span
+    id="header-right"
+    class="flex flex-row gap-x-4 justify-between items-center"
+  >
+    <SocialIcons class="hidden xs:flex" items={config.headerLinks} />
+    <ThemeSelector />
+    <MobileMenuToggle class="md:hidden" />
+  </span>
 </header>
