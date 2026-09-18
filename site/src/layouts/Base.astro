@@ -20,9 +20,9 @@ const { title, description } = Astro.props;
     >
       <section
         class:list={[
-          "absolute md:static",
+          "fixed md:static",
           "bg-grey-05 dark:bg-steel-90 md:bg-inherit md:dark:bg-inherit",
-          "left-0",
+          "left-0 top-16 bottom-0 overflow-scroll",
           "px-4 md:px-0",
           "w-full",
           "z-2",
@@ -31,7 +31,7 @@ const { title, description } = Astro.props;
         x-data
         :class="$store.nav.open ? '!block' : ''"
       >
-        <Sidebar class="md:sticky top-16 py-4" />
+        <Sidebar class="md:sticky py-4" />
       </section>
       <slot />
     </div>
