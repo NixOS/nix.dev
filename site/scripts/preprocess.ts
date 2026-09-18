@@ -4,7 +4,7 @@ import { toCommonmark } from "../src/lib/nixpkgs-markdown.ts";
 const [fname] = process.argv.slice(2);
 
 if (!fname) {
-    throw "First argument must be the file to convert";
+  throw "First argument must be the file to convert";
 }
 // File in nixpkgs syntax
 const orig = readFileSync(fname, "utf8");

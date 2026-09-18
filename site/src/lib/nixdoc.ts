@@ -9,10 +9,8 @@
 import { z } from "astro/zod";
 
 import {
-  shiftHeadings,
   toCommonmark,
   unterminatedFence,
-  type ConvertOptions,
 } from "./nixpkgs-markdown";
 
 const SCHEMA_VERSION = 1;
@@ -93,9 +91,8 @@ function sourceUrl(source: NixdocSource, revision: string): string {
 export function entryBody(
   entry: NixdocEntry,
   revision: string,
-  options?: ConvertOptions,
 ): string {
-  const doc = shiftHeadings(toCommonmark(entry.description.trim(), options), 1);
+  const doc = toCommonmark(entry.description.trim());
   // a doc comment with an unterminated code fence would swallow the footer
   const fence = unterminatedFence(doc);
   const body = fence ? `${doc}\n${fence}` : doc;

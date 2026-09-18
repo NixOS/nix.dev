@@ -2,22 +2,16 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import {
-  entryAnchor,
   entryBody,
   entrySlug,
-  groupAnchor,
   parseExport,
   type NixdocEntry,
   type NixdocGroup,
 } from "./nixdoc";
 import {
-  containers,
   headings,
-  inlineAnchorIds,
   leadText,
-  shiftHeadings,
   toCommonmark,
-  type AnchorTarget,
 } from "./nixpkgs-markdown";
 
 export const docRoot = path.resolve(
@@ -284,60 +278,56 @@ async function buildDocIndex(): Promise<DocIndex> {
 
   const { groups, entries } = await readCollections(nav.items, []);
 
-  const anchors = new Map<string, AnchorTarget>();
-  const register = (markdown: string, href: string, fallback: string) => {
-    for (const heading of headings(markdown)) {
-      if (heading.id) {
-        anchors.set(heading.id, {
-          href: `${href}#${heading.id}`,
-          text: heading.title,
-        });
-      }
-    }
-    for (const container of containers(markdown)) {
-      anchors.set(container.id, {
-        href: `${href}#${container.id}`,
-        text: container.title,
-      });
-    }
-    for (const id of inlineAnchorIds(markdown)) {
-      anchors.set(id, { href: `${href}#${id}`, text: fallback });
-    }
-  };
+  // const anchors = new Map<string, AnchorTarget>();
+  // const register = (markdown: string, href: string, fallback: string) => {
+  //   for (const heading of headings(markdown)) {
+  //     if (heading.id) {
+  //       anchors.set(heading.id, {
+  //         href: `${href}#${heading.id}`,
+  //         text: heading.title,
+  //       });
+  //     }
+  //   }
+  //   for (const container of containers(markdown)) {
+  //     anchors.set(container.id, {
+  //       href: `${href}#${container.id}`,
+  //       text: container.title,
+  //     });
+  //   }
+  //   for (const id of inlineAnchorIds(markdown)) {
+  //     anchors.set(id, { href: `${href}#${id}`, text: fallback });
+  //   }
+  // };
 
-  for (const page of raw.values()) {
-    if (page.anchor) {
-      anchors.set(page.anchor, { href: page.href, text: page.title });
-    }
-    register(page.markdown, page.href, page.title);
-  }
-  for (const group of groups) {
-    const href = `${BASE}/${group.slug}`;
-    anchors.set(groupAnchor(group.id), { href, text: group.id });
-    register(group.description, href, group.id);
-  }
-  for (const entry of entries) {
-    const href = `${BASE}/${entry.slug}`;
-    anchors.set(entryAnchor(entry.id), { href, text: entry.attrPath });
-    register(entry.description, href, entry.attrPath);
-  }
+  // for (const page of raw.values()) {
+  //   if (page.anchor) {
+  //     anchors.set(page.anchor, { href: page.href, text: page.title });
+  //   }
+  //   register(page.markdown, page.href, page.title);
+  // }
+  // for (const group of groups) {
+  //   const href = `${BASE}/${group.slug}`;
+  //   anchors.set(groupAnchor(group.id), { href, text: group.id });
+  //   register(group.description, href, group.id);
+  // }
+  // for (const entry of entries) {
+  //   const href = `${BASE}/${entry.slug}`;
+  //   anchors.set(entryAnchor(entry.id), { href, text: entry.attrPath });
+  //   register(entry.description, href, entry.attrPath);
+  // }
 
-  const convert = {
-    manpageUrls,
-    anchor: (id: string) => anchors.get(id),
-    onDrop: (what: string) => console.warn(`nixpkgs doc: dropped ${what}`),
-  };
+  // const convert = {
+  //   manpageUrls,
+  //   // anchor: (id: string) => anchors.get(id),
+  //   onDrop: (what: string) => console.warn(`nixpkgs doc: dropped ${what}`),
+  // };
 
   const pages = [...raw.values()].map((page) => ({
     slug: page.slug,
     href: page.href,
     title: page.title,
     file: page.file,
-    body: toCommonmark(page.markdown, {
-      ...convert,
-      onDrop: (what) =>
-        console.warn(`nixpkgs doc: ${page.file}: dropped ${what}`),
-    }),
+    body: toCommonmark(page.markdown),
   }));
 
   const functions = entries.map((entry) => ({
@@ -348,11 +338,7 @@ async function buildDocIndex(): Promise<DocIndex> {
     groups: entry.groups,
     summary: leadText(entry.description),
     source: entry.source,
-    body: entryBody(entry, revision, {
-      ...convert,
-      onDrop: (what) =>
-        console.warn(`nixpkgs doc: ${entry.id}: dropped ${what}`),
-    }),
+    body: entryBody(entry, revision),
   }));
 
   const tree = (nodes: NavNode[]): TreeNode[] =>
@@ -384,14 +370,7 @@ async function buildDocIndex(): Promise<DocIndex> {
       href: `${BASE}/${group.slug}`,
       id: group.id,
       summary: leadText(group.description),
-      body: shiftHeadings(
-        toCommonmark(group.description, {
-          ...convert,
-          onDrop: (what) =>
-            console.warn(`nixpkgs doc: group ${group.id}: dropped ${what}`),
-        }),
-        1,
-      ),
+      body: toCommonmark(group.description),
     })),
     tree: tree(nav.items),
   };
