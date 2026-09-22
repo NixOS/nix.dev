@@ -1,19 +1,93 @@
 ---
-import Page from "../../layouts/Page.astro";
 import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
 
-export async function getStaticPaths() {
-  const pages = await getCollection("nixpkgs");
-  return pages.map((page) => ({
-    params: { slug: page.id },
-    props: { page },
-  }));
-}
+import Page from "../../layouts/Page.astro";
 
-const { page } = Astro.props;
-const { Content, headings } = await render(page);
+// every nixpkgs resource sits below this route, at the path nav.json gives it
+export type Props =
+  | { page: CollectionEntry<"nixpkgs"> }
+  | {
+      group: CollectionEntry<"libGroups">;
+      functions: CollectionEntry<"libFunctions">[];
+    }
+  | { entry: CollectionEntry<"libFunctions"> };
+
+export const getStaticPaths = (async () => {
+  const [pages, groups, functions] = await Promise.all([
+    getCollection("nixpkgs"),
+    getCollection("libGroups"),
+    getCollection("libFunctions"),
+  ]);
+  return [
+    ...pages.map((page) => ({ params: { slug: page.id }, props: { page } })),
+    ...groups.map((group) => ({
+      params: { slug: group.id },
+      props: {
+        group,
+        functions: functions.filter((entry) =>
+          entry.data.groups.includes(group.data.id),
+        ),
+      },
+    })),
+    ...functions.map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry },
+    })),
+  ];
+}) satisfies GetStaticPaths;
+
+const props = Astro.props;
+const { doc, title, description, functions } =
+  "page" in props
+    ? {
+        doc: props.page,
+        title: props.page.data.title,
+        description: undefined,
+        functions: undefined,
+      }
+    : "group" in props
+      ? {
+          doc: props.group,
+          title: `lib.${props.group.data.id}`,
+          description: props.group.data.summary,
+          functions: props.functions,
+        }
+      : {
+          doc: props.entry,
+          title: props.entry.data.attrPath,
+          description: props.entry.data.summary,
+          functions: undefined,
+        };
+
+const { Content, headings } = await render(doc);
 ---
 
-<Page title={page.data.title} headings={headings}>
+<Page
+  title={title}
+  description={description}
+  headings={functions
+    ? [...headings, { depth: 2, slug: "functions", text: "Functions" }]
+    : headings}
+>
   <Content />
+
+  {
+    functions && (
+      <>
+        <h2 id="functions">Functions</h2>
+        <ul>
+          {functions.map((entry) => (
+            <li>
+              <a href={`/nixpkgs/${entry.id}`}>
+                <code>{entry.data.attrPath}</code>
+              </a>
+              {entry.data.summary && <span>: {entry.data.summary}</span>}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </Page>
