@@ -19,11 +19,11 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.17.2",
-    "astro": "^7.2.0",
+    "astro": "^7.3.3",
     "astro-expressive-code": "^0.44.0",
     "hast": "^0.0.2",
     "inter-ui": "^4.1.1",
-    "satteri": "^0.9.5",
+    "satteri": "^0.10.5",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
