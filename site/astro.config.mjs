@@ -37,6 +37,7 @@ export default defineConfig({
     processor: satteri({
       features: {
         directive: true,
+        definitionList: true,
       },
     }),
   },
