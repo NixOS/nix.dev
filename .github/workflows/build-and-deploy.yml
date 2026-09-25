@@ -23,7 +23,7 @@ jobs:
 
     - name: Build
       run: |
-        nix-build --arg withManuals true
+        nix-build --arg withManuals true --arg withPDF true
 
         # The netlify action doesn't follow symlinks properly.
         mkdir ./dist
