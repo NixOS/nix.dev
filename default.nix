@@ -102,10 +102,25 @@ let
     };
   update-nix-releases = pkgs.callPackage ./nix/update-nix-releases.nix { };
   update-nixpkgs-releases = pkgs.callPackage ./nix/update-nixpkgs-releases.nix { };
+
+  nixpkgs-master = inputs.main.nixpkgs-master;
+  pkgs-master = (import nixpkgs-master {
+    inherit system;
+  });
+
+  nixpkgs-doc = pkgs.callPackage ./nix/nixpkgs-doc.nix {
+    nixpkgs = nixpkgs-master;
+    revision = nixpkgs-master.revision;
+    inherit (pkgs-master.nixpkgs-manual) lib-docs;
+  };
 in
 {
   # build with `nix-build -A build`
   build = nix-dev;
+
+  # the content folder of the site, `nix-build -A nixpkgs-doc`
+  inherit nixpkgs-doc pkgs-master;
+
 
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
@@ -119,5 +134,11 @@ in
       pkgs.netlify-cli
       pkgs.nodejs_26
     ];
+
+    shellHook = ''
+      # link to the nixpkgs source derivation
+      rm -rf ${toString ./site}/nixpkgs-doc
+      ln -s ${nixpkgs-doc} ${toString ./site}/nixpkgs-doc
+    '';
   };
 }

@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# content input
+nixpkgs-doc
+
 # dependencies
 node_modules/
 

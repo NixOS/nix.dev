@@ -1,5 +1,18 @@
 {
   "pins": {
+    "nixpkgs-master": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "0c19ce491e34864ef03ec0a7cee9ed707209d6a9",
+      "url": "https://github.com/nixos/nixpkgs/archive/0c19ce491e34864ef03ec0a7cee9ed707209d6a9.tar.gz",
+      "hash": "sha256-76ARyxgEceu8xAyB/GuSdMSMj5J5VKQQn5A+id5aNsI="
+    },
     "nixpkgs-rolling": {
       "type": "Git",
       "repository": {
