@@ -12,6 +12,9 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
+  // the manual has no index page yet. Redirect to the preface for now.
+  redirects: { "/nixpkgs": "/nixpkgs/preface" },
+
   integrations: [
     icon({
       // server-rendered routes cause entire iconset to be bundled if required
@@ -38,6 +41,7 @@ export default defineConfig({
       features: {
         directive: true,
         definitionList: true,
+        headingAttributes: true,
       },
     }),
   },
