@@ -5,13 +5,12 @@ Open an [issue](https://github.com/NixOS/nix.dev/issues) to discuss a larger cha
 
 Read the [documentation contributor guide](https://nix.dev/contributing/documentation) before you write or review documentation.
 
-When you work on documentation, confirm that your change follows the applicable [nix.dev documentation style guide](https://nix.dev/contributing/documentation/style-guide) or [Nixpkgs style guide](https://github.com/NixOS/nixpkgs/blob/master/doc/styleguide.md).
+When you work on documentation, confirm that your change follows the [Nixpkgs style guide](https://github.com/NixOS/nixpkgs/blob/master/doc/styleguide.md).
 
-## Contribute to the prototype documentation site
+## Contribute to docs.nixos.org
 
-The [nix.dev](https://nix.dev) site is the current documentation site. The
-[docs.nixos.org](https://docs.nixos.org/) site is an Astro-based prototype for
-Nix, NixOS, and Nixpkgs documentation in one place.
+The [nix.dev](https://nix.dev) site is the current documentation site.
+The [docs.nixos.org](https://docs.nixos.org/) site is an Astro-based prototype for Nix, NixOS, and Nixpkgs documentation in one place.
 
 | Topic          | nix.dev                                     | docs.nixos.org                                |
 | -------------- | ------------------------------------------- | --------------------------------------------- |
@@ -19,17 +18,18 @@ Nix, NixOS, and Nixpkgs documentation in one place.
 | Purpose        | Learning and task-focused Nix documentation | Unified Nix, NixOS, and Nixpkgs documentation |
 | Site generator | Sphinx                                      | Astro                                         |
 
-Some guides are available in the [nix.dev](https://github.com/NixOS/nix.dev) repository itself. However, [nix.dev](https://nix.dev) site also links to the Nix, Nixpkgs, and NixOS manuals, which can contain additional guides and reference material.
+Some guides are available in the [nix.dev](https://github.com/NixOS/nix.dev) repository itself.
+However, [nix.dev](https://nix.dev) also links to the Nix, Nixpkgs, and NixOS manuals, which can contain additional guides and reference material.
 
-The [docs.nixos.org](https://docs.nixos.org/) site aims to provide one documentation site with search across Nix, Nixpkgs, and NixOS.
+[docs.nixos.org](https://docs.nixos.org/) aims to provide one documentation site with search across Nix, Nixpkgs, and NixOS.
 
-The [site](site/) directory contains the prototype site.
+The [site](site/) directory contains the source for [docs.nixos.org](https://docs.nixos.org/).
 
 Install its dependencies:
 
 ```shell
-cd site
 nix-shell .
+cd site
 npm install
 ```
 
