@@ -1,76 +1,106 @@
-# Contributing to nix.dev
+# Contributing
 
-See also [contributing to 'docs.nixos.org'](#contributing-to-docsnixosorg)
+Open a [pull request][pull-requests] to contribute.
+Open an [issue][issues] to discuss a larger change before you start work.
 
-nix.dev is a community effort to collect, create, and maintain learning resources for Nix.
+Read the [documentation contributor guide][documentation-contributor-guide] before you write or review documentation.
 
-We strongly encourage everyone interested to participate:
-- Make a [pull request](https://github.com/NixOS/nix.dev/pulls) if you want to introduce an incremental change.
-- Open an [issue](https://github.com/NixOS/nix.dev/issues) if you want to discuss a significant change before starting to work on it.
+When you work on documentation, confirm that your change follows the [Nixpkgs style guide][nixpkgs-style-guide].
 
-Please read our [contributor guide](https://nix.dev/contributing/documentation) for more details.
+## Contribute to docs.nixos.org
 
-## Local preview
+[nix.dev][nix-dev] is the current documentation site.
+[docs.nixos.org][docs-nixos-org] is an Astro-based prototype for Nix, NixOS, and Nixpkgs documentation in one place.
 
-Enter the development environment with `nix-shell`, or [set up direnv](https://nix.dev/guides/recipes/direnv.html) and run `direnv allow`, and then:
+| Topic          | nix.dev                                     | docs.nixos.org                                |
+| -------------- | ------------------------------------------- | --------------------------------------------- |
+| Status         | Current documentation site                  | In development. Expect breaking changes.      |
+| Purpose        | Learning and task-focused Nix documentation | Unified Nix, NixOS, and Nixpkgs documentation |
+| Site generator | Sphinx                                      | Astro                                         |
 
-```shell-session
-[nix-shell:nix.dev]$ devmode
-```
+Some guides are available in the [nix.dev][repository] repository itself.
+However, [nix.dev][nix-dev] also links to the Nix, Nixpkgs, and NixOS manuals, which can contain additional guides and reference material.
 
-and open a browser at <http://localhost:8080>.
+[docs.nixos.org][docs-nixos-org] aims to provide one documentation site with search across Nix, Nixpkgs, and NixOS.
 
-As you make changes, your browser should auto-reload.
+The [site][site] directory contains the source for [docs.nixos.org][docs-nixos-org].
 
-To manually test [redirects](./_redirects):
-
-```shell-session
-[nix-shell:nix.dev]$ nix-build -A build
-[nix-shell:nix.dev]$ netlify dev -d result
-```
-
-## Building the reference manuals
-
-By default, nix.dev builds without the various versions of the Nix reference manual, as that takes quite a while due to how it's currently implemented.
-To enable building the manuals:
-
-```shell-session
-$ nix-build -A build --arg withManuals true
-```
-
-Or for interactive development:
-
-```shell-session
-$ nix-shell --arg withManuals true --run devmode
-```
-
-## Updating reference manuals
-
-With the current setup, the [Nix manual hosted on nix.dev](https://nix.dev/reference/nix-manual) does not get updated automatically with new releases.
-The following manual steps are required:
-
-```shell-session
-nix-shell --run update-nixpkgs-releases
-nix-shell --run update-nix-releases
-```
-
-## Contributing to docs.nixos.org
-
-Use `nix-shell` or `direnv`
-
-To install dependencies, run this once.
+Install its dependencies:
 
 ```shell
-cd ./site
-npm run install
+nix-shell .
+cd site
+npm install
 ```
 
-Sometimes you need to delete the `node_modules` folder and re-run - especially if you didn't contribute for a long time.
-
-Start the dev server
+Start the development server:
 
 ```shell
 npm run dev
 ```
 
-You can edit files live
+## Preview nix.dev Locally
+
+Run the development server to preview your changes:
+
+```shell
+nix-shell --run devmode
+```
+
+Open [http://localhost:8080][local-preview] in your browser.
+The browser reloads when you save a change.
+
+To enter the development environment automatically, [set up direnv][direnv] and run:
+
+```shell
+direnv allow
+```
+
+## Test Redirects
+
+Build the site:
+
+```shell
+nix-build --attr build
+```
+
+Start Netlify's local server to test [redirects][redirects]:
+
+```shell
+netlify dev --dir result
+```
+
+## Build the Reference Manuals
+
+The default build does not include versioned Nix reference manuals. Include them when you change the manuals or their integration:
+
+```shell
+nix-build --attr build --arg withManuals true
+```
+
+Run the development server with the manuals:
+
+```shell
+nix-shell --arg withManuals true --run devmode
+```
+
+## Update the Reference Manuals
+
+Run these commands to add the current Nix and Nixpkgs releases to nix.dev:
+
+```shell
+nix-shell --run update-nixpkgs-releases
+nix-shell --run update-nix-releases
+```
+
+[direnv]: https://nix.dev/guides/recipes/direnv.html
+[docs-nixos-org]: https://docs.nixos.org/
+[documentation-contributor-guide]: https://nix.dev/contributing/documentation
+[issues]: https://github.com/NixOS/nix.dev/issues
+[local-preview]: http://localhost:8080
+[nix-dev]: https://nix.dev
+[nixpkgs-style-guide]: https://github.com/NixOS/nixpkgs/blob/master/doc/styleguide.md
+[pull-requests]: https://github.com/NixOS/nix.dev/pulls
+[redirects]: ./_redirects
+[repository]: https://github.com/NixOS/nix.dev
+[site]: site/
