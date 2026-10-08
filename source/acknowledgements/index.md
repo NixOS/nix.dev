@@ -1,6 +1,12 @@
 (acknowledgements)=
 # Acknowledgements
 
+```{toctree}
+:hidden:
+
+contributors.md
+```
+
 ## Sponsoring
 
 The following people and organisations have contributed to make this effort possible:
