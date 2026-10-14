@@ -12,6 +12,11 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
+  // until we have a landing page for nixpkgs
+  redirects: {
+    "/nixpkgs": "/nixpkgs/preface",
+  },
+
   integrations: [
     icon({
       // server-rendered routes cause entire iconset to be bundled if required
