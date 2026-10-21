@@ -1,14 +1,16 @@
 ---
-import Page from "../../layouts/Page.astro";
 import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
 
-export async function getStaticPaths() {
+import Page from "../../layouts/Page.astro";
+
+export type Props = { page: CollectionEntry<"nixpkgs"> };
+
+export const getStaticPaths = (async () => {
   const pages = await getCollection("nixpkgs");
-  return pages.map((page) => ({
-    params: { slug: page.id },
-    props: { page },
-  }));
-}
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 const { Content, headings } = await render(page);

@@ -1,0 +1,51 @@
+---
+import type { TreeNode } from "../lib/nixpkgs-doc";
+
+interface Props {
+  nodes: TreeNode[];
+  current: string;
+}
+
+const { nodes, current } = Astro.props;
+
+/**
+ * Checks whether a link is on the path the reader is currently viewing
+ */
+function related(href: string): boolean {
+  return (
+    href === current ||
+    current.startsWith(`${href}/`) ||
+    href.startsWith(`${current}/`)
+  );
+}
+
+function contains(nodes: TreeNode[]): boolean {
+  return nodes.some((node) =>
+    "children" in node ? contains(node.children) : related(node.href),
+  );
+}
+---
+
+<ol class="[&_ol]:pl-3">
+  {
+    nodes.map((node) =>
+      "children" in node ? (
+        <li>
+          <details open={contains(node.children)}>
+            <summary>{node.label}</summary>
+            <Astro.self nodes={node.children} current={current} />
+          </details>
+        </li>
+      ) : (
+        <li>
+          <a
+            href={node.href}
+            aria-current={node.href === current ? "page" : undefined}
+          >
+            {node.title}
+          </a>
+        </li>
+      ),
+    )
+  }
+</ol>
