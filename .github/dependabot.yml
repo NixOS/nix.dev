@@ -4,10 +4,15 @@ updates:
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: monday
     time: '00:00'
     timezone: UTC
   open-pull-requests-limit: 10
+  groups:
+    github-actions:
+      patterns:
+        - "*"
   commit-message:
       prefix: "chore"
       include: "scope"
