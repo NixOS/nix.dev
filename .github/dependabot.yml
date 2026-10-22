@@ -16,3 +16,20 @@ updates:
   commit-message:
       prefix: "chore"
       include: "scope"
+
+- package-ecosystem: npm
+  directory: "/site"
+  schedule:
+    interval: weekly
+    day: monday
+    time: '00:00'
+    timezone: UTC
+  open-pull-requests-limit: 10
+  groups:
+    site:
+      update-types:
+        - minor
+        - patch
+  commit-message:
+      prefix: "chore"
+      include: "scope"
