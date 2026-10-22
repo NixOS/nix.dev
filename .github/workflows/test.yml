@@ -7,6 +7,9 @@ on:
   merge_group:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   # The linkchecker runs into rate limits 100% of the time in CI for a very long time
   # It requires caching to not hit all endpoints each time.
