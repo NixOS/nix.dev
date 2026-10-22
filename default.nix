@@ -117,6 +117,10 @@ in
   # the content folder of the site, `nix-build -A nixpkgs-doc`
   inherit nixpkgs-doc pkgs-master;
 
+  # tools for CI jobs, so they don't have to build the whole development shell
+  # run with e.g. `nix run -f . vale`
+  inherit update-nix-releases update-nixpkgs-releases;
+  inherit (pkgs) editorconfig-checker vale;
 
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
