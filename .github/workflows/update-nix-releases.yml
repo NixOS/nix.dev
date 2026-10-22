@@ -2,6 +2,7 @@ name: "Update pinned sources"
 on:
   workflow_dispatch:
   schedule:
+    # Each job's `if:` matches one of these strings, so change both together.
     # nightly: Nix releases
     - cron: "31 2 * * *"
     # weekly: Nixpkgs, since every bump rebuilds most of the toolchain in CI
