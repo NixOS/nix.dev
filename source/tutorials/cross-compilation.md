@@ -264,7 +264,7 @@ It's also possible to provide an environment with a compiler configured for **cr
 
 Given we have a `shell.nix`:
 
-```nix
+```{code-block} nix shell.nix
 let
   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/release-23.11";
   pkgs = (import nixpkgs {}).pkgsCross.aarch64-multiplatform;
