@@ -49,9 +49,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # TOOD: make this a nix-build
+      # TODO: make this a nix-build
       - name: Build and deploy to Netlify
-        run: npx netlify deploy --build ${{ inputs.production && '--prod' || '' }} --message "workflow_dispatch by ${{ github.actor }} @ ${{ github.sha }}"
+        run: nix run -f .. netlify-cli -- deploy --build ${PRODUCTION:+--prod} --message "workflow_dispatch by $ACTOR @ $GITHUB_SHA"
         env:
+          PRODUCTION: ${{ inputs.production && 'true' || '' }}
+          ACTOR: ${{ github.actor }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.PERSONAL_POC_ACCESS_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_POC_SITE_ID }}

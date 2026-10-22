@@ -120,7 +120,7 @@ in
   # tools for CI jobs, so they don't have to build the whole development shell
   # run with e.g. `nix run -f . vale`
   inherit update-nix-releases update-nixpkgs-releases;
-  inherit (pkgs) editorconfig-checker vale;
+  inherit (pkgs) editorconfig-checker netlify-cli vale;
 
   shell = pkgs.mkShell {
     inputsFrom = [ nix-dev ];
