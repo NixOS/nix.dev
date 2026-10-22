@@ -1,6 +1,5 @@
 name: "Update nix releases"
 on:
-  repository_dispatch:
   workflow_dispatch:
   schedule:
     - cron: "31 2 * * *"
