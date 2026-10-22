@@ -28,6 +28,18 @@ jobs:
         with:
           persist-credentials: false
 
+      - uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
+
+      - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        with:
+          name: nix-dev
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      # The site renders the Nixpkgs manual from site/nixpkgs-doc, which the
+      # development shell links in the same way.
+      - name: Build Nixpkgs manual sources
+        run: nix-build .. -A nixpkgs-doc --out-link nixpkgs-doc
+
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: site/.node-version
