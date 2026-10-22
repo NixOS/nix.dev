@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 22
+          node-version-file: site/.node-version
           cache: npm
           cache-dependency-path: site/package-lock.json
 
