@@ -24,10 +24,8 @@ jobs:
       with:
         persist-credentials: false
     - uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
     - name: Checking EditorConfig
-      run: nix run nixpkgs#editorconfig-checker
+      run: nix run -f . editorconfig-checker
     - if: ${{ failure() }}
       run: |
         echo "::error :: Hey! It looks like your changes don't follow our editorconfig settings. Read https://editorconfig.org/#download to configure your editor so you never see this error again."
