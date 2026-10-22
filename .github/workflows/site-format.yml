@@ -36,8 +36,9 @@ jobs:
         run: npm ci
 
       - name: Check formatting
+        id: format
         run: npm run format:check
 
-      - if: ${{ failure() }}
+      - if: ${{ failure() && steps.format.outcome == 'failure' }}
         run: |
           echo "::error :: Hey! It looks like the site is not formatted. Run 'npm run format' in site/ to fix it."
