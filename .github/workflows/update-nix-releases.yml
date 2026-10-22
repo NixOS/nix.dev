@@ -11,16 +11,31 @@ jobs:
   update-nix-releases:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
+      # PRs opened with the GITHUB_TOKEN don't trigger other workflows, so CI
+      # would never run on them. Use the nix-dev-ci GitHub App instead; it has
+      # Contents and Pull requests write access on this repository only.
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app-token
+        with:
+          client-id: ${{ vars.NIX_DEV_CI_CLIENT_ID }}
+          private-key: ${{ secrets.NIX_DEV_CI_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
       - name: Update nix releases
         run: nix run -f . update-nix-releases
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: update/nix-releases
+          commit-message: "nix: update Nix releases"
           title: Update nix versions
+          body: |
+            Automated update of `nix/nix-versions.json` by `update-nix-releases`, from the [nightly workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
           labels: dependencies
+          delete-branch: true
