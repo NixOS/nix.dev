@@ -3,7 +3,7 @@ command = "astro build"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "22"
+NODE_VERSION = "26"
 
 # Keep the POC out of search indexes.
 # Attention: Server rendered /reference/* needs a seperate X-Robots-Tag itself
