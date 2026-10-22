@@ -33,6 +33,7 @@ jobs:
       - name: Update nix releases
         run: nix run -f . update-nix-releases
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -43,6 +44,14 @@ jobs:
             Automated update of `nix/nix-versions.json` by `update-nix-releases`, from [this workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
           labels: dependencies
           delete-branch: true
+      # The update only points at manuals Hydra has already built, so there is
+      # nothing to review beyond CI passing.
+      - name: Merge once CI passes
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
 
   update-nixpkgs-releases:
     if: github.event_name != 'schedule' || github.event.schedule == '47 3 * * 1'
