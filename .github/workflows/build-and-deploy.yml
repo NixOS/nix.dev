@@ -58,4 +58,7 @@ jobs:
         enable-commit-comment: false
         enable-commit-status: true
         enable-github-deployment: false
-      if: github.repository_owner == 'NixOS'
+      # PRs from forks don't get the Netlify secrets, so there is nothing to deploy with
+      if: >-
+        github.repository_owner == 'NixOS' &&
+        (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
