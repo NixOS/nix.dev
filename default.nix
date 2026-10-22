@@ -34,11 +34,7 @@ let
   nix-dev = pkgs.stdenv.mkDerivation {
     name = "nix-dev";
     src = ./.;
-    nativeBuildInputs = [
-      nix-dev-python-pkgs
-      nix-dev-latex
-      pkgs.pagefind
-    ];
+    nativeBuildInputs = nix-dev-python-pkgs ++ nix-dev-latex ++ [ pkgs.pagefind ];
     buildPhase =
       let
         substitutedNixManualReference = pkgs.substitute {
