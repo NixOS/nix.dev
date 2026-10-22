@@ -8,7 +8,6 @@ type Item = {
 
 interface Props {
   item: Item;
-  collapseDepth?: number;
   maxDepth?: number;
   slugPrefix?: string;
   stackSlugs?: boolean;
@@ -16,7 +15,6 @@ interface Props {
 
 const {
   item,
-  collapseDepth = 3,
   maxDepth = 99,
   slugPrefix = "",
   stackSlugs = false,
