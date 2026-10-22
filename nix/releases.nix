@@ -70,12 +70,21 @@ let
   #   "latest" = "2.20";
   #   ...
   # }
-  mutableNixManualRedirects = {
-    latest = nixVersions.latest;
-    rolling = nixVersionForPkgs pkgsRolling;
-    stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.latest};
-    prev-stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.prevLatest};
-  };
+  mutableNixManualRedirects =
+    lib.mapAttrs
+      (
+        name: version:
+        # Otherwise the redirect, and the links on the Nix manual page, would point to a manual that doesn't exist
+        lib.throwIfNot (nixReleases ? ${version})
+          "The ${name} Nix manual is Nix ${version}, which isn't in nix/nix-versions.json. Run update-nix-releases, which adds a release once Hydra has built its manual."
+          version
+      )
+      {
+        latest = nixVersions.latest;
+        rolling = nixVersionForPkgs pkgsRolling;
+        stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.latest};
+        prev-stable = nixVersionForPkgs pkgsReleases.${nixpkgsVersions.prevLatest};
+      };
 
   # Substitutions to perform on ../source/reference/nix-manual.md
   # E.g. @nix-latest@ gets replaced with 2.20, which is encoded as:
