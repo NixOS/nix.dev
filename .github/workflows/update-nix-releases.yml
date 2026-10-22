@@ -16,6 +16,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
+      - name: Update nix releases
+        run: nix run -f . update-nix-releases
+      - name: Summarize changes
+        id: summary
+        run: |
+          {
+            echo 'changes<<EOF'
+            git show HEAD:nix/nix-versions.json | jq -r --slurpfile new nix/nix-versions.json '
+              . as $old
+              | $new[0] | to_entries[]
+              | select($old[.key].url != .value.url)
+              | "| \(.key) | \($old[.key].version // "(new)") | \(.value.version) |"'
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
       # PRs opened with the GITHUB_TOKEN don't trigger other workflows, so CI
       # would never run on them. Use the nix-dev-ci GitHub App instead; it has
       # Contents and Pull requests write access on this repository only.
@@ -26,12 +44,6 @@ jobs:
           private-key: ${{ secrets.NIX_DEV_CI_APP_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
-      - name: Update nix releases
-        run: nix run -f . update-nix-releases
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
@@ -41,11 +53,17 @@ jobs:
           commit-message: "nix: update Nix releases"
           title: Update nix versions
           body: |
+            New Nix releases whose manuals are on cache.nixos.org:
+
+            | Version | Before | After |
+            | --- | --- | --- |
+            ${{ steps.summary.outputs.changes }}
+
             Automated update of `nix/nix-versions.json` by `update-nix-releases`, from [this workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
           labels: dependencies
           delete-branch: true
-      # The update only points at manuals Hydra has already built, so there is
-      # nothing to review beyond CI passing.
+      # The update only moves to newer release tags whose manuals Hydra has
+      # already built, so there is nothing to review beyond CI passing.
       - name: Merge once CI passes
         if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
         run: gh pr merge --auto --squash "$PR_URL"
