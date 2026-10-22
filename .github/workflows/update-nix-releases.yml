@@ -36,11 +36,11 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
-          branch: update/nix-releases
+          branch: create-pull-request/nix-releases
           commit-message: "nix: update Nix releases"
           title: Update nix versions
           body: |
-            Automated update of `nix/nix-versions.json` by `update-nix-releases`, from the [nightly workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            Automated update of `nix/nix-versions.json` by `update-nix-releases`, from [this workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
           labels: dependencies
           delete-branch: true
 
@@ -67,11 +67,11 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
-          branch: update/nixpkgs-releases
+          branch: create-pull-request/nixpkgs-releases
           commit-message: "nix: update Nixpkgs pins"
           title: Update Nixpkgs pins
           body: |
-            Automated update of `npins/sources.json` (nixpkgs-rolling) and `nix/sources.json` (stable releases) by `update-nixpkgs-releases`, from the [nightly workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            Automated update of `npins/sources.json` (nixpkgs-rolling) and `nix/sources.json` (stable releases) by `update-nixpkgs-releases`, from [this workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
 
             The rolling Nixpkgs provides every tool the build and CI use, so check the build before merging.
           labels: dependencies
