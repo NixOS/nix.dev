@@ -9,6 +9,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # Cancel superseded PR runs. Runs on master wait for each other instead, so
+  # production deploys happen one at a time and an older build can never
+  # overwrite a newer one.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
