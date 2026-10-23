@@ -31,5 +31,10 @@
     "astro-iconset": "^0.0.6",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "overrides": {
+    "@netlify/zip-it-and-ship-it": {
+      "toml": "^5.0.1"
+    }
   }
 }
