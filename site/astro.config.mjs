@@ -9,6 +9,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import alpinejs from "@astrojs/alpinejs";
 
+import firaCodeUnicodeRanges from "@fontsource-variable/fira-code/unicode.json" with { type: "json" };
+
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
@@ -92,15 +94,42 @@ export default defineConfig({
       },
     },
     {
+      // The files and their unicode ranges come from the package rather than
+      // the fontsource provider, which would download them at build time.
       // symbols2 has the box-drawing characters used in directory trees; the
-      // Cyrillic and Greek subsets aren't used by any code on the site
-      provider: fontProviders.fontsource(),
+      // Cyrillic and Greek subsets aren't used by any code on the site.
+      provider: fontProviders.local(),
       name: "Fira Code",
       cssVariable: "--font-fira-code",
-      weights: ["300 700"],
-      styles: ["normal"],
-      subsets: ["latin", "latin-ext", "symbols2"],
       fallbacks: ["monospace"],
+      options: {
+        variants: [
+          {
+            src: [
+              "@fontsource-variable/fira-code/files/fira-code-latin-wght-normal.woff2",
+            ],
+            weight: "300 700",
+            style: "normal",
+            unicodeRange: [firaCodeUnicodeRanges.latin],
+          },
+          {
+            src: [
+              "@fontsource-variable/fira-code/files/fira-code-latin-ext-wght-normal.woff2",
+            ],
+            weight: "300 700",
+            style: "normal",
+            unicodeRange: [firaCodeUnicodeRanges["latin-ext"]],
+          },
+          {
+            src: [
+              "@fontsource-variable/fira-code/files/fira-code-symbols2-wght-normal.woff2",
+            ],
+            weight: "300 700",
+            style: "normal",
+            unicodeRange: [firaCodeUnicodeRanges.symbols2],
+          },
+        ],
+      },
     },
   ],
 
