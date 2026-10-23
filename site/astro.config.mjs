@@ -55,12 +55,12 @@ export default defineConfig({
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/route159/Route159-Regular.woff"],
+            src: ["./src/assets/fonts/route159/Route159-Regular.woff2"],
             weight: "normal",
             style: "normal",
           },
           {
-            src: ["./src/assets/fonts/route159/Route159-Bold.woff"],
+            src: ["./src/assets/fonts/route159/Route159-Bold.woff2"],
             weight: "bold",
             style: "normal",
           },
