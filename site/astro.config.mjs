@@ -92,16 +92,15 @@ export default defineConfig({
       },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
-      name: "Fira Code Variable",
-      styles: ["normal", "italic"],
+      // symbols2 has the box-drawing characters used in directory trees; the
+      // Cyrillic and Greek subsets aren't used by any code on the site
+      provider: fontProviders.fontsource(),
+      name: "Fira Code",
       cssVariable: "--font-fira-code",
-      weights: ["100 900"],
-      featureSettings: "'dlig'",
-      options: {
-        package: "@fontsource-variable/fira-code",
-        file: "index.css",
-      },
+      weights: ["300 700"],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext", "symbols2"],
+      fallbacks: ["monospace"],
     },
   ],
 
