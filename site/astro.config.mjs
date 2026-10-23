@@ -68,15 +68,27 @@ export default defineConfig({
       },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      // Inter's own Latin subset: a quarter of the size of the full font, but
+      // unlike the Fontsource and Google Fonts subsets it keeps Inter's
+      // OpenType features (dlig, cv01-cv13, ss01-ss08, ...) and the opsz axis
+      provider: fontProviders.local(),
       name: "InterVariable",
-      styles: ["normal", "italic"],
       cssVariable: "--font-inter",
-      weights: ["100 900"],
-      featureSettings: "'dlig'",
       options: {
-        package: "inter-ui",
-        file: "inter-variable.css",
+        variants: [
+          {
+            src: ["inter-ui/variable-latin/InterVariable-subset.woff2"],
+            weight: "100 900",
+            style: "normal",
+            featureSettings: "'dlig'",
+          },
+          {
+            src: ["inter-ui/variable-latin/InterVariable-Italic-subset.woff2"],
+            weight: "100 900",
+            style: "italic",
+            featureSettings: "'dlig'",
+          },
+        ],
       },
     },
     {
