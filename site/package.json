@@ -24,7 +24,7 @@
     "inter-ui": "^4.1.1",
     "satteri": "^0.10.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
