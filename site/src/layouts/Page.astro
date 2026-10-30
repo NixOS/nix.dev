@@ -40,34 +40,30 @@ const { title, description, headings = [], toc = true } = Astro.props;
       font-family: var(--font-heading);
     }
 
-    h1 {
+    /* h1 is page title and should not be used in prose container */
+
+    h2 {
       font-size: 2.5rem;
       margin-top: 2.5rem;
     }
 
-    h2 {
+    h3 {
       font-size: 2rem;
       margin-top: 2rem;
     }
 
-    h3 {
+    h4 {
       font-size: 1.7rem;
       margin-top: 1.5rem;
     }
 
-    h4 {
+    h5 {
       font-size: 1.4rem;
       margin-top: 1rem;
     }
 
-    h5 {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
-
     h6 {
-      font-size: 1rem;
-      font-style: italic;
+      font-size: 1.2rem;
       margin-top: 1rem;
     }
 
@@ -238,12 +234,16 @@ const { title, description, headings = [], toc = true } = Astro.props;
    * separated by extra space. Need to use `:global()` because Astro makes
    * sibling combinators too specific.
    */
-    :global(h1 + :is(h2, h3, h4, h5, h6)),
     :global(h2 + :is(h3, h4, h5, h6)),
     :global(h3 + :is(h4, h5, h6)),
     :global(h4 + :is(h5, h6)),
     :global(h5 + h6) {
       margin-top: 0rem;
+    }
+
+    /* Let container determine top-spacing (also handles h1 + h2) */
+    & :first-child {
+      margin-top: 0;
     }
   }
 </style>
