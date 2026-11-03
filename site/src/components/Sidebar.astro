@@ -22,16 +22,19 @@ const collection = tree && findCollection(tree, current);
       <a href="/nixpkgs/preface">Nixpkgs</a>
       {
         tree && (
-          <div x-data={`{ drilled: ${!!collection} }`} class="mt-2 -ml-2.5">
-            <div x-show="!drilled" x-cloak={collection ? "" : undefined}>
+          <div
+            x-data={`{ showCollection: ${!!collection} }`}
+            class="mt-2 -ml-2.5"
+          >
+            <div x-show="!showCollection" x-cloak={collection ? "" : undefined}>
               <NixpkgsNavTree nodes={tree} current={current} parts />
             </div>
             {collection && (
-              <div x-show="drilled">
+              <div x-show="showCollection">
                 <button
                   type="button"
                   class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-60 dark:text-grey-40"
-                  x-on:click="drilled = false"
+                  x-on:click="showCollection = false"
                 >
                   <Icon name="mdi:chevron-left" />
                   Back
