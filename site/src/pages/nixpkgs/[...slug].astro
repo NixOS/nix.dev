@@ -4,7 +4,13 @@ import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
 import Page from "../../layouts/Page.astro";
-import { findCollection, leaves, loadDocIndex } from "../../lib/nixpkgs-doc";
+import {
+  asCollection,
+  findCollection,
+  findTrail,
+  leaves,
+  loadDocIndex,
+} from "../../lib/nixpkgs-doc";
 
 export type Props = { page: CollectionEntry<"nixpkgs"> };
 
@@ -18,12 +24,45 @@ const { Content, headings } = await render(page);
 
 // The index page of a collection lists the entries of the collection as cards.
 const href = `/nixpkgs/${page.id}`;
-const collection = findCollection((await loadDocIndex()).tree, href);
+const { tree } = await loadDocIndex();
+const collection = findCollection(tree, href);
 const cards =
   collection?.index.href === href ? leaves(collection.entries) : undefined;
+
+// A collection crumb links to the index page. On the index page itself the
+// page title is the last crumb, so the collection crumb drops out.
+const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
+  const index = asCollection(group)?.index.href;
+  return index === href ? [] : [{ label: group.label, href: index }];
+});
 ---
 
 <Page title={page.data.title} headings={headings}>
+  <nav
+    slot="breadcrumbs"
+    aria-label="Breadcrumb"
+    class="mt-4 flex flex-wrap gap-x-1.5 text-sm text-grey-60 dark:text-grey-40"
+  >
+    <a href="/nixpkgs/preface" style="color: unset">Nixpkgs</a>
+    {
+      crumbs.map((crumb) => (
+        <>
+          <span aria-hidden="true">/</span>
+          {crumb.href ? (
+            <a href={crumb.href} style="color: unset">
+              {crumb.label}
+            </a>
+          ) : (
+            <span>{crumb.label}</span>
+          )}
+        </>
+      ))
+    }
+    <span aria-hidden="true">/</span>
+    <span aria-current="page" class="text-black dark:text-mainsail-10">
+      {page.data.title}
+    </span>
+  </nav>
   <Content />
   {
     cards && (

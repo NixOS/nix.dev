@@ -7,6 +7,7 @@ const { title, description, headings = [], toc = true } = Astro.props;
 
 <Base title={title} description={description}>
   <main id="main-content" class="max-w-[80ch] mx-auto">
+    <slot name="breadcrumbs" />
     {
       title && (
         <hgroup class="my-4">

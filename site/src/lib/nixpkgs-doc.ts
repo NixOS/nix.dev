@@ -135,6 +135,22 @@ export function findCollection(
   return undefined;
 }
 
+/** Returns the groups that hold the page at `href`, outermost first. */
+export function findTrail(
+  nodes: TreeNode[],
+  href: string,
+): TreeGroup[] | undefined {
+  for (const node of nodes) {
+    if (!("children" in node)) {
+      if (node.href === href) return [];
+      continue;
+    }
+    const trail = findTrail(node.children, href);
+    if (trail) return [node, ...trail];
+  }
+  return undefined;
+}
+
 export interface DocIndex {
   pages: DocPage[];
   tree: TreeNode[];
