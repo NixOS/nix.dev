@@ -43,6 +43,8 @@ export default defineConfig({
   markdown: {
     processor: satteri({
       features: {
+        gfm: true,
+        headingAttributes: true,
         directive: true,
         definitionList: true,
       },
