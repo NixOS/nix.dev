@@ -59,9 +59,81 @@ export interface DocPage {
   body: string;
 }
 
-/** A sidebar entry: either a link to a page or a labelled group of entries. */
-export type TreeNode =
-  { label: string; children: TreeNode[] } | { href: string; title: string };
+/** A sidebar link to one page. */
+export interface TreeLeaf {
+  href: string;
+  title: string;
+}
+
+/** A labelled group of sidebar entries, with the group id from nav.json. */
+export interface TreeGroup {
+  id: string;
+  label: string;
+  children: TreeNode[];
+}
+
+export type TreeNode = TreeGroup | TreeLeaf;
+
+/**
+ * Groups with too many entries to expand inline. The sidebar shows a
+ * collection as one link to its first page, the index, and lists the entries
+ * in a view of their own.
+ */
+const COLLECTIONS: Record<string, true> = {
+  "chap-language-support": true,
+  "chap-hooks": true,
+  "chap-packages": true,
+};
+
+/** A collection with its index page split from the other entries. */
+export interface Collection {
+  group: TreeGroup;
+  index: TreeLeaf;
+  entries: TreeNode[];
+  /** The groups above the collection, outermost first. */
+  ancestors: TreeGroup[];
+}
+
+/** Returns the collection of `node`, or nothing for a page or a plain group. */
+export function asCollection(
+  node: TreeNode,
+  ancestors: TreeGroup[] = [],
+): Collection | undefined {
+  if (!("children" in node) || !COLLECTIONS[node.id]) return undefined;
+  const [index, ...entries] = node.children;
+  if (!index || "children" in index) {
+    throw new Error(`collection '${node.id}' does not start with a page`);
+  }
+  return { group: node, index, entries, ancestors };
+}
+
+/** Returns every page below `nodes`, in nav order. */
+export function leaves(nodes: TreeNode[]): TreeLeaf[] {
+  return nodes.flatMap((node) =>
+    "children" in node ? leaves(node.children) : [node],
+  );
+}
+
+/** Finds the collection that holds the page at `href`. */
+export function findCollection(
+  nodes: TreeNode[],
+  href: string,
+  ancestors: TreeGroup[] = [],
+): Collection | undefined {
+  for (const node of nodes) {
+    if (!("children" in node)) continue;
+    const collection = asCollection(node, ancestors);
+    if (collection) {
+      if (leaves(node.children).some((leaf) => leaf.href === href)) {
+        return collection;
+      }
+      continue;
+    }
+    const found = findCollection(node.children, href, [...ancestors, node]);
+    if (found) return found;
+  }
+  return undefined;
+}
 
 export interface DocIndex {
   pages: DocPage[];
@@ -177,7 +249,9 @@ async function buildDocIndex(): Promise<DocIndex> {
   const tree = (nodes: NavNode[]): TreeNode[] =>
     nodes.flatMap((node): TreeNode[] => {
       if ("children" in node) {
-        return [{ label: node.label, children: tree(node.children) }];
+        return [
+          { id: node.id, label: node.label, children: tree(node.children) },
+        ];
       }
       // a nixdoc collection has no page of its own
       if (!("file" in node)) return [];
