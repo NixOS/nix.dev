@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
 import Page from "../../layouts/Page.astro";
+import { findCollection, leaves, loadDocIndex } from "../../lib/nixpkgs-doc";
 
 export type Props = { page: CollectionEntry<"nixpkgs"> };
 
@@ -14,8 +15,29 @@ export const getStaticPaths = (async () => {
 
 const { page } = Astro.props;
 const { Content, headings } = await render(page);
+
+// The index page of a collection lists the entries of the collection as cards.
+const href = `/nixpkgs/${page.id}`;
+const collection = findCollection((await loadDocIndex()).tree, href);
+const cards =
+  collection?.index.href === href ? leaves(collection.entries) : undefined;
 ---
 
 <Page title={page.data.title} headings={headings}>
   <Content />
+  {
+    cards && (
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+        {cards.map((card) => (
+          <a
+            href={card.href}
+            class="border border-grey-10 dark:border-grey-90 hover:border-blue-30 dark:hover:border-blue-60 p-3"
+            style="color: unset"
+          >
+            <strong>{card.title}</strong>
+          </a>
+        ))}
+      </div>
+    )
+  }
 </Page>
