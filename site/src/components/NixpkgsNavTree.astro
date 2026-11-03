@@ -56,15 +56,14 @@ function link(marked: boolean): (string | false)[] {
               aria-current={index.href === current ? "page" : undefined}
               class:list={link(marked)}
             >
-              <Icon
-                name="mdi:view-grid-outline"
-                class="shrink-0 text-blue-30 dark:text-blue-60"
-              />
               <span class="grow">{group.label}</span>
               <span class="rounded-full bg-grey-10 dark:bg-grey-90 px-1.5 text-xs font-medium">
                 {leaves(collection.entries).length}
               </span>
-              <Icon name="mdi:chevron-right" class="shrink-0" />
+              <Icon
+                name="mdi:view-grid-outline"
+                class="shrink-0 text-grey-60 dark:text-grey-40"
+              />
             </a>
           </li>
         );
