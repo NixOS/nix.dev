@@ -1,23 +1,65 @@
 ---
+import { Icon } from "astro-iconset/components";
 import NixpkgsNavTree from "./NixpkgsNavTree.astro";
-import { loadDocIndex } from "../lib/nixpkgs-doc";
+import { findCollection, loadDocIndex } from "../lib/nixpkgs-doc";
 
 const current = Astro.url.pathname.replace(/\/+$/, "");
 const inNixpkgs =
   current.startsWith("/nixpkgs") || current.startsWith("/reference");
 const tree = inNixpkgs ? (await loadDocIndex()).tree : undefined;
+// A page inside a collection opens the sidebar on the collection's own list.
+const collection = tree && findCollection(tree, current);
 ---
 
 <nav class:list={[Astro.props.class]}>
   <ol
     id="section-nav"
-    class="[&_:is(a,summary)]:hover:opacity-80 [&_summary]:cursor-pointer"
+    class="[&_:is(a,summary,button)]:hover:opacity-80 [&_:is(summary,button)]:cursor-pointer"
   >
     <li><a href="/nix">Nix</a></li>
     <li><a href="/nixos">NixOS</a></li>
     <li>
       <a href="/nixpkgs/preface">Nixpkgs</a>
-      {tree && <NixpkgsNavTree nodes={tree} current={current} />}
+      {
+        tree && (
+          <div
+            x-data={`{ showCollection: ${!!collection} }`}
+            class="mt-2 -ml-2.5"
+          >
+            <div x-show="!showCollection" x-cloak={collection ? "" : undefined}>
+              <NixpkgsNavTree nodes={tree} current={current} parts />
+            </div>
+            {collection && (
+              <div x-show="showCollection">
+                <button
+                  type="button"
+                  class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-60 dark:text-grey-40"
+                  x-on:click="showCollection = false"
+                >
+                  <Icon name="mdi:chevron-left" />
+                  Back
+                </button>
+                <div class="mb-2 border-b border-grey-10 dark:border-grey-90 px-2.5 pt-2.5 pb-3">
+                  <div class="text-xs text-grey-60 dark:text-grey-40">
+                    <a href="/nixpkgs/preface">Nixpkgs</a>
+                    {collection.ancestors.map((group) => ` › ${group.label}`)}
+                  </div>
+                  <div class="mt-0.5 font-heading font-semibold text-xl">
+                    {collection.group.label}
+                  </div>
+                </div>
+                <NixpkgsNavTree
+                  nodes={[
+                    { href: collection.index.href, title: "Overview" },
+                    ...collection.entries,
+                  ]}
+                  current={current}
+                />
+              </div>
+            )}
+          </div>
+        )
+      }
     </li>
   </ol>
 </nav>

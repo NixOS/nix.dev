@@ -1,12 +1,17 @@
 ---
-import type { TreeNode } from "../lib/nixpkgs-doc";
+import { Icon } from "astro-iconset/components";
+import { asCollection, leaves, type TreeNode } from "../lib/nixpkgs-doc";
 
 interface Props {
   nodes: TreeNode[];
   current: string;
+  /** Renders the groups as part headings that do not collapse. */
+  parts?: boolean;
+  /** Marks the list of an open group: smaller entries along a left rule. */
+  nested?: boolean;
 }
 
-const { nodes, current } = Astro.props;
+const { nodes, current, parts = false, nested = false } = Astro.props;
 
 /**
  * Checks whether a link is on the path the reader is currently viewing
@@ -20,32 +25,91 @@ function related(href: string): boolean {
 }
 
 function contains(nodes: TreeNode[]): boolean {
-  return nodes.some((node) =>
-    "children" in node ? contains(node.children) : related(node.href),
-  );
+  return leaves(nodes).some((leaf) => related(leaf.href));
+}
+
+/** The classes of a link, marked when it is or holds the current page. */
+function link(marked: boolean): (string | false)[] {
+  return [
+    "flex items-center gap-2 py-1 pr-2.5",
+    nested ? "-ml-px border-l-2 pl-3.5 text-[0.84rem]" : "pl-2.5 text-sm",
+    nested && !marked && "border-transparent",
+    nested && marked && "border-blue-30 dark:border-blue-60",
+    marked && "font-semibold text-blue-30 dark:text-blue-60",
+  ];
 }
 ---
 
-<ol class="[&_ol]:pl-3">
+<ol
+  class:list={[nested && "ml-2.5 border-l border-grey-10 dark:border-grey-90"]}
+>
   {
-    nodes.map((node) =>
-      "children" in node ? (
-        <li>
-          <details open={contains(node.children)}>
-            <summary>{node.label}</summary>
+    nodes.map((node) => {
+      const collection = asCollection(node);
+      if (collection) {
+        const { group, index } = collection;
+        const marked = contains(group.children);
+        return (
+          <li>
+            <a
+              href={index.href}
+              aria-current={index.href === current ? "page" : undefined}
+              class:list={link(marked)}
+            >
+              <span class="grow">{group.label}</span>
+              <span class="rounded-full bg-grey-10 dark:bg-grey-90 px-1.5 text-xs font-medium">
+                {leaves(collection.entries).length}
+              </span>
+              <Icon
+                name="mdi:view-grid-outline"
+                class="shrink-0 text-grey-60 dark:text-grey-40"
+              />
+            </a>
+          </li>
+        );
+      }
+      if ("children" in node && parts) {
+        return (
+          <li>
+            <h2 class="font-heading font-semibold px-2.5 pt-6 pb-1.5">
+              {node.label}
+            </h2>
             <Astro.self nodes={node.children} current={current} />
-          </details>
-        </li>
-      ) : (
+          </li>
+        );
+      }
+      if ("children" in node) {
+        return (
+          <li>
+            <details open={contains(node.children)}>
+              <summary
+                class:list={[
+                  link(false),
+                  "list-none [&::-webkit-details-marker]:hidden",
+                ]}
+              >
+                <span class="grow">{node.label}</span>
+                <Icon
+                  name="mdi:chevron-right"
+                  class="shrink-0 transition-transform [details[open]>summary>&]:rotate-90"
+                />
+              </summary>
+              <Astro.self nodes={node.children} current={current} nested />
+            </details>
+          </li>
+        );
+      }
+      return (
         <li>
           <a
             href={node.href}
             aria-current={node.href === current ? "page" : undefined}
+            class:list={link(node.href === current)}
           >
             {node.title}
           </a>
         </li>
-      ),
-    )
+      );
+    })
   }
 </ol>
