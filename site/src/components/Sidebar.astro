@@ -16,11 +16,11 @@ const tree = inside("/nixpkgs") ? (await loadDocIndex()).tree : undefined;
 const collection = tree && findCollection(tree, current);
 ---
 
-<nav class:list={[Astro.props.class]}>
+<nav class:list={[Astro.props.class, "flex flex-col"]}>
   <ul
     id="section-nav"
     aria-label="Topic"
-    class="grid grid-cols-3 gap-0.5 rounded-[10px] bg-grey-10 p-[3px] md:bg-grey-05 dark:bg-grey-90 md:dark:bg-grey-90"
+    class="grid shrink-0 grid-cols-3 gap-0.5 rounded-[10px] bg-grey-10 p-[3px] md:bg-grey-05 dark:bg-grey-90 md:dark:bg-grey-90"
   >
     {
       topics.map(({ label, href, active }) => (
@@ -46,37 +46,46 @@ const collection = tree && findCollection(tree, current);
     tree && (
       <div
         x-data={`{ showCollection: ${!!collection} }`}
-        class="mt-4 [&_:is(a,summary,button)]:hover:opacity-80 [&_:is(summary,button)]:cursor-pointer"
+        class="mt-4 flex min-h-0 flex-1 flex-col [&_:is(a,summary,button)]:hover:opacity-80 [&_:is(summary,button)]:cursor-pointer"
       >
-        <div x-show="!showCollection" x-cloak={collection ? "" : undefined}>
+        <div
+          x-show="!showCollection"
+          x-cloak={collection ? "" : undefined}
+          class="min-h-0 flex-1 overflow-y-auto pb-4"
+        >
           <NixpkgsNavTree nodes={tree} current={current} parts />
         </div>
         {collection && (
-          <div x-show="showCollection">
-            <button
-              type="button"
-              class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-60 dark:text-grey-40"
-              x-on:click="showCollection = false"
-            >
-              <Icon name="mdi:chevron-left" />
-              Back
-            </button>
-            <div class="mb-2 border-b border-grey-10 dark:border-grey-90 px-2.5 pt-2.5 pb-3">
-              <div class="text-xs text-grey-60 dark:text-grey-40">
-                <a href="/nixpkgs/preface">Nixpkgs</a>
-                {collection.ancestors.map((group) => ` › ${group.label}`)}
-              </div>
-              <div class="mt-0.5 font-heading font-semibold text-xl">
-                {collection.group.label}
+          <div x-show="showCollection" class="flex min-h-0 flex-1 flex-col">
+            {/* The collection header stays put while its list scrolls. */}
+            <div class="shrink-0">
+              <button
+                type="button"
+                class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-60 dark:text-grey-40"
+                x-on:click="showCollection = false"
+              >
+                <Icon name="mdi:chevron-left" />
+                Back
+              </button>
+              <div class="mb-2 border-b border-grey-10 dark:border-grey-90 px-2.5 pt-2.5 pb-3">
+                <div class="text-xs text-grey-60 dark:text-grey-40">
+                  <a href="/nixpkgs/preface">Nixpkgs</a>
+                  {collection.ancestors.map((group) => ` › ${group.label}`)}
+                </div>
+                <div class="mt-0.5 font-heading font-semibold text-xl">
+                  {collection.group.label}
+                </div>
               </div>
             </div>
-            <NixpkgsNavTree
-              nodes={[
-                { href: collection.index.href, title: "Overview" },
-                ...collection.entries,
-              ]}
-              current={current}
-            />
+            <div class="min-h-0 flex-1 overflow-y-auto pb-4">
+              <NixpkgsNavTree
+                nodes={[
+                  { href: collection.index.href, title: "Overview" },
+                  ...collection.entries,
+                ]}
+                current={current}
+              />
+            </div>
           </div>
         )}
       </div>
