@@ -10,17 +10,17 @@ const { title, description } = Astro.props;
 <html lang="en">
   <Head title={title} description={description} />
   <body
-    class="flex flex-col min-h-dvh gap-y-8 font-sans
+    class="flex flex-col min-h-dvh font-sans
     bg-grey-02 text-black dark:bg-steel-95 dark:text-mainsail-10"
   >
     <Header class="px-4 fixed" />
     <div
       class="px-4 mt-16 flex-grow gap-x-4
-        md:grid md:grid-cols-[2fr_5fr] lg:grid-cols-page"
+        md:grid md:grid-cols-[2fr_5fr] md:grid-rows-[1fr_auto] lg:grid-cols-page"
     >
       <section
         class:list={[
-          "fixed md:static",
+          "fixed md:static md:row-span-2",
           "bg-grey-05 dark:bg-steel-90 md:bg-inherit md:dark:bg-inherit",
           "left-0 top-14 bottom-0 overflow-y-auto md:overflow-y-visible",
           "px-4 md:px-0",
@@ -36,7 +36,7 @@ const { title, description } = Astro.props;
         />
       </section>
       <slot />
+      <Footer class="mx-auto mt-8 w-full max-w-[80ch] py-4 md:col-start-2" />
     </div>
-    <Footer class="p-4" />
   </body>
 </html>
