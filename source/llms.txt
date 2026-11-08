@@ -1,0 +1,14 @@
+# nix.dev — Official Nix Documentation
+
+> Official documentation hub for the Nix ecosystem: tutorials, guides, reference links, and best practices for reproducible builds and declarative system configuration.
+
+## Core Sections
+
+- [Tutorials](https://nix.dev/tutorials/): Step-by-step introductions to Nix, Nixpkgs, and NixOS.
+- [Guides](https://nix.dev/guides/): Practical recipes and troubleshooting guides.
+- [Reference](https://nix.dev/reference/): Pinning Nixpkgs, Nix manuals, and glossary.
+- [Concepts](https://nix.dev/concepts/): Core principles of the Nix language and store.
+
+## AI Agent & LLM Indexing
+
+- Structured following the standard /llms.txt specification for deterministic LLM and RAG ingestion.
