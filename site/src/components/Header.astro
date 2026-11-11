@@ -6,6 +6,8 @@ import ThemeSelector from "../components/ThemeSelector.astro";
 import MobileMenuToggle from "../components/MobileMenuToggle.astro";
 
 import { config } from "../site.config.ts";
+
+const { sidebar = true } = Astro.props;
 ---
 
 <header
@@ -39,6 +41,6 @@ import { config } from "../site.config.ts";
   >
     <SocialIcons class="hidden xs:flex" items={config.headerLinks} />
     <ThemeSelector />
-    <MobileMenuToggle class="md:hidden" />
+    {sidebar && <MobileMenuToggle class="md:hidden" />}
   </span>
 </header>

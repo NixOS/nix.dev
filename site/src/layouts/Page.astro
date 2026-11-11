@@ -2,10 +2,16 @@
 import Base from "../layouts/Base.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 
-const { title, description, headings = [], toc = true } = Astro.props;
+const {
+  title,
+  description,
+  headings = [],
+  toc = true,
+  sidebar = true,
+} = Astro.props;
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} sidebar={sidebar}>
   <main id="main-content" class="max-w-[80ch] mx-auto">
     <slot name="breadcrumbs" />
     {
