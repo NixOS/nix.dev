@@ -26,7 +26,10 @@ const {
     </article>
   </main>
   <section class:list={["hidden", toc ? "lg:block" : ""]}>
-    <TableOfContents headings={headings} class="sticky top-16 py-4" />
+    <TableOfContents
+      headings={headings}
+      class="sticky top-16 py-4 text-sm text-grey-60 dark:text-grey-40"
+    />
   </section>
 </Base>
 
