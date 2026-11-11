@@ -17,7 +17,7 @@ const {
     {
       title && (
         <hgroup class="my-4">
-          <h1 class="text-5xl">{title}</h1>
+          <h1 class="text-h1 leading-tight text-balance">{title}</h1>
         </hgroup>
       )
     }
@@ -34,6 +34,11 @@ const {
   @reference "../styles/global.css";
 
   .prose {
+    line-height: 1.6;
+
+    /* A heading sits closer to its own section than to the section before.
+     * The margins are in em, so they shrink with the heading size.
+     */
     h1,
     h2,
     h3,
@@ -41,41 +46,40 @@ const {
     h5,
     h6 {
       text-wrap: balance;
-      line-height: 1.15;
-      margin-bottom: 1rem;
+      line-height: 1.25;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
     }
 
     /* h1 is page title and should not be used in prose container */
 
     h2 {
-      font-size: 2.5rem;
-      margin-top: 2.5rem;
+      font-size: var(--text-h2);
     }
 
     h3 {
-      font-size: 2rem;
-      margin-top: 2rem;
+      font-size: var(--text-h3);
     }
 
     h4 {
-      font-size: 1.7rem;
-      margin-top: 1.5rem;
+      font-size: var(--text-h4);
     }
 
     h5 {
-      font-size: 1.4rem;
-      margin-top: 1rem;
+      font-size: var(--text-h5);
     }
 
     h6 {
-      font-size: 1.2rem;
-      margin-top: 1rem;
+      font-size: 1rem;
     }
 
     p {
-      font-size: 1rem;
-      line-height: 1.6;
       margin-bottom: 1rem;
+    }
+
+    p,
+    li {
+      text-wrap: pretty;
     }
 
     strong {
