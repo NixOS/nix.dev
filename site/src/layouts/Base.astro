@@ -4,7 +4,7 @@ import Header from "../components/Header.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 
-const { title, description } = Astro.props;
+const { title, description, sidebar = true } = Astro.props;
 ---
 
 <html lang="en">
@@ -13,10 +13,10 @@ const { title, description } = Astro.props;
     class="flex flex-col min-h-dvh gap-y-8 font-sans
     bg-grey-02 text-black dark:bg-steel-95 dark:text-mainsail-10"
   >
-    <Header class="px-4 fixed" />
+    <Header class="px-4 fixed" sidebar={sidebar} />
     <div
       class="px-4 mt-16 flex-grow gap-x-4
-        md:grid md:grid-cols-[2fr_5fr] lg:grid-cols-[1fr_3fr_1fr]"
+        md:grid md:grid-cols-[2fr_5fr] lg:grid-cols-page"
     >
       <section
         class:list={[
@@ -31,7 +31,7 @@ const { title, description } = Astro.props;
         x-data
         :class="$store.nav.open ? '!block' : ''"
       >
-        <Sidebar class="md:sticky py-4" />
+        {sidebar && <Sidebar class="md:sticky py-4" />}
       </section>
       <slot />
     </div>

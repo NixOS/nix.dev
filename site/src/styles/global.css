@@ -98,6 +98,13 @@
   --color-mainsail-10: oklch(0.9 0.007 229); /* #d9dfe2 */
 }
 
+/* Columns of the page on large screens. The header is fixed outside the page
+ * grid, so it uses this too in order to line up with the page below it.
+ */
+@utility grid-cols-page {
+  grid-template-columns: minmax(0, 16.75rem) 3fr 1fr;
+}
+
 /* Alpine utility to hide conditionally rendered components before init. */
 [x-cloak] {
   display: none !important;

@@ -6,6 +6,8 @@ import ThemeSelector from "../components/ThemeSelector.astro";
 import MobileMenuToggle from "../components/MobileMenuToggle.astro";
 
 import { config } from "../site.config.ts";
+
+const { sidebar = true } = Astro.props;
 ---
 
 <header
@@ -15,7 +17,7 @@ import { config } from "../site.config.ts";
     "w-full h-14",
     "z-3",
     "gap-x-4 flex flex-row",
-    "lg:grid lg:grid-cols-[1fr_3fr_1fr]",
+    "lg:grid lg:grid-cols-page",
   ]}
 >
   <span id="header-left" class="grow">
@@ -39,6 +41,6 @@ import { config } from "../site.config.ts";
   >
     <SocialIcons class="hidden xs:flex" items={config.headerLinks} />
     <ThemeSelector />
-    <MobileMenuToggle class="md:hidden" />
+    {sidebar && <MobileMenuToggle class="md:hidden" />}
   </span>
 </header>
