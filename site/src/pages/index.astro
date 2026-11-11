@@ -1,6 +1,10 @@
 ---
 import Page from "../layouts/Page.astro";
-import { Icon } from "astro-iconset/components";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import Laptop from "@lucide/astro/icons/laptop";
+import Package from "@lucide/astro/icons/package";
+import TriangleExclamationPoint from "@lucide/astro/icons/triangle-exclamation-point";
+import NixSnowflake from "../assets/nix-snowflake.svg";
 import Logo from "../assets/nixos-logo.svg";
 ---
 
@@ -9,7 +13,7 @@ import Logo from "../assets/nixos-logo.svg";
     class="border-l-2 border-mahogany-40 dark:border-mahogany-50 pl-4 py-1 my-6"
   >
     <div class="mb-2">
-      <Icon name="mdi:flash-triangle-outline" class="mr-2 inline" />
+      <TriangleExclamationPoint size="1em" class="mr-2 inline" />
       <strong>Attention</strong>
     </div>
     <span>This website is a work-in-progress. </span>
@@ -27,9 +31,9 @@ import Logo from "../assets/nixos-logo.svg";
       style="color: unset"
     >
       <div class="mb-2 flex gap-x-2 items-center">
-        <Icon name="mdi:nix" />
+        <NixSnowflake width="1em" height="1em" />
         <strong class="grow">Nix</strong>
-        <Icon name="mdi:arrow-right" />
+        <ArrowRight size="1em" />
       </div>
       <div>The Nix language, CLI, store, and package management.</div>
     </a>
@@ -40,9 +44,9 @@ import Logo from "../assets/nixos-logo.svg";
       style="color: unset"
     >
       <div class="mb-2 flex gap-x-2 items-center">
-        <Icon name="mdi:laptop" />
+        <Laptop size="1em" />
         <strong class="grow">NixOS</strong>
-        <Icon name="mdi:arrow-right" />
+        <ArrowRight size="1em" />
       </div>
       <div>
         The Linux distribution built on Nix: configuration and administration.
@@ -55,9 +59,9 @@ import Logo from "../assets/nixos-logo.svg";
       style="color: unset"
     >
       <div class="mb-2 flex gap-x-2 items-center">
-        <Icon name="mdi:package-variant-closed" />
+        <Package size="1em" />
         <strong class="grow">Nixpkgs</strong>
-        <Icon name="mdi:arrow-right" />
+        <ArrowRight size="1em" />
       </div>
       <div>
         The package collection: lib functions, build helpers, hooks, and

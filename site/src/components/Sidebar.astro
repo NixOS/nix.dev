@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-iconset/components";
+import ChevronLeft from "@lucide/astro/icons/chevron-left";
 import NixpkgsNavTree from "./NixpkgsNavTree.astro";
 import { findCollection, loadDocIndex } from "../lib/nixpkgs-doc";
 
@@ -64,7 +64,7 @@ const collection = tree && findCollection(tree, current);
                 class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-60 dark:text-grey-40"
                 x-on:click="showCollection = false"
               >
-                <Icon name="mdi:chevron-left" />
+                <ChevronLeft size="1em" />
                 Back
               </button>
               <div class="mb-2 border-b border-grey-10 dark:border-grey-90 px-2.5 pt-2.5 pb-3">

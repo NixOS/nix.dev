@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-iconset/components";
+import ChevronRight from "@lucide/astro/icons/chevron-right";
+import LayoutGrid from "@lucide/astro/icons/layout-grid";
 import { asCollection, leaves, type TreeNode } from "../lib/nixpkgs-doc";
 
 interface Props {
@@ -60,8 +61,8 @@ function link(marked: boolean): (string | false)[] {
               <span class="rounded-full bg-grey-10 dark:bg-grey-90 px-1.5 text-xs font-medium">
                 {leaves(collection.entries).length}
               </span>
-              <Icon
-                name="mdi:view-grid-outline"
+              <LayoutGrid
+                size="1em"
                 class="shrink-0 text-grey-60 dark:text-grey-40"
               />
             </a>
@@ -89,8 +90,8 @@ function link(marked: boolean): (string | false)[] {
                 ]}
               >
                 <span class="grow">{node.label}</span>
-                <Icon
-                  name="mdi:chevron-right"
+                <ChevronRight
+                  size="1em"
                   class="shrink-0 transition-transform [details[open]>summary>&]:rotate-90"
                 />
               </summary>

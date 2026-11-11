@@ -3,7 +3,6 @@ import { defineConfig, fontProviders } from "astro/config";
 import { satteri } from "@astrojs/markdown-satteri";
 import netlify from "@astrojs/netlify";
 import expressiveCode from "astro-expressive-code";
-import icon from "astro-iconset";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -20,11 +19,6 @@ export default defineConfig({
   },
 
   integrations: [
-    icon({
-      // server-rendered routes cause entire iconset to be bundled if required
-      // icons are not explicitly listed here:
-      // include: { mdi: [ "github", ] },
-    }),
     expressiveCode({
       themes: ["catppuccin-latte", "catppuccin-mocha"],
       defaultProps: {
