@@ -32,7 +32,7 @@ const collection = tree && findCollection(tree, current);
               "flex h-9 items-center justify-center rounded-lg text-[0.9375rem]",
               "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-30 dark:focus-visible:outline-blue-60",
               active
-                ? "bg-blue-30 font-semibold text-white shadow-xs"
+                ? "bg-blue-30 text-white shadow-xs"
                 : "text-grey-90 hover:opacity-80 dark:text-mainsail-10",
             ]}
           >
@@ -72,7 +72,7 @@ const collection = tree && findCollection(tree, current);
                   <a href="/nixpkgs/preface">Nixpkgs</a>
                   {collection.ancestors.map((group) => ` › ${group.label}`)}
                 </div>
-                <div class="mt-0.5 font-semibold text-xl">
+                <div class="mt-0.5 text-xl">
                   {collection.group.label}
                 </div>
               </div>

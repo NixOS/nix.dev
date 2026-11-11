@@ -35,7 +35,7 @@ function link(marked: boolean): (string | false)[] {
     nested ? "-ml-px border-l-2 pl-3.5 text-[0.84rem]" : "pl-2.5 text-sm",
     nested && !marked && "border-transparent",
     nested && marked && "border-blue-30 dark:border-blue-60",
-    marked && "font-semibold text-blue-30 dark:text-blue-60",
+    marked && "text-blue-30 dark:text-blue-60",
   ];
 }
 ---
@@ -71,7 +71,7 @@ function link(marked: boolean): (string | false)[] {
       if ("children" in node && parts) {
         return (
           <li>
-            <h2 class="font-semibold px-2.5 pt-6 pb-1.5">
+            <h2 class="px-2.5 pt-6 pb-1.5">
               {node.label}
             </h2>
             <Astro.self nodes={node.children} current={current} />
