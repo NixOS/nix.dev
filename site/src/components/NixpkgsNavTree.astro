@@ -71,7 +71,7 @@ function link(marked: boolean): (string | false)[] {
       if ("children" in node && parts) {
         return (
           <li>
-            <h2 class="font-heading font-semibold px-2.5 pt-6 pb-1.5">
+            <h2 class="font-semibold px-2.5 pt-6 pb-1.5">
               {node.label}
             </h2>
             <Astro.self nodes={node.children} current={current} />
