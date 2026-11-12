@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-iconset/components";
+import Menu from "@lucide/astro/icons/menu";
+import X from "@lucide/astro/icons/x";
 ---
 
 <button
@@ -9,11 +10,6 @@ import { Icon } from "astro-iconset/components";
   :aria-expanded="$store.nav.open"
   aria-controls="mobile-menu"
 >
-  <Icon name="mdi:menu" size="1.5rem" x-show="!$store.nav.open" />
-  <Icon
-    name="mdi:window-close"
-    size="1.5rem"
-    x-show="$store.nav.open"
-    x-cloak
-  />
+  <Menu size="1.5rem" x-show="!$store.nav.open" />
+  <X size="1.5rem" x-show="$store.nav.open" x-cloak />
 </button>

@@ -1,8 +1,8 @@
 ---
-import { Icon } from "astro-iconset/components";
+import Search from "@lucide/astro/icons/search";
 ---
 
-<Icon name="mdi:magnify" title="Search" size="1.5rem" class="sm:hidden" />
+<Search size="1.5rem" role="img" aria-label="Search" class="sm:hidden" />
 <input
   class:list={[
     Astro.props.class,
