@@ -47,25 +47,6 @@ export default defineConfig({
 
   fonts: [
     {
-      provider: fontProviders.local(),
-      name: "Route159",
-      cssVariable: "--font-route159",
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/route159/Route159-Regular.woff2"],
-            weight: "normal",
-            style: "normal",
-          },
-          {
-            src: ["./src/assets/fonts/route159/Route159-Bold.woff2"],
-            weight: "bold",
-            style: "normal",
-          },
-        ],
-      },
-    },
-    {
       // Inter's own Latin subset: a quarter of the size of the full font, but
       // unlike the Fontsource and Google Fonts subsets it keeps Inter's
       // OpenType features (dlig, cv01-cv13, ss01-ss08, ...) and the opsz axis

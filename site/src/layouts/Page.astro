@@ -12,12 +12,12 @@ const {
 ---
 
 <Base title={title} description={description} sidebar={sidebar}>
-  <main id="main-content" class="max-w-[80ch] mx-auto">
+  <main id="main-content" class="max-w-measure mx-auto">
     <slot name="breadcrumbs" />
     {
       title && (
         <hgroup class="my-4">
-          <h1 class="font-bold font-heading text-5xl">{title}</h1>
+          <h1 class="text-h1 leading-tight text-balance">{title}</h1>
         </hgroup>
       )
     }
@@ -26,7 +26,10 @@ const {
     </article>
   </main>
   <section class:list={["hidden", toc ? "lg:block" : ""]}>
-    <TableOfContents headings={headings} class="sticky top-16 py-4" />
+    <TableOfContents
+      headings={headings}
+      class="sticky top-16 py-4 text-sm text-grey-60 dark:text-grey-40"
+    />
   </section>
 </Base>
 
@@ -34,6 +37,11 @@ const {
   @reference "../styles/global.css";
 
   .prose {
+    line-height: 1.6;
+
+    /* A heading sits closer to its own section than to the section before.
+     * The margins are in em, so they shrink with the heading size.
+     */
     h1,
     h2,
     h3,
@@ -41,47 +49,44 @@ const {
     h5,
     h6 {
       text-wrap: balance;
-      font-weight: bold;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      font-family: var(--font-heading);
+      line-height: 1.25;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
     }
 
     /* h1 is page title and should not be used in prose container */
 
     h2 {
-      font-size: 2.5rem;
-      margin-top: 2.5rem;
+      font-size: var(--text-h2);
     }
 
     h3 {
-      font-size: 2rem;
-      margin-top: 2rem;
+      font-size: var(--text-h3);
     }
 
     h4 {
-      font-size: 1.7rem;
-      margin-top: 1.5rem;
+      font-size: var(--text-h4);
     }
 
     h5 {
-      font-size: 1.4rem;
-      margin-top: 1rem;
+      font-size: var(--text-h5);
     }
 
     h6 {
-      font-size: 1.2rem;
-      margin-top: 1rem;
+      font-size: 1rem;
     }
 
     p {
-      font-size: 1rem;
-      line-height: 1.6;
       margin-bottom: 1rem;
     }
 
+    p,
+    li {
+      text-wrap: pretty;
+    }
+
     strong {
-      font-weight: bold;
+      font-weight: 500;
     }
 
     a {
@@ -148,7 +153,7 @@ const {
     }
 
     dt {
-      font-weight: bold;
+      font-weight: 500;
       margin-top: 0.75rem;
     }
 
@@ -167,11 +172,12 @@ const {
       @apply my-4;
     }
 
-    code:not(pre code),
+    /* Code in a heading keeps the size of the heading and gets no box */
+    code:not(pre code, :is(h2, h3, h4, h5, h6) code),
     kbd {
-      padding: 0.15rem 0.25rem;
+      padding: 0.125em 0.3em;
       border-radius: 0.25rem;
-      @apply bg-grey-10 dark:bg-grey-90 text-[0.95em] wrap-break-word;
+      @apply bg-grey-05 dark:bg-steel-90 text-[0.875em] wrap-break-word;
     }
 
     kbd {
@@ -197,7 +203,7 @@ const {
       th {
         padding-inline: 0.5rem;
         padding-bottom: 0.5rem;
-        font-weight: bold;
+        font-weight: 500;
         vertical-align: bottom;
 
         &:first-child {
