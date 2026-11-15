@@ -1,17 +1,22 @@
 ---
 import ChevronLeft from "@lucide/astro/icons/chevron-left";
 import NixpkgsNavTree from "./NixpkgsNavTree.astro";
-import { findCollection, loadDocIndex } from "../lib/nixpkgs-doc";
+import { findCollection, loadDocIndex, MANUALS } from "../lib/nixpkgs-doc";
 
 const current = Astro.url.pathname.replace(/\/+$/, "");
 const inside = (path: string) =>
   current === path || current.startsWith(`${path}/`);
 const topics = [
-  { label: "NixOS", href: "/nixos", active: inside("/nixos") },
+  { label: "NixOS", href: "/nixos/preface", active: inside("/nixos") },
   { label: "Nixpkgs", href: "/nixpkgs/preface", active: inside("/nixpkgs") },
   { label: "Nix", href: "/nix", active: inside("/nix") },
 ];
-const tree = inside("/nixpkgs") ? (await loadDocIndex()).tree : undefined;
+const manual = inside("/nixos")
+  ? "nixos"
+  : inside("/nixpkgs")
+    ? "nixpkgs"
+    : undefined;
+const tree = manual ? (await loadDocIndex(manual)).tree : undefined;
 // A page inside a collection opens the sidebar on the collection's own list.
 const collection = tree && findCollection(tree, current);
 ---
@@ -69,7 +74,7 @@ const collection = tree && findCollection(tree, current);
               </button>
               <div class="mb-2 border-b border-grey-10 dark:border-grey-90 px-2.5 pt-2.5 pb-3">
                 <div class="text-xs text-grey-60 dark:text-grey-40">
-                  <a href="/nixpkgs/preface">Nixpkgs</a>
+                  <a href={`/${manual}/preface`}>{MANUALS[manual!].label}</a>
                   {collection.ancestors.map((group) => ` › ${group.label}`)}
                 </div>
                 <div class="mt-0.5 text-xl">{collection.group.label}</div>

@@ -13,9 +13,10 @@ import firaCodeUnicodeRanges from "@fontsource-variable/fira-code/unicode.json" 
 export default defineConfig({
   site: "https://docs.nixos.org/",
 
-  // until we have a landing page for nixpkgs
+  // until we have landing pages for the manuals
   redirects: {
     "/nixpkgs": "/nixpkgs/preface",
+    "/nixos": "/nixos/preface",
   },
 
   integrations: [

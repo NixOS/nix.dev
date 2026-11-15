@@ -10,21 +10,31 @@ import {
   findTrail,
   leaves,
   loadDocIndex,
+  MANUALS,
+  type Manual,
 } from "../../lib/nixpkgs-doc";
 
-export type Props = { page: CollectionEntry<"nixpkgs"> };
+export type Props = { manual: Manual; page: CollectionEntry<Manual> };
 
 export const getStaticPaths = (async () => {
-  const pages = await getCollection("nixpkgs");
-  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+  const manuals = Object.keys(MANUALS) as Manual[];
+  const paths = await Promise.all(
+    manuals.map(async (manual) =>
+      (await getCollection(manual)).map((page) => ({
+        params: { manual, slug: page.id },
+        props: { manual, page },
+      })),
+    ),
+  );
+  return paths.flat();
 }) satisfies GetStaticPaths;
 
-const { page } = Astro.props;
+const { manual, page } = Astro.props;
 const { Content, headings } = await render(page);
 
 // The index page of a collection lists the entries of the collection as cards.
-const href = `/nixpkgs/${page.id}`;
-const { tree } = await loadDocIndex();
+const href = `/${manual}/${page.id}`;
+const { tree } = await loadDocIndex(manual);
 const collection = findCollection(tree, href);
 const cards =
   collection?.index.href === href ? leaves(collection.entries) : undefined;
@@ -43,7 +53,9 @@ const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
     aria-label="Breadcrumb"
     class="mt-4 flex flex-wrap gap-x-1.5 text-sm text-grey-60 dark:text-grey-40"
   >
-    <a href="/nixpkgs/preface" style="color: unset">Nixpkgs</a>
+    <a href={`/${manual}/preface`} style="color: unset">
+      {MANUALS[manual].label}
+    </a>
     {
       crumbs.map((crumb) => (
         <>
