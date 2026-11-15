@@ -2,12 +2,12 @@ import { defineCollection } from "astro:content";
 import { type Loader } from "astro/loaders";
 import { z } from "astro/zod";
 
-import { loadDocIndex } from "./lib/nixpkgs-doc";
+import { loadDocIndex, type Manual } from "./lib/nixpkgs-doc";
 
-const docPageLoader: Loader = {
-  name: "nixpkgs-doc-pages",
+const docPageLoader = (manual: Manual): Loader => ({
+  name: `${manual}-doc-pages`,
   async load({ store, parseData, renderMarkdown, generateDigest, logger }) {
-    const { pages } = await loadDocIndex();
+    const { pages } = await loadDocIndex(manual);
     store.clear();
     for (const page of pages) {
       logger.info(`processing: ${page.slug}`);
@@ -23,14 +23,14 @@ const docPageLoader: Loader = {
       });
     }
   },
-};
+});
+
+const schema = z.object({
+  title: z.string(),
+  file: z.string(),
+});
 
 export const collections = {
-  nixpkgs: defineCollection({
-    loader: docPageLoader,
-    schema: z.object({
-      title: z.string(),
-      file: z.string(),
-    }),
-  }),
+  nixpkgs: defineCollection({ loader: docPageLoader("nixpkgs"), schema }),
+  nixos: defineCollection({ loader: docPageLoader("nixos"), schema }),
 };
