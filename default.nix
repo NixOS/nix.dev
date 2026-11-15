@@ -109,13 +109,18 @@ let
     revision = nixpkgs-master.revision;
     inherit (pkgs-master.nixpkgs-manual) lib-docs;
   };
+
+  nixos-doc = pkgs.callPackage ./nix/nixos-doc.nix {
+    nixpkgs = nixpkgs-master;
+    revision = nixpkgs-master.revision;
+  };
 in
 {
   # build with `nix-build -A build`
   build = nix-dev;
 
-  # the content folder of the site, `nix-build -A nixpkgs-doc`
-  inherit nixpkgs-doc pkgs-master;
+  # the content folders of the site, `nix-build -A nixpkgs-doc` and `nix-build -A nixos-doc`
+  inherit nixpkgs-doc nixos-doc pkgs-master;
 
   # tools for CI jobs, so they don't have to build the whole development shell
   # run with e.g. `nix run -f . vale`
@@ -136,9 +141,10 @@ in
     ];
 
     shellHook = ''
-      # link to the nixpkgs source derivation
-      rm -rf ${toString ./site}/nixpkgs-doc
+      # link to the nixpkgs and nixos source derivations
+      rm -rf ${toString ./site}/nixpkgs-doc ${toString ./site}/nixos-doc
       ln -s ${nixpkgs-doc} ${toString ./site}/nixpkgs-doc
+      ln -s ${nixos-doc} ${toString ./site}/nixos-doc
     '';
   };
 }
