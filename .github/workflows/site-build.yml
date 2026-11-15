@@ -34,10 +34,13 @@ jobs:
           name: nix-dev
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
-      # The site renders the Nixpkgs manual from site/nixpkgs-doc, which the
-      # development shell links in the same way.
+      # The site renders the Nixpkgs and NixOS manuals from site/nixpkgs-doc and
+      # site/nixos-doc, which the development shell links in the same way.
       - name: Build Nixpkgs manual sources
         run: nix-build .. -A nixpkgs-doc --out-link nixpkgs-doc
+
+      - name: Build NixOS manual sources
+        run: nix-build .. -A nixos-doc --out-link nixos-doc
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:

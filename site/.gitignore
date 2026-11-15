@@ -5,6 +5,7 @@ dist/
 
 # content input
 nixpkgs-doc
+nixos-doc
 
 # dependencies
 node_modules/
