@@ -1,0 +1,74 @@
+# nix.dev
+
+> Official tutorials, guides, and reference documentation for the Nix ecosystem.
+
+Nix is a package manager and build tool, Nixpkgs is a package collection and library, and NixOS is a Linux distribution configured using Nix.
+Use tutorials and guides for tasks, and the component's reference manual for command syntax, functions, and configuration options.
+Match the manual to the installed Nix version or the project's Nixpkgs and NixOS release; the latest release may differ from the version in use.
+Check each page's prerequisites, including any experimental features required by its examples.
+The links below point to the existing rendered documentation.
+
+## Reference manuals
+
+- [Nix manual versions](https://nix.dev/reference/nix-manual.html): Select a Nix reference manual for command syntax, the Nix language, store operations, and Nix configuration.
+- [Nixpkgs manual](https://nixos.org/manual/nixpkgs/stable/): Stable-release reference for package construction, the standard build environment, language-specific build helpers, and library functions.
+- [NixOS manual](https://nixos.org/manual/nixos/stable/): Stable-release reference for installation, system configuration, services, and NixOS options.
+- [Glossary](https://nix.dev/reference/glossary.html): Definitions of terms used across the Nix ecosystem.
+
+## Getting started
+
+- [Install Nix](https://nix.dev/install-nix.html): Installation instructions.
+- [First steps](https://nix.dev/tutorials/first-steps/): Introductory lessons on working with Nix.
+- [Nix language basics](https://nix.dev/tutorials/nix-language.html): An introduction to reading the Nix language.
+
+## Development environments
+
+- [Ad hoc shell environments](https://nix.dev/tutorials/first-steps/ad-hoc-shell-environments.html): Obtain tools temporarily and run programs using nix-shell.
+- [Declarative shell environments](https://nix.dev/tutorials/first-steps/declarative-shell.html): Define a development environment in shell.nix.
+- [Reproducible interpreted scripts](https://nix.dev/tutorials/first-steps/reproducible-scripts.html): Declare an interpreter and dependencies for a script.
+- [Automatic environment activation](https://nix.dev/guides/recipes/direnv.html): Activate a project's shell with direnv and nix-direnv.
+- [Python development environment](https://nix.dev/guides/recipes/python-environment.html): Create a development environment for a Python application.
+- [Sharing build and shell dependencies](https://nix.dev/guides/recipes/sharing-dependencies.html): Reuse package dependencies in a development shell with inputsFrom.
+
+## Packaging and reproducibility
+
+- [Packaging existing software](https://nix.dev/tutorials/packaging-existing-software.html): Build C/C++ software using derivations and stdenv.
+- [Package parameters and overrides](https://nix.dev/tutorials/callpackage.html): Compose package recipes and customize their arguments with callPackage.
+- [Working with local files](https://nix.dev/tutorials/working-with-local-files.html): Select build inputs with lib.fileset and copy source files into the Nix store.
+- [Pinning Nixpkgs](https://nix.dev/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs.html): Make a development environment reproducible by selecting a specific Nixpkgs revision.
+- [Managing remote sources with npins](https://nix.dev/guides/recipes/dependency-management.html): Pin and update the remote sources used by Nix expressions.
+- [Cross compilation](https://nix.dev/tutorials/cross-compilation.html): Build software for a different host platform.
+
+## Modules, NixOS, and deployment
+
+- [Module system tutorial](https://nix.dev/tutorials/module-system/): Learn how modules declare options and combine configuration values.
+- [Module system deep dive](https://nix.dev/tutorials/module-system/deep-dive.html): Work with option types, conditional definitions, defaults, and submodules.
+- [NixOS virtual machines](https://nix.dev/tutorials/nixos/nixos-configuration-on-vm.html): Build and run a virtual machine from a NixOS configuration.
+- [NixOS integration tests](https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html): Test system configurations and services with testers.runNixOSTest.
+- [Bootable ISO images](https://nix.dev/tutorials/nixos/building-bootable-iso-image.html): Build installation media from a NixOS configuration.
+- [Docker images](https://nix.dev/tutorials/nixos/building-and-running-docker-images.html): Build and run container images using Nixpkgs tooling.
+- [Provisioning remote machines](https://nix.dev/tutorials/nixos/provisioning-remote-machines.html): Install and deploy NixOS over SSH with nixos-anywhere and disko.
+- [Distributed builds](https://nix.dev/tutorials/nixos/distributed-builds-setup.html): Configure remote machines to perform Nix builds.
+
+## Binary caches and continuous integration
+
+- [Using a binary cache](https://nix.dev/guides/recipes/add-binary-cache.html): Configure Nix to obtain build results from an additional binary cache.
+- [Setting up an HTTP binary cache](https://nix.dev/tutorials/nixos/binary-cache-setup.html): Serve and sign build results from a NixOS machine.
+- [GitHub Actions](https://nix.dev/guides/recipes/continuous-integration-github-actions.html): Build and cache project environments in continuous integration.
+
+## Concepts and troubleshooting
+
+- [Flakes](https://nix.dev/concepts/flakes.html): Understand flake inputs and outputs, experimental status, and adoption considerations.
+- [Channels and other concepts](https://nix.dev/concepts/faq.html): Understand channel branch choices, flakes, and sandbox-related questions.
+- [Best practices](https://nix.dev/guides/best-practices.html): Avoid common Nix language and reproducibility pitfalls.
+- [Troubleshooting](https://nix.dev/guides/troubleshooting.html): Diagnose binary cache, store database, and installation problems.
+- [Practical frequently asked questions](https://nix.dev/guides/faq.html): Find guidance on formatting, non-Nix executables, and common NixOS tasks.
+
+## Optional
+
+- [All tutorials](https://nix.dev/tutorials/): Browse the tutorial series, including additional NixOS installation and deployment examples.
+- [All guides](https://nix.dev/guides/): Browse recipes and task-oriented guides.
+- [Pinning reference](https://nix.dev/reference/pinning-nixpkgs.html): Compare ways to specify remote Nix expressions and Nixpkgs revisions.
+- [Post-build hooks](https://nix.dev/guides/recipes/post-build-hook.html): Upload build results to an S3-compatible cache, with implementation caveats.
+- [Contributing documentation](https://nix.dev/contributing/documentation/): Find the contribution workflow and documentation style guide.
+- [Sitemap](https://nix.dev/sitemap.xml): Discover additional documentation pages beyond this curated selection.
