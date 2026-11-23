@@ -27,6 +27,7 @@ export default defineConfig({
       },
       styleOverrides: {
         codeFontFamily: "var(--font-fira-code), ui-monospace, monospace",
+        borderRadius: "0",
       },
       useDarkModeMediaQuery: false,
       themeCssSelector: (theme, { styleVariants }) =>
