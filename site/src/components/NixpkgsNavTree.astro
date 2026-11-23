@@ -34,15 +34,15 @@ function link(marked: boolean): (string | false)[] {
   return [
     "flex items-center gap-2 py-1 pr-2.5",
     nested ? "-ml-px border-l-2 pl-3.5 text-[0.84rem]" : "pl-2.5 text-sm",
-    nested && !marked && "border-transparent",
-    nested && marked && "border-blue-30 dark:border-blue-60",
-    marked && "text-blue-30 dark:text-blue-60",
+    nested && !marked && "border-transparent text-grey-63 dark:text-grey-17",
+    nested && marked && "border-blue-75 dark:border-blue-65",
+    marked && "text-blue-20 dark:text-blue-65",
   ];
 }
 ---
 
 <ol
-  class:list={[nested && "ml-2.5 border-l border-grey-10 dark:border-grey-90"]}
+  class:list={[nested && "ml-2.5 border-l border-grey-22 dark:border-grey-64"]}
 >
   {
     nodes.map((node) => {
@@ -58,12 +58,12 @@ function link(marked: boolean): (string | false)[] {
               class:list={link(marked)}
             >
               <span class="grow">{group.label}</span>
-              <span class="rounded-[3px] bg-grey-10 dark:bg-grey-90 px-1.5 text-xs font-medium">
+              <span class="rounded-[3px] bg-grey-07 px-1.5 text-xs font-medium text-grey-63 dark:bg-grey-79 dark:text-grey-17">
                 {leaves(collection.entries).length}
               </span>
               <LayoutGrid
                 size="1em"
-                class="shrink-0 text-grey-60 dark:text-grey-40"
+                class="shrink-0 text-grey-55 dark:text-grey-28"
               />
             </a>
           </li>
@@ -72,7 +72,9 @@ function link(marked: boolean): (string | false)[] {
       if ("children" in node && parts) {
         return (
           <li>
-            <h2 class="px-2.5 pt-6 pb-1.5">{node.label}</h2>
+            <h2 class="px-2.5 pt-6 pb-1.5 text-grey-78 dark:text-grey-03">
+              {node.label}
+            </h2>
             <Astro.self nodes={node.children} current={current} />
           </li>
         );
@@ -90,7 +92,7 @@ function link(marked: boolean): (string | false)[] {
                 <span class="grow">{node.label}</span>
                 <ChevronRight
                   size="1em"
-                  class="shrink-0 transition-transform [details[open]>summary>&]:rotate-90"
+                  class="shrink-0 text-grey-55 transition-transform dark:text-grey-28 [details[open]>summary>&]:rotate-90"
                 />
               </summary>
               <Astro.self nodes={node.children} current={current} nested />
