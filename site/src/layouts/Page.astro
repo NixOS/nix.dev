@@ -17,7 +17,9 @@ const {
     {
       title && (
         <hgroup class="my-4">
-          <h1 class="text-h1 leading-tight text-balance">{title}</h1>
+          <h1 class="text-h1 leading-tight text-balance text-grey-78 dark:text-grey-03">
+            {title}
+          </h1>
         </hgroup>
       )
     }
@@ -28,7 +30,7 @@ const {
   <section class:list={["hidden", toc ? "lg:block" : ""]}>
     <TableOfContents
       headings={headings}
-      class="sticky top-16 py-4 text-sm text-grey-60 dark:text-grey-40"
+      class="sticky top-16 py-4 text-sm text-grey-55 dark:text-grey-28"
     />
   </section>
 </Base>
@@ -52,6 +54,7 @@ const {
       line-height: 1.25;
       margin-top: 2em;
       margin-bottom: 0.5em;
+      @apply text-grey-78 dark:text-grey-03;
     }
 
     /* h1 is page title and should not be used in prose container */
@@ -90,7 +93,7 @@ const {
     }
 
     a {
-      @apply text-blue-30 dark:text-blue-60;
+      @apply text-blue-20 hover:text-blue-10 dark:text-blue-65 dark:hover:text-blue-80;
     }
 
     ol {
@@ -165,7 +168,7 @@ const {
       margin-block: 1rem;
       padding-left: 1rem;
       border-inline-start-width: 2px;
-      @apply border-grey-10 dark:border-grey-90;
+      @apply border-grey-22 dark:border-grey-64;
     }
 
     .expressive-code {
@@ -177,18 +180,18 @@ const {
     kbd {
       padding: 0.125em 0.3em;
       border-radius: 0.125rem;
-      @apply bg-grey-05 dark:bg-steel-90 text-[0.875em] wrap-break-word;
+      @apply bg-grey-04 dark:bg-grey-88 text-[0.875em] wrap-break-word;
     }
 
     kbd {
-      @apply border-1 border-grey-40 dark:border-grey-60;
+      @apply border-1 border-grey-39 dark:border-grey-51;
     }
 
     section.footnotes {
       margin-top: 2rem;
       padding-top: 2rem;
       border-top-width: 2px;
-      @apply border-grey-10 dark:border-grey-90;
+      @apply border-grey-22 dark:border-grey-64;
 
       * {
         font-size: 0.8rem;
@@ -236,7 +239,7 @@ const {
 
     mark {
       padding: 0.1rem;
-      @apply bg-blue-60 dark:bg-blue-30 dark:text-grey-95;
+      @apply bg-blue-75 text-grey-78 dark:bg-blue-65 dark:text-grey-87;
     }
 
     abbr {

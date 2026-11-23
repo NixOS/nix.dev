@@ -28,6 +28,11 @@ export default defineConfig({
       styleOverrides: {
         codeFontFamily: "var(--font-fira-code), ui-monospace, monospace",
         borderRadius: "0",
+        // grey-04 and grey-22 (light), grey-88 and grey-64 (dark) in global.css
+        codeBackground: ({ theme }) =>
+          theme.type === "dark" ? "#050608" : "#f1f3f8",
+        borderColor: ({ theme }) =>
+          theme.type === "dark" ? "#3a3d44" : "#b3b7bf",
       },
       useDarkModeMediaQuery: false,
       themeCssSelector: (theme, { styleVariants }) =>
