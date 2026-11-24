@@ -1,5 +1,6 @@
 ---
 import ChevronLeft from "@lucide/astro/icons/chevron-left";
+import ExternalLink from "@lucide/astro/icons/external-link";
 import NixpkgsNavTree from "./NixpkgsNavTree.astro";
 import { findCollection, loadDocIndex, MANUALS } from "../lib/nixpkgs-doc";
 
@@ -9,7 +10,13 @@ const inside = (path: string) =>
 const topics = [
   { label: "NixOS", href: "/nixos/preface", active: inside("/nixos") },
   { label: "Nixpkgs", href: "/nixpkgs/preface", active: inside("/nixpkgs") },
-  { label: "Nix", href: "/nix", active: inside("/nix") },
+  // Nix manual lives on nix.dev until the Nix topic is migrated.
+  {
+    label: "Nix",
+    href: "https://nix.dev/manual/nix/latest/",
+    active: false,
+    external: true,
+  },
 ];
 const manual = inside("/nixos")
   ? "nixos"
@@ -28,13 +35,20 @@ const collection = tree && findCollection(tree, current);
     class="grid shrink-0 grid-cols-3 gap-0.5 rounded-[3px] bg-grey-07 p-[3px] dark:bg-grey-79"
   >
     {
-      topics.map(({ label, href, active }) => (
+      topics.map(({ label, href, active, external }) => (
         <li>
           <a
             href={href}
             aria-current={active ? "true" : undefined}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener" : undefined}
+            aria-label={
+              external
+                ? `${label} manual, opens nix.dev in a new tab`
+                : undefined
+            }
             class:list={[
-              "flex h-9 items-center justify-center rounded-xs text-[0.9375rem]",
+              "flex h-9 items-center justify-center gap-[5px] rounded-xs text-[0.9375rem]",
               "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-20 dark:focus-visible:outline-blue-65",
               active
                 ? "bg-blue-75 text-grey-78 dark:bg-blue-65 dark:text-grey-87"
@@ -42,6 +56,14 @@ const collection = tree && findCollection(tree, current);
             ]}
           >
             {label}
+            {external && (
+              <ExternalLink
+                size={13}
+                stroke-width={2.2}
+                aria-hidden="true"
+                class="shrink-0"
+              />
+            )}
           </a>
         </li>
       ))
