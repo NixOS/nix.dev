@@ -11,7 +11,7 @@ const { title, description, sidebar = true } = Astro.props;
   <Head title={title} description={description} />
   <body
     class="flex flex-col min-h-dvh font-sans
-    bg-grey-02 text-grey-73 dark:bg-grey-85 dark:text-grey-08"
+    bg-grey-01 text-grey-79 dark:bg-grey-81 dark:text-grey-08"
   >
     <Header class="px-4 fixed" sidebar={sidebar} />
     <div
@@ -21,7 +21,7 @@ const { title, description, sidebar = true } = Astro.props;
       <section
         class:list={[
           "fixed md:static md:row-span-2",
-          "bg-grey-04 dark:bg-grey-88 md:bg-inherit md:dark:bg-inherit",
+          "bg-grey-02 dark:bg-grey-88 md:bg-inherit md:dark:bg-inherit",
           "left-0 top-14 bottom-0 overflow-y-auto md:overflow-y-visible",
           "px-4 md:px-0",
           "w-full",

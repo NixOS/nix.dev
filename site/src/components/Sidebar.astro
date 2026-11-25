@@ -32,7 +32,7 @@ const collection = tree && findCollection(tree, current);
   <ul
     id="section-nav"
     aria-label="Topic"
-    class="grid shrink-0 grid-cols-3 gap-0.5 rounded-[3px] bg-grey-07 p-[3px] dark:bg-grey-79"
+    class="grid shrink-0 grid-cols-3 gap-0.5 rounded-[3px] bg-grey-05 p-[3px] dark:bg-grey-79"
   >
     {
       topics.map(({ label, href, active, external }) => (
@@ -49,10 +49,10 @@ const collection = tree && findCollection(tree, current);
             }
             class:list={[
               "flex h-9 items-center justify-center gap-[5px] rounded-xs text-[0.9375rem]",
-              "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-20 dark:focus-visible:outline-blue-65",
+              "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-15 dark:focus-visible:outline-blue-65",
               active
-                ? "bg-blue-75 text-grey-78 dark:bg-blue-65 dark:text-grey-87"
-                : "text-grey-63 hover:opacity-80 dark:text-grey-17",
+                ? "bg-blue-70 text-grey-82 dark:bg-blue-65 dark:text-grey-87"
+                : "text-grey-71 hover:opacity-80 dark:text-grey-17",
             ]}
           >
             {label}
@@ -88,18 +88,18 @@ const collection = tree && findCollection(tree, current);
             <div class="shrink-0">
               <button
                 type="button"
-                class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-55 dark:text-grey-28"
+                class="flex items-center gap-1 px-2.5 py-1 text-xs text-grey-62 dark:text-grey-28"
                 x-on:click="showCollection = false"
               >
                 <ChevronLeft size="1em" />
                 Back
               </button>
               <div class="mb-2 border-b border-grey-22 dark:border-grey-64 px-2.5 pt-2.5 pb-3">
-                <div class="text-xs text-grey-55 dark:text-grey-28">
+                <div class="text-xs text-grey-62 dark:text-grey-28">
                   <a href={`/${manual}/preface`}>{MANUALS[manual!].label}</a>
                   {collection.ancestors.map((group) => ` › ${group.label}`)}
                 </div>
-                <div class="mt-0.5 text-xl text-grey-78 dark:text-grey-03">
+                <div class="mt-0.5 text-xl text-grey-82 dark:text-grey-03">
                   {collection.group.label}
                 </div>
               </div>
