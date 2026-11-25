@@ -30,7 +30,7 @@ export default defineConfig({
         borderRadius: "0",
         // grey-02 and grey-22 (light), grey-88 and grey-64 (dark) in global.css
         codeBackground: ({ theme }) =>
-          theme.type === "dark" ? "#050608" : "#f3f7ff",
+          theme.type === "dark" ? "#111419" : "#f3f7ff",
         borderColor: ({ theme }) =>
           theme.type === "dark" ? "#3a3d44" : "#b3b7bf",
         // yellow in global.css: a bar and a light fill on marked lines
