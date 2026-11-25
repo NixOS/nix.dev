@@ -134,8 +134,8 @@
   --color-grey-88: #050608;
 }
 
-/* Columns of the page on large screens. The header is fixed outside the page
- * grid, so it uses this too in order to line up with the page below it.
+/* Columns of the page on large screens: sidebar, content, and the column with
+ * search, theme toggle and table of contents.
  */
 @utility grid-cols-page {
   grid-template-columns: minmax(0, 16.75rem) 3fr 1fr;
