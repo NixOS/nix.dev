@@ -1,7 +1,11 @@
 name: "Deploy site POC"
 
-# MANUAL DISPATCH
+# Every push to master (this includes merged pull requests) deploys to
+# production. A manual dispatch deploys a preview, or production if requested.
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
     inputs:
       production:
@@ -54,9 +58,10 @@ jobs:
 
       # TODO: make this a nix-build
       - name: Build and deploy to Netlify
-        run: nix run -f .. netlify-cli -- deploy --build ${PRODUCTION:+--prod} --message "workflow_dispatch by $ACTOR @ $GITHUB_SHA"
+        run: nix run -f .. netlify-cli -- deploy --build ${PRODUCTION:+--prod} --message "$EVENT by $ACTOR @ $GITHUB_SHA"
         env:
-          PRODUCTION: ${{ inputs.production && 'true' || '' }}
+          PRODUCTION: ${{ (github.event_name == 'push' || inputs.production) && 'true' || '' }}
+          EVENT: ${{ github.event_name }}
           ACTOR: ${{ github.actor }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.PERSONAL_POC_ACCESS_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_POC_SITE_ID }}
