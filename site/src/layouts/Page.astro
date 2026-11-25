@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import Search from "../components/Search.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import ThemeSelector from "../components/ThemeSelector.astro";
 
 const {
   title,
@@ -27,11 +29,21 @@ const {
       <slot />
     </article>
   </main>
-  <section class:list={["hidden", toc ? "lg:block" : ""]}>
-    <TableOfContents
-      headings={headings}
-      class="sticky top-16 py-4 text-sm text-grey-62 dark:text-grey-28"
-    />
+  <section class="hidden lg:block lg:row-span-2">
+    <div class="sticky top-0 flex max-h-dvh flex-col pt-4">
+      <div class="flex shrink-0 items-center gap-x-4">
+        <Search class="min-w-0 flex-1" />
+        <ThemeSelector />
+      </div>
+      {
+        toc && (
+          <TableOfContents
+            headings={headings}
+            class="min-h-0 overflow-y-auto py-4 text-sm text-grey-62 dark:text-grey-28"
+          />
+        )
+      }
+    </div>
   </section>
 </Base>
 

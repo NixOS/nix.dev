@@ -1,6 +1,5 @@
 ---
 import Head from "../components/Head.astro";
-import Header from "../components/Header.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 
@@ -13,29 +12,12 @@ const { title, description, sidebar = true } = Astro.props;
     class="flex flex-col min-h-dvh font-sans
     bg-grey-01 text-grey-79 dark:bg-grey-81 dark:text-grey-08"
   >
-    <Header class="px-4 fixed" sidebar={sidebar} />
     <div
-      class="px-4 mt-16 flex-grow gap-x-4
+      class="px-4 flex-grow gap-x-4
         md:grid md:grid-cols-[2fr_5fr] md:grid-rows-[1fr_auto] lg:grid-cols-page"
     >
-      <section
-        class:list={[
-          "fixed md:static md:row-span-2",
-          "bg-grey-02 dark:bg-grey-88 md:bg-inherit md:dark:bg-inherit",
-          "left-0 top-14 bottom-0 overflow-y-auto md:overflow-y-visible",
-          "px-4 md:px-0",
-          "w-full",
-          "z-2",
-          "hidden md:block",
-        ]}
-        x-data
-        :class="$store.nav.open ? '!block' : ''"
-      >
-        {
-          sidebar && (
-            <Sidebar class="h-full pt-4 md:sticky md:top-16 md:h-[calc(100dvh-4rem)]" />
-          )
-        }
+      <section class="hidden md:block md:row-span-2">
+        {sidebar && <Sidebar class="pt-4 md:sticky md:top-0 md:h-dvh" />}
       </section>
       <slot />
       <Footer class="mx-auto mt-8 w-full max-w-measure py-4 md:col-start-2" />
