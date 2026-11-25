@@ -43,6 +43,15 @@ export default defineConfig({
       useDarkModeMediaQuery: false,
       themeCssSelector: (theme, { styleVariants }) =>
         theme.name === styleVariants[1]?.theme.name ? ".dark" : false,
+      shiki: {
+        langAlias: {
+          ShellSession: "shellsession",
+          shellSession: "shellsession",
+          "{=include=}": "txt",
+          INI: "ini",
+          Python: "python",
+        },
+      },
     }),
     alpinejs({ entrypoint: "./src/alpine.ts" }),
   ],
