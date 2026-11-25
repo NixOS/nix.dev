@@ -21,7 +21,8 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  # Runs the npm dependencies, so it gets no secrets. Cachix is read-only here.
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -37,7 +38,6 @@ jobs:
       - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
           name: nix-dev
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       # The site renders the Nixpkgs and NixOS manuals from site/nixpkgs-doc and
       # site/nixos-doc, which the development shell links in the same way.
@@ -56,9 +56,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # TODO: make this a nix-build
-      - name: Build and deploy to Netlify
-        run: nix run -f .. netlify-cli -- deploy --build ${PRODUCTION:+--prod} --message "$EVENT by $ACTOR @ $GITHUB_SHA"
+      - name: Build
+        run: npm run build
+
+      # dist has the static files. .netlify/v1 has the server and edge
+      # functions that the Netlify adapter generates.
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site
+          path: |
+            site/dist
+            site/.netlify/v1
+          include-hidden-files: true
+          if-no-files-found: error
+
+  # Has the Netlify secrets, so it runs no code from the build. Forks have no
+  # secrets and skip it.
+  deploy:
+    needs: build
+    if: github.repository == 'NixOS/nix.dev'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      # for netlify.toml and the pinned netlify-cli
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: cachix/install-nix-action@75c75c31ebece974e48ebc36b4ad125bd97bd97b # v31.11.3
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site
+          path: site
+
+      - name: Deploy to Netlify
+        run: nix run -f .. netlify-cli -- deploy --no-build ${PRODUCTION:+--prod} --message "$EVENT by $ACTOR @ $GITHUB_SHA"
         env:
           PRODUCTION: ${{ (github.event_name == 'push' || inputs.production) && 'true' || '' }}
           EVENT: ${{ github.event_name }}
