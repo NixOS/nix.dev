@@ -17,7 +17,7 @@ const {
     {
       title && (
         <hgroup class="my-4">
-          <h1 class="text-h1 leading-tight text-balance text-grey-78 dark:text-grey-03">
+          <h1 class="text-h1 leading-tight text-balance text-grey-82 dark:text-grey-03">
             {title}
           </h1>
         </hgroup>
@@ -30,7 +30,7 @@ const {
   <section class:list={["hidden", toc ? "lg:block" : ""]}>
     <TableOfContents
       headings={headings}
-      class="sticky top-16 py-4 text-sm text-grey-55 dark:text-grey-28"
+      class="sticky top-16 py-4 text-sm text-grey-62 dark:text-grey-28"
     />
   </section>
 </Base>
@@ -54,7 +54,7 @@ const {
       line-height: 1.25;
       margin-top: 2em;
       margin-bottom: 0.5em;
-      @apply text-grey-78 dark:text-grey-03;
+      @apply text-grey-82 dark:text-grey-03;
     }
 
     /* h1 is page title and should not be used in prose container */
@@ -93,7 +93,7 @@ const {
     }
 
     a {
-      @apply text-blue-20 hover:text-blue-10 dark:text-blue-65 dark:hover:text-blue-80;
+      @apply text-blue-15 hover:text-blue-05 dark:text-blue-65 dark:hover:text-blue-80;
     }
 
     ol {
@@ -180,7 +180,7 @@ const {
     kbd {
       padding: 0.125em 0.3em;
       border-radius: 0.125rem;
-      @apply bg-grey-04 dark:bg-grey-88 text-[0.875em] wrap-break-word;
+      @apply bg-grey-02 dark:bg-grey-88 text-[0.875em] wrap-break-word;
     }
 
     kbd {
@@ -239,7 +239,7 @@ const {
 
     mark {
       padding: 0.1rem;
-      @apply bg-blue-75 text-grey-78 dark:bg-blue-65 dark:text-grey-87;
+      @apply bg-blue-70 text-grey-82 dark:bg-blue-65 dark:text-grey-87;
     }
 
     abbr {

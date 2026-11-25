@@ -94,36 +94,36 @@
   --color-purple-60: oklch(var(--lc-60) var(--h-purple)); /* #d39bff * */
 
   /* More blues on the same hue. Like the scale above, a higher number is
-   * lighter. Light mode: links (blue-20), link hover (blue-10) and the
-   * pastel accent (blue-75). Dark mode: accent and links (blue-65), link
+   * lighter. Light mode: links (blue-15), link hover (blue-05) and the
+   * pastel accent (blue-70). Dark mode: accent and links (blue-65), link
    * hover (blue-80).
    */
-  --color-blue-10: oklch(0.419 0.09 var(--h-blue)); /* #334b7e */
-  --color-blue-20: oklch(0.489 0.1 var(--h-blue)); /* #435e99 */
+  --color-blue-05: oklch(0.355 0.081 var(--h-blue)); /* #263a66 */
+  --color-blue-15: oklch(0.433 0.097 var(--h-blue)); /* #354e86 */
   --color-blue-65: oklch(0.8 0.1 var(--h-blue)); /* #9dbdff */
-  --color-blue-75: oklch(0.86 0.065 var(--h-blue)); /* #bcd1fd */
+  --color-blue-70: oklch(0.811 0.09 var(--h-blue)); /* #a4c1fc */
   --color-blue-80: oklch(0.88 0.058 var(--h-blue)); /* #c4d8ff */
 
   /* Greys are tinted toward NixOS blue (hue 264). The number is about
    * 100 minus the lightness in percent. No step is pure white or black.
    */
-  --color-grey-02: oklch(0.985 0.004 var(--h-blue)); /* #f9fafd */
+  --color-grey-01: oklch(0.988 0.006 var(--h-blue)); /* #f9fbff */
+  --color-grey-02: oklch(0.975 0.011 var(--h-blue)); /* #f3f7ff */
   --color-grey-03: oklch(0.97 0.003 var(--h-blue)); /* #f4f5f7 */
-  --color-grey-04: oklch(0.964 0.007 var(--h-blue)); /* #f1f3f8 */
-  --color-grey-07: oklch(0.933 0.009 var(--h-blue)); /* #e6e9ef */
-  --color-grey-08: oklch(0.92 0.006 var(--h-blue)); /* #e2e5e9 */
+  --color-grey-05: oklch(0.954 0.02 var(--h-blue)); /* #e9f0fe */
+  --color-grey-08: oklch(0.922 0.006 var(--h-blue)); /* #e3e5e9 */
   --color-grey-17: oklch(0.829 0.008 var(--h-blue)); /* #c4c7cc */
   --color-grey-22: oklch(0.779 0.012 var(--h-blue)); /* #b3b7bf */
-  --color-grey-28: oklch(0.72 0.01 var(--h-blue)); /* #a1a5ab */
+  --color-grey-28: oklch(0.721 0.009 var(--h-blue)); /* #a2a5ab */
   --color-grey-39: oklch(0.609 0.015 var(--h-blue)); /* #7e838c */
   --color-grey-51: oklch(0.488 0.014 var(--h-blue)); /* #5c6068 */
-  --color-grey-55: oklch(0.449 0.014 var(--h-blue)); /* #51555d */
-  --color-grey-63: oklch(0.363 0.015 var(--h-blue)); /* #3a3e46 */
+  --color-grey-57: oklch(0.429 0.015 var(--h-blue)); /* #4b5058 */
+  --color-grey-62: oklch(0.384 0.015 var(--h-blue)); /* #3f444c */
   --color-grey-64: oklch(0.36 0.013 var(--h-blue)); /* #3a3d44 */
-  --color-grey-73: oklch(0.268 0.014 var(--h-blue)); /* #22262d */
-  --color-grey-78: oklch(0.221 0.011 var(--h-blue)); /* #181b20 */
+  --color-grey-71: oklch(0.292 0.014 var(--h-blue)); /* #282c33 */
   --color-grey-79: oklch(0.213 0.013 var(--h-blue)); /* #16191f */
-  --color-grey-85: oklch(0.154 0.009 var(--h-blue)); /* #0a0c10 */
+  --color-grey-81: oklch(0.19 0.011 var(--h-blue)); /* #111419 */
+  --color-grey-82: oklch(0.181 0.011 var(--h-blue)); /* #0f1217 */
   --color-grey-87: oklch(0.129 0.008 var(--h-blue)); /* #06070a */
   --color-grey-88: oklch(0.122 0.006 var(--h-blue)); /* #050608 */
 }

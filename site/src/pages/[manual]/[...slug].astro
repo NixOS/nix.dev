@@ -51,7 +51,7 @@ const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
   <nav
     slot="breadcrumbs"
     aria-label="Breadcrumb"
-    class="mt-4 flex flex-wrap gap-x-1.5 text-sm text-grey-55 dark:text-grey-28"
+    class="mt-4 flex flex-wrap gap-x-1.5 text-sm text-grey-62 dark:text-grey-28"
   >
     <a href={`/${manual}/preface`} style="color: unset">
       {MANUALS[manual].label}
@@ -71,7 +71,7 @@ const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
       ))
     }
     <span aria-hidden="true">/</span>
-    <span aria-current="page" class="text-grey-73 dark:text-grey-08">
+    <span aria-current="page" class="text-grey-79 dark:text-grey-08">
       {page.data.title}
     </span>
   </nav>
