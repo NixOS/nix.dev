@@ -33,6 +33,12 @@ export default defineConfig({
           theme.type === "dark" ? "#050608" : "#f3f7ff",
         borderColor: ({ theme }) =>
           theme.type === "dark" ? "#3a3d44" : "#b3b7bf",
+        // yellow in global.css: a bar and a light fill on marked lines
+        textMarkers: {
+          markBackground: "#fbd62226",
+          markBorderColor: "#fbd622",
+          lineMarkerAccentWidth: "3px",
+        },
       },
       useDarkModeMediaQuery: false,
       themeCssSelector: (theme, { styleVariants }) =>

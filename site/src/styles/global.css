@@ -104,6 +104,11 @@
   --color-blue-70: oklch(0.811 0.09 var(--h-blue)); /* #a4c1fc */
   --color-blue-80: oklch(0.88 0.058 var(--h-blue)); /* #c4d8ff */
 
+  /* Yellow marks what to look at: marked text and marked code lines. It is
+   * a fill with dark text (grey-78), never a text colour on its own.
+   */
+  --color-yellow: oklch(0.881 0.1752 95.8); /* #fbd622 */
+
   /* Greys are tinted toward NixOS blue (hue 264). The number is about
    * 100 minus the lightness in percent. No step is pure white or black.
    */
@@ -121,6 +126,7 @@
   --color-grey-62: oklch(0.384 0.015 var(--h-blue)); /* #3f444c */
   --color-grey-64: oklch(0.36 0.013 var(--h-blue)); /* #3a3d44 */
   --color-grey-71: oklch(0.292 0.014 var(--h-blue)); /* #282c33 */
+  --color-grey-78: oklch(0.221 0.011 var(--h-blue)); /* #181b20 */
   --color-grey-79: oklch(0.213 0.013 var(--h-blue)); /* #16191f */
   --color-grey-81: oklch(0.19 0.011 var(--h-blue)); /* #111419 */
   --color-grey-82: oklch(0.181 0.011 var(--h-blue)); /* #0f1217 */
