@@ -32,7 +32,7 @@ File sets can be created, composed, and manipulated with the various functions o
 You can explore and learn about the library with [`nix repl`](https://nix.dev/manual/nix/stable/command-ref/new-cli/nix3-repl):
 
 ```shell-session
-$ nix repl -f channel:nixos-23.11
+$ nix repl -f channel:nixos-26.05
 ...
 nix-repl> fs = lib.fileset
 ```
@@ -95,7 +95,7 @@ Create a new directory, enter it, and set up `npins` to pin the Nixpkgs dependen
 ```shell-session
 $ mkdir fileset
 $ cd fileset
-$ nix-shell -p npins --run "npins init --bare; npins add github nixos nixpkgs --branch nixos-23.11"
+$ nix-shell -p npins --run "npins init --bare; npins add github nixos nixpkgs --branch nixos-26.05"
 ```
 
 Then create a `default.nix` file with the following contents:
