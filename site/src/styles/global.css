@@ -98,40 +98,40 @@
    * pastel accent (blue-70). Dark mode: accent and links (blue-65), link
    * hover (blue-80).
    */
-  --color-blue-05: oklch(0.355 0.081 var(--h-blue)); /* #263a66 */
-  --color-blue-15: oklch(0.433 0.097 var(--h-blue)); /* #354e86 */
-  --color-blue-65: oklch(0.8 0.1 var(--h-blue)); /* #9dbdff */
-  --color-blue-70: oklch(0.811 0.09 var(--h-blue)); /* #a4c1fc */
-  --color-blue-80: oklch(0.88 0.058 var(--h-blue)); /* #c4d8ff */
+  --color-blue-05: #263a66;
+  --color-blue-15: #354e86;
+  --color-blue-65: #9dbdff;
+  --color-blue-70: #a4c1fc;
+  --color-blue-80: #c4d8ff;
 
   /* Yellow marks what to look at: marked text and marked code lines. It is
    * a fill with dark text (grey-78), never a text colour on its own.
    */
-  --color-yellow: oklch(0.881 0.1752 95.8); /* #fbd622 */
+  --color-yellow: #fbd622;
 
   /* Greys are tinted toward NixOS blue (hue 264). The number is about
    * 100 minus the lightness in percent. No step is pure white or black.
    */
-  --color-grey-01: oklch(0.988 0.006 var(--h-blue)); /* #f9fbff */
-  --color-grey-02: oklch(0.975 0.011 var(--h-blue)); /* #f3f7ff */
-  --color-grey-03: oklch(0.97 0.003 var(--h-blue)); /* #f4f5f7 */
-  --color-grey-05: oklch(0.954 0.02 var(--h-blue)); /* #e9f0fe */
-  --color-grey-08: oklch(0.922 0.006 var(--h-blue)); /* #e3e5e9 */
-  --color-grey-17: oklch(0.829 0.008 var(--h-blue)); /* #c4c7cc */
-  --color-grey-22: oklch(0.779 0.012 var(--h-blue)); /* #b3b7bf */
-  --color-grey-28: oklch(0.721 0.009 var(--h-blue)); /* #a2a5ab */
-  --color-grey-39: oklch(0.609 0.015 var(--h-blue)); /* #7e838c */
-  --color-grey-51: oklch(0.488 0.014 var(--h-blue)); /* #5c6068 */
-  --color-grey-57: oklch(0.429 0.015 var(--h-blue)); /* #4b5058 */
-  --color-grey-62: oklch(0.384 0.015 var(--h-blue)); /* #3f444c */
-  --color-grey-64: oklch(0.36 0.013 var(--h-blue)); /* #3a3d44 */
-  --color-grey-71: oklch(0.292 0.014 var(--h-blue)); /* #282c33 */
-  --color-grey-78: oklch(0.221 0.011 var(--h-blue)); /* #181b20 */
-  --color-grey-79: oklch(0.213 0.013 var(--h-blue)); /* #16191f */
-  --color-grey-81: oklch(0.19 0.011 var(--h-blue)); /* #111419 */
-  --color-grey-82: oklch(0.181 0.011 var(--h-blue)); /* #0f1217 */
-  --color-grey-87: oklch(0.129 0.008 var(--h-blue)); /* #06070a */
-  --color-grey-88: oklch(0.122 0.006 var(--h-blue)); /* #050608 */
+  --color-grey-01: #fafcff;
+  --color-grey-02: #f3f7ff;
+  --color-grey-03: #f4f5f7;
+  --color-grey-05: #e9f0fe;
+  --color-grey-08: #e3e5e9;
+  --color-grey-17: #c4c7cc;
+  --color-grey-22: #b3b7bf;
+  --color-grey-28: #a2a5ab;
+  --color-grey-39: #7e838c;
+  --color-grey-51: #5c6068;
+  --color-grey-57: #4b5058;
+  --color-grey-62: #3f444c;
+  --color-grey-64: #3a3d44;
+  --color-grey-71: #282c33;
+  --color-grey-78: #181b20;
+  --color-grey-79: #16191f;
+  --color-grey-81: #111419;
+  --color-grey-82: #0f1217;
+  --color-grey-87: #06070a;
+  --color-grey-88: #050608;
 }
 
 /* Columns of the page on large screens. The header is fixed outside the page
