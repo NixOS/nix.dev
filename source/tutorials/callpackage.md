@@ -156,7 +156,7 @@ Nixpkgs is therefore not simply a huge library of pre-configured packages, but a
 
 `callPackage` adds more convenience by allowing parameters to be customised _after the fact_ using the returned derivation's `override` function.
 
-Add a third attribute `hello-folks` to `default.nix` and set it to `hello.override` called with a new value for `audience`:
+Add the `hello-folks` attribute to `default.nix` and set it to `hello.override` called with a new value for `audience`:
 
 ```{code-block} diff
 :caption: default.nix
@@ -179,7 +179,7 @@ That is, attribute values can refer to names from within the same attribute set.
 All the other parameters will remain the same.
 This is especially useful and can be often found on packages that provide many options to customise a package.
 
-Building `hello-folks` attribute and running the resulting executable will again produce a new version of the script:
+Building the `hello-folks` attribute and running the resulting executable will again produce a new version of the script:
 
 ```shell-session
 $ nix-build -A hello-folks
