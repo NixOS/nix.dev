@@ -32,7 +32,7 @@ const collection = tree && findCollection(tree, current);
   <ul
     id="section-nav"
     aria-label="Topic"
-    class="grid shrink-0 grid-cols-3 gap-0.5 rounded-[3px] bg-grey-05 p-[3px] dark:bg-grey-78"
+    class="grid shrink-0 grid-cols-3 gap-0.5 bg-grey-05 p-[3px] dark:bg-grey-78"
   >
     {
       topics.map(({ label, href, active, external }) => (
@@ -48,7 +48,7 @@ const collection = tree && findCollection(tree, current);
                 : undefined
             }
             class:list={[
-              "flex h-9 items-center justify-center gap-[5px] rounded-xs text-[0.9375rem]",
+              "flex h-9 items-center justify-center gap-[5px] text-[0.9375rem]",
               "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-15 dark:focus-visible:outline-blue-65",
               active
                 ? "bg-blue-70 text-grey-82 dark:bg-blue-65 dark:text-grey-87"
