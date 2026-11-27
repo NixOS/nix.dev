@@ -22,14 +22,10 @@ type Node = {
 
 type Stack = Node[];
 
-// Make a flat list recursive using the list items’ depth attributes.
 const nest = (items: Stack): Stack => {
   const f = (stack: Stack, node: Node): Stack => {
-    // pop nodes off the stack until we find the parent of the current node
     while ((stack.at(-1) as Node).depth >= node.depth) stack.pop();
-    // add the current node to the parent’s children
     (stack.at(-1) as Node).children.push(node);
-    // and also add (another reference to) it to the stack as candidate parent
     stack.push({ ...node, children: (node.children = []) });
 
     return stack;
@@ -43,9 +39,20 @@ const nest = (items: Stack): Stack => {
 const outline = nest(headings.map((i) => ({ ...i, children: [] })));
 ---
 
-<nav class:list={[Astro.props.class]}>
-  <ol>
-    <li><a href="#main-content">Top</a></li>
+<nav
+  aria-labelledby="toc-heading"
+  class:list={[Astro.props.class, "flex min-h-0 flex-col text-sm"]}
+>
+  <h2
+    id="toc-heading"
+    class="mb-3 shrink-0 font-semibold text-grey-82 dark:text-grey-03"
+  >
+    On this page
+  </h2>
+  <ol
+    id="toc-list"
+    class="-m-1 flex min-h-0 flex-col gap-0.5 overflow-y-auto p-1"
+  >
     {
       outline.map((item) => (
         <TableOfContentsItem item={item} maxDepth={maxDepth} slugPrefix="#" />
@@ -53,3 +60,68 @@ const outline = nest(headings.map((i) => ({ ...i, children: [] })));
     }
   </ol>
 </nav>
+
+<script>
+  const list = document.getElementById("toc-list");
+  const sections = [
+    ...(list?.querySelectorAll<HTMLAnchorElement>("a[href^='#']") ?? []),
+  ].flatMap((link) => {
+    const heading = document.getElementById(
+      decodeURIComponent(link.hash.slice(1)),
+    );
+    return heading ? [{ link, heading }] : [];
+  });
+
+  let current: HTMLAnchorElement | undefined;
+  let queued = false;
+
+  const mark = (link: HTMLAnchorElement | undefined) => {
+    if (link === current) return;
+    current?.removeAttribute("aria-current");
+    current = link;
+    if (!list) return;
+    if (!link) {
+      list.scrollTop = 0;
+      return;
+    }
+    link.setAttribute("aria-current", "true");
+
+    const box = list.getBoundingClientRect();
+    const row = link.getBoundingClientRect();
+    if (row.top < box.top) list.scrollTop -= box.top - row.top;
+    else if (row.bottom > box.bottom) list.scrollTop += row.bottom - box.bottom;
+  };
+
+  const update = () => {
+    queued = false;
+    // A few pixels of slack absorb rounding after a jump to a heading.
+    const line = 8;
+    let index = -1;
+    for (const [i, { heading }] of sections.entries()) {
+      if (heading.getBoundingClientRect().top > line) break;
+      index = i;
+    }
+
+    const end =
+      innerHeight + scrollY >= document.documentElement.scrollHeight - 1;
+    const target = sections.findIndex(
+      ({ link }) => link.hash === location.hash,
+    );
+    if (end && target > index) index = target;
+
+    mark(sections[index]?.link);
+  };
+
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  };
+
+  if (sections.length !== 0) {
+    addEventListener("scroll", schedule, { passive: true });
+    addEventListener("resize", schedule);
+    addEventListener("hashchange", schedule);
+    update();
+  }
+</script>
