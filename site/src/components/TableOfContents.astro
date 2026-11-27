@@ -62,6 +62,8 @@ const outline = nest(headings.map((i) => ({ ...i, children: [] })));
 </nav>
 
 <script>
+  import { watchCurrentHeading } from "../lib/current-heading";
+
   const list = document.getElementById("toc-list");
   const sections = [
     ...(list?.querySelectorAll<HTMLAnchorElement>("a[href^='#']") ?? []),
@@ -73,7 +75,6 @@ const outline = nest(headings.map((i) => ({ ...i, children: [] })));
   });
 
   let current: HTMLAnchorElement | undefined;
-  let queued = false;
 
   const mark = (link: HTMLAnchorElement | undefined) => {
     if (link === current) return;
@@ -92,36 +93,10 @@ const outline = nest(headings.map((i) => ({ ...i, children: [] })));
     else if (row.bottom > box.bottom) list.scrollTop += row.bottom - box.bottom;
   };
 
-  const update = () => {
-    queued = false;
-    // A few pixels of slack absorb rounding after a jump to a heading.
-    const line = 8;
-    let index = -1;
-    for (const [i, { heading }] of sections.entries()) {
-      if (heading.getBoundingClientRect().top > line) break;
-      index = i;
-    }
-
-    const end =
-      innerHeight + scrollY >= document.documentElement.scrollHeight - 1;
-    const target = sections.findIndex(
-      ({ link }) => link.hash === location.hash,
-    );
-    if (end && target > index) index = target;
-
-    mark(sections[index]?.link);
-  };
-
-  const schedule = () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(update);
-  };
-
   if (sections.length !== 0) {
-    addEventListener("scroll", schedule, { passive: true });
-    addEventListener("resize", schedule);
-    addEventListener("hashchange", schedule);
-    update();
+    watchCurrentHeading(
+      sections.map(({ heading }) => heading),
+      (index) => mark(sections[index]?.link),
+    );
   }
 </script>
