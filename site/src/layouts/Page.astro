@@ -36,11 +36,8 @@ const {
         <ThemeSelector />
       </div>
       {
-        toc && (
-          <TableOfContents
-            headings={headings}
-            class="min-h-0 overflow-y-auto py-4 text-sm text-grey-62 dark:text-grey-28"
-          />
+        toc && headings.length !== 0 && (
+          <TableOfContents headings={headings} class="py-4" />
         )
       }
     </div>
