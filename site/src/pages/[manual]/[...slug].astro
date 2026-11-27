@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Page from "../../layouts/Page.astro";
 import {
   asCollection,
@@ -48,33 +49,15 @@ const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
 ---
 
 <Page title={page.data.title} headings={headings}>
-  <nav
+  <Breadcrumbs
     slot="breadcrumbs"
-    aria-label="Breadcrumb"
-    class="mt-4 flex flex-wrap gap-x-1.5 text-sm text-grey-62 dark:text-grey-28"
-  >
-    <a href={`/${manual}/preface`} style="color: unset">
-      {MANUALS[manual].label}
-    </a>
-    {
-      crumbs.map((crumb) => (
-        <>
-          <span aria-hidden="true">/</span>
-          {crumb.href ? (
-            <a href={crumb.href} style="color: unset">
-              {crumb.label}
-            </a>
-          ) : (
-            <span>{crumb.label}</span>
-          )}
-        </>
-      ))
-    }
-    <span aria-hidden="true">/</span>
-    <span aria-current="page" class="text-grey-79 dark:text-grey-08">
-      {page.data.title}
-    </span>
-  </nav>
+    crumbs={[
+      { label: MANUALS[manual].label, href: `/${manual}/preface` },
+      ...crumbs,
+    ]}
+    title={page.data.title}
+    headings={headings}
+  />
   <Content />
   {
     cards && (

@@ -1,0 +1,107 @@
+---
+interface Props {
+  crumbs: { label: string; href?: string | undefined }[];
+  title: string;
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { crumbs, title, headings } = Astro.props;
+
+const sections = headings.filter(({ depth }) => depth === 2 || depth === 3);
+---
+
+<nav
+  id="breadcrumbs"
+  aria-label="Breadcrumb"
+  class="sticky top-0 z-10 flex h-14 items-center gap-x-1.5 overflow-hidden
+    bg-grey-01 text-sm whitespace-nowrap text-grey-62
+    dark:bg-grey-87 dark:text-grey-28"
+>
+  {
+    crumbs.map((crumb, i) => (
+      <>
+        {i !== 0 && <span aria-hidden="true">/</span>}
+        {crumb.href ? (
+          <a href={crumb.href}>{crumb.label}</a>
+        ) : (
+          <span>{crumb.label}</span>
+        )}
+      </>
+    ))
+  }
+  <span aria-hidden="true">/</span>
+  <a
+    href="#"
+    aria-current="page"
+    class="font-medium text-grey-79 dark:text-grey-08"
+  >
+    {title}
+  </a>
+  {
+    sections.map(({ depth, slug, text }) => (
+      <span hidden class="flex min-w-0 gap-x-1.5">
+        <span aria-hidden="true">›</span>
+        <a
+          href={`#${slug}`}
+          data-depth={depth}
+          class="truncate font-medium text-grey-82 aria-current:font-semibold dark:text-grey-03"
+        >
+          {text}
+        </a>
+      </span>
+    ))
+  }
+</nav>
+
+<style>
+  :global(html:has(#breadcrumbs)) {
+    scroll-padding-top: 3.5rem;
+  }
+</style>
+
+<script>
+  import { watchCurrentHeading } from "../lib/current-heading";
+
+  const bar = document.getElementById("breadcrumbs");
+  const sections = [
+    ...(bar?.querySelectorAll<HTMLAnchorElement>("a[data-depth]") ?? []),
+  ].flatMap((link) => {
+    const heading = document.getElementById(
+      decodeURIComponent(link.hash.slice(1)),
+    );
+    return heading
+      ? [{ link, heading, depth: Number(link.dataset.depth) }]
+      : [];
+  });
+
+  const trail = (index: number) => {
+    const current = sections[index];
+    if (!current) return [];
+    if (current.depth === 2) return [current];
+    const parent = sections
+      .slice(0, index)
+      .findLast(({ depth }) => depth === 2);
+    return parent ? [parent, current] : [current];
+  };
+
+  let shown: number | undefined;
+
+  if (bar) {
+    watchCurrentHeading(
+      sections.map(({ heading }) => heading),
+      (index) => {
+        if (index === shown) return;
+        shown = index;
+
+        const path = trail(index);
+        for (const section of sections) {
+          (section.link.parentElement as HTMLElement).hidden =
+            !path.includes(section);
+          if (section === path.at(-1))
+            section.link.setAttribute("aria-current", "location");
+          else section.link.removeAttribute("aria-current");
+        }
+      },
+    );
+  }
+</script>
