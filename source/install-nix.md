@@ -1,18 +1,19 @@
 (install-nix)=
 
 # Install Nix
-Requirements:
- - Prior to installation, you might first need to install `xz-utils` or similar for decompressing the Nix binary tarball (`.tar.xz`) that will be downloaded via the scripts below.
 
 :::::{tab-set}
 
 ::::{tab-item} Linux
 
-Install Nix via the recommended [multi-user installation]:
+On Linux running systemd (`x86_64` or `aarch64`), use the [Nix Installer] for the recommended [multi-user installation].
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
+
+For single-user installations or other supported Linux architectures, see the [shell installer instructions](https://nix.dev/manual/nix/stable/installation/installing-binary).
+The shell installer may require first installing `xz-utils` to unpack Nix.
 
 On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
 
@@ -22,10 +23,10 @@ On Fedora, you can [install Nix via `dnf`](https://src.fedoraproject.org/rpms/ni
 
 ::::{tab-item} macOS
 
-Install Nix via the recommended [multi-user installation]:
+On macOS with Apple Silicon (`aarch64`), use the [Nix Installer] for the recommended [multi-user installation].
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
 :::{important}
@@ -42,16 +43,16 @@ when running Nix commands, refer to GitHub issue [NixOS/nix#10892](https://githu
 
 ::::{tab-item} Windows (WSL2)
 
-Install Nix via the recommended [single-user installation]:
+Without systemd, use the shell installer for a [single-user installation].
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl -L https://channels.nixos.org/nix-latest/install | sh -s -- --no-daemon
 ```
 
-However, if you have [systemd support] enabled, install Nix via the recommended [multi-user installation]:
+However, if you have [systemd support] enabled, use the [Nix Installer] for a [multi-user installation].
 
 ```shell-session
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
 [systemd support]: https://learn.microsoft.com/en-us/windows/wsl/wsl-config#systemd-support
@@ -97,3 +98,5 @@ nix (Nix) 2.11.0
 
 [multi-user installation]: https://nix.dev/manual/nix/stable/installation/multi-user.html
 [single-user installation]: https://nix.dev/manual/nix/stable/installation/single-user.html
+
+[Nix Installer]: https://github.com/NixOS/nix-installer
