@@ -1,0 +1,280 @@
+---
+import Page from "../layouts/Page.astro";
+import Search from "../components/Search.astro";
+import { CATEGORIES } from "../lib/search";
+
+const filters = [
+  { label: "All", value: "" },
+  ...CATEGORIES.map((category) => ({ label: category, value: category })),
+];
+
+const filterButton = [
+  "group flex cursor-pointer py-[3px] text-left text-sm leading-[22px]",
+  "text-grey-57 hover:text-blue-15 aria-pressed:text-blue-15",
+  "dark:text-grey-28 dark:hover:text-blue-65 dark:aria-pressed:text-blue-65",
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-15 dark:focus-visible:outline-blue-65",
+];
+---
+
+<Page title="Search" toc={false} prose={false} searchPage>
+  <Fragment slot="heading">
+    <Search class="mt-4 lg:hidden" page id="search-field-narrow" />
+    <h1
+      id="search-heading"
+      aria-live="polite"
+      class="mt-4 mb-5 text-h1 leading-tight text-balance text-grey-82 dark:text-grey-03"
+    >
+      Search the docs
+    </h1>
+  </Fragment>
+
+  <nav
+    hidden
+    aria-label="Filter"
+    data-filters
+    class="-mt-1.5 mb-3 flex flex-wrap gap-x-5 lg:hidden"
+  >
+    {
+      filters.map(({ label, value }) => (
+        <button
+          type="button"
+          data-category={value}
+          aria-pressed="false"
+          class:list={[filterButton, "gap-1.5 py-1.5"]}
+        >
+          <span class="inline-grid">
+            <span class="col-start-1 row-start-1 group-aria-pressed:font-semibold">
+              {label}
+            </span>
+            <span
+              aria-hidden="true"
+              class="invisible col-start-1 row-start-1 font-semibold"
+            >
+              {label}
+            </span>
+          </span>
+          <span
+            data-count
+            class="tabular-nums group-aria-pressed:font-semibold"
+          />
+        </button>
+      ))
+    }
+  </nav>
+
+  <noscript>
+    <p>Search needs JavaScript.</p>
+  </noscript>
+  <ol id="search-results"></ol>
+  <button
+    id="search-more"
+    hidden
+    type="button"
+    class="mt-4 cursor-pointer text-[0.9375rem] text-blue-15 underline-offset-3 hover:text-blue-05 hover:underline dark:text-blue-65 dark:hover:text-blue-80"
+  >
+    Show more results
+  </button>
+
+  <nav slot="rail" hidden aria-label="Filter" data-filters class="py-4">
+    <h2 class="mb-2 text-sm font-semibold text-grey-82 dark:text-grey-03">
+      Filter
+    </h2>
+    {
+      filters.map(({ label, value }) => (
+        <button
+          type="button"
+          data-category={value}
+          aria-pressed="false"
+          class:list={[filterButton, "w-full justify-between gap-4"]}
+        >
+          <span class="inline-grid">
+            <span class="col-start-1 row-start-1 group-aria-pressed:font-semibold">
+              {label}
+            </span>
+            <span
+              aria-hidden="true"
+              class="invisible col-start-1 row-start-1 font-semibold"
+            >
+              {label}
+            </span>
+          </span>
+          <span
+            data-count
+            class="tabular-nums group-aria-pressed:font-semibold"
+          />
+        </button>
+      ))
+    }
+  </nav>
+</Page>
+
+<script>
+  import {
+    displayUrl,
+    isCategory,
+    isExternal,
+    latest,
+    MARK,
+    markExternal,
+    quoted,
+    search,
+    searchPageUrl,
+    type Category,
+    type Hit,
+    type Results,
+  } from "../lib/search";
+
+  const PAGE_SIZE = 10;
+
+  const fields = [
+    ...document.querySelectorAll<HTMLInputElement>("[data-search-field]"),
+  ];
+  const heading = document.getElementById("search-heading")!;
+  const list = document.getElementById("search-results")!;
+  const more = document.getElementById("search-more")!;
+  const navs = [...document.querySelectorAll<HTMLElement>("[data-filters]")];
+  const buttons = navs.flatMap((nav) => [
+    ...nav.querySelectorAll<HTMLButtonElement>("button"),
+  ]);
+
+  const params = new URLSearchParams(location.search);
+  let term = params.get("q")?.trim() ?? "";
+  const requested = params.get("category");
+  let category: Category | undefined = isCategory(requested)
+    ? requested
+    : undefined;
+
+  let results: Results | undefined;
+  let loaded = 0;
+
+  const element = (tag: string, className: string, text?: string) => {
+    const node = document.createElement(tag);
+    node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+
+  const item = (hit: Hit) => {
+    const title = element(
+      "a",
+      "text-lg leading-[26px] text-blue-15 underline-offset-3 hover:text-blue-05 hover:underline dark:text-blue-65 dark:hover:text-blue-80",
+      hit.title,
+    ) as HTMLAnchorElement;
+    title.href = hit.url;
+    if (isExternal(hit.url)) markExternal(title, title);
+    const head = element("div", "");
+    head.append(
+      title,
+      element(
+        "span",
+        "ml-2 text-[0.8125rem] text-grey-57 dark:text-grey-28",
+        hit.category,
+      ),
+    );
+    const excerpt = element(
+      "div",
+      `mt-1 text-sm leading-[21px] text-grey-62 dark:text-grey-17 ${MARK}`,
+    );
+    excerpt.innerHTML = hit.excerpt;
+    const row = element(
+      "li",
+      "-mx-3.5 px-3.5 py-3 hover:bg-grey-02 dark:hover:bg-grey-81",
+    );
+    row.append(
+      head,
+      excerpt,
+      element(
+        "div",
+        "mt-1 font-mono text-[0.78125rem] break-all text-grey-57 dark:text-grey-28",
+        displayUrl(hit.url),
+      ),
+    );
+    return row;
+  };
+
+  const headingText = ({ matches }: Results) => {
+    const scope = category ? ` in ${category}` : "";
+    if (matches === 0) return `No results for ${quoted(term)}${scope}`;
+    const noun = matches === 1 ? "result" : "results";
+    return `${matches} ${noun} for ${quoted(term)}${scope}`;
+  };
+
+  const showFilters = ({ total, counts }: Results) => {
+    for (const button of buttons) {
+      const value = button.dataset.category;
+      const count = isCategory(value) ? (counts[value] ?? 0) : total;
+      button.querySelector("[data-count]")!.textContent = String(count);
+      button.setAttribute(
+        "aria-pressed",
+        String((value || undefined) === category),
+      );
+    }
+    for (const nav of navs) nav.hidden = false;
+  };
+
+  const clear = (text: string) => {
+    results = undefined;
+    heading.textContent = text;
+    list.replaceChildren();
+    more.hidden = true;
+    for (const nav of navs) nav.hidden = true;
+  };
+
+  const { now, debounced } = latest(async (isLatest) => {
+    history.replaceState(
+      null,
+      "",
+      term ? searchPageUrl(term, category) : "/search/",
+    );
+    if (!term) {
+      clear("Search the docs");
+      return;
+    }
+    try {
+      const next = await search(term, category);
+      const hits = await next.hits(0, PAGE_SIZE);
+      if (!isLatest()) return;
+      results = next;
+      loaded = hits.length;
+      heading.textContent = headingText(next);
+      list.replaceChildren(...hits.map(item));
+      more.hidden = loaded >= next.matches;
+      showFilters(next);
+    } catch (error) {
+      if (!isLatest()) return;
+      console.error(error);
+      clear("Search is not available");
+    }
+  });
+
+  for (const field of fields) {
+    field.value = term;
+    field.addEventListener("input", () => {
+      term = field.value.trim();
+      for (const other of fields)
+        if (other !== field) other.value = field.value;
+      debounced();
+    });
+  }
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.category;
+      category = isCategory(value) ? value : undefined;
+      now();
+    });
+  }
+
+  more.addEventListener("click", async () => {
+    const current = results;
+    if (!current) return;
+    const hits = await current.hits(loaded, loaded + PAGE_SIZE);
+    if (current !== results) return;
+    loaded += hits.length;
+    list.append(...hits.map(item));
+    more.hidden = loaded >= current.matches;
+  });
+
+  now();
+  if (!term) fields.find((field) => field.offsetParent !== null)?.focus();
+</script>
