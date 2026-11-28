@@ -8,6 +8,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import alpinejs from "@astrojs/alpinejs";
 
+import pagefind from "./src/integrations/pagefind";
+
 import firaCodeUnicodeRanges from "@fontsource-variable/fira-code/unicode.json" with { type: "json" };
 
 export default defineConfig({
@@ -54,6 +56,7 @@ export default defineConfig({
       },
     }),
     alpinejs({ entrypoint: "./src/alpine.ts" }),
+    pagefind(),
   ],
 
   markdown: {
