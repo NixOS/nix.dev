@@ -59,23 +59,26 @@ export default function pagefindIntegration(): AstroIntegration {
     hooks: {
       "astro:build:done": async ({ dir, logger }) => {
         const out = fileURLToPath(dir);
-        // Some languages that Pagefind has no stemmer for.
-        // "deriv", "derivatio" -> "derivation"
-        const { index } = check(
-          // Hack: "zz" -> No language to index words as they are.
-          // Pagefind has no way to turn stemming of.
-          await pagefind.createIndex({ forceLanguage: "zz" }),
-        );
-        if (!index) throw new Error("pagefind: no index");
-        const { page_count } = check(await index.addDirectory({ path: out }));
-        const nixCount = await addNixManual(index);
-        check(
-          await index.writeFiles({ outputPath: path.join(out, "pagefind") }),
-        );
-        await pagefind.close();
-        logger.info(
-          `indexed ${page_count} site pages and ${nixCount} Nix manual pages`,
-        );
+        try {
+          // Index words as they are, without stemming.
+          // With stemming, partial words like "derivatio" do not find "derivation".
+          // Pagefind has no option to turn stemming off.
+          // "zz" is a language without a stemmer, so it has this effect.
+          const { index } = check(
+            await pagefind.createIndex({ forceLanguage: "zz" }),
+          );
+          if (!index) throw new Error("pagefind: no index");
+          const { page_count } = check(await index.addDirectory({ path: out }));
+          const nixCount = await addNixManual(index);
+          check(
+            await index.writeFiles({ outputPath: path.join(out, "pagefind") }),
+          );
+          logger.info(
+            `indexed ${page_count} site pages and ${nixCount} Nix manual pages`,
+          );
+        } finally {
+          await pagefind.close();
+        }
       },
     },
   };
