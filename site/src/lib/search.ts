@@ -73,11 +73,14 @@ export const loadPagefind = (): Promise<Pagefind> =>
 
 type PagefindResult = PagefindSearch["results"][number];
 
-/** We get 30 results, then pull the exact title matches up.
- * Pagefind has no exact matches or special handling for long titles
- * Titles "Derivation" and "What you didn't want to know about derivation" gets the same boost in pagefind.
+/**
+ * Pull exact title matches to the top of the first results.
+ * Pagefind gives the titles "Derivation" and "What you didn't want to know
+ * about derivation" the same boost.
+ * The window is the size of the first batch in the search dropdown, so the
+ * check loads no data that the dropdown does not show anyway.
  */
-const TITLE_MATCH_WINDOW = 30;
+const TITLE_MATCH_WINDOW = 20;
 
 /** A title or term without case, extra spaces and a plural "s". */
 const titleKey = (text: string) =>
