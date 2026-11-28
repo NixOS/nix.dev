@@ -9,7 +9,7 @@ export const isCategory = (value: unknown): value is Category =>
 export const DEBOUNCE_MS = 100;
 
 /** Classes for the `<mark>` elements in an excerpt: matches are always yellow. */
-export const MARK = "[&_mark]:bg-yellow [&_mark]:text-grey-78";
+const MARK = "[&_mark]:bg-yellow [&_mark]:text-grey-78";
 
 interface PagefindData {
   url: string;
@@ -131,7 +131,7 @@ export async function search(
 }
 
 /** Results on another site, like the Nix manual on nix.dev, have a full URL. */
-export const isExternal = (url: string): boolean => /^https?:\/\//.test(url);
+const isExternal = (url: string): boolean => /^https?:\/\//.test(url);
 
 /** The URL to show under a result: site paths as they are, other sites without the scheme. */
 export const displayUrl = (url: string): string =>
@@ -141,7 +141,7 @@ export const displayUrl = (url: string): string =>
  * Mark a link to another site like the sidebar does: open it in a new tab,
  * put the Lucide external-link icon after `label`, and tell screen readers.
  */
-export function markExternal(link: HTMLAnchorElement, label: HTMLElement) {
+function markExternal(link: HTMLAnchorElement, label: HTMLElement) {
   link.target = "_blank";
   link.rel = "noopener";
   label.insertAdjacentHTML(
@@ -153,6 +153,37 @@ export function markExternal(link: HTMLAnchorElement, label: HTMLElement) {
   note.className = "sr-only";
   note.textContent = `, opens ${new URL(link.href).host} in a new tab`;
   label.append(note);
+}
+
+/** Create an element with classes and, if given, text. */
+export const element = <K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  className: string,
+  text?: string,
+): HTMLElementTagNameMap[K] => {
+  const node = document.createElement(tag);
+  node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+/**
+ * Render the parts that the dropdown and the search page share: the head with
+ * the title and the category, and the excerpt. `link` is the anchor of the
+ * result. `title` holds the title text.
+ */
+export function hitParts(
+  hit: Hit,
+  link: HTMLAnchorElement,
+  title: HTMLElement,
+  classes: { category: string; excerpt: string },
+): [head: HTMLElement, excerpt: HTMLElement] {
+  if (isExternal(hit.url)) markExternal(link, title);
+  const head = element("div", "");
+  head.append(title, element("span", classes.category, hit.category));
+  const excerpt = element("div", `${classes.excerpt} ${MARK}`);
+  excerpt.innerHTML = hit.excerpt;
+  return [head, excerpt];
 }
 
 /** The URL of the search page for a term and category. */
