@@ -47,6 +47,9 @@ jobs:
       - name: Build NixOS manual sources
         run: nix-build .. -A nixos-doc --out-link nixos-doc
 
+      - name: Build Nix manual
+        run: nix-build .. -A nix-doc --out-link nix-doc
+
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: site/.node-version
