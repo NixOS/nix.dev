@@ -104,11 +104,10 @@ const input: HTMLAttributes<"input"> = page
 
 <script>
   import {
-    isExternal,
+    element,
+    hitParts,
     latest,
     loadPagefind,
-    MARK,
-    markExternal,
     quoted,
     search,
     searchPageUrl,
@@ -158,18 +157,11 @@ const input: HTMLAttributes<"input"> = page
     field.select();
   });
 
-  const element = (tag: string, className: string, text?: string) => {
-    const node = document.createElement(tag);
-    node.className = className;
-    if (text !== undefined) node.textContent = text;
-    return node;
-  };
-
   const option = (hit: Hit, index: number) => {
     const row = element(
       "a",
       "group block px-3.5 py-2.5 hover:not-aria-selected:bg-grey-05 aria-selected:bg-blue-15 dark:hover:not-aria-selected:bg-grey-71 dark:aria-selected:bg-blue-65",
-    ) as HTMLAnchorElement;
+    );
     row.id = `search-option-${index}`;
     row.href = hit.url;
     row.tabIndex = -1;
@@ -181,21 +173,12 @@ const input: HTMLAttributes<"input"> = page
       "text-base leading-[22px] text-blue-15 group-aria-selected:text-grey-01 dark:text-blue-65 dark:group-aria-selected:text-grey-87",
       hit.title,
     );
-    if (isExternal(hit.url)) markExternal(row, title);
-    const head = element("div", "");
-    head.append(
-      title,
-      element(
-        "span",
+    const [head, excerpt] = hitParts(hit, row, title, {
+      category:
         "ml-2 text-[0.8125rem] text-grey-57 group-aria-selected:text-grey-01 dark:text-grey-28 dark:group-aria-selected:text-grey-87",
-        hit.category,
-      ),
-    );
-    const excerpt = element(
-      "div",
-      `mt-0.5 line-clamp-2 text-sm leading-5 text-grey-62 group-aria-selected:text-grey-01 dark:text-grey-17 dark:group-aria-selected:text-grey-87 ${MARK}`,
-    );
-    excerpt.innerHTML = hit.excerpt;
+      excerpt:
+        "mt-0.5 line-clamp-2 text-sm leading-5 text-grey-62 group-aria-selected:text-grey-01 dark:text-grey-17 dark:group-aria-selected:text-grey-87",
+    });
     row.append(head, excerpt);
     return row;
   };
