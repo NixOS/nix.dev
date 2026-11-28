@@ -10,22 +10,32 @@ const {
   headings = [],
   toc = true,
   sidebar = true,
+  prose = true,
+  searchPage = false,
+  category,
 } = Astro.props;
 ---
 
 <Base title={title} description={description} sidebar={sidebar}>
-  <main id="main-content" class="max-w-measure mx-auto">
+  <main
+    id="main-content"
+    class="max-w-measure mx-auto"
+    data-pagefind-body={category && ""}
+    data-pagefind-filter={category && `category:${category}`}
+  >
     <slot name="breadcrumbs" />
-    {
-      title && (
-        <hgroup class="my-4">
-          <h1 class="text-h1 leading-tight text-balance text-grey-82 dark:text-grey-03">
-            {title}
-          </h1>
-        </hgroup>
-      )
-    }
-    <article class:list={[Astro.props.class, "prose"]}>
+    <slot name="heading">
+      {
+        title && (
+          <hgroup class="my-4">
+            <h1 class="text-h1 leading-tight text-balance text-grey-82 dark:text-grey-03">
+              {title}
+            </h1>
+          </hgroup>
+        )
+      }
+    </slot>
+    <article class:list={[Astro.props.class, prose && "prose"]}>
       <slot />
     </article>
   </main>
@@ -33,7 +43,7 @@ const {
     <div class="sticky top-0 flex max-h-dvh flex-col">
       <!--The row must have the same height as the breadcrumb bar -->
       <div class="flex h-14 shrink-0 items-center gap-x-4">
-        <Search class="min-w-0 flex-1" />
+        <Search class="min-w-0 flex-1" page={searchPage} />
         <ThemeSelector />
       </div>
       {
@@ -41,6 +51,7 @@ const {
           <TableOfContents headings={headings} class="py-4" />
         )
       }
+      <slot name="rail" />
     </div>
   </section>
 </Base>

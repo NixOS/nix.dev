@@ -1,9 +1,357 @@
-<input
-  class:list={[
-    Astro.props.class,
-    "bg-grey-01 dark:bg-grey-81",
-    "border border-grey-39 dark:border-grey-51",
-    "px-2 py-1",
-  ]}
-  placeholder="Search …"
-/>
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props {
+  class?: string;
+  page?: boolean;
+  id?: string;
+}
+
+const { page = false, id = "search-field" } = Astro.props;
+
+const field = [
+  "h-9 w-full bg-grey-02 px-3 text-[0.9375rem] text-grey-79",
+  "placeholder:text-grey-57 focus:outline-2 focus:outline-blue-15",
+  "dark:bg-grey-81 dark:text-grey-08 dark:placeholder:text-grey-28 dark:focus:outline-blue-65",
+];
+
+const keyBase = [
+  "inline-block min-w-[1.7em] px-[0.42em] text-center align-[0.06em]",
+  "font-sans text-[0.8em] leading-[1.65] font-medium",
+];
+
+const key = [
+  keyBase,
+  "bg-grey-01 text-grey-57 dark:bg-grey-87 dark:text-grey-28",
+];
+
+const pageKey = [
+  keyBase,
+  "bg-grey-05 text-grey-79 dark:bg-grey-71 dark:text-grey-08",
+];
+
+const input: HTMLAttributes<"input"> = page
+  ? { "aria-controls": "search-results" }
+  : {
+      role: "combobox",
+      "aria-autocomplete": "list",
+      "aria-expanded": "false",
+      "aria-controls": "search-list",
+    };
+---
+
+<div
+  class:list={[Astro.props.class, "relative"]}
+  data-search-dropdown={page ? undefined : ""}
+>
+  <label for={id} class="sr-only">Search the docs</label>
+  <input
+    id={id}
+    type="search"
+    autocomplete="off"
+    spellcheck="false"
+    placeholder="Search the docs"
+    data-search-field
+    class:list={[field, "peer"]}
+    {...input}
+  />
+  <span
+    hidden
+    aria-hidden="true"
+    data-search-keys
+    class="pointer-events-none invisible absolute top-1/2 right-2 -translate-y-1/2 text-[0.9375rem] leading-none whitespace-nowrap peer-[:placeholder-shown:not(:focus)]:visible"
+  >
+    <kbd data-modifier class:list={key}>Ctrl</kbd><span
+      class="mx-[0.2em] text-[0.8em] text-grey-57 dark:text-grey-28">+</span
+    ><kbd class:list={key}>K</kbd>
+  </span>
+  {
+    !page && (
+      <div
+        hidden
+        data-popup
+        class="absolute top-full right-0 z-20 mt-1 flex max-h-[calc(100dvh-5rem)] w-[max(100%,28.75rem)] max-w-[calc(100vw-2rem)] flex-col border border-grey-22 bg-grey-01 dark:border-grey-64 dark:bg-grey-87"
+      >
+        <div
+          hidden
+          data-summary
+          class="flex shrink-0 items-baseline justify-between gap-4 px-3.5 pt-2.5 pb-1 text-sm"
+        >
+          <span data-count class="text-grey-57 dark:text-grey-28" />
+          <a
+            data-all
+            class="text-blue-15 underline-offset-3 hover:text-blue-05 hover:underline dark:text-blue-65 dark:hover:text-blue-80"
+          >
+            Refine search{" "}
+            <kbd aria-hidden="true" class:list={pageKey}>
+              ⏎
+            </kbd>
+          </a>
+        </div>
+        <div data-scroller class="min-h-0 overflow-y-auto overscroll-contain">
+          <div id="search-list" role="listbox" aria-label="Search results" />
+          <div data-sentinel aria-hidden="true" />
+          <p
+            hidden
+            data-message
+            class="px-3.5 py-3 text-sm text-grey-57 dark:text-grey-28"
+          />
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  import {
+    isExternal,
+    latest,
+    loadPagefind,
+    MARK,
+    markExternal,
+    quoted,
+    search,
+    searchPageUrl,
+    type Hit,
+    type Results,
+  } from "../lib/search";
+
+  const BATCH = 20;
+
+  // Ctrl+K, or Cmd+K on a Mac, focuses the search field.
+  // The physical K key, so that it works with every keyboard layout.
+  // "/" works as well, but on many layouts it needs Shift or
+  // AltGr, for example Shift+7 on a German keyboard.
+  const mac = /Mac|iPhone|iPad/.test(navigator.userAgent);
+  const fields = [
+    ...document.querySelectorAll<HTMLInputElement>("[data-search-field]"),
+  ];
+  for (const field of fields) {
+    field.setAttribute("aria-keyshortcuts", mac ? "Meta+K" : "Control+K");
+    const keys =
+      field.parentElement!.querySelector<HTMLElement>("[data-search-keys]")!;
+    if (mac) keys.querySelector("[data-modifier]")!.textContent = "⌘";
+    keys.hidden = false;
+  }
+
+  addEventListener("keydown", (event) => {
+    const target = event.target as HTMLElement;
+    const typing =
+      target.isContentEditable ||
+      ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+    const slash =
+      event.key === "/" &&
+      !typing &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      !event.altKey;
+    const k =
+      event.code === "KeyK" &&
+      (mac ? event.metaKey : event.ctrlKey) &&
+      !event.altKey &&
+      !event.shiftKey;
+    if (!slash && !k) return;
+    const field = fields.find((field) => field.offsetParent !== null);
+    if (!field) return;
+    event.preventDefault();
+    field.focus();
+    field.select();
+  });
+
+  const element = (tag: string, className: string, text?: string) => {
+    const node = document.createElement(tag);
+    node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+
+  const option = (hit: Hit, index: number) => {
+    const row = element(
+      "a",
+      "group block px-3.5 py-2.5 hover:not-aria-selected:bg-grey-05 aria-selected:bg-blue-15 dark:hover:not-aria-selected:bg-grey-71 dark:aria-selected:bg-blue-65",
+    ) as HTMLAnchorElement;
+    row.id = `search-option-${index}`;
+    row.href = hit.url;
+    row.tabIndex = -1;
+    row.setAttribute("role", "option");
+    row.setAttribute("aria-selected", "false");
+
+    const title = element(
+      "span",
+      "text-base leading-[22px] text-blue-15 group-aria-selected:text-grey-01 dark:text-blue-65 dark:group-aria-selected:text-grey-87",
+      hit.title,
+    );
+    if (isExternal(hit.url)) markExternal(row, title);
+    const head = element("div", "");
+    head.append(
+      title,
+      element(
+        "span",
+        "ml-2 text-[0.8125rem] text-grey-57 group-aria-selected:text-grey-01 dark:text-grey-28 dark:group-aria-selected:text-grey-87",
+        hit.category,
+      ),
+    );
+    const excerpt = element(
+      "div",
+      `mt-0.5 line-clamp-2 text-sm leading-5 text-grey-62 group-aria-selected:text-grey-01 dark:text-grey-17 dark:group-aria-selected:text-grey-87 ${MARK}`,
+    );
+    excerpt.innerHTML = hit.excerpt;
+    row.append(head, excerpt);
+    return row;
+  };
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-search-dropdown]",
+  )) {
+    const field = root.querySelector("input")!;
+    const popup = root.querySelector<HTMLElement>("[data-popup]")!;
+    const scroller = root.querySelector<HTMLElement>("[data-scroller]")!;
+    const list = root.querySelector<HTMLElement>("[role=listbox]")!;
+    const sentinel = root.querySelector<HTMLElement>("[data-sentinel]")!;
+    const message = root.querySelector<HTMLElement>("[data-message]")!;
+    const summary = root.querySelector<HTMLElement>("[data-summary]")!;
+    const count = root.querySelector<HTMLElement>("[data-count]")!;
+    const all = root.querySelector<HTMLAnchorElement>("[data-all]")!;
+
+    let rows: HTMLAnchorElement[] = [];
+    let active = -1;
+    // The term and results that the popup shows.
+    let shown: string | undefined;
+    let results: Results | undefined;
+    let pending: Promise<void> | undefined;
+    // The end of the list is in or near the visible part of the popup.
+    let sentinelVisible = false;
+
+    const term = () => field.value.trim();
+
+    const open = (value: boolean) => {
+      popup.hidden = !value;
+      field.setAttribute("aria-expanded", String(value));
+    };
+
+    const more = () => results !== undefined && rows.length < results.matches;
+
+    // Append the next rows of the shown results. Calls during a load get the
+    // same promise.
+    const loadMore = (): Promise<void> => {
+      pending ??= (async () => {
+        const current = results;
+        if (!current || !more()) return;
+        const hits = await current.hits(rows.length, rows.length + BATCH);
+        if (current !== results) return;
+        const added = hits.map((hit, i) => option(hit, rows.length + i));
+        rows.push(...added);
+        list.append(...added);
+      })().finally(() => {
+        pending = undefined;
+        // The rows may not fill the popup yet.
+        if (sentinelVisible && more()) void loadMore();
+      });
+      return pending;
+    };
+
+    // Load more rows as the end of the list scrolls into view.
+    new IntersectionObserver(
+      ([entry]) => {
+        sentinelVisible = entry?.isIntersecting ?? false;
+        if (sentinelVisible) void loadMore();
+      },
+      { root: scroller, rootMargin: "0px 0px 200px 0px" },
+    ).observe(sentinel);
+
+    const select = (index: number) => {
+      rows[active]?.setAttribute("aria-selected", "false");
+      active = index;
+      const row = rows[index];
+      if (!row) {
+        field.removeAttribute("aria-activedescendant");
+        return;
+      }
+      row.setAttribute("aria-selected", "true");
+      field.setAttribute("aria-activedescendant", row.id);
+      row.scrollIntoView({ block: "nearest" });
+    };
+
+    const show = (value: string, next: Results | undefined, hits: Hit[]) => {
+      select(-1);
+      results = next;
+      rows = hits.map(option);
+      list.replaceChildren(...rows);
+      scroller.scrollTop = 0;
+      const total = next?.total ?? 0;
+      message.hidden = total !== 0;
+      message.textContent = `No results for ${quoted(value)}`;
+      summary.hidden = total === 0;
+      count.textContent = `${total} ${total === 1 ? "result" : "results"}`;
+      all.href = searchPageUrl(value);
+      shown = value;
+      open(document.activeElement === field);
+    };
+
+    const { now, debounced } = latest(async (isLatest, value: string) => {
+      if (!value) {
+        shown = undefined;
+        results = undefined;
+        open(false);
+        return;
+      }
+      try {
+        const next = await search(value);
+        const hits = await next.hits(0, BATCH);
+        if (isLatest()) show(value, next, hits);
+      } catch (error) {
+        if (!isLatest()) return;
+        console.error(error);
+        show(value, undefined, []);
+        message.textContent = "Search is not available.";
+      }
+    });
+
+    field.addEventListener("input", () => debounced(term()));
+
+    field.addEventListener("focus", () => {
+      loadPagefind().catch(() => {});
+      if (!term()) return;
+      if (shown === term()) open(true);
+      else now(term());
+    });
+
+    field.addEventListener("blur", () => open(false));
+
+    // Keep the focus in the field when a row is clicked.
+    popup.addEventListener("mousedown", (event) => event.preventDefault());
+
+    field.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        if (popup.hidden) {
+          if (shown === term() && shown) open(true);
+          return;
+        }
+        if (rows.length === 0) return;
+        const step = event.key === "ArrowDown" ? 1 : -1;
+        // Wrap to the top only after the last result, not the last loaded row.
+        if (step === 1 && active === rows.length - 1 && more()) {
+          void loadMore().then(() => select(active + 1));
+          return;
+        }
+        select(
+          active === -1 && step === -1
+            ? rows.length - 1
+            : (active + step + rows.length) % rows.length,
+        );
+      } else if (event.key === "Enter") {
+        if (!term()) return;
+        event.preventDefault();
+        const row = popup.hidden ? undefined : rows[active];
+        // A click follows the target of the row: results on other sites open in a new tab.
+        if (row) row.click();
+        else location.href = searchPageUrl(term());
+      } else if (event.key === "Escape" && !popup.hidden) {
+        event.preventDefault();
+        select(-1);
+        open(false);
+      }
+    });
+  }
+</script>

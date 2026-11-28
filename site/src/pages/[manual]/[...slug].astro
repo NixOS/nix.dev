@@ -48,7 +48,11 @@ const crumbs = (findTrail(tree, href) ?? []).flatMap((group) => {
 });
 ---
 
-<Page title={page.data.title} headings={headings}>
+<Page
+  title={page.data.title}
+  headings={headings}
+  category={MANUALS[manual].label}
+>
   <Breadcrumbs
     slot="breadcrumbs"
     crumbs={[
