@@ -6,6 +6,7 @@ dist/
 # content input
 nixpkgs-doc
 nixos-doc
+nix-doc
 
 # dependencies
 node_modules/
