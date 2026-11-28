@@ -58,15 +58,18 @@ let pagefind: Promise<Pagefind> | undefined;
 /**
  * Load Pagefind and its filter index, once. Call it early to hide the load
  * time. Pagefind counts the matches per category only after it has loaded
- * the filter index.
+ * the filter index. After a failed load, the next call tries again.
  */
 export const loadPagefind = (): Promise<Pagefind> =>
-  (pagefind ??= import(/* @vite-ignore */ PAGEFIND_URL).then(
-    async (pf: Pagefind) => {
+  (pagefind ??= import(/* @vite-ignore */ PAGEFIND_URL)
+    .then(async (pf: Pagefind) => {
       await pf.filters();
       return pf;
-    },
-  ));
+    })
+    .catch((error: unknown) => {
+      pagefind = undefined;
+      throw error;
+    }));
 
 type PagefindResult = PagefindSearch["results"][number];
 
